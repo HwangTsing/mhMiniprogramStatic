@@ -80,7 +80,6 @@ page {
   -mz-border-radius: 35rpx;
   border-radius: 35rpx;
   text-align: center;
-  /*padding-left: 77rpx;*/
   color: #757575;
   font-size: 30rpx;
 }

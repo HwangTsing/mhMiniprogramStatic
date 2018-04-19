@@ -142,7 +142,6 @@
         </view>
     </scroll-view>
 
-
   <!--蒙层-->
   <view class="{{isOpacity? 'layer' :'layer_n'}}" catchtouchmove='noScrollMove' catchtap="blurInputEvent"></view>
     <!--根据搜索结果渲染数据-->

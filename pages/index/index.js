@@ -81,6 +81,7 @@ Page({
                 console.log(encryptedData);
             }
         });
+
         /*节点操作*/
         let query = wx.createSelectorQuery();
         query.select('#haha').boundingClientRect()
