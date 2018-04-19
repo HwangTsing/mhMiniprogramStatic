@@ -1,0 +1,244 @@
+<!--index.wxml-->
+<view class="container">
+    <!--search搜索-->
+    <view class="search_view">
+        <view class="search_img">
+            <image src="../../images/search_gray.png"></image>
+            <input class="search_input" type="text" cursor-spacing="3px" placeholder="想搜就搜一下" bindfocus="focusInputEvent"
+                   bindinput="bindInputChange"/>
+        </view>
+    </view>
+    <scroll-view class="content_view" scroll-y="{{isScroll}}">
+        <view class="canvas-box">
+            <canvas canvas-id="myCanvas" style="width:100%;height:{{windowHeight}}px;"></canvas>
+        </view>
+        <!--<view class="userinfo">
+          <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+          <block wx:else>
+            <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+            <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+          </block>
+        </view>
+        <view class="usermotto">
+          <text class="user-motto">{{motto}}</text>
+        </view>-->
+
+        <!--自定义组件-->
+        <!--<dialog modal-hidden="{{is_modal_Hidden}}" modal-msg="{{is_modal_Msg}}"/>-->
+
+        <!--banner图-->
+        <view class="banner" id="haha">
+            <swiper indicator-dots="{{indicatorDots}}"
+                    autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color ="{{indicatorColor}}"
+                    indicator-active-color ="{{indicatorActiveColor}}" circular="{{circular}}" vertical ="{{vertical}}">
+                <block wx:for="{{imgUrls}}" wx:key="index">
+                    <swiper-item>
+                        <image src="{{item}}" class="slide-image" width="355" height="200"/>
+                    </swiper-item>
+                </block>
+            </swiper>
+        </view>
+
+        <view class="fine_works">
+            <image mode="aspectFit" src="../../images/nav/Group2.0.png"></image>
+            <view class="fine_text">精品佳作</view>
+
+        </view>
+        <!--img+content 图片区域内容可滑动-->
+        <scroll-view class="scroll_view" scroll-x="true">
+            <block>
+                <navigator class="big_img" url="../details/details">
+                    <image mode="aspectFit" src="../../images/nav/HPWC2lTX.png"></image>
+                    <view class="word_info">
+                        <text class="name_name">晓雾将歇</text>
+                        <text class="name_info">一场复仇与私奔</text>
+                    </view>
+                </navigator>
+                <navigator class="big_img" url="../details/details">
+                    <image mode="aspectFit" src="../../images/nav/HPWC2lTX.png"></image>
+                    <view class="word_info">
+                        <text class="name_name">晓雾将歇</text>
+                        <text class="name_info">一场复仇与私奔</text>
+                    </view>
+                </navigator>
+                <navigator class="big_img" url="../details/details">
+                    <image mode="aspectFit" src="../../images/nav/HPWC2lTX.png"></image>
+                    <view class="word_info">
+                        <text class="name_name">晓雾将歇</text>
+                        <text class="name_info">一场复仇与私奔</text>
+                    </view>
+                </navigator>
+                <navigator class="big_img" url="../details/details">
+                    <image mode="aspectFit" src="../../images/nav/HPWC2lTX.png"></image>
+                    <view class="word_info">
+                        <text class="name_name">晓雾将歇</text>
+                        <text class="name_info">一场复仇与私奔</text>
+                    </view>
+                </navigator>
+                <navigator class="big_img" url="../details/details">
+                    <image mode="aspectFit" src="../../images/nav/HPWC2lTX.png"></image>
+                    <view class="word_info">
+                        <text class="name_name">晓雾将歇</text>
+                        <text class="name_info">一场复仇与私奔</text>
+                    </view>
+                </navigator>
+                <navigator class="big_img"url="../details/details">
+                    <image mode="aspectFit" src="../../images/nav/HPWC2lTX.png"></image>
+                    <view class="word_info">
+                        <text class="name_name">晓雾将歇</text>
+                        <text class="name_info">一场复仇与私奔</text>
+                    </view>
+                </navigator>
+                <navigator class="big_img" url="../details/details">
+                    <image mode="aspectFit" src="../../images/nav/HPWC2lTX.png"></image>
+                    <view class="word_info">
+                        <text class="name_name">晓雾将歇</text>
+                        <text class="name_info">一场复仇与私奔</text>
+                    </view>
+                </navigator>
+            </block>
+        </scroll-view>
+        <view class="bg_more" catchtap="bindMoreTap">
+            <view class="more_btn">查看更多</view>
+        </view>
+
+        <view class="fine_works">
+            <image mode="aspectFit" src="../../images/nav/Group2.0.png"></image>
+            <view class="fine_text">人气作品</view>
+
+        </view>
+        <!--img+content 图片区域内容可滑动-->
+        <view class="hot_view">
+            <block>
+                <navigator class="big_img" url="../details/details">
+                    <image mode="aspectFit" src="../../images/nav/HPWC2lTX.png"></image>
+                    <view class="word_info">
+                        <text class="name_name">晓雾将歇</text>
+                        <text class="name_info">一场复仇与私奔</text>
+                    </view>
+                </navigator>
+                <navigator class="big_img" url="../details/details">
+                    <image mode="aspectFit" src="../../images/nav/HPWC2lTX.png"></image>
+                    <view class="word_info">
+                        <text class="name_name">晓雾将歇</text>
+                        <text class="name_info">一场复仇与私奔</text>
+                    </view>
+                </navigator>
+                <navigator class="big_img" url="../details/details">
+                    <image mode="aspectFit" src="../../images/nav/HPWC2lTX.png"></image>
+                    <view class="word_info">
+                        <text class="name_name">晓雾将歇</text>
+                        <text class="name_info">一场复仇与私奔</text>
+                    </view>
+                </navigator>
+                <navigator class="big_img" url="../details/details">
+                    <image mode="aspectFit" src="../../images/nav/HPWC2lTX.png"></image>
+                    <view class="word_info">
+                        <text class="name_name">晓雾将歇</text>
+                        <text class="name_info">一场复仇与私奔</text>
+                    </view>
+                </navigator>
+            </block>
+        </view>
+    </scroll-view>
+
+
+  <!--蒙层-->
+  <view class="{{isOpacity? 'layer' :'layer_n'}}" catchtouchmove='noScrollMove' catchtap="blurInputEvent"></view>
+    <!--根据搜索结果渲染数据-->
+    <scroll-view class="{{listData ? 'big_listdata_bloc':'big_listdata'}}" enable-back-to-top="true" scroll-y="true" bindscrolltoupper="upper"
+                 bindscrolltolower="lower" bindscroll="scroll" scroll-top="{{scrollTop}}" lower-threshold="10">
+        <view class="list_data">
+            <view class="img_view">
+                <image mode="aspectFit" src="../../images/b.png"></image>
+            </view>
+            <view class="book_data">
+                <p class="book_name">风水师</p>
+                <p class="author">夜赦</p>
+                <p class="explain">风水师对风水格外在行，风水师外公生的伟大</p>
+            </view>
+        </view>
+        <view class="list_data">
+            <view class="img_view">
+                <image mode="aspectFit" src="../../images/b.png"></image>
+            </view>
+            <view class="book_data">
+                <p class="book_name">风水师</p>
+                <p class="author">夜赦</p>
+                <p class="explain">风水师对风水格外在行，风水师外公生的伟大</p>
+            </view>
+        </view>
+        <view class="list_data">
+            <view class="img_view">
+                <image mode="aspectFit" src="../../images/b.png"></image>
+            </view>
+            <view class="book_data">
+                <p class="book_name">风水师</p>
+                <p class="author">夜赦</p>
+                <p class="explain">风水师对风水格外在行，风水师外公生的伟大</p>
+            </view>
+        </view>
+        <view class="list_data">
+            <view class="img_view">
+                <image mode="aspectFit" src="../../images/b.png"></image>
+            </view>
+            <view class="book_data">
+                <p class="book_name">风水师</p>
+                <p class="author">夜赦</p>
+                <p class="explain">风水师对风水格外在行，风水师外公生的伟大</p>
+            </view>
+        </view>
+        <view class="list_data">
+            <view class="img_view">
+                <image mode="aspectFit" src="../../images/b.png"></image>
+            </view>
+            <view class="book_data">
+                <p class="book_name">风水师</p>
+                <p class="author">夜赦</p>
+                <p class="explain">风水师对风水格外在行，风水师外公生的伟大</p>
+            </view>
+        </view>
+        <view class="list_data">
+            <view class="img_view">
+                <image mode="aspectFit" src="../../images/b.png"></image>
+            </view>
+            <view class="book_data">
+                <p class="book_name">风水师</p>
+                <p class="author">夜赦</p>
+                <p class="explain">风水师对风水格外在行，风水师外公生的伟大</p>
+            </view>
+        </view>
+        <view class="list_data">
+            <view class="img_view">
+                <image mode="aspectFit" src="../../images/b.png"></image>
+            </view>
+            <view class="book_data">
+                <p class="book_name">风水师</p>
+                <p class="author">夜赦</p>
+                <p class="explain">风水师对风水格外在行，风水师外公生的伟大</p>
+            </view>
+        </view>
+        <view class="list_data">
+            <view class="img_view">
+                <image mode="aspectFit" src="../../images/b.png"></image>
+            </view>
+            <view class="book_data">
+                <p class="book_name">风水师</p>
+                <p class="author">夜赦</p>
+                <p class="explain">风水师对风水格外在行，风水师外公生的伟大</p>
+            </view>
+        </view>
+        <view class="list_data">
+            <view class="img_view">
+                <image mode="aspectFit" src="../../images/b.png"></image>
+            </view>
+            <view class="book_data">
+                <p class="book_name">风水师</p>
+                <p class="author">夜赦</p>
+                <p class="explain">风水师对风水格外在行，风水师外公生的伟大</p>
+            </view>
+        </view>
+
+    </scroll-view>
+</view>
+

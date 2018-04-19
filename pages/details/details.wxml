@@ -1,0 +1,34 @@
+<!--pages/details/details.wxml-->
+<view class="container">
+    <view class="details_view" style="background: url('../../images/details_01.jpg') no-repeat;-webkit-background-size:cover;background-position: center bottom;">
+        <view class="details_img">
+            <image class="detail_src" src="../../images/details_01.jpg"></image>
+            <view class="info_content">
+                <view class="detail_title">夏洛特的道听途说数据皮肤如若</view>
+                <view class="detail_label">
+                    <span>原创</span>
+                    <span>情感</span>
+                    <span>奇幻</span>
+                    <span>古风</span>
+                    <span>生活</span>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="read_view">
+        <!--根据状态判断是否阅读？暂未阅读 or 阅读的章节 wx:if wx:elif-->
+        <view class="read_r">{{readMain}}</view>
+        <!--根据状态判断是否阅读？开始阅读 or 继续阅读 wx:if wx:elif-->
+        <view class="read_btn" catchtap="onReadClick">{{readTitle}}</view>
+    </view>
+    <view class="comic_tab">
+        <view class="comic_nav">
+            <block wx:for="{{tabData}}" wx:for-item="tabData">
+                <view class="{{status === tabData.status ? 'activeChecked':'checked'}}" data-status="{{tabData.status}}" catchtap="onTabTap">{{tabData.title}}</view>
+            </block>
+            <!--考虑使用模板-->
+            <!--<template is="" data=""></template>
+            <button type="button" style="background: #FF4C6A;padding: 30rpx 0;">点击</button>-->
+        </view>
+    </view>
+</view>

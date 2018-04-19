@@ -1,0 +1,7 @@
+<!--pages/edition/edition.wxml-->
+<view class="container">
+    <view class="choose_view">
+        <view>男</view><br/>
+        <view>女</view>
+    </view>
+</view>

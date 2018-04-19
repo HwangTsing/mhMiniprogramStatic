@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "微博动漫",
+  "backgroundTextStyle": "dark",
+  "navigationBarBackgroundColor": "#fff",
+  "enablePullDownRefresh":false
+}
