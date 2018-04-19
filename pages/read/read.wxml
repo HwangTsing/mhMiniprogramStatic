@@ -1,0 +1,4 @@
+<!--pages/read/read.wxml-->
+<view class="container">
+    <view>阅读页</view>
+</view>

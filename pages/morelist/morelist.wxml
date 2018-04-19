@@ -1,0 +1,27 @@
+<!--pages/morelist/morelist.wxml-->
+<view class="container">
+    <!--请求接口遍历数据-->
+    <view class="list_girl">
+        <view class="left_img">
+            <image mode="aspectFit" src="../../images/a.jpg"></image>
+        </view>
+        <view class="brief_introduction">
+            <p class="book_name">风水师</p>
+            <p class="author">夜赦</p>
+            <p class="explain">纪念我那已逝去的风水地理师外公风水风水风水风水风胡思睡杀的开始发放</p>
+        </view>
+
+    </view>
+    <view class="list_girl">
+        <view class="left_img">
+            <image mode="aspectFit" src="../../images/a.jpg"></image>
+        </view>
+        <view class="brief_introduction">
+            <p class="book_name">风水师</p>
+            <p class="author">夜赦</p>
+            <p class="explain">纪念我那已逝去的风水地理师外公风水风水风水风水风胡思睡杀的开始发放</p>
+        </view>
+
+    </view>
+</view>
+
