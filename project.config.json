@@ -10,7 +10,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "1.9.93",
 	"appid": "wx6d9193c1588387d3",
-	"projectname": "mhMiniprogramStatic",
+	"projectname": "mini",
 	"condition": {
 		"search": {
 			"current": -1,

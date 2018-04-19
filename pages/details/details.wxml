@@ -27,7 +27,7 @@
                 <view class="{{status === tabData.status ? 'activeChecked':'checked'}}" data-status="{{tabData.status}}" catchtap="onTabTap">{{tabData.title}}</view>
             </block>
             <!--考虑使用模板-->
-            <!--<template is="" data=""></template>
+            <!--<template is="" data=""></template>-->
         </view>
     </view>
 </view>
