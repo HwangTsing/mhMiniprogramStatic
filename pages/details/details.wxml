@@ -28,7 +28,6 @@
             </block>
             <!--考虑使用模板-->
             <!--<template is="" data=""></template>
-            <button type="button" style="background: #FF4C6A;padding: 30rpx 0;">点击</button>-->
         </view>
     </view>
 </view>
