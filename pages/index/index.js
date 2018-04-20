@@ -22,7 +22,7 @@ Page({
           autoplay: true, //是否自动切换
           interval: 1000, //自动切换间隔时长
           duration: 1000, //滑动动画时长
-          indicatorColor:'#e4e4e4',   //指示点颜色
+          indicatorColor:'#fff',   //指示点颜色
           indicatorActiveColor:'#FFCC33',   //当前选中指示点颜色
           circular:true,  //衔接滑动
           vertical: false,  //滑动方向是否纵向
@@ -30,6 +30,7 @@ Page({
           isScroll:true,   //scroll-view滚动条
           isOpacity:false,  //蒙层
           listData:false,    //搜索结果列表(调取接口时listData为Array,本地测试为Boolean)
+          isScrollSearch:false,    //滚动
 
       },
 
@@ -59,6 +60,27 @@ Page({
         wx.navigateTo({
             url: '/pages/morelist/morelist'
         })
+    },
+
+    /*滚动触发事件*/
+    //滚动条滚到顶部的时候触发
+    upper: function(e) {
+        console.log(e);
+    },
+    //滚动条滚到底部的时候触发
+    lower: function(e) {
+        console.log(e);
+    },
+    //滚动条滚动后触发
+    scroll: function(e) {
+        var that = this;
+        console.log(e);
+        console.log(e.detail.scrollTop);
+        this.setData({
+            isScrollSearch:!that.data.isScrollSearch
+        })
+
+        var sessionTop = wx.setStorageSync('sessionTop',e.detail.scrollTop);
     },
 
     onLoad: function () {
