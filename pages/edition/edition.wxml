@@ -1,8 +1,22 @@
 <!--pages/edition/edition.wxml-->
 <view class="container">
     <view class="choose_view">
-        <view>男</view><br/>
-        <view>女</view>
+        <image class="choose_view_img" src="../../images/edition/rectangle.png"></image>
     </view>
-
+    <view class="icon_image">
+        <image src="../../images/edition/boy_org.png"></image>
+    </view>
+    <view class="bg_view">
+        <view class="boy_view">
+            <image class="boy_s" src="../../images/edition/Rectangle_s.png"></image>
+            <image class="boy_btn" src="../../images/edition/CShape_b.png"></image>
+        </view>
+        <view class="girl_view">
+            <image class="girl_s" src="../../images/edition/girl_s.png"></image>
+            <image class="girl_btn_" src="../../images/edition/CShape_g.png"></image>
+        </view>
+    </view>
+    <view class="logo_view">
+        <image class="logo_logo" src="../../images/edition/logo.png"></image>
+    </view>
 </view>

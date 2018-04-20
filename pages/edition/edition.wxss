@@ -1,2 +1,84 @@
-/* pages/edition/edition.wxss */
-
+/*基本公共样式*/
+.container {
+  width: 100%;
+  height: 100%;
+  background: #ff4c6a;
+  display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  box-sizing: border-box;
+  position: relative;
+}
+.choose_view {
+  width: 100%;
+  height: 186rpx;
+  background: #ff4c6a;
+  text-align: center;
+}
+.choose_view .choose_view_img {
+  width: 480rpx;
+  height: 186rpx;
+}
+.icon_image {
+  width: 100%;
+  height: 280rpx;
+  background: #ff4c6a;
+  text-align: center;
+  margin-top: 16rpx;
+}
+.icon_image image {
+  width: 276rpx;
+  height: 280rpx;
+}
+.bg_view {
+  width: 100%;
+  background: #ff4c6a;
+  text-align: center;
+  margin-bottom: 130rpx;
+}
+.boy_view,
+.girl_view {
+  width: 292rpx;
+  height: 452rpx;
+  background: #ffffff;
+  border-radius: 16px ;
+  display: inline-block;
+  margin: 0 14rpx;
+}
+.boy_view .boy_s {
+  width: 292rpx;
+  height: 452rpx;
+}
+.boy_view .boy_btn {
+  width: 240rpx;
+  height: 96rpx;
+  position: absolute;
+  left: 94rpx;
+  bottom: 316rpx;
+}
+.girl_view .girl_s {
+  width: 292rpx;
+  height: 452rpx;
+}
+.girl_view .girl_btn_ {
+  width: 240rpx;
+  height: 96rpx;
+  position: absolute;
+  right: 94rpx;
+  bottom: 316rpx;
+}
+.logo_view {
+  width: 100%;
+  background: #ff4c6a;
+  text-align: center;
+  /*margin-bottom: 37rpx;*/
+  height: 150rpx;
+}
+.logo_view .logo_logo {
+  width: 200rpx;
+  height: 76rpx;
+}
