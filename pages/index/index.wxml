@@ -2,16 +2,14 @@
 <view class="container">
     <!--search搜索-->
     <!--搜索框聚焦时显示-->
-    <block>
-        <view class="search_view" style="{{isOpacity ? 'background:#fff;opacity:0.95;' :''}}">
-            <view class="search_img">
-                <image class="search_images" src="../../images/search_gray.png"></image>
-                <input class="search_input" type="text" cursor-spacing="3px" placeholder="搜索作品或作者名称" placeholder-style="color:#fff;"
-                       bindfocus="focusInputEvent" bindinput="bindInputChange"/>
-                <image class="boy_img" src="../../images/boy.png"></image>
-            </view>
+    <view class="search_view" style="{{isOpacity ? 'background:#fff;opacity:0.95;' :''}}">
+        <view class="search_img">
+            <image class="search_images" src="../../images/search_gray.png"></image>
+            <input class="search_input" type="text" cursor-spacing="3px" placeholder="搜索作品或作者名称" placeholder-style="color:#fff;"
+                   bindfocus="focusInputEvent" bindinput="bindInputChange"/>
+            <image class="boy_img" src="../../images/boy.png"></image>
         </view>
-    </block>
+    </view>
     <!---->
     <block wx:if="{{isScrollSearch}}">
         <view class="search_view" style="{{isScrollSearch === true? 'background:#fff;opacity:0.95;' :''}}">
