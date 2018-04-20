@@ -6,8 +6,43 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+        isBoy:false,   //男版
+        isGirl:false,   //女版
+
   },
+
+   //事件
+    /*boy and girl*/
+    onBoyTap:function (event) {
+        var boyId=event.currentTarget.dataset.index;
+        console.log(boyId);
+        this.setData({
+            isBoy:true,
+
+        })
+        var timer = setTimeout(function () {
+            wx.redirectTo({
+                url: '/pages/index/index?boyid='+boyId
+            })
+        },1000);
+
+    },
+
+    onGirlTap:function (event) {
+        var girlId=event.currentTarget.dataset.index;
+        console.log(girlId);
+        this.setData({
+            isGirl:true,
+            idsed:3
+
+        })
+        var timer = setTimeout(function () {
+            wx.redirectTo({
+                url: '/pages/index/index?girlid='+girlId
+            })
+        },1000);
+
+    },
 
   /**
    * 生命周期函数--监听页面加载

@@ -64,7 +64,13 @@
   width: 292rpx;
   height: 452rpx;
 }
-.girl_view .girl_btn_ {
+.hidden_b {
+  display: none;
+}
+.hidden_s {
+  display: none;
+}
+.girl_view .girl_btn {
   width: 240rpx;
   height: 96rpx;
   position: absolute;
