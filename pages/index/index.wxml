@@ -1,15 +1,50 @@
 <!--index.wxml-->
 <view class="container">
     <!--search搜索-->
-    <view class="search_view" style="{{isOpacity  || isScrollSearch ? 'background:#fff;opacity:0.95;' :''}}">
-        <view class="search_img">
-            <image class="search_images" src="../../images/search_gray.png"></image>
-            <input class="search_input" type="text" cursor-spacing="3px" value="搜索作品或作者名称" bindfocus="focusInputEvent"
-                   bindinput="bindInputChange"/>
-            <image class="boy_img" src="../../images/boy.png"></image>
+    <!--搜索框聚焦时显示-->
+    <block>
+        <view class="search_view" style="{{isOpacity ? 'background:#fff;opacity:0.95;' :''}}">
+            <view class="search_img">
+                <image class="search_images" src="../../images/search_gray.png"></image>
+                <input class="search_input" type="text" cursor-spacing="3px" placeholder="搜索作品或作者名称" placeholder-style="color:#fff;"
+                       bindfocus="focusInputEvent" bindinput="bindInputChange"/>
+                <image class="boy_img" src="../../images/boy.png"></image>
+            </view>
         </view>
-    </view>
-    <scroll-view class="content_view" scroll-y="{{isScroll}}">
+    </block>
+    <!---->
+    <block wx:if="{{isScrollSearch}}">
+        <view class="search_view" style="{{isScrollSearch === true? 'background:#fff;opacity:0.95;' :''}}">
+            <view class="search_img">
+                <image class="search_images" src="../../images/search_gray.png"></image>
+                <input class="search_input" type="text" cursor-spacing="3px" placeholder="搜索作品或作者名称" placeholder-style="color:#fff;"
+                       bindfocus="focusInputEvent" bindinput="bindInputChange"/>
+                <image class="boy_img" src="../../images/boy.png"></image>
+            </view>
+        </view>
+    </block>
+    <block wx:elif="{{isScrollSearch}}">
+        <view class="search_view" style="{{isScrollSearch === false? '' :''}}">
+            <view class="search_img">
+                <image class="search_images" src="../../images/search_gray.png"></image>
+                <input class="search_input" type="text" cursor-spacing="3px" placeholder="搜索作品或作者名称" placeholder-style="color:#fff;"
+                       bindfocus="focusInputEvent" bindinput="bindInputChange"/>
+                <image class="boy_img" src="../../images/boy.png"></image>
+            </view>
+        </view>
+    </block>
+    <block wx:else>
+        <view class="search_view">
+            <view class="search_img">
+                <image class="search_images" src="../../images/search_gray.png"></image>
+                <input class="search_input" type="text" cursor-spacing="3px" placeholder="搜索作品或作者名称" placeholder-style="color:#fff;"
+                       bindfocus="focusInputEvent" bindinput="bindInputChange"/>
+                <image class="boy_img" src="../../images/boy.png"></image>
+            </view>
+        </view>
+    </block>
+
+    <scroll-view class="content_view" scroll-y="{{isScroll}}" bindscroll="scroll" bindscrolltoupper="upper">
         <!--banner图-->
         <view class="banner" id="haha">
             <swiper indicator-dots="{{indicatorDots}}"

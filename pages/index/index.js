@@ -31,7 +31,6 @@ Page({
           isOpacity:false,  //蒙层
           listData:false,    //搜索结果列表(调取接口时listData为Array,本地测试为Boolean)
           isScrollSearch:false,    //滚动
-
       },
 
       //事件处理函数
@@ -70,15 +69,26 @@ Page({
     //滚动条滚到底部的时候触发
     lower: function(e) {
         console.log(e);
+
     },
     //滚动条滚动后触发
     scroll: function(e) {
         var that = this;
         console.log(e);
         console.log(e.detail.scrollTop);
-        this.setData({
-            isScrollSearch:!that.data.isScrollSearch
-        })
+        var scrollTop = e.detail.scrollTop;
+        if (scrollTop >67){
+            this.setData({
+                isScrollSearch:true
+            })
+        }
+        if (scrollTop === 0){
+            this.setData({
+                isScrollSearch:false
+            })
+
+        }
+
 
         var sessionTop = wx.setStorageSync('sessionTop',e.detail.scrollTop);
     },
