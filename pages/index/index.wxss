@@ -309,6 +309,18 @@ swiper-item wx-image {
   color: #666;
   font-size: 26rpx;
 }
+.hot_view .bg_more {
+  width: 690rpx;
+  height: 68rpx;
+  line-height: 68rpx;
+  background: #fafafa;
+  border-radius: 8rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #999999;
+  margin: 0 30rpx;
+  margin-top: 26rpx;
+}
 .layer {
   width: 100%;
   height: 93% ;

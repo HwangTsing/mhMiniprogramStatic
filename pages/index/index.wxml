@@ -103,7 +103,7 @@
             <view class="border" style="margin-left: 10rpx;"></view>
 
         </view>
-        <!--img+content 图片区域内容可滑动-->
+        <!--img+content 图片区域内容-->
         <view class="hot_view">
             <block>
                 <navigator class="hot_img" url="../details/details">
@@ -135,6 +135,11 @@
                     </view>
                 </navigator>
             </block>
+        </view>
+        <view class="bg_more" catchtap="bindMoreTap">查看更多</view>
+        <!--最新上架-->
+        <view class="new_view">
+
         </view>
     </scroll-view>
 
