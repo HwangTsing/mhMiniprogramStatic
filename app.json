@@ -4,7 +4,8 @@
     "pages/index/index",
     "pages/details/details",
     "pages/morelist/morelist",
-    "pages/read/read"
+    "pages/read/read",
+    "pages/index/searchlist/searchlist"
   ],
   "window": {
     "backgroundTextStyle": "light",
