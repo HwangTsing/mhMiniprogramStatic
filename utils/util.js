@@ -1,82 +1,98 @@
 const {
-  baseUrl,
+    baseUrl,
 } = require('../config/index.js');
 
-const formatTime = date => {
-  const year = date.getFullYear()
-  const month = date.getMonth() + 1
-  const day = date.getDate()
-  const hour = date.getHours()
-  const minute = date.getMinutes()
-  const second = date.getSeconds()
+class wxApi {
 
-  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+   formatTime = date => {
+      const year = date.getFullYear()
+      const month = date.getMonth() + 1
+      const day = date.getDate()
+      const hour = date.getHours()
+      const minute = date.getMinutes()
+      const second = date.getSeconds()
+
+      return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+   }
+
+   formatNumber = n => {
+      n = n.toString()
+      return n[1] ? n : '0' + n
+   }
+
+   getPaths = (url = '') => {
+      if (!/^(http[s]?:)/.test(url) ) {
+          return baseUrl + url;
+      }
+      return url;
+   }
+    ajax = (url, cfg = { data:{}}) => {
+
+      const {
+          data,
+          header,
+          method,
+          dataType,
+          complete,
+          responseType,
+      } = cfg;
+
+      const promise = new Promise((resolve, reject) => {
+
+          wx.request({
+              url: this.getPaths(url),
+              data,
+              header,
+              method,
+              dataType,
+              responseType,
+              success({ data, statusCode, header }) {
+                  resolve(data, statusCode, header)
+              },
+              fail({ data, statusCode, header }) {
+                  resolve(data, statusCode, header)
+              },
+              complete,
+          });
+      })
+
+      return promise;
+
+    }
+
+   post = (url, cfg = {method: 'POST'}) => {
+      return this.ajax(url, cfg)
+   }
+
+   get = (url, cfg = {method: 'GET' }) => {
+      return this.ajax(url, cfg);
+   }
+
+   request = (url, cfg = {method: 'GET'}) => {
+      return wx.request({
+          url: this.getPaths(url),
+          ...cfg,
+      });
+   }
+
+
+  /*以下是调用接口方法*/
+  //推荐页
+   recommendBoy (cfg){return this.request('wbcomic/home/page_recommend_list?mca=h5_recommend_male',cfg)}
+   recommendGirl (cfg) {return this.get('wbcomic/home/page_recommend_list?mca=h5_recommend_female',cfg)}
+
+
 }
 
-const formatNumber = n => {
-  n = n.toString()
-  return n[1] ? n : '0' + n
-}
 
-const getPaths = (url = '') => {
-  if (!/^(http[s]?:)/.test(url) ) {
-    return baseUrl + url;
-  }
-  return url;
-}
-const ajax = (url, cfg = { data:{}}) => {
 
-  const {
-    data,
-    header,
-    method,
-    dataType,
-    complete,
-    responseType,
-  } = cfg;
 
-  const promise = new Promise((resolve, reject) => {
-    
-    wx.request({
-      url: getPaths(url),
-      data,
-      header,
-      method,
-      dataType,
-      responseType,
-      success({ data, statusCode, header }) {
-        resolve(data, statusCode, header)
-      },
-      fail({ data, statusCode, header }) {
-        resolve(data, statusCode, header)
-      },
-      complete,
-    });
-  })
-
-  return promise;
-
-}
-
-const post = (url, cfg = {method: 'POST'}) => {
-  return ajax(url, cfg)
-}
-
-const get = (url, cfg = {method: 'GET' }) => {
-  return ajax(url, cfg);
-}
-
-const request = (url, cfg = {method: 'GET'}) => {
-  return wx.request({
-    url: getPaths(url),
-    ...cfg,
-  });
-}
-
-module.exports = {
+/*module.exports = {
   formatTime,
   ajax,
-  get, 
+  get,
   post,
   request,
-}
+}*/
+
+export  default wxApi

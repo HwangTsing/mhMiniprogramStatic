@@ -3,7 +3,7 @@
 <view class="container">
     <!--男女分版-->
     <block wx:if="{{boyid}}">
-        <view class="{{isCancel ? 'boy_layer_hidden':'boy_layer'}}">
+        <view class="{{isCancel ? 'boy_layer_hidden':'boy_layer'}}" catchtouchmove='noScrollMove'>
             <view class="l_brother_view">
                 <image class="l_brother" src="../../images/L_brother.png"></image>
             </view>
@@ -18,7 +18,7 @@
     </block>
 
     <block wx:elif="{{girlid}}">
-        <view class="{{isCancel ? 'girl_layer_hidden':'girl_layer'}}">
+        <view class="{{isCancel ? 'girl_layer_hidden':'girl_layer'}}" catchtouchmove='noScrollMove'>
             <view class="l_sister_view">
                 <image class="l_sister" src="../../images/L_sister.png"></image>
             </view>
@@ -65,9 +65,14 @@
             <swiper indicator-dots="{{indicatorDots}}"
                     autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color ="{{indicatorColor}}"
                     indicator-active-color ="{{indicatorActiveColor}}" circular="{{circular}}" vertical ="{{vertical}}">
-                <block wx:for="{{imgUrls}}" wx:key="index">
+                <block wx:if="{{boyid}}" wx:for="{{imgUrls}}" wx:key="index">
                     <swiper-item>
-                        <image src="{{item}}" class="slide-image" width="355" height="200"/>
+                        <image src="{{item.image_url}}" class="slide-image" width="355" height="200"/>
+                    </swiper-item>
+                </block>
+                <block wx:if="{{girlid}}" wx:for="{{imgUrls}}" wx:key="index">
+                    <swiper-item>
+                        <image src="{{item.image_url}}" class="slide-image" width="355" height="200"/>
                     </swiper-item>
                 </block>
             </swiper>
