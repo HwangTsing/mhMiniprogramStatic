@@ -18,13 +18,22 @@ Page({
           circular:true,  //衔接滑动
           vertical: false,  //滑动方向是否纵向
           networkType:'',  //网络
+          isCancel:false,   //推荐页男女分版弹层
           isScroll:true,   //scroll-view滚动条
           isOpacity:false,  //蒙层
           listData:false,    //搜索结果列表(调取接口时listData为Array,本地测试为Boolean)
           isScrollSearch:false,    //滚动
+          searchListData:[]
       },
 
-      //事件处理函数
+    //事件处理函数
+    //关闭男女分版弹层事件
+    onCancelTap:function () {
+        var that = this;
+        this.setData({
+            isCancel:!that.data.isCancel
+        })
+    },
     /*input聚焦和失焦,监听*/
     focusInputEvent: function () {
           var that= this;
@@ -84,7 +93,14 @@ Page({
         var sessionTop = wx.setStorageSync('sessionTop',e.detail.scrollTop);
     },
 
-    onLoad: function () {
+    onLoad: function (options) {
+        console.log(options);
+        var boyid = options.boyid;
+        var girlid = options.girlid;
+        this.setData({
+            boyid:boyid,
+            girlid:girlid
+        })
        var that = this;
        /*获取个人头像等信息*/
         /*wx.getUserInfo({

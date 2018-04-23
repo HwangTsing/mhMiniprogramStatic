@@ -5,6 +5,9 @@
 @nameColor: #333;
 @fontsizeColor: #999;
 
+@layWidth:100%;
+@imgHeight:262rpx;
+
 page {
   position: relative;
   font-family: Arial, "Microsoft YaHei", sans-serif;
@@ -27,6 +30,107 @@ page {
   box-sizing: border-box;
   position: relative;
   background: #fff;
+}
+//男女分版wxss
+.boy_layer {
+  width:@layWidth;
+  background:rgba(0,0,0,1);
+  opacity:0.8;
+  -webkit-border-radius: 2rpx;
+  -moz-border-radius: 2rpx;
+  border-radius: 2rpx;
+  text-align: center;
+  height:100%;
+  position:fixed;
+  bottom:0;
+  z-index:99;
+  left:0;
+  right:0;
+}
+.boy_layer_hidden {
+  width:@layWidth;
+  background:rgba(0,0,0,1);
+  opacity:0.8;
+  -webkit-border-radius: 2rpx;
+  -moz-border-radius: 2rpx;
+  border-radius: 2rpx;
+  text-align: center;
+  height:100%;
+  position:fixed;
+  bottom:0;
+  z-index:99;
+  left:0;
+  right:0;
+  display: none;
+}
+.girl_layer {
+  width:@layWidth;
+  background:rgba(0,0,0,1);
+  opacity:0.8;
+  -webkit-border-radius: 2rpx;
+  -moz-border-radius: 2rpx;
+  border-radius: 2rpx;
+  text-align: center;
+  height:100%;
+  position:fixed;
+  bottom:0;
+  z-index:99;
+  left:0;
+  right:0;
+}
+.girl_layer_hidden {
+  width:@layWidth;
+  background:rgba(0,0,0,1);
+  opacity:0.8;
+  -webkit-border-radius: 2rpx;
+  -moz-border-radius: 2rpx;
+  border-radius: 2rpx;
+  text-align: center;
+  height:100%;
+  position:fixed;
+  bottom:0;
+  z-index:99;
+  left:0;
+  right:0;
+  display: none;
+}
+.boy_layer .l_brother_view, .girl_layer .l_sister_view{
+  width: @layWidth;
+  height: @imgHeight;
+  margin-top:138rpx;
+}
+.l_brother_view .l_brother,.l_sister_view .l_sister {
+  width: 552rpx;
+  height: @imgHeight;
+}
+.boy_layer .icon_brother_view,.girl_layer .icon_sister_view {
+  width: @layWidth;
+  height: 520rpx;
+  margin-top:24rpx;
+}
+.icon_brother_view .icon_brother, .icon_sister_view .icon_sister {
+  width: 520rpx;
+  height: 520rpx;
+
+}
+.boy_layer .cancel_brother_view,.girl_layer .cancel_sister_view {
+  width: @layWidth;
+  height: 100rpx;
+  margin-top:34rpx;
+  margin-bottom:125rpx;
+}
+.cancel_brother_view .cancel_icon, .cancel_sister_view .cancel_icon {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.girl_layer {
+  width:100%;
+  background:rgba(0,0,0,1);
+  opacity:0.8;
+  -webkit-border-radius: 2rpx;
+  -moz-border-radius: 2rpx;
+  border-radius: 2rpx;
 }
 .content_view {
   width: 100%;
@@ -99,7 +203,7 @@ page {
   opacity:0.2;
 
 }
-.search_img .boy_img {
+.search_img .boy_img, .search_img .girl_img {
   width:120rpx ;
   height: 60rpx;
   line-height: 60rpx;
