@@ -8,19 +8,21 @@ Page({
   data: {
         isBoy:false,   //男版
         isGirl:false,   //女版
+        timer:null,     //倒计时
 
   },
 
    //事件
     /*boy and girl*/
     onBoyTap:function (event) {
+        var that = this;
         var boyId=event.currentTarget.dataset.index;
         console.log(boyId);
         this.setData({
             isBoy:true,
 
         })
-        var timer = setTimeout(function () {
+        that.data.timer = setTimeout(function () {
             wx.redirectTo({
                 url: '/pages/index/index?boyid='+boyId
             })
@@ -29,6 +31,7 @@ Page({
     },
 
     onGirlTap:function (event) {
+        var that = this;
         var girlId=event.currentTarget.dataset.index;
         console.log(girlId);
         this.setData({
@@ -36,7 +39,7 @@ Page({
             idsed:3
 
         })
-        var timer = setTimeout(function () {
+        that.data.timer = setTimeout(function () {
             wx.redirectTo({
                 url: '/pages/index/index?girlid='+girlId
             })
@@ -76,7 +79,8 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+    clearTimeout(this.data.timer);
+
   },
 
   /**

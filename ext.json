@@ -2,9 +2,7 @@
   "extEnable": true,
   "extAppid": "wx13467f1160f783de",
   "ext": {
-    "uniacid": 15,
-    "ver": 1,
-    "api_prefix": "http://api.manhua.weibo.com",
+    "api_prefix": "http://manhua.weibo.cn/",
     "debug": true
   },
   "window": {

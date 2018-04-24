@@ -1,14 +1,9 @@
 //index.js
-//获取应用实例
-var app = getApp()
+var wxApi = require("../../utils/util.js");
 
 Page({
       data: {
-          imgUrls:[
-              "https://img.alicdn.com/simba/img/TB19IBHQVXXXXaQXXXXSutbFXXX.jpg",
-              "https://img.alicdn.com/tfs/TB134OnRVXXXXabXXXXXXXXXXXX-520-280.jpg",
-              'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg',
-          ],
+          imgUrls:[],
           indicatorDots: true, //是否显示指示点
           autoplay: true, //是否自动切换
           interval: 1000, //自动切换间隔时长
@@ -18,13 +13,25 @@ Page({
           circular:true,  //衔接滑动
           vertical: false,  //滑动方向是否纵向
           networkType:'',  //网络
+          isCancel:false,   //推荐页男女分版弹层
+          boyid:'',
+          girlid:'',
           isScroll:true,   //scroll-view滚动条
           isOpacity:false,  //蒙层
           listData:false,    //搜索结果列表(调取接口时listData为Array,本地测试为Boolean)
           isScrollSearch:false,    //滚动
+          searchListData:[]
       },
 
-      //事件处理函数
+    //事件处理函数
+    //关闭男女分版弹层事件
+    onCancelTap:function () {
+        var that = this;
+        this.setData({
+            isCancel:!that.data.isCancel,
+            isScroll:true
+        })
+    },
     /*input聚焦和失焦,监听*/
     focusInputEvent: function () {
           var that= this;
@@ -36,13 +43,13 @@ Page({
           var that = this;
         this.setData({
             isOpacity:false,
-            isScroll:"{{false}}"
+            isScroll:true
         })
     },
     bindInputChange:function () {
         this.setData({
             listData:true,
-            isScroll:"{{false}}"
+            isScroll:false
         })
     },
     /*查看更多*/
@@ -83,9 +90,63 @@ Page({
 
         var sessionTop = wx.setStorageSync('sessionTop',e.detail.scrollTop);
     },
+    initData: function (id) {
+        var that = this;
+        if (id === 0){
+            //console.log(app.globalData.wxApi);
+            wxApi.recommendBoy({
+                method:'GET',
+                data:{},
+                header:'application/html',
+                success:function (data) {
+                    console.log(data.data.data);
+                    var data = data.data.data;
+                    var imgUrls = data.h5_recommend_male_rotation_map;
+                    console.log(imgUrls);
+                    that.setData({
+                        imgUrls:imgUrls
+                    })
+                },
+                fail:function (data) {
 
-    onLoad: function () {
-       var that = this;
+                }
+            })
+        }else if (id === 1) {
+            wxApi.recommendGirl({}).then(function (data) {
+                console.log(data.data);
+                var data = data.data;
+                var imgUrls = data.h5_recommend_female_rotation_map;
+                console.log(imgUrls);
+                that.setData({
+                    imgUrls:imgUrls
+                })
+            })
+        }
+
+
+    },
+
+    onLoad: function (options) {
+        var that = this;
+        console.log(options);
+        var boyid = options.boyid;
+        var girlid = options.girlid;
+        this.setData({
+            boyid:boyid,
+            girlid:girlid
+        })
+        if (boyid) {
+            this.setData({
+                isScroll:false
+            })
+            this.initData(0);
+        }else if(girlid){
+            this.setData({
+                isScroll:false
+            })
+            this.initData(1);
+        }
+
        /*获取个人头像等信息*/
         /*wx.getUserInfo({
             success: res => {
@@ -122,7 +183,10 @@ Page({
             },
 
         })
+
+
     },
+
     onShow: function () {
       var that = this;
       wx.getNetworkType({  //判断网络类型

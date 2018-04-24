@@ -22,6 +22,110 @@ page {
   position: relative;
   background: #fff;
 }
+.boy_layer {
+  width: 100%;
+  background: #000000;
+  opacity: 0.8;
+  -webkit-border-radius: 2rpx;
+  -moz-border-radius: 2rpx;
+  border-radius: 2rpx;
+  text-align: center;
+  height: 100%;
+  position: fixed;
+  bottom: 0;
+  z-index: 99;
+  left: 0;
+  right: 0;
+}
+.boy_layer_hidden {
+  width: 100%;
+  background: #000000;
+  opacity: 0.8;
+  -webkit-border-radius: 2rpx;
+  -moz-border-radius: 2rpx;
+  border-radius: 2rpx;
+  text-align: center;
+  height: 100%;
+  position: fixed;
+  bottom: 0;
+  z-index: 99;
+  left: 0;
+  right: 0;
+  display: none;
+}
+.girl_layer {
+  width: 100%;
+  background: #000000;
+  opacity: 0.8;
+  -webkit-border-radius: 2rpx;
+  -moz-border-radius: 2rpx;
+  border-radius: 2rpx;
+  text-align: center;
+  height: 100%;
+  position: fixed;
+  bottom: 0;
+  z-index: 99;
+  left: 0;
+  right: 0;
+}
+.girl_layer_hidden {
+  width: 100%;
+  background: #000000;
+  opacity: 0.8;
+  -webkit-border-radius: 2rpx;
+  -moz-border-radius: 2rpx;
+  border-radius: 2rpx;
+  text-align: center;
+  height: 100%;
+  position: fixed;
+  bottom: 0;
+  z-index: 99;
+  left: 0;
+  right: 0;
+  display: none;
+}
+.boy_layer .l_brother_view,
+.girl_layer .l_sister_view {
+  width: 100%;
+  height: 262rpx;
+  margin-top: 138rpx;
+}
+.l_brother_view .l_brother,
+.l_sister_view .l_sister {
+  width: 552rpx;
+  height: 262rpx;
+}
+.boy_layer .icon_brother_view,
+.girl_layer .icon_sister_view {
+  width: 100%;
+  height: 520rpx;
+  margin-top: 24rpx;
+}
+.icon_brother_view .icon_brother,
+.icon_sister_view .icon_sister {
+  width: 520rpx;
+  height: 520rpx;
+}
+.boy_layer .cancel_brother_view,
+.girl_layer .cancel_sister_view {
+  width: 100%;
+  height: 100rpx;
+  margin-top: 34rpx;
+  margin-bottom: 125rpx;
+}
+.cancel_brother_view .cancel_icon,
+.cancel_sister_view .cancel_icon {
+  width: 100rpx;
+  height: 100rpx;
+}
+.girl_layer {
+  width: 100%;
+  background: #000000;
+  opacity: 0.8;
+  -webkit-border-radius: 2rpx;
+  -moz-border-radius: 2rpx;
+  border-radius: 2rpx;
+}
 .content_view {
   width: 100%;
   height: 100vh;
@@ -92,7 +196,8 @@ page {
   background: #000000;
   opacity: 0.2;
 }
-.search_img .boy_img {
+.search_img .boy_img,
+.search_img .girl_img {
   width: 120rpx ;
   height: 60rpx;
   line-height: 60rpx;
@@ -336,7 +441,7 @@ swiper-item wx-image {
   width: 100%;
   height: 93%;
   background: #fff;
-  opacity: 0.6;
+  opacity: 0.95;
   position: fixed;
   bottom: 0;
   left: 0;

@@ -1,0 +1,98 @@
+<!--pages/index/searchlist/searchlist.wxml-->
+<template name="searchList">
+    <!--根据搜索结果渲染数据-->
+    <scroll-view class="{{listData ? 'big_listdata_bloc':'big_listdata'}}" enable-back-to-top="true" scroll-y="true" bindscrolltoupper="upper"
+                 bindscrolltolower="lower" bindscroll="scroll" scroll-top="{{scrollTop}}" lower-threshold="10">
+        <view class="list_data">
+            <view class="img_view">
+                <image mode="aspectFit" src="../../images/b.png"></image>
+            </view>
+            <view class="book_data">
+                <p class="book_name">风水师</p>
+                <p class="author">夜赦</p>
+                <p class="explain">风水师对风水格外在行，风水师外公生的伟大</p>
+            </view>
+        </view>
+        <view class="list_data">
+            <view class="img_view">
+                <image mode="aspectFit" src="../../images/b.png"></image>
+            </view>
+            <view class="book_data">
+                <p class="book_name">风水师</p>
+                <p class="author">夜赦</p>
+                <p class="explain">风水师对风水格外在行，风水师外公生的伟大</p>
+            </view>
+        </view>
+        <view class="list_data">
+            <view class="img_view">
+                <image mode="aspectFit" src="../../images/b.png"></image>
+            </view>
+            <view class="book_data">
+                <p class="book_name">风水师</p>
+                <p class="author">夜赦</p>
+                <p class="explain">风水师对风水格外在行，风水师外公生的伟大</p>
+            </view>
+        </view>
+        <view class="list_data">
+            <view class="img_view">
+                <image mode="aspectFit" src="../../images/b.png"></image>
+            </view>
+            <view class="book_data">
+                <p class="book_name">风水师</p>
+                <p class="author">夜赦</p>
+                <p class="explain">风水师对风水格外在行，风水师外公生的伟大</p>
+            </view>
+        </view>
+        <view class="list_data">
+            <view class="img_view">
+                <image mode="aspectFit" src="../../images/b.png"></image>
+            </view>
+            <view class="book_data">
+                <p class="book_name">风水师</p>
+                <p class="author">夜赦</p>
+                <p class="explain">风水师对风水格外在行，风水师外公生的伟大</p>
+            </view>
+        </view>
+        <view class="list_data">
+            <view class="img_view">
+                <image mode="aspectFit" src="../../images/b.png"></image>
+            </view>
+            <view class="book_data">
+                <p class="book_name">风水师</p>
+                <p class="author">夜赦</p>
+                <p class="explain">风水师对风水格外在行，风水师外公生的伟大</p>
+            </view>
+        </view>
+        <view class="list_data">
+            <view class="img_view">
+                <image mode="aspectFit" src="../../images/b.png"></image>
+            </view>
+            <view class="book_data">
+                <p class="book_name">风水师</p>
+                <p class="author">夜赦</p>
+                <p class="explain">风水师对风水格外在行，风水师外公生的伟大</p>
+            </view>
+        </view>
+        <view class="list_data">
+            <view class="img_view">
+                <image mode="aspectFit" src="../../images/b.png"></image>
+            </view>
+            <view class="book_data">
+                <p class="book_name">风水师</p>
+                <p class="author">夜赦</p>
+                <p class="explain">风水师对风水格外在行，风水师外公生的伟大</p>
+            </view>
+        </view>
+        <view class="list_data">
+            <view class="img_view">
+                <image mode="aspectFit" src="../../images/b.png"></image>
+            </view>
+            <view class="book_data">
+                <p class="book_name">风水师</p>
+                <p class="author">夜赦</p>
+                <p class="explain">风水师对风水格外在行，风水师外公生的伟大</p>
+            </view>
+        </view>
+
+    </scroll-view>
+</template>

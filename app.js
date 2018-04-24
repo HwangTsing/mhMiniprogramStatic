@@ -35,10 +35,6 @@ App({
     })
   },
   globalData: {
-      userInfo: null,
-      isIphone: false,
-      avatarUtl:[
-          {}
-          ]
+    wxApi: null
   }
 })
