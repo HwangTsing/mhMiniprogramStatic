@@ -36,6 +36,10 @@
             </swiper>
         </view>
 
+         <view>
+          <navigator url="/pages/read/read">reader</navigator>
+          </view>
+        
         <view class="fine_works">
             <view class="border"></view>
             <view class="fine_text">精品佳作</view>

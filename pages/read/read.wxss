@@ -1,1 +1,7 @@
 /* pages/read/read.wxss */
+.container {
+  background-color: #3D454D;
+}
+.vcomic-wrap{
+  width: 100%;
+}

@@ -1,4 +1,14 @@
 <!--pages/read/read.wxml-->
 <view class="container">
-    <view>阅读页</view>
+    <scroll-view scroll-y="{{true}}">
+        <vcomic 
+            class="vcomic-wrap"
+            wx:for="{{json_content.page}}" 
+            wx:key="{{item.image_id}}" 
+            order="{{index}}"
+            width="{{windowWidth}}"
+            scale="{{item.mobileImgWidth/item.mobileImgHeight}}"
+            src="{{item.mobileImgUrl}}"
+        ></vcomic>
+    </scroll-view>
 </view>

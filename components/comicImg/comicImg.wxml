@@ -1,0 +1,12 @@
+<view class="vcomic-item" style="width:{{width}}px;height:{{height}}px">
+  <view class="vcomic-order">{{order}}</view>
+  <image 
+    class="vcomic-img" 
+    style="width: {{width}}px;"
+    src="{{src}}" 
+    mode="widthFix"
+    lazy-load="{{true}}"
+    bindload="load"
+    binderror="error">
+  </image>
+</view>

@@ -55,8 +55,12 @@ const ajax = (url, cfg = { data:{}}) => {
   })
 
   return promise;
-
 }
+
+var systemInfo = {};
+try {
+  systemInfo = wx.getSystemInfoSync();
+} catch(e) {}
 
 const post = (url, cfg = {method: 'POST'}) => {
   return ajax(url, cfg)
@@ -79,4 +83,5 @@ module.exports = {
   get, 
   post,
   request,
+  systemInfo,
 }
