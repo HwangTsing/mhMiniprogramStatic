@@ -1,5 +1,6 @@
 //index.js
 var util = require("../../utils/util.js");
+//var _= require("../../utils/underscore.js");
 //获取应用实例
 var app = getApp()
 
@@ -18,11 +19,14 @@ Page({
           isCancel:false,   //推荐页男女分版弹层
           boyid:'',
           girlid:'',
+          recommendBList:[],   //推荐页男版数据
+          recommendGList:[],    //推荐女版数据
           isScroll:true,   //scroll-view滚动条
           isOpacity:false,  //蒙层
           listData:false,    //搜索结果列表(调取接口时listData为Array,本地测试为Boolean)
           isScrollSearch:false,    //滚动
-          searchListData:[]
+          searchListData:[],
+          inputValue:''
       },
 
     //事件处理函数
@@ -48,10 +52,24 @@ Page({
             isScroll:true
         })
     },
-    bindInputChange:function () {
+    bindInputChange:function (e) {
         this.setData({
+            inputValue: e.detail.value,
             listData:true,
             isScroll:false
+        })
+    },
+    //删除搜索事件
+    onDel:function () {
+        this.setData({
+            inputValue:''
+        })
+    },
+    //取消
+    onCancel:function(){
+        this.setData({
+            isOpacity:false,
+            listData:false
         })
     },
     /*查看更多*/
@@ -102,11 +120,19 @@ Page({
                 header:'application/html',
                 success:function (data) {
                     console.log(data.data.data);
-                    var data = data.data.data;
-                    var imgUrls = data.h5_recommend_male_rotation_map;
-                    console.log(imgUrls);
+                    var location_list = data.data.data.location_list;
+                    console.log(location_list);
+                    location_list.forEach((item,index)=> {
+                        console.log(item.location_en);
+                        var key = item.location_en;
+                        console.log(key);
+                        console.log(data.data.data[key]);
+                        that.data.recommendBList.push(data.data.data[key]);
+                    });
+                    console.log(that.data.recommendBList);
                     that.setData({
-                        imgUrls:imgUrls
+                        imgUrls:that.data.recommendBList[0],
+                        recommendBList:that.data.recommendBList,
                     })
                 },
                 fail:function (data) {
@@ -116,11 +142,18 @@ Page({
         }else if (id === 1) {
             app.globalData.wxApi.recommendGirl({}).then(function (data) {
                 console.log(data.data);
-                var data = data.data;
-                var imgUrls = data.h5_recommend_female_rotation_map;
-                console.log(imgUrls);
+                var location_list = data.data.location_list;
+                location_list.forEach((item,index)=> {
+                    console.log(item.location_en);
+                    var key = item.location_en;
+                    console.log(key);
+                    console.log(data.data[key]);
+                    that.data.recommendGList.push(data.data[key]);
+                });
+                console.log(that.data.recommendGList);
                 that.setData({
-                    imgUrls:imgUrls
+                        imgUrls:that.data.recommendGList[0],
+                        recommendGList:that.data.recommendGList,
                 })
             })
         }
