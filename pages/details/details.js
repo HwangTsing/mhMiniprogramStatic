@@ -1,4 +1,6 @@
 // pages/details/details.js
+
+import { urlValue }from '../../utils/util.js';
 Page({
 
     /**
@@ -48,7 +50,8 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+      //options 获取参数
+      console.log(options);
     },
 
     /**

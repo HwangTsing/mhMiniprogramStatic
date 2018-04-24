@@ -47,7 +47,7 @@
         <!--img+content 图片区域内容可滑动-->
         <scroll-view class="scroll_view" scroll-x="true">
             <block>
-                <navigator class="big_img" url="../details/details">
+                <navigator class="big_img" url="../details/details?id=68491">
                     <image mode="aspectFit" src="../../images/nav/HPWC2lTX.png"></image>
                     <view class="word_info">
                         <text class="name_name">晓雾将歇</text>
