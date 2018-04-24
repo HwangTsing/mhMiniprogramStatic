@@ -1,3 +1,5 @@
+const wxApi = require('../../utils/util.js');
+
 // pages/read/read.js
 Page({
 
@@ -5,14 +7,29 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    windowWidth: 320,
+    chapter: {},
+    comic: {},
+    json_content: {
+      page: []
+    }
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    wxApi.get('wbcomic/comic/comic_play', { 
+      data: {
+        chapter_id: 236874,
+        create_source: "h5"
+      }
+    }).then(({code, message, data}) => {
+      const { windowWidth } = wxApi.systemInfo();
+      data.windowWidth = windowWidth;
+      this.setData({...data})
+    })
+
   },
 
   /**

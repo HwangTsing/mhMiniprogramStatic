@@ -68,7 +68,7 @@
         </view>
     </block>
 
-    <scroll-view class="content_view" scroll-y="{{isScroll}}" bindscroll="scroll" bindscrolltoupper="upper">
+    <scroll-view class="content_view" scroll-y="{{isScroll}}" bindscroll="scroll" bindscrolltolower="lower">
         <!--banner图-->
         <view class="banner" id="haha">
             <swiper indicator-dots="{{indicatorDots}}"
@@ -87,111 +87,125 @@
             </swiper>
         </view>
 
+         <!--<view>
+          <navigator url="/pages/read/read">reader</navigator>
+          </view>-->
+
         <view class="fine_works">
             <view class="border"></view>
-            <view class="fine_text">精品佳作</view>
+            <view class="fine_text">{{title_fine}}</view>
             <view class="border" style="margin-left: 10rpx;"></view>
         </view>
-        <!--img+content 图片区域内容可滑动-->
+
+        <!--img+content 图片区域内容可滑动--精品佳作-->
         <scroll-view class="scroll_view" scroll-x="true">
-            <block>
-                <navigator class="big_img" url="../details/details">
-                    <image mode="aspectFill" src="../../images/nav/HPWC2lTX.jpg"></image>
+            <block wx:for="{{girlFineWorks}}" wx:key="index">
+                <navigator class="big_img" url="../details/details?comic_id={{item.extra.comic_id}}">
+                    <image mode="aspectFill" src="{{item.extra.hcover}}"></image>
                     <view class="word_info">
-                        <text class="name_name">美少女日记最多这么…</text>
-                        <text class="name_info">和四美男同居只为学习</text>
-                    </view>
-                </navigator>
-                <navigator class="big_img" url="../details/details">
-                    <image mode="aspectFill" src="../../images/nav/HPWC2lTX.jpg"></image>
-                    <view class="word_info">
-                        <text class="name_name">美少女日记最多这么…</text>
-                        <text class="name_info">和四美男同居只为学习</text>
-                    </view>
-                </navigator>
-                <navigator class="big_img" url="../details/details">
-                    <image mode="aspectFill" src="../../images/nav/HPWC2lTX.jpg"></image>
-                    <view class="word_info">
-                        <text class="name_name">美少女日记最多这么…</text>
-                        <text class="name_info">和四美男同居只为学习</text>
-                    </view>
-                </navigator>
-                <navigator class="big_img" url="../details/details">
-                    <image mode="aspectFill" src="../../images/nav/HPWC2lTX.jpg"></image>
-                    <view class="word_info">
-                        <text class="name_name">美少女日记最多这么…</text>
-                        <text class="name_info">和四美男同居只为学习</text>
-                    </view>
-                </navigator>
-                <navigator class="big_img" url="../details/details">
-                    <image mode="aspectFill" src="../../images/nav/HPWC2lTX.jpg"></image>
-                    <view class="word_info">
-                        <text class="name_name">美少女日记最多这么…</text>
-                        <text class="name_info">和四美男同居只为学习</text>
-                    </view>
-                </navigator>
-                <navigator class="big_img"url="../details/details">
-                    <image mode="aspectFill" src="../../images/nav/HPWC2lTX.jpg"></image>
-                    <view class="word_info">
-                        <text class="name_name">美少女日记最多这么…</text>
-                        <text class="name_info">和四美男同居只为学习</text>
-                    </view>
-                </navigator>
-                <navigator class="big_img" url="../details/details">
-                    <image mode="aspectFill" src="../../images/nav/HPWC2lTX.jpg"></image>
-                    <view class="word_info">
-                        <text class="name_name">美少女日记最多这么…</text>
-                        <text class="name_info">和四美男同居只为学习</text>
+                        <text class="name_name">{{item.extra.name}}</text>
+                        <text class="name_info">{{item.extra.watching_focus}}</text>
                     </view>
                 </navigator>
             </block>
         </scroll-view>
-        <view class="bg_more" catchtap="bindMoreTap">查看更多</view>
+        <view class="bg_more" catchtap="bindMoreTap" data-index="{{keyIndex[0]}}">查看更多</view>
 
         <view class="hot_works">
             <view class="border"></view>
-            <view class="fine_text">人气作品</view>
+            <view class="fine_text">{{title_hot}}</view>
             <view class="border" style="margin-left: 10rpx;"></view>
-
         </view>
-        <!--img+content 图片区域内容-->
+        <!--img+content 人气作品-->
         <view class="hot_view">
-            <block>
-                <navigator class="hot_img" url="../details/details">
-                    <image mode="aspectFill" src="../../images/nav/HPWC2lTX.jpg"></image>
+            <block wx:for="{{girlPopularWorks}}" wx:key="index">
+                <navigator class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}">
+                    <image mode="aspectFill" src="{{item.extra.hcover}}"></image>
                     <view class="word_info">
-                        <text class="name_name">美少女日记</text>
-                        <text class="name_info">和四美男同居只为学习</text>
-                    </view>
-                </navigator>
-                <navigator class="hot_img" url="../details/details">
-                    <image mode="aspectFill" src="../../images/nav/HPWC2lTX.jpg"></image>
-                    <view class="word_info">
-                        <text class="name_name">美少女日记</text>
-                        <text class="name_info">和四美男同居只为学习</text>
-                    </view>
-                </navigator>
-                <navigator class="hot_img" url="../details/details">
-                    <image mode="aspectFill" src="../../images/nav/HPWC2lTX.jpg"></image>
-                    <view class="word_info">
-                        <text class="name_name">美少女日记</text>
-                        <text class="name_info">和四美男同居只为学习</text>
-                    </view>
-                </navigator>
-                <navigator class="hot_img" url="../details/details">
-                    <image mode="aspectFill" src="../../images/nav/HPWC2lTX.jpg"></image>
-                    <view class="word_info">
-                        <text class="name_name">美少女日记</text>
-                        <text class="name_info">和四美男同居只为学习</text>
+                        <text class="name_name">{{item.extra.name}}</text>
+                        <text class="name_info">{{item.extra.watching_focus}}</text>
                     </view>
                 </navigator>
             </block>
         </view>
-        <view class="bg_more" catchtap="bindMoreTap">查看更多</view>
+        <view class="bg_more" catchtap="bindMoreTap" data-index="{{keyIndex[1]}}">查看更多</view>
         <!--最新上架-->
-        <view class="new_view">
-
+        <view class="new_works">
+            <view class="border"></view>
+            <view class="fine_text">{{title_new}}</view>
+            <view class="border" style="margin-left: 10rpx;"></view>
         </view>
+        <view class="new_view">
+                <view class="big_new_view">
+                    <block wx:for="{{newArrivalWorks}}" wx:key="index">
+                        <navigator class="new_img" url="../details/details?comic_id={{item.extra.comic_id}}">
+                            <image mode="aspectFill" src="{{item.extra.hcover}}"></image>
+                            <view class="word_info">
+                                <text class="name_name">{{item.extra.name}}</text>
+                                <text class="name_info">{{item.extra.watching_focus}}</text>
+                            </view>
+                        </navigator>
+                    </block>
+                </view>
+        </view>
+        <view class="bg_more" catchtap="bindMoreTap" data-index="{{keyIndex[2]}}">查看更多</view>
+        <!--热门连载-->
+        <view class="hot_works">
+            <view class="border"></view>
+            <view class="fine_text">{{title_hotserial}}</view>
+            <view class="border" style="margin-left: 10rpx;"></view>
+        </view>
+        <!--img+content 图片区域内容-->
+        <view class="hot_view">
+            <block wx:for="{{hotSerialWorks}}" wx:key="index">
+                <navigator class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}">
+                    <image mode="aspectFill" src="{{item.extra.hcover}}"></image>
+                    <view class="word_info">
+                        <text class="name_name">{{item.extra.name}}</text>
+                        <text class="name_info">{{item.extra.watching_focus}}</text>
+                    </view>
+                </navigator>
+            </block>
+        </view>
+        <view class="bg_more" catchtap="bindMoreTap" data-index="{{keyIndex[3]}}">查看更多</view>
+        <!--小编推荐-->
+        <view class="new_works">
+            <view class="border"></view>
+            <view class="fine_text">{{title_xbrecommend}}</view>
+            <view class="border" style="margin-left: 10rpx;"></view>
+        </view>
+        <view class="new_view">
+            <view class="big_new_view">
+                <block wx:for="{{xiaobianRecommend}}" wx:key="index">
+                    <navigator class="new_img" url="../details/details?comic_id={{item.extra.comic_id}}">
+                        <image mode="aspectFill" src="{{item.extra.hcover}}"></image>
+                        <view class="word_info">
+                            <text class="name_name">{{item.extra.name}}</text>
+                            <text class="name_info">{{item.extra.watching_focus}}</text>
+                        </view>
+                    </navigator>
+                </block>
+            </view>
+        </view>
+        <view class="bg_more" catchtap="bindMoreTap" data-index="{{keyIndex[4]}}">查看更多</view>
+        <!--img+content 本周推荐-->
+        <view class="hot_works">
+            <view class="border"></view>
+            <view class="fine_text">{{title_weekrecommend}}</view>
+            <view class="border" style="margin-left: 10rpx;"></view>
+        </view>
+        <view class="hot_view">
+            <block wx:for="{{weekRecommend}}" wx:key="index">
+                <navigator class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}">
+                    <image mode="aspectFill" src="{{item.extra.hcover}}"></image>
+                    <view class="word_info">
+                        <text class="name_name">{{item.extra.name}}</text>
+                        <text class="name_info">{{item.extra.watching_focus}}</text>
+                    </view>
+                </navigator>
+            </block>
+        </view>
+        <view class="bg_more" catchtap="bindMoreTap" data-index="{{keyIndex[5]}}">查看更多</view>
     </scroll-view>
 
   <!--蒙层-->
@@ -295,6 +309,9 @@
 
     </scroll-view>
 
-
+    <!--滑动到底部没有数据了提示-->
+    <view class="{{isLower ? 'bottom_img':'bottom_img_hidden'}}">
+        <image src="../../images/prompt.png"></image>
+    </view>
 </view>
 

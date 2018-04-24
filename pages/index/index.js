@@ -1,12 +1,11 @@
 //index.js
-var util = require("../../utils/util.js");
-//var _= require("../../utils/underscore.js");
-//获取应用实例
-var app = getApp()
+var wxApi = require("../../utils/util.js");
 
 Page({
       data: {
           imgUrls:[],
+          title:[],
+          keyIndex:[],
           indicatorDots: true, //是否显示指示点
           autoplay: true, //是否自动切换
           interval: 1000, //自动切换间隔时长
@@ -26,7 +25,8 @@ Page({
           listData:false,    //搜索结果列表(调取接口时listData为Array,本地测试为Boolean)
           isScrollSearch:false,    //滚动
           searchListData:[],
-          inputValue:''
+          inputValue:'',
+          isLower:false,    //滑动到底部提示没有数据了
       },
 
     //事件处理函数
@@ -38,6 +38,8 @@ Page({
             isScroll:true
         })
     },
+    //男女分版切换
+
     /*input聚焦和失焦,监听*/
     focusInputEvent: function () {
           var that= this;
@@ -49,7 +51,7 @@ Page({
           var that = this;
         this.setData({
             isOpacity:false,
-            isScroll:true
+            isScroll:false
         })
     },
     bindInputChange:function (e) {
@@ -69,13 +71,16 @@ Page({
     onCancel:function(){
         this.setData({
             isOpacity:false,
-            listData:false
+            listData:false,
+            isScroll:true
         })
     },
     /*查看更多*/
-    bindMoreTap:function () {
+    bindMoreTap:function (e) {
+        var location_en = e.currentTarget.dataset.index;
+        console.log(location_en);
         wx.navigateTo({
-            url: '/pages/morelist/morelist'
+            url: '/pages/morelist/morelist?location_en='+location_en
         })
     },
 
@@ -86,7 +91,10 @@ Page({
     },
     //滚动条滚到底部的时候触发
     lower: function(e) {
-        console.log(e);
+        var that = this;
+        this.setData({
+            isLower:!that.data.isLower
+        })
 
     },
     //滚动条滚动后触发
@@ -113,52 +121,139 @@ Page({
     initData: function (id) {
         var that = this;
         if (id === 0){
-            //console.log(app.globalData.wxApi);
-            app.globalData.wxApi.recommendBoy({
-                method:'GET',
-                data:{},
-                header:'application/html',
-                success:function (data) {
-                    console.log(data.data.data);
-                    var location_list = data.data.data.location_list;
-                    console.log(location_list);
-                    location_list.forEach((item,index)=> {
-                        console.log(item.location_en);
-                        var key = item.location_en;
-                        console.log(key);
-                        console.log(data.data.data[key]);
-                        that.data.recommendBList.push(data.data.data[key]);
-                    });
-                    console.log(that.data.recommendBList);
-                    that.setData({
-                        imgUrls:that.data.recommendBList[0],
-                        recommendBList:that.data.recommendBList,
-                    })
-                },
-                fail:function (data) {
-
-                }
-            })
+            that.indexListBoy();
         }else if (id === 1) {
-            app.globalData.wxApi.recommendGirl({}).then(function (data) {
-                console.log(data.data);
-                var location_list = data.data.location_list;
-                location_list.forEach((item,index)=> {
-                    console.log(item.location_en);
-                    var key = item.location_en;
-                    console.log(key);
-                    console.log(data.data[key]);
-                    that.data.recommendGList.push(data.data[key]);
-                });
-                console.log(that.data.recommendGList);
-                that.setData({
-                        imgUrls:that.data.recommendGList[0],
-                        recommendGList:that.data.recommendGList,
-                })
-            })
+            that.indexListGirl();
         }
 
 
+    },
+    indexListBoy:function () {
+        var that = this;
+        wxApi.recommendBoy({
+            method:'GET',
+            data:{},
+            header:'application/html',
+            success:function (data) {
+                console.log(data.data.data);
+                var location_list = data.data.data.location_list;
+                console.log(location_list);
+                location_list.forEach((item,index)=> {
+                    //console.log(item.location_en);
+                    var key = item.location_en;
+                    console.log(key);
+                    console.log(data.data.data[key]);
+                    that.data.title.push(item.location_cn);
+                    that.data.keyIndex.push(key)
+                    that.data.recommendBList.push(data.data.data[key]);
+                });
+                console.log(that.data.recommendBList);
+                if (that.data.recommendBList[2].length >=4){
+                    var girlPopularWorks = that.data.recommendBList[2].slice(0,4);
+                }else  if (that.data.recommendBList[2].length < 4){
+                    var girlPopularWorks = that.data.recommendBList[2]
+                }
+                if  (that.data.recommendBList[3].length >=3){
+                    var newArrivalWorks = that.data.recommendBList[3].slice(0,3);
+                }else if (that.data.recommendBList[3].length < 3) {
+                    var newArrivalWorks = that.data.recommendBList[3]
+                }
+                if (that.data.recommendBList[4].length >= 4) {
+                    var hotSerialWorks = that.data.recommendBList[4].slice(0,4);
+                }else if (that.data.recommendBList[4].length < 4){
+                    var hotSerialWorks = that.data.recommendBList[4]
+                }
+                if  (that.data.recommendBList[5].length >=3){
+                    var xiaobianRecommend = that.data.recommendBList[5].slice(0,3);
+                }else if (that.data.recommendBList[5].length < 3) {
+                    var xiaobianRecommend = that.data.recommendBList[5]
+                }
+                if (that.data.recommendBList[6].length >= 4) {
+                    var weekRecommend = that.data.recommendBList[6].slice(0,4);
+                }else  if (that.data.recommendBList[6].length < 4){
+                    var weekRecommend = that.data.recommendBList[6]
+                }
+                that.setData({
+                    keyIndex:that.data.keyIndex,
+                    title_fine:that.data.title[1],
+                    title_hot:that.data.title[2],
+                    title_new:that.data.title[3],
+                    title_hotserial:that.data.title[4],
+                    title_xbrecommend:that.data.title[5],
+                    title_weekrecommend:that.data.title[6],
+                    recommendGList:that.data.recommendBList,
+                    imgUrls:that.data.recommendBList[0],
+                    girlFineWorks:that.data.recommendBList[1],
+                    girlPopularWorks:girlPopularWorks,
+                    newArrivalWorks:newArrivalWorks,
+                    hotSerialWorks:hotSerialWorks,
+                    xiaobianRecommend:xiaobianRecommend,
+                    weekRecommend:weekRecommend
+                })
+            },
+            fail:function (data) {
+
+            }
+        })
+    },
+
+    indexListGirl:function () {
+        var that = this;
+        wxApi.recommendGirl({}).then(function (data) {
+            console.log(data.data);
+            var location_list = data.data.location_list;
+            location_list.forEach((item,index)=> {
+                //console.log(item.location_en);
+                var key = item.location_en;
+                //console.log(key);
+                console.log(data.data[key]);
+                that.data.title.push(item.location_cn);
+                that.data.keyIndex.push(key)
+                that.data.recommendGList.push(data.data[key]);
+            });
+            if (that.data.recommendGList[2].length >=4){
+                var girlPopularWorks = that.data.recommendGList[2].slice(0,4);
+            }else  if (that.data.recommendGList[2].length < 4){
+                var girlPopularWorks = that.data.recommendGList[2]
+            }
+            if  (that.data.recommendGList[3].length >=3){
+                var newArrivalWorks = that.data.recommendGList[3].slice(0,3);
+            }else if (that.data.recommendGList[3].length < 3) {
+                var newArrivalWorks = that.data.recommendGList[3]
+            }
+            if (that.data.recommendGList[4].length >= 4) {
+                var hotSerialWorks = that.data.recommendGList[4].slice(0,4);
+            }else if (that.data.recommendGList[4].length < 4){
+                var hotSerialWorks = that.data.recommendGList[4]
+            }
+            if  (that.data.recommendGList[5].length >=3){
+                var xiaobianRecommend = that.data.recommendGList[5].slice(0,3);
+            }else if (that.data.recommendGList[5].length < 3) {
+                var xiaobianRecommend = that.data.recommendGList[5]
+            }
+            if (that.data.recommendGList[6].length >= 4) {
+                var weekRecommend = that.data.recommendGList[6].slice(0,4);
+            }else  if (that.data.recommendGList[6].length < 4){
+                var weekRecommend = that.data.recommendGList[6]
+            }
+            that.setData({
+                keyIndex:that.data.keyIndex,
+                title_fine:that.data.title[1],
+                title_hot:that.data.title[2],
+                title_new:that.data.title[3],
+                title_hotserial:that.data.title[4],
+                title_xbrecommend:that.data.title[5],
+                title_weekrecommend:that.data.title[6],
+                recommendGList:that.data.recommendGList,
+                imgUrls:that.data.recommendGList[0],
+                girlFineWorks:that.data.recommendGList[1],
+                girlPopularWorks:girlPopularWorks,
+                newArrivalWorks:newArrivalWorks,
+                hotSerialWorks:hotSerialWorks,
+                xiaobianRecommend:xiaobianRecommend,
+                weekRecommend:weekRecommend
+            })
+        })
     },
 
     onLoad: function (options) {

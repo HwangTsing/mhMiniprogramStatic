@@ -1,6 +1,4 @@
 //app.js
-import wxApi from "./utils/util";
-
 App({
   onLaunch: function () {
     // 展示本地存储能力
@@ -37,8 +35,6 @@ App({
     })
   },
   globalData: {
-      userInfo: null,
-      isIphone: false,
-      wxApi:new wxApi
+    wxApi: null
   }
 })

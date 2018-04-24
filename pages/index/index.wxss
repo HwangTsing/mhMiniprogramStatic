@@ -381,10 +381,19 @@ swiper-item wx-image {
   margin-bottom: 5rpx;
 }
 .scroll_view .word_info .name_name {
+  display: block;
+  width: 320rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   color: #333;
   font-size: 32rpx;
 }
 .scroll_view .word_info .name_info {
+  width: 240rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   color: #999999;
   font-size: 24rpx;
 }
@@ -404,7 +413,8 @@ swiper-item wx-image {
   background: #fff;
   overflow-x: hidden;
 }
-.hot_works {
+.hot_works,
+.new_works {
   display: flex;
   flex-direction: row;
   display: -webkit-box;
@@ -437,7 +447,7 @@ swiper-item wx-image {
   height: 212rpx;
 }
 .hot_view .word_info {
-  width: 352rpx;
+  width: 372rpx;
   height: 90rpx;
   background: #fff;
   display: flex;
@@ -451,10 +461,19 @@ swiper-item wx-image {
   margin-top: 5rpx;
 }
 .hot_view .word_info .name_name {
+  display: block;
+  width: 160rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   color: #1a1a1a;
   font-size: 30rpx;
 }
 .hot_view .word_info .name_info {
+  width: 240rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   color: #666;
   font-size: 26rpx;
 }
@@ -469,6 +488,86 @@ swiper-item wx-image {
   color: #999999;
   margin: 0 30rpx;
   margin-top: 26rpx;
+}
+.new_view,
+.big_new_view {
+  width: 100%;
+  background: #fff;
+  overflow-x: hidden;
+}
+.big_new_view .new_img:first-child {
+  width: 100%;
+  background: #fff;
+  overflow-x: hidden;
+}
+.big_new_view .new_img:first-child image:nth-child(1) {
+  width: 100%;
+  height: 424rpx;
+}
+.big_new_view .new_img:first-child .word_info {
+  width: 100%;
+  height: 104rpx;
+}
+.big_new_view .new_img:first-child .word_info text {
+  padding: 0 30rpx;
+  margin-top: 5rpx;
+}
+.big_new_view .new_img:first-child .word_info .name_name {
+  width: 160rpx;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #1a1a1a;
+  font-size: 30rpx;
+}
+.big_new_view .new_img:first-child .word_info .name_info {
+  width: 240rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #666;
+  font-size: 26rpx;
+}
+.big_new_view .new_img:nth-child(2),
+.big_new_view .new_img:nth-child(3) {
+  width: 374rpx;
+  height: 212rpx;
+  display: inline-block;
+}
+.big_new_view .new_img:nth-child(2) image,
+.big_new_view .new_img:nth-child(3) image {
+  width: 374rpx;
+  height: 212rpx;
+  display: inline-block;
+}
+.big_new_view .new_img:nth-child(2) .word_info,
+.big_new_view .new_img:nth-child(3) .word_info {
+  width: 374rpx;
+}
+.big_new_view .new_img:nth-child(2) .word_info text,
+.big_new_view .new_img:nth-child(3) .word_info text {
+  padding: 0 30rpx;
+  margin-top: 5rpx;
+}
+.big_new_view .new_img:nth-child(2) .word_info .name_name,
+.big_new_view .new_img:nth-child(3) .word_info .name_name {
+  width: 160rpx;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #1a1a1a;
+  font-size: 30rpx;
+}
+.big_new_view .new_img:nth-child(2) .word_info .name_info,
+.big_new_view .new_img:nth-child(3) .word_info .name_info {
+  width: 240rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #666;
+  font-size: 26rpx;
 }
 .layer {
   width: 100%;
@@ -492,6 +591,23 @@ swiper-item wx-image {
   right: 0;
   z-index: 10;
   display: none;
+}
+.bottom_img {
+  width: 100%;
+  height: 318rpx;
+  text-align: center;
+  overflow: hidden;
+}
+.bottom_img_hidden {
+  width: 100%;
+  height: 318rpx;
+  text-align: center;
+  overflow: hidden;
+  display: none;
+}
+.bottom_img image {
+  width: 256rpx;
+  height: 256rpx;
 }
 /*搜索结果数据样式*/
 .big_listdata {
