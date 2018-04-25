@@ -18,8 +18,7 @@ Page({
           isCancel:false,   //推荐页男女分版弹层
           boyid:'',
           girlid:'',
-          recommendBList:[],   //推荐页男版数据
-          recommendGList:[],    //推荐女版数据
+          recommendList:[],   //推荐页数据
           isScroll:true,   //scroll-view滚动条
           isOpacity:false,  //蒙层
           listData:false,    //搜索结果列表(调取接口时listData为Array,本地测试为Boolean)
@@ -27,9 +26,101 @@ Page({
           searchListData:[],
           inputValue:'',
           isLower:false,    //滑动到底部提示没有数据了
+          isToast:false,   //男女分版切换toast
+          btnId:''
+
+      },
+      metaData:{
+          mca:''
       },
 
-    //事件处理函数
+    initData: function () {
+        var that = this;
+        var mca = '';
+        if (!!this.metaData.mca){
+            mca = this.metaData.mca;
+        }
+        wxApi.recommendList({
+            method:'GET',
+            data:{mca},
+            header:'application/html',
+            success:function (data) {
+                //console.log(data)
+                console.log(data.data.data);
+                var location_list = data.data.data.location_list;
+                console.log(location_list);
+                var recommendList = that.data.recommendList;
+                var title= that.data.title,keyIndex = that.data.keyIndex;
+                if (data.data.code == 1){
+                    if (that.data.btnId === 0 || that.data.btnId === 1){
+                        recommendList = [];
+                        title = [];
+                        keyIndex = [];
+                    }
+                    location_list.forEach((item,index)=> {
+                        //console.log(item.location_en);
+                        var key = item.location_en;
+                        console.log(key);
+                        console.log(data.data.data[key]);
+                        title.push(item.location_cn);
+                        keyIndex.push(key)
+                        recommendList.push(data.data.data[key]);
+                    });
+                    console.log(recommendList);
+                    if (recommendList[2].length >=4){
+                        var girlPopularWorks = recommendList[2].slice(0,4);
+                    }else  if (recommendList[2].length < 4){
+                        var girlPopularWorks = recommendList[2]
+                    }
+                    if  (recommendList[3].length >=3){
+                        var newArrivalWorks = recommendList[3].slice(0,3);
+                    }else if (recommendList[3].length < 3) {
+                        var newArrivalWorks = recommendList[3]
+                    }
+                    if (recommendList[4].length >= 4) {
+                        var hotSerialWorks = recommendList[4].slice(0,4);
+                    }else if (recommendList[4].length < 4){
+                        var hotSerialWorks = recommendList[4]
+                    }
+                    if  (recommendList[5].length >=3){
+                        var xiaobianRecommend = recommendList[5].slice(0,3);
+                    }else if (recommendList[5].length < 3) {
+                        var xiaobianRecommend = recommendList[5]
+                    }
+                    if (recommendList[6].length >= 4) {
+                        var weekRecommend = recommendList[6].slice(0,4);
+                    }else  if (recommendList[6].length < 4){
+                        var weekRecommend = recommendList[6]
+                    }
+                    that.setData({
+                        keyIndex:keyIndex,
+                        title_fine:title[1],
+                        title_hot:title[2],
+                        title_new:title[3],
+                        title_hotserial:title[4],
+                        title_xbrecommend:title[5],
+                        title_weekrecommend:title[6],
+                        recommendList:recommendList,
+                        imgUrls:recommendList[0],
+                        girlFineWorks:recommendList[1],
+                        girlPopularWorks:girlPopularWorks,
+                        newArrivalWorks:newArrivalWorks,
+                        hotSerialWorks:hotSerialWorks,
+                        xiaobianRecommend:xiaobianRecommend,
+                        weekRecommend:weekRecommend,
+                        isToast:false
+                    })
+                }
+
+            },
+            fail:function (data) {
+
+            }
+        })
+
+    },
+
+    /*事件处理函数*/
     //关闭男女分版弹层事件
     onCancelTap:function () {
         var that = this;
@@ -38,8 +129,6 @@ Page({
             isScroll:true
         })
     },
-    //男女分版切换
-
     /*input聚焦和失焦,监听*/
     focusInputEvent: function () {
           var that= this;
@@ -100,8 +189,8 @@ Page({
     //滚动条滚动后触发
     scroll: function(e) {
         var that = this;
-        console.log(e);
-        console.log(e.detail.scrollTop);
+        /*console.log(e);
+        console.log(e.detail.scrollTop);*/
         var scrollTop = e.detail.scrollTop;
         if (scrollTop >67){
             this.setData({
@@ -118,143 +207,6 @@ Page({
 
         var sessionTop = wx.setStorageSync('sessionTop',e.detail.scrollTop);
     },
-    initData: function (id) {
-        var that = this;
-        if (id === 0){
-            that.indexListBoy();
-        }else if (id === 1) {
-            that.indexListGirl();
-        }
-
-
-    },
-    indexListBoy:function () {
-        var that = this;
-        wxApi.recommendBoy({
-            method:'GET',
-            data:{},
-            header:'application/html',
-            success:function (data) {
-                console.log(data.data.data);
-                var location_list = data.data.data.location_list;
-                console.log(location_list);
-                location_list.forEach((item,index)=> {
-                    //console.log(item.location_en);
-                    var key = item.location_en;
-                    console.log(key);
-                    console.log(data.data.data[key]);
-                    that.data.title.push(item.location_cn);
-                    that.data.keyIndex.push(key)
-                    that.data.recommendBList.push(data.data.data[key]);
-                });
-                console.log(that.data.recommendBList);
-                if (that.data.recommendBList[2].length >=4){
-                    var girlPopularWorks = that.data.recommendBList[2].slice(0,4);
-                }else  if (that.data.recommendBList[2].length < 4){
-                    var girlPopularWorks = that.data.recommendBList[2]
-                }
-                if  (that.data.recommendBList[3].length >=3){
-                    var newArrivalWorks = that.data.recommendBList[3].slice(0,3);
-                }else if (that.data.recommendBList[3].length < 3) {
-                    var newArrivalWorks = that.data.recommendBList[3]
-                }
-                if (that.data.recommendBList[4].length >= 4) {
-                    var hotSerialWorks = that.data.recommendBList[4].slice(0,4);
-                }else if (that.data.recommendBList[4].length < 4){
-                    var hotSerialWorks = that.data.recommendBList[4]
-                }
-                if  (that.data.recommendBList[5].length >=3){
-                    var xiaobianRecommend = that.data.recommendBList[5].slice(0,3);
-                }else if (that.data.recommendBList[5].length < 3) {
-                    var xiaobianRecommend = that.data.recommendBList[5]
-                }
-                if (that.data.recommendBList[6].length >= 4) {
-                    var weekRecommend = that.data.recommendBList[6].slice(0,4);
-                }else  if (that.data.recommendBList[6].length < 4){
-                    var weekRecommend = that.data.recommendBList[6]
-                }
-                that.setData({
-                    keyIndex:that.data.keyIndex,
-                    title_fine:that.data.title[1],
-                    title_hot:that.data.title[2],
-                    title_new:that.data.title[3],
-                    title_hotserial:that.data.title[4],
-                    title_xbrecommend:that.data.title[5],
-                    title_weekrecommend:that.data.title[6],
-                    recommendGList:that.data.recommendBList,
-                    imgUrls:that.data.recommendBList[0],
-                    girlFineWorks:that.data.recommendBList[1],
-                    girlPopularWorks:girlPopularWorks,
-                    newArrivalWorks:newArrivalWorks,
-                    hotSerialWorks:hotSerialWorks,
-                    xiaobianRecommend:xiaobianRecommend,
-                    weekRecommend:weekRecommend
-                })
-            },
-            fail:function (data) {
-
-            }
-        })
-    },
-
-    indexListGirl:function () {
-        var that = this;
-        wxApi.recommendGirl({}).then(function (data) {
-            console.log(data.data);
-            var location_list = data.data.location_list;
-            location_list.forEach((item,index)=> {
-                //console.log(item.location_en);
-                var key = item.location_en;
-                //console.log(key);
-                console.log(data.data[key]);
-                that.data.title.push(item.location_cn);
-                that.data.keyIndex.push(key)
-                that.data.recommendGList.push(data.data[key]);
-            });
-            if (that.data.recommendGList[2].length >=4){
-                var girlPopularWorks = that.data.recommendGList[2].slice(0,4);
-            }else  if (that.data.recommendGList[2].length < 4){
-                var girlPopularWorks = that.data.recommendGList[2]
-            }
-            if  (that.data.recommendGList[3].length >=3){
-                var newArrivalWorks = that.data.recommendGList[3].slice(0,3);
-            }else if (that.data.recommendGList[3].length < 3) {
-                var newArrivalWorks = that.data.recommendGList[3]
-            }
-            if (that.data.recommendGList[4].length >= 4) {
-                var hotSerialWorks = that.data.recommendGList[4].slice(0,4);
-            }else if (that.data.recommendGList[4].length < 4){
-                var hotSerialWorks = that.data.recommendGList[4]
-            }
-            if  (that.data.recommendGList[5].length >=3){
-                var xiaobianRecommend = that.data.recommendGList[5].slice(0,3);
-            }else if (that.data.recommendGList[5].length < 3) {
-                var xiaobianRecommend = that.data.recommendGList[5]
-            }
-            if (that.data.recommendGList[6].length >= 4) {
-                var weekRecommend = that.data.recommendGList[6].slice(0,4);
-            }else  if (that.data.recommendGList[6].length < 4){
-                var weekRecommend = that.data.recommendGList[6]
-            }
-            that.setData({
-                keyIndex:that.data.keyIndex,
-                title_fine:that.data.title[1],
-                title_hot:that.data.title[2],
-                title_new:that.data.title[3],
-                title_hotserial:that.data.title[4],
-                title_xbrecommend:that.data.title[5],
-                title_weekrecommend:that.data.title[6],
-                recommendGList:that.data.recommendGList,
-                imgUrls:that.data.recommendGList[0],
-                girlFineWorks:that.data.recommendGList[1],
-                girlPopularWorks:girlPopularWorks,
-                newArrivalWorks:newArrivalWorks,
-                hotSerialWorks:hotSerialWorks,
-                xiaobianRecommend:xiaobianRecommend,
-                weekRecommend:weekRecommend
-            })
-        })
-    },
 
     onLoad: function (options) {
         var that = this;
@@ -263,18 +215,15 @@ Page({
         var girlid = options.girlid;
         this.setData({
             boyid:boyid,
-            girlid:girlid
+            girlid:girlid,
+            isScroll:false
         })
         if (boyid) {
-            this.setData({
-                isScroll:false
-            })
-            this.initData(0);
+            this.metaData.mca = "h5_recommend_male";
+            this.initData();
         }else if(girlid){
-            this.setData({
-                isScroll:false
-            })
-            this.initData(1);
+            this.metaData.mca = "h5_recommend_female";
+            this.initData();
         }
 
        /*获取个人头像等信息*/
@@ -315,6 +264,23 @@ Page({
         })
 
 
+    },
+
+    //男女分版切换
+    onToastTap:function (e) {
+        var that = this;
+        that.data.btnId = Number(e.currentTarget.dataset.index);
+        console.log(that.data.btnId);
+        if (that.data.btnId === 0){
+            this.metaData.mca = "h5_recommend_female";
+            this.initData();
+        }else  if (that.data.btnId === 1){
+            this.metaData.mca = "h5_recommend_male";
+            this.initData();
+        }
+        this.setData({
+            isToast:true
+        })
     },
 
     onShow: function () {

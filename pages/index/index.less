@@ -43,7 +43,7 @@ page {
   height:100%;
   position:fixed;
   bottom:0;
-  z-index:99;
+  z-index:100;
   left:0;
   right:0;
 }
@@ -58,7 +58,7 @@ page {
   height:100%;
   position:fixed;
   bottom:0;
-  z-index:99;
+  z-index:100;
   left:0;
   right:0;
   display: none;
@@ -74,7 +74,7 @@ page {
   height:100%;
   position:fixed;
   bottom:0;
-  z-index:99;
+  z-index:100;
   left:0;
   right:0;
 }
@@ -89,10 +89,50 @@ page {
   height:100%;
   position:fixed;
   bottom:0;
-  z-index:99;
+  z-index:100;
   left:0;
   right:0;
   display: none;
+}
+#toast {
+  width:100%;
+  height: 100%;
+  z-index:100;
+  background:rgba(0,0,0,1);
+  opacity:0.7;
+  border-radius: 2px ;
+  display: block;
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+}
+.toast_view {
+  width:100%;
+  text-align: center;
+  z-index:100;
+  margin-top: 400rpx;
+}
+.toast_view .toast_img {
+  width:304rpx;
+  height:304rpx;
+}
+.toast_view .toast_word {
+  color:rgba(255,255,255,1);
+  font-size:28rpx;
+}
+#toast_hidden {
+  width:100%;
+  height: 100%;
+  z-index:100;
+  background:rgba(0,0,0,1);
+  opacity:0.7;
+  border-radius: 2px ;
+  display: none;
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
 }
 .boy_layer .l_brother_view, .girl_layer .l_sister_view{
   width: @layWidth;
@@ -526,6 +566,7 @@ swiper-item wx-image {
 }
 .big_new_view .new_img:first-child .word_info .name_info {
   width: 240rpx;
+  display: block;
   overflow: hidden;
   text-overflow:ellipsis;
   white-space: nowrap;
@@ -560,6 +601,7 @@ swiper-item wx-image {
 }
 .big_new_view .new_img:nth-child(2) .word_info .name_info, .big_new_view .new_img:nth-child(3) .word_info .name_info {
   width: 240rpx;
+  display: block;
   overflow: hidden;
   text-overflow:ellipsis;
   white-space: nowrap;

@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<!--<import src="searchlist/searchlist.wxml"></import>-->
+
 <view class="container">
     <!--男女分版-->
     <block wx:if="{{boyid}}">
@@ -30,7 +30,13 @@
             </view>
         </view>
     </block>
-
+    <!--toast-->
+    <view id="{{isToast ? 'toast':'toast_hidden'}}">
+        <view class="toast_view">
+            <image class="toast_img" src="../../images/toast.png"></image>
+            <view class="toast_word">正在加载中...</view>
+        </view>
+    </view>
     <!--search搜索-->
     <!--搜索框聚焦时显示-->
     <view class="{{isOpacity? 'search_view_show':'search_view'}}">
@@ -41,16 +47,18 @@
             <image class="{{isOpacity ? 'del':'del_hidden'}}" src="../../images/delete.png" catchtap="onDel"></image>
             <view class="{{isOpacity?'qx_view':'qx_view_hidden'}}}" catchtap="onCancel">取消</view>
             <block wx:if="{{boyid}}">
-                <image class="{{isOpacity ? 'boy_img_hidden':'boy_img'}}" src="../../images/boy.png"></image>
+                <image class="{{isOpacity ? 'boy_img_hidden':'boy_img'}}" data-index="{{boyid}}"
+                       src="../../images/boy.png" catchtap="onToastTap"></image>
             </block>
             <block wx:elif="{{girlid}}">
-                <image class="{{isOpacity ? 'girl_img_hidden':'girl_img'}}" src="../../images/girl.png"></image>
+                <image class="{{isOpacity ? 'girl_img_hidden':'girl_img'}}" data-index="{{girlid}}"
+                       src="../../images/girl.png" catchtap="onToastTap"></image>
             </block>
 
         </view>
     </view>
     <!--页面滚动-->
-    <block wx:if="{{isScrollSearch}}">
+    <!--<block wx:if="{{isScrollSearch}}">
         <view class="search_view" style="{{isScrollSearch === true && isOpacity === false? 'background:#fff;opacity:0.95;':'display:none'}}">
             <view class="search_img">
                 <image class="search_images" src="../../images/search_gray.png"></image>
@@ -59,14 +67,16 @@
                 <image class="{{isOpacity ? 'del':'del_hidden'}}" src="../../images/delete.png" catchtap="onDel"></image>
                 <view class="{{isOpacity ?'qx_view':'qx_view_hidden'}}}" catchtap="onCancel">取消</view>
                 <block wx:if="{{boyid}}">
-                    <image class="{{isOpacity ? 'boy_img_hidden':'boy_img'}}" src="../../images/boy.png"></image>
+                    <image class="{{isOpacity ? 'boy_img_hidden':'boy_img'}}" data-index="{{boyid}}"
+                           src="../../images/boy.png" catchtap="onToastTap"></image>
                 </block>
                 <block wx:elif="{{girlid}}">
-                    <image class="{{isOpacity ? 'girl_img_hidden':'girl_img'}}" src="../../images/girl.png"></image>
+                    <image class="{{isOpacity ? 'girl_img_hidden':'girl_img'}}" data-index="{{girlid}}"
+                           src="../../images/girl.png" catchtap="onToastTap"></image>
                 </block>
             </view>
         </view>
-    </block>
+    </block>-->
 
     <scroll-view class="content_view" scroll-y="{{isScroll}}" bindscroll="scroll" bindscrolltolower="lower">
         <!--banner图-->
@@ -99,9 +109,9 @@
 
         <!--img+content 图片区域内容可滑动--精品佳作-->
         <scroll-view class="scroll_view" scroll-x="true">
-            <block wx:for="{{girlFineWorks}}" wx:key="index">
+            <block wx:if="{{girlFineWorks}}" wx:for="{{girlFineWorks}}" wx:key="index">
                 <navigator class="big_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                    <image mode="aspectFill" src="{{item.extra.hcover}}"></image>
+                    <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"></image>
                     <view class="word_info">
                         <text class="name_name">{{item.extra.name}}</text>
                         <text class="name_info">{{item.extra.watching_focus}}</text>
@@ -120,7 +130,7 @@
         <view class="hot_view">
             <block wx:for="{{girlPopularWorks}}" wx:key="index">
                 <navigator class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                    <image mode="aspectFill" src="{{item.extra.hcover}}"></image>
+                    <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"></image>
                     <view class="word_info">
                         <text class="name_name">{{item.extra.name}}</text>
                         <text class="name_info">{{item.extra.watching_focus}}</text>
@@ -139,7 +149,7 @@
                 <view class="big_new_view">
                     <block wx:for="{{newArrivalWorks}}" wx:key="index">
                         <navigator class="new_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                            <image mode="aspectFill" src="{{item.extra.hcover}}"></image>
+                            <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"></image>
                             <view class="word_info">
                                 <text class="name_name">{{item.extra.name}}</text>
                                 <text class="name_info">{{item.extra.watching_focus}}</text>
@@ -159,7 +169,7 @@
         <view class="hot_view">
             <block wx:for="{{hotSerialWorks}}" wx:key="index">
                 <navigator class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                    <image mode="aspectFill" src="{{item.extra.hcover}}"></image>
+                    <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"></image>
                     <view class="word_info">
                         <text class="name_name">{{item.extra.name}}</text>
                         <text class="name_info">{{item.extra.watching_focus}}</text>
@@ -178,7 +188,7 @@
             <view class="big_new_view">
                 <block wx:for="{{xiaobianRecommend}}" wx:key="index">
                     <navigator class="new_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                        <image mode="aspectFill" src="{{item.extra.hcover}}"></image>
+                        <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"></image>
                         <view class="word_info">
                             <text class="name_name">{{item.extra.name}}</text>
                             <text class="name_info">{{item.extra.watching_focus}}</text>
@@ -197,7 +207,7 @@
         <view class="hot_view">
             <block wx:for="{{weekRecommend}}" wx:key="index">
                 <navigator class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                    <image mode="aspectFill" src="{{item.extra.hcover}}"></image>
+                    <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"></image>
                     <view class="word_info">
                         <text class="name_name">{{item.extra.name}}</text>
                         <text class="name_info">{{item.extra.watching_focus}}</text>
