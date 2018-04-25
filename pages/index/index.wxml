@@ -47,18 +47,22 @@
             <image class="{{isOpacity ? 'del':'del_hidden'}}" src="../../images/delete.png" catchtap="onDel"></image>
             <view class="{{isOpacity?'qx_view':'qx_view_hidden'}}}" catchtap="onCancel">取消</view>
             <block wx:if="{{boyid}}">
-                <image class="{{isOpacity ? 'boy_img_hidden':'boy_img'}}" data-index="{{boyid}}"
+                <image class="{{isCancel ? 'boy_img':'boy_img_hidden'}}" data-index="{{boyid}}"
                        src="../../images/boy.png" catchtap="onToastTap"></image>
+               <!-- <image class="{{id === 0 ? 'girl_img':'girl_img_hidden'}}" data-index="{{girlid}}"
+                       src="../../images/girl.png" catchtap="onToastTap"></image>-->
             </block>
             <block wx:elif="{{girlid}}">
-                <image class="{{isOpacity ? 'girl_img_hidden':'girl_img'}}" data-index="{{girlid}}"
+                <image class="{{isCancel ? 'girl_img':'girl_img_hidden'}}" data-index="{{girlid}}"
                        src="../../images/girl.png" catchtap="onToastTap"></image>
+               <!-- <image class="{{id === 1 ? 'boy_img':'boy_img_hidden'}}" data-index="{{boyid}}"
+                       src="../../images/boy.png" catchtap="onToastTap"></image>-->
             </block>
 
         </view>
     </view>
     <!--页面滚动-->
-    <!--<block wx:if="{{isScrollSearch}}">
+    <block wx:if="{{isScrollSearch}}">
         <view class="search_view" style="{{isScrollSearch === true && isOpacity === false? 'background:#fff;opacity:0.95;':'display:none'}}">
             <view class="search_img">
                 <image class="search_images" src="../../images/search_gray.png"></image>
@@ -76,7 +80,7 @@
                 </block>
             </view>
         </view>
-    </block>-->
+    </block>
 
     <scroll-view class="content_view" scroll-y="{{isScroll}}" bindscroll="scroll" bindscrolltolower="lower">
         <!--banner图-->
