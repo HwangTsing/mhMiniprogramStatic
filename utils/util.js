@@ -92,13 +92,10 @@ class wxApi {
   
   /*以下是调用接口方法*/
   //推荐页
-  recommendBoy(cfg){
-    return this.request('wbcomic/home/page_recommend_list?mca=h5_recommend_male',cfg)
+  recommendList(cfg){
+    return this.request('wbcomic/home/page_recommend_list?',cfg)
   }
-  
-  recommendGirl(cfg) {
-    return this.get('wbcomic/home/page_recommend_list?mca=h5_recommend_female',cfg)
-  }
+
 
 }
 
