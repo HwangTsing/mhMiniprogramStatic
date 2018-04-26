@@ -95,7 +95,10 @@ class wxApi {
   recommendList(cfg){
     return this.request('wbcomic/home/page_recommend_list?',cfg)
   }
-
+  //搜索内容接口
+  searchList(cfg) {
+     return this.request('wbcomic/home/search?',cfg)
+  }
 
 }
 

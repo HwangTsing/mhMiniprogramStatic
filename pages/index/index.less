@@ -32,7 +32,7 @@ page {
   background: #fff;
 }
 //男女分版wxss
-.boy_layer {
+.boy_layer, .girl_layer {
   width:@layWidth;
   background:rgba(0,0,0,1);
   opacity:0.8;
@@ -41,13 +41,13 @@ page {
   border-radius: 2rpx;
   text-align: center;
   height:100%;
+  z-index:100;
   position:fixed;
   bottom:0;
-  z-index:100;
   left:0;
   right:0;
 }
-.boy_layer_hidden {
+.boy_layer_hidden, .girl_layer_hidden {
   width:@layWidth;
   background:rgba(0,0,0,1);
   opacity:0.8;
@@ -63,25 +63,21 @@ page {
   right:0;
   display: none;
 }
-.girl_layer {
+.boy_layer_img, .girl_layer_img {
   width:@layWidth;
-  background:rgba(0,0,0,1);
-  opacity:0.8;
   -webkit-border-radius: 2rpx;
   -moz-border-radius: 2rpx;
   border-radius: 2rpx;
   text-align: center;
   height:100%;
+  z-index:100;
   position:fixed;
   bottom:0;
-  z-index:100;
   left:0;
   right:0;
 }
-.girl_layer_hidden {
+.boy_layer_img_hidden, .girl_layer_img_hidden {
   width:@layWidth;
-  background:rgba(0,0,0,1);
-  opacity:0.8;
   -webkit-border-radius: 2rpx;
   -moz-border-radius: 2rpx;
   border-radius: 2rpx;
@@ -97,10 +93,25 @@ page {
 #toast {
   width:100%;
   height: 100%;
+  -webkit-border-radius: 2rpx;
+  -moz-border-radius: 2rpx;
+  border-radius: 2rpx;
   z-index:100;
   background:rgba(0,0,0,1);
   opacity:0.7;
-  border-radius: 2px ;
+  display: block;
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+}
+.toast_img {
+  width:100%;
+  height: 100%;
+  -webkit-border-radius: 2rpx;
+  -moz-border-radius: 2rpx;
+  border-radius: 2rpx;
+  z-index:100;
   display: block;
   position:fixed;
   bottom:0;
@@ -113,28 +124,44 @@ page {
   z-index:100;
   margin-top: 400rpx;
 }
-.toast_view .toast_img {
+.toast_view .toast_images {
   width:304rpx;
   height:304rpx;
 }
 .toast_view .toast_word {
   color:rgba(255,255,255,1);
   font-size:28rpx;
+  margin-top: 60rpx;
 }
 #toast_hidden {
   width:100%;
   height: 100%;
+  -webkit-border-radius: 2rpx;
+  -moz-border-radius: 2rpx;
+  border-radius: 2rpx;
   z-index:100;
   background:rgba(0,0,0,1);
   opacity:0.7;
-  border-radius: 2px ;
   display: none;
   position:fixed;
   bottom:0;
   left:0;
   right:0;
 }
-.boy_layer .l_brother_view, .girl_layer .l_sister_view{
+.toast_img_hidden {
+  width:100%;
+  height: 100%;
+  -webkit-border-radius: 2rpx;
+  -moz-border-radius: 2rpx;
+  border-radius: 2rpx;
+  z-index:100;
+  display: none;
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+}
+.boy_layer_img .l_brother_view, .girl_layer_img .l_sister_view{
   width: @layWidth;
   height: @imgHeight;
   margin-top:138rpx;
@@ -143,7 +170,7 @@ page {
   width: 552rpx;
   height: @imgHeight;
 }
-.boy_layer .icon_brother_view,.girl_layer .icon_sister_view {
+.boy_layer_img .icon_brother_view,.girl_layer_img .icon_sister_view {
   width: @layWidth;
   height: 520rpx;
   margin-top:24rpx;
@@ -153,7 +180,7 @@ page {
   height: 520rpx;
 
 }
-.boy_layer .cancel_brother_view,.girl_layer .cancel_sister_view {
+.boy_layer_img .cancel_brother_view,.girl_layer_img .cancel_sister_view {
   width: @layWidth;
   height: 100rpx;
   margin-top:34rpx;
@@ -162,15 +189,6 @@ page {
 .cancel_brother_view .cancel_icon, .cancel_sister_view .cancel_icon {
   width: 100rpx;
   height: 100rpx;
-}
-
-.girl_layer {
-  width:100%;
-  background:rgba(0,0,0,1);
-  opacity:0.8;
-  -webkit-border-radius: 2rpx;
-  -moz-border-radius: 2rpx;
-  border-radius: 2rpx;
 }
 .content_view {
   width: 100%;
@@ -612,6 +630,7 @@ swiper-item wx-image {
 .layer {
   width: 100%;
   height: 93% ;
+  /*background: rgba(0,0,0,.5);*/
   background: #fff;
   opacity: 0.95;
   position: fixed;
@@ -694,67 +713,7 @@ swiper-item wx-image {
   left: 0;
   right: 0;
 }
-.list_data {
-  width: 100%;
-  /*height: auto;*/
-  height: 262rpx;
-  margin-top: 20rpx;
-  border-bottom: 1rpx solid #e4e4e4;
-  padding-bottom: 20rpx;
-}
-.sizeColor {
-  width: 100%;
-  /*height: auto;*/
-  height: 262rpx;
-  margin-top: 20rpx;
-  border-bottom: 1rpx solid #e4e4e4;
-  padding-bottom: 20rpx;
-  background: #ff4d6a;
-}
-.img_view {
-  width: 200rpx;
-  height: 262rpx;
-  /*margin-left: 30rpx;*/
-  flex: 1;
-  -webkit-box-flex: 1;
-  -webkit-flex: 1;
-  float: left;
-}
-.img_view image {
-  width: 100%;
-  height: 100%;
-}
-.book_data {
-  flex: 1;
-  -webkit-box-flex: 1;
-  -webkit-flex: 1;
-  float: left;
-  width: 72%;
-  height: auto;
-  /*margin-left: @marginBottom;*/
-}
-.book_data .book_name {
-  color: @nameColor;
-  font-size: 30rpx;
-  margin-bottom: 20rpx;
-  display: block;
-  font-weight: bold;
-}
-.book_data .author {
-  margin-bottom: 20rpx;
-}
-.book_data .explain {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
-}
-.book_data .author, .book_data .explain {
-  color: @fontsizeColor;
-  font-size: 28rpx;
-  display: block;
-}
+
 
 
 

@@ -29,11 +29,18 @@ Page({
           isToast:false,   //男女分版切换toast
           id:0,
           idg:1,
+          searchList:[],   //搜索列表
 
       },
       metaData:{
           mca:''
       },
+    searchData:{
+        page_num:1,
+        rows_num:20
+    },
+
+
 
     initData: function () {
         var that = this;
@@ -145,10 +152,44 @@ Page({
         })
     },
     bindInputChange:function (e) {
-        this.setData({
-            inputValue: e.detail.value,
-            listData:true,
-            isScroll:false
+        var that = this;
+        var word = e.detail.value;
+        var page_num = '',rows_num='';
+        if (!!this.searchData.page_num) {
+            page_num = +this.searchData.page_num;
+        }
+        if (!!this.searchData.rows_num){
+            rows_num = this.searchData.rows_num;
+        }
+        wxApi.searchList({
+            method:'GET',
+            data:{word,rows_num,page_num},
+            header:'',
+            success:function (data) {
+                if (data.data.code == 1){
+                    console.log(data.data);
+                    console.log(data.data.data.data);
+                    var total = data.data.data.page_total;
+                    that.data.searchList = data.data.data.data;
+                    var searchList = that.data.searchList;
+                    console.log(searchList);
+                    that.setData({
+                        searchList:searchList,
+                        inputValue: e.detail.value,
+                        listData:true,
+                        isScroll:false
+                    })
+                    console.log(searchList);
+                }else if (rows_num<=20 || (page_num === total)){
+                    return;
+                }
+
+
+            },
+            fail:function () {
+
+            }
+
         })
     },
     //删除搜索事件
@@ -313,6 +354,12 @@ Page({
         }
     },
 
+    /**
+     * 生命周期函数--监听页面初次渲染完成
+     */
+    onReady: function () {
+        this.searchlist = this.selectComponent("#searchlist");
+    },
     onShow: function () {
       var that = this;
       wx.getNetworkType({  //判断网络类型
@@ -331,9 +378,6 @@ Page({
               }
           }
       });
-      /*wx.onNetworkStatusChange(function(res) {  //判断当前是否有网络连接
-          console.log(res);
-      })*/
     },
 
    /* onPageScroll:function(e){ // 获取滚动条当前位置
@@ -352,10 +396,6 @@ Page({
             })
         }
     }*/
-
-    /*scroll: function(e) {
-        console.log(e)
-    },*/
 
 
     /**

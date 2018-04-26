@@ -3,7 +3,8 @@
 <view class="container">
     <!--男女分版-->
     <block wx:if="{{boyid}}">
-        <view class="{{isCancel ? 'boy_layer_hidden':'boy_layer'}}" catchtouchmove='noScrollMove'>
+        <view class="{{isCancel ? 'boy_layer_hidden':'boy_layer'}}"></view>
+        <view class="{{isCancel ? 'boy_layer_img_hidden':'boy_layer_img'}}" catchtouchmove='noScrollMove'>
             <view class="l_brother_view">
                 <image class="l_brother" src="../../images/L_brother.png"></image>
             </view>
@@ -13,12 +14,12 @@
             <view class="cancel_brother_view">
                 <image class="cancel_icon" catchtap="onCancelTap" src="../../images/icon_canel.png"></image>
             </view>
-
         </view>
     </block>
 
     <block wx:elif="{{girlid}}">
-        <view class="{{isCancel ? 'girl_layer_hidden':'girl_layer'}}" catchtouchmove='noScrollMove'>
+        <view class="{{isCancel ? 'girl_layer_hidden':'girl_layer'}}"></view>
+        <view class="{{isCancel ? 'girl_layer_img_hidden':'girl_layer_img'}}" catchtouchmove='noScrollMove'>
             <view class="l_sister_view">
                 <image class="l_sister" src="../../images/L_sister.png"></image>
             </view>
@@ -31,9 +32,10 @@
         </view>
     </block>
     <!--toast-->
-    <view id="{{isToast ? 'toast':'toast_hidden'}}">
+    <view id="{{isToast ? 'toast':'toast_hidden'}}"></view>
+    <view class="{{isToast ? 'toast_img':'toast_img_hidden'}}">
         <view class="toast_view">
-            <image class="toast_img" src="../../images/toast.png"></image>
+            <image class="toast_images" src="../../images/toast.png"></image>
             <view class="toast_word">正在加载中...</view>
         </view>
     </view>
@@ -208,8 +210,8 @@
         <template is="searchList" data="{{...searchListData}}"></template>
     </block>-->
     <!--根据搜索结果渲染数据-->
-    <scroll-view class="{{listData ? 'big_listdata_bloc':'big_listdata'}}" enable-back-to-top="true" scroll-y="true" bindscrolltoupper="upper"
-                 bindscrolltolower="lower" bindscroll="scroll" scroll-top="{{scrollTop}}" lower-threshold="10">
+    <!--<scroll-view class="{{listData ? 'big_listdata_bloc':'big_listdata'}}" enable-back-to-top="true" scroll-y="true"
+                 bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-top="{{scrollTop}}" lower-threshold="10">
         <view class="list_data">
             <view class="img_view">
                 <image mode="aspectFit" src="../../images/b.png"></image>
@@ -220,87 +222,21 @@
                 <p class="explain">风水师对风水格外在行，风水师外公生的伟大</p>
             </view>
         </view>
-        <view class="list_data">
-            <view class="img_view">
-                <image mode="aspectFit" src="../../images/b.png"></image>
-            </view>
-            <view class="book_data">
-                <p class="book_name">风水师</p>
-                <p class="author">夜赦</p>
-                <p class="explain">风水师对风水格外在行，风水师外公生的伟大</p>
-            </view>
-        </view>
-        <view class="list_data">
-            <view class="img_view">
-                <image mode="aspectFit" src="../../images/b.png"></image>
-            </view>
-            <view class="book_data">
-                <p class="book_name">风水师</p>
-                <p class="author">夜赦</p>
-                <p class="explain">风水师对风水格外在行，风水师外公生的伟大</p>
-            </view>
-        </view>
-        <view class="list_data">
-            <view class="img_view">
-                <image mode="aspectFit" src="../../images/b.png"></image>
-            </view>
-            <view class="book_data">
-                <p class="book_name">风水师</p>
-                <p class="author">夜赦</p>
-                <p class="explain">风水师对风水格外在行，风水师外公生的伟大</p>
-            </view>
-        </view>
-        <view class="list_data">
-            <view class="img_view">
-                <image mode="aspectFit" src="../../images/b.png"></image>
-            </view>
-            <view class="book_data">
-                <p class="book_name">风水师</p>
-                <p class="author">夜赦</p>
-                <p class="explain">风水师对风水格外在行，风水师外公生的伟大</p>
-            </view>
-        </view>
-        <view class="list_data">
-            <view class="img_view">
-                <image mode="aspectFit" src="../../images/b.png"></image>
-            </view>
-            <view class="book_data">
-                <p class="book_name">风水师</p>
-                <p class="author">夜赦</p>
-                <p class="explain">风水师对风水格外在行，风水师外公生的伟大</p>
-            </view>
-        </view>
-        <view class="list_data">
-            <view class="img_view">
-                <image mode="aspectFit" src="../../images/b.png"></image>
-            </view>
-            <view class="book_data">
-                <p class="book_name">风水师</p>
-                <p class="author">夜赦</p>
-                <p class="explain">风水师对风水格外在行，风水师外公生的伟大</p>
-            </view>
-        </view>
-        <view class="list_data">
-            <view class="img_view">
-                <image mode="aspectFit" src="../../images/b.png"></image>
-            </view>
-            <view class="book_data">
-                <p class="book_name">风水师</p>
-                <p class="author">夜赦</p>
-                <p class="explain">风水师对风水格外在行，风水师外公生的伟大</p>
-            </view>
-        </view>
-        <view class="list_data">
-            <view class="img_view">
-                <image mode="aspectFit" src="../../images/b.png"></image>
-            </view>
-            <view class="book_data">
-                <p class="book_name">风水师</p>
-                <p class="author">夜赦</p>
-                <p class="explain">风水师对风水格外在行，风水师外公生的伟大</p>
-            </view>
-        </view>
+    </scroll-view>-->
 
+    <scroll-view class="{{listData ? 'big_listdata_bloc':'big_listdata'}}" wx:if="{{searchList&&searchList.length!==0}}"
+                 enable-back-to-top="true" scroll-y="true" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll"
+                 scroll-top="{{scrollTop}}" lower-threshold="10">
+        <searchlist
+                id="searchlist"
+                wx:for="{{searchList}}"
+                wx:key="index"
+                idx="{{item.comic_id}}"
+                src="{{item.cover}}"
+                name="{{item.name}}"
+                artists="{{item.artists}}"
+                cates="{{item.cates.cate_name}}"
+        ></searchlist>
     </scroll-view>
 
     <!--滑动到底部没有数据了提示-->

@@ -1,0 +1,12 @@
+<!--components/searchList/searchList.wxml-->
+
+<navigator class="list_data" url="../details/details?comic_id={{idx}}">
+    <view class="img_view">
+        <image mode="aspectFit" src="{{src}}"></image>
+    </view>
+    <view class="book_data">
+        <p class="book_name">{{name}}</p>
+        <p class="author">作者：{{artists}}</p>
+        <p class="explain">{{cates}}\</p>
+    </view>
+</navigator>
