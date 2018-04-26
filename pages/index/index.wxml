@@ -39,7 +39,7 @@
     </view>
     <!--search搜索-->
     <!--搜索框聚焦时显示-->
-    <view class="{{isOpacity? 'search_view_show':'search_view'}}">
+    <view class="{{isOpacity? 'search_view_show':'search_view'}}" style="{{isScrollSearch === true && isOpacity === false? 'background:#fff;opacity:0.95;':''}}">
         <view class="search_img">
             <image class="search_images" src="../../images/search_gray.png"></image>
             <input class="search_input" type="text" cursor-spacing="3px" value="{{inputValue}}" placeholder="搜索作品或作者名称" placeholder-style="color:#fff;"
@@ -47,40 +47,20 @@
             <image class="{{isOpacity ? 'del':'del_hidden'}}" src="../../images/delete.png" catchtap="onDel"></image>
             <view class="{{isOpacity?'qx_view':'qx_view_hidden'}}}" catchtap="onCancel">取消</view>
             <block wx:if="{{boyid}}">
-                <image class="{{isCancel ? 'boy_img':'boy_img_hidden'}}" data-index="{{boyid}}"
-                       src="../../images/boy.png" catchtap="onToastTap"></image>
-               <!-- <image class="{{id === 0 ? 'girl_img':'girl_img_hidden'}}" data-index="{{girlid}}"
-                       src="../../images/girl.png" catchtap="onToastTap"></image>-->
+                <image class="{{isOpacity ? 'boy_img_hidden':'boy_img'}}" data-index="{{boyid}}"
+                       src="../../images/boy.png" catchtap="onToastTap" data-id="{{id}}"></image>
+                <image class="{{id === 0 || isOpacity === true ? 'girl_img_hidden':'girl_img'}}" data-index="{{girlid}}"
+                       src="../../images/girl.png" catchtap="onToastTap" data-id="{{id}}"></image>
             </block>
             <block wx:elif="{{girlid}}">
-                <image class="{{isCancel ? 'girl_img':'girl_img_hidden'}}" data-index="{{girlid}}"
-                       src="../../images/girl.png" catchtap="onToastTap"></image>
-               <!-- <image class="{{id === 1 ? 'boy_img':'boy_img_hidden'}}" data-index="{{boyid}}"
-                       src="../../images/boy.png" catchtap="onToastTap"></image>-->
+                <image class="{{isOpacity ? 'girl_img_hidden':'girl_img'}}" data-index="{{girlid}}"
+                       src="../../images/girl.png" catchtap="onToastTap02" data-id="{{idg}}"></image>
+                <image class="{{idg === 1 || isOpacity === true? 'boy_img_hidden':'boy_img'}}" data-index="{{boyid}}"
+                       src="../../images/boy.png" catchtap="onToastTap02" data-id="{{idg}}"></image>
             </block>
 
         </view>
     </view>
-    <!--页面滚动-->
-    <block wx:if="{{isScrollSearch}}">
-        <view class="search_view" style="{{isScrollSearch === true && isOpacity === false? 'background:#fff;opacity:0.95;':'display:none'}}">
-            <view class="search_img">
-                <image class="search_images" src="../../images/search_gray.png"></image>
-                <input class="search_input" type="text" cursor-spacing="3px" value="{{inputValue}}" placeholder="搜索作品或作者名称" placeholder-style="color:#fff;"
-                       bindfocus="focusInputEvent" bindinput="bindInputChange"/>
-                <image class="{{isOpacity ? 'del':'del_hidden'}}" src="../../images/delete.png" catchtap="onDel"></image>
-                <view class="{{isOpacity ?'qx_view':'qx_view_hidden'}}}" catchtap="onCancel">取消</view>
-                <block wx:if="{{boyid}}">
-                    <image class="{{isOpacity ? 'boy_img_hidden':'boy_img'}}" data-index="{{boyid}}"
-                           src="../../images/boy.png" catchtap="onToastTap"></image>
-                </block>
-                <block wx:elif="{{girlid}}">
-                    <image class="{{isOpacity ? 'girl_img_hidden':'girl_img'}}" data-index="{{girlid}}"
-                           src="../../images/girl.png" catchtap="onToastTap"></image>
-                </block>
-            </view>
-        </view>
-    </block>
 
     <scroll-view class="content_view" scroll-y="{{isScroll}}" bindscroll="scroll" bindscrolltolower="lower">
         <!--banner图-->

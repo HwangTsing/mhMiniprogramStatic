@@ -27,7 +27,8 @@ Page({
           inputValue:'',
           isLower:false,    //滑动到底部提示没有数据了
           isToast:false,   //男女分版切换toast
-          btnId:''
+          id:0,
+          idg:1,
 
       },
       metaData:{
@@ -52,7 +53,7 @@ Page({
                 var recommendList = that.data.recommendList;
                 var title= that.data.title,keyIndex = that.data.keyIndex;
                 if (data.data.code == 1){
-                    if (that.data.btnId === 0 || that.data.btnId === 1){
+                    if (that.data.id === 0 || that.data.id === 1){
                         recommendList = [];
                         title = [];
                         keyIndex = [];
@@ -269,18 +270,47 @@ Page({
     //男女分版切换
     onToastTap:function (e) {
         var that = this;
-        that.data.btnId = Number(e.currentTarget.dataset.index);
-        console.log(that.data.btnId);
-        if (that.data.btnId === 0){
+        that.data.id = Number(e.currentTarget.dataset.id);
+        var id = that.data.id;
+        console.log(id);
+        if (id === 0){
             this.metaData.mca = "h5_recommend_female";
             this.initData();
-        }else  if (that.data.btnId === 1){
+            this.setData({
+                isToast:true,
+                id : 1
+            })
+        }else  if (id === 1){
             this.metaData.mca = "h5_recommend_male";
             this.initData();
+            this.setData({
+                isToast:true,
+                id : 0
+            })
         }
-        this.setData({
-            isToast:true
-        })
+
+    },
+    onToastTap02:function (e) {
+        var that = this;
+        that.data.idg = Number(e.currentTarget.dataset.id);
+        var idg = that.data.idg;
+        console.log(idg);
+        if (idg === 1){
+            this.metaData.mca = "h5_recommend_male";
+            this.initData();
+            this.setData({
+                isToast:true,
+                idg : 0
+            })
+        }
+        else if (idg === 0){
+            this.metaData.mca = "h5_recommend_female";
+            this.initData();
+            this.setData({
+                isToast:true,
+                idg : 1
+            })
+        }
     },
 
     onShow: function () {
