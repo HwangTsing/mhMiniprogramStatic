@@ -7,23 +7,23 @@ Component({
   properties: {
       src:{
         type:null,
-        value:null
+        value:''
       },
       name:{
         type:null,
-        value:null
+        value:''
       },
       artists:{
-          type:null,
-          value:null
+        type:null,
+        value:''
       },
       cates:{
          type:null,
-         value:null
+         value:''
       },
       idx:{
-        type:null,
-        value:null
+        type:Number,
+        value:''
       }
   },
 

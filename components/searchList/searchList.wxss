@@ -1,52 +1,40 @@
 /* components/searchList/searchList.wxss */
 .list_data {
   width: 100%;
-  /*height: auto;*/
-  height: 262rpx;
-  margin-top: 20rpx;
-  border-bottom: 1rpx solid #e4e4e4;
-  padding-bottom: 20rpx;
-}
-.sizeColor {
-  width: 100%;
-  /*height: auto;*/
-  height: 262rpx;
-  margin-top: 20rpx;
-  border-bottom: 1rpx solid #e4e4e4;
-  padding-bottom: 20rpx;
-  background: #ff4d6a;
+  height: 100%;
+  margin-top: 31rpx;
 }
 .img_view {
-  width: 200rpx;
-  height: 262rpx;
-  /*margin-left: 30rpx;*/
+  width: 180rpx;
+  height: 231rpx;
   flex: 1;
   -webkit-box-flex: 1;
   -webkit-flex: 1;
   float: left;
 }
 .img_view image {
-  width: 100%;
-  height: 100%;
+  width: 180rpx;
+  height: 231rpx;
+
 }
 .book_data {
+  display: inline-block;
   flex: 1;
   -webkit-box-flex: 1;
   -webkit-flex: 1;
-  float: left;
-  width: 72%;
-  height: auto;
-  /*margin-left: @marginBottom;*/
+  height: 231rpx;
+  margin-top:40rpx;
+  margin-left:24rpx;
 }
 .book_data .book_name {
-  color: @nameColor;
-  font-size: 30rpx;
-  margin-bottom: 20rpx;
+  color: #333333;
+  font-size: 32rpx;
   display: block;
   font-weight: bold;
+  margin-bottom:14rpx;
 }
 .book_data .author {
-  margin-bottom: 20rpx;
+  margin-bottom:16rpx;
 }
 .book_data .explain {
   overflow: hidden;
@@ -56,7 +44,7 @@
   -webkit-line-clamp: 1;
 }
 .book_data .author, .book_data .explain {
-  color: @fontsizeColor;
-  font-size: 28rpx;
+  color: #999;
+  font-size: 26rpx;
   display: block;
 }
