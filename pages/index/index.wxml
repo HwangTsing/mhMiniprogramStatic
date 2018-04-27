@@ -46,7 +46,8 @@
             <image class="search_images" src="../../images/search_gray.png"></image>
             <input class="search_input" type="text" cursor-spacing="3px" value="{{inputValue}}" placeholder="搜索作品或作者名称" placeholder-style="color:#fff;"
                    bindfocus="focusInputEvent" bindinput="bindInputChange"/>
-            <image class="{{isOpacity ? 'del':'del_hidden'}}" src="../../images/delete.png" catchtap="onDel"></image>
+            <image class="{{isOpacity === true && searchList.length !== 0? 'del':'del_hidden'}}"
+                   src="../../images/delete.png" catchtap="onDel"></image>
             <view class="{{isOpacity?'qx_view':'qx_view_hidden'}}}" catchtap="onCancel">取消</view>
             <block wx:if="{{boyid}}">
                 <image class="{{isOpacity ? 'boy_img_hidden':'boy_img'}}" data-index="{{boyid}}"
@@ -72,12 +73,14 @@
                     indicator-active-color ="{{indicatorActiveColor}}" circular="{{circular}}" vertical ="{{vertical}}">
                 <block wx:if="{{boyid}}" wx:for="{{imgUrls}}" wx:key="index">
                     <swiper-item>
-                        <image src="{{item.image_url}}" class="slide-image" width="355" height="200"/>
+                        <image src="{{item.image_url}}" data-typeid="{{item.object_id}}" class="slide-image"
+                               catchtap="swipTap"/>
                     </swiper-item>
                 </block>
                 <block wx:if="{{girlid}}" wx:for="{{imgUrls}}" wx:key="index">
                     <swiper-item>
-                        <image src="{{item.image_url}}" class="slide-image" width="355" height="200"/>
+                        <image src="{{item.image_url}}" data-typeid="{{item.object_id}}"
+                               class="slide-image" catchtap="swipTap"/>
                     </swiper-item>
                 </block>
             </swiper>
@@ -225,18 +228,19 @@
     </scroll-view>-->
 
     <scroll-view class="{{listData ? 'big_listdata_bloc':'big_listdata'}}" wx:if="{{searchList&&searchList.length!==0}}"
-                 enable-back-to-top="true" scroll-y="true" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll"
+                 enable-back-to-top="true" scroll-y="true" bindscrolltolower="lower" bindscroll="scroll"
                  scroll-top="{{scrollTop}}" lower-threshold="10">
-        <searchlist
-                id="searchlist"
-                wx:for="{{searchList}}"
-                wx:key="index"
-                idx="{{item.comic_id}}"
-                src="{{item.cover}}"
-                name="{{item.name}}"
-                artists="{{item.artists}}"
-                cates="{{item.cates.cate_name}}"
-        ></searchlist>
+        <block wx:for="{{searchList}}" wx:key="index">
+            <searchlist
+                    class="searchlist"
+                    idx="{{item.comic_id}}"
+                    src="{{item.cover}}"
+                    name="{{item.name}}"
+                    artists="{{item.artists}}"
+                    cates="{{item.cates.cate_name}}"
+            ></searchlist>
+        </block>
+
     </scroll-view>
 
     <!--滑动到底部没有数据了提示-->

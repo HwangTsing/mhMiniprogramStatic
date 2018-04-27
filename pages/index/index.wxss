@@ -663,6 +663,7 @@ swiper-item wx-image {
   height: 318rpx;
   text-align: center;
   overflow: hidden;
+  margin-top: 40rpx;
 }
 .bottom_img_hidden {
   width: 100%;
@@ -679,15 +680,6 @@ swiper-item wx-image {
 .big_listdata {
   width: 100%;
   height: 94vh;
-  /*display: flex;
-  display: -webkit-box;
-  display: -webkit-flex;
-  flex-direction: column;
-  -webkit-box-orient: vertical;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  box-sizing: border-box;*/
-  margin-top: 80rpx;
   background: #fff;
   opacity: 0.8;
   display: none;
@@ -699,7 +691,7 @@ swiper-item wx-image {
 }
 .big_listdata_bloc {
   width: 100%;
-  height: 94vh;
+  height: 92.5vh;
   display: flex;
   display: -webkit-box;
   display: -webkit-flex;
@@ -708,7 +700,6 @@ swiper-item wx-image {
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   box-sizing: border-box;
-  margin-top: 80rpx;
   background: #fff;
   opacity: 0.8;
   z-index: 99;
@@ -716,4 +707,20 @@ swiper-item wx-image {
   bottom: 0;
   left: 0;
   right: 0;
+}
+.big_listdata_bloc:first-child {
+  margin-top: 0rpx;
+}
+.searchlist {
+  height: 293rpx;
+  display: flex;
+  display: -webkit-flex;
+  display: -webkit-box;
+  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  box-sizing: border-box;
+  border-bottom: 2rpx solid #DFDFE3;
+  margin: 0 20rpx 0;
 }

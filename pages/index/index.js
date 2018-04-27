@@ -129,6 +129,13 @@ Page({
     },
 
     /*事件处理函数*/
+    //banner跳转详情
+    swipTap:function (e) {
+        var comic_id = e.currentTarget.dataset.typeid;
+        wx.navigateTo({
+            url: '/pages/details/details?comic_id='+comic_id
+        })
+    },
     //关闭男女分版弹层事件
     onCancelTap:function () {
         var that = this;
@@ -153,7 +160,8 @@ Page({
     },
     bindInputChange:function (e) {
         var that = this;
-        var word = e.detail.value;
+        var word = e.detail.value,cates = [];
+        console.log(word)
         var page_num = '',rows_num='';
         if (!!this.searchData.page_num) {
             page_num = +this.searchData.page_num;
@@ -161,41 +169,53 @@ Page({
         if (!!this.searchData.rows_num){
             rows_num = this.searchData.rows_num;
         }
-        wxApi.searchList({
-            method:'GET',
-            data:{word,rows_num,page_num},
-            header:'',
-            success:function (data) {
-                if (data.data.code == 1){
-                    console.log(data.data);
-                    console.log(data.data.data.data);
-                    var total = data.data.data.page_total;
-                    that.data.searchList = data.data.data.data;
-                    var searchList = that.data.searchList;
-                    console.log(searchList);
-                    that.setData({
-                        searchList:searchList,
-                        inputValue: e.detail.value,
-                        listData:true,
-                        isScroll:false
-                    })
-                    console.log(searchList);
-                }else if (rows_num<=20 || (page_num === total)){
-                    return;
+        if (word === ''){
+            this.setData({
+                searchList:[]
+            })
+        }else {
+            wxApi.searchList({
+                method:'GET',
+                data:{word,rows_num,page_num},
+                header:'',
+                success:function (data) {
+                    if (data.data.code == 1){
+                        console.log(data.data);
+                        console.log(data.data.data.data);
+                        var total = data.data.data.page_total;
+                        that.data.searchList = data.data.data.data;
+                        var searchList = that.data.searchList;
+                        console.log(searchList);
+                        searchList.forEach((item,index)=>{
+                            cates.push(item.cates);
+                        })
+                        console.log(cates);
+                        that.setData({
+                            searchList:searchList,
+                            inputValue: e.detail.value,
+                            listData:true,
+                            isScroll:false
+                        })
+                        console.log(searchList);
+                    }else if (rows_num<=20 || (page_num >= total)){
+                        return;
+                    }
+
+
+                },
+                fail:function () {
+
                 }
 
+            })
+        }
 
-            },
-            fail:function () {
-
-            }
-
-        })
     },
-    //删除搜索事件
+    //删除搜索框内容事件
     onDel:function () {
         this.setData({
-            inputValue:''
+            inputValue:'',
+            searchList:[]
         })
     },
     //取消
@@ -203,7 +223,9 @@ Page({
         this.setData({
             isOpacity:false,
             listData:false,
-            isScroll:true
+            isScroll:true,
+            inputValue:'',
+            searchList:[]
         })
     },
     /*查看更多*/
