@@ -65,7 +65,7 @@
         </view>
     </view>
 
-    <scroll-view class="content_view" scroll-y="{{isScroll}}" bindscroll="scroll" bindscrolltolower="lower">
+    <scroll-view class="content_view" scroll-y="{{isScroll}}" bindscroll="scroll" bindscrolltolower="lower" lower-threshold="40">
         <!--banner图-->
         <view class="banner" id="haha">
             <swiper indicator-dots="{{indicatorDots}}"
@@ -205,31 +205,18 @@
             </block>
         </view>
         <view class="bg_more" catchtap="bindMoreTap" data-index="{{keyIndex[5]}}">查看更多</view>
+        <!--滑动到底部没有数据了提示-->
+        <view class="bottom_img">
+            <image src="../../images/prompt.png"></image>
+        </view>
     </scroll-view>
 
   <!--蒙层-->
   <view class="{{isOpacity? 'layer' :'layer_n'}}" catchtouchmove='noScrollMove' catchtap="blurInputEvent"></view>
-   <!-- <block wx:for="{{searchListData}}" for-item="searchListData" wx:key="id">
-        <template is="searchList" data="{{...searchListData}}"></template>
-    </block>-->
     <!--根据搜索结果渲染数据-->
-    <!--<scroll-view class="{{listData ? 'big_listdata_bloc':'big_listdata'}}" enable-back-to-top="true" scroll-y="true"
-                 bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-top="{{scrollTop}}" lower-threshold="10">
-        <view class="list_data">
-            <view class="img_view">
-                <image mode="aspectFit" src="../../images/b.png"></image>
-            </view>
-            <view class="book_data">
-                <p class="book_name">风水师</p>
-                <p class="author">夜赦</p>
-                <p class="explain">风水师对风水格外在行，风水师外公生的伟大</p>
-            </view>
-        </view>
-    </scroll-view>-->
-
     <scroll-view class="{{listData ? 'big_listdata_bloc':'big_listdata'}}" wx:if="{{searchList&&searchList.length!==0}}"
                  enable-back-to-top="true" scroll-y="true" bindscrolltolower="lower" bindscroll="scroll"
-                 scroll-top="{{scrollTop}}" lower-threshold="10">
+                 scroll-top="{{scrollTop}}" lower-threshold="40">
         <block wx:for="{{searchList}}" wx:key="index">
             <searchlist
                     class="searchlist"
@@ -242,10 +229,5 @@
         </block>
 
     </scroll-view>
-
-    <!--滑动到底部没有数据了提示-->
-    <view class="{{isLower ? 'bottom_img':'bottom_img_hidden'}}">
-        <image src="../../images/prompt.png"></image>
-    </view>
 </view>
 
