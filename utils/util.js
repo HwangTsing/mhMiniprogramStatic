@@ -99,6 +99,11 @@ class wxApi {
   searchList(cfg) {
      return this.request('wbcomic/home/search?',cfg)
   }
+  //查看更多接口
+  moreList(cfg){
+    return this.request('wbcomic/home/recommend_list?',cfg)
+  }
+
 
 }
 
