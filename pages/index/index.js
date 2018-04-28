@@ -261,16 +261,16 @@ Page({
     /*查看更多*/
     bindMoreTap:function (e) {
         var location_en = e.currentTarget.dataset.index;
-        console.log(location_en);
+        var title = e.currentTarget.dataset.title;
         wx.navigateTo({
-            url: '/pages/morelist/morelist?location_en='+location_en
+            url: '/pages/morelist/morelist?location_en='+location_en+'&title='+title
         })
     },
 
     /*滚动触发事件*/
     //滚动条滚到顶部的时候触发
     upper: function(e) {
-        console.log(e);
+
     },
     //滚动条滚到底部的时候触发
     lower: function(e) {

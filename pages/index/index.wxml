@@ -108,7 +108,8 @@
                 </navigator>
             </block>
         </scroll-view>
-        <view class="bg_more" catchtap="bindMoreTap" data-index="{{keyIndex[0]}}">查看更多</view>
+        <view class="bg_more" catchtap="bindMoreTap" data-index="{{keyIndex[1]}}"
+              data-title="{{title_fine}}">查看更多</view>
 
         <view class="hot_works">
             <view class="border"></view>
@@ -127,7 +128,8 @@
                 </navigator>
             </block>
         </view>
-        <view class="bg_more" catchtap="bindMoreTap" data-index="{{keyIndex[1]}}">查看更多</view>
+        <view class="bg_more" catchtap="bindMoreTap" data-index="{{keyIndex[2]}}"
+              data-title="{{title_hot}}">查看更多</view>
         <!--最新上架-->
         <view class="new_works">
             <view class="border"></view>
@@ -147,7 +149,8 @@
                     </block>
                 </view>
         </view>
-        <view class="bg_more" catchtap="bindMoreTap" data-index="{{keyIndex[2]}}">查看更多</view>
+        <view class="bg_more" catchtap="bindMoreTap" data-index="{{keyIndex[3]}}"
+              data-title="{{title_new}}">查看更多</view>
         <!--热门连载-->
         <view class="hot_works">
             <view class="border"></view>
@@ -166,7 +169,8 @@
                 </navigator>
             </block>
         </view>
-        <view class="bg_more" catchtap="bindMoreTap" data-index="{{keyIndex[3]}}">查看更多</view>
+        <view class="bg_more" catchtap="bindMoreTap" data-index="{{keyIndex[4]}}"
+              data-title="{{title_hotserial}}">查看更多</view>
         <!--小编推荐-->
         <view class="new_works">
             <view class="border"></view>
@@ -186,7 +190,8 @@
                 </block>
             </view>
         </view>
-        <view class="bg_more" catchtap="bindMoreTap" data-index="{{keyIndex[4]}}">查看更多</view>
+        <view class="bg_more" catchtap="bindMoreTap" data-index="{{keyIndex[5]}}"
+              data-title="{{title_xbrecommend}}">查看更多</view>
         <!--img+content 本周推荐-->
         <view class="hot_works">
             <view class="border"></view>
@@ -204,7 +209,8 @@
                 </navigator>
             </block>
         </view>
-        <view class="bg_more" catchtap="bindMoreTap" data-index="{{keyIndex[5]}}">查看更多</view>
+        <view class="bg_more" catchtap="bindMoreTap" data-index="{{keyIndex[6]}}"
+              data-title="{{title_weekrecommend}}">查看更多</view>
         <!--滑动到底部没有数据了提示-->
         <view class="bottom_img">
             <image src="../../images/prompt.png"></image>
