@@ -2,7 +2,7 @@
 /*基础公共样式*/
 @nameColor: #333;
 @fontsizeColor: #999;
-@marginBottom: 20rpx;
+@marginBottom: 30rpx;
 
 .container {
   display: flex;
@@ -21,8 +21,8 @@
   padding-bottom: @marginBottom;
 }
 .left_img {
-  width: 200rpx;
-  height: 262rpx;
+  width: 272rpx;
+  height: 152rpx;
   /*margin-left: 30rpx;*/
   flex: 1;
   -webkit-box-flex: 1;
@@ -31,21 +31,19 @@
 
 }
 .left_img image {
-  width: 100%;
-  height: 100%;
+  width: 272rpx;
+  height: 152rpx;
 }
 .brief_introduction {
   flex: 1;
   -webkit-box-flex: 1;
   -webkit-flex: 1;
-  float: left;
-  width: 72%;
   height: auto;
   /*margin-left: @marginBottom;*/
 }
 .brief_introduction .book_name {
   color: @nameColor;
-  font-size: 30rpx;
+  font-size: 32rpx;
   margin-bottom: @marginBottom;
   display: block;
   font-weight: bold;
@@ -62,6 +60,6 @@
 }
 .brief_introduction .author, .brief_introduction .explain {
   color: @fontsizeColor;
-  font-size: 28rpx;
+  font-size: 24rpx;
   display: block;
 }

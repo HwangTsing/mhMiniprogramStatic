@@ -227,7 +227,6 @@
                     cates="{{item.cates.cate_name}}"
             ></searchlist>
         </block>
-
     </scroll-view>
 </view>
 

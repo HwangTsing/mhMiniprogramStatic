@@ -30,14 +30,18 @@ Page({
           id:0,
           idg:1,
           searchList:[],   //搜索列表
+          cates:[],
+          hasMore:true,   //是否还有数据
+          scrolType:'',
 
       },
       metaData:{
           mca:''
       },
     searchData:{
-        page_num:1,
-        rows_num:20
+          word:'',
+          page_num:1,
+          rows_num:20
     },
 
 
@@ -127,6 +131,63 @@ Page({
         })
 
     },
+    searchDatas:function () {
+        var that = this;
+        var page_num = '',rows_num='',word='';
+        if (!!this.searchData.word){
+            word = this.searchData.word;
+            console.log(word)
+        }
+        if (!!this.searchData.page_num) {
+            page_num = +this.searchData.page_num;
+        }
+        if (!!this.searchData.rows_num){
+            rows_num = this.searchData.rows_num;
+        }
+        wxApi.searchList({
+                method:'GET',
+                data:{word,rows_num,page_num},
+                header:'',
+                success:function (data) {
+                    if (data.data.data.data.length !==0){
+                        console.log(data.data);
+                        console.log(data.data.data.data);
+                        var total = data.data.data.page_total;
+                        var cates = that.data.cates;
+                        /* searchList.forEach((item,index)=>{
+                             cates.push(item.cates);
+                         })*/
+                        console.log(cates);
+                        if (that.data.scrolType !== ''){
+                            var searchList = that.data.searchList.concat(data.data.data.data);
+                            console.log(searchList);
+                        }else {
+                            that.data.searchList = data.data.data.data;
+                            var searchList = that.data.searchList;
+                            console.log(searchList);
+                        }
+                        that.setData({
+                            searchList:searchList,
+                            inputValue: word,
+                            listData:true,
+                            isScroll:false
+                        })
+                    }else if (data.data.data.data.length === 0){//搜索没有匹配的数据时提示图
+                        that.setData({
+
+                        })
+                    }
+                },
+                fail:function (data) {
+                    that.setData({
+
+                    })
+                }
+
+            });
+
+
+    },
 
     /*事件处理函数*/
     //banner跳转详情
@@ -160,73 +221,42 @@ Page({
     },
     bindInputChange:function (e) {
         var that = this;
-        var word = e.detail.value,cates = [];
-        console.log(word)
-        var page_num = '',rows_num='';
-        if (!!this.searchData.page_num) {
-            page_num = +this.searchData.page_num;
-        }
-        if (!!this.searchData.rows_num){
-            rows_num = this.searchData.rows_num;
-        }
+         that.searchData.word = e.detail.value;
+        console.log(that.searchData.word);
+        var word = that.searchData.word;
         if (word === ''){
             this.setData({
                 searchList:[]
             })
+            that.data.scrolType = '';
+            that.searchData.page_num = 1;
         }else {
-            wxApi.searchList({
-                method:'GET',
-                data:{word,rows_num,page_num},
-                header:'',
-                success:function (data) {
-                    if (data.data.code == 1){
-                        console.log(data.data);
-                        console.log(data.data.data.data);
-                        var total = data.data.data.page_total;
-                        that.data.searchList = data.data.data.data;
-                        var searchList = that.data.searchList;
-                        console.log(searchList);
-                        searchList.forEach((item,index)=>{
-                            cates.push(item.cates);
-                        })
-                        console.log(cates);
-                        that.setData({
-                            searchList:searchList,
-                            inputValue: e.detail.value,
-                            listData:true,
-                            isScroll:false
-                        })
-                        console.log(searchList);
-                    }else if (rows_num<=20 || (page_num >= total)){
-                        return;
-                    }
-
-
-                },
-                fail:function () {
-
-                }
-
-            })
+            that.searchDatas();
         }
 
     },
     //删除搜索框内容事件
     onDel:function () {
+        var that = this;
         this.setData({
             inputValue:'',
             searchList:[]
-        })
+        });
+        that.data.scrolType = '';
+        that.searchData.page_num = 1;
     },
     //取消
     onCancel:function(){
+        var that = this;
         this.setData({
             isOpacity:false,
             listData:false,
             isScroll:true,
             inputValue:'',
             searchList:[]
-        })
+        });
+        that.data.scrolType = '';
+        that.searchData.page_num = 1;
     },
     /*查看更多*/
     bindMoreTap:function (e) {
@@ -244,10 +274,15 @@ Page({
     },
     //滚动条滚到底部的时候触发
     lower: function(e) {
+        console.log(e.type);
         var that = this;
+        that.data.scrolType = e.type;
         this.setData({
             isLower:!that.data.isLower
         })
+        that.searchData.page_num++;
+
+        that.searchDatas();
 
     },
     //滚动条滚动后触发
