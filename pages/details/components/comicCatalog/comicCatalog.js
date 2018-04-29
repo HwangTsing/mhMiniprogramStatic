@@ -4,8 +4,8 @@ Component({
             type: Number, // 类型（必填），目前接受的类型包括：String, Number, Boolean, Object, Array, null（表示任意类型）
             value: null, // 属性初始值（可选），如果未指定则会根据类型选择一个
         },
-        chapterData: {
-            type: Object, // 类型（必填），目前接受的类型包括：String, Number, Boolean, Object, Array, null（表示任意类型）
+        chapterList: {
+            type: Array, // 类型（必填），目前接受的类型包括：String, Number, Boolean, Object, Array, null（表示任意类型）
             value: null, // 属性初始值（可选），如果未指定则会根据类型选择一个
         }
     },
@@ -16,7 +16,7 @@ Component({
 
     attached() {
         //组件生命周期函数，在组件实例进入页面节点树时执行
-        //console.log(this.properties.thisData, this.data)
+       /* console.log(this.properties.chapterList) */
     },
     moved() {
         //组件生命周期函数，在组件实例被移动到节点树另一个位置时执行

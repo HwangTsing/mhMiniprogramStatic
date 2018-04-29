@@ -1,9 +1,21 @@
 
 <!-- 目录组件(章节)包含横版|九宫格 S -->
 <view class="comic_catalog_box">
-   <view class="comic_catalog_one">
-        <view class=""></view>
-        <view></view>
-   </view>
+   <navigator
+       url="/pages/read/read?chapter_id={{item.chapter_id}}"
+       class="comic_catalog_one"
+       wx:if="{{directoryDisplay==2}}"
+       wx:for="{{chapterList}}"
+   >
+        <view class="comic_catalog_chapter_name">
+            {{item.chapter_name?item.chapter_name:''}}
+        </view>
+        <view class="comic_catalog_chapter_btn">
+            <image
+                mode="aspectFill"
+                src="../../../../images/details/catalog_chapter_btn.png"
+            ></image>
+        </view>
+   </navigator>
 </view>
 <!-- 目录组件(章节)包含横版|九宫格 E -->

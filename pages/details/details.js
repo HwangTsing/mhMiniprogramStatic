@@ -42,7 +42,6 @@ Page({
     },
     onTabTap: function (event) {
         var status = event.currentTarget.dataset.status;
-        console.log(status);
         var self = this;
         this.setData({
             status: status
@@ -54,7 +53,6 @@ Page({
     * @ isSort 1 正序 2倒叙
     * */
     catalogSort(){
-        console.log(this)
         let isSort=this.data.isSort==1?2:1; //设置点击后的值
         let dataAry=this.data.dataAry;//获取数据
 
@@ -86,7 +84,10 @@ Page({
         * *** wbcomic/comic/comic_show?comic_id=68491 摘要页接口
         * *** wbcomic/comic/comic_comment_list?comic_id=24&page_num=1&rows_num=10&_debug_=yes 评论列表
         * */
+        /*
+        console.log(options.comic_id);
         console.log(options.comic_id ? options.comic_id : 24)
+        */
         //comic_id
         let comic_id =options.comic_id ? options.comic_id : 24;//24 68491
         let page_num = 1;//页码

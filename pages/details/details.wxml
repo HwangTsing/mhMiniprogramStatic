@@ -77,6 +77,7 @@
                     <!-- 章节信息 组件 S -->
                     <comicCatalog
                         directoryDisplay="{{dataAry.comic.directory_display}}"
+                        chapterList="{{dataAry.chapter_list}}"
                     ></comicCatalog>
                     <!-- 章节信息 组件 E -->
 

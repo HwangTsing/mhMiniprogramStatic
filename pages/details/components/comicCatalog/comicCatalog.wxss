@@ -10,3 +10,26 @@
     border-bottom:2rpx solid #E6E6E6;
     display: flex;
 }
+.comic_catalog_chapter_name{
+    align-items: center;
+    flex: 2;
+    height: 48rpx;
+    line-height: 48rpx;
+    font-size: 35rpx;
+    color: #333333;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+.comic_catalog_chapter_btn{
+    position: relative;
+    align-items: center;
+    flex: 1;
+}
+.comic_catalog_chapter_btn image{
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 48rpx;
+    height: 48rpx;
+}
