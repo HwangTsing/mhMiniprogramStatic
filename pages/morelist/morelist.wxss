@@ -5,58 +5,54 @@
   display: -webkit-flex;
   flex-direction: column;
   box-sizing: border-box;
-  width: 100%;
-  border-top: 2rpx solid #e4e4e4 ;
+  margin: 30rpx 30rpx;
 }
-.list_girl {
+.more_list {
   width: 100%;
-  height: auto;
-  margin-top: 20rpx;
-  border-bottom: 1rpx solid #e4e4e4;
-  padding-bottom: 20rpx;
+  height: 212rpx;
+  border-bottom: 1rpx solid #E6E6E6;
 }
 .left_img {
-  width: 200rpx;
-  height: 262rpx;
-  /*margin-left: 30rpx;*/
+  width: 272rpx;
+  height: 152rpx;
+  margin-top: 30rpx;
   flex: 1;
   -webkit-box-flex: 1;
   -webkit-flex: 1;
   float: left;
 }
 .left_img image {
-  width: 100%;
-  height: 100%;
+  width: 272rpx;
+  height: 152rpx;
 }
 .brief_introduction {
+  display: inline-block;
   flex: 1;
   -webkit-box-flex: 1;
   -webkit-flex: 1;
-  float: left;
-  width: 72%;
-  height: auto;
-  /*margin-left: @marginBottom;*/
+  height: 152rpx;
+  margin-top: 48rpx;
+  margin-left: 12rpx;
 }
 .brief_introduction .book_name {
   color: #333;
-  font-size: 30rpx;
-  margin-bottom: 20rpx;
+  font-size: 32rpx;
+  margin-bottom: 4rpx;
   display: block;
   font-weight: bold;
 }
 .brief_introduction .author {
-  margin-bottom: 20rpx;
+  margin-bottom: 4rpx;
 }
 .brief_introduction .explain {
+  width: 400rpx;
   overflow: hidden;
   text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
+  white-space: nowrap;
 }
 .brief_introduction .author,
 .brief_introduction .explain {
   color: #999;
-  font-size: 28rpx;
+  font-size: 24rpx;
   display: block;
 }
