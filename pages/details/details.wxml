@@ -1,33 +1,97 @@
 <!--pages/details/details.wxml-->
+
+<!--  摘要页 S   -->
 <view class="container">
-    <view class="details_view" style="background: url('../../images/details_01.jpg') no-repeat;-webkit-background-size:cover;background-position: center bottom;">
-        <view class="details_img">
-            <image class="detail_src" src="../../images/details_01.jpg"></image>
-            <view class="info_content">
-                <view class="detail_title">夏洛特的道听途说数据皮肤如若</view>
-                <view class="detail_label">
-                    <span>原创</span>
-                    <span>情感</span>
-                    <span>奇幻</span>
-                    <span>古风</span>
-                    <span>生活</span>
+
+    <!--  数据加载完成后显示S  -->
+    <view wx:if="{{dataAry}}" style='width:100%;'>
+
+          <!--  头部图片区S  -->
+          <comicShowTop
+            thisData="{{dataAry}}"
+          ></comicShowTop>
+          <!--  头部图片区E  -->
+
+
+
+          <!--  中间阅读表示区S  -->
+          <view class="read_view">
+              <!--根据状态判断是否阅读？暂未阅读 or 阅读的章节 wx:if wx:elif-->
+              <view class="read_r">{{readMain}}</view>
+              <!--根据状态判断是否阅读？开始阅读 or 继续阅读 wx:if wx:elif-->
+              <view class="read_btn" catchtap="onReadClick">{{readTitle}}</view>
+          </view>
+          <!--  中间阅读表示区E  -->
+
+          <!--  详情区S -->
+          <view class="comic_tab">
+
+              <!--  当前页二级导航 S  -->
+              <view class="comic_nav">
+                  <block wx:for="{{tabData}}" wx:for-item="tabData" wx:key="index">
+                      <view class="{{status === tabData.status ? 'activeChecked':'checked'}}" data-status="{{tabData.status}}" catchtap="onTabTap">{{tabData.title}}</view>
+                  </block>
+              </view>
+              <!--  当前页二级导航 E  -->
+
+
+              <!--  二级导航内容区 S  -->
+              <view class="comic_tab_con">
+
+                <!-- 二级导航详情区 S  -->
+                <view class="comic_con_box" wx:if="{{status===0}}">
+                    <comicDetails
+                        thisData="{{dataAry}}"
+                        comicCommentData="{{comicCommentData}}"
+                    ></comicDetails>
+
+                    <!-- 更多评论 S -->
+                    <navigator class="see_more" url="/pages/details/details" wx:if="{{isSeeMore}}">
+                        更多评论
+                    </navigator>
+                    <!-- 更多评论 E -->
                 </view>
-            </view>
-        </view>
+                <!-- 二级导航详情区 E  -->
+
+
+                <!-- 二级导航目录区 S  -->
+                <view class="comic_con_box" wx:if="{{status===1}}">
+                    <view class="comic_catalog_top">
+                        <!-- 头部连载信息 S -->
+                        <view class="comic_catalog_top_text">
+                            {{dataAry.comic.is_end==0?'连载中':'已完结'}}{{'(共'+ dataAry.chapter_list.length +'话)'}}
+                        </view>
+                        <!-- 头部连载信息 E -->
+
+                        <!-- 顺序切换按钮 S -->
+                        <view class="comic_catalog_top_btn">
+                            <view
+                                class="top_btn"
+                                style="background: url('../../images/details/{{isSort==1?'no.png':'yes.png'}}')  center center/cover ;"
+                                catchtap="catalogSort"
+                            ></view>
+                        </view>
+                        <!-- 顺序切换按钮 E -->
+                    </view>
+
+                    <!-- 章节信息 组件 S -->
+                    <comicCatalog
+                        directoryDisplay="{{dataAry.comic.directory_display}}"
+                    ></comicCatalog>
+                    <!-- 章节信息 组件 E -->
+
+                </view>
+                <!-- 二级导航目录区 E  -->
+
+              </view>
+              <!--  二级导航内容区 E  -->
+
+          </view>
+          <!--  详情区E -->
     </view>
-    <view class="read_view">
-        <!--根据状态判断是否阅读？暂未阅读 or 阅读的章节 wx:if wx:elif-->
-        <view class="read_r">{{readMain}}</view>
-        <!--根据状态判断是否阅读？开始阅读 or 继续阅读 wx:if wx:elif-->
-        <view class="read_btn" catchtap="onReadClick">{{readTitle}}</view>
-    </view>
-    <view class="comic_tab">
-        <view class="comic_nav">
-            <block wx:for="{{tabData}}" wx:for-item="tabData">
-                <view class="{{status === tabData.status ? 'activeChecked':'checked'}}" data-status="{{tabData.status}}" catchtap="onTabTap">{{tabData.title}}</view>
-            </block>
-            <!--考虑使用模板-->
-            <!--<template is="" data=""></template>-->
-        </view>
-    </view>
+    <!--  数据加载完成后显示S  -->
+
+    <!-- 底部空白区S -->
+    <view style="height: 100rpx;"></view>
+    <!-- 底部空白区E -->
 </view>

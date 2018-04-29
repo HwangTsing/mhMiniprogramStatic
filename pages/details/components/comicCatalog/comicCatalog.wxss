@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+.comic_catalog_box{
+    width:100%;
+    height: auto;
+}
+.comic_catalog_one{
+    margin: 0 30rpx;
+    padding: 48rpx 0;
+    border-bottom:2rpx solid #E6E6E6;
+    display: flex;
+}

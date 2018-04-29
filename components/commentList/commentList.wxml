@@ -1,0 +1,48 @@
+<!--  评论组件S  -->
+<view class="comment_list_box">
+    <view class="comment_letf">
+        <!-- 头像S -->
+        <image
+            mode="aspectFill"
+            class="user_avatar"
+            style="background:url(../../images/user_cover.png) no-repeat center center/cover ;"
+            src="{{ user.user_avatar?user.user_avatar:'' }}"
+        ></image>
+        <!-- 头像E -->
+    </view>
+    <view class="comment_right">
+        <!-- 用户名 S -->
+        <view class="comment_user_nickname">
+            {{ user.user_nickname }}
+        </view>
+        <!-- 用户名 E -->
+
+        <!-- 评论内容 S -->
+        <view class="comment_content">
+            {{ content.comment_content}}
+        </view>
+        <!-- 评论内容 E -->
+
+        <!-- 二级评论 S -->
+        <view class="reply_content"  wx:if="{{ replyContent && replyContent.length>0 }}">
+            <view class="reply_content_item"
+                  wx:for="{{ replyContent }}"
+                  wx:key="index"
+            >
+                <view class="reply_user_nickname">{{item.user.user_nickname+': '}}</view>
+                <view class="reply_content_text">{{item.data.reply_content}}</view>
+            </view>
+            <view class="reply_total">
+                {{ '共'+replyContent.length+'条回复'+' >'}}
+            </view>
+        </view>
+        <!-- 二级评论 E -->
+
+        <!-- 评论时间S -->
+        <view class="comment_time">
+            {{ contentId.create_time }}
+        </view>
+        <!-- 评论时间E -->
+    </view>
+</view>
+<!--  评论组件E  -->

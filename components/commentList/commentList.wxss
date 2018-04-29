@@ -1,0 +1,75 @@
+/*  评论组件S  */
+@charset "UTF-8";
+
+.comment_list_box {
+    padding-bottom: 28rpx;
+    padding-top: 20rpx;
+    display: flex;
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #E6E6E6;
+}
+/* 主体框架 */
+.comment_list_box .comment_letf{
+    width: 88rpx;
+}
+.comment_list_box .comment_right{
+    flex: 1;
+}
+
+/* letf 头像 */
+.comment_list_box .comment_letf image{
+    margin-right: 16rpx;
+    width:72rpx ;
+    height: 72rpx;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+/* right 用户名|内容|时间 */
+.comment_right .comment_user_nickname {
+    width: 100%;
+    line-height: 40rpx;
+    font-size: 26rpx;
+    color: #999;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+.comment_right .comment_content{
+    padding-top: 12rpx;
+    padding-bottom: 12rpx;
+    line-height: 44rpx;
+    font-size:28rpx;
+    color:#333;
+}
+.comment_right .comment_time{
+    line-height: 32rpx;
+    font-size: 22rpx;
+    color: #999;
+}
+
+/* 二级评论 */
+.comment_right .reply_content{
+    margin-bottom: 12rpx;
+    padding: 16rpx;
+    background: #F6F6F6;
+}
+.comment_right .reply_content_item{
+    line-height: 36rpx;
+    font-size: 24rpx;
+    color:  #2A2A2A;
+}
+.reply_user_nickname,.reply_content_text{
+    display: inline;
+}
+.reply_user_nickname{
+    color: #33BBFF;
+}
+.reply_total{
+    line-height: 36rpx;
+    font-size: 24rpx;
+    color: #33BBFF;
+}
+
+/*  评论组件S  */
