@@ -110,7 +110,6 @@ class wxApi {
             url: this.getPaths(url),
             ...cfg,
         });
-<<<<<<< HEAD
     }
 
     systemInfo() {
@@ -130,62 +129,19 @@ class wxApi {
     /*以下是调用接口方法*/
 
     //推荐页
-    recommendBoy(cfg) {
-        return this.request('wbcomic/home/page_recommend_list?mca=h5_recommend_male', cfg)
+    recommendList(cfg) {
+        return this.request('wbcomic/home/page_recommend_list?', cfg)
     }
 
-    recommendGirl(cfg) {
-        return this.get('wbcomic/home/page_recommend_list?mca=h5_recommend_female', cfg)
+    //搜索内容接口
+    searchList(cfg) {
+        return this.request('wbcomic/home/search?', cfg)
     }
-=======
-    })
 
-    return promise;
-
-  }
-
-  post(url, cfg = {method: 'POST'}) {
-    return this.ajax(url, cfg)
-  }
-
-  get(url, cfg = {method: 'GET' }) {
-    return this.ajax(url, cfg);
-  }
-
-  request(url, cfg = {method: 'GET'}) {
-    return wx.request({
-      url: this.getPaths(url),
-      ...cfg,
-    });
-  }
-
-  systemInfo() {
-    var systemInfo = {};
-    try {
-      systemInfo = wx.getSystemInfoSync()
-    } catch (e) {}
-
-    return systemInfo
-  }
-  
-  post(url, cfg = { method: 'POST' }) {
-    return ajax(url, cfg)
-  }
-  
-  /*以下是调用接口方法*/
-  //推荐页
-  recommendList(cfg){
-    return this.request('wbcomic/home/page_recommend_list?',cfg)
-  }
-  //搜索内容接口
-  searchList(cfg) {
-     return this.request('wbcomic/home/search?',cfg)
-  }
-  //查看更多接口
-  moreList(cfg){
-    return this.request('wbcomic/home/recommend_list?',cfg)
-  }
->>>>>>> feature_1.0.0
+    //查看更多接口
+    moreList(cfg) {
+        return this.request('wbcomic/home/recommend_list?', cfg)
+    }
 
 
 }
@@ -198,3 +154,5 @@ if (!globalData.wxApi) {
 }
 
 module.exports = globalData.wxApi
+
+

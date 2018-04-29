@@ -86,7 +86,9 @@ Page({
         * *** wbcomic/comic/comic_show?comic_id=68491 摘要页接口
         * *** wbcomic/comic/comic_comment_list?comic_id=24&page_num=1&rows_num=10&_debug_=yes 评论列表
         * */
-        let comic_id = 24;//24 68491
+        console.log(options.comic_id ? options.comic_id : 24)
+        //comic_id
+        let comic_id =options.comic_id ? options.comic_id : 24;//24 68491
         let page_num = 1;//页码
         let rows_num = 10;//每页条数
         let comicShowUrl = 'wbcomic/comic/comic_show';//摘要页接口前缀
