@@ -30,7 +30,6 @@ Page({
           id:0,
           idg:1,
           searchList:[],   //搜索列表
-          cates:[],
           hasMore:true,   //是否还有数据
           scrolType:'',
 
@@ -153,11 +152,6 @@ Page({
                         console.log(data.data);
                         console.log(data.data.data.data);
                         var total = data.data.data.page_total;
-                        var cates = that.data.cates;
-                        /* searchList.forEach((item,index)=>{
-                             cates.push(item.cates);
-                         })*/
-                        console.log(cates);
                         if (that.data.scrolType !== ''){
                             var searchList = that.data.searchList.concat(data.data.data.data);
                             console.log(searchList);

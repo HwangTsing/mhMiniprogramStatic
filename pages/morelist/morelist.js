@@ -1,5 +1,6 @@
 // pages/morelist/morelist.js
 var wxApi = require("../../utils/util.js");
+//var { _ } = require("../../utils/underscore.js");
 Page({
 
   /**
@@ -7,6 +8,7 @@ Page({
    */
   data: {
       moreData:[],   //数据
+      networkType:''  //网络
   },
 
   /**
@@ -34,6 +36,10 @@ Page({
             var extra = [];
             for (var i in that.data.moreData){
                 var moreData = data.data.data[i];
+                /*_.each(moreData,function (item,index) {
+                    console.log(item.extra);
+                });*/
+
                 moreData.forEach((item,index) =>{
                   console.log(item.extra);
                   extra.push(item.extra);
@@ -57,48 +63,58 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+      wx.getNetworkType({  //判断网络类型
+          success: function(res) {
+              console.log(res);
+              /* that.setData({
+                   netWorkType:res.networkType
+               })*/
+              if (res.networkType === 'none') {
+                 
+              }
+          }
+      });
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   }
 })
