@@ -21,7 +21,7 @@ Page({
           recommendList:[],   //推荐页数据
           isScroll:true,   //scroll-view滚动条
           isOpacity:false,  //蒙层
-          listData:false,    //搜索结果列表(调取接口时listData为Array,本地测试为Boolean)
+          listData:false,    //搜索显示隐藏
           isScrollSearch:false,    //滚动
           searchListData:[],
           inputValue:'',
@@ -288,8 +288,6 @@ Page({
     //滚动条滚动后触发
     scroll: function(e) {
         var that = this;
-        /*console.log(e);
-        console.log(e.detail.scrollTop);*/
         var scrollTop = e.detail.scrollTop;
         if (scrollTop >67){
             this.setData({
@@ -302,9 +300,6 @@ Page({
             })
 
         }
-
-
-        var sessionTop = wx.setStorageSync('sessionTop',e.detail.scrollTop);
     },
 
     onLoad: function (options) {
