@@ -220,26 +220,9 @@
   <!--蒙层-->
   <view class="{{isOpacity? 'layer' :'layer_n'}}" catchtouchmove='noScrollMove' catchtap="blurInputEvent"></view>
     <!--根据搜索结果渲染数据-->
-    <!--<scroll-view class="{{listData ? 'big_listdata_bloc':'big_listdata'}}" wx:if="{{searchList&&searchList.length!==0}}"
-                 enable-back-to-top="true" scroll-y="true" bindscrolltolower="lower" bindscroll="scroll"
-                 scroll-top="{{scrollTop}}" lower-threshold="40">
-        <block wx:for="{{searchList}}" wx:key="index">
-            <searchlist
-                    class="searchlist"
-                    idx="{{item.comic_id}}"
-                    src="{{item.cover}}"
-                    name="{{item.name}}"
-                    artists="{{item.artists}}"
-                    cates="{{item.cates.cate_name}}"
-            ></searchlist>
-        </block>
-    </scroll-view>-->
-
-
     <scroll-view class="{{listData ? 'big_listdata_bloc':'big_listdata'}}" wx:if="{{searchList&&searchList.length!==0}}"
                  enable-back-to-top="true" scroll-y="true" bindscrolltolower="lower" bindscroll="scroll"
                  scroll-top="{{scrollTop}}" lower-threshold="40">
-        <view wx:for="{{item.cates}}">{{item.cate_name}}</view>
         <block wx:for="{{searchList}}" wx:key="index">
             <searchlist
                 class="searchlist"
