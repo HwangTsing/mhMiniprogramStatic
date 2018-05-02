@@ -5,8 +5,8 @@
         <image
             mode="aspectFill"
             class="user_avatar"
-            style="background:url(../../images/user_cover.png) no-repeat center center/cover ;"
-            src="{{ user.user_avatar?user.user_avatar:'' }}"
+            style="background:url(../../images/user_cover.png) center center/cover ;"
+            src="{{ user.user_avatar?user.user_avatar:'../../images/user_cover.png' }}"
         ></image>
         <!-- 头像E -->
     </view>

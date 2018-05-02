@@ -1,7 +1,7 @@
 <!--pages/details/details.wxml-->
 
 <!--  摘要页 S   -->
-<view class="container">
+<view class="container" catchtap="ClickCatalog">
 
     <!--  数据加载完成后显示S  -->
     <view wx:if="{{dataAry}}" style='width:100%;'>
@@ -17,9 +17,9 @@
           <!--  中间阅读表示区S  -->
           <view class="read_view">
               <!--根据状态判断是否阅读？暂未阅读 or 阅读的章节 wx:if wx:elif-->
-              <view class="read_r">{{readMain}}</view>
+              <view class="read_r">{{history?'看到:'+history.chapter_name:'暂未阅读'}}</view>
               <!--根据状态判断是否阅读？开始阅读 or 继续阅读 wx:if wx:elif-->
-              <view class="read_btn" catchtap="onReadClick">{{readTitle}}</view>
+              <view class="read_btn" catchtap="onReadClick">{{history?'继续阅读':'开始阅读'}}</view>
           </view>
           <!--  中间阅读表示区E  -->
 
@@ -78,6 +78,7 @@
                     <comicCatalog
                         directoryDisplay="{{dataAry.comic.directory_display}}"
                         chapterList="{{dataAry.chapter_list}}"
+                        comic_id="{{dataAry.comic.comic_id}}"
                     ></comicCatalog>
                     <!-- 章节信息 组件 E -->
 

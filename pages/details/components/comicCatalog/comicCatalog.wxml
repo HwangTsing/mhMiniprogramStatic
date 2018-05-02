@@ -1,21 +1,56 @@
-
 <!-- 目录组件(章节)包含横版|九宫格 S -->
 <view class="comic_catalog_box">
-   <navigator
-       url="/pages/read/read?chapter_id={{item.chapter_id}}"
-       class="comic_catalog_one"
-       wx:if="{{directoryDisplay==2}}"
-       wx:for="{{chapterList}}"
-   >
+
+    <view
+        class="comic_catalog_one"
+        wx:if="{{directoryDisplay==1}}"
+    >
+        <view
+            wx:for="{{chapterList}}"
+            style="margin-right:{{(index+1)%3===0?'0;':'24rpx;'}};"
+            wx:key="index"
+            class="comic_catalog_one_item {{item.chapter_id===chapter.chapter_id?'active':''}}"
+            id="{{item.chapter_id}}"
+            data-chapter_id="{{item.chapter_id}}"
+            data-chapter_name="{{item.chapter_name?item.chapter_name:''}}"
+            data-comic_id="{{comic_id}}"
+            bindtap="ClickCatalog"
+        >
+            {{item.chapter_name?item.chapter_name:''}}
+        </view>
+    </view>
+
+    <!-- 横版目录 S -->
+    <view
+        wx:if="{{directoryDisplay==2}}"
+        wx:for="{{chapterList}}"
+        wx:key="index"
+        class="comic_catalog_two {{item.chapter_id===chapter.chapter_id?'active':''}}"
+        id="{{item.chapter_id}}"
+        data-chapter_id="{{item.chapter_id}}"
+        data-chapter_name="{{item.chapter_name?item.chapter_name:''}}"
+        data-comic_id="{{comic_id}}"
+        bindtap="ClickCatalog"
+    >
+        <!-- 章节名称 S -->
         <view class="comic_catalog_chapter_name">
             {{item.chapter_name?item.chapter_name:''}}
         </view>
+        <!-- 章节名称 E -->
+
+        <!-- 右侧箭头 S -->
         <view class="comic_catalog_chapter_btn">
             <image
                 mode="aspectFill"
+                style="background: url(../../../../images/details/catalog_chapter_btn.png) center center / cover;"
                 src="../../../../images/details/catalog_chapter_btn.png"
             ></image>
         </view>
-   </navigator>
+        <!-- 右侧箭头 E -->
+    </view>
+    <!-- 横版目录 E -->
+
+
+
 </view>
 <!-- 目录组件(章节)包含横版|九宫格 E -->

@@ -12,8 +12,7 @@ Page({
         comicCommentData: null,
         isSeeMore:false,//是否显示查看更多
         isSort:1,//是否排序 1默认|2倒叙
-        readMain: '暂未阅读',
-        readTitle: '开始阅读',
+        history:null,
         see: '看到：',
         isBtn: false,
         tabData: [
@@ -31,13 +30,26 @@ Page({
 
     },
 
-    //事件
+    //点击开始阅读|和据需阅读的事件
     onReadClick: function (event) {
-        var self = this;
-        this.setData({
-            readMain: self.data.see + '章节匆匆测试测试测试测试',
-            readTitle: '继续阅读',
-            isBtn: !self.data.isBtn
+        let key="comic_id_"+this.data.dataAry.comic.comic_id;
+        wx.getStorage({//从本地缓存中异步获取指定 key 对应的内容。
+            key: key,
+            success: (res)=> { //存储到当前页面中的数据
+                //console.log(res.data)
+                let data=res.data;
+                console.log(data)
+                wx.navigateTo({
+                    url: `/pages/read/read?chapter_id=${data.chapter_id}&comic_id=${data.comic_id}`
+                })
+            },
+            fail:(err)=>{ //没有获取本地缓存数据的时候
+                if(this.data.dataAry.chapter_list&&this.data.dataAry.chapter_list[0]){
+                    wx.navigateTo({
+                        url: `/pages/read/read?chapter_id=${this.data.dataAry.chapter_list[0].chapter_id}&comic_id=${this.data.dataAry.comic.comic_id}`
+                    })
+                }
+            }
         })
     },
     onTabTap: function (event) {
@@ -47,7 +59,27 @@ Page({
             status: status
         })
     },
-
+    ClickCatalog(){ //通过组件传递的消息,执行事件
+        if(!this.data.dataAry){
+            return
+        }
+        let key="comic_id_"+this.data.dataAry.comic.comic_id;
+        wx.getStorage({//从本地缓存中异步获取指定 key 对应的内容。
+            key: key,
+            success: (res)=> { //存储到当前页面中的数据
+                //console.log(res.data)
+                this.setData({
+                    history:res.data
+                })
+            },
+            fail:(err)=>{ //没有获取本地缓存数据的时候
+                //console.log(err)
+                this.setData({
+                    history:null
+                })
+            }
+        })
+    },
     /*
     * 点击排序按钮 目录进行排序
     * @ isSort 1 正序 2倒叙
@@ -84,10 +116,6 @@ Page({
         * *** wbcomic/comic/comic_show?comic_id=68491 摘要页接口
         * *** wbcomic/comic/comic_comment_list?comic_id=24&page_num=1&rows_num=10&_debug_=yes 评论列表
         * */
-        /*
-        console.log(options.comic_id);
-        console.log(options.comic_id ? options.comic_id : 24)
-        */
         //comic_id
         let comic_id =options.comic_id ? options.comic_id : 24;//24 68491
         let page_num = 1;//页码
@@ -124,11 +152,29 @@ Page({
                     wx.setNavigationBarTitle({
                         title: res.data.comic.name
                     })
-
                     //存储 comic信息
                     this.setData({
                         dataAry: res.data
                     })
+
+                    let key="comic_id_"+res.data.comic.comic_id;
+                    wx.getStorage({//从本地缓存中异步获取指定 key 对应的内容。
+                        key: key,
+                        success: (res)=> {
+                            //console.log(res.data)
+                            this.setData({
+                                history:res.data
+                            })
+
+                        },
+                        fail:(err)=>{ //没有获取本地缓存数据的时候
+                            //console.log(err)
+                            this.setData({
+                                history:null
+                            })
+                        }
+                    })
+
                 } else {
                     this.ToUrl();//错误时候跳转到首页
                 }
