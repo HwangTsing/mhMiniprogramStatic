@@ -7,6 +7,10 @@
     <view class="book_data">
         <p class="book_name">{{name}}</p>
         <p class="author">作者：{{artists}}</p>
-        <p class="explain">{{cates}}\</p>
+        <block wx:for="{{cates}}" wx:key="index">
+            <p class="explain" wx:if="{{cates.length-1===index}}">{{item.cate_name}}</p>
+            <p class="explain" wx:else>{{item.cate_name}}\</p>
+        </block>
+
     </view>
 </navigator>

@@ -18,13 +18,14 @@
 
 }
 .book_data {
-  display: inline-block;
+  /*display: inline-block;*/
   flex: 1;
   -webkit-box-flex: 1;
   -webkit-flex: 1;
   height: 231rpx;
   margin-top:40rpx;
   margin-left:24rpx;
+  float: left;
 }
 .book_data .book_name {
   color: #333333;
@@ -35,16 +36,12 @@
 }
 .book_data .author {
   margin-bottom:16rpx;
+  display: block;
 }
 .book_data .explain {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
+    display:inline-block ;
 }
 .book_data .author, .book_data .explain {
-  color: #999;
-  font-size: 26rpx;
-  display: block;
+    color: #999;
+    font-size: 26rpx;
 }
