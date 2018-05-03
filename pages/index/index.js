@@ -32,6 +32,7 @@ Page({
           searchList:[],   //搜索列表
           hasMore:true,   //是否还有数据
           scrolType:'',
+          message:'',    //提示语
           total:1    //总页码
 
       },
@@ -169,7 +170,8 @@ Page({
                             searchList:searchList,
                             inputValue: word,
                             listData:true,
-                            isScroll:false
+                            isScroll:false,
+                            message: that.data.total > page_num ? '加载中...' : '没有更多了',//提示语
                         })
                     }else if (data.data.data.data.length === 0){//搜索没有匹配的数据时提示图
                         that.setData({

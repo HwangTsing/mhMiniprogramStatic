@@ -220,7 +220,7 @@
   <!--蒙层-->
   <view class="{{isOpacity? 'layer' :'layer_n'}}" catchtouchmove='noScrollMove' catchtap="blurInputEvent"></view>
     <!--根据搜索结果渲染数据-->
-    <scroll-view class="{{listData ? 'big_listdata_bloc':'big_listdata'}}" wx:if="{{searchList&&searchList.length!==0}}"
+    <scroll-view class="{{listData ? 'big_listdata_bloc':'big_listdata'}}" wx:if="{{searchList&&searchList.length>0}}"
                  enable-back-to-top="true" scroll-y="true" bindscrolltolower="lower" bindscroll="scroll"
                  scroll-top="{{scrollTop}}" lower-threshold="40">
         <block wx:for="{{searchList}}" wx:key="index">
@@ -233,6 +233,7 @@
                 cates="{{item.cates}}"
             ></searchlist>
         </block>
+        <view class="comment_message" wx:if="{{searchList.length>10}}">{{message}}</view>
     </scroll-view>
 </view>
 
