@@ -41,8 +41,6 @@ Page({
             console.log(code,message,data)
             if(code===1&&data.data.length!==0){
                 data.data.forEach((item,index)=>{
-                    console.log(item,index)
-
                     /* 存储用户信息 */
                     let user=data.user[item.user_id]?data.user[item.user_id]:{
                         user_avatar:'',
@@ -50,7 +48,7 @@ Page({
                     };
                     //判断用户头是否有HTTPS|http 有什么也不做,没有拼接前缀
                     if (user && user.user_avatar && !/^http[s]?:\/\//ig.test(user.user_avatar)) {
-                        user.user_avatar = dataList.site_image + user.user_avatar;
+                        user.user_avatar = data.site_image + user.user_avatar;
                     }
                     /* 存储评论内容 */
                     let content=data.content[item.reply_id]?data.content[item.reply_id]:{

@@ -59,12 +59,15 @@
   white-space: nowrap;
 }
 .comicShowTop .info_content .detail_label {
-  width: 100%;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 .comicShowTop .detail_label .span {
-  display: inline-block;
-  padding: 6rpx 12rpx;
-  line-height: 36rpx;
+  padding: 0 12rpx;
+  min-width: 48rpx;
+  line-height: 32rpx;
+  height: 34rpx;
   font-size: 24rpx;
   color: #fff;
   border: 2rpx solid rgba(255, 255, 255, 0.6);
@@ -92,9 +95,13 @@
 }
 .details_comic .details_comic_top{
     display: flex;
+    align-items:center;
     padding: 16rpx 16rpx 16rpx 30rpx;
 }
 .details_comic .comic_top_text{
+    align-items: center;
+    max-width: 60%;
+    min-width:90rpx;
     height: 24px;
 }
 .details_comic .comic_top_text text{
@@ -104,10 +111,13 @@
 }
  /* 付费框 */
 .details_comic .comic_top_icon{
+    flex: 1;
+    align-items: center;
     margin-left:16rpx;
-    margin-top: 14rpx;
+    margin-top:8rpx;
+    max-width: 60rpx;
+    min-width:90rpx;
     width: 60rpx;
-    height: 32rpx;
     line-height: 32rpx;
     background: #FF4C6A;
     border-radius:16rpx;
@@ -117,17 +127,23 @@
 }
 /* 标签 */
 .details_view_2 .detail_comic_label{
-  padding:0 30rpx;
+    display: flex;
+    align-items:center;
+    padding:0 30rpx;
 }
 .details_view_2 .comic_label{
+    align-items: center;
+    max-width:96rpx;
     margin-right: 8rpx;
     padding: 0 12rpx;
     font-size: 24rpx;
-    line-height: 32rpx;
+    height: 34rpx;
+    line-height:32rpx;
     border: 1px solid #FFFFFF;
-    border-radius:16rpx;
+    border-radius:20rpx;
     text-align: center;
     color:#fff;
+    vertical-align: middle;
 }
 
 /*  第二种展示方式 E  */

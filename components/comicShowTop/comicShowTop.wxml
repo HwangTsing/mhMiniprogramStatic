@@ -24,14 +24,14 @@
 
                     <!-- 标签 S -->
                     <view class="detail_label">
-                        <block wx:if="{{thisData.comic_cate && thisData.comic_cate.length!==0 }}" wx:for="{{thisData.comic_cate}}" wx:key="index">
-
-                            <view class="span"
-                                  cate_id="{{item.cate_id}}"
-                            >
-                              <text>{{item.cate_name}}</text>
-                            </view>
-                        </block>
+                        <view class="span"
+                              cate_id="{{item.cate_id}}"
+                              wx:if="{{thisData.comic_cate && thisData.comic_cate.length!==0 }}"
+                              wx:for="{{thisData.comic_cate}}"
+                              wx:key="index"
+                        >
+                            <text>{{item.cate_name}}</text>
+                        </view>
                     </view>
                     <!-- 标签 E -->
                 </view>
@@ -44,23 +44,23 @@
           style="background: url('{{thisData.site_image + thisData.comic.hcover}}') no-repeat center center; background-size: cover;"
       >
         <view class="details_comic">
-            <view class="details_comic_top cls">
-                <view class="comic_top_text fl">
+            <view class="details_comic_top">
+                <view class="comic_top_text">
                     <text>{{thisData.comic.name?thisData.comic.name:''}}</text>
                 </view>
-                <view class="comic_top_icon fl" style='display: none;'>
-                    <text>付费</text>
+                <view class="comic_top_icon" style="display: none;">
+                    付费
                 </view>
             </view>
-            <view class="detail_comic_label cls">
-                  <block wx:if="{{thisData.comic_cate && thisData.comic_cate.length!==0 }}" wx:for="{{thisData.comic_cate}}" wx:key="index">
-
-                      <view class="comic_label fl"
-                            cate_id="{{item.cate_id}}"
-                      >
-                        <text>{{item.cate_name}}</text>
-                      </view>
-                  </block>
+            <view class="detail_comic_label">
+                  <view class="comic_label"
+                        wx:if="{{ thisData.comic_cate && thisData.comic_cate.length !==0 }}"
+                        wx:for="{{ thisData.comic_cate }}"
+                        cate_id="{{ item.cate_id }}"
+                        wx:key="index"
+                  >
+                    {{item.cate_name}}
+                  </view>
              </view>
         </view>
       </view>

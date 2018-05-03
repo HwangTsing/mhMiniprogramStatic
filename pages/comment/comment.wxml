@@ -17,7 +17,7 @@
             content="{{ item.content }}"
             contentId="{{ item.data.item }}"
             replyContent="{{item.reply_content?item.reply_content:null}}"
-            isReplyContent="{{false}}"
+            isReplyContent="{{true}}"
         ></commentList>
         <view class="comment_message" wx:if="{{comicCommentData.length>9}}">{{message}}</view>
     </scroll-view>
