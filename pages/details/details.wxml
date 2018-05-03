@@ -46,7 +46,10 @@
                     ></comicDetails>
 
                     <!-- 更多评论 S -->
-                    <navigator class="see_more" url="/pages/details/details" wx:if="{{isSeeMore}}">
+                    <navigator
+                        class="see_more" url="/pages/comment/comment?comic_id={{dataAry.comic.comic_id}}"
+                        wx:if="{{isSeeMore}}"
+                    >
                         更多评论
                     </navigator>
                     <!-- 更多评论 E -->
@@ -65,11 +68,13 @@
 
                         <!-- 顺序切换按钮 S -->
                         <view class="comic_catalog_top_btn">
-                            <view
+                            <image
+                                mode="aspectFill"
                                 class="top_btn"
                                 style="background: url('../../images/details/{{isSort==1?'no.png':'yes.png'}}')  center center/cover ;"
+                                src="../../images/details/{{isSort==1?'no.png':'yes.png'}}"
                                 catchtap="catalogSort"
-                            ></view>
+                            ></image>
                         </view>
                         <!-- 顺序切换按钮 E -->
                     </view>

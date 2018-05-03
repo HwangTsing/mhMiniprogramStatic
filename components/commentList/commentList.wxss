@@ -9,6 +9,9 @@
     height: auto;
     border-bottom: 1px solid #E6E6E6;
 }
+.comment_list_box_border{
+    border-bottom:none;
+}
 /* 主体框架 */
 .comment_list_box .comment_letf{
     width: 88rpx;
@@ -29,6 +32,7 @@
 /* right 用户名|内容|时间 */
 .comment_right .comment_user_nickname {
     width: 100%;
+    height: 40rpx;
     line-height: 40rpx;
     font-size: 26rpx;
     color: #999;
@@ -42,11 +46,6 @@
     line-height: 44rpx;
     font-size:28rpx;
     color:#333;
-}
-.comment_right .comment_time{
-    line-height: 32rpx;
-    font-size: 22rpx;
-    color: #999;
 }
 
 /* 二级评论 */
@@ -72,4 +71,28 @@
     color: #33BBFF;
 }
 
+/* 底部 */
+.comment_right .comment_bottom{
+    display: flex;
+    width: 100%;
+    height:32rpx;
+}
+.comment_right .comment_time{
+    align-items: center;
+    flex: 2;
+    width: 200rpx;
+    max-width: 200rpx;
+    line-height: 32rpx;
+    font-size: 22rpx;
+    color: #999;
+}
+.comment_right .comment_bottom .comment_reply_length{
+    align-items: center;
+    flex: 2;
+    width: 200rpx;
+    max-width: 200rpx;
+    line-height: 32rpx;
+    font-size: 22rpx;
+    color: #999;
+}
 /*  评论组件S  */

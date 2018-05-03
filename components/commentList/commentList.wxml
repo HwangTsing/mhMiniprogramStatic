@@ -1,5 +1,5 @@
 <!--  评论组件S  -->
-<view class="comment_list_box">
+<view class="comment_list_box {{!isBorder? 'comment_list_box_border':''}}">
     <view class="comment_letf">
         <!-- 头像S -->
         <image
@@ -19,12 +19,12 @@
 
         <!-- 评论内容 S -->
         <view class="comment_content">
-            {{ content.comment_content}}
+            {{ content.comment_content ? content.comment_content:(content.reply_content?content.reply_content:" ")}}
         </view>
         <!-- 评论内容 E -->
 
         <!-- 二级评论 S -->
-        <view class="reply_content"  wx:if="{{ replyContent && replyContent.length>0 }}">
+        <view class="reply_content"  wx:if="{{ replyContent && contentId.reply_num >0 && isReplyContent }}">
             <view class="reply_content_item"
                   wx:for="{{ replyContent }}"
                   wx:key="index"
@@ -32,17 +32,31 @@
                 <view class="reply_user_nickname">{{item.user.user_nickname+': '}}</view>
                 <view class="reply_content_text">{{item.data.reply_content}}</view>
             </view>
-            <view class="reply_total">
-                {{ '共'+replyContent.length+'条回复'+' >'}}
+            <view
+                class="reply_total"
+                wx:if="{{ replyContent && contentId.reply_num > 3 && isReplyContent }}"
+                catchtap="clickGoReply"
+                data-user_avatar="{{ user.user_avatar?user.user_avatar:'../../images/user_cover.png' }}"
+                data-user_nickname="{{ user.user_nickname}}"
+                data-comment_content="{{content.comment_content}}"
+                data-create_time="{{ contentId.create_time }}"
+                data-comment_id="{{ contentId.comment_id }}"
+                data-comic_id="{{ contentId.comic_id }}"
+            >
+                {{ '全部回复 ' }}<text decode="{{true}}">&gt;</text>
             </view>
         </view>
         <!-- 二级评论 E -->
 
-        <!-- 评论时间S -->
-        <view class="comment_time">
-            {{ contentId.create_time }}
+        <!-- 底部 S -->
+        <view class="comment_bottom">
+            <!-- 评论时间S -->
+            <view class="comment_time">
+                {{ contentId.create_time }}
+            </view>
+            <!-- 评论时间E -->
         </view>
-        <!-- 评论时间E -->
+        <!-- 底部 E -->
     </view>
 </view>
 <!--  评论组件E  -->

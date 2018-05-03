@@ -1,0 +1,24 @@
+<!--pages/read/read.wxml-->
+<view class="comment_container">
+    <scroll-view
+        class="scroll_view"
+        style="height:{{height}}px"
+        scroll-y
+        lower-threshold="{{50}}"
+        scroll-with-animation="true"
+        enable-back-to-top="true"
+        bindscrolltolower="onScroll"
+    >
+        <commentList
+            wx:if="{{ comicCommentData && comicCommentData.length>0 }}"
+            wx:for="{{ comicCommentData }}"
+            wx:key="index"
+            user="{{ item.data.user }}"
+            content="{{ item.content }}"
+            contentId="{{ item.data.item }}"
+            replyContent="{{item.reply_content?item.reply_content:null}}"
+            isReplyContent="{{false}}"
+        ></commentList>
+        <view class="comment_message" wx:if="{{comicCommentData.length>9}}">{{message}}</view>
+    </scroll-view>
+</view>

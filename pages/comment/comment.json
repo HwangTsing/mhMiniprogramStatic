@@ -1,0 +1,9 @@
+{
+    "navigationBarTitleText": "全部评论",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#FF4D6A",
+    "navigationBarTextStyle": "white",
+    "usingComponents": {
+        "commentList": "/components/commentList/commentList"
+    }
+}
