@@ -1,17 +1,17 @@
 {
-  "pages": [
-    "pages/details/details",
-    "pages/edition/edition",
-    "pages/index/index",
-    "pages/comment/comment",
-    "pages/morelist/morelist",
-    "pages/read/read",
-    "pages/reply/reply"
-  ],
-  "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "",
-    "navigationBarTextStyle": "black"
-  }
+    "pages": [
+        "pages/edition/edition",
+        "pages/index/index",
+        "pages/details/details",
+        "pages/comment/comment",
+        "pages/morelist/morelist",
+        "pages/read/read",
+        "pages/reply/reply"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "",
+        "navigationBarTextStyle": "black"
+    }
 }

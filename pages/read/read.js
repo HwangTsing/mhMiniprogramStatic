@@ -21,7 +21,7 @@ Page({
   onLoad: function (options) {
     wxApi.get('wbcomic/comic/comic_play', {
       data: {
-        chapter_id: options.chapter_id ? options.chapter_id : 236874,
+        chapter_id: options.chapter_id,
         create_source: "h5"
       }
     }).then(({code, message, data}) => {
