@@ -1,6 +1,5 @@
 // pages/morelist/morelist.js
 var wxApi = require("../../utils/util.js");
-//var { _ } = require("../../utils/underscore.js");
 Page({
 
   /**
@@ -15,7 +14,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-      console.log(options);
+      //console.log(options);
       var location_en = options.location_en;
       var title = options.title;
       wx.setNavigationBarTitle({//动态设置当前页面的标题
@@ -36,12 +35,7 @@ Page({
             var extra = [];
             for (var i in that.data.moreData){
                 var moreData = data.data.data[i];
-                /*_.each(moreData,function (item,index) {
-                    console.log(item.extra);
-                });*/
-
                 moreData.forEach((item,index) =>{
-                  console.log(item.extra);
                   extra.push(item.extra);
                 })
             }

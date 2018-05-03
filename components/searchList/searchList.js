@@ -6,19 +6,19 @@ Component({
    */
   properties: {
       src:{
-        type:null,
+        type:String,
         value:''
       },
       name:{
-        type:null,
+        type:String,
         value:''
       },
       artists:{
-        type:null,
+        type:String,
         value:''
       },
       cates:{
-         type:null,
+         type:Array,
          value:''
       },
       idx:{
