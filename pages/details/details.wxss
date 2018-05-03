@@ -3,86 +3,86 @@
 
 
 .container {
-  width: 100%;
-  display: flex;
-  display: -webkit-box;
-  display: -webkit-flex;
-  flex-direction: column;
-  -webkit-box-orient: vertical;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  box-sizing: border-box;
-  position: relative;
+    width: 100%;
+    display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    box-sizing: border-box;
+    position: relative;
 }
 
 .read_view {
-  position: fixed;
-  left: 0;
-  bottom:0;
+    position: fixed;
+    left: 0;
+    bottom:0;
     z-index: 9999;
-  width: 100%;
-  height: 100rpx;
-  line-height: 100rpx;
-  /* border-bottom: 10rpx solid whitesmoke; */
-  display: flex;
-  display: -webkit-box;
-  display: -webkit-flex;
-  flex-direction: row;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  justify-content: space-between;
-  padding: 15rpx 0 10rpx 0;
-  background: #fff;
+    width: 100%;
+    height: 100rpx;
+    line-height: 100rpx;
+    /* border-bottom: 10rpx solid whitesmoke; */
+    display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    flex-direction: row;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    justify-content: space-between;
+    padding: 15rpx 0 10rpx 0;
+    background: #fff;
 }
 .read_view .read_r {
-  width: 248rpx;
-  display: inline-block;
-  height: 100rpx ;
-  line-height: 100rpx;
-  font-size: 32rpx;
-  color: #333;
-  -ms-text-overflow: ellipsis;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  margin-left: 60rpx;
+    width: 248rpx;
+    display: inline-block;
+    height: 100rpx ;
+    line-height: 100rpx;
+    font-size: 32rpx;
+    color: #333;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-left: 60rpx;
 }
 .read_view .read_btn {
-  width: 280rpx;
-  height: 93rpx;
-  line-height: 93rpx;
-  color: #fff;
-  font-size: 36rpx;
-  background: #FF4C6A;
-  -webkit-border-radius: 50rpx;
-  -moz-border-radius: 50rpx;
-  border-radius: 50rpx;
-  text-align: center;
-  margin-right: 30rpx;
+    width: 280rpx;
+    height: 93rpx;
+    line-height: 93rpx;
+    color: #fff;
+    font-size: 36rpx;
+    background: #FF4C6A;
+    -webkit-border-radius: 50rpx;
+    -moz-border-radius: 50rpx;
+    border-radius: 50rpx;
+    text-align: center;
+    margin-right: 30rpx;
 }
 .comic_tab {
-  width: 100%;
-  padding: 40rpx 0;
+    width: 100%;
+    padding: 40rpx 0;
 }
 .comic_nav {
-  width: 100%;
-  display: flex;
-  display: -webkit-box;
-  display: -webkit-flex;
-  flex-direction: row;
-  justify-content: space-around;
-  box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    flex-direction: row;
+    justify-content: space-around;
+    box-sizing: border-box;
 }
 .comic_nav .activeChecked {
-  color: #FF4C6A;
-  font-size: 36rpx;
-  border-bottom: 6rpx solid #FF4C6A;
-  padding-bottom: 6rpx;
+    color: #FF4C6A;
+    font-size: 36rpx;
+    border-bottom: 6rpx solid #FF4C6A;
+    padding-bottom: 6rpx;
 }
 
 .comic_nav .checked {
-  font-size: 36rpx;
-  color: #333;
+    font-size: 36rpx;
+    color: #333;
 }
 
 .comic_con_box .see_more{
