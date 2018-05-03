@@ -32,6 +32,7 @@ Page({
           searchList:[],   //搜索列表
           hasMore:true,   //是否还有数据
           scrolType:'',
+          total:1    //总页码
 
       },
       metaData:{
@@ -143,7 +144,10 @@ Page({
         if (!!this.searchData.rows_num){
             rows_num = this.searchData.rows_num;
         }
-        wxApi.searchList({
+        if (page_num >that.data.total){
+            return;
+        }else {
+            wxApi.searchList({
                 method:'GET',
                 data:{word,rows_num,page_num},
                 header:'',
@@ -151,7 +155,8 @@ Page({
                     if (data.data.data.data.length !==0){
                         console.log(data.data);
                         console.log(data.data.data.data);
-                        var total = data.data.data.page_total;
+                        that.data.total = data.data.data.page_total;
+                        console.log(that.data.total);
                         if (that.data.scrolType !== ''){
                             var searchList = that.data.searchList.concat(data.data.data.data);
                             console.log(searchList);
@@ -179,6 +184,8 @@ Page({
                 }
 
             });
+        }
+
 
 
     },

@@ -77,7 +77,7 @@ Page({
                    netWorkType:res.networkType
                })*/
               if (res.networkType === 'none') {
-                 
+
               }
           }
       });
