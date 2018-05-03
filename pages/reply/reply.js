@@ -1,5 +1,5 @@
 const wxApi = require('../../utils/util.js');
-
+const app = getApp();
 // pages/read/read.js
 Page({
 
@@ -16,6 +16,7 @@ Page({
         pageTotal: 0,//一共可以下拉加载次数
         message: '',//加载提示语,
         commentId: 0,//记录评论的id
+        networkType: true,//是否有网络
     },
 
     /*
@@ -38,7 +39,7 @@ Page({
             }
         }).then(({code,message,data}) => {
             let replyList=this.data.replyList?this.data.replyList:[];
-            console.log(code,message,data)
+            //console.log(code,message,data)
             if(code===1&&data.data.length!==0){
                 data.data.forEach((item,index)=>{
                     /* 存储用户信息 */
@@ -110,38 +111,69 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        let commentData=JSON.parse(options.data);
-        //console.log(commentData)
-        let Data={
-            user:{
-                user_avatar:commentData.user_avatar,
-                user_nickname:commentData.user_nickname
-            },
-            content:{
-                comment_id:commentData.comment_id,
-                comment_content:commentData.comment_content
-            },
-            contentId:{
-                comment_id:commentData.comment_id,
-                comic_id:commentData.comic_id,
-                create_time:commentData.create_time,
-            },
-            replyContent:null,
-            isReplyContent:false
-        }
-        this.setData({
-            commentData: Data
-        });
+        /*
+        * @ wx.onNetworkStatusChange 获取网络类型。
+        * success	Function	是	接口调用成功，返回网络类型 networkType
+        * fail	Function	否	接口调用失败的回调函数
+        * complete	Function	否	接口调用结束的回调函数（调用成功、失败都会执行）
+        *
+        * wifi	wifi 网络
+        * 2g	2g 网络
+        * 3g	3g 网络
+        * 4g	4g 网络
+        * none	无网络
+        * unknown	Android下不常见的网络类型
+        * */
+        wx.getNetworkType({
+            success: (res) => {
+                // 返回网络类型, 有效值：
+                // wifi/2g/3g/4g/unknown(Android下不常见的网络类型)/none(无网络)
 
-        let commentId = commentData.comment_id;
-        let pageNum = this.data.pageNum;
-        let rowsNum = this.data.rowsNum;
+                let networkType = res.networkType
+                if (networkType === 'none' || networkType === 'unknown') {
+                    //无网络什么都不做
+                    this.setData({
+                        networkType: false
+                    })
+                    return
+                } else {
+                    //有网络
+                    let commentData=JSON.parse(options.data);
+                    //console.log(commentData)
+                    let Data={
+                        user:{
+                            user_avatar:commentData.user_avatar,
+                            user_nickname:commentData.user_nickname
+                        },
+                        content:{
+                            comment_id:commentData.comment_id,
+                            comment_content:commentData.comment_content
+                        },
+                        contentId:{
+                            comment_id:commentData.comment_id,
+                            comic_id:commentData.comic_id,
+                            create_time:commentData.create_time,
+                        },
+                        replyContent:null,
+                        isReplyContent:false
+                    }
+                    this.setData({
+                        commentData: Data
+                    });
 
-        this.getDataInfo(commentId,pageNum,rowsNum); //初始化数据
+                    let commentId = commentData.comment_id;
+                    let pageNum = this.data.pageNum;
+                    let rowsNum = this.data.rowsNum;
+
+                    this.getDataInfo(commentId,pageNum,rowsNum); //初始化数据
+                }
+            }
+        })
+
 
         wx.getSystemInfo({
             success:  (res) =>{
-                console.log(res);
+                //console.log(res);
                 // 可使用窗口宽度、高度
                 //console.log('height=' + res.windowHeight);
                 //console.log('width=' + res.windowWidth);
