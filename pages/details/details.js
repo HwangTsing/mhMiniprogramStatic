@@ -138,6 +138,28 @@ Page({
         let comicCommentListFn = wxApi.get(`${comicCommentListUrl}?comic_id=${comic_id}&page_num=${page_num}&rows_num=${rows_num}&_debug_=yes`);
 
         /*
+        * @ wx.getNetworkType 获取网络类型。
+        * success	Function	是	接口调用成功，返回网络类型 networkType
+        * fail	Function	否	接口调用失败的回调函数
+        * complete	Function	否	接口调用结束的回调函数（调用成功、失败都会执行）
+        *
+        * wifi	wifi 网络
+        * 2g	2g 网络
+        * 3g	3g 网络
+        * 4g	4g 网络
+        * none	无网络
+        * unknown	Android下不常见的网络类型
+        * */
+        wx.getNetworkType({
+            success: function(res) {
+                // 返回网络类型, 有效值：
+                // wifi/2g/3g/4g/unknown(Android下不常见的网络类型)/none(无网络)
+                var networkType = res.networkType
+                console.log(res)
+            }
+        })
+
+        /*
         *  调用 摘要页接口promise对象
         *  comic.upload_type： 根据这个字段 判断是否展示多个作者 1 author：字段作者列表 0 展示comic作者信息
         *  comic.directory_display：判断是目录展示方式 1表示9宫格，2表示横板
