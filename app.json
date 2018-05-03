@@ -1,6 +1,5 @@
 {
     "pages": [
-
         "pages/edition/edition",
         "pages/index/index",
         "pages/details/details",
