@@ -64,16 +64,22 @@
   flex-wrap: wrap;
 }
 .comicShowTop .detail_label .span {
+    display: flex;
+    align-items:center;/*垂直居中*/
+    justify-content: center;/*水平居中*/
   padding: 0 12rpx;
   min-width: 48rpx;
   line-height: 32rpx;
-  height: 34rpx;
+  height: 32rpx;
   font-size: 24rpx;
   color: #fff;
   border: 2rpx solid rgba(255, 255, 255, 0.6);
   border-radius: 20rpx;
   margin-right: 36rpx;
   margin-bottom: 20rpx;
+}
+.comicShowTop .detail_label .span text{
+    flex: 1;
 }
 /*  第一种展示方式 E  */
 
@@ -132,18 +138,22 @@
     padding:0 30rpx;
 }
 .details_view_2 .comic_label{
-    align-items: center;
-    max-width:96rpx;
+    display:flex;
+    align-items:center;/*垂直居中*/
+    justify-content: center;/*水平居中*/
     margin-right: 8rpx;
-    padding: 0 12rpx;
+    padding:0 12rpx;
     font-size: 24rpx;
-    height: 34rpx;
     line-height:32rpx;
+    height: 32rpx;
     border: 1px solid #FFFFFF;
-    border-radius:20rpx;
+    border-radius:18rpx;
     text-align: center;
     color:#fff;
     vertical-align: middle;
+}
+.details_view_2 .comic_label text{
+    flex: 1;
 }
 
 /*  第二种展示方式 E  */

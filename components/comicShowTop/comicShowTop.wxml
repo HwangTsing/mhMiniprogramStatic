@@ -59,7 +59,7 @@
                         cate_id="{{ item.cate_id }}"
                         wx:key="index"
                   >
-                    {{item.cate_name}}
+                      <text>{{item.cate_name}}</text>
                   </view>
              </view>
         </view>
