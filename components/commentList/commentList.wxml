@@ -43,7 +43,7 @@
                 data-comment_id="{{ contentId.comment_id }}"
                 data-comic_id="{{ contentId.comic_id }}"
             >
-                {{ '全部回复 ' }}<text decode="{{true}}">&gt;</text>
+                {{'全部回复 ' }}<text decode="{{true}}">&gt;</text>
             </view>
         </view>
         <!-- 二级评论 E -->
