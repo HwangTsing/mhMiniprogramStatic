@@ -10,7 +10,7 @@
         <view class="boy_view">
             <block wx:if="{{isBoy}}}">
                 <view style="{{isBoy === true ? 'display:block':'display:none'}}">
-                    <image class="boy_s" src="../../images/edition/Rectangle_s.png"></image>
+                    <image class="boy_s" src="../../images/edition/Rectangle_w.png"></image>
                     <image class="boy_btn" data-index="0" src="../../images/edition/CShape_bactive.png"
                            catchtap="onBoyTap"></image>
                 </view>
@@ -40,7 +40,7 @@
             </view>
             <block wx:if="{{isGirl}}">
                 <view style="{{isGirl === true}}">
-                    <image class="girl_s" src="../../images/edition/girl_s.png"></image>
+                    <image class="girl_s" src="../../images/edition/girl_w.png"></image>
                     <image class="girl_btn" data-index="1" src="../../images/edition/CShape_gative.png"
                            catchtap="onGirlTap"></image>
                 </view>
