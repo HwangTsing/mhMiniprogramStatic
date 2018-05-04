@@ -17,9 +17,9 @@ Page({
     onBoyTap:function (event) {
         var that = this;
         var boyId=event.currentTarget.dataset.index;
-        console.log(boyId);
+        //console.log(boyId);
         this.setData({
-            isBoy:true,
+            isBoy:!that.data.isBoy,
 
         })
         that.data.timer = setTimeout(function () {
@@ -28,6 +28,26 @@ Page({
             })
         },1000);
 
+        var isData = that.data.isBoy;
+        console.log(isData);
+        wx.setStorage({
+            key:'isBoy',
+            data:isData,
+            success:function (res) {
+                console.log(res);
+            }
+        });
+        wx.getStorage({
+            key:'isBoy',
+            success:function (res) {
+                console.log(res);
+                var data = res.data;
+                that.setData({
+                    isBoy:data
+                })
+            }
+        })
+
     },
 
     onGirlTap:function (event) {
@@ -35,7 +55,7 @@ Page({
         var girlId=event.currentTarget.dataset.index;
         console.log(girlId);
         this.setData({
-            isGirl:true,
+            isGirl:!that.data.isGirl,
             idsed:3
 
         })
@@ -45,34 +65,44 @@ Page({
             })
         },1000);
 
+        var isData = that.data.isGirl;
+        console.log(isData);
+        wx.setStorage({
+            key:'isGirl',
+            data:isData,
+            success:function (res) {
+                console.log(res);
+            }
+        })
+
     },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
@@ -87,20 +117,20 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   }
 })

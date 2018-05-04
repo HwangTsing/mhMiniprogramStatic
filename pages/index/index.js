@@ -307,7 +307,7 @@ Page({
 
     onLoad: function (options) {
         var that = this;
-        console.log(options);
+        //console.log(options);
         var boyid = options.boyid;
         var girlid = options.girlid;
         this.setData({
