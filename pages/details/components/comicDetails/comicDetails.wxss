@@ -1,26 +1,4 @@
-/* 公共S */
-.fl {
-    float: left;
-}
 
-.fr {
-    float: right;
-}
-
-/* 清除浮动 */
-.cls {
-}
-
-.cls::before, .cls::after {
-    display: block;
-    content: " ";
-    clear: both;
-    height: 0;
-    font-size: 0;
-    line-height: 0;
-    overflow: hidden;
-}
-/* 公共E */
 
 /* 二级导航详情区 S   */
 .comic_details{
@@ -48,13 +26,13 @@
 }
 .author_title{
      display: flex;
-    width:84rpx; 
+    width:84rpx;
     text-align: left;
     font-size: 28rpx;
 }
 .author_title text{
   flex:1;
-  line-height:50rpx; 
+  line-height:50rpx;
   font-size: 28rpx;
   color:#999;
 }
@@ -64,16 +42,26 @@
   align-items: center;
   height: 50rpx;
 }
+.author_cover_bg{
+    position: relative;
+    width: 50rpx;
+    height: 50rpx;
+    border-radius:50%;
+    overflow: hidden;
+}
 .author_cover{
+    position: absolute;
+    top: 0;
+    left: 0;
   width: 50rpx;
   height: 50rpx;
   border-radius:50%;
-  overflow: hidden; 
+  overflow: hidden;
 }
 .author_info .text{
   margin-left:8rpx;
-  max-width:192rpx;  
-  line-height:50rpx; 
+  max-width:192rpx;
+  line-height:50rpx;
   font-size: 28rpx;
   color: #333333;
   overflow: hidden;
@@ -84,7 +72,7 @@
 
 /* 新鲜评论 */
 .comment_title{
-    padding-top:20rpx; 
+    padding-top:20rpx;
     width: 100%;
     line-height: 88rpx;
     font-size: 36rpx;

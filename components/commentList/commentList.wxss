@@ -13,7 +13,7 @@
     border-bottom:none;
 }
 /* 主体框架 */
-.comment_list_box .comment_letf{
+.comment_list_box .comment_left{
     width: 88rpx;
 }
 .comment_list_box .comment_right{
@@ -21,12 +21,21 @@
 }
 
 /* letf 头像 */
-.comment_list_box .comment_letf image{
-    margin-right: 16rpx;
+.comment_list_box .comment_left .user_avatar_bg,.comment_list_box .comment_left .user_avatar{
     width:72rpx ;
     height: 72rpx;
     border-radius: 50%;
     overflow: hidden;
+}
+.comment_list_box .comment_left .user_avatar_bg{
+    position: relative;
+    margin-right: 16rpx;
+}
+.comment_list_box .comment_left .user_avatar{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
 }
 
 /* right 用户名|内容|时间 */

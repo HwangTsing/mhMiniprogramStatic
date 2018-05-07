@@ -15,15 +15,20 @@
         <!--  作者是 1 个的情况下 S -->
         <view class="author_info" wx:if="{{thisData.comic.upload_type==0}}">
             <image
-              mode="aspectFill"
-              class="author_cover"
-              style="background:url(../../../../images/user_cover.png) no-repeat center center/cover;"
-            ></image>
+                mode="aspectFill"
+                class="author_cover_bg"
+                style="background:url(../../../../images/user_cover.png) no-repeat center center;background-size:cover;"
+                src="../../../../images/user_cover.png"
+            >
+                <image
+                  mode="aspectFill"
+                  class="author_cover"
+                  src="{{item.comic.user_avatar?item.comic.user_avatar:''}}"
+                ></image>
+            </image>
 
             <view
               class='text'
-              sina_user_id="{{thisData.comic.sina_user_id}}"
-              src="{{item.comic.user_avatar?item.comic.user_avatar:''}}"
             >
               {{thisData.comic.sina_nickname}}
             </view>
@@ -39,11 +44,18 @@
             style="{{index>0 ? 'margin-left:42rpx':''}}"
         >
             <image
-              mode="aspectFill"
-              class="author_cover fl"
-              style="background:url(../../../../images/user_cover.png) no-repeat center center/cover ;"
-              src="{{item.user_avatar}}"
-            ></image>
+                mode="aspectFill"
+                class="author_cover"
+                style="background:url(../../../../images/user_cover.png) no-repeat center center/cover ;"
+                src="../../../../images/user_cover.png"
+            >
+                <image
+                    mode="aspectFill"
+                    class="author_cover"
+                    style="background:url(../../../../images/user_cover.png) no-repeat center center/cover ;"
+                    src="{{item.user_avatar}}"
+                ></image>
+            </image>
 
             <view class='text fl'
             >{{item.pen_name}}</view>
