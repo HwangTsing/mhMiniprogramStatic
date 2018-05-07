@@ -3,6 +3,9 @@ var wxApi = require("../../utils/util.js");
 
 Page({
       data: {
+          isBoy:false,   //男版
+          isGirl:false,   //女版
+          timer:null,     //倒计时
           imgUrls:[],
           title:[],
           keyIndex:[],
@@ -16,8 +19,6 @@ Page({
           vertical: false,  //滑动方向是否纵向
           networkType:'',  //网络
           isCancel:false,   //推荐页男女分版弹层
-          boyid:'',
-          girlid:'',
           recommendList:[],   //推荐页数据
           isScroll:true,   //scroll-view滚动条
           isOpacity:false,  //蒙层
@@ -193,6 +194,61 @@ Page({
     },
 
     /*事件处理函数*/
+    //事件
+    /*boy and girl*/
+    onBoyTap:function (event) {
+        var that = this;
+        var boyid=event.currentTarget.dataset.index;
+        console.log(boyid);
+        this.setData({
+            isBoy:!that.data.isBoy
+
+        });
+        that.data.timer = setTimeout(function () {
+            that.setData({
+                boyid:boyid
+            })
+        },1000);
+        if (boyid) {
+            this.metaData.mca = "h5_recommend_male";
+            this.initData();
+        }
+        //#############本地存储############//
+        wx.setStorage({
+            key:'id',
+            data:boyid,
+            success:function (res) {
+                console.log(res);
+            }
+        })
+    },
+
+    onGirlTap:function (event) {
+        var that = this;
+        var girlid=event.currentTarget.dataset.index;
+        console.log(girlid);
+        this.setData({
+            isGirl:!that.data.isGirl,
+            idsed:3
+        });
+        that.data.timer = setTimeout(function () {
+            that.setData({
+                girlid:girlid
+            })
+        },1000);
+        if(girlid){
+            this.metaData.mca = "h5_recommend_female";
+            this.initData();
+        }
+        //#############本地存储############//
+        wx.setStorage({
+            key:'id',
+            data:girlid,
+            success:function (res) {
+                console.log(res);
+            }
+        })
+    },
     //banner跳转详情
     swipTap:function (e) {
         var comic_id = e.currentTarget.dataset.typeid;
@@ -308,12 +364,11 @@ Page({
     onLoad: function (options) {
         var that = this;
         //console.log(options);
-        var boyid = options.boyid;
+        /*var boyid = options.boyid;
         var girlid = options.girlid;
         this.setData({
             boyid:boyid,
-            girlid:girlid,
-            isScroll:false
+            girlid:girlid
         })
         if (boyid) {
             this.metaData.mca = "h5_recommend_male";
@@ -321,43 +376,29 @@ Page({
         }else if(girlid){
             this.metaData.mca = "h5_recommend_female";
             this.initData();
-        }
+        }*/
 
-       /*获取个人头像等信息*/
-        /*wx.getUserInfo({
-            success: res => {
-                app.globalData.userInfo = res.userInfo;
-                console.log(app.globalData.userInfo);
-                this.setData({
-                    userInfo: res.userInfo,
-                    hasUserInfo: true
-                })
-            }
-        })*/
-
-        /*节点操作*/
-        let query = wx.createSelectorQuery();
-            query.select('#haha').boundingClientRect()
-            query.exec(function (res) {
-              //获取节点信息
-              console.log(res);
-              console.log(res[0].width);
-              console.log(res[0].top);
-            });
-
-
-        //获取设备 -- 系统信息
-        wx.getSystemInfo({
-            success: res => {
-                //console.log(res.model);
-                if (res.model == 'iPhone X') {
-                    this.setData({
-                        isIphone: true,
-
-                    })
+        //###########获取存储##############//
+        wx.getStorage({
+            key:'id',
+            success:function (res) {
+                console.log(res.data);
+                var data = res.data;
+                console.log(data);
+                if (data === "0"){
+                    that.setData({
+                        boyid:"0"
+                    });
+                    that.metaData.mca = "h5_recommend_male";
+                    that.initData();
+                }else  if (data === "1"){
+                    that.setData({
+                        girlid:"1"
+                    });
+                    that.metaData.mca = "h5_recommend_female";
+                    that.initData();
                 }
-            },
-
+            }
         })
 
 
@@ -384,6 +425,15 @@ Page({
                 id : 0
             })
         }
+        //#############本地存储############//
+        wx.setStorage({
+            key:'id',
+            data:id,
+            success:function (res) {
+                console.log(res);
+            }
+
+        })
 
     },
     onToastTap02:function (e) {
@@ -424,33 +474,11 @@ Page({
                    netWorkType:res.networkType
                })*/
               if (res.networkType === 'none') {
-                  wx.showToast({
-                      title:'无网络',
-                      icon:'loading',
-                      duration:1000,
-                      mask:true
-                  })
+
               }
           }
       });
     },
-
-   /* onPageScroll:function(e){ // 获取滚动条当前位置
-        console.log(e)
-    },
-
-    goTop: function (e) {  // 一键回到顶部
-        if (wx.pageScrollTo) {
-            wx.pageScrollTo({
-                scrollTop: 0
-            })
-        } else {
-            wx.showModal({
-                title: '提示',
-                content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
-            })
-        }
-    }*/
 
 
     /**

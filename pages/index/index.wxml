@@ -2,7 +2,7 @@
 
 <view class="container">
     <!--男女分版-->
-    <block wx:if="{{boyid}}">
+    <!--<block wx:if="{{boyid}}">
         <view class="{{isCancel ? 'boy_layer_hidden':'boy_layer'}}"></view>
         <view class="{{isCancel ? 'boy_layer_img_hidden':'boy_layer_img'}}" catchtouchmove='noScrollMove'>
             <view class="l_brother_view">
@@ -30,7 +30,62 @@
                 <image class="cancel_icon" catchtap="onCancelTap" src="../../images/icon_canel.png"></image>
             </view>
         </view>
-    </block>
+    </block>-->
+
+    <!--弹层男女选择-->
+    <view class="{{boyid || girlid? 'fix_view_hidden':'fix_view'}}">
+        <view class="choose_view">
+            <image class="choose_view_img" src="../../images/edition/rectangle.png"></image>
+        </view>
+        <view class="icon_image">
+            <image src="../../images/edition/boy_org.png"></image>
+        </view>
+        <view class="bg_view">
+            <view class="boy_view">
+                <block wx:if="{{isBoy}}}">
+                    <view style="{{isBoy === true ? 'display:block':'display:none'}}">
+                        <image class="boy_s" src="../../images/edition/Rectangle_w.png"></image>
+                        <image class="boy_btn" data-index="0" src="../../images/edition/CShape_bactive.png"
+                               catchtap="onBoyTap"></image>
+                    </view>
+                    <view style="{{isBoy === true ? 'display:none':'display:block'}}">
+                        <image class="{{idsed === 3?'hidden_b':'boy_s'}}" src="../../images/edition/Rectangle_s.png"></image>
+                        <image class="boy_btn" data-index="0" src="../../images/edition/CShape_b.png"
+                               catchtap="onBoyTap"></image>
+                    </view>
+                </block>
+                <view style="{{isGirl === true ? 'display:block;':'display:none;'}}">
+                    <image class="boy_s" src="../../images/edition/Rectangle_k.png"></image>
+                    <image class="boy_btn" data-index="0" src="../../images/edition/CShape_b.png"
+                           catchtap="onBoyTap"></image>
+                </view>
+            </view>
+
+            <view class="girl_view">
+
+                <view style="{{isBoy === true ? 'display:block;':'display:none;'}}">
+                    <image class="girl_s" src="../../images/edition/girl_k.png"></image>
+                    <image class="girl_btn" data-index="1" src="../../images/edition/CShape_g.png"></image>
+                </view>
+                <view style="{{isBoy ===  true? 'display:none;':'display:block;'}}">
+                    <image class="{{idsed === 3?'hidden_s':'girl_s'}}" src="../../images/edition/girl_s.png"></image>
+                    <image class="girl_btn" data-index="1" src="../../images/edition/CShape_g.png"
+                           catchtap="onGirlTap"></image>
+                </view>
+                <block wx:if="{{isGirl}}">
+                    <view style="{{isGirl === true}}">
+                        <image class="girl_s" src="../../images/edition/girl_w.png"></image>
+                        <image class="girl_btn" data-index="1" src="../../images/edition/CShape_gative.png"
+                               catchtap="onGirlTap"></image>
+                    </view>
+                </block>
+            </view>
+        </view>
+
+        <view class="logo_view">
+            <image class="logo_logo" src="../../images/edition/logo.png"></image>
+        </view>
+    </view>
     <!--toast-->
     <view id="{{isToast ? 'toast':'toast_hidden'}}"></view>
     <view class="{{isToast ? 'toast_img':'toast_img_hidden'}}">

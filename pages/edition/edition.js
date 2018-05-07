@@ -92,7 +92,7 @@ Page({
    */
   onLoad: function (options) {
       var that = this;
-      wx.getStorage({    //获取缓存
+      /*wx.getStorage({    //获取缓存
           key:'isBoy',
           success:function (res) {
               //console.log(res);
@@ -142,7 +142,7 @@ Page({
 
               }
           }
-      });
+      });*/
 
   },
 

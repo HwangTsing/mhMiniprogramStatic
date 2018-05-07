@@ -1,7 +1,7 @@
 {
     "pages": [
-        "pages/edition/edition",
         "pages/index/index",
+        "pages/edition/edition",
         "pages/details/details",
         "pages/comment/comment",
         "pages/morelist/morelist",
