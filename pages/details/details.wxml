@@ -62,7 +62,7 @@
                     <view class="comic_catalog_top">
                         <!-- 头部连载信息 S -->
                         <view class="comic_catalog_top_text">
-                            {{dataAry.comic.is_end==0?'连载中':'已完结'}}{{'(共'+ dataAry.chapter_list.length +'话)'}}
+                            {{dataAry.comic.is_end==0?'连载中':'已完结'}}{{'(共'+ dataAry.chapterList.length +'话)'}}
                         </view>
                         <!-- 头部连载信息 E -->
 
@@ -82,7 +82,7 @@
                     <!-- 章节信息 组件 S -->
                     <comicCatalog
                         directoryDisplay="{{dataAry.comic.directory_display}}"
-                        chapterList="{{dataAry.chapter_list}}"
+                        chapterList="{{dataAry.chapterList}}"
                         comic_id="{{dataAry.comic.comic_id}}"
                     ></comicCatalog>
                     <!-- 章节信息 组件 E -->

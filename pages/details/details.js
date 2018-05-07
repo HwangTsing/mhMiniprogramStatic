@@ -11,7 +11,7 @@ Page({
         dataAry: null,
         comicCommentData: null,
         isSeeMore: false,//是否显示查看更多
-        isSort: 1,//是否排序 1默认|2倒叙
+        isSort: 2,//是否排序 1默认|2倒叙
         history: null,
         see: '看到：',
         isBtn: false,
@@ -91,8 +91,8 @@ Page({
         let dataAry = this.data.dataAry;//获取数据
 
 
-        if (dataAry.chapter_list && dataAry.chapter_list.length !== 0) {
-            dataAry.chapter_list.reverse(); //翻转数组顺序
+        if (dataAry.chapterList && dataAry.chapterList.length !== 0) {
+            dataAry.chapterList.reverse(); //翻转数组顺序
             this.setData({
                 isSort: isSort,
                 dataAry: dataAry
@@ -184,8 +184,23 @@ Page({
                                     title: res.data.comic.name
                                 })
                                 //存储 comic信息
+                                let DATA=res.data;
+                                let chapterList=null;
+                                if(DATA.chapter_list && DATA.chapter_list.length!==0){
+                                    chapterList=[];
+                                    DATA.chapter_list.forEach((item,index)=>{
+                                        if(item.chapter_pay_vcoin===0||item.chapter_pay_vcoin==='0'){
+                                            chapterList.push(item)
+                                        }
+                                    })
+                                    DATA.chapterList=chapterList;
+                                    DATA.chapterList.reverse();
+                                    chapterList=null;
+                                }else {
+                                    DATA.chapterList=null;
+                                }
                                 this.setData({
-                                    dataAry: res.data
+                                    dataAry: DATA
                                 })
 
                                 let key = "comic_id_" + res.data.comic.comic_id;
