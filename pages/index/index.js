@@ -31,7 +31,6 @@ Page({
           id:0,
           idg:1,
           searchList:[],   //搜索列表
-          hasMore:true,   //是否还有数据
           scrolType:'',
           message:'',    //提示语
           total:1    //总页码
@@ -378,7 +377,7 @@ Page({
             this.initData();
         }*/
 
-        //###########获取存储##############//
+        //########### 获取初次男女分版存储 ##############//
         wx.getStorage({
             key:'id',
             success:function (res) {
@@ -399,8 +398,34 @@ Page({
                     that.initData();
                 }
             }
-        })
+        });
 
+        //################# 获取推荐页男女选择存储 #########################//
+        wx.getStorage({
+            key:'id',
+            success:function (res) {
+                console.log(res);
+                var id = res.data;
+                if (id === 0){
+                    that.metaData.mca = "h5_recommend_female";
+                    that.initData();
+                    that.setData({
+                        id:1,
+                        idg : 1,
+                        boyid:"0"
+                    })
+                }else if (id === 1){
+                    that.metaData.mca = "h5_recommend_male";
+                    that.initData();
+                    that.setData({
+                        id:0,
+                        idg : 0,
+                        girlid:"1"
+                    })
+                }
+
+            }
+        });
 
     },
 
@@ -410,6 +435,15 @@ Page({
         that.data.id = Number(e.currentTarget.dataset.id);
         var id = that.data.id;
         console.log(id);
+        //#############本地存储############//
+        wx.setStorage({
+            key:'id',
+            data:id,
+            success:function (res) {
+                console.log(res);
+            }
+
+        })
         if (id === 0){
             this.metaData.mca = "h5_recommend_female";
             this.initData();
@@ -425,22 +459,20 @@ Page({
                 id : 0
             })
         }
-        //#############本地存储############//
-        wx.setStorage({
-            key:'id',
-            data:id,
-            success:function (res) {
-                console.log(res);
-            }
-
-        })
-
     },
     onToastTap02:function (e) {
         var that = this;
         that.data.idg = Number(e.currentTarget.dataset.id);
         var idg = that.data.idg;
         console.log(idg);
+        //#############本地存储############//
+        wx.setStorage({
+            key:'id',
+            data:idg,
+            success:function (res) {
+                console.log(res);
+            }
+        })
         if (idg === 1){
             this.metaData.mca = "h5_recommend_male";
             this.initData();
