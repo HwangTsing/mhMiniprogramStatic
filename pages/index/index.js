@@ -435,15 +435,6 @@ Page({
         that.data.id = Number(e.currentTarget.dataset.id);
         var id = that.data.id;
         console.log(id);
-        //#############本地存储############//
-        wx.setStorage({
-            key:'id',
-            data:id,
-            success:function (res) {
-                console.log(res);
-            }
-
-        })
         if (id === 0){
             this.metaData.mca = "h5_recommend_female";
             this.initData();
@@ -459,20 +450,21 @@ Page({
                 id : 0
             })
         }
+        //#############本地存储############//
+        wx.setStorage({
+            key:'id',
+            data:id,
+            success:function (res) {
+                console.log(res);
+            }
+
+        })
     },
     onToastTap02:function (e) {
         var that = this;
         that.data.idg = Number(e.currentTarget.dataset.id);
         var idg = that.data.idg;
         console.log(idg);
-        //#############本地存储############//
-        wx.setStorage({
-            key:'id',
-            data:idg,
-            success:function (res) {
-                console.log(res);
-            }
-        })
         if (idg === 1){
             this.metaData.mca = "h5_recommend_male";
             this.initData();
@@ -489,6 +481,14 @@ Page({
                 idg : 1
             })
         }
+        //#############本地存储############//
+        wx.setStorage({
+            key:'id',
+            data:idg,
+            success:function (res) {
+                console.log(res);
+            }
+        })
     },
 
     /**

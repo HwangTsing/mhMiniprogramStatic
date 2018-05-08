@@ -103,9 +103,17 @@ page {
 .boy_view .boy_btn {
   width: 240rpx;
   height: 96rpx;
-  position: absolute;
-  left: 94rpx;
-  bottom: 269rpx;
+  position: relative;
+  left: 0;
+  bottom: 162rpx;
+}
+.boy_view .boy_btn_hidden {
+  width: 240rpx;
+  height: 96rpx;
+  position: relative;
+  left: 0;
+  bottom: 162rpx;
+  display: none;
 }
 .girl_view .girl_s {
   width: 292rpx;
@@ -120,9 +128,17 @@ page {
 .girl_view .girl_btn {
   width: 240rpx;
   height: 96rpx;
-  position: absolute;
-  right: 94rpx;
-  bottom: 269rpx;
+  position: relative;
+  right: 0;
+  bottom: 162rpx;
+}
+.girl_view .girl_btn_hidden {
+  width: 240rpx;
+  height: 96rpx;
+  position: relative;
+  right: 0;
+  bottom: 162rpx;
+  display: none;
 }
 .logo_view {
   width: 100%;
@@ -366,7 +382,7 @@ page {
   display: inline-block;
   float: left;
   position: absolute;
-  left: 44rpx;
+  left: 41rpx;
   top: 27rpx;
   z-index: 99;
 }
@@ -469,8 +485,8 @@ swiper-item wx-image {
 .boy_view image,
 .classify_view image,
 .list_view image {
-  width: 100rpx;
-  height: 100rpx;
+  width: 240rpx;
+  height: 96rpx;
   margin-bottom: 30rpx;
 }
 .girl_view text,
@@ -516,9 +532,12 @@ swiper-item wx-image {
   width: 690rpx;
   height: 68rpx;
   line-height: 68rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   background: #fafafa;
   border-radius: 8rpx;
-  text-align: center;
   font-size: 24rpx;
   color: #999999;
   margin: 0 30rpx;

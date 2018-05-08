@@ -1,37 +1,6 @@
 <!--index.wxml-->
 
 <view class="container">
-    <!--男女分版-->
-    <!--<block wx:if="{{boyid}}">
-        <view class="{{isCancel ? 'boy_layer_hidden':'boy_layer'}}"></view>
-        <view class="{{isCancel ? 'boy_layer_img_hidden':'boy_layer_img'}}" catchtouchmove='noScrollMove'>
-            <view class="l_brother_view">
-                <image class="l_brother" src="../../images/L_brother.png"></image>
-            </view>
-            <view class="icon_brother_view">
-                <image class="icon_brother" src="../../images/icon_bg.png"></image>
-            </view>
-            <view class="cancel_brother_view">
-                <image class="cancel_icon" catchtap="onCancelTap" src="../../images/icon_canel.png"></image>
-            </view>
-        </view>
-    </block>
-
-    <block wx:elif="{{girlid}}">
-        <view class="{{isCancel ? 'girl_layer_hidden':'girl_layer'}}"></view>
-        <view class="{{isCancel ? 'girl_layer_img_hidden':'girl_layer_img'}}" catchtouchmove='noScrollMove'>
-            <view class="l_sister_view">
-                <image class="l_sister" src="../../images/L_sister.png"></image>
-            </view>
-            <view class="icon_sister_view">
-                <image class="icon_sister" src="../../images/icon_bg.png"></image>
-            </view>
-            <view class="cancel_sister_view">
-                <image class="cancel_icon" catchtap="onCancelTap" src="../../images/icon_canel.png"></image>
-            </view>
-        </view>
-    </block>-->
-
     <!--弹层男女选择-->
     <view class="{{boyid || girlid? 'fix_view_hidden':'fix_view'}}">
         <view class="choose_view">
@@ -50,7 +19,7 @@
                     </view>
                     <view style="{{isBoy === true ? 'display:none':'display:block'}}">
                         <image class="{{idsed === 3?'hidden_b':'boy_s'}}" src="../../images/edition/Rectangle_s.png"></image>
-                        <image class="boy_btn" data-index="0" src="../../images/edition/CShape_b.png"
+                        <image class="{{isGirl === true ? 'boy_btn_hidden':'boy_btn'}}" data-index="0" src="../../images/edition/CShape_b.png"
                                catchtap="onBoyTap"></image>
                     </view>
                 </block>
@@ -69,7 +38,7 @@
                 </view>
                 <view style="{{isBoy ===  true? 'display:none;':'display:block;'}}">
                     <image class="{{idsed === 3?'hidden_s':'girl_s'}}" src="../../images/edition/girl_s.png"></image>
-                    <image class="girl_btn" data-index="1" src="../../images/edition/CShape_g.png"
+                    <image class="{{isGirl === true ? 'girl_btn_hidden':'girl_btn'}}" data-index="1" src="../../images/edition/CShape_g.png"
                            catchtap="onGirlTap"></image>
                 </view>
                 <block wx:if="{{isGirl}}">
@@ -123,22 +92,54 @@
     <scroll-view class="content_view" scroll-y="{{isScroll}}" bindscroll="scroll" bindscrolltolower="lower" lower-threshold="40">
         <!--banner图-->
         <view class="banner" id="haha">
-            <swiper indicator-dots="{{indicatorDots}}"
-                    autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color ="{{indicatorColor}}"
-                    indicator-active-color ="{{indicatorActiveColor}}" circular="{{circular}}" vertical ="{{vertical}}">
-                <block wx:if="{{boyid}}" wx:for="{{imgUrls}}" wx:key="index">
-                    <swiper-item>
-                        <image src="{{item.image_url}}" data-typeid="{{item.object_id}}" class="slide-image"
-                               catchtap="swipTap"/>
-                    </swiper-item>
-                </block>
-                <block wx:if="{{girlid}}" wx:for="{{imgUrls}}" wx:key="index">
-                    <swiper-item>
-                        <image src="{{item.image_url}}" data-typeid="{{item.object_id}}"
-                               class="slide-image" catchtap="swipTap"/>
-                    </swiper-item>
-                </block>
-            </swiper>
+            <block wx:if="{{imgUrls.length>1}}">
+                <swiper indicator-dots="{{indicatorDots}}"
+                        autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color ="{{indicatorColor}}"
+                        indicator-active-color ="{{indicatorActiveColor}}" circular="{{circular}}" vertical ="{{vertical}}">
+                    <block wx:if="{{boyid}}" wx:for="{{imgUrls}}" wx:key="index">
+                        <swiper-item>
+                            <image class="slide-image"
+                                   style="background: url('../../images/banner_bitmap.png') no-repeat;background-size:100% 100%;position: relative;left: 0;top: 0;">
+                                <image src="{{item.image_url}}" data-typeid="{{item.object_id}}" class="slide-image"
+                                       catchtap="swipTap" style="position: absolute;left: 0;top: 0;"></image>
+                            </image>
+                        </swiper-item>
+                    </block>
+                    <block wx:if="{{girlid}}" wx:for="{{imgUrls}}" wx:key="index">
+                        <swiper-item>
+                            <image class="slide-image"
+                                   style="background: url('../../images/banner_bitmap.png')no-repeat;-webkit-background-size: 100% 100%;background-size: 100% 100%;position: relative;left: 0;top: 0;">
+                                <image src="{{item.image_url}}" data-typeid="{{item.object_id}}"
+                                       class="slide-image" catchtap="swipTap" style="position: absolute;left: 0;top: 0;"></image>
+                            </image>
+                        </swiper-item>
+                    </block>
+                </swiper>
+            </block>
+
+            <block wx:else>
+                <swiper>
+                    <block wx:if="{{boyid}}" wx:for="{{imgUrls}}" wx:key="index">
+                        <swiper-item>
+                            <image class="slide-image"
+                                   style="background: url('../../images/banner_bitmap.png') no-repeat;background-size:100% 100%;position: relative;left: 0;top: 0;">
+                                <image src="{{item.image_url}}" data-typeid="{{item.object_id}}" class="slide-image"
+                                       catchtap="swipTap" style="position: absolute;left: 0;top: 0;"></image>
+                            </image>
+                        </swiper-item>
+                    </block>
+                    <block wx:if="{{girlid}}" wx:for="{{imgUrls}}" wx:key="index">
+                        <swiper-item>
+                            <image class="slide-image"
+                                   style="background: url('../../images/banner_bitmap.png')no-repeat;-webkit-background-size: 100% 100%;background-size: 100% 100%;position: relative;left: 0;top: 0;">
+                                <image src="{{item.image_url}}" data-typeid="{{item.object_id}}"
+                                       class="slide-image" catchtap="swipTap" style="position: absolute;left: 0;top: 0;"></image>
+                            </image>
+                        </swiper-item>
+                    </block>
+                </swiper>
+            </block>
+
         </view>
 
          <!--<view>
@@ -164,7 +165,7 @@
             </block>
         </scroll-view>
         <view class="bg_more" catchtap="bindMoreTap" data-index="{{keyIndex[1]}}"
-              data-title="{{title_fine}}">查看更多</view>
+              data-title="{{title_fine}}"><text>查看更多</text></view>
 
         <view class="hot_works">
             <view class="border"></view>
