@@ -89,7 +89,7 @@
         </view>
     </view>
 
-    <scroll-view class="content_view" scroll-y="{{isScroll}}" bindscroll="scroll" bindscrolltolower="lower" lower-threshold="40">
+    <scroll-view class="content_view" scroll-y="{{isScroll}}" bindscroll="scroll">
         <!--banner图-->
         <view class="banner" id="haha">
             <block wx:if="{{imgUrls.length>1}}">

@@ -17,7 +17,7 @@ Page({
           indicatorActiveColor:'#FFCC33',   //当前选中指示点颜色
           circular:true,  //衔接滑动
           vertical: false,  //滑动方向是否纵向
-          networkType:'',  //网络
+          networkType:true,  //是否有网络
           isCancel:false,   //推荐页男女分版弹层
           recommendList:[],   //推荐页数据
           isScroll:true,   //scroll-view滚动条
@@ -379,68 +379,70 @@ Page({
 
     onLoad: function (options) {
         var that = this;
-        //console.log(options);
-        /*var boyid = options.boyid;
-        var girlid = options.girlid;
-        this.setData({
-            boyid:boyid,
-            girlid:girlid
-        })
-        if (boyid) {
-            this.metaData.mca = "h5_recommend_male";
-            this.initData();
-        }else if(girlid){
-            this.metaData.mca = "h5_recommend_female";
-            this.initData();
-        }*/
-
-        //########### 获取初次男女分版存储 ##############//
-        wx.getStorage({
-            key:'id',
-            success:function (res) {
-                console.log(res.data);
-                var data = res.data;
-                console.log(data);
-                if (data === "0"){
-                    that.setData({
-                        boyid:"0"
-                    });
-                    that.metaData.mca = "h5_recommend_male";
-                    that.initData();
-                }else  if (data === "1"){
-                    that.setData({
-                        girlid:"1"
-                    });
-                    that.metaData.mca = "h5_recommend_female";
-                    that.initData();
-                }
-            }
-        });
-
-        //################# 获取推荐页男女选择存储 #########################//
-        wx.getStorage({
-            key:'id',
-            success:function (res) {
+        wx.getNetworkType({  //判断网络类型
+            success: function(res) {
                 console.log(res);
-                var id = res.data;
-                if (id === 0){
-                    that.metaData.mca = "h5_recommend_female";
-                    that.initData();
-                    that.setData({
-                        id:1,
-                        idg : 1,
-                        boyid:"0"
+                let networkType = res.networkType;
+                if (networkType === 'none' || networkType === 'unknown') {
+                    //无网络什么都不做
+                    this.setData({
+                        networkType: false
                     })
-                }else if (id === 1){
-                    that.metaData.mca = "h5_recommend_male";
-                    that.initData();
-                    that.setData({
-                        id:0,
-                        idg : 0,
-                        girlid:"1"
-                    })
-                }
+                    return
+                }else {
+                    //########### 获取初次男女分版存储 ##############//
+                    wx.getStorage({
+                        key:'id',
+                        success:function (res) {
+                            console.log(res.data);
+                            var data = res.data;
+                            console.log(data);
+                            if (data === "0"){
+                                that.setData({
+                                    boyid:"0"
+                                });
+                                that.metaData.mca = "h5_recommend_male";
+                                that.initData();
+                            }else  if (data === "1"){
+                                that.setData({
+                                    girlid:"1"
+                                });
+                                that.metaData.mca = "h5_recommend_female";
+                                that.initData();
+                            }
+                        }
+                    });
 
+                    //################# 获取推荐页男女选择存储 #########################//
+                    wx.getStorage({
+                        key:'id',
+                        success:function (res) {
+                            console.log(res);
+                            var id = res.data;
+                            if (id === 0){
+                                that.metaData.mca = "h5_recommend_female";
+                                that.initData();
+                                that.setData({
+                                    id:1,
+                                    idg : 1,
+                                    boyid:"0"
+                                })
+                            }else if (id === 1){
+                                that.metaData.mca = "h5_recommend_male";
+                                that.initData();
+                                that.setData({
+                                    id:0,
+                                    idg : 0,
+                                    girlid:"1"
+                                })
+                            }
+
+                        }
+                    });
+                }
+            },
+            fail:function (res) {
+                return;
             }
         });
 
@@ -515,18 +517,7 @@ Page({
         this.searchlist = this.selectComponent("#searchlist");
     },
     onShow: function () {
-      var that = this;
-      wx.getNetworkType({  //判断网络类型
-          success: function(res) {
-              console.log(res);
-              /* that.setData({
-                   netWorkType:res.networkType
-               })*/
-              if (res.networkType === 'none') {
 
-              }
-          }
-      });
     },
 
 
