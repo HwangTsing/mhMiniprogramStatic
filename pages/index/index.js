@@ -188,7 +188,7 @@ Page({
                             inputValue: word,
                             listData:true,
                             isScroll:false,
-                            message: that.data.total > page_num ? '加载中...' : '没有更多了',//提示语
+                            message: that.data.total > page_num ? '加载更多...' : '没有更多了',//提示语
                         })
                     }else if (data.data.data.data.length === 0){//搜索没有匹配的数据时提示图
                         that.setData({
