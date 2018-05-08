@@ -45,7 +45,7 @@
         >
             <image
                 mode="aspectFill"
-                class="author_cover"
+                class="author_cover_bg"
                 style="background:url(../../../../images/user_cover.png) no-repeat center center/cover ;"
                 src="../../../../images/user_cover.png"
             >
