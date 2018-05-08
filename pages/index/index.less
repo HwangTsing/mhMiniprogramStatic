@@ -370,6 +370,7 @@ page {
   top:0;
   right:100px;
   margin-top:28rpx;
+  z-index: 99;
 }
 .search_img .del_hidden {
   width: 30rpx;
@@ -402,6 +403,20 @@ page {
   background:rgba(0,0,0,1);
   opacity:0.2;
 
+}
+.search_input_focus{
+    height: 56rpx;
+    -webkit-border-radius: 30rpx;
+    -moz-border-radius: 30rpx;
+    -mz-border-radius: 30rpx;
+    border-radius: 30rpx;
+    /*text-align: center;*/
+    padding-left: 52rpx;
+    color: #333;
+    font-size: 28rpx;
+    margin-top: 16rpx;
+    margin-bottom: 16rpx;
+    background:rgba(245,245,245,1);
 }
 .search_img .boy_img, .search_img .girl_img {
   width:120rpx ;
@@ -852,7 +867,7 @@ swiper-item wx-image {
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   box-sizing: border-box;
-  border-bottom: 2rpx solid #DFDFE3;
+  border-bottom: 1rpx solid #DFDFE3;
   margin:0 20rpx 0;
 }
 .load_view {
