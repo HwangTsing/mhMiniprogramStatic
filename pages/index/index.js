@@ -60,6 +60,7 @@ Page({
             success:function (data) {
                 //console.log(data)
                 console.log(data.data.data);
+                var site_image = data.data.data.site_image;
                 var location_list = data.data.data.location_list;
                 console.log(location_list);
                 var recommendList = that.data.recommendList;
@@ -79,7 +80,9 @@ Page({
                         keyIndex.push(key)
                         recommendList.push(data.data.data[key]);
                     });
+
                     console.log(recommendList);
+
                     if (recommendList[2].length >=4){
                         var girlPopularWorks = recommendList[2].slice(0,4);
                     }else  if (recommendList[2].length < 4){
@@ -157,12 +160,26 @@ Page({
                         console.log(data.data);
                         console.log(data.data.data.data);
                         that.data.total = data.data.data.page_total;
-                        console.log(that.data.total);
+                        var site_cover = data.data.data.site_cover;
+
                         if (that.data.scrolType !== ''){
+                            data.data.data.data.forEach((item,index) =>{
+                                //判断图片路径是否带有https||http前缀，有则什么都不做，没有加上
+                                if (item.cover && !/^http[s]?:\/\//ig.test(item.cover)){
+                                    item.cover = site_cover + item.cover;
+                                }
+                            })
                             var searchList = that.data.searchList.concat(data.data.data.data);
                             console.log(searchList);
+
                         }else {
                             that.data.searchList = data.data.data.data;
+                            that.data.searchList.forEach((item,index) =>{
+                                //判断图片路径是否带有https||http前缀，有则什么都不做，没有加上
+                                if (item.cover && !/^http[s]?:\/\//ig.test(item.cover)){
+                                    item.cover = site_cover + item.cover;
+                                }
+                            })
                             var searchList = that.data.searchList;
                             console.log(searchList);
                         }

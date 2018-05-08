@@ -156,7 +156,11 @@
         <scroll-view class="scroll_view" scroll-x="true">
             <block wx:if="{{girlFineWorks}}" wx:for="{{girlFineWorks}}" wx:key="index">
                 <navigator class="big_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                    <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"></image>
+                    <image mode="aspectFill" lazy-load="true"
+                           style="background: url('../../images/banner_bitmap.png')no-repeat;background-size: 100% 100%;position: relative;top: 0;left: 0;">
+                        <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"
+                        style="position: absolute;left: 0;top: 0;"></image>
+                    </image>
                     <view class="word_info">
                         <text class="name_name">{{item.extra.name}}</text>
                         <text class="name_info">{{item.extra.watching_focus}}</text>
@@ -176,7 +180,10 @@
         <view class="hot_view">
             <block wx:for="{{girlPopularWorks}}" wx:key="index">
                 <navigator class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                    <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"></image>
+                    <image mode="aspectFill"
+                           style="background: url('../../images/banner_bitmap.png')no-repeat;background-size: 100% 100%;position: relative;top: 0;left: 0;">
+                        <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}" style="position: absolute;top: 0;left: 0;"></image>
+                    </image>
                     <view class="word_info">
                         <text class="name_name">{{item.extra.name}}</text>
                         <text class="name_info">{{item.extra.watching_focus}}</text>
@@ -289,7 +296,12 @@
                 cates="{{item.cates}}"
             ></searchlist>
         </block>
-        <view class="comment_message" wx:if="{{searchList.length>10}}">{{message}}</view>
+        <view class="load_view">
+            <view class="load_img_bg" wx:if="{{searchList.length === 10}}">
+                <image class="load_image" src="../../images/icon_load.png"></image>
+            </view>
+            <view class="comment_message">{{message}}</view>
+        </view>
     </scroll-view>
 </view>
 
