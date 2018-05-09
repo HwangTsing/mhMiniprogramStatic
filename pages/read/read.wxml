@@ -1,7 +1,7 @@
 <!--pages/read/read.wxml-->
 <view class="container">
 
-    <message type="loading"></message>
+    <message hasRefresh="{{true}}" type="loading"></message>
     <view bind:tap="tapScrollHandler">
         <vcomic
             class="vcomic-wrap"
