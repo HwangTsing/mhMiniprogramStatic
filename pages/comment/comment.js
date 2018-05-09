@@ -14,8 +14,10 @@ Page({
         isLoads: false,//是否先加载完效果成图
         pageTotal: 0,//一共可以下拉加载次数
         message: '',//加载提示语,
+        isMessage:true,//是否显示加载提示语
         comicId: 0,//记录漫画的id
         networkType: true,//是否有网络
+        url:null,
     },
 
     /*
@@ -119,14 +121,18 @@ Page({
                     isLoads: false,//改为可以下拉加载
                     pageNum: Number(pageNum) + 1,//修改页码状态
                     pageTotal: page_total,//保存可以下拉加载的次数
-                    message: page_total > pageNum ? '加载中...' : '没更多了',//存储提示词
+                    message: page_total > pageNum ? '加载中' : '没更多了',//存储提示词
+                    isMessage:true,
                     comicId: comicId,//记录漫画的id
+                    networkType: true,//是否有网络
                 })
 
             }
         }).catch((err)=>{
             this.setData({
-                isLoads: false
+                isLoads: false,
+                networkType: false,//是否有网络
+                isMessage:false,
             })
         })
     },
@@ -152,44 +158,6 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        console.log(wxApi.getNetworkType)
-        /*
-        * @ wx.onNetworkStatusChange 获取网络类型。
-        * success	Function	是	接口调用成功，返回网络类型 networkType
-        * fail	Function	否	接口调用失败的回调函数
-        * complete	Function	否	接口调用结束的回调函数（调用成功、失败都会执行）
-        *
-        * wifi	wifi 网络
-        * 2g	2g 网络
-        * 3g	3g 网络
-        * 4g	4g 网络
-        * none	无网络
-        * unknown	Android下不常见的网络类型
-        * */
-        // wx.getNetworkType({
-        //     success: (res) => {
-        //         // 返回网络类型, 有效值：
-        //         // wifi/2g/3g/4g/unknown(Android下不常见的网络类型)/none(无网络)
-        //
-        //         let networkType = res.networkType
-        //         if (networkType === 'none' || networkType === 'unknown') {
-        //             //无网络什么都不做
-        //             this.setData({
-        //                 networkType: false
-        //             })
-        //
-        //         } else {
-        //             //有网络
-        //             let comicId = options.comic_id;
-        //             let pageNum = this.data.pageNum;
-        //             let rowsNum = this.data.rowsNum;
-        //             this.getDataInfo(comicId, pageNum, rowsNum);
-        //             this.setData({
-        //                 networkType: true
-        //             })
-        //         }
-        //     }
-        // })
         wxApi.getNetworkType().then((NetworkType)=>{
             let networkType = NetworkType.networkType
             if (networkType === 'none' || networkType === 'unknown') {
@@ -214,20 +182,11 @@ Page({
             })
         })
 
-
-
-        // 获取系统信息
-        wx.getSystemInfo({
-            success:  (res)=> {
-                //console.log(res);
-                // 可使用窗口宽度、高度
-                //console.log('height=' + res.windowHeight);
-                //console.log('width=' + res.windowWidth);
-                // 计算主体部分高度,单位为px
-                this.setData({
-                    height: res.windowHeight
-                })
-            }
+        const url = wxApi.getPageUrl();//获取当前页面带有参数的路径
+        console.log(url)
+        const { windowHeight } = wxApi.getSystemInfoSync(); //获取设备信息
+        this.setData({
+            height: windowHeight
         })
     },
 

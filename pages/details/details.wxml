@@ -4,39 +4,40 @@
 <view class="container" catchtap="ClickCatalog">
 
     <!--  数据加载完成后显示S  -->
-    <view wx:if="{{dataAry}}" style='width:100%;'>
+    <view wx:if="{{dataAry && dataAry!='{}' }}" style='width:100%;'>
 
-          <!--  头部图片区S  -->
-          <comicShowTop
+        <!--  头部图片区S  -->
+        <comicShowTop
             thisData="{{dataAry}}"
-          ></comicShowTop>
-          <!--  头部图片区E  -->
+        ></comicShowTop>
+        <!--  头部图片区E  -->
 
 
+        <!--  中间阅读表示区S  -->
+        <view class="read_view">
+            <!--根据状态判断是否阅读？暂未阅读 or 阅读的章节 wx:if wx:elif-->
+            <view class="read_r">{{history?'看到:'+history.chapter_name:'暂未阅读'}}</view>
+            <!--根据状态判断是否阅读？开始阅读 or 继续阅读 wx:if wx:elif-->
+            <view class="read_btn" catchtap="onReadClick">{{history?'继续阅读':'开始阅读'}}</view>
+        </view>
+        <!--  中间阅读表示区E  -->
 
-          <!--  中间阅读表示区S  -->
-          <view class="read_view">
-              <!--根据状态判断是否阅读？暂未阅读 or 阅读的章节 wx:if wx:elif-->
-              <view class="read_r">{{history?'看到:'+history.chapter_name:'暂未阅读'}}</view>
-              <!--根据状态判断是否阅读？开始阅读 or 继续阅读 wx:if wx:elif-->
-              <view class="read_btn" catchtap="onReadClick">{{history?'继续阅读':'开始阅读'}}</view>
-          </view>
-          <!--  中间阅读表示区E  -->
+        <!--  详情区S -->
+        <view class="comic_tab">
 
-          <!--  详情区S -->
-          <view class="comic_tab">
-
-              <!--  当前页二级导航 S  -->
-              <view class="comic_nav">
-                  <block wx:for="{{tabData}}" wx:for-item="tabData" wx:key="index">
-                      <view class="{{status === tabData.status ? 'activeChecked':'checked'}}" data-status="{{tabData.status}}" catchtap="onTabTap">{{tabData.title}}</view>
-                  </block>
-              </view>
-              <!--  当前页二级导航 E  -->
+            <!--  当前页二级导航 S  -->
+            <view class="comic_nav">
+                <block wx:for="{{tabData}}" wx:for-item="tabData" wx:key="index">
+                    <view class="{{status === tabData.status ? 'activeChecked':'checked'}}"
+                          data-status="{{tabData.status}}" catchtap="onTabTap">{{tabData.title}}
+                    </view>
+                </block>
+            </view>
+            <!--  当前页二级导航 E  -->
 
 
-              <!--  二级导航内容区 S  -->
-              <view class="comic_tab_con">
+            <!--  二级导航内容区 S  -->
+            <view class="comic_tab_con">
 
                 <!-- 二级导航详情区 S  -->
                 <view class="comic_con_box" wx:if="{{status===0}}">
@@ -90,16 +91,39 @@
                 </view>
                 <!-- 二级导航目录区 E  -->
 
-              </view>
-              <!--  二级导航内容区 E  -->
+            </view>
+            <!--  二级导航内容区 E  -->
 
-          </view>
-          <!--  详情区E -->
+        </view>
+        <!--  详情区E -->
+
+        <!-- 底部空白区S -->
+        <view style="height: 100rpx;"></view>
+        <!-- 底部空白区E -->
     </view>
     <!--  数据加载完成后显示S  -->
 
-    <!-- 底部空白区S -->
-    <view style="height: 100rpx;"></view>
-    <!-- 底部空白区E -->
+    <!-- 首次加载失败后(网络差)信息提示 S -->
+    <message
+        wx:if="{{ !networkType && !dataAry }}"
+        modal="{{ true }}"
+        type="net"
+    ></message>
+    <!-- 首次加载失败后(网络差)信息提示 E-->
 
+    <!-- 首次加载 信息提示 S -->
+    <message
+        wx:if="{{ networkType && !dataAry }}"
+        modal="{{ true }}"
+        type="loading"
+    ></message>
+    <!-- 首次加载 信息提示 E-->
+
+    <!-- 首次加载 信息提示 S -->
+    <message
+        wx:if="{{ networkType && dataAry=='{}' }}"
+        modal="{{ true }}"
+        type="out"
+    ></message>
+    <!-- 首次加载 信息提示 E-->
 </view>
