@@ -5,6 +5,7 @@
   "navigationBarBackgroundColor": "#FF4D6A",
   "enablePullDownRefresh":false,
   "usingComponents":{
-    "searchlist":"/components/searchList/searchList"
+    "searchlist":"/components/searchList/searchList",
+    "message": "/components/message/message"
   }
 }
