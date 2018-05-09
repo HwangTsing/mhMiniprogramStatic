@@ -113,7 +113,6 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
         /*
         * *** wbcomic/comic/comic_show?comic_id=68491 摘要页接口
         * *** wbcomic/comic/comic_comment_list?comic_id=24&page_num=1&rows_num=10&_debug_=yes 评论列表

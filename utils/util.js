@@ -142,6 +142,68 @@ class wxApi {
         return promise
     }
 
+    setStorage(key,value){
+        /*
+       * *** setStorage
+       * @将数据存储在本地缓存中指定的 key 中，会覆盖掉原来该 key 对应的内容，这是一个异步接口
+       * **@ key 必须为字符串类型
+       * **@ value必须为(字符串|对象)类型
+       * 返回 promise 对象
+       * */
+        const promise = new Promise((resolve, reject) => {
+            var keyType=typeof key;
+            var valueType=typeof value;
+            if(keyType!=='string'){ //key
+                reject({message:'key is not a string'});
+                return
+            }
+
+            if(valueType!=='string' && valueType!=='object'){//value
+                reject({message:'value is not a string or an object'});
+                return
+            }
+
+            wx.setStorage({ //将数据存储在本地
+                key:key,
+                data:value,
+                success(res){ //成功
+                    resolve(res)
+                },
+                fail(err){ //失败
+                    reject(err)
+                }
+            })
+        });
+
+        return promise
+    }
+
+    getStorage(key){
+        /*
+        * *** getStorage 从本地缓存中异步获取指定 key 对应的内容。
+        * **@ key 必须为字符串类型
+        * 返回 promise 对象
+        * */
+        const promise = new Promise((resolve, reject) => {
+            var keyType=typeof key;
+            if(keyType!=='string'){ //key
+                reject({message:'key is not a string'});
+                return
+            }
+            wx.getStorage({ //从本地缓存中异步获取指定 key 对应的内容。
+                key: key,
+                success (res) {//成功
+                    resolve(res)
+                },
+                fail(err){ //失败
+                    reject(err)
+                }
+            })
+        })
+
+        return promise
+    }
+
     getPageUrl(){
         /* 获取当前页带参数的url */
         var pages = getCurrentPages()    //获取加载的页面
