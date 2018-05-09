@@ -749,6 +749,8 @@ swiper-item wx-image {
   width: 374rpx;
   height: 212rpx;
   display: inline-block;
+  float: left;
+  overflow: hidden;
 }
 .big_new_view .new_img:nth-child(2) image,
 .big_new_view .new_img:nth-child(3) image {
@@ -902,4 +904,24 @@ swiper-item wx-image {
   line-height: 80rpx;
   color: #999;
   margin-left: 20rpx;
+}
+.net_view,
+.server_view {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  display: -webkit-flex;
+  display: -webkit-box;
+  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  z-index: 99;
 }

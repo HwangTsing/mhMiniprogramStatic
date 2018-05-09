@@ -318,5 +318,7 @@
     <block wx:if="{{noSearch === false}}">
         <message class="search_message" modal="{{false}}" type="search"></message>
     </block>
+    <message wx:if="{{networkType === false}}" class="net_view" type="net"></message>
+    <message wx:if="{{isLoad === true}}" class="server_view" type="server"></message>
 </view>
 

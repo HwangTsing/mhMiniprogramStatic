@@ -34,7 +34,8 @@ Page({
           scrolType:'',
           message:'',    //提示语
           total:1,    //总页码
-          noSearch:true   //是否有搜索结果
+          noSearch:true,   //是否有搜索结果
+          isLoad:false,     //是否加载失败
 
       },
       metaData:{
@@ -131,7 +132,9 @@ Page({
 
             },
             fail:function (data) {
-
+                that.setData({
+                    isLoad:true
+                })
             }
         })
 
@@ -199,7 +202,7 @@ Page({
                 },
                 fail:function (data) {
                     that.setData({
-
+                        isLoad:true
                     })
                 }
 
@@ -383,6 +386,7 @@ Page({
     },
 
     onLoad: function (options) {
+        console.log(wxApi.getNetworkType());
         var that = this;
         wx.getNetworkType({  //判断网络类型
             success: function(res) {
