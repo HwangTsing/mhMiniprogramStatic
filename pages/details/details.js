@@ -65,7 +65,6 @@ Page({
                       history: res.data
                 })
         }).catch((err) => {
-            console.error(err)
             this.setData({
                 history: null
             })//错误时候
@@ -170,7 +169,6 @@ Page({
                                     history: res.data
                                 })
                             }).catch((err) => {
-                                console.error(err)
                                 this.setData({
                                     history: null
                                 })//错误时候
