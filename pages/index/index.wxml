@@ -1,295 +1,307 @@
 <!--index.wxml-->
-<!--<import src="searchlist/searchlist.wxml"></import>-->
+
 <view class="container">
-    <!--男女分版-->
-    <block wx:if="{{boyid}}">
-        <view class="{{isCancel ? 'boy_layer_hidden':'boy_layer'}}" catchtouchmove='noScrollMove'>
-            <view class="l_brother_view">
-                <image class="l_brother" src="../../images/L_brother.png"></image>
-            </view>
-            <view class="icon_brother_view">
-                <image class="icon_brother" src="../../images/icon_bg.png"></image>
-            </view>
-            <view class="cancel_brother_view">
-                <image class="cancel_icon" catchtap="onCancelTap" src="../../images/icon_canel.png"></image>
-            </view>
-
+    <!--弹层男女选择-->
+    <view class="{{boyid || girlid? 'fix_view_hidden':'fix_view'}}">
+        <view class="choose_view">
+            <image class="choose_view_img" src="../../images/edition/rectangle.png"></image>
         </view>
-    </block>
+        <view class="icon_image">
+            <image src="../../images/edition/boy_org.png"></image>
+        </view>
+        <view class="bg_view">
+            <view class="boy_view">
+                <block wx:if="{{isBoy}}}">
+                    <view style="{{isBoy === true ? 'display:block':'display:none'}}">
+                        <image class="boy_s" src="../../images/edition/Rectangle_w.png"></image>
+                        <image class="boy_btn" data-index="0" src="../../images/edition/CShape_bactive.png"
+                               catchtap="onBoyTap"></image>
+                    </view>
+                    <view style="{{isBoy === true ? 'display:none':'display:block'}}">
+                        <image class="{{idsed === 3?'hidden_b':'boy_s'}}" src="../../images/edition/Rectangle_s.png"></image>
+                        <image class="{{isGirl === true ? 'boy_btn_hidden':'boy_btn'}}" data-index="0" src="../../images/edition/CShape_b.png"
+                               catchtap="onBoyTap"></image>
+                    </view>
+                </block>
+                <view style="{{isGirl === true ? 'display:block;':'display:none;'}}">
+                    <image class="boy_s" src="../../images/edition/Rectangle_k.png"></image>
+                    <image class="boy_btn" data-index="0" src="../../images/edition/CShape_b.png"
+                           catchtap="onBoyTap"></image>
+                </view>
+            </view>
 
-    <block wx:elif="{{girlid}}">
-        <view class="{{isCancel ? 'girl_layer_hidden':'girl_layer'}}" catchtouchmove='noScrollMove'>
-            <view class="l_sister_view">
-                <image class="l_sister" src="../../images/L_sister.png"></image>
-            </view>
-            <view class="icon_sister_view">
-                <image class="icon_sister" src="../../images/icon_bg.png"></image>
-            </view>
-            <view class="cancel_sister_view">
-                <image class="cancel_icon" catchtap="onCancelTap" src="../../images/icon_canel.png"></image>
+            <view class="girl_view">
+
+                <view style="{{isBoy === true ? 'display:block;':'display:none;'}}">
+                    <image class="girl_s" src="../../images/edition/girl_k.png"></image>
+                    <image class="girl_btn" data-index="1" src="../../images/edition/CShape_g.png"></image>
+                </view>
+                <view style="{{isBoy ===  true? 'display:none;':'display:block;'}}">
+                    <image class="{{idsed === 3?'hidden_s':'girl_s'}}" src="../../images/edition/girl_s.png"></image>
+                    <image class="{{isGirl === true ? 'girl_btn_hidden':'girl_btn'}}" data-index="1" src="../../images/edition/CShape_g.png"
+                           catchtap="onGirlTap"></image>
+                </view>
+                <block wx:if="{{isGirl}}">
+                    <view style="{{isGirl === true}}">
+                        <image class="girl_s" src="../../images/edition/girl_w.png"></image>
+                        <image class="girl_btn" data-index="1" src="../../images/edition/CShape_gative.png"
+                               catchtap="onGirlTap"></image>
+                    </view>
+                </block>
             </view>
         </view>
-    </block>
 
+        <view class="logo_view">
+            <image class="logo_logo" src="../../images/edition/logo.png"></image>
+        </view>
+    </view>
+    <!--toast-->
+    <view id="{{isToast ? 'toast':'toast_hidden'}}"></view>
+    <view class="{{isToast ? 'toast_img':'toast_img_hidden'}}">
+        <view class="toast_view">
+            <image class="toast_images" src="../../images/toast.png"></image>
+            <view class="toast_word">正在加载中...</view>
+        </view>
+    </view>
     <!--search搜索-->
     <!--搜索框聚焦时显示-->
-    <view class="{{isOpacity? 'search_view_show':'search_view'}}">
+    <view class="{{isOpacity? 'search_view_show':'search_view'}}" style="{{isScrollSearch === true && isOpacity === false? 'background:#fff;opacity:0.95;':''}}">
         <view class="search_img">
-            <image class="search_images" src="../../images/search_gray.png"></image>
-            <input class="search_input" type="text" cursor-spacing="3px" placeholder="搜索作品或作者名称" placeholder-style="color:#fff;"
-                   bindfocus="focusInputEvent" bindinput="bindInputChange"/>
+            <image class="search_images" src="{{isOpacity === true ? '../../images/search_gray_02.png':'../../images/search_gray.png'}}"></image>
+            <input class="{{isOpacity === true?'search_input_focus':'search_input'}}" type="text" cursor-spacing="3px" value="{{inputValue}}"
+                   placeholder="搜索作品或作者名称" placeholder-style="color:#fff;font-size:28rpx;" bindfocus="focusInputEvent" bindinput="bindInputChange"/>
+            <image class="{{isOpacity === true && searchList.length !== 0? 'del':'del_hidden'}}"
+                   src="../../images/delete.png" catchtap="onDel"></image>
+            <view class="{{isOpacity?'qx_view':'qx_view_hidden'}}}" catchtap="onCancel">取消</view>
             <block wx:if="{{boyid}}">
-                <image class="boy_img" src="../../images/boy.png"></image>
+                <image class="{{isOpacity || id !== 0? 'boy_img_hidden':'boy_img'}}" data-index="{{boyid}}"
+                       src="../../images/boy.png" catchtap="onToastTap" data-id="{{id}}"></image>
+                <image class="{{id === 0 || isOpacity === true ? 'girl_img_hidden':'girl_img'}}" data-index="{{girlid}}"
+                       src="../../images/girl.png" catchtap="onToastTap" data-id="{{id}}"></image>
             </block>
             <block wx:elif="{{girlid}}">
-                <image class="girl_img" src="../../images/girl.png"></image>
+                <image class="{{isOpacity || idg !== 1? 'girl_img_hidden':'girl_img'}}" data-index="{{girlid}}"
+                       src="../../images/girl.png" catchtap="onToastTap02" data-id="{{idg}}"></image>
+                <image class="{{idg === 1 || isOpacity === true? 'boy_img_hidden':'boy_img'}}" data-index="{{boyid}}"
+                       src="../../images/boy.png" catchtap="onToastTap02" data-id="{{idg}}"></image>
             </block>
 
         </view>
     </view>
-    <!--页面滚动-->
-    <block wx:if="{{isScrollSearch}}">
-        <view class="search_view" style="{{isScrollSearch === true && isOpacity === false? 'background:#fff;opacity:0.95;':'display:none'}}">
-            <view class="search_img">
-                <image class="search_images" src="../../images/search_gray.png"></image>
-                <input class="search_input" type="text" cursor-spacing="3px" placeholder="搜索作品或作者名称" placeholder-style="color:#fff;"
-                       bindfocus="focusInputEvent" bindinput="bindInputChange"/>
-                <image class="boy_img" src="../../images/boy.png"></image>
-            </view>
-        </view>
-    </block>
 
-    <scroll-view class="content_view" scroll-y="{{isScroll}}" bindscroll="scroll" bindscrolltoupper="upper">
+    <scroll-view class="content_view" scroll-y="{{isScroll}}" bindscroll="scroll">
         <!--banner图-->
         <view class="banner" id="haha">
-            <swiper indicator-dots="{{indicatorDots}}"
-                    autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color ="{{indicatorColor}}"
-                    indicator-active-color ="{{indicatorActiveColor}}" circular="{{circular}}" vertical ="{{vertical}}">
-                <block wx:if="{{boyid}}" wx:for="{{imgUrls}}" wx:key="index">
-                    <swiper-item>
-                        <image src="{{item.image_url}}" class="slide-image" width="355" height="200"/>
-                    </swiper-item>
-                </block>
-                <block wx:if="{{girlid}}" wx:for="{{imgUrls}}" wx:key="index">
-                    <swiper-item>
-                        <image src="{{item.image_url}}" class="slide-image" width="355" height="200"/>
-                    </swiper-item>
-                </block>
-            </swiper>
+            <block wx:if="{{imgUrls.length>1}}">
+                <swiper indicator-dots="{{indicatorDots}}"
+                        autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color ="{{indicatorColor}}"
+                        indicator-active-color ="{{indicatorActiveColor}}" circular="{{circular}}" vertical ="{{vertical}}">
+                    <block wx:if="{{boyid}}" wx:for="{{imgUrls}}" wx:key="index">
+                        <swiper-item>
+                            <image class="slide-image"
+                                   style="background: url('../../images/banner_bitmap.png') no-repeat;background-size:100% 100%;position: relative;left: 0;top: 0;">
+                                <image src="{{item.image_url}}" data-typeid="{{item.object_id}}" class="slide-image"
+                                       catchtap="swipTap" style="position: absolute;left: 0;top: 0;"></image>
+                            </image>
+                        </swiper-item>
+                    </block>
+                    <block wx:if="{{girlid}}" wx:for="{{imgUrls}}" wx:key="index">
+                        <swiper-item>
+                            <image class="slide-image"
+                                   style="background: url('../../images/banner_bitmap.png')no-repeat;-webkit-background-size: 100% 100%;background-size: 100% 100%;position: relative;left: 0;top: 0;">
+                                <image src="{{item.image_url}}" data-typeid="{{item.object_id}}"
+                                       class="slide-image" catchtap="swipTap" style="position: absolute;left: 0;top: 0;"></image>
+                            </image>
+                        </swiper-item>
+                    </block>
+                </swiper>
+            </block>
+
+            <block wx:else>
+                <swiper>
+                    <block wx:if="{{boyid}}" wx:for="{{imgUrls}}" wx:key="index">
+                        <swiper-item>
+                            <image class="slide-image"
+                                   style="background: url('../../images/banner_bitmap.png') no-repeat;background-size:100% 100%;position: relative;left: 0;top: 0;">
+                                <image src="{{item.image_url}}" data-typeid="{{item.object_id}}" class="slide-image"
+                                       catchtap="swipTap" style="position: absolute;left: 0;top: 0;"></image>
+                            </image>
+                        </swiper-item>
+                    </block>
+                    <block wx:if="{{girlid}}" wx:for="{{imgUrls}}" wx:key="index">
+                        <swiper-item>
+                            <image class="slide-image"
+                                   style="background: url('../../images/banner_bitmap.png')no-repeat;-webkit-background-size: 100% 100%;background-size: 100% 100%;position: relative;left: 0;top: 0;">
+                                <image src="{{item.image_url}}" data-typeid="{{item.object_id}}"
+                                       class="slide-image" catchtap="swipTap" style="position: absolute;left: 0;top: 0;"></image>
+                            </image>
+                        </swiper-item>
+                    </block>
+                </swiper>
+            </block>
+
         </view>
 
-         <view>
-          <navigator url="/pages/read/read?chapter_id=258951">reader</navigator>
-          </view>
-        
+         <!--<view>
+          <navigator url="/pages/read/read">reader</navigator>
+          </view>-->
+
         <view class="fine_works">
             <view class="border"></view>
-            <view class="fine_text">精品佳作</view>
+            <view class="fine_text">{{title_fine}}</view>
             <view class="border" style="margin-left: 10rpx;"></view>
         </view>
-        <!--img+content 图片区域内容可滑动-->
+
+        <!--img+content 图片区域内容可滑动--精品佳作-->
         <scroll-view class="scroll_view" scroll-x="true">
-            <block>
-                <navigator class="big_img" url="../details/details">
-                    <image mode="aspectFill" src="../../images/nav/HPWC2lTX.jpg"></image>
+            <block wx:if="{{girlFineWorks}}" wx:for="{{girlFineWorks}}" wx:key="index">
+                <navigator class="big_img" url="../details/details?comic_id={{item.extra.comic_id}}">
+                    <image mode="aspectFill" lazy-load="true"
+                           style="background: url('../../images/banner_bitmap.png')no-repeat;background-size: 100% 100%;position: relative;top: 0;left: 0;">
+                        <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"
+                        style="position: absolute;left: 0;top: 0;"></image>
+                    </image>
                     <view class="word_info">
-                        <text class="name_name">美少女日记最多这么…</text>
-                        <text class="name_info">和四美男同居只为学习</text>
-                    </view>
-                </navigator>
-                <navigator class="big_img" url="../details/details">
-                    <image mode="aspectFill" src="../../images/nav/HPWC2lTX.jpg"></image>
-                    <view class="word_info">
-                        <text class="name_name">美少女日记最多这么…</text>
-                        <text class="name_info">和四美男同居只为学习</text>
-                    </view>
-                </navigator>
-                <navigator class="big_img" url="../details/details">
-                    <image mode="aspectFill" src="../../images/nav/HPWC2lTX.jpg"></image>
-                    <view class="word_info">
-                        <text class="name_name">美少女日记最多这么…</text>
-                        <text class="name_info">和四美男同居只为学习</text>
-                    </view>
-                </navigator>
-                <navigator class="big_img" url="../details/details">
-                    <image mode="aspectFill" src="../../images/nav/HPWC2lTX.jpg"></image>
-                    <view class="word_info">
-                        <text class="name_name">美少女日记最多这么…</text>
-                        <text class="name_info">和四美男同居只为学习</text>
-                    </view>
-                </navigator>
-                <navigator class="big_img" url="../details/details">
-                    <image mode="aspectFill" src="../../images/nav/HPWC2lTX.jpg"></image>
-                    <view class="word_info">
-                        <text class="name_name">美少女日记最多这么…</text>
-                        <text class="name_info">和四美男同居只为学习</text>
-                    </view>
-                </navigator>
-                <navigator class="big_img"url="../details/details">
-                    <image mode="aspectFill" src="../../images/nav/HPWC2lTX.jpg"></image>
-                    <view class="word_info">
-                        <text class="name_name">美少女日记最多这么…</text>
-                        <text class="name_info">和四美男同居只为学习</text>
-                    </view>
-                </navigator>
-                <navigator class="big_img" url="../details/details">
-                    <image mode="aspectFill" src="../../images/nav/HPWC2lTX.jpg"></image>
-                    <view class="word_info">
-                        <text class="name_name">美少女日记最多这么…</text>
-                        <text class="name_info">和四美男同居只为学习</text>
+                        <text class="name_name">{{item.extra.name}}</text>
+                        <text class="name_info">{{item.extra.watching_focus}}</text>
                     </view>
                 </navigator>
             </block>
         </scroll-view>
-        <view class="bg_more" catchtap="bindMoreTap">查看更多</view>
+        <view class="bg_more" catchtap="bindMoreTap" data-index="{{keyIndex[1]}}"
+              data-title="{{title_fine}}"><text>查看更多</text></view>
 
         <view class="hot_works">
             <view class="border"></view>
-            <view class="fine_text">人气作品</view>
+            <view class="fine_text">{{title_hot}}</view>
             <view class="border" style="margin-left: 10rpx;"></view>
-
         </view>
-        <!--img+content 图片区域内容-->
+        <!--img+content 人气作品-->
         <view class="hot_view">
-            <block>
-                <navigator class="hot_img" url="../details/details">
-                    <image mode="aspectFill" src="../../images/nav/HPWC2lTX.jpg"></image>
+            <block wx:for="{{girlPopularWorks}}" wx:key="index">
+                <navigator class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}">
+                    <image mode="aspectFill"
+                           style="background: url('../../images/banner_bitmap.png')no-repeat;background-size: 100% 100%;position: relative;top: 0;left: 0;">
+                        <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}" style="position: absolute;top: 0;left: 0;"></image>
+                    </image>
                     <view class="word_info">
-                        <text class="name_name">美少女日记</text>
-                        <text class="name_info">和四美男同居只为学习</text>
-                    </view>
-                </navigator>
-                <navigator class="hot_img" url="../details/details">
-                    <image mode="aspectFill" src="../../images/nav/HPWC2lTX.jpg"></image>
-                    <view class="word_info">
-                        <text class="name_name">美少女日记</text>
-                        <text class="name_info">和四美男同居只为学习</text>
-                    </view>
-                </navigator>
-                <navigator class="hot_img" url="../details/details">
-                    <image mode="aspectFill" src="../../images/nav/HPWC2lTX.jpg"></image>
-                    <view class="word_info">
-                        <text class="name_name">美少女日记</text>
-                        <text class="name_info">和四美男同居只为学习</text>
-                    </view>
-                </navigator>
-                <navigator class="hot_img" url="../details/details">
-                    <image mode="aspectFill" src="../../images/nav/HPWC2lTX.jpg"></image>
-                    <view class="word_info">
-                        <text class="name_name">美少女日记</text>
-                        <text class="name_info">和四美男同居只为学习</text>
+                        <text class="name_name">{{item.extra.name}}</text>
+                        <text class="name_info">{{item.extra.watching_focus}}</text>
                     </view>
                 </navigator>
             </block>
         </view>
-        <view class="bg_more" catchtap="bindMoreTap">查看更多</view>
+        <view class="bg_more" catchtap="bindMoreTap" data-index="{{keyIndex[2]}}"
+              data-title="{{title_hot}}">查看更多</view>
         <!--最新上架-->
+        <view class="new_works">
+            <view class="border"></view>
+            <view class="fine_text">{{title_new}}</view>
+            <view class="border" style="margin-left: 10rpx;"></view>
+        </view>
         <view class="new_view">
-
+                <view class="big_new_view">
+                    <block wx:for="{{newArrivalWorks}}" wx:key="index">
+                        <navigator class="new_img" url="../details/details?comic_id={{item.extra.comic_id}}">
+                            <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"></image>
+                            <view class="word_info">
+                                <text class="name_name">{{item.extra.name}}</text>
+                                <text class="name_info">{{item.extra.watching_focus}}</text>
+                            </view>
+                        </navigator>
+                    </block>
+                </view>
+        </view>
+        <view class="bg_more" catchtap="bindMoreTap" data-index="{{keyIndex[3]}}"
+              data-title="{{title_new}}">查看更多</view>
+        <!--热门连载-->
+        <view class="hot_works">
+            <view class="border"></view>
+            <view class="fine_text">{{title_hotserial}}</view>
+            <view class="border" style="margin-left: 10rpx;"></view>
+        </view>
+        <!--img+content 图片区域内容-->
+        <view class="hot_view">
+            <block wx:for="{{hotSerialWorks}}" wx:key="index">
+                <navigator class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}">
+                    <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"></image>
+                    <view class="word_info">
+                        <text class="name_name">{{item.extra.name}}</text>
+                        <text class="name_info">{{item.extra.watching_focus}}</text>
+                    </view>
+                </navigator>
+            </block>
+        </view>
+        <view class="bg_more" catchtap="bindMoreTap" data-index="{{keyIndex[4]}}"
+              data-title="{{title_hotserial}}">查看更多</view>
+        <!--小编推荐-->
+        <view class="new_works">
+            <view class="border"></view>
+            <view class="fine_text">{{title_xbrecommend}}</view>
+            <view class="border" style="margin-left: 10rpx;"></view>
+        </view>
+        <view class="new_view">
+            <view class="big_new_view">
+                <block wx:for="{{xiaobianRecommend}}" wx:key="index">
+                    <navigator class="new_img" url="../details/details?comic_id={{item.extra.comic_id}}">
+                        <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"></image>
+                        <view class="word_info">
+                            <text class="name_name">{{item.extra.name}}</text>
+                            <text class="name_info">{{item.extra.watching_focus}}</text>
+                        </view>
+                    </navigator>
+                </block>
+            </view>
+        </view>
+        <view class="bg_more" catchtap="bindMoreTap" data-index="{{keyIndex[5]}}"
+              data-title="{{title_xbrecommend}}">查看更多</view>
+        <!--img+content 本周推荐-->
+        <view class="hot_works">
+            <view class="border"></view>
+            <view class="fine_text">{{title_weekrecommend}}</view>
+            <view class="border" style="margin-left: 10rpx;"></view>
+        </view>
+        <view class="hot_view">
+            <block wx:for="{{weekRecommend}}" wx:key="index">
+                <navigator class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}">
+                    <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"></image>
+                    <view class="word_info">
+                        <text class="name_name">{{item.extra.name}}</text>
+                        <text class="name_info">{{item.extra.watching_focus}}</text>
+                    </view>
+                </navigator>
+            </block>
+        </view>
+        <view class="bg_more" catchtap="bindMoreTap" data-index="{{keyIndex[6]}}"
+              data-title="{{title_weekrecommend}}">查看更多</view>
+        <!--滑动到底部没有数据了提示-->
+        <view class="bottom_img">
+            <image src="../../images/prompt.png"></image>
         </view>
     </scroll-view>
 
   <!--蒙层-->
   <view class="{{isOpacity? 'layer' :'layer_n'}}" catchtouchmove='noScrollMove' catchtap="blurInputEvent"></view>
-   <!-- <block wx:for="{{searchListData}}" for-item="searchListData" wx:key="id">
-        <template is="searchList" data="{{...searchListData}}"></template>
-    </block>-->
     <!--根据搜索结果渲染数据-->
-    <scroll-view class="{{listData ? 'big_listdata_bloc':'big_listdata'}}" enable-back-to-top="true" scroll-y="true" bindscrolltoupper="upper"
-                 bindscrolltolower="lower" bindscroll="scroll" scroll-top="{{scrollTop}}" lower-threshold="10">
-        <view class="list_data">
-            <view class="img_view">
-                <image mode="aspectFit" src="../../images/b.png"></image>
+    <scroll-view class="{{listData ? 'big_listdata_bloc':'big_listdata'}}" wx:if="{{searchList&&searchList.length>0}}"
+                 enable-back-to-top="true" scroll-y="true" bindscrolltolower="lower" bindscroll="scroll"
+                 scroll-top="{{scrollTop}}" lower-threshold="40">
+        <block wx:for="{{searchList}}" wx:key="index">
+            <searchlist
+                class="searchlist"
+                idx="{{item.comic_id}}"
+                src="{{item.cover}}"
+                name="{{item.name}}"
+                artists="{{item.artists}}"
+                cates="{{item.cates}}"
+            ></searchlist>
+        </block>
+        <view class="load_view">
+            <view class="load_img_bg" wx:if="{{searchList.length === 10}}">
+                <image class="load_image" src="../../images/icon_load.png"></image>
             </view>
-            <view class="book_data">
-                <p class="book_name">风水师</p>
-                <p class="author">夜赦</p>
-                <p class="explain">风水师对风水格外在行，风水师外公生的伟大</p>
-            </view>
+            <view class="comment_message">{{message}}</view>
         </view>
-        <view class="list_data">
-            <view class="img_view">
-                <image mode="aspectFit" src="../../images/b.png"></image>
-            </view>
-            <view class="book_data">
-                <p class="book_name">风水师</p>
-                <p class="author">夜赦</p>
-                <p class="explain">风水师对风水格外在行，风水师外公生的伟大</p>
-            </view>
-        </view>
-        <view class="list_data">
-            <view class="img_view">
-                <image mode="aspectFit" src="../../images/b.png"></image>
-            </view>
-            <view class="book_data">
-                <p class="book_name">风水师</p>
-                <p class="author">夜赦</p>
-                <p class="explain">风水师对风水格外在行，风水师外公生的伟大</p>
-            </view>
-        </view>
-        <view class="list_data">
-            <view class="img_view">
-                <image mode="aspectFit" src="../../images/b.png"></image>
-            </view>
-            <view class="book_data">
-                <p class="book_name">风水师</p>
-                <p class="author">夜赦</p>
-                <p class="explain">风水师对风水格外在行，风水师外公生的伟大</p>
-            </view>
-        </view>
-        <view class="list_data">
-            <view class="img_view">
-                <image mode="aspectFit" src="../../images/b.png"></image>
-            </view>
-            <view class="book_data">
-                <p class="book_name">风水师</p>
-                <p class="author">夜赦</p>
-                <p class="explain">风水师对风水格外在行，风水师外公生的伟大</p>
-            </view>
-        </view>
-        <view class="list_data">
-            <view class="img_view">
-                <image mode="aspectFit" src="../../images/b.png"></image>
-            </view>
-            <view class="book_data">
-                <p class="book_name">风水师</p>
-                <p class="author">夜赦</p>
-                <p class="explain">风水师对风水格外在行，风水师外公生的伟大</p>
-            </view>
-        </view>
-        <view class="list_data">
-            <view class="img_view">
-                <image mode="aspectFit" src="../../images/b.png"></image>
-            </view>
-            <view class="book_data">
-                <p class="book_name">风水师</p>
-                <p class="author">夜赦</p>
-                <p class="explain">风水师对风水格外在行，风水师外公生的伟大</p>
-            </view>
-        </view>
-        <view class="list_data">
-            <view class="img_view">
-                <image mode="aspectFit" src="../../images/b.png"></image>
-            </view>
-            <view class="book_data">
-                <p class="book_name">风水师</p>
-                <p class="author">夜赦</p>
-                <p class="explain">风水师对风水格外在行，风水师外公生的伟大</p>
-            </view>
-        </view>
-        <view class="list_data">
-            <view class="img_view">
-                <image mode="aspectFit" src="../../images/b.png"></image>
-            </view>
-            <view class="book_data">
-                <p class="book_name">风水师</p>
-                <p class="author">夜赦</p>
-                <p class="explain">风水师对风水格外在行，风水师外公生的伟大</p>
-            </view>
-        </view>
-
     </scroll-view>
-
-
 </view>
 

@@ -1,0 +1,40 @@
+/* pages/reply/reply.wxss */
+
+/* 传递来评论 */
+.comment_container_top{
+    width: 100%;
+    height: auto;
+}
+.comment_container_top .top_comment{
+    background: #FFFFFF;
+    padding: 0 30rpx;
+}
+.comment_container_top .top_comment_bg{
+    width: 100%;
+    height: 16rpx;
+    background: #F5F5F5;
+}
+
+/* 回复标题 */
+.reply_content_middle{
+    padding: 0 30rpx;
+}
+.reply_content_middle .reply_h3{
+    line-height: 88rpx;
+    text-align: left;
+    font-size: 36rpx;
+    color: #333333;
+}
+
+/* 回复列表 */
+.reply_content_commentList{
+    padding: 0 30rpx;
+    height: auto;
+}
+
+.comment_message{
+    font-size: 28rpx;
+    text-align: center;
+    line-height: 80rpx;
+    color: #999;
+}

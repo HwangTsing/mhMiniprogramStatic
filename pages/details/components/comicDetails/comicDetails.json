@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+     "commentList":"../../../../components/commentList/commentList" 
+  }
+}

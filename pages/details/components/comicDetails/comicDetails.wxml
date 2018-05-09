@@ -1,0 +1,90 @@
+<!--  二级导航详情区 S  -->
+<view class='comic_details' wx:if="{{thisData}}">
+
+    <!-- 漫画简介 S -->
+    <view class="introduce_text">
+        {{thisData.comic.description?thisData.comic.description:' '}}
+    </view>
+    <!-- 漫画简介 E -->
+
+    <!--  作者 S  -->
+    <view class="author cls">
+        <view class='author_title fl'>
+            <text>作者: </text>
+        </view>
+        <!--  作者是 1 个的情况下 S -->
+        <view class="author_info" wx:if="{{thisData.comic.upload_type==0}}">
+            <image
+                mode="aspectFill"
+                class="author_cover_bg"
+                style="background:url(../../../../images/user_cover.png) no-repeat center center;background-size:cover;"
+                src="../../../../images/user_cover.png"
+            >
+                <image
+                  mode="aspectFill"
+                  class="author_cover"
+                  src="{{item.comic.user_avatar?item.comic.user_avatar:''}}"
+                ></image>
+            </image>
+
+            <view
+              class='text'
+            >
+              {{thisData.comic.sina_nickname}}
+            </view>
+        </view>
+        <!--  作者是 1 个的情况下 E -->
+
+        <!--  作者是多个的情况下 S -->
+        <view
+            class="author_info"
+            wx:if="{{thisData.comic.upload_type==1}}"
+            wx:for="{{thisData.author}}"
+            wx:key="index"
+            style="{{index>0 ? 'margin-left:42rpx':''}}"
+        >
+            <image
+                mode="aspectFill"
+                class="author_cover_bg"
+                style="background:url(../../../../images/user_cover.png) no-repeat center center/cover ;"
+                src="../../../../images/user_cover.png"
+            >
+                <image
+                    mode="aspectFill"
+                    class="author_cover"
+                    style="background:url(../../../../images/user_cover.png) no-repeat center center/cover ;"
+                    src="{{item.user_avatar}}"
+                ></image>
+            </image>
+
+            <view class='text fl'
+            >{{item.pen_name}}</view>
+        </view>
+        <!--  作者是多个的情况下 E -->
+
+    </view>
+    <!--  作者 E  -->
+
+    <!--  新鲜评论 S  -->
+    <view class="comment_title">
+            <text>新鲜的评论</text>
+    </view>
+    <view class="comment_box">
+        <!--
+            user:评论用户信息
+            content:评论内容
+            contentId:评论id 信息
+         -->
+        <commentList
+            wx:if="{{ comicCommentData && comicCommentData.length>0 }}"
+            wx:for="{{ comicCommentData }}"
+            wx:key="index"
+            user="{{ item.data.user }}"
+            content="{{ item.content }}"
+            contentId="{{ item.data.item }}"
+            replyContent="{{item.reply_content?item.reply_content:null}}"
+        ></commentList>
+    </view>
+    <!--  新鲜评论 E  -->
+</view>
+<!--  二级导航详情区 E  -->

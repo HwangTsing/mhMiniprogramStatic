@@ -1,0 +1,45 @@
+<!--pages/read/read.wxml-->
+
+<scroll-view
+    class="reply_container"
+    style="height:{{height}}px"
+    scroll-y
+    lower-threshold="{{50}}"
+    scroll-with-animation="true"
+    enable-back-to-top="true"
+    bindscrolltolower="onScroll"
+>
+    <view class="comment_container_top">
+        <view class="top_comment">
+            <commentList
+                wx:if="{{ commentData }}"
+                user="{{ commentData.user }}"
+                content="{{ commentData.content }}"
+                contentId="{{ commentData.contentId }}"
+                replyContent="{{commentData.replyContent}}"
+                isReplyContent="{{commentData.isReplyContent}}"
+                isBorder="{{false}}"
+            ></commentList>
+        </view>
+        <view class="top_comment_bg"></view>
+    </view>
+
+    <view class="reply_content_middle">
+        <view class="reply_h3">
+            新鲜的评论
+        </view>
+    </view>
+    <view class="reply_content_commentList">
+        <commentList
+            wx:if="{{ replyList && replyList.length>0 }}"
+            wx:for="{{ replyList }}"
+            wx:key="index"
+            user="{{ item.user }}"
+            content="{{ item.content }}"
+            contentId="{{ item.contentId }}"
+            replyContent="{{item.replyContent?item.replyContent:null}}"
+            isReplyContent="{{false}}"
+        ></commentList>
+        <view class="comment_message" wx:if="{{replyList.length>3}}">{{message}}</view>
+    </view>
+</scroll-view>
