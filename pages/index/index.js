@@ -44,7 +44,7 @@ Page({
     searchData:{
           word:'',
           page_num:1,
-          rows_num:20
+          rows_num:10
     },
 
 
@@ -126,7 +126,8 @@ Page({
                         hotSerialWorks:hotSerialWorks,
                         xiaobianRecommend:xiaobianRecommend,
                         weekRecommend:weekRecommend,
-                        isToast:false
+                        isToast:false,
+                        networkType:true
                     })
                 }
 
@@ -193,6 +194,7 @@ Page({
                             listData:true,
                             isScroll:false,
                             message: that.data.total > page_num ? '加载更多...' : '没有更多了',//提示语
+                            networkType:true
                         })
                     }else if (data.data.data.data.length === 0){//搜索没有匹配的数据时提示图
                         that.setData({
@@ -386,75 +388,69 @@ Page({
     },
 
     onLoad: function (options) {
-        console.log(wxApi.getNetworkType());
         var that = this;
-        wx.getNetworkType({  //判断网络类型
-            success: function(res) {
-                console.log(res);
-                let networkType = res.networkType;
-                if (networkType === 'none' || networkType === 'unknown') {
-                    //无网络什么都不做
-                    this.setData({
-                        networkType: false
-                    })
-                    return
-                }else {
-                    //有网络
-                    //########### 获取初次男女分版存储 ##############//
-                    wx.getStorage({
-                        key:'id',
-                        success:function (res) {
-                            console.log(res.data);
-                            var data = res.data;
-                            console.log(data);
-                            if (data === "0"){
-                                that.setData({
-                                    boyid:"0"
-                                });
-                                that.metaData.mca = "h5_recommend_male";
-                                that.initData();
-                            }else  if (data === "1"){
-                                that.setData({
-                                    girlid:"1"
-                                });
-                                that.metaData.mca = "h5_recommend_female";
-                                that.initData();
-                            }
-                        }
-                    });
+        //判断网络类型
+        wxApi.getNetworkType().then((res) =>{
+            let networkType = res.networkType;
+            if (networkType === 'none' || networkType === 'unknown') {
+                //无网络不进行任何操作
+                this.setData({
+                    networkType: false
+                })
 
-                    //################# 获取推荐页男女选择存储 #########################//
-                    wx.getStorage({
-                        key:'id',
-                        success:function (res) {
-                            console.log(res);
-                            var id = res.data;
-                            if (id === 0){
-                                that.metaData.mca = "h5_recommend_female";
-                                that.initData();
-                                that.setData({
-                                    id:1,
-                                    idg : 1,
-                                    boyid:"0"
-                                })
-                            }else if (id === 1){
-                                that.metaData.mca = "h5_recommend_male";
-                                that.initData();
-                                that.setData({
-                                    id:0,
-                                    idg : 0,
-                                    girlid:"1"
-                                })
-                            }
-
+            }else {
+                //有网络
+                //########### 获取初次男女分版存储 ##############//
+                wx.getStorage({
+                    key:'id',
+                    success:function (res) {
+                        console.log(res.data);
+                        var data = res.data;
+                        console.log(data);
+                        if (data === "0"){
+                            that.setData({
+                                boyid:"0"
+                            });
+                            that.metaData.mca = "h5_recommend_male";
+                            that.initData();
+                        }else  if (data === "1"){
+                            that.setData({
+                                girlid:"1"
+                            });
+                            that.metaData.mca = "h5_recommend_female";
+                            that.initData();
                         }
-                    });
-                }
-            },
-            fail:function (res) {
-                return;
+                    }
+                });
+
+                //################# 获取推荐页男女选择存储 #########################//
+                wx.getStorage({
+                    key:'id',
+                    success:function (res) {
+                        console.log(res);
+                        var id = res.data;
+                        if (id === 0){
+                            that.metaData.mca = "h5_recommend_female";
+                            that.initData();
+                            that.setData({
+                                id:1,
+                                idg : 1,
+                                boyid:"0"
+                            })
+                        }else if (id === 1){
+                            that.metaData.mca = "h5_recommend_male";
+                            that.initData();
+                            that.setData({
+                                id:0,
+                                idg : 0,
+                                girlid:"1"
+                            })
+                        }
+
+                    }
+                });
             }
-        });
+        })
 
     },
 

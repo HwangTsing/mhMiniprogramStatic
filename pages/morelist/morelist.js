@@ -7,7 +7,8 @@ Page({
    */
   data: {
       moreData:[],   //数据
-      networkType:true  //是否有网络
+      networkType:true,  //是否有网络
+      isLoad:false,     //是否加载失败
   },
 
   /**
@@ -18,28 +19,23 @@ Page({
       var that = this;
       var location_en = options.location_en;
       var title = options.title;
-      wx.getNetworkType({  //判断网络类型
-          success: function(res) {
-              console.log(res);
-              let networkType = res.networkType
-              if (networkType === 'none' || networkType === 'unknown') {
-                  //无网络什么都不做
-                  this.setData({
-                      networkType: false
-                  })
-                  return
-              }else {
-                  //有网络
-                  wx.setNavigationBarTitle({//动态设置当前页面的标题
-                      title: title
-                  });
-                  that.moreList(location_en);
-              }
-          },
-          fail:function (res) {
-              return;
+      //判断网络类型
+      wxApi.getNetworkType().then((res) =>{
+          let networkType = res.networkType;
+          if (networkType === 'none' || networkType === 'unknown') {
+              //无网络不进行任何操作
+              this.setData({
+                  networkType: false
+              })
+
+          }else {
+              //有网络
+              wx.setNavigationBarTitle({//动态设置当前页面的标题
+                  title: title
+              });
+              that.moreList(location_en);
           }
-      });
+      })
   },
   moreList:function (location_en) {
     var that = this;
@@ -62,11 +58,13 @@ Page({
             console.log(extra);
             that.setData({
                 moreData:extra,
-
+                networkType:true
             })
         },
         fail:function (data) {
-            console.log(data);
+            that.setData({
+                isLoad:true
+            })
         }
 
     })
