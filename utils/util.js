@@ -213,6 +213,9 @@ class wxApi {
     return url
   }
 
+  pageScrollTo(options) {
+    wx.pageScrollTo(options);
+  }
 
 }
 

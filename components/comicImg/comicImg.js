@@ -24,7 +24,7 @@ Component({
   },
   methods: {
     load(e) {
-      console.log(e)
+      // console.log(e)
     },
     error(e) {
       // console.log(e)

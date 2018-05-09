@@ -9,6 +9,7 @@ Page({
    */
   data: {
     windowWidth: 320,
+    scrollY: 0,
     chapter: {},
     comic: {},
     json_content: {
@@ -71,6 +72,9 @@ Page({
 
   },
 
+  onPageScroll: function () {
+  },
+
   /**
    * 用户点击右上角分享
    */
@@ -105,24 +109,25 @@ Page({
       return { chapter_list, chapter_id, chapter_name}
     })
   },
+  
+  tapScrollHandler: function ({ detail: { y }, currentTarget: { offsetTop }, touches: [{ clientY }] }){
+    const scrollY = y - clientY
+    const _scrollTop = scrollY < offsetTop ? (clientY - offsetTop + scrollY) : clientY
+    const scrollTop = _scrollTop < this.windowHeight / 2 ? (scrollY - this.windowHeight < 0 ? 0 : scrollY - this.windowHeight) : scrollY + this.windowHeight
 
-  scrollTo: function (x = 0, y = 0){
-
-  },
-
-  tapScrollHandler: function ({detail}){
-    const windowHeight = this.windowHeight
-    console.log(detail, windowHeight, detail.y / windowHeight)
+    wxApi.pageScrollTo({ scrollTop })
   },
 
   render: function (chapter_id = 258951){
-    wx.pageScrollTo({scrollTop: 0, duration: 0});
+    //wxApi.pageScrollTo({scrollTop: 0});
     
     this.fetchComic(chapter_id).then(({ chapter_list, chapter_id, chapter_name})=>{
       this.findChapterList(chapter_id, chapter_list)
       wxApi.setNavigationBarTitle(chapter_name)
     });
   },
+  
+  
 
   createNavUrlByIndex: function (chapter_id, chapter_list=[]) {
     chapter_id = chapter_id+''
