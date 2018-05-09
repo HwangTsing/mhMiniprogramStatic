@@ -14,6 +14,11 @@ Component({
       type: String,
       value: 'net'
     },
+    modal: {
+      type: Boolean,
+      value: false
+    },
+    background: String,
     message: String,
     hasRefresh: {
       type: Boolean,
@@ -22,6 +27,7 @@ Component({
   },
   data: {
     url: null,
+    height: 'auto',
     buttons: ['net', 'server'],
     msg: {
       net: '主人，您目前的网络好像不太好呢~～',
@@ -49,9 +55,14 @@ Component({
     }
   },
   attached () {
-    const { windowHeight } = wxApi.getSystemInfoSync()
-    const hasButton = this.data.buttons.indexOf(this.properties.type) != -1
-    this.setData({ windowHeight, hasButton })
+    let height = 'auto';
+    const { type, modal } = this.properties
+    if (modal) {
+      const { windowHeight } = wxApi.getSystemInfoSync()
+      if (windowHeight>0) height = windowHeight + 'px'
+    }
+    const hasButton = this.data.buttons.indexOf(type) != -1
+    this.setData({ height, hasButton })
 
   },
   ready () {

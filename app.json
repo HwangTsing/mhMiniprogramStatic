@@ -1,11 +1,11 @@
 {
     "pages": [
+        "pages/read/read",
         "pages/index/index",
         "pages/edition/edition",
         "pages/details/details",
         "pages/comment/comment",
         "pages/morelist/morelist",
-        "pages/read/read",
         "pages/reply/reply"
     ],
     "window": {
