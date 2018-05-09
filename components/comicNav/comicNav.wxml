@@ -1,0 +1,15 @@
+<block wx:if="{{url}}">
+  <navigator 
+    url="{{url}}"
+    open-type="redirect" 
+    class="comic-nav-button" 
+    hover-class="navigator-hover">
+    <view class="button {{action}}-button">{{text}}</view>
+  </navigator>
+</block>
+<block wx:else>
+  <view
+    class="comic-nav-button disabled">
+    <view class="button {{action}}-button">{{text}}</view>
+  </view>
+</block>

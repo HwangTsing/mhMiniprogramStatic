@@ -1,0 +1,9 @@
+<view class="message" style="height:{{windowHeight}}px">
+  <view class="{{clazz[type]}}" >
+    <image src="{{icon[type]}}"></image>
+    <view class="message-text">
+      <text>{{message ? message : msg[type]}}</text>
+    </view>
+  </view>
+  <navigator wx:if="{{hasRefresh||hasButton}}" url="{{url}}" class="button" open-type="redirect">刷新</navigator>
+</view>

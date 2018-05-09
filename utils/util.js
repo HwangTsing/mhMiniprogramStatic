@@ -77,7 +77,7 @@ class wxApi {
     });
   }
 
-  systemInfo() {
+  getSystemInfoSync() {
     var systemInfo = {};
     try {
       systemInfo = wx.getSystemInfoSync()
@@ -100,6 +100,56 @@ class wxApi {
     return this.get('wbcomic/home/page_recommend_list?mca=h5_recommend_female',cfg)
   }
 
+  setNavigationBarTitle(title) {
+    if (title) wx.setNavigationBarTitle({title})
+  }
+
+  appendParams(route, params={}) {
+    if (!route) return ''
+    let param = [];
+    const join = route.indexOf('?') != -1 ? '&' : '?'
+    for (let [key, value] of Object.entries(params)) {
+      if (!!value) param.push(key + '=' + value);
+    }
+    return route + (param.length > 0 ? join + param.join('&') : '');
+  }
+
+  getParam(url='', name='') {
+    var reg = new RegExp( name + '=([^=&]*)', 'i')
+    var matchers = url.match(reg)
+    return matchers && matchers[1] || ''
+  }
+
+  getCurrentPageParams() {
+    const { options } = this.getCurrentPage()
+    return options || {}
+  }
+
+  getApp() {
+    return getApp()
+  }
+
+  getCurrentPage() {
+    const pages = getCurrentPages()
+    return pages.length > 0 ? pages[0] : {}
+  }
+
+  getCurrentRoute() {
+    let { route } = this.getCurrentPage()
+    route = route ? '/' + route : route
+    
+    return route
+  }
+
+  getCurrentPageUrl() {
+    const route = this.getCurrentRoute()
+    const options = this.getCurrentPageParams()
+    const url = this.appendParams(route, options)
+
+    return url
+  }
+
+  
 }
 
 const __wxApi = new wxApi()

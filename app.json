@@ -1,11 +1,11 @@
 {
   "pages": [
+    "pages/read/read",
     "pages/edition/edition",
     "pages/index/index",
     "pages/details/details",
+    
     "pages/morelist/morelist",
-
-    "pages/read/read",
     "pages/index/searchlist/searchlist"
   ],
   "window": {

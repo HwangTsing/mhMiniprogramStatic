@@ -79,7 +79,7 @@
         </view>
 
          <view>
-          <navigator url="/pages/read/read">reader</navigator>
+          <navigator url="/pages/read/read?chapter_id=258951">reader</navigator>
           </view>
         
         <view class="fine_works">

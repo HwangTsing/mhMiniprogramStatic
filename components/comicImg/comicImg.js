@@ -8,6 +8,7 @@ Component({
       type: String,
       value: '',
     },
+    image_id: String,
     scale: Number,
     width: Number,
   },
@@ -26,7 +27,7 @@ Component({
       console.log(e)
     },
     error(e) {
-      console.log(e)
+      // console.log(e)
     },
   }
 })

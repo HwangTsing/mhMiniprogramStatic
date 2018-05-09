@@ -15,3 +15,11 @@
   page {
     font-family :"Microsoft YaHei", Helvetica Neue, Helvetica, Roboto, Heiti SC, STHeiTi, Arial, sans-serif;
   }
+
+  message{
+    flex: auto;
+    align-self: stretch;
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+  }

@@ -1,14 +1,23 @@
 <!--pages/read/read.wxml-->
 <view class="container">
-    <scroll-view scroll-y="{{true}}">
-        <vcomic 
+
+    <message type="loading"></message>
+    <view bind:tap="tapScrollHandler">
+        <vcomic
             class="vcomic-wrap"
             wx:for="{{json_content.page}}" 
             wx:key="{{item.image_id}}" 
             order="{{index}}"
             width="{{windowWidth}}"
             scale="{{item.mobileImgWidth/item.mobileImgHeight}}"
+            image_id="vcomic-{{item.image_id}}"
             src="{{item.mobileImgUrl}}"
         ></vcomic>
-    </scroll-view>
+    </view>
+    
+    <view class="vcomic-buttons flex align-center" hidden="{{!chapter_nav}}">
+        <comcicNav url="{{chapter_nav.prev_url}}" action="prev" bind:myevent="chapterNavTap" class="flex-item" text="上一篇"></comcicNav>
+        <comcicNav url="{{chapter_nav.next_url}}" action="next" bind:myevent="chapterNavTap" class="flex-item" text="下一篇"></comcicNav>
+    </view>
+    
 </view>

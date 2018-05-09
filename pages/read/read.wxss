@@ -5,3 +5,20 @@
 .vcomic-wrap{
   width: 100%;
 }
+.flex{
+  width: 100%;
+  display: flex;
+}
+.flex-item{
+  flex: auto;
+}
+.justify-center{
+  justify-content: center;
+}
+.align-center{
+  align-items: center;
+}
+.vcomic-buttons{
+  background-color: #fff;
+}
+

@@ -1,6 +1,7 @@
 <view class="vcomic-item" style="width:{{width}}px;height:{{height}}px">
   <view class="vcomic-order">{{order}}</view>
   <image 
+    id="{{image_id}}"
     class="vcomic-img" 
     style="width: {{width}}px;"
     src="{{src}}" 

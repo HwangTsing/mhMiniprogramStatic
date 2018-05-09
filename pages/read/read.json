@@ -1,7 +1,9 @@
 {
-  "navigationBarTitleText": "新浪动漫",
+  "navigationBarTitleText": "",
   "backgroundTextStyle": "dark",
   "usingComponents": {
-    "vcomic": "/components/comicImg/comicImg"
+    "vcomic": "/components/comicImg/comicImg",
+    "comcicNav": "/components/comicNav/comicNav",
+    "message": "/components/message/message"
   }
 }

@@ -1,0 +1,46 @@
+
+.message{
+  width: 100%;
+  text-align: center;
+  font-size: 32rpx;
+  color: #999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+}
+.message-img image, .message-out-img image{
+  width: 368rpx;
+  height: 368rpx;
+  margin-top: -80rpx;
+}
+.search-img {
+  position: relative;
+  top: -30%;
+}
+.search-img image{
+  width: 260rpx;
+  height: 260rpx;
+}
+.message-text{
+  text-align: center;
+  color: #999;
+  line-height: 48rpx;
+}
+.message-out-img .message-text{
+  max-width: 390rpx;
+}
+.button{
+  margin: 50rpx auto;
+  padding: 20rpx 60rpx;
+  opacity: 0.86;
+  color: #fff;
+  display: inline-block;
+  font-size: 32rpx;
+  background: #FF4C6A;
+  border-radius: 100rpx;
+}
+.navigator-hover{
+  opacity: 0.7;
+}
