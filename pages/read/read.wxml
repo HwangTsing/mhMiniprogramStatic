@@ -1,6 +1,6 @@
 <!--pages/read/read.wxml-->
 <view class="container">
-    <message modal="{{true}}" style="background:#333;" hasRefresh="{{true}}" type="search"></message>
+    <message type="net"></message>
     <view bind:tap="tapScrollHandler">
         <vcomic
             class="vcomic-wrap"

@@ -16,7 +16,7 @@ Component({
     },
     modal: {
       type: Boolean,
-      value: false
+      value: true
     },
     background: String,
     message: String,
