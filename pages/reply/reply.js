@@ -154,7 +154,7 @@ Page({
                 let pageNum = this.data.pageNum;
                 let rowsNum = this.data.rowsNum;
 
-                this.getDataInfo(commentId+10000,pageNum,rowsNum); //初始化数据
+                this.getDataInfo(commentId,pageNum,rowsNum); //初始化数据
             }
         }).catch((err)=>{
             this.setData({

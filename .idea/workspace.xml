@@ -2,16 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7e1745e0-c431-482c-aeb1-c3bbb31843a3" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
       <change beforePath="$PROJECT_DIR$/app.json" afterPath="$PROJECT_DIR$/app.json" />
-      <change beforePath="$PROJECT_DIR$/pages/index/index.js" afterPath="$PROJECT_DIR$/pages/index/index.js" />
-      <change beforePath="$PROJECT_DIR$/pages/index/index.less" afterPath="$PROJECT_DIR$/pages/index/index.less" />
-      <change beforePath="$PROJECT_DIR$/pages/index/index.wxml" afterPath="$PROJECT_DIR$/pages/index/index.wxml" />
-      <change beforePath="$PROJECT_DIR$/pages/index/index.wxss" afterPath="$PROJECT_DIR$/pages/index/index.wxss" />
-      <change beforePath="$PROJECT_DIR$/pages/morelist/morelist.js" afterPath="$PROJECT_DIR$/pages/morelist/morelist.js" />
-      <change beforePath="$PROJECT_DIR$/pages/morelist/morelist.json" afterPath="$PROJECT_DIR$/pages/morelist/morelist.json" />
-      <change beforePath="$PROJECT_DIR$/pages/morelist/morelist.less" afterPath="$PROJECT_DIR$/pages/morelist/morelist.less" />
-      <change beforePath="$PROJECT_DIR$/pages/morelist/morelist.wxml" afterPath="$PROJECT_DIR$/pages/morelist/morelist.wxml" />
-      <change beforePath="$PROJECT_DIR$/pages/morelist/morelist.wxss" afterPath="$PROJECT_DIR$/pages/morelist/morelist.wxss" />
+      <change beforePath="$PROJECT_DIR$/pages/details/components/comicCatalog/comicCatalog.js" afterPath="$PROJECT_DIR$/pages/details/components/comicCatalog/comicCatalog.js" />
+      <change beforePath="$PROJECT_DIR$/pages/details/details.js" afterPath="$PROJECT_DIR$/pages/details/details.js" />
+      <change beforePath="$PROJECT_DIR$/pages/reply/reply.js" afterPath="$PROJECT_DIR$/pages/reply/reply.js" />
+      <change beforePath="$PROJECT_DIR$/pages/reply/reply.wxml" afterPath="$PROJECT_DIR$/pages/reply/reply.wxml" />
+      <change beforePath="$PROJECT_DIR$/utils/util.js" afterPath="$PROJECT_DIR$/utils/util.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -82,14 +79,14 @@
       <file leaf-file-name="message.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/components/message/message.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1617">
-              <caret line="70" column="4" lean-forward="false" selection-start-line="70" selection-start-column="4" selection-end-line="70" selection-end-column="4" />
+            <state relative-caret-position="561">
+              <caret line="74" column="2" lean-forward="false" selection-start-line="74" selection-start-column="2" selection-end-line="74" selection-end-column="2" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="message.wxml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="message.wxml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/components/message/message.wxml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="396">
@@ -111,11 +108,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.json" pinned="false" current-in-tab="false">
+      <file leaf-file-name="app.json" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="4" column="8" lean-forward="true" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="32" />
+            <state relative-caret-position="165">
+              <caret line="5" column="30" lean-forward="false" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -125,7 +122,7 @@
         <entry file="file://$PROJECT_DIR$/pages/index/index.less">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="497">
-              <caret line="927" column="0" lean-forward="true" selection-start-line="927" selection-start-column="0" selection-end-line="927" selection-end-column="0" />
+              <caret line="927" column="0" lean-forward="false" selection-start-line="927" selection-start-column="0" selection-end-line="927" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -134,8 +131,8 @@
       <file leaf-file-name="details.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/details/details.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="462">
-              <caret line="146" column="54" lean-forward="true" selection-start-line="146" selection-start-column="54" selection-end-line="146" selection-end-column="54" />
+            <state relative-caret-position="-264">
+              <caret line="124" column="54" lean-forward="false" selection-start-line="124" selection-start-column="54" selection-end-line="124" selection-end-column="54" />
               <folding />
             </state>
           </provider>
@@ -190,8 +187,8 @@
         <option value="$PROJECT_DIR$/pages/index/index.js" />
         <option value="$PROJECT_DIR$/pages/index/index.json" />
         <option value="$PROJECT_DIR$/pages/morelist/morelist.json" />
-        <option value="$PROJECT_DIR$/app.json" />
         <option value="$PROJECT_DIR$/pages/index/index.wxml" />
+        <option value="$PROJECT_DIR$/app.json" />
       </list>
     </option>
   </component>
@@ -341,12 +338,12 @@
       <updated>1525830926447</updated>
       <workItem from="1525830927834" duration="9292000" />
       <workItem from="1525846404638" duration="202000" />
-      <workItem from="1525846622450" duration="15759000" />
+      <workItem from="1525846622450" duration="15970000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25253000" />
+    <option name="totallyTimeSpent" value="25464000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -637,14 +634,14 @@
         <state relative-caret-position="3677">
           <caret line="134" column="63" lean-forward="false" selection-start-line="134" selection-start-column="63" selection-end-line="134" selection-end-column="63" />
           <folding>
-            <marker date="1525858760001" expanded="true" signature="5493:5503" ph="{...}" />
-            <marker date="1525858760001" expanded="true" signature="5517:5554" ph="/** 生命周期函数--监听页面初次渲染完成 ...*/" />
-            <marker date="1525858760001" expanded="true" signature="5595:5628" ph="/** 生命周期函数--监听页面显示 ...*/" />
-            <marker date="1525858760001" expanded="true" signature="5668:5701" ph="/** 生命周期函数--监听页面隐藏 ...*/" />
-            <marker date="1525858760001" expanded="true" signature="5741:5774" ph="/** 生命周期函数--监听页面卸载 ...*/" />
-            <marker date="1525858760001" expanded="true" signature="5816:5855" ph="/** 页面相关事件处理函数--监听用户下拉动作 ...*/" />
-            <marker date="1525858760001" expanded="true" signature="5906:5938" ph="/** 页面上拉触底事件的处理函数 ...*/" />
-            <marker date="1525858760001" expanded="true" signature="5985:6013" ph="/** 用户点击右上角分享 ...*/" />
+            <marker date="1525863606351" expanded="true" signature="5487:5497" ph="{...}" />
+            <marker date="1525863606351" expanded="true" signature="5511:5548" ph="/** 生命周期函数--监听页面初次渲染完成 ...*/" />
+            <marker date="1525863606351" expanded="true" signature="5589:5622" ph="/** 生命周期函数--监听页面显示 ...*/" />
+            <marker date="1525863606351" expanded="true" signature="5662:5695" ph="/** 生命周期函数--监听页面隐藏 ...*/" />
+            <marker date="1525863606351" expanded="true" signature="5735:5768" ph="/** 生命周期函数--监听页面卸载 ...*/" />
+            <marker date="1525863606351" expanded="true" signature="5810:5849" ph="/** 页面相关事件处理函数--监听用户下拉动作 ...*/" />
+            <marker date="1525863606351" expanded="true" signature="5900:5932" ph="/** 页面上拉触底事件的处理函数 ...*/" />
+            <marker date="1525863606351" expanded="true" signature="5979:6007" ph="/** 用户点击右上角分享 ...*/" />
           </folding>
         </state>
       </provider>
@@ -710,7 +707,7 @@
     <entry file="file://$PROJECT_DIR$/pages/index/index.less">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="497">
-          <caret line="927" column="0" lean-forward="true" selection-start-line="927" selection-start-column="0" selection-end-line="927" selection-end-column="0" />
+          <caret line="927" column="0" lean-forward="false" selection-start-line="927" selection-start-column="0" selection-end-line="927" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -749,16 +746,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/details/details.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="146" column="54" lean-forward="true" selection-start-line="146" selection-start-column="54" selection-end-line="146" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="4" column="8" lean-forward="true" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="32" />
+        <state relative-caret-position="-264">
+          <caret line="124" column="54" lean-forward="false" selection-start-line="124" selection-start-column="54" selection-end-line="124" selection-end-column="54" />
           <folding />
         </state>
       </provider>
@@ -779,26 +768,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/index/index.wxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="62" column="38" lean-forward="false" selection-start-line="62" selection-start-column="38" selection-end-line="62" selection-end-column="38" />
-          <folding>
-            <element signature="n#view#0;n#view#0;n#!!top" expanded="false" />
-            <element signature="n#view#3;n#view#0;n#!!top" expanded="false" />
-            <element signature="n#scroll-view#0;n#view#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/message/message.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1617">
-          <caret line="70" column="4" lean-forward="false" selection-start-line="70" selection-start-column="4" selection-end-line="70" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/components/message/message.wxss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -814,6 +783,34 @@
           <folding>
             <element signature="n#style#0;n#view#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/message/message.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="74" column="2" lean-forward="false" selection-start-line="74" selection-start-column="2" selection-end-line="74" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/index/index.wxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="62" column="38" lean-forward="false" selection-start-line="62" selection-start-column="38" selection-end-line="62" selection-end-column="38" />
+          <folding>
+            <element signature="n#view#0;n#view#0;n#!!top" expanded="false" />
+            <element signature="n#view#3;n#view#0;n#!!top" expanded="false" />
+            <element signature="n#scroll-view#0;n#view#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="5" column="30" lean-forward="false" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="30" />
+          <folding />
         </state>
       </provider>
     </entry>

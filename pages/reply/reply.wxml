@@ -57,7 +57,7 @@
             <!-- 首次加载网络差提示 E -->
 
             <view class="comment_message"
-                  wx:if="{{ comicCommentData.length>9 && isMessage }}"
+                  wx:if="{{ networkType && replyList.length>9 && isMessage }}"
             >
                 <image
                     wx:if="{{ message != '没更多了' }}"

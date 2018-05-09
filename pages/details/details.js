@@ -1,5 +1,4 @@
 // pages/details/details.js
-const app = getApp();
 var wxApi = require("../../utils/util.js");//导入wxApi
 
 Page({
@@ -32,24 +31,19 @@ Page({
     //点击开始阅读|和据需阅读的事件
     onReadClick: function (event) {
         let key = "comic_id_" + this.data.dataAry.comic.comic_id;
-        wx.getStorage({//从本地缓存中异步获取指定 key 对应的内容。
-            key: key,
-            success: (res) => { //存储到当前页面中的数据
-                //console.log(res.data)
-                let data = res.data;
-                console.log(data)
+
+        wxApi.getStorage(key).then((res)=>{ //获取阅读历史
+            let data = res.data;
+            wx.navigateTo({
+                url: `/pages/read/read?chapter_id=${data.chapter_id}&comic_id=${data.comic_id}`
+            })
+        }).catch((err) => {
+            if (this.data.dataAry.chapter_list && this.data.dataAry.chapter_list[0]) {
                 wx.navigateTo({
-                    url: `/pages/read/read?chapter_id=${data.chapter_id}&comic_id=${data.comic_id}`
+                    url: `/pages/read/read?chapter_id=${this.data.dataAry.chapter_list[0].chapter_id}&comic_id=${this.data.dataAry.comic.comic_id}`
                 })
-            },
-            fail: (err) => { //没有获取本地缓存数据的时候
-                if (this.data.dataAry.chapter_list && this.data.dataAry.chapter_list[0]) {
-                    wx.navigateTo({
-                        url: `/pages/read/read?chapter_id=${this.data.dataAry.chapter_list[0].chapter_id}&comic_id=${this.data.dataAry.comic.comic_id}`
-                    })
-                }
-            }
-        })
+            }//错误时候
+        });
     },
     onTabTap: function (event) {
         var status = event.currentTarget.dataset.status;
@@ -66,20 +60,15 @@ Page({
             return
         }
         let key = "comic_id_" + this.data.dataAry.comic.comic_id;
-        wx.getStorage({//从本地缓存中异步获取指定 key 对应的内容。
-            key: key,
-            success: (res) => { //存储到当前页面中的数据
+        wxApi.getStorage(key).then((res)=>{
                 this.setData({
-                    history: res.data
+                      history: res.data
                 })
-            },
-            fail: (err) => { //没有获取本地缓存数据的时候
-                //console.log(err)
-                this.setData({
-                    history: null
-                })
-            }
-        })
+        }).catch((err) => {
+            this.setData({
+                history: null
+            })//错误时候
+        });
     },
     /*
     * 点击排序按钮 目录进行排序
@@ -98,22 +87,11 @@ Page({
             })
         }
     },
-    //  错误信息|接口错误|网络错误
-    /**
-     * ***ToUrl 跳转页面
-     *  @ url 跳转路径, string  默认'/pages/index/index'
-     */
-    ToUrl(url) {
-        wx.navigateTo({
-            url: url ? url : '/pages/index/index'
-        })
-    },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
         /*
         * *** wbcomic/comic/comic_show?comic_id=68491 摘要页接口
         * *** wbcomic/comic/comic_comment_list?comic_id=24&page_num=1&rows_num=10&_debug_=yes 评论列表
@@ -121,7 +99,7 @@ Page({
         //comic_id
         let comic_id = options.comic_id;
         // comic_id= options.comic_id ? options.comic_id : 24;//24 68491
-        comic_id = 68491;
+        // comic_id = 68491;
         let page_num = 1;//页码
         let rows_num = 10;//每页条数
         let comicShowUrl = 'wbcomic/comic/comic_show';//摘要页接口前缀
@@ -186,22 +164,15 @@ Page({
                             })
 
                             let key = "comic_id_" + res.data.comic.comic_id;
-                            wx.getStorage({//从本地缓存中异步获取指定 key 对应的内容。
-                                key: key,
-                                success: (res) => {
-                                    //console.log(res.data)
-                                    this.setData({
-                                        history: res.data
-                                    })
-
-                                },
-                                fail: (err) => { //没有获取本地缓存数据的时候
-                                    //console.log(err)
-                                    this.setData({
-                                        history: null
-                                    })
-                                }
-                            })
+                            wxApi.getStorage(key).then((res)=>{ //获取阅读历史
+                                this.setData({
+                                    history: res.data
+                                })
+                            }).catch((err) => {
+                                this.setData({
+                                    history: null
+                                })//错误时候
+                            });
                         }
                         else {
                             this.setData({
@@ -320,186 +291,6 @@ Page({
                 networkType: true
             })
         })
-
-        // wx.getNetworkType({
-        //     success: (res) => {
-        //         // 返回网络类型, 有效值：
-        //         // wifi/2g/3g/4g/unknown(Android下不常见的网络类型)/none(无网络)
-        //
-        //         let networkType = res.networkType
-        //         if (networkType === 'none' || networkType === 'unknown') {
-        //             //无网络什么都不做
-        //             this.setData({
-        //                 networkType: false
-        //             })
-        //             return
-        //         } else {
-        //             //有网络
-        //             /*
-        //             *  调用 摘要页接口promise对象
-        //             *  comic.upload_type： 根据这个字段 判断是否展示多个作者 1 author：字段作者列表 0 展示comic作者信息
-        //             *  comic.directory_display：判断是目录展示方式 1表示9宫格，2表示横板
-        //             *  comic.cover_display： 1表示使用 cover 2表示使用hcover
-        //             **/
-        //             comicShowFn.then((res) => {
-        //                 if (res.code === 1) {
-        //                     if (res.data.comic.name) {
-        //                         //修改导航Title 文案
-        //                         wx.setNavigationBarTitle({
-        //                             title: res.data.comic.name
-        //                         })
-        //                         //存储 comic信息
-        //                         let DATA = res.data;
-        //                         let chapterList = null;
-        //                         if (DATA.chapter_list && DATA.chapter_list.length !== 0) {
-        //                             chapterList = [];
-        //                             DATA.chapter_list.forEach((item, index) => {
-        //                                 if (item.chapter_pay_vcoin === 0 || item.chapter_pay_vcoin === '0') {
-        //                                     chapterList.push(item)
-        //                                 }
-        //                             })
-        //                             DATA.chapterList = chapterList;
-        //                             DATA.chapterList.reverse();
-        //                             chapterList = null;
-        //                         } else {
-        //                             DATA.chapterList = null;
-        //                         }
-        //                         this.setData({
-        //                             dataAry: DATA
-        //                         })
-        //
-        //                         let key = "comic_id_" + res.data.comic.comic_id;
-        //                         wx.getStorage({//从本地缓存中异步获取指定 key 对应的内容。
-        //                             key: key,
-        //                             success: (res) => {
-        //                                 //console.log(res.data)
-        //                                 this.setData({
-        //                                     history: res.data
-        //                                 })
-        //
-        //                             },
-        //                             fail: (err) => { //没有获取本地缓存数据的时候
-        //                                 //console.log(err)
-        //                                 this.setData({
-        //                                     history: null
-        //                                 })
-        //                             }
-        //                         })
-        //
-        //                     } else {
-        //                         this.ToUrl();//错误时候跳转到首页
-        //                     }
-        //                 } else {
-        //                     this.ToUrl();//错误时候跳转到首页
-        //                 }
-        //             }).catch((err) => {
-        //                 this.ToUrl();//错误时候跳转到首页
-        //             });
-        //
-        //             /*
-        //             *
-        //             * ***comicCommentListFn  调用 摘要页评论promise对象
-        //             * */
-        //             comicCommentListFn.then((res) => {
-        //                 //comicCommentData
-        //                 let dataList = res.data ? res.data : null; //存储数据变量
-        //
-        //                 //判断是否存在数据,存在进行格式化数据,不存在什么都不做
-        //                 if (res.code === 1 && dataList && dataList.data && dataList.data.length !== 0) {
-        //                     let dataArray = []; //定义空数组 , 存储格式化后的数据列表
-        //                     dataList.data.forEach((item, index) => { //循环整个数据组
-        //                         //判断单条评论内容是否存在 默认null;
-        //                         let content = dataList.content //dataList.content 是否存在
-        //                             ?
-        //                             (
-        //                                 dataList.content[item.comment_id] //dataList.content[item.comment_id] 是否存在
-        //                                     ?
-        //                                     dataList.content[item.comment_id]
-        //                                     :
-        //                                     null
-        //                             ) : null;
-        //
-        //                         let reply_list = dataList.reply_list  //dataList.reply_list 是否存在
-        //                             ?
-        //                             (
-        //                                 dataList.reply_list[item.comment_id]  //dataList.reply_list[item.comment_id] 是否存在
-        //                                     ?
-        //                                     dataList.reply_list[item.comment_id]
-        //                                     :
-        //                                     null
-        //                             ) : null;
-        //                         reply_list = reply_list && reply_list.length > 0 ? reply_list : null;//判断格式化后的数组是否为空
-        //
-        //                         let reply_content; //存储回复评论的数据
-        //                         if (reply_list) {
-        //                             reply_content = [];//给回复对象重新赋值
-        //                             reply_list.forEach((item, index) => {
-        //                                 if (dataList.reply_content[item.reply_id]) { //判断当前的回复评论id是否存在
-        //                                     let data = {
-        //                                         data: dataList.reply_content[item.reply_id],
-        //                                         user: dataList.user[item.user_id]
-        //                                     }
-        //                                     reply_content.push(data);//存储找到的数据
-        //                                 }
-        //                             })
-        //                         } else {
-        //                             reply_content = null;
-        //                         }
-        //
-        //
-        //                         //存储 单项数据
-        //                         let user = dataList.user[item.user_id] ? dataList.user[item.user_id] : null;
-        //                         //判断用户头是否有HTTPS|http 有什么也不做,没有拼接前缀
-        //                         if (user.user_avatar && !/^http[s]?:\/\//ig.test(user.user_avatar)) {
-        //                             user.user_avatar = dataList.site_image + user.user_avatar;
-        //                         }
-        //
-        //                         //格式化时间
-        //                         item.create_time = wxApi.formatTime(item.create_time, {y: true, h: true});
-        //
-        //                         //存储单个格式后的数据
-        //                         let obj = {
-        //                             data: {
-        //                                 item,
-        //                                 user
-        //                             },
-        //                             content,
-        //                             reply_list,
-        //                             reply_content
-        //                         }
-        //
-        //                         dataArray.push(obj) //存储格式化的数据到列表
-        //
-        //                     })
-        //
-        //
-        //                     /*
-        //                    * *** 赋值到this 中 comicCommentData
-        //                    * */
-        //                     if (dataArray.length > 3) {//判断是否要显示查看更多评论按钮
-        //                         this.setData({
-        //                             isSeeMore: true,
-        //                             comicCommentData: dataArray.slice(0, 3)
-        //                         })
-        //                         //isSeeMore
-        //                     } else {
-        //                         this.setData({
-        //                             comicCommentData: dataArray
-        //                         })
-        //                     }
-        //
-        //                 }
-        //             }).catch((err) => {
-        //                 //错误时候跳转到首页
-        //                 console.error(err)
-        //             });
-        //         }
-        //     },
-        //     fail: () => {
-        //         return
-        //     }
-        // })
-
 
     },
 
