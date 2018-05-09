@@ -70,7 +70,7 @@
             <image class="search_images" src="{{isOpacity === true ? '../../images/search_gray_02.png':'../../images/search_gray.png'}}"></image>
             <input class="{{isOpacity === true?'search_input_focus':'search_input'}}" type="text" cursor-spacing="3px" value="{{inputValue}}"
                    placeholder="搜索作品或作者名称" placeholder-style="color:#fff;font-size:28rpx;" bindfocus="focusInputEvent" bindinput="bindInputChange"/>
-            <image class="{{isOpacity === true && searchList.length !== 0? 'del':'del_hidden'}}"
+            <image class="{{isOpacity === true && searchList.length !== 0 || noSearch === false? 'del':'del_hidden'}}"
                    src="../../images/delete.png" catchtap="onDel"></image>
             <view class="{{isOpacity?'qx_view':'qx_view_hidden'}}}" catchtap="onCancel">取消</view>
             <block wx:if="{{boyid}}">
@@ -142,10 +142,6 @@
 
         </view>
 
-         <!--<view>
-          <navigator url="/pages/read/read">reader</navigator>
-          </view>-->
-
         <view class="fine_works">
             <view class="border"></view>
             <view class="fine_text">{{title_fine}}</view>
@@ -203,7 +199,11 @@
                 <view class="big_new_view">
                     <block wx:for="{{newArrivalWorks}}" wx:key="index">
                         <navigator class="new_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                            <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"></image>
+                            <image mode="aspectFill" lazy-load="true"
+                            style="background: url('../../images/banner_bitmap.png')no-repeat;background-size: 100% 100%;position: relative;top: 0;left: 0;">
+                                <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"
+                                style="position: absolute;left: 0;top: 0;"></image>
+                            </image>
                             <view class="word_info">
                                 <text class="name_name">{{item.extra.name}}</text>
                                 <text class="name_info">{{item.extra.watching_focus}}</text>
@@ -224,7 +224,11 @@
         <view class="hot_view">
             <block wx:for="{{hotSerialWorks}}" wx:key="index">
                 <navigator class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                    <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"></image>
+                    <image mode="aspectFill" lazy-load="true"
+                    style="background: url('../../images/banner_bitmap.png')no-repeat;background-size: 100% 100%;position: relative;top: 0;left: 0;;">
+                        <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"
+                        style="position: absolute;left: 0;top: 0;"></image>
+                    </image>
                     <view class="word_info">
                         <text class="name_name">{{item.extra.name}}</text>
                         <text class="name_info">{{item.extra.watching_focus}}</text>
@@ -244,7 +248,11 @@
             <view class="big_new_view">
                 <block wx:for="{{xiaobianRecommend}}" wx:key="index">
                     <navigator class="new_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                        <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"></image>
+                        <image mode="aspectFill" lazy-load="true"
+                               style="background: url('../../images/banner_bitmap.png')no-repeat;background-size: 100% 100%;position: relative;top: 0;left: 0;;">
+                            <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"
+                                   style="position: absolute;left: 0;top: 0;"></image>
+                        </image>
                         <view class="word_info">
                             <text class="name_name">{{item.extra.name}}</text>
                             <text class="name_info">{{item.extra.watching_focus}}</text>
@@ -264,7 +272,11 @@
         <view class="hot_view">
             <block wx:for="{{weekRecommend}}" wx:key="index">
                 <navigator class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                    <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"></image>
+                    <image mode="aspectFill" lazy-load="true"
+                           style="background: url('../../images/banner_bitmap.png')no-repeat;background-size: 100% 100%;position: relative;top: 0;left: 0;;">
+                        <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"
+                               style="position: absolute;left: 0;top: 0;"></image>
+                    </image>
                     <view class="word_info">
                         <text class="name_name">{{item.extra.name}}</text>
                         <text class="name_info">{{item.extra.watching_focus}}</text>
@@ -280,8 +292,8 @@
         </view>
     </scroll-view>
 
-  <!--蒙层-->
-  <view class="{{isOpacity? 'layer' :'layer_n'}}" catchtouchmove='noScrollMove' catchtap="blurInputEvent"></view>
+    <!--蒙层-->
+    <view class="{{isOpacity? 'layer' :'layer_n'}}" catchtouchmove='noScrollMove' catchtap="blurInputEvent"></view>
     <!--根据搜索结果渲染数据-->
     <scroll-view class="{{listData ? 'big_listdata_bloc':'big_listdata'}}" wx:if="{{searchList&&searchList.length>0}}"
                  enable-back-to-top="true" scroll-y="true" bindscrolltolower="lower" bindscroll="scroll"
@@ -303,5 +315,8 @@
             <view class="comment_message">{{message}}</view>
         </view>
     </scroll-view>
+    <block wx:if="{{noSearch === false}}">
+        <message class="search_message" modal="{{false}}" type="search"></message>
+    </block>
 </view>
 

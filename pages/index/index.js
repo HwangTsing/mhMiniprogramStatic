@@ -33,7 +33,8 @@ Page({
           searchList:[],   //搜索列表
           scrolType:'',
           message:'',    //提示语
-          total:1    //总页码
+          total:1,    //总页码
+          noSearch:true   //是否有搜索结果
 
       },
       metaData:{
@@ -192,7 +193,7 @@ Page({
                         })
                     }else if (data.data.data.data.length === 0){//搜索没有匹配的数据时提示图
                         that.setData({
-
+                            noSearch:false
                         })
                     }
                 },
@@ -301,7 +302,8 @@ Page({
         var word = that.searchData.word;
         if (word === ''){
             this.setData({
-                searchList:[]
+                searchList:[],
+                noSearch:true
             })
             that.data.scrolType = '';
             that.searchData.page_num = 1;
@@ -315,7 +317,8 @@ Page({
         var that = this;
         this.setData({
             inputValue:'',
-            searchList:[]
+            searchList:[],
+            noSearch:true   //关闭提示重新搜索
         });
         that.data.scrolType = '';
         that.searchData.page_num = 1;
@@ -328,7 +331,9 @@ Page({
             listData:false,
             isScroll:true,
             inputValue:'',
-            searchList:[]
+            searchList:[],
+            noSearch:true,
+
         });
         that.data.scrolType = '';
         that.searchData.page_num = 1;
@@ -390,6 +395,7 @@ Page({
                     })
                     return
                 }else {
+                    //有网络
                     //########### 获取初次男女分版存储 ##############//
                     wx.getStorage({
                         key:'id',
