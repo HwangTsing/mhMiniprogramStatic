@@ -6,6 +6,7 @@
   "usingComponents": {
       "comicShowTop": "/components/comicShowTop/comicShowTop",
       "comicDetails": "./components/comicDetails/comicDetails",
-      "comicCatalog": "./components/comicCatalog/comicCatalog"
+      "comicCatalog": "./components/comicCatalog/comicCatalog",
+      "message": "/components/message/message"
   }
 }

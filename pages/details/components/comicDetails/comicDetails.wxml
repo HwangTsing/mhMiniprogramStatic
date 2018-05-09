@@ -84,6 +84,14 @@
             contentId="{{ item.data.item }}"
             replyContent="{{item.reply_content?item.reply_content:null}}"
         ></commentList>
+
+        <!-- 没有评论信息的时候S -->
+        <message
+            wx:if="{{ !comicCommentData || comicCommentData.length===0 }}"
+            type="noExist"
+            modal="{{ false }}"
+        ></message>
+        <!-- 没有评论信息的时候E -->
     </view>
     <!--  新鲜评论 E  -->
 </view>

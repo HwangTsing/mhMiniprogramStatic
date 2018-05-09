@@ -1,6 +1,6 @@
 const wxApi = require('../../utils/util.js');
-const app = getApp();
-// pages/read/read.js
+
+// pages/repiy/repiy.js
 Page({
 
     /**
@@ -15,6 +15,7 @@ Page({
         isLoads: false,//是否先加载完效果成图
         pageTotal: 0,//一共可以下拉加载次数
         message: '',//加载提示语,
+        isMessage:true,//是否显示加载提示语
         commentId: 0,//记录评论的id
         networkType: true,//是否有网络
     },
@@ -68,21 +69,25 @@ Page({
                         isReplyContent:false
                     }
                     replyList.push(Data); //保存到创建的数组中
-
-                    let page_total=data.page_total;
-                    this.setData({
-                        replyList: replyList, //存储数据
-                        isLoads: false,//改为可以下拉加载
-                        pageNum: Number(pageNum) + 1,//修改页码状态
-                        pageTotal: page_total,//保存可以下拉加载的次数
-                        message: page_total > pageNum ? '加载中...' : '没更多了',//存储提示词
-                        commentId: commentId,//记录漫画的id
-                    })
                 })
-            }else {
-                //接口数据不对的时候
-                return
             }
+            let page_total=data.page_total;
+            this.setData({
+                replyList: replyList, //存储数据
+                isLoads: false,//改为可以下拉加载
+                pageNum: Number(pageNum) + 1,//修改页码状态
+                pageTotal: page_total,//保存可以下拉加载的次数
+                message: page_total > pageNum ? '加载中' : '没更多了',//存储提示词
+                isMessage:true,
+                commentId: commentId,//记录漫画的id
+                networkType: true,//是否有网络
+            })
+        }).catch((err)=>{
+            this.setData({
+                isLoads: false,
+                networkType: false,//是否有网络
+                isMessage:false,
+            })
         });
 
     },
@@ -111,77 +116,55 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        /*
-        * @ wx.onNetworkStatusChange 获取网络类型。
-        * success	Function	是	接口调用成功，返回网络类型 networkType
-        * fail	Function	否	接口调用失败的回调函数
-        * complete	Function	否	接口调用结束的回调函数（调用成功、失败都会执行）
-        *
-        * wifi	wifi 网络
-        * 2g	2g 网络
-        * 3g	3g 网络
-        * 4g	4g 网络
-        * none	无网络
-        * unknown	Android下不常见的网络类型
-        * */
-        wx.getNetworkType({
-            success: (res) => {
-                // 返回网络类型, 有效值：
-                // wifi/2g/3g/4g/unknown(Android下不常见的网络类型)/none(无网络)
+        wxApi.getNetworkType().then((NetworkType)=>{
+            let networkType = NetworkType.networkType;
 
-                let networkType = res.networkType
-                if (networkType === 'none' || networkType === 'unknown') {
-                    //无网络什么都不做
-                    this.setData({
-                        networkType: false
-                    })
-                    return
-                } else {
-                    //有网络
-                    let commentData=JSON.parse(options.data);
-                    //console.log(commentData)
-                    let Data={
-                        user:{
-                            user_avatar:commentData.user_avatar,
-                            user_nickname:commentData.user_nickname
-                        },
-                        content:{
-                            comment_id:commentData.comment_id,
-                            comment_content:commentData.comment_content
-                        },
-                        contentId:{
-                            comment_id:commentData.comment_id,
-                            comic_id:commentData.comic_id,
-                            create_time:commentData.create_time,
-                        },
-                        replyContent:null,
-                        isReplyContent:false
-                    }
-                    this.setData({
-                        commentData: Data
-                    });
-
-                    let commentId = commentData.comment_id;
-                    let pageNum = this.data.pageNum;
-                    let rowsNum = this.data.rowsNum;
-
-                    this.getDataInfo(commentId,pageNum,rowsNum); //初始化数据
+            if (networkType === 'none' || networkType === 'unknown') {
+                //无网络什么都不做
+                this.setData({
+                    networkType: false
+                })
+                return
+            } else {
+                //有网络
+                let commentData=JSON.parse(options.data);
+                //console.log(commentData)
+                let Data={
+                    user:{
+                        user_avatar:commentData.user_avatar,
+                        user_nickname:commentData.user_nickname
+                    },
+                    content:{
+                        comment_id:commentData.comment_id,
+                        comment_content:commentData.comment_content
+                    },
+                    contentId:{
+                        comment_id:commentData.comment_id,
+                        comic_id:commentData.comic_id,
+                        create_time:commentData.create_time,
+                    },
+                    replyContent:null,
+                    isReplyContent:false
                 }
+                this.setData({
+                    commentData: Data
+                });
+
+                let commentId = commentData.comment_id;
+                let pageNum = this.data.pageNum;
+                let rowsNum = this.data.rowsNum;
+
+                this.getDataInfo(commentId+10000,pageNum,rowsNum); //初始化数据
             }
+        }).catch((err)=>{
+            this.setData({
+                networkType: true
+            })
         })
 
-
-        wx.getSystemInfo({
-            success:  (res) =>{
-                //console.log(res);
-                // 可使用窗口宽度、高度
-                //console.log('height=' + res.windowHeight);
-                //console.log('width=' + res.windowWidth);
-                // 计算主体部分高度,单位为px
-                this.setData({
-                    height: res.windowHeight
-                })
-            }
+        const { windowHeight } = wxApi.getSystemInfoSync(); //获取设备信息
+        this.setData({
+            height: windowHeight
         })
     },
 
