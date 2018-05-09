@@ -88,7 +88,7 @@ Page({
             })
         }
     },
-    
+
     /**
      * 生命周期函数--监听页面加载
      */
@@ -100,7 +100,7 @@ Page({
         //comic_id
         let comic_id = options.comic_id;
         // comic_id= options.comic_id ? options.comic_id : 24;//24 68491
-        comic_id = 68491;
+        // comic_id = 68491;
         let page_num = 1;//页码
         let rows_num = 10;//每页条数
         let comicShowUrl = 'wbcomic/comic/comic_show';//摘要页接口前缀

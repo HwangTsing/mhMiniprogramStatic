@@ -1,11 +1,9 @@
 {
     "pages": [
-        "pages/details/details",
         "pages/index/index",
-        "pages/read/read",
-        
         "pages/edition/edition",
-        
+        "pages/details/details",
+        "pages/read/read",
         "pages/comment/comment",
         "pages/morelist/morelist",
         "pages/reply/reply"
