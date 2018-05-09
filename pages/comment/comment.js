@@ -124,6 +124,10 @@ Page({
                 })
 
             }
+        }).catch((err)=>{
+            this.setData({
+                isLoads: false
+            })
         })
     },
     /*
@@ -148,7 +152,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        console.log(wxApi.getNetworkType)
         /*
         * @ wx.onNetworkStatusChange 获取网络类型。
         * success	Function	是	接口调用成功，返回网络类型 networkType
@@ -162,26 +166,52 @@ Page({
         * none	无网络
         * unknown	Android下不常见的网络类型
         * */
-        wx.getNetworkType({
-            success: (res) => {
-                // 返回网络类型, 有效值：
-                // wifi/2g/3g/4g/unknown(Android下不常见的网络类型)/none(无网络)
+        // wx.getNetworkType({
+        //     success: (res) => {
+        //         // 返回网络类型, 有效值：
+        //         // wifi/2g/3g/4g/unknown(Android下不常见的网络类型)/none(无网络)
+        //
+        //         let networkType = res.networkType
+        //         if (networkType === 'none' || networkType === 'unknown') {
+        //             //无网络什么都不做
+        //             this.setData({
+        //                 networkType: false
+        //             })
+        //
+        //         } else {
+        //             //有网络
+        //             let comicId = options.comic_id;
+        //             let pageNum = this.data.pageNum;
+        //             let rowsNum = this.data.rowsNum;
+        //             this.getDataInfo(comicId, pageNum, rowsNum);
+        //             this.setData({
+        //                 networkType: true
+        //             })
+        //         }
+        //     }
+        // })
+        wxApi.getNetworkType().then((NetworkType)=>{
+            let networkType = NetworkType.networkType
+            if (networkType === 'none' || networkType === 'unknown') {
+                //无网络什么都不做
+                this.setData({
+                    networkType: false
+                })
 
-                let networkType = res.networkType
-                if (networkType === 'none' || networkType === 'unknown') {
-                    //无网络什么都不做
-                    this.setData({
-                        networkType: false
-                    })
-                    return
-                } else {
-                    //有网络
-                    let comicId = options.comic_id;
-                    let pageNum = this.data.pageNum;
-                    let rowsNum = this.data.rowsNum;
-                    this.getDataInfo(comicId, pageNum, rowsNum);
-                }
+            } else {
+                //有网络
+                let comicId = options.comic_id;
+                let pageNum = this.data.pageNum;
+                let rowsNum = this.data.rowsNum;
+                this.getDataInfo(comicId, pageNum, rowsNum);
+                this.setData({
+                    networkType: true
+                })
             }
+        }).catch((err)=>{
+            this.setData({
+                networkType: true
+            })
         })
 
 

@@ -1,14 +1,18 @@
-<!--pages/read/read.wxml-->
+<!--pages/comment/comment.wxml-->
+<!-- 全部评论S -->
 <view class="comment_container">
+    <!-- 上滑加载 S -->
     <scroll-view
         class="scroll_view"
         style="height:{{height}}px"
+        wx:if="{{ comicCommentData }}"
         scroll-y
         lower-threshold="{{50}}"
         scroll-with-animation="true"
         enable-back-to-top="true"
         bindscrolltolower="onScroll"
     >
+        <!-- 评论列表 S -->
         <commentList
             wx:if="{{ comicCommentData && comicCommentData.length>0 }}"
             wx:for="{{ comicCommentData }}"
@@ -19,6 +23,15 @@
             replyContent="{{item.reply_content?item.reply_content:null}}"
             isReplyContent="{{true}}"
         ></commentList>
+        <!-- 评论列表 E -->
         <view class="comment_message" wx:if="{{comicCommentData.length>9}}">{{message}}</view>
     </scroll-view>
+    <!-- 上滑加载 S -->
+
+    <!-- 信息提示 S -->
+    <!--<message-->
+
+    <!--&gt;</message>-->
+    <!-- 信息提示 E -->
 </view>
+<!-- 全部评论S -->
