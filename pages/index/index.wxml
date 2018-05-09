@@ -2,7 +2,7 @@
 
 <view class="container">
     <!--弹层男女选择-->
-    <view wx:if="{{networkType === true && boyid || girlid}}" class="{{boyid || girlid? 'fix_view_hidden':'fix_view'}}">
+    <view wx:if="{{networkType === true}}" class="{{boyid || girlid? 'fix_view_hidden':'fix_view'}}">
             <view class="choose_view">
                 <image class="choose_view_img" src="../../images/edition/rectangle.png"></image>
             </view>
