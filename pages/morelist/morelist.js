@@ -7,7 +7,7 @@ Page({
    */
   data: {
       moreData:[],   //数据
-      networkType:''  //网络
+      networkType:true  //是否有网络
   },
 
   /**
@@ -15,12 +15,31 @@ Page({
    */
   onLoad: function (options) {
       //console.log(options);
+      var that = this;
       var location_en = options.location_en;
       var title = options.title;
-      wx.setNavigationBarTitle({//动态设置当前页面的标题
-          title: title
+      wx.getNetworkType({  //判断网络类型
+          success: function(res) {
+              console.log(res);
+              let networkType = res.networkType
+              if (networkType === 'none' || networkType === 'unknown') {
+                  //无网络什么都不做
+                  this.setData({
+                      networkType: false
+                  })
+                  return
+              }else {
+                  //有网络
+                  wx.setNavigationBarTitle({//动态设置当前页面的标题
+                      title: title
+                  });
+                  that.moreList(location_en);
+              }
+          },
+          fail:function (res) {
+              return;
+          }
       });
-      this.moreList(location_en);
   },
   moreList:function (location_en) {
     var that = this;
@@ -64,17 +83,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-      wx.getNetworkType({  //判断网络类型
-          success: function(res) {
-              console.log(res);
-              /* that.setData({
-                   netWorkType:res.networkType
-               })*/
-              if (res.networkType === 'none') {
 
-              }
-          }
-      });
   },
 
   /**
