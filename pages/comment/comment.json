@@ -4,6 +4,7 @@
     "navigationBarBackgroundColor": "#FF4D6A",
     "navigationBarTextStyle": "white",
     "usingComponents": {
-        "commentList": "/components/commentList/commentList"
+        "commentList": "/components/commentList/commentList",
+        "message": "/components/message/message"
     }
 }

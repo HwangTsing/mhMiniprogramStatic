@@ -122,6 +122,26 @@ class wxApi {
         return systemInfo
     }
 
+    getNetworkType(){
+        /*
+        * ***getNetworkType
+        * 返回 promise 对象
+        * */
+        //获取网络状态
+        const promise = new Promise((resolve, reject) => {
+            wx.getNetworkType({
+                success(res){ //成功
+                    resolve(res)
+                },
+                fail(err){ //失败
+                    reject(err)
+                }
+            })
+        });
+
+        return promise
+    }
+
     post(url, cfg = {method: 'POST'}) {
         return ajax(url, cfg)
     }
@@ -181,7 +201,7 @@ class wxApi {
   getCurrentRoute() {
     let { route } = this.getCurrentPage()
     route = route ? '/' + route : route
-    
+
     return route
   }
 
@@ -193,7 +213,7 @@ class wxApi {
     return url
   }
 
-  
+
 }
 
 const __wxApi = new wxApi()
