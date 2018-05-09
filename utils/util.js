@@ -195,7 +195,7 @@ class wxApi {
 
   getCurrentPage() {
     const pages = getCurrentPages()
-    return pages.length > 0 ? pages[0] : {}
+    return pages.length > 0 ? pages[pages.length-1] : {}
   }
 
   getCurrentRoute() {
