@@ -63,12 +63,14 @@
                     <view class="comic_catalog_top">
                         <!-- 头部连载信息 S -->
                         <view class="comic_catalog_top_text">
-                            {{dataAry.comic.is_end==0?'连载中':'已完结'}}{{'(共'+ dataAry.chapterList.length +'话)'}}
+                            {{dataAry.comic.is_end==0?'连载中':'已完结'}}(共{{dataAry.chapterList?dataAry.chapterList.length:0 }}话)
                         </view>
                         <!-- 头部连载信息 E -->
 
                         <!-- 顺序切换按钮 S -->
-                        <view class="comic_catalog_top_btn">
+                        <view class="comic_catalog_top_btn"
+                            wx:if="{{ dataAry.chapterList && dataAry.chapterList.length > 1 }}"
+                        >
                             <image
                                 mode="aspectFill"
                                 class="top_btn"
@@ -82,11 +84,20 @@
 
                     <!-- 章节信息 组件 S -->
                     <comicCatalog
+                        wx:if="{{dataAry.chapterList && dataAry.chapterList.length > 0}}"
                         directoryDisplay="{{dataAry.comic.directory_display}}"
                         chapterList="{{dataAry.chapterList}}"
                         comic_id="{{dataAry.comic.comic_id}}"
                     ></comicCatalog>
                     <!-- 章节信息 组件 E -->
+
+                    <!-- 没有章节信息的时候S -->
+                    <message
+                        wx:if="{{ !dataAry.chapterList || dataAry.chapterList.length === 0 }}"
+                        type="noExist"
+                        modal="{{ false }}"
+                    ></message>
+                    <!-- 没有章节信息的时候E -->
 
                 </view>
                 <!-- 二级导航目录区 E  -->

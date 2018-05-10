@@ -24,9 +24,16 @@
 /* 公共E */
 
 .comicShowTop{
-  width: 100%;
+    position: relative;
+    width: 100%;
+    height: 420rpx;
 }
-
+.comicShowTop .details_view,.comicShowTop .details_view_2{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
 /*  第一种展示方式S  */
 .comicShowTop .details_view {
   width: 100%;
@@ -38,12 +45,21 @@
   background: rgba(0, 0, 0, 0.65);
 }
 .comicShowTop .details_img .detail_src {
+  position: relative;
   width: 192rpx;
   height: 274rpx;
   margin-top: 68rpx;
   margin-left: 30rpx;
   display: inline-block;
   float: left;
+}
+.comicShowTop .details_img .detail_src .detail_src_bg{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
 }
 .comicShowTop .info_content {
   float: left;
@@ -111,9 +127,13 @@
 }
 .details_comic .comic_top_text{
     align-items: center;
-    max-width: 60%;
+    max-width: 85%;
     min-width:90rpx;
     height: 24px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    color:#fff
 }
 .details_comic .comic_top_text text{
     line-height: 48rpx;
