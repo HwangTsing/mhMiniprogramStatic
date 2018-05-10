@@ -1,0 +1,25 @@
+<template name="message" >
+    <!-- 首次加载失败后(网络差)信息提示 S -->
+    <message
+        wx:if="{{ !networkType && !dataAry }}"
+        modal="{{ true }}"
+        type="net"
+    ></message>
+    <!-- 首次加载失败后(网络差)信息提示 E-->
+
+    <!-- 首次加载 信息提示 S -->
+    <message
+        wx:if="{{ networkType && !dataAry }}"
+        modal="{{ true }}"
+        type="loading"
+    ></message>
+    <!-- 首次加载 信息提示 E-->
+
+    <!-- 首次加载 信息提示 S -->
+    <message
+        wx:if="{{ networkType && dataAry=='{}' }}"
+        modal="{{ true }}"
+        type="out"
+    ></message>
+    <!-- 首次加载 信息提示 E-->
+</template>

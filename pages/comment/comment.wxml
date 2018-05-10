@@ -48,20 +48,12 @@
     </scroll-view>
     <!-- 上滑加载 S -->
 
-    <!-- 加载信息提示 S -->
-    <message
-        wx:if="{{ networkType && !comicCommentData }}"
-        modal="{{ true }}"
-        type="loading"
-    ></message>
-    <!-- 加载信息提示 E-->
 
-    <!-- 首次加载失败后(网络差)信息提示 S -->
-    <message
-        wx:if="{{ !networkType && !comicCommentData }}"
-        modal="{{ true }}"
-        type="net"
-    ></message>
-    <!-- 首次加载失败后(网络差)信息提示 E-->
+    <!-- 提示信息 S  -->
+    <import src="./template/template.wxml"/>
+
+    <template is="message" data="{{ networkType,comicCommentData }}"/>
+    <!-- 提示信息 S  -->
+
 </view>
 <!-- 全部评论S -->

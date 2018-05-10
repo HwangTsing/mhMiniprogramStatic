@@ -26,6 +26,7 @@ Page({
         ],
         status: 0,
         networkType: true,//是否有网络
+        type:'net',
     },
 
     //点击开始阅读|和据需阅读的事件
@@ -91,6 +92,7 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
+
     onLoad: function (options) {
         /*
         * *** wbcomic/comic/comic_show?comic_id=68491 摘要页接口

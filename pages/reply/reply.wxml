@@ -73,21 +73,13 @@
     </scroll-view>
     <!-- 加载组件E -->
 
-    <!-- 首次加载 S -->
-    <message
-        wx:if="{{ networkType && !replyList  }}"
-        modal="{{ true }}"
-        type="loading"
-    ></message>
-    <!-- 首次加载 E -->
 
-    <!-- 首次加载网络差提示 S -->
-    <message
-        wx:if="{{ !networkType && !replyList }}"
-        modal="{{ true }}"
-        type="net"
-    ></message>
-    <!-- 首次加载网络差提示 E -->
+
+    <!-- 提示信息 S  -->
+    <import src="./template/template.wxml"/>
+
+    <template is="message" data="{{ networkType,replyList }}"/>
+    <!-- 提示信息 S  -->
 </view>
 <!-- 组件外层盒子E -->
 

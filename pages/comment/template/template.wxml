@@ -1,0 +1,17 @@
+<template name="message" >
+    <!-- 加载信息提示 S -->
+    <message
+        wx:if="{{ networkType && !comicCommentData }}"
+        modal="{{ true }}"
+        type="loading"
+    ></message>
+    <!-- 加载信息提示 E-->
+
+    <!-- 首次加载失败后(网络差)信息提示 S -->
+    <message
+        wx:if="{{ !networkType && !comicCommentData }}"
+        modal="{{ true }}"
+        type="net"
+    ></message>
+    <!-- 首次加载失败后(网络差)信息提示 E-->
+</template>
