@@ -150,7 +150,7 @@
         </view>
 
         <!--img+content 图片区域内容可滑动--精品佳作-->
-        <scroll-view class="scroll_view" scroll-x="{{isScroll}}">
+        <scroll-view class="scroll_view" scroll-x="{{true}}">
             <view>
                 <block wx:if="{{girlFineWorks}}" wx:for="{{girlFineWorks}}" wx:key="index">
                     <navigator class="big_img" url="../details/details?comic_id={{item.extra.comic_id}}">
@@ -299,7 +299,7 @@
     <view class="{{isOpacity? 'layer' :'layer_n'}}" catchtouchmove='noScrollMove' catchtap="blurInputEvent"></view>
     <!--根据搜索结果渲染数据-->
     <scroll-view class="{{listData ? 'big_listdata_bloc':'big_listdata'}}" wx:if="{{searchList&&searchList.length>0}}"
-                 enable-back-to-top="true" scroll-y="true" bindscrolltolower="lower" bindscroll="scroll"
+                 enable-back-to-top="true" scroll-y="{{true}}" bindscrolltolower="lower" bindscroll="scroll"
                  scroll-top="{{scrollTop}}" lower-threshold="40">
         <block wx:for="{{searchList}}" wx:key="index">
             <searchlist
