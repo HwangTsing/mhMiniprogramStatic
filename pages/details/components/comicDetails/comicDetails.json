@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+     "commentList":"/components/commentList/commentList",
+      "message": "/components/message/message"
+  }
+}
