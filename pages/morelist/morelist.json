@@ -2,5 +2,8 @@
   "navigationBarTitleText": "",
   "navigationBarTextStyle": "white",
   "backgroundTextStyle": "dark",
-  "navigationBarBackgroundColor": "#FF4D6A"
+  "navigationBarBackgroundColor": "#FF4D6A",
+    "usingComponents":{
+      "message": "/components/message/message"
+    }
 }

@@ -56,7 +56,11 @@ Component({
             let chapter_id = data.chapter_id;
             let comic_id = data.comic_id;
             if(comic_id && chapter_id){
-                wx.setStorage({ //将数据存储在本地缓存中指定的 key 中，会覆盖掉原来该 key 对应的内容
+                wx.navigateTo({
+                    url: `/pages/read/read?chapter_id=${chapter_id}`//&comic_id=${comic_id}
+                })
+                return //什么都不做
+                /*wx.setStorage({ //将数据存储在本地缓存中指定的 key 中，会覆盖掉原来该 key 对应的内容
                     key:"comic_id_"+comic_id,
                     data:data,
                     success:()=>{
@@ -76,7 +80,7 @@ Component({
                         console.log('存储失败')
 
                     }
-                })
+                })*/
             }
         }
     }

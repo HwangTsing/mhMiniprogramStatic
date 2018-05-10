@@ -24,14 +24,44 @@
             isReplyContent="{{true}}"
         ></commentList>
         <!-- 评论列表 E -->
-        <view class="comment_message" wx:if="{{comicCommentData.length>9}}">{{message}}</view>
+        <view class="comment_message"
+              wx:if="{{ comicCommentData.length>9 && isMessage }}"
+        >
+            <image
+                wx:if="{{ message != '没更多了' }}"
+                class="comment_src"
+                mode="aspectFill"
+                src="../../images/details/loads.png"
+            ></image>
+            <view class="text">
+                {{message}}
+            </view>
+        </view>
+
+        <!-- 加载失败后(网络差)信息提示 S -->
+        <message
+            wx:if="{{ !networkType && comicCommentData && comicCommentData.length>0 }}"
+            modal="{{ false }}"
+            type="server"
+        ></message>
+        <!--加载失败后(网络差)信息提示 E-->
     </scroll-view>
     <!-- 上滑加载 S -->
 
-    <!-- 信息提示 S -->
-    <!--<message-->
+    <!-- 加载信息提示 S -->
+    <message
+        wx:if="{{ networkType && !comicCommentData }}"
+        modal="{{ true }}"
+        type="loading"
+    ></message>
+    <!-- 加载信息提示 E-->
 
-    <!--&gt;</message>-->
-    <!-- 信息提示 E -->
+    <!-- 首次加载失败后(网络差)信息提示 S -->
+    <message
+        wx:if="{{ !networkType && !comicCommentData }}"
+        modal="{{ true }}"
+        type="net"
+    ></message>
+    <!-- 首次加载失败后(网络差)信息提示 E-->
 </view>
 <!-- 全部评论S -->

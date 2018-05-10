@@ -1,45 +1,93 @@
-<!--pages/read/read.wxml-->
+<!--pages/reply/reply.wxml-->
 
-<scroll-view
-    class="reply_container"
-    style="height:{{height}}px"
-    scroll-y
-    lower-threshold="{{50}}"
-    scroll-with-animation="true"
-    enable-back-to-top="true"
-    bindscrolltolower="onScroll"
->
-    <view class="comment_container_top">
-        <view class="top_comment">
+<!-- 组件外层盒子S -->
+<view>
+    <!-- 加载组件S -->
+    <scroll-view
+        class="reply_container"
+        style="height:{{height}}px"
+        scroll-y
+        lower-threshold="{{50}}"
+        scroll-with-animation="true"
+        enable-back-to-top="true"
+        bindscrolltolower="onScroll"
+        wx:if="{{ networkType && replyList  }}"
+    >
+        <!-- 头部上级页面传递数据S -->
+        <view class="comment_container_top">
+            <view class="top_comment">
+                <!-- 评论列表S -->
+                <commentList
+                    wx:if="{{ commentData }}"
+                    user="{{ commentData.user }}"
+                    content="{{ commentData.content }}"
+                    contentId="{{ commentData.contentId }}"
+                    replyContent="{{commentData.replyContent}}"
+                    isReplyContent="{{commentData.isReplyContent}}"
+                    isBorder="{{false}}"
+                ></commentList>
+                <!-- 评论列表E -->
+            </view>
+            <view class="top_comment_bg"></view>
+        </view>
+        <!-- 头部上级页面传递数据E -->
+
+        <view class="reply_content_middle">
+            <view class="reply_h3">
+                新鲜的评论
+            </view>
+        </view>
+        <view class="reply_content_commentList">
             <commentList
-                wx:if="{{ commentData }}"
-                user="{{ commentData.user }}"
-                content="{{ commentData.content }}"
-                contentId="{{ commentData.contentId }}"
-                replyContent="{{commentData.replyContent}}"
-                isReplyContent="{{commentData.isReplyContent}}"
-                isBorder="{{false}}"
+                wx:if="{{ replyList && replyList.length>0 }}"
+                wx:for="{{ replyList }}"
+                wx:key="index"
+                user="{{ item.user }}"
+                content="{{ item.content }}"
+                contentId="{{ item.contentId }}"
+                replyContent="{{item.replyContent?item.replyContent:null}}"
+                isReplyContent="{{false}}"
             ></commentList>
-        </view>
-        <view class="top_comment_bg"></view>
-    </view>
+            <!-- 首次加载网络差提示 S -->
+            <message
+                wx:if="{{ networkType && replyList && replyList.length===0 }}"
+                modal="{{ false }}"
+                type="noExist"
+            ></message>
+            <!-- 首次加载网络差提示 E -->
 
-    <view class="reply_content_middle">
-        <view class="reply_h3">
-            新鲜的评论
+            <view class="comment_message"
+                  wx:if="{{ networkType && replyList.length>9 && isMessage }}"
+            >
+                <image
+                    wx:if="{{ message != '没更多了' }}"
+                    class="comment_src"
+                    mode="aspectFill"
+                    src="../../images/details/loads.png"
+                ></image>
+                <view class="text">
+                    {{message}}
+                </view>
+            </view>
         </view>
-    </view>
-    <view class="reply_content_commentList">
-        <commentList
-            wx:if="{{ replyList && replyList.length>0 }}"
-            wx:for="{{ replyList }}"
-            wx:key="index"
-            user="{{ item.user }}"
-            content="{{ item.content }}"
-            contentId="{{ item.contentId }}"
-            replyContent="{{item.replyContent?item.replyContent:null}}"
-            isReplyContent="{{false}}"
-        ></commentList>
-        <view class="comment_message" wx:if="{{replyList.length>3}}">{{message}}</view>
-    </view>
-</scroll-view>
+    </scroll-view>
+    <!-- 加载组件E -->
+
+    <!-- 首次加载 S -->
+    <message
+        wx:if="{{ networkType && !replyList  }}"
+        modal="{{ true }}"
+        type="loading"
+    ></message>
+    <!-- 首次加载 E -->
+
+    <!-- 首次加载网络差提示 S -->
+    <message
+        wx:if="{{ !networkType && !replyList }}"
+        modal="{{ true }}"
+        type="net"
+    ></message>
+    <!-- 首次加载网络差提示 E -->
+</view>
+<!-- 组件外层盒子E -->
+
