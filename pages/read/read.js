@@ -118,7 +118,7 @@ Page({
     wxApi.pageScrollTo({ scrollTop })
   },
 
-  render: function (chapter_id = 258951){
+  render: function (chapter_id){
     //wxApi.pageScrollTo({scrollTop: 0});
     
     this.fetchComic(chapter_id).then(({ chapter_list, chapter_id, chapter_name})=>{
@@ -126,8 +126,6 @@ Page({
       wxApi.setNavigationBarTitle(chapter_name)
     });
   },
-  
-  
 
   createNavUrlByIndex: function (chapter_id, chapter_list=[]) {
     chapter_id = chapter_id+''

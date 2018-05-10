@@ -21,4 +21,8 @@
 .vcomic-buttons{
   background-color: #fff;
 }
+message{
+  background: none;
+  color:#fff;
+}
 

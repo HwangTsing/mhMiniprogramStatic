@@ -1,6 +1,6 @@
 <!--pages/read/read.wxml-->
 <view class="container">
-    <!--<message type="net"></message>-->
+    <message type="lose"></message>
     <view bind:tap="tapScrollHandler">
         <vcomic
             class="vcomic-wrap"
