@@ -107,7 +107,7 @@ Page({
         create_source
       }
     }).then(({ code, message, data } = {}) => {
-      
+
       const {
         chapter = {},
         chapter_list = [],
@@ -124,16 +124,13 @@ Page({
         chapter
       })
 
-<<<<<<< HEAD
-=======
-      if (page && page.length) this.setData({ json_content })
+        if (page && page.length) this.setData({ json_content })
 
-      if (!chapter_list.length) this.setPageMessage('out')
-      else if (!(page&&page.length)) this.setPageMessage('lose')
->>>>>>> 5dea6e1841517005d02772321f035288246d90b5
-      return { chapter_list, comic_id, chapter_id, chapter_name}
+        if (!chapter_list.length) this.setPageMessage('out')
+        else if (!(page&&page.length)) this.setPageMessage('lose')
+        return { chapter_list, comic_id, chapter_id, chapter_name}
     }, () => {
-      this.setPageMessage('server')
+        this.setPageMessage('server')
     })
   },
 
