@@ -26,7 +26,7 @@ Page({
         ],
         status: 0,
         networkType: true,//是否有网络
-        type:'net',
+        type:'loading',
     },
 
     //点击开始阅读|和据需阅读的事件
@@ -128,7 +128,8 @@ Page({
             if (networkType === 'none' || networkType === 'unknown') {
                 //无网络什么都不做
                 this.setData({
-                    networkType: false
+                    networkType: false,
+                    type:'net'
                 })
             } else {
                 //有网络
@@ -162,7 +163,8 @@ Page({
                                 DATA.chapterList = null;
                             }
                             this.setData({
-                                dataAry: DATA
+                                dataAry: DATA,
+                                type:null
                             })
 
                             let key = "comic_id_" + res.data.comic.comic_id;
@@ -178,13 +180,15 @@ Page({
                         }
                         else {
                             this.setData({
-                                dataAry:"{}"
+                                dataAry:"{}",
+                                type:'out'
                             })
                         }
                     }
                 }).catch((err) => {
                     this.setData({
-                        networkType: false
+                        networkType: false,
+                        type:'net'
                     })//错误时候
                 });
 
@@ -290,7 +294,8 @@ Page({
 
         }).catch((err) => {
             this.setData({
-                networkType: true
+                networkType: true,
+                type:'server'
             })
         })
 

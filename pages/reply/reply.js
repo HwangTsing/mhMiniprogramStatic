@@ -18,6 +18,7 @@ Page({
         isMessage:true,//是否显示加载提示语
         commentId: 0,//记录评论的id
         networkType: true,//是否有网络
+        type:'loading'
     },
 
     /*
@@ -35,8 +36,7 @@ Page({
             data: {
                 comment_id: commentId,
                 page_num: pageNum,
-                rows_num: rowsNum,
-                _debug_: "yes"
+                rows_num: rowsNum
             }
         }).then(({code,message,data}) => {
             let replyList=this.data.replyList?this.data.replyList:[];
@@ -81,6 +81,7 @@ Page({
                 isMessage:true,
                 commentId: commentId,//记录漫画的id
                 networkType: true,//是否有网络
+                type:null
             })
         }).catch((err)=>{
             this.setData({
@@ -122,7 +123,8 @@ Page({
             if (networkType === 'none' || networkType === 'unknown') {
                 //无网络什么都不做
                 this.setData({
-                    networkType: false
+                    networkType: false,
+                    type:'net'
                 })
                 return
             } else {
@@ -158,7 +160,8 @@ Page({
             }
         }).catch((err)=>{
             this.setData({
-                networkType: true
+                networkType: false,
+                type:'net'
             })
         })
 

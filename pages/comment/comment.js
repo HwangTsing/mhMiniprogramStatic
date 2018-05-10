@@ -18,6 +18,7 @@ Page({
         comicId: 0,//记录漫画的id
         networkType: true,//是否有网络
         url:null,
+        type:'loading'
     },
 
     /*
@@ -124,7 +125,8 @@ Page({
                     message: page_total > pageNum ? '加载中' : '没更多了',//存储提示词
                     isMessage:true,
                     comicId: comicId,//记录漫画的id
-                    networkType: true,//是否有网络
+                    networkType: true,//是否有网络,
+                    type:null
                 })
 
             }
@@ -163,7 +165,8 @@ Page({
             if (networkType === 'none' || networkType === 'unknown') {
                 //无网络什么都不做
                 this.setData({
-                    networkType: false
+                    networkType: false,
+                    type:'net'
                 })
 
             } else {
@@ -173,12 +176,14 @@ Page({
                 let rowsNum = this.data.rowsNum;
                 this.getDataInfo(comicId, pageNum, rowsNum);
                 this.setData({
-                    networkType: true
+                    networkType: true,
+                    type:null
                 })
             }
         }).catch((err)=>{
             this.setData({
-                networkType: true
+                networkType: false,
+                type:'net'
             })
         })
 

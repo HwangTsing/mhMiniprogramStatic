@@ -4,7 +4,7 @@
 <view class="container" catchtap="ClickCatalog">
 
     <!--  数据加载完成后显示S  -->
-    <view wx:if="{{dataAry && dataAry!='{}' }}" style='width:100%;'>
+    <view wx:if="{{dataAry && dataAry!='{}' && !type }}" style='width:100%;'>
 
         <!--  头部图片区S  -->
         <comicShowTop
@@ -116,9 +116,9 @@
 
 
     <!-- 提示信息 S  -->
-    <import src="./template/template.wxml"/>
+    <import src="/tpls/message.wxml"/>
 
-    <template is="message" data="{{ networkType,dataAry }}"/>
+    <template is="message" wx:if="{{type}}" data="{{ type }}"/>
     <!-- 提示信息 S  -->
 
 </view>
