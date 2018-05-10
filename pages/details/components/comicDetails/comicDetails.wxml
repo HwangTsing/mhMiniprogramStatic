@@ -3,7 +3,7 @@
 
     <!-- 漫画简介 S -->
     <view class="introduce_text">
-        {{thisData.comic.description?thisData.comic.description:' '}}
+        {{thisData.comic.description?thisData.comic.description:'暂无介绍'}}
     </view>
     <!-- 漫画简介 E -->
 
