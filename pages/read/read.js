@@ -10,6 +10,7 @@ Page({
   data: {
     windowWidth: 320,
     scrollY: 0,
+    messageType: '',
     chapter: {},
     comic: {},
     json_content: {
@@ -33,9 +34,12 @@ Page({
       if (networkType == 'none') this.setPageMessage('net')
     })
 
-    wxApi.onNetworkStatusChange(({ isConnected, networkType }) => {
-      if (!isConnected || networkType == 'none') this.setPageMessage('net')
-    })
+    // wxApi.onNetworkStatusChange(({ isConnected, networkType }) => {
+    //   const {type} = this.data;
+    //   if (!isConnected || networkType == 'none') return this.setPageMessage('net')
+    //   console.log('type', this.data.messageType)
+    //   //this.setPageMessage('')
+    // })
   },
   
   /**
@@ -111,15 +115,15 @@ Page({
         comic
       } = data;
       
-      const { chapter_name} = chapter
-      
+      const { chapter_name } = chapter
+      const { comic_id } = comic
       this.setData({
         json_content,
         comic,
         chapter
       })
       
-      return { chapter_list, chapter_id, chapter_name}
+      return { chapter_list, comic_id, chapter_id, chapter_name}
     })
   },
   
@@ -134,9 +138,10 @@ Page({
   render: function (chapter_id){
     //wxApi.pageScrollTo({scrollTop: 0});
     if (!chapter_id) return this.setPageMessage('noExist')
-    this.fetchComic(chapter_id).then(({ chapter_list, chapter_id, chapter_name})=>{
-      this.findChapterList(chapter_id, chapter_list)
+    this.fetchComic(chapter_id).then(({ chapter_list, comic_id, chapter_id, chapter_name})=>{
       wxApi.setNavigationBarTitle(chapter_name)
+      this.findChapterList(chapter_id, chapter_list)
+      this.setReadingLog({ comic_id, chapter_id, chapter_name })
     });
   },
 
@@ -172,6 +177,14 @@ Page({
 
     this.render(chapter_id)
     //this.triggerEvent('navchapter',{}, {})
+  },
+
+  setReadingLog: function (values) {
+    const PREFIX = 'comic_id_'
+    const { comic_id = '' } = values
+    const KEY = PREFIX + comic_id
+
+    if (comic_id) wxApi.setStorage(KEY, {...values})
   },
 
   onMyEvent: function(){

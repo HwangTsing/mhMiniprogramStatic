@@ -1,4 +1,3 @@
-<!--pages/read/read.wxml-->
 <import src="/tpls/message.wxml" />
 <view class="container {{type}}">
     <template wx:if="{{type}}" is="message" data="{{type}}" />
