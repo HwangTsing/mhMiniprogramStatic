@@ -41,20 +41,20 @@ Page({
     //   //this.setPageMessage('')
     // })
   },
-  
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
     wxApi.setNavigationBarTitle(this.chapter_name);
-    
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+
   },
 
   /**
@@ -92,7 +92,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   },
 
   setPageMessage: function (type) {
@@ -114,7 +114,7 @@ Page({
         json_content,
         comic
       } = data;
-      
+
       const { chapter_name } = chapter
       const { comic_id } = comic
       this.setData({
@@ -122,11 +122,11 @@ Page({
         comic,
         chapter
       })
-      
+
       return { chapter_list, comic_id, chapter_id, chapter_name}
     })
   },
-  
+
   tapScrollHandler: function ({ detail: { y }, currentTarget: { offsetTop }, touches: [{ clientY }] }){
     const scrollY = y - clientY
     const _scrollTop = scrollY < offsetTop ? (clientY - offsetTop + scrollY) : clientY
