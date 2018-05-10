@@ -1,7 +1,8 @@
 <!--pages/read/read.wxml-->
-<view class="container">
-    <message type="lose"></message>
-    <view bind:tap="tapScrollHandler">
+<import src="/tpls/message.wxml" />
+<view class="container {{type}}">
+    <template wx:if="{{type}}" is="message" data="{{type}}" />
+    <view wx:else bind:tap="tapScrollHandler">
         <vcomic
             class="vcomic-wrap"
             wx:for="{{json_content.page}}" 
@@ -13,10 +14,8 @@
             src="{{item.mobileImgUrl}}"
         ></vcomic>
     </view>
-    
-    <view class="vcomic-buttons flex align-center" hidden="{{!chapter_nav}}">
+    <view wx:if="{{!type||type=='lose'}}" class="vcomic-buttons flex align-center" hidden="{{!chapter_nav}}">
         <comcicNav url="{{chapter_nav.prev_url}}" action="prev" bind:myevent="chapterNavTap" class="flex-item" text="上一篇"></comcicNav>
         <comcicNav url="{{chapter_nav.next_url}}" action="next" bind:myevent="chapterNavTap" class="flex-item" text="下一篇"></comcicNav>
     </view>
-    
 </view>

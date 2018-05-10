@@ -1,6 +1,9 @@
 {
-  "navigationBarTitleText": "",
+  "navigationBarTitleText": "微博动漫",
+  "navigationBarTextStyle": "white",
   "backgroundTextStyle": "dark",
+  "navigationBarBackgroundColor": "#FF4D6A",
+  "enablePullDownRefresh": false,
   "usingComponents": {
     "vcomic": "/components/comicImg/comicImg",
     "comcicNav": "/components/comicNav/comicNav",

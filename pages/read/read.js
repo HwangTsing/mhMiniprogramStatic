@@ -28,6 +28,14 @@ Page({
 
     this.setData({ windowWidth})
     this.render(chapter_id)
+
+    wxApi.getNetworkType().then(({ networkType }) => {
+      if (networkType == 'none') this.setPageMessage('net')
+    })
+
+    wxApi.onNetworkStatusChange(({ isConnected, networkType }) => {
+      if (!isConnected || networkType == 'none') this.setPageMessage('net')
+    })
   },
   
   /**
@@ -35,13 +43,14 @@ Page({
    */
   onReady: function () {
     wxApi.setNavigationBarTitle(this.chapter_name);
+    
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    
   },
 
   /**
@@ -82,6 +91,10 @@ Page({
   
   },
 
+  setPageMessage: function (type) {
+    wxApi.setMessageType(this, type)
+  },
+
   fetchComic: function (chapter_id) {
     const create_source = "microprogram";
     return wxApi.get('wbcomic/comic/comic_play', {
@@ -89,7 +102,7 @@ Page({
         chapter_id,
         create_source
       }
-    }).then(({ code, message, data }) => {
+    }).then(({ code, message, data } = {}) => {
 
       const {
         chapter = {},
@@ -120,7 +133,7 @@ Page({
 
   render: function (chapter_id){
     //wxApi.pageScrollTo({scrollTop: 0});
-    
+    if (!chapter_id) return this.setPageMessage('noExist')
     this.fetchComic(chapter_id).then(({ chapter_list, chapter_id, chapter_name})=>{
       this.findChapterList(chapter_id, chapter_list)
       wxApi.setNavigationBarTitle(chapter_name)

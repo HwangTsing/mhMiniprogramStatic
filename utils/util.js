@@ -298,6 +298,16 @@ class wxApi {
     wx.pageScrollTo(options);
   }
 
+  setMessageType(page, type) {
+    if (page && page.setData) page.setData({type})
+  }
+
+  onNetworkStatusChange(callback) {
+    if (typeof callback == 'function') {
+      wx.onNetworkStatusChange(callback)
+    }
+  }
+
 }
 
 const __wxApi = new wxApi()

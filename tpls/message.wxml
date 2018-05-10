@@ -1,0 +1,9 @@
+<template name="message">
+    <message wx:if="{{type=='net'}}" type="net"></message>
+    <message wx:if="{{type=='server'}}" type="server"></message>
+    <message wx:if="{{type=='search'}}" type="search"></message>
+    <message wx:if="{{type=='out'}}" type="out"></message>
+    <message wx:if="{{type=='noExist'}}" type="noExist"></message>
+    <message wx:if="{{type=='loading'}}" type="loading"></message>
+    <message wx:if="{{type=='lose'}}" type="lose"></message>
+</template>

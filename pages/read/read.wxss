@@ -23,6 +23,10 @@
 }
 message{
   background: none;
-  color:#fff;
 }
 
+.lose .vcomic-buttons{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}
