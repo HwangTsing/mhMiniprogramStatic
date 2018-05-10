@@ -231,18 +231,32 @@ Page({
                 boyid:boyid
             })
         },1000);
-        if (boyid) {
-            this.metaData.mca = "h5_recommend_male";
-            this.initData();
-        }
-        //#############本地存储############//
-        wx.setStorage({
-            key:'id',
-            data:boyid,
-            success:function (res) {
-                //console.log(res);
+        //判断网络类型
+        wxApi.getNetworkType().then((res) =>{
+            let networkType = res.networkType;
+            if (networkType === 'none' || networkType === 'unknown') {
+                //无网络不进行任何操作
+                this.setData({
+                    networkType: false
+                })
+
+            }else {
+                //有网络
+                if (boyid) {
+                    this.metaData.mca = "h5_recommend_male";
+                    this.initData();
+                }
+                //#############本地存储############//
+                wx.setStorage({
+                    key:'id',
+                    data:boyid,
+                    success:function (res) {
+                        //console.log(res);
+                    }
+                })
             }
         })
+
     },
 
     onGirlTap:function (event) {
@@ -258,16 +272,29 @@ Page({
                 girlid:girlid
             })
         },1000);
-        if(girlid){
-            this.metaData.mca = "h5_recommend_female";
-            this.initData();
-        }
-        //#############本地存储############//
-        wx.setStorage({
-            key:'id',
-            data:girlid,
-            success:function (res) {
-                //console.log(res);
+        //判断网络类型
+        wxApi.getNetworkType().then((res) =>{
+            let networkType = res.networkType;
+            if (networkType === 'none' || networkType === 'unknown') {
+                //无网络不进行任何操作
+                this.setData({
+                    networkType: false
+                })
+
+            }else {
+                //有网络
+                if(girlid){
+                    this.metaData.mca = "h5_recommend_female";
+                    this.initData();
+                }
+                //#############本地存储############//
+                wx.setStorage({
+                    key:'id',
+                    data:girlid,
+                    success:function (res) {
+                        //console.log(res);
+                    }
+                })
             }
         })
     },
@@ -276,14 +303,6 @@ Page({
         var comic_id = e.currentTarget.dataset.typeid;
         wx.navigateTo({
             url: '/pages/details/details?comic_id='+comic_id
-        })
-    },
-    //关闭男女分版弹层事件
-    onCancelTap:function () {
-        var that = this;
-        this.setData({
-            isCancel:!that.data.isCancel,
-            isScroll:true
         })
     },
     /*input聚焦和失焦,监听*/
@@ -304,17 +323,29 @@ Page({
         var that = this;
          that.searchData.word = e.detail.value;
         //console.log(that.searchData.word);
-        var word = that.searchData.word;
-        if (word === ''){
-            this.setData({
-                searchList:[],
-                noSearch:true
-            })
-            that.data.scrolType = '';
-            that.searchData.page_num = 1;
-        }else {
-            that.searchDatas();
-        }
+        var word = that.searchData.word;//判断网络类型
+        wxApi.getNetworkType().then((res) =>{
+            let networkType = res.networkType;
+            if (networkType === 'none' || networkType === 'unknown') {
+                //无网络不进行任何操作
+                this.setData({
+                    networkType: false
+                })
+
+            }else {
+                //有网络
+                if (word === ''){
+                    this.setData({
+                        searchList:[],
+                        noSearch:true
+                    })
+                    that.data.scrolType = '';
+                    that.searchData.page_num = 1;
+                }else {
+                    that.searchDatas();
+                }
+            }
+        })
 
     },
     //删除搜索框内容事件
@@ -365,9 +396,21 @@ Page({
         this.setData({
             isLower:!that.data.isLower
         })
-        that.searchData.page_num++;
+        //判断网络类型
+        wxApi.getNetworkType().then((res) =>{
+            let networkType = res.networkType;
+            if (networkType === 'none' || networkType === 'unknown') {
+                //无网络不进行任何操作
+                this.setData({
+                    networkType: false
+                })
 
-        that.searchDatas();
+            }else {
+                //有网络
+                that.searchData.page_num++;
+                that.searchDatas();
+            }
+        })
 
     },
     //滚动条滚动后触发

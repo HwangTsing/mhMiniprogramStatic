@@ -50,9 +50,9 @@
 
 
     <!-- 提示信息 S  -->
-    <import src="./template/template.wxml"/>
+    <import src="/tpls/message.wxml"/>
 
-    <template is="message" data="{{ networkType,comicCommentData }}"/>
+    <template is="message"  wx:if="{{ type }}" data="{{ type }}"/>
     <!-- 提示信息 S  -->
 
 </view>

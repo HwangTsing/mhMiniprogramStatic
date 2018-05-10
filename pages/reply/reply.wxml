@@ -11,7 +11,7 @@
         scroll-with-animation="true"
         enable-back-to-top="true"
         bindscrolltolower="onScroll"
-        wx:if="{{ networkType && replyList  }}"
+        wx:if="{{ commentData && replyList  }}"
     >
         <!-- 头部上级页面传递数据S -->
         <view class="comment_container_top">
@@ -56,6 +56,14 @@
             ></message>
             <!-- 首次加载网络差提示 E -->
 
+            <!-- 首次加载网络差提示 S -->
+            <message
+                wx:if="{{ !networkType && replyList && replyList.length>0 }}"
+                modal="{{ false }}"
+                type="search"
+            ></message>
+            <!-- 首次加载网络差提示 E -->
+
             <view class="comment_message"
                   wx:if="{{ networkType && replyList.length>9 && isMessage }}"
             >
@@ -76,9 +84,9 @@
 
 
     <!-- 提示信息 S  -->
-    <import src="./template/template.wxml"/>
+    <import src="/tpls/message.wxml"/>
 
-    <template is="message" data="{{ networkType,replyList }}"/>
+    <template is="message"  wx:if="{{ type }}" data="{{ type }}"/>
     <!-- 提示信息 S  -->
 </view>
 <!-- 组件外层盒子E -->
