@@ -125,8 +125,9 @@ Page({
       })
 
       if (page && page.length) this.setData({ json_content })
+
       if (!chapter_list.length) this.setPageMessage('out')
-      if (!(page&&page.length)) this.setPageMessage('lose')
+      else if (!(page&&page.length)) this.setPageMessage('lose')
       return { chapter_list, comic_id, chapter_id, chapter_name}
     }, () => {
       this.setPageMessage('server')

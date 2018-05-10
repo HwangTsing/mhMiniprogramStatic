@@ -563,16 +563,16 @@ swiper-item wx-image {
   margin-top: 26rpx;
 }
 /*img*/
-.scroll_view {
+.scroll_view, .scroll_view view{
   width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
+  display: flex;
+  flex-wrap: nowrap;
 }
 .scroll_view .big_img {
-  display: inline-block;
   width: 488rpx;
   height: 388rpx;
   background: #ffffff;
+  flex: 1;
   margin: 0 2rpx;
 }
 .scroll_view .big_img image {

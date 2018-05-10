@@ -150,20 +150,22 @@
         </view>
 
         <!--img+content 图片区域内容可滑动--精品佳作-->
-        <scroll-view class="scroll_view" scroll-x="true">
-            <block wx:if="{{girlFineWorks}}" wx:for="{{girlFineWorks}}" wx:key="index">
-                <navigator class="big_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                    <image mode="aspectFill" lazy-load="true"
-                           style="background: url('../../images/hcover.png')no-repeat;background-size: 100% 100%;position: relative;top: 0;left: 0;">
-                        <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"
-                        style="position: absolute;left: 0;top: 0;"></image>
-                    </image>
-                    <view class="word_info">
-                        <text class="name_name">{{item.extra.name}}</text>
-                        <text class="name_info">{{item.extra.watching_focus}}</text>
-                    </view>
-                </navigator>
-            </block>
+        <scroll-view scroll-x="{{true}}" class="scroll_view">
+            <view>
+                <block wx:if="{{girlFineWorks}}" wx:for="{{girlFineWorks}}" wx:key="index">
+                    <navigator class="big_img" url="../details/details?comic_id={{item.extra.comic_id}}">
+                        <image mode="aspectFill" lazy-load="true"
+                            style="background: url('../../images/hcover.png')no-repeat;background-size: 100% 100%;position: relative;top: 0;left: 0;">
+                            <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"
+                            style="position: absolute;left: 0;top: 0;"></image>
+                        </image>
+                        <view class="word_info">
+                            <text class="name_name">{{item.extra.name}}</text>
+                            <text class="name_info">{{item.extra.watching_focus}}</text>
+                        </view>
+                    </navigator>
+                </block>
+            </view>
         </scroll-view>
         <view class="bg_more" catchtap="bindMoreTap" data-index="{{keyIndex[1]}}"
               data-title="{{title_fine}}"><text>查看更多</text></view>
