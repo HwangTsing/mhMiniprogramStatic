@@ -66,10 +66,8 @@ Component({
     }
     const hasButton = this.data.buttons.indexOf(type) != -1
     this.setData({ height, hasButton })
-    console.log(type, this.data.msg[type])
   },
   ready () {
-    console.log('bb')
     const url = wxApi.getCurrentPageUrl()
     this.setData({ url })
   },
