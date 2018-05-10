@@ -17,7 +17,7 @@
             </view>
         </navigator>
     </block>
-    <message wx:if="{{networkType === false}}" class="net_view" type="net"></message>
-    <message wx:if="{{isLoad === true}}" class="server_view" type="server"></message>
+    <import src="./template/message.wxml"></import>
+    <template is="message" data="{{networkType,isLoad}}"></template>
 </view>
 
