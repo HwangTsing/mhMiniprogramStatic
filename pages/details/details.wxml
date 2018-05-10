@@ -88,6 +88,7 @@
                         directoryDisplay="{{dataAry.comic.directory_display}}"
                         chapterList="{{dataAry.chapterList}}"
                         comic_id="{{dataAry.comic.comic_id}}"
+                        history="{{history}}"
                     ></comicCatalog>
                     <!-- 章节信息 组件 E -->
 

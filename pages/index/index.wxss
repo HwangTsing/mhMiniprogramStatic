@@ -565,8 +565,8 @@ swiper-item wx-image {
 /*img*/
 .scroll_view {
   width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
+  display: flex;
+  flex-wrap: nowrap;
 }
 .scroll_view .big_img {
   display: inline-block;

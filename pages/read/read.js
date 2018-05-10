@@ -31,7 +31,7 @@ Page({
     this.render(chapter_id)
 
     wxApi.getNetworkType().then(({ networkType }) => {
-      if (networkType == 'none') this.setPageMessage('net')
+      if (_.indexOf(['none', '2g'], networkType) != -1) this.setPageMessage('net')
     })
 
     // wxApi.onNetworkStatusChange(({ isConnected, networkType }) => {
@@ -107,23 +107,33 @@ Page({
         create_source
       }
     }).then(({ code, message, data } = {}) => {
-
+      
       const {
         chapter = {},
-        chapter_list,
-        json_content,
+        chapter_list = [],
+        json_content = {page: []},
+        json_content: {page},
+        is_allow_read,
         comic
       } = data;
 
       const { chapter_name } = chapter
       const { comic_id } = comic
       this.setData({
-        json_content,
         comic,
         chapter
       })
 
+<<<<<<< HEAD
+=======
+      if (page && page.length) this.setData({ json_content })
+
+      if (!chapter_list.length) this.setPageMessage('out')
+      else if (!(page&&page.length)) this.setPageMessage('lose')
+>>>>>>> 5dea6e1841517005d02772321f035288246d90b5
       return { chapter_list, comic_id, chapter_id, chapter_name}
+    }, () => {
+      this.setPageMessage('server')
     })
   },
 
@@ -135,10 +145,10 @@ Page({
     wxApi.pageScrollTo({ scrollTop })
   },
 
-  render: function (chapter_id){
+  render: function (chapter_id=343){
     //wxApi.pageScrollTo({scrollTop: 0});
     if (!chapter_id) return this.setPageMessage('noExist')
-    this.fetchComic(chapter_id).then(({ chapter_list, comic_id, chapter_id, chapter_name})=>{
+    this.fetchComic(chapter_id).then(({ chapter_list, comic_id, chapter_id, chapter_name} = {})=>{
       wxApi.setNavigationBarTitle(chapter_name)
       this.findChapterList(chapter_id, chapter_list)
       this.setReadingLog({ comic_id, chapter_id, chapter_name })
