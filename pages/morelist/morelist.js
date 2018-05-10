@@ -44,9 +44,9 @@ Page({
         data:{location_en},
         header:'',
         success:function (data) {
-            console.log(data);
+            //console.log(data);
             that.data.moreData = data.data.data;
-            console.log(that.data.moreData);
+            //console.log(that.data.moreData);
             var extra = [];
             for (var i in that.data.moreData){
                 var moreData = data.data.data[i];
@@ -54,8 +54,8 @@ Page({
                   extra.push(item.extra);
                 })
             }
-            console.log(moreData);
-            console.log(extra);
+            //console.log(moreData);
+            //console.log(extra);
             that.setData({
                 moreData:extra,
                 networkType:true

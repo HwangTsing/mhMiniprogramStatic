@@ -44,7 +44,7 @@ Page({
     searchData:{
           word:'',
           page_num:1,
-          rows_num:10
+          rows_num:20
     },
 
 
@@ -61,10 +61,10 @@ Page({
             header:'application/html',
             success:function (data) {
                 //console.log(data)
-                console.log(data.data.data);
+                //console.log(data.data.data);
                 var site_image = data.data.data.site_image;
                 var location_list = data.data.data.location_list;
-                console.log(location_list);
+                //console.log(location_list);
                 var recommendList = that.data.recommendList;
                 var title= that.data.title,keyIndex = that.data.keyIndex;
                 if (data.data.code == 1){
@@ -76,14 +76,14 @@ Page({
                     location_list.forEach((item,index)=> {
                         //console.log(item.location_en);
                         var key = item.location_en;
-                        console.log(key);
-                        console.log(data.data.data[key]);
+                        //console.log(key);
+                        //console.log(data.data.data[key]);
                         title.push(item.location_cn);
                         keyIndex.push(key)
                         recommendList.push(data.data.data[key]);
                     });
 
-                    console.log(recommendList);
+                    //console.log(recommendList);
 
                     if (recommendList[2].length >=4){
                         var girlPopularWorks = recommendList[2].slice(0,4);
@@ -145,7 +145,7 @@ Page({
         var page_num = '',rows_num='',word='';
         if (!!this.searchData.word){
             word = this.searchData.word;
-            console.log(word)
+            //console.log(word)
         }
         if (!!this.searchData.page_num) {
             page_num = +this.searchData.page_num;
@@ -162,8 +162,8 @@ Page({
                 header:'',
                 success:function (data) {
                     if (data.data.data.data.length !==0){
-                        console.log(data.data);
-                        console.log(data.data.data.data);
+                        //console.log(data.data);
+                        //console.log(data.data.data.data);
                         that.data.total = data.data.data.page_total;
                         var site_cover = data.data.data.site_cover;
 
@@ -175,7 +175,7 @@ Page({
                                 }
                             })
                             var searchList = that.data.searchList.concat(data.data.data.data);
-                            console.log(searchList);
+                            //console.log(searchList);
 
                         }else {
                             that.data.searchList = data.data.data.data;
@@ -186,7 +186,7 @@ Page({
                                 }
                             })
                             var searchList = that.data.searchList;
-                            console.log(searchList);
+                            //console.log(searchList);
                         }
                         that.setData({
                             searchList:searchList,
@@ -221,7 +221,7 @@ Page({
     onBoyTap:function (event) {
         var that = this;
         var boyid=event.currentTarget.dataset.index;
-        console.log(boyid);
+        //console.log(boyid);
         this.setData({
             isBoy:!that.data.isBoy
 
@@ -240,7 +240,7 @@ Page({
             key:'id',
             data:boyid,
             success:function (res) {
-                console.log(res);
+                //console.log(res);
             }
         })
     },
@@ -248,7 +248,7 @@ Page({
     onGirlTap:function (event) {
         var that = this;
         var girlid=event.currentTarget.dataset.index;
-        console.log(girlid);
+        //console.log(girlid);
         this.setData({
             isGirl:!that.data.isGirl,
             idsed:3
@@ -267,7 +267,7 @@ Page({
             key:'id',
             data:girlid,
             success:function (res) {
-                console.log(res);
+                //console.log(res);
             }
         })
     },
@@ -303,7 +303,7 @@ Page({
     bindInputChange:function (e) {
         var that = this;
          that.searchData.word = e.detail.value;
-        console.log(that.searchData.word);
+        //console.log(that.searchData.word);
         var word = that.searchData.word;
         if (word === ''){
             this.setData({
@@ -359,7 +359,7 @@ Page({
     },
     //滚动条滚到底部的时候触发
     lower: function(e) {
-        console.log(e.type);
+        //console.log(e.type);
         var that = this;
         that.data.scrolType = e.type;
         this.setData({
@@ -404,9 +404,9 @@ Page({
                 wx.getStorage({
                     key:'id',
                     success:function (res) {
-                        console.log(res.data);
+                        //console.log(res.data);
                         var data = res.data;
-                        console.log(data);
+                        //console.log(data);
                         if (data === "0"){
                             that.setData({
                                 boyid:"0"
@@ -427,7 +427,7 @@ Page({
                 wx.getStorage({
                     key:'id',
                     success:function (res) {
-                        console.log(res);
+                        //console.log(res);
                         var id = res.data;
                         if (id === 0){
                             that.metaData.mca = "h5_recommend_female";
@@ -459,7 +459,7 @@ Page({
         var that = this;
         that.data.id = Number(e.currentTarget.dataset.id);
         var id = that.data.id;
-        console.log(id);
+        //console.log(id);
         if (id === 0){
             this.metaData.mca = "h5_recommend_female";
             this.initData();
@@ -480,7 +480,7 @@ Page({
             key:'id',
             data:id,
             success:function (res) {
-                console.log(res);
+                //console.log(res);
             }
 
         })
@@ -489,7 +489,7 @@ Page({
         var that = this;
         that.data.idg = Number(e.currentTarget.dataset.id);
         var idg = that.data.idg;
-        console.log(idg);
+        //console.log(idg);
         if (idg === 1){
             this.metaData.mca = "h5_recommend_male";
             this.initData();
@@ -511,7 +511,7 @@ Page({
             key:'id',
             data:idg,
             success:function (res) {
-                console.log(res);
+                //console.log(res);
             }
         })
     },
