@@ -304,17 +304,29 @@ Page({
         var that = this;
          that.searchData.word = e.detail.value;
         //console.log(that.searchData.word);
-        var word = that.searchData.word;
-        if (word === ''){
-            this.setData({
-                searchList:[],
-                noSearch:true
-            })
-            that.data.scrolType = '';
-            that.searchData.page_num = 1;
-        }else {
-            that.searchDatas();
-        }
+        var word = that.searchData.word;//判断网络类型
+        wxApi.getNetworkType().then((res) =>{
+            let networkType = res.networkType;
+            if (networkType === 'none' || networkType === 'unknown') {
+                //无网络不进行任何操作
+                this.setData({
+                    networkType: false
+                })
+
+            }else {
+                //有网络
+                if (word === ''){
+                    this.setData({
+                        searchList:[],
+                        noSearch:true
+                    })
+                    that.data.scrolType = '';
+                    that.searchData.page_num = 1;
+                }else {
+                    that.searchDatas();
+                }
+            }
+        })
 
     },
     //删除搜索框内容事件
@@ -365,9 +377,21 @@ Page({
         this.setData({
             isLower:!that.data.isLower
         })
-        that.searchData.page_num++;
+        //判断网络类型
+        wxApi.getNetworkType().then((res) =>{
+            let networkType = res.networkType;
+            if (networkType === 'none' || networkType === 'unknown') {
+                //无网络不进行任何操作
+                this.setData({
+                    networkType: false
+                })
 
-        that.searchDatas();
+            }else {
+                //有网络
+                that.searchData.page_num++;
+                that.searchDatas();
+            }
+        })
 
     },
     //滚动条滚动后触发
