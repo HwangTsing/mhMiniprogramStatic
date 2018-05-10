@@ -564,6 +564,14 @@ swiper-item wx-image {
 .scroll_view, .scroll_view view{
     width: 100%;
     display: flex;
+    display: -webkit-flex;
+    display: -webkit-box;
+    flex-direction: row;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    -webkit-flex-direction: row;
+    box-sizing: border-box;
     flex-wrap: nowrap;
 }
 .scroll_view .big_img {
