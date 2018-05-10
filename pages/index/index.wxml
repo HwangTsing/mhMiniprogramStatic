@@ -63,6 +63,7 @@
             <view class="toast_word">正在加载中...</view>
         </view>
     </view>
+
     <!--search搜索-->
     <!--搜索框聚焦时显示-->
     <view class="{{isOpacity? 'search_view_show':'search_view'}}" style="{{isScrollSearch === true && isOpacity === false? 'background:#fff;opacity:0.95;':''}}">
@@ -153,7 +154,7 @@
             <block wx:if="{{girlFineWorks}}" wx:for="{{girlFineWorks}}" wx:key="index">
                 <navigator class="big_img" url="../details/details?comic_id={{item.extra.comic_id}}">
                     <image mode="aspectFill" lazy-load="true"
-                           style="background: url('../../images/banner_bitmap.png')no-repeat;background-size: 100% 100%;position: relative;top: 0;left: 0;">
+                           style="background: url('../../images/hcover.png')no-repeat;background-size: 100% 100%;position: relative;top: 0;left: 0;">
                         <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"
                         style="position: absolute;left: 0;top: 0;"></image>
                     </image>
@@ -177,7 +178,7 @@
             <block wx:for="{{girlPopularWorks}}" wx:key="index">
                 <navigator class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}">
                     <image mode="aspectFill"
-                           style="background: url('../../images/banner_bitmap.png')no-repeat;background-size: 100% 100%;position: relative;top: 0;left: 0;">
+                           style="background: url('../../images/hcover.png')no-repeat;background-size: 100% 100%;position: relative;top: 0;left: 0;">
                         <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}" style="position: absolute;top: 0;left: 0;"></image>
                     </image>
                     <view class="word_info">
@@ -200,7 +201,7 @@
                     <block wx:for="{{newArrivalWorks}}" wx:key="index">
                         <navigator class="new_img" url="../details/details?comic_id={{item.extra.comic_id}}">
                             <image mode="aspectFill" lazy-load="true"
-                            style="background: url('../../images/banner_bitmap.png')no-repeat;background-size: 100% 100%;position: relative;top: 0;left: 0;">
+                            style="background: url('../../images/hcover.png')no-repeat;background-size: 100% 100%;position: relative;top: 0;left: 0;">
                                 <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"
                                 style="position: absolute;left: 0;top: 0;"></image>
                             </image>
@@ -225,7 +226,7 @@
             <block wx:for="{{hotSerialWorks}}" wx:key="index">
                 <navigator class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}">
                     <image mode="aspectFill" lazy-load="true"
-                    style="background: url('../../images/banner_bitmap.png')no-repeat;background-size: 100% 100%;position: relative;top: 0;left: 0;;">
+                    style="background: url('../../images/hcover.png')no-repeat;background-size: 100% 100%;position: relative;top: 0;left: 0;;">
                         <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"
                         style="position: absolute;left: 0;top: 0;"></image>
                     </image>
@@ -249,7 +250,7 @@
                 <block wx:for="{{xiaobianRecommend}}" wx:key="index">
                     <navigator class="new_img" url="../details/details?comic_id={{item.extra.comic_id}}">
                         <image mode="aspectFill" lazy-load="true"
-                               style="background: url('../../images/banner_bitmap.png')no-repeat;background-size: 100% 100%;position: relative;top: 0;left: 0;;">
+                               style="background: url('../../images/hcover.png')no-repeat;background-size: 100% 100%;position: relative;top: 0;left: 0;;">
                             <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"
                                    style="position: absolute;left: 0;top: 0;"></image>
                         </image>
@@ -273,7 +274,7 @@
             <block wx:for="{{weekRecommend}}" wx:key="index">
                 <navigator class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}">
                     <image mode="aspectFill" lazy-load="true"
-                           style="background: url('../../images/banner_bitmap.png')no-repeat;background-size: 100% 100%;position: relative;top: 0;left: 0;;">
+                           style="background: url('../../images/hcover.png')no-repeat;background-size: 100% 100%;position: relative;top: 0;left: 0;;">
                         <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"
                                style="position: absolute;left: 0;top: 0;"></image>
                     </image>
