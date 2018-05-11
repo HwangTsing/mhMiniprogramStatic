@@ -18,7 +18,6 @@ Page({
           circular:true,  //衔接滑动
           vertical: false,  //滑动方向是否纵向
           networkType:true,  //是否有网络
-          isCancel:false,   //推荐页男女分版弹层
           recommendList:[],   //推荐页数据
           isScroll:true,   //scroll-view滚动条
           isOpacity:false,  //蒙层
@@ -26,7 +25,6 @@ Page({
           isScrollSearch:false,    //滚动
           searchListData:[],
           inputValue:'',
-          isLower:false,    //滑动到底部提示没有数据了
           isToast:false,   //男女分版切换toast
           id:0,
           idg:1,
@@ -36,18 +34,15 @@ Page({
           total:1,    //总页码
           noSearch:true,   //是否有搜索结果
           isLoad:false,     //是否加载失败
-
       },
       metaData:{
-          mca:''
+        mca:''
       },
     searchData:{
-          word:'',
-          page_num:1,
-          rows_num:20
+       word:'',
+       page_num:1,
+       rows_num:20
     },
-
-
 
     initData: function () {
         var that = this;
@@ -61,7 +56,6 @@ Page({
             header:'application/html',
             success:function (data) {
                 //console.log(data)
-                //console.log(data.data.data);
                 var site_image = data.data.data.site_image;
                 var location_list = data.data.data.location_list;
                 //console.log(location_list);
@@ -84,7 +78,6 @@ Page({
                     });
 
                     //console.log(recommendList);
-
                     if (recommendList[2].length >=4){
                         var girlPopularWorks = recommendList[2].slice(0,4);
                     }else  if (recommendList[2].length < 4){
@@ -134,6 +127,7 @@ Page({
             },
             fail:function (data) {
                 that.setData({
+                    networkType:true,
                     isLoad:true
                 })
             }
@@ -145,7 +139,6 @@ Page({
         var page_num = '',rows_num='',word='';
         if (!!this.searchData.word){
             word = this.searchData.word;
-            //console.log(word)
         }
         if (!!this.searchData.page_num) {
             page_num = +this.searchData.page_num;
@@ -163,7 +156,6 @@ Page({
                 success:function (data) {
                     if (data.data.data.data.length !==0){
                         //console.log(data.data);
-                        //console.log(data.data.data.data);
                         that.data.total = data.data.data.page_total;
                         var site_cover = data.data.data.site_cover;
 
@@ -204,6 +196,7 @@ Page({
                 },
                 fail:function (data) {
                     that.setData({
+                        networkType:true,
                         isLoad:true
                     })
                 }
@@ -216,7 +209,6 @@ Page({
     },
 
     /*事件处理函数*/
-    //事件
     /*boy and girl*/
     onBoyTap:function (event) {
         var that = this;
@@ -255,6 +247,11 @@ Page({
                     }
                 })
             }
+        }).catch((err) =>{
+            this.setData({
+                networkType:true,
+                isLoad:true
+            })
         })
 
     },
@@ -296,6 +293,11 @@ Page({
                     }
                 })
             }
+        }).catch((err) =>{
+            this.setData({
+                networkType: true,
+                isLoad:true
+            })
         })
     },
     //banner跳转详情
@@ -345,6 +347,11 @@ Page({
                     that.searchDatas();
                 }
             }
+        }).catch((err) =>{
+            this.setData({
+                networkType: true,
+                isLoad:true
+            })
         })
 
     },
@@ -383,7 +390,6 @@ Page({
         })
     },
 
-    /*滚动触发事件*/
     //滚动条滚到顶部的时候触发
     upper: function(e) {
 
@@ -393,9 +399,6 @@ Page({
         //console.log(e.type);
         var that = this;
         that.data.scrolType = e.type;
-        this.setData({
-            isLower:!that.data.isLower
-        })
         //判断网络类型
         wxApi.getNetworkType().then((res) =>{
             let networkType = res.networkType;
@@ -410,6 +413,11 @@ Page({
                 that.searchData.page_num++;
                 that.searchDatas();
             }
+        }).catch((err) =>{
+            this.setData({
+                networkType: true,
+                isLoad:true
+            })
         })
 
     },
@@ -493,6 +501,11 @@ Page({
                     }
                 });
             }
+        }).catch((err) =>{
+            this.setData({
+                networkType: true,
+                isLoad:true
+            })
         })
 
     },
@@ -503,72 +516,110 @@ Page({
         that.data.id = Number(e.currentTarget.dataset.id);
         var id = that.data.id;
         //console.log(id);
-        if (id === 0){
-            this.setData({
-                imgUrls:[]
-            })
-            this.metaData.mca = "h5_recommend_female";
-            this.initData();
-            this.setData({
-                isToast:true,
-                id : 1
-            })
-        }else  if (id === 1){
-            this.setData({
-                imgUrls:[]
-            })
-            this.metaData.mca = "h5_recommend_male";
-            this.initData();
-            this.setData({
-                isToast:true,
-                id : 0
-            })
-        }
-        //#############本地存储############//
-        wx.setStorage({
-            key:'id',
-            data:id,
-            success:function (res) {
-                //console.log(res);
-            }
+        //判断网络类型
+        wxApi.getNetworkType().then((res) =>{
+            let networkType = res.networkType;
+            if (networkType === 'none' || networkType === 'unknown') {
+                //无网络不进行任何操作
+                this.setData({
+                    networkType: false
+                })
 
+            }else {
+                //有网络
+                if (id === 0){
+                    this.setData({
+                        imgUrls:[]
+                    })
+                    this.metaData.mca = "h5_recommend_female";
+                    this.initData();
+                    this.setData({
+                        isToast:true,
+                        id : 1
+                    })
+                }else  if (id === 1){
+                    this.setData({
+                        imgUrls:[]
+                    })
+                    this.metaData.mca = "h5_recommend_male";
+                    this.initData();
+                    this.setData({
+                        isToast:true,
+                        id : 0
+                    })
+                }
+                //#############本地存储############//
+                wx.setStorage({
+                    key:'id',
+                    data:id,
+                    success:function (res) {
+                        //console.log(res);
+                    }
+
+                })
+            }
+        }).catch((err) =>{
+            this.setData({
+                networkType: true,
+                isLoad:true
+            })
         })
+
     },
     onToastTap02:function (e) {
         var that = this;
         that.data.idg = Number(e.currentTarget.dataset.id);
         var idg = that.data.idg;
         //console.log(idg);
-        if (idg === 1){
-            that.setData({
-                imgUrls:[]
-            })
-            this.metaData.mca = "h5_recommend_male";
-            this.initData();
-            this.setData({
-                isToast:true,
-                idg : 0
-            })
-        }
-        else if (idg === 0){
-            this.setData({
-                imgUrls:[]
-            })
-            this.metaData.mca = "h5_recommend_female";
-            this.initData();
-            that.setData({
-                isToast:true,
-                idg : 1
-            })
-        }
-        //#############本地存储############//
-        wx.setStorage({
-            key:'id',
-            data:idg,
-            success:function (res) {
-                //console.log(res);
+        //判断网络类型
+        wxApi.getNetworkType().then((res) =>{
+            let networkType = res.networkType;
+            if (networkType === 'none' || networkType === 'unknown') {
+                //无网络不进行任何操作
+                this.setData({
+                    networkType: false
+                })
+
+            }else {
+                //有网络
+                if (idg === 1){
+                    that.setData({
+                        imgUrls:[]
+                    })
+                    this.metaData.mca = "h5_recommend_male";
+                    this.initData();
+                    this.setData({
+                        isToast:true,
+                        idg : 0
+                    })
+                }
+                else if (idg === 0){
+                    this.setData({
+                        imgUrls:[]
+                    })
+                    this.metaData.mca = "h5_recommend_female";
+                    this.initData();
+                    that.setData({
+                        isToast:true,
+                        idg : 1
+                    })
+                }
+                //#############本地存储############//
+                wx.setStorage({
+                    key:'id',
+                    data:idg,
+                    success:function (res) {
+                        //console.log(res);
+                    }
+                })
             }
+        }).catch((err) =>{
+            this.setData({
+                networkType: true,
+                isLoad:true
+            })
         })
+
     },
 
     /**
@@ -580,7 +631,6 @@ Page({
     onShow: function () {
 
     },
-
 
     /**
      * 页面相关事件处理函数--监听用户下拉动作
