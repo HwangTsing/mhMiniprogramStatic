@@ -34,18 +34,15 @@ Page({
           total:1,    //总页码
           noSearch:true,   //是否有搜索结果
           isLoad:false,     //是否加载失败
-
       },
       metaData:{
-          mca:''
+        mca:''
       },
     searchData:{
-          word:'',
-          page_num:1,
-          rows_num:20
+       word:'',
+       page_num:1,
+       rows_num:20
     },
-
-
 
     initData: function () {
         var that = this;
@@ -59,7 +56,6 @@ Page({
             header:'application/html',
             success:function (data) {
                 //console.log(data)
-                //console.log(data.data.data);
                 var site_image = data.data.data.site_image;
                 var location_list = data.data.data.location_list;
                 //console.log(location_list);
@@ -82,7 +78,6 @@ Page({
                     });
 
                     //console.log(recommendList);
-
                     if (recommendList[2].length >=4){
                         var girlPopularWorks = recommendList[2].slice(0,4);
                     }else  if (recommendList[2].length < 4){
@@ -144,7 +139,6 @@ Page({
         var page_num = '',rows_num='',word='';
         if (!!this.searchData.word){
             word = this.searchData.word;
-            //console.log(word)
         }
         if (!!this.searchData.page_num) {
             page_num = +this.searchData.page_num;
@@ -162,7 +156,6 @@ Page({
                 success:function (data) {
                     if (data.data.data.data.length !==0){
                         //console.log(data.data);
-                        //console.log(data.data.data.data);
                         that.data.total = data.data.data.page_total;
                         var site_cover = data.data.data.site_cover;
 
@@ -216,7 +209,6 @@ Page({
     },
 
     /*事件处理函数*/
-    //事件
     /*boy and girl*/
     onBoyTap:function (event) {
         var that = this;
@@ -398,7 +390,6 @@ Page({
         })
     },
 
-    /*滚动触发事件*/
     //滚动条滚到顶部的时候触发
     upper: function(e) {
 
@@ -640,7 +631,6 @@ Page({
     onShow: function () {
 
     },
-
 
     /**
      * 页面相关事件处理函数--监听用户下拉动作
