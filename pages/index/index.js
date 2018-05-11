@@ -18,7 +18,6 @@ Page({
           circular:true,  //衔接滑动
           vertical: false,  //滑动方向是否纵向
           networkType:true,  //是否有网络
-          isCancel:false,   //推荐页男女分版弹层
           recommendList:[],   //推荐页数据
           isScroll:true,   //scroll-view滚动条
           isOpacity:false,  //蒙层
@@ -26,7 +25,6 @@ Page({
           isScrollSearch:false,    //滚动
           searchListData:[],
           inputValue:'',
-          isLower:false,    //滑动到底部提示没有数据了
           isToast:false,   //男女分版切换toast
           id:0,
           idg:1,
@@ -393,9 +391,6 @@ Page({
         //console.log(e.type);
         var that = this;
         that.data.scrolType = e.type;
-        this.setData({
-            isLower:!that.data.isLower
-        })
         //判断网络类型
         wxApi.getNetworkType().then((res) =>{
             let networkType = res.networkType;
