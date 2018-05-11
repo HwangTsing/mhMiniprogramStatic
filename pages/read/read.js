@@ -26,7 +26,7 @@ Page({
     this.chapter_id = chapter_id
     this.chapter_name = chapter_name
     this.windowHeight = windowHeight
-
+    
     wxApi.getNetworkType().then(({ networkType }) => {
       if (_.indexOf(['none', '2g'], networkType) != -1) {
         this.setPageMessage('net')
@@ -97,7 +97,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    
   },
 
   setPageMessage: function (type) {
