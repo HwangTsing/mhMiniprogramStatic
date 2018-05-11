@@ -19,5 +19,8 @@
     </block>
     <import src="./template/message.wxml"></import>
     <template is="message" data="{{networkType,isLoad}}"></template>
+    <!--data返回null时提示信息-->
+    <import src="/tpls/message.wxml"/>
+    <template is="message" wx:if="{{type}}" data="{{ type }}"/>
 </view>
 
