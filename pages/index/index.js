@@ -11,7 +11,7 @@ Page({
           keyIndex:[],
           indicatorDots: true, //是否显示指示点
           autoplay: true, //是否自动切换
-          interval: 1000, //自动切换间隔时长
+          interval: 3000, //自动切换间隔时长
           duration: 1000, //滑动动画时长
           indicatorColor:'#fff',   //指示点颜色
           indicatorActiveColor:'#FFCC33',   //当前选中指示点颜色
