@@ -131,10 +131,10 @@ class wxApi {
         const promise = new Promise((resolve, reject) => {
             wx.getNetworkType({
                 success(res){ //成功
-                    resolve(res)
+                  resolve(res)
                 },
                 fail(err){ //失败
-                    reject(err)
+                  reject(err)
                 }
             })
         });

@@ -23,8 +23,15 @@ Component({
     });
   },
   methods: {
-    load(e) {
-      // console.log(e)
+    load({ detail = {} }) {
+      const { width, height } = detail
+      const scale = width / height
+      const { width: _width, scale: _scale} = this.properties
+      if (_scale != scale)  {
+        this.setData({
+          height: _width / scale,
+        })
+      }
     },
     error(e) {
       // console.log(e)

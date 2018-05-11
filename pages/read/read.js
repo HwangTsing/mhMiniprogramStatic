@@ -27,11 +27,16 @@ Page({
     this.chapter_name = chapter_name
     this.windowHeight = windowHeight
 
-    this.setData({ windowWidth})
-    this.render(chapter_id)
-
     wxApi.getNetworkType().then(({ networkType }) => {
-      if (_.indexOf(['none', '2g'], networkType) != -1) this.setPageMessage('net')
+      if (_.indexOf(['none', '2g'], networkType) != -1) {
+        this.setPageMessage('net')
+      } else {
+        this.setData({ windowWidth })
+        this.render(chapter_id)
+      }
+    }, () => {
+      this.setData({ windowWidth })
+      this.render(chapter_id)
     })
 
     // wxApi.onNetworkStatusChange(({ isConnected, networkType }) => {
@@ -98,7 +103,7 @@ Page({
   setPageMessage: function (type) {
     wxApi.setMessageType(this, type)
   },
-
+  
   fetchComic: function (chapter_id) {
     const create_source = "microprogram";
     return wxApi.get('wbcomic/comic/comic_play', {
@@ -107,7 +112,10 @@ Page({
         create_source
       }
     }).then(({ code, message, data } = {}) => {
-
+      if (!data || !code) {
+        this.setPageMessage('server')
+        return {}
+      }
       const {
         chapter = {},
         chapter_list = [],
@@ -146,6 +154,7 @@ Page({
     //wxApi.pageScrollTo({scrollTop: 0});
     if (!chapter_id) return this.setPageMessage('noExist')
     this.fetchComic(chapter_id).then(({ chapter_list, comic_id, chapter_id, chapter_name} = {})=>{
+      if (!comic_id) return
       wxApi.setNavigationBarTitle(chapter_name)
       this.findChapterList(chapter_id, chapter_list)
       this.setReadingLog({ comic_id, chapter_id, chapter_name })
