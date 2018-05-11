@@ -504,6 +504,9 @@ Page({
         var id = that.data.id;
         //console.log(id);
         if (id === 0){
+            this.setData({
+                imgUrls:[]
+            })
             this.metaData.mca = "h5_recommend_female";
             this.initData();
             this.setData({
@@ -511,6 +514,9 @@ Page({
                 id : 1
             })
         }else  if (id === 1){
+            this.setData({
+                imgUrls:[]
+            })
             this.metaData.mca = "h5_recommend_male";
             this.initData();
             this.setData({
@@ -534,6 +540,9 @@ Page({
         var idg = that.data.idg;
         //console.log(idg);
         if (idg === 1){
+            that.setData({
+                imgUrls:[]
+            })
             this.metaData.mca = "h5_recommend_male";
             this.initData();
             this.setData({
@@ -542,9 +551,12 @@ Page({
             })
         }
         else if (idg === 0){
+            this.setData({
+                imgUrls:[]
+            })
             this.metaData.mca = "h5_recommend_female";
             this.initData();
-            this.setData({
+            that.setData({
                 isToast:true,
                 idg : 1
             })

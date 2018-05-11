@@ -27,11 +27,16 @@ Page({
     this.chapter_name = chapter_name
     this.windowHeight = windowHeight
 
-    this.setData({ windowWidth})
-    this.render(chapter_id)
-
     wxApi.getNetworkType().then(({ networkType }) => {
-      if (_.indexOf(['none', '2g'], networkType) != -1) this.setPageMessage('net')
+      if (_.indexOf(['none', '2g'], networkType) != -1) {
+        this.setPageMessage('net')
+      } else {
+        this.setData({ windowWidth })
+        this.render(chapter_id)
+      }
+    }, () => {
+      this.setData({ windowWidth })
+      this.render(chapter_id)
     })
 
     // wxApi.onNetworkStatusChange(({ isConnected, networkType }) => {
@@ -41,20 +46,20 @@ Page({
     //   //this.setPageMessage('')
     // })
   },
-  
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
     wxApi.setNavigationBarTitle(this.chapter_name);
-    
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+
   },
 
   /**
@@ -92,13 +97,13 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   },
 
   setPageMessage: function (type) {
     wxApi.setMessageType(this, type)
   },
-
+  
   fetchComic: function (chapter_id) {
     const create_source = "microprogram";
     return wxApi.get('wbcomic/comic/comic_play', {
@@ -107,7 +112,10 @@ Page({
         create_source
       }
     }).then(({ code, message, data } = {}) => {
-      if (!data) this.setPageMessage('server')
+      if (!data || !code) {
+        this.setPageMessage('server')
+        return {}
+      }
       const {
         chapter = {},
         chapter_list = [],
@@ -116,7 +124,7 @@ Page({
         is_allow_read,
         comic
       } = data;
-      
+
       const { chapter_name } = chapter
       const { comic_id } = comic
       this.setData({
@@ -124,16 +132,16 @@ Page({
         chapter
       })
 
-      if (page && page.length) this.setData({ json_content })
+        if (page && page.length) this.setData({ json_content })
 
-      if (!chapter_list.length) this.setPageMessage('out')
-      else if (!(page&&page.length)) this.setPageMessage('lose')
-      return { chapter_list, comic_id, chapter_id, chapter_name}
+        if (!chapter_list.length) this.setPageMessage('out')
+        else if (!(page&&page.length)) this.setPageMessage('lose')
+        return { chapter_list, comic_id, chapter_id, chapter_name}
     }, () => {
-      this.setPageMessage('server')
+        this.setPageMessage('server')
     })
   },
-  
+
   tapScrollHandler: function ({ detail: { y }, currentTarget: { offsetTop }, touches: [{ clientY }] }){
     const scrollY = y - clientY
     const _scrollTop = scrollY < offsetTop ? (clientY - offsetTop + scrollY) : clientY
@@ -146,6 +154,7 @@ Page({
     //wxApi.pageScrollTo({scrollTop: 0});
     if (!chapter_id) return this.setPageMessage('noExist')
     this.fetchComic(chapter_id).then(({ chapter_list, comic_id, chapter_id, chapter_name} = {})=>{
+      if (!comic_id) return
       wxApi.setNavigationBarTitle(chapter_name)
       this.findChapterList(chapter_id, chapter_list)
       this.setReadingLog({ comic_id, chapter_id, chapter_name })

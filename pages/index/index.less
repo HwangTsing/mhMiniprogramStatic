@@ -561,17 +561,25 @@ swiper-item wx-image {
   margin-top:26rpx;
 }
 /*img*/
-.scroll_view {
-  width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
+.scroll_view, .scroll_view view{
+    width: 100%;
+    display: flex;
+    display: -webkit-flex;
+    display: -webkit-box;
+    flex-direction: row;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    -webkit-flex-direction: row;
+    box-sizing: border-box;
+    flex-wrap: nowrap;
 }
 .scroll_view .big_img {
-  display: inline-block;
-  width: 488rpx;
-  height: 388rpx;
-  background:rgba(255,255,255,1);
-  margin: 0 2rpx;
+    width: 488rpx;
+    height: 388rpx;
+    background: #ffffff;
+    flex: 1;
+    margin: 0 2rpx;
 }
 .scroll_view .big_img image {
   display: inline-block;
@@ -746,7 +754,7 @@ swiper-item wx-image {
   width: 374rpx;
   height: 212rpx;
   display: inline-block;
-  float: left;
+  vertical-align: top;
   overflow: hidden;
 }
 .big_new_view .new_img:nth-child(2) image, .big_new_view .new_img:nth-child(3) image {
