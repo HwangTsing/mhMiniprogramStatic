@@ -60,13 +60,18 @@ Page({
                         extra.push(item.extra);
                     })
                 }
-                //console.log(moreData);
-                //console.log(extra);
-                that.setData({
-                    moreData:extra,
-                    networkType:true
-                })
-            }else if(data.data.data === null){
+                if (moreData.length > 0){
+                    that.setData({
+                        moreData:extra,
+                        networkType:true
+                    })
+                }else {
+                    that.setData({
+                        networkType:true,
+                        type:'noExist'
+                    })
+                }
+            }else {
                 that.setData({
                     networkType:true,
                     type:'noExist'
