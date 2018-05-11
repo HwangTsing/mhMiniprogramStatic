@@ -132,6 +132,7 @@ Page({
             },
             fail:function (data) {
                 that.setData({
+                    networkType:true,
                     isLoad:true
                 })
             }
@@ -202,6 +203,7 @@ Page({
                 },
                 fail:function (data) {
                     that.setData({
+                        networkType:true,
                         isLoad:true
                     })
                 }
@@ -253,6 +255,11 @@ Page({
                     }
                 })
             }
+        }).catch((err) =>{
+            this.setData({
+                networkType:true,
+                isLoad:true
+            })
         })
 
     },
@@ -294,6 +301,11 @@ Page({
                     }
                 })
             }
+        }).catch((err) =>{
+            this.setData({
+                networkType: true,
+                isLoad:true
+            })
         })
     },
     //banner跳转详情
@@ -343,6 +355,11 @@ Page({
                     that.searchDatas();
                 }
             }
+        }).catch((err) =>{
+            this.setData({
+                networkType: true,
+                isLoad:true
+            })
         })
 
     },
@@ -405,6 +422,11 @@ Page({
                 that.searchData.page_num++;
                 that.searchDatas();
             }
+        }).catch((err) =>{
+            this.setData({
+                networkType: true,
+                isLoad:true
+            })
         })
 
     },
@@ -488,6 +510,11 @@ Page({
                     }
                 });
             }
+        }).catch((err) =>{
+            this.setData({
+                networkType: true,
+                isLoad:true
+            })
         })
 
     },
@@ -498,72 +525,110 @@ Page({
         that.data.id = Number(e.currentTarget.dataset.id);
         var id = that.data.id;
         //console.log(id);
-        if (id === 0){
-            this.setData({
-                imgUrls:[]
-            })
-            this.metaData.mca = "h5_recommend_female";
-            this.initData();
-            this.setData({
-                isToast:true,
-                id : 1
-            })
-        }else  if (id === 1){
-            this.setData({
-                imgUrls:[]
-            })
-            this.metaData.mca = "h5_recommend_male";
-            this.initData();
-            this.setData({
-                isToast:true,
-                id : 0
-            })
-        }
-        //#############本地存储############//
-        wx.setStorage({
-            key:'id',
-            data:id,
-            success:function (res) {
-                //console.log(res);
-            }
+        //判断网络类型
+        wxApi.getNetworkType().then((res) =>{
+            let networkType = res.networkType;
+            if (networkType === 'none' || networkType === 'unknown') {
+                //无网络不进行任何操作
+                this.setData({
+                    networkType: false
+                })
 
+            }else {
+                //有网络
+                if (id === 0){
+                    this.setData({
+                        imgUrls:[]
+                    })
+                    this.metaData.mca = "h5_recommend_female";
+                    this.initData();
+                    this.setData({
+                        isToast:true,
+                        id : 1
+                    })
+                }else  if (id === 1){
+                    this.setData({
+                        imgUrls:[]
+                    })
+                    this.metaData.mca = "h5_recommend_male";
+                    this.initData();
+                    this.setData({
+                        isToast:true,
+                        id : 0
+                    })
+                }
+                //#############本地存储############//
+                wx.setStorage({
+                    key:'id',
+                    data:id,
+                    success:function (res) {
+                        //console.log(res);
+                    }
+
+                })
+            }
+        }).catch((err) =>{
+            this.setData({
+                networkType: true,
+                isLoad:true
+            })
         })
+
     },
     onToastTap02:function (e) {
         var that = this;
         that.data.idg = Number(e.currentTarget.dataset.id);
         var idg = that.data.idg;
         //console.log(idg);
-        if (idg === 1){
-            that.setData({
-                imgUrls:[]
-            })
-            this.metaData.mca = "h5_recommend_male";
-            this.initData();
-            this.setData({
-                isToast:true,
-                idg : 0
-            })
-        }
-        else if (idg === 0){
-            this.setData({
-                imgUrls:[]
-            })
-            this.metaData.mca = "h5_recommend_female";
-            this.initData();
-            that.setData({
-                isToast:true,
-                idg : 1
-            })
-        }
-        //#############本地存储############//
-        wx.setStorage({
-            key:'id',
-            data:idg,
-            success:function (res) {
-                //console.log(res);
+        //判断网络类型
+        wxApi.getNetworkType().then((res) =>{
+            let networkType = res.networkType;
+            if (networkType === 'none' || networkType === 'unknown') {
+                //无网络不进行任何操作
+                this.setData({
+                    networkType: false
+                })
+
+            }else {
+                //有网络
+                if (idg === 1){
+                    that.setData({
+                        imgUrls:[]
+                    })
+                    this.metaData.mca = "h5_recommend_male";
+                    this.initData();
+                    this.setData({
+                        isToast:true,
+                        idg : 0
+                    })
+                }
+                else if (idg === 0){
+                    this.setData({
+                        imgUrls:[]
+                    })
+                    this.metaData.mca = "h5_recommend_female";
+                    this.initData();
+                    that.setData({
+                        isToast:true,
+                        idg : 1
+                    })
+                }
+                //#############本地存储############//
+                wx.setStorage({
+                    key:'id',
+                    data:idg,
+                    success:function (res) {
+                        //console.log(res);
+                    }
+                })
             }
+        }).catch((err) =>{
+            this.setData({
+                networkType: true,
+                isLoad:true
+            })
         })
+
     },
 
     /**
