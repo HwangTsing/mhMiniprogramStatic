@@ -107,7 +107,7 @@ Page({
         create_source
       }
     }).then(({ code, message, data } = {}) => {
-      
+      if (!data) this.setPageMessage('server')
       const {
         chapter = {},
         chapter_list = [],
