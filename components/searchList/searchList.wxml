@@ -1,6 +1,6 @@
 <!--components/searchList/searchList.wxml-->
 
-<navigator class="list_data" url="../details/details?comic_id={{idx}}">
+<view class="list_data" catchtap="listTap" data-comic_id="{{idx}}">
     <view class="img_view">
         <image mode="aspectFit" lazy-load="true" src="../../images/cover.png"
                style="position: relative;top: 0;left: 0;;">
@@ -17,4 +17,4 @@
         </block>
 
     </view>
-</navigator>
+</view>
