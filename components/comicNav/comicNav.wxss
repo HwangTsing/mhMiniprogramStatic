@@ -28,12 +28,11 @@
 .prev-button::before, .next-button::after{
   content: ' ';
   display: inline-block;
-  position: relative;
-  top: 3rpx;
-  width: 16rpx;
-  height: 16rpx;
+  vertical-align: middle;
+  width: 14rpx;
+  height: 14rpx;
   margin: 0 4rpx;
-  border: 6rpx solid #ccc;
+  border: 4rpx solid #ccc;
   border-radius: 2rpx;
   transform: rotateZ(45deg);
 }
