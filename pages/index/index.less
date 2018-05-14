@@ -8,7 +8,7 @@
 page {
   position: relative;
   font-family: Arial, "Microsoft YaHei", sans-serif;
-  overflow-x: hidden;
+
   background-color: #f5f5f5;
 }
 .container {
@@ -23,7 +23,6 @@ page {
   align-items: center;
   font-size: 26rpx;
   padding: 0;
-  overflow-x: hidden;
   box-sizing: border-box;
   position: relative;
   background: #fff;
@@ -550,18 +549,20 @@ swiper-item wx-image {
   margin-top:26rpx;
 }
 /*img*/
-.scroll_view, .scroll_view{
+.scroll_view{
     width: 100%;
+}
+.scroll_view view{
     height: 388rpx;
-    white-space: nowrap;
-    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
 }
 .scroll_view .big_img {
     width: 488rpx;
     height: 388rpx;
     background: #ffffff;
-    display: inline-block;
-    vertical-align: top;
+
     margin: 0 2rpx;
 }
 .scroll_view .big_img image {
