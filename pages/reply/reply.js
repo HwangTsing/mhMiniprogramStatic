@@ -104,8 +104,10 @@ Page({
 
         let pageTotal = this.data.pageTotal;
         let isLoads = this.data.isLoads;
-
-        if (isLoads || pageTotal < pageNum) {
+        if(isLoads){
+            return
+        }
+        if ( pageTotal < pageNum) {
             //如果加载状态是true,一共可以下拉加载次数是否小于当前页码
             // 条件成立 什么都不做
             return

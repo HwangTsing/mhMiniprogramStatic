@@ -69,7 +69,7 @@ Page({
                         reply_list = reply_list && reply_list.length > 0 ? reply_list : null;//判断格式化后的数组是否为空
 
                         let reply_content; //存储回复评论的数据
-                        if (reply_list) {
+                        if (reply_list && reply_list.length>0) {
                             reply_content = [];//给回复对象重新赋值
                             reply_list.forEach((item, index) => {
                                 if (dataList.reply_content[item.reply_id]) { //判断当前的回复评论id是否存在
@@ -77,7 +77,9 @@ Page({
                                         data: dataList.reply_content[item.reply_id],
                                         user: dataList.user[item.user_id]
                                     }
-                                    reply_content.push(data);//存储找到的数据
+                                    if(data.user && data.user.user_nickname){
+                                        reply_content.push(data);//存储找到的数据
+                                    }
                                 }
                             })
                         } else {
@@ -131,6 +133,7 @@ Page({
 
             }
         }).catch((err)=>{
+            console.log(err)
             this.setData({
                 isLoads: false,
                 networkType: false,//是否有网络
@@ -148,7 +151,10 @@ Page({
 
         let pageTotal = this.data.pageTotal;
         let isLoads = this.data.isLoads;
-        if (isLoads || pageTotal < pageNum) {
+        if(isLoads){
+            return
+        }
+        if ( pageTotal < pageNum) {
             //如果加载状态是true,一共可以下拉加载次数是否小于当前页码
             // 条件成立 什么都不做
             return
