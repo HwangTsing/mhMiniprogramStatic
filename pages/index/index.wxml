@@ -149,9 +149,9 @@
             <view class="border" style="margin-left: 10rpx;"></view>
         </view>
 
-        <!--img+content 图片区域内容可滑动--精品佳作-->
+        <!--img+content 图片区域内容可滑动-精品佳作-->
         <scroll-view class="scroll_view" scroll-x="{{true}}">
-            <view style="width:{{FineWorks.length*488}}rpx">
+            <view style="width: {{windowWidth}}">
                 <block wx:if="{{FineWorks}}" wx:for="{{FineWorks}}" wx:key="index">
                     <navigator class="big_img" url="../details/details?comic_id={{item.extra.comic_id}}">
                         <image mode="aspectFill" lazy-load="true" src="../../images/hcover.png"

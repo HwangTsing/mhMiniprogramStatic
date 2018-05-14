@@ -3,6 +3,7 @@ var wxApi = require("../../utils/util.js");
 
 Page({
       data: {
+          windowWidth: '320px',
           isBoy:false,   //男版
           isGirl:false,   //女版
           timer:null,     //倒计时
@@ -69,7 +70,7 @@ Page({
                     location_list.forEach((item,index)=> {
                         //console.log(item.location_en);
                         var key = item.location_en;
-                        recommendList[key] = data.data.data[key];
+                        recommendList[key] = data.data.data[key]||[];
                         //console.log(data.data.data[key]);
                         title.push(item.location_cn);
                         keyIndex.push(key)
@@ -434,6 +435,11 @@ Page({
     onLoad: function (options) {
         var that = this;
         //判断网络类型
+        let { windowWidth } = wxApi.getSystemInfoSync()
+        if (windowWidth > 0) {
+            windowWidth = windowWidth + 'px'
+            this.setData({ windowWidth })
+        }
         wxApi.getNetworkType().then((res) =>{
             let networkType = res.networkType;
             if (networkType === 'none' || networkType === 'unknown') {
