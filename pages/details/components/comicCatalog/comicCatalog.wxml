@@ -3,7 +3,7 @@
 
     <view
         class="comic_catalog_one"
-        wx:if="{{directoryDisplay==2}}"
+        wx:if="{{directoryDisplay==1}}"
     >
         <view
             wx:for="{{chapterList}}"
@@ -22,7 +22,7 @@
 
     <!-- 横版目录 S -->
     <view
-        wx:if="{{directoryDisplay==1}}"
+        wx:if="{{directoryDisplay==2}}"
         wx:for="{{chapterList}}"
         wx:key="index"
         class="comic_catalog_two {{history && history.chapter_id===item.chapter_id?' active':''}}"
