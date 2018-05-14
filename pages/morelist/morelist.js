@@ -35,6 +35,11 @@ Page({
               });
               that.moreList(location_en);
           }
+      }).catch((err) =>{
+          this.setData({
+              networkType: true,
+              isLoad:true
+          })
       })
   },
   moreList:function (location_en) {
@@ -44,25 +49,38 @@ Page({
         data:{location_en},
         header:'',
         success:function (data) {
-            //console.log(data);
-            that.data.moreData = data.data.data;
-            //console.log(that.data.moreData);
-            var extra = [];
-            for (var i in that.data.moreData){
-                var moreData = data.data.data[i];
-                moreData.forEach((item,index) =>{
-                  extra.push(item.extra);
+            console.log(data.data.data);
+            if (data.data.data !== null){
+                that.data.moreData = data.data.data;
+                //console.log(that.data.moreData);
+                var extra = [];
+                for (var i in that.data.moreData){
+                    var moreData = data.data.data[i];
+                    moreData.forEach((item,index) =>{
+                        extra.push(item.extra);
+                    })
+                }
+                if (moreData.length > 0){
+                    that.setData({
+                        moreData:extra,
+                        networkType:true
+                    })
+                }else {
+                    that.setData({
+                        networkType:true,
+                        type:'noExist'
+                    })
+                }
+            }else {
+                that.setData({
+                    networkType:true,
+                    type:'noExist'
                 })
             }
-            //console.log(moreData);
-            //console.log(extra);
-            that.setData({
-                moreData:extra,
-                networkType:true
-            })
         },
         fail:function (data) {
             that.setData({
+                networkType:true,
                 isLoad:true
             })
         }
