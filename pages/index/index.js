@@ -75,18 +75,18 @@ Page({
                         title.push(item.location_cn);
                         keyIndex.push(key)
                     });
+                    console.log('recommendList', recommendList);
                     const imgUrls = recommendList[mca+'_rotation_map'];
                     //精品佳作
                     const FineWorks = recommendList[mca+'_fine_works'];
                     //人气作品
-                    const PopularWorks = recommendList[mca +'_popular_works'].slice(0,4);
+                    const PopularWorks = recommendList[mca+'_popular_works'].slice(0,4);
                     //最新上架
-                    const newArrivalWorks = recommendList[mca +'_new_arrival'].slice(0,3);
+                    const newArrivalWorks = recommendList[mca+'_new_arrival'].slice(0,3);
                     //热门连载
-                    const hotSerialWorks = recommendList[mca +'_hot_serial'].slice(0,4);
-                    const xiaobianRecommend = recommendList[mca +'_xiaobian_recommend'].slice(0,3);
-                    const weekRecommend = recommendList[mca +'_week_recommend'].slice(0,4);
-
+                    const hotSerialWorks = recommendList[mca+'_hot_serial'].slice(0,4);
+                    const xiaobianRecommend = recommendList[mca+'_xiaobian_recommend'].slice(0,3);
+                    const weekRecommend = recommendList[mca+'_week_recommend'].slice(0,4);
                     that.setData({
                         keyIndex:keyIndex,
                         title_fine:title[1],
@@ -105,6 +105,7 @@ Page({
                         isToast:false,
                         networkType:true
                     })
+
                 }
 
             },
@@ -220,7 +221,7 @@ Page({
             }else {
                 //有网络
                 if (boyid) {
-                    this.metaData.mca = "mini_recommend_male";
+                    this.metaData.mca = "h5_recommend_male";
                     this.initData();
                 }
                 //#############本地存储############//

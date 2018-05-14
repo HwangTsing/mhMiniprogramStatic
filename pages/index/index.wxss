@@ -555,8 +555,10 @@ swiper-item wx-image {
 }
 .scroll_view view {
   height: 388rpx;
+  width: 320px;
   display: flex;
   flex-direction: row;
+  align-items: flex-start;
   justify-content: flex-start;
 }
 .scroll_view .big_img {
