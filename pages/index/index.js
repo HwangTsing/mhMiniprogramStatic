@@ -75,67 +75,35 @@ Page({
                         keyIndex.push(key)
                     });
                     console.log('recommendList', recommendList);
-                    if (mca === "h5_recommend_male") {
-                        const imgUrls = recommendList['h5_recommend_male_rotation_map'];
-                        //精品佳作
-                        const FineWorks = recommendList['h5_recommend_male_fine_works'];
-                        //人气作品
-                        const PopularWorks = recommendList['h5_recommend_male_popular_works'].slice(0,4);
-                        //最新上架
-                        const newArrivalWorks = recommendList['h5_recommend_male_new_arrival'].slice(0,3);
-                        //热门连载
-                        const hotSerialWorks = recommendList['h5_recommend_male_hot_serial'].slice(0,4);
-                        const xiaobianRecommend = recommendList['h5_recommend_male_xiaobian_recommend'].slice(0,3);
-                        const weekRecommend = recommendList['h5_recommend_male_week_recommend'].slice(0,4);
-                        that.setData({
-                            keyIndex:keyIndex,
-                            title_fine:title[1],
-                            title_hot:title[2],
-                            title_new:title[3],
-                            title_hotserial:title[4],
-                            title_xbrecommend:title[5],
-                            title_weekrecommend:title[6],
-                            imgUrls,
-                            FineWorks,
-                            PopularWorks,
-                            newArrivalWorks,
-                            hotSerialWorks,
-                            xiaobianRecommend,
-                            weekRecommend,
-                            isToast:false,
-                            networkType:true
-                        })
-                    }else {
-                        const imgUrls = recommendList['h5_recommend_female_rotation_map'];
-                        //精品佳作
-                        const FineWorks = recommendList['h5_recommend_female_fine_works'];
-                        //人气作品
-                        const PopularWorks = recommendList['h5_recommend_female_popular_works'].slice(0,4);
-                        //最新上架
-                        const newArrivalWorks = recommendList['h5_recommend_female_new_arrival'].slice(0,3);
-                        //热门连载
-                        const hotSerialWorks = recommendList['h5_recommend_female_hot_serial'].slice(0,4);
-                        const xiaobianRecommend = recommendList['h5_recommend_female_xiaobian_recommend'].slice(0,3);
-                        const weekRecommend = recommendList['h5_recommend_female_week_recommend'].slice(0,4);
-                        that.setData({
-                            keyIndex:keyIndex,
-                            title_fine:title[1],
-                            title_hot:title[2],
-                            title_new:title[3],
-                            title_hotserial:title[4],
-                            title_xbrecommend:title[5],
-                            title_weekrecommend:title[6],
-                            imgUrls,
-                            FineWorks,
-                            PopularWorks,
-                            newArrivalWorks,
-                            hotSerialWorks,
-                            xiaobianRecommend,
-                            weekRecommend,
-                            isToast:false,
-                            networkType:true
-                        })
-                    }
+                    const imgUrls = recommendList[mca+'_rotation_map'];
+                    //精品佳作
+                    const FineWorks = recommendList[mca+'_fine_works'];
+                    //人气作品
+                    const PopularWorks = recommendList[mca+'_popular_works'].slice(0,4);
+                    //最新上架
+                    const newArrivalWorks = recommendList[mca+'_new_arrival'].slice(0,3);
+                    //热门连载
+                    const hotSerialWorks = recommendList[mca+'_hot_serial'].slice(0,4);
+                    const xiaobianRecommend = recommendList[mca+'_xiaobian_recommend'].slice(0,3);
+                    const weekRecommend = recommendList[mca+'_week_recommend'].slice(0,4);
+                    that.setData({
+                        keyIndex:keyIndex,
+                        title_fine:title[1],
+                        title_hot:title[2],
+                        title_new:title[3],
+                        title_hotserial:title[4],
+                        title_xbrecommend:title[5],
+                        title_weekrecommend:title[6],
+                        imgUrls,
+                        FineWorks,
+                        PopularWorks,
+                        newArrivalWorks,
+                        hotSerialWorks,
+                        xiaobianRecommend,
+                        weekRecommend,
+                        isToast:false,
+                        networkType:true
+                    })
 
                 }
 
