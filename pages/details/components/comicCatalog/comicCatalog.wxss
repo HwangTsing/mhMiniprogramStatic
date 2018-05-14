@@ -46,6 +46,10 @@
 }
 .comic_catalog_one_item{
     flex: 1;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    justify-items: center;
     margin-bottom: 28rpx;
     margin-right: 24rpx;
     min-width:220rpx;
@@ -70,6 +74,7 @@
     width: 224rpx;
     height: 80rpx;
     line-height: 80rpx;
+    text-align: center;
     background: #FF4C6A;
     color: #fff;
     border: none;

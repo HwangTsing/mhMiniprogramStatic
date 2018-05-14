@@ -3,26 +3,26 @@
 
     <view
         class="comic_catalog_one"
-        wx:if="{{directoryDisplay==1}}"
+        wx:if="{{directoryDisplay==2}}"
     >
         <view
             wx:for="{{chapterList}}"
             style="margin-right:{{(index+1)%3===0?'0;':'24rpx;'}};"
             wx:key="index"
-            class="comic_catalog_two {{history && history.chapter_id===item.chapter_id?' active':''}}"
+            class="comic_catalog_one_item {{history && history.chapter_id===item.chapter_id?' active':''}}"
             id="{{item.chapter_id}}"
             data-chapter_id="{{item.chapter_id}}"
             data-chapter_name="{{item.chapter_name?item.chapter_name:''}}"
             data-comic_id="{{comic_id}}"
             bindtap="ClickCatalog"
         >
-            {{item.chapter_name?item.chapter_name:''}}
+            <text>{{item.chapter_name?item.chapter_name:''}}</text>
         </view>
     </view>
 
     <!-- 横版目录 S -->
     <view
-        wx:if="{{directoryDisplay==2}}"
+        wx:if="{{directoryDisplay==1}}"
         wx:for="{{chapterList}}"
         wx:key="index"
         class="comic_catalog_two {{history && history.chapter_id===item.chapter_id?' active':''}}"
