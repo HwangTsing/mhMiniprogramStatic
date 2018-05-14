@@ -24,8 +24,11 @@
         <!-- 用户名 E -->
 
         <!-- 评论内容 S -->
-        <view class="comment_content">
-            {{ content.comment_content ? content.comment_content:(content.reply_content?content.reply_content:" ")}}
+        <view class="comment_content" wx:if="{{content.comment_content}}">
+            {{content.comment_content ? content.comment_content:""}}
+        </view>
+        <view class="comment_content" wx:if="{{content.reply_content}}">
+            {{content.reply_content?content.reply_content:""}}
         </view>
         <!-- 评论内容 E -->
 
