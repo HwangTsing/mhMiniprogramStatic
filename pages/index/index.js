@@ -318,7 +318,7 @@ Page({
           var that = this;
         this.setData({
             isOpacity:false,
-            isScroll:false
+            isScroll:true
         })
     },
     bindInputChange:function (e) {
