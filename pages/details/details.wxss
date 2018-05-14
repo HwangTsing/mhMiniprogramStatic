@@ -62,7 +62,7 @@
 }
 .comic_tab {
     width: 100%;
-    padding: 40rpx 0;
+    padding: 10rpx 0;
 }
 .comic_nav {
     width: 100%;
@@ -76,15 +76,30 @@
 .comic_nav .activeChecked {
     color: #FF4C6A;
     font-size: 36rpx;
-    border-bottom: 6rpx solid #FF4C6A;
-    padding-bottom: 6rpx;
 }
 
 .comic_nav .checked {
     font-size: 36rpx;
     color: #333;
 }
-
+.comic_nav .checkedBorder{
+    width: 50%;
+    height: 2rpx;
+    margin: 12rpx auto;
+    background: #fff;
+    border: 2rpx solid #fff;
+    border-radius:10rpx;
+    overflow: hidden;
+}
+.comic_nav .activeCheckedBorder{
+    width: 50%;
+    height: 2rpx;
+    margin: 12rpx auto;
+    border: 2rpx solid #FF4C6A;
+    background: #FF4C6A;
+    border-radius:10rpx;
+    overflow: hidden;
+}
 .comic_con_box .see_more{
     display: block;
     margin: 10rpx auto 40rpx auto;

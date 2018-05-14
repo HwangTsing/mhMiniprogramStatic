@@ -28,8 +28,14 @@
             <!--  当前页二级导航 S  -->
             <view class="comic_nav">
                 <block wx:for="{{tabData}}" wx:for-item="tabData" wx:key="index">
-                    <view class="{{status === tabData.status ? 'activeChecked':'checked'}}"
-                          data-status="{{tabData.status}}" catchtap="onTabTap">{{tabData.title}}
+                    <view
+                        class="{{status === tabData.status ? 'activeChecked':'checked'}}"
+                          data-status="{{tabData.status}}" catchtap="onTabTap"
+                    >
+                        {{tabData.title}}
+                        <view
+                            class="{{status === tabData.status ? 'activeCheckedBorder':'checkedBorder'}}"
+                        ></view>
                     </view>
                 </block>
             </view>
