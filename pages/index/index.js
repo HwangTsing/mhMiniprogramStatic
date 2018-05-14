@@ -401,6 +401,9 @@ Page({
                 //有网络
                 that.searchData.page_num++;
                 that.searchDatas();
+                that.setData({
+                    isScroll:false
+                })
             }
         }).catch((err) =>{
             this.setData({
@@ -416,7 +419,8 @@ Page({
         var scrollTop = e.detail.scrollTop;
         if (scrollTop >67){
             this.setData({
-                isScrollSearch:true
+                isScrollSearch:true,
+                isScroll:false
             })
         }
         if (scrollTop === 0){
