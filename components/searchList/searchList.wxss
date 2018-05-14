@@ -2,7 +2,6 @@
 .list_data {
   width: 100%;
   height: 100%;
-  margin-top: 31rpx;
 }
 .img_view {
   width: 180rpx;
