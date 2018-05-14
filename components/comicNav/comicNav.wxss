@@ -1,12 +1,12 @@
 .comic-nav-button{
-  padding: 32rpx 0;
+  /* padding: 32rpx 0; */
 }
 
 .comic-nav-button .button{
   position: relative;
   height: 96rpx;
   line-height: 96rpx;
-  font-size: 28rpx;
+  font-size: 24rpx;
   color: #333;
   text-align: center;
 }
@@ -16,8 +16,14 @@
 .navigator-hover .button, .disabled .button{
   color: #ccc;
 }
-.next-button{
-  border-left: 1rpx solid #E6E6E6;
+.next-button::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 26rpx;
+  width: 1px;
+  height: 44rpx;
+  background-color: #e6e6e6;
 }
 .prev-button::before, .next-button::after{
   content: ' ';

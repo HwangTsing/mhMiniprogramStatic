@@ -1,6 +1,15 @@
 /* pages/read/read.wxss */
 .container {
   background-color: #3D454D;
+  margin-bottom: 96rpx;
+}
+.net.container,
+.server.container,
+.out.container,
+.noExist.container,
+.loading.container,
+.lose.container{
+  margin-bottom: 0;
 }
 .vcomic-wrap{
   width: 100%;
@@ -25,8 +34,9 @@ message{
   background: none;
 }
 
-.lose .vcomic-buttons{
+.vcomic-buttons{
   position: fixed;
   left: 0;
   bottom: 0;
+  z-index: 10;
 }
