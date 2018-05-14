@@ -322,19 +322,8 @@ page {
 .content_view {
   width: 100%;
   height: 100vh;
-  display: flex;
-  display: -webkit-box;
-  display: -webkit-flex;
-  flex-direction: column;
-  -webkit-box-orient: vertical;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  align-items: center;
   font-size: 26rpx;
   padding: 0;
-  overflow-x: hidden;
-  box-sizing: border-box;
-  position: relative;
 }
 /*搜索*/
 .search_view {
@@ -561,24 +550,18 @@ swiper-item wx-image {
   margin-top:26rpx;
 }
 /*img*/
-.scroll_view, .scroll_view view{
+.scroll_view, .scroll_view{
     width: 100%;
-    display: flex;
-    display: -webkit-flex;
-    display: -webkit-box;
-    flex-direction: row;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: row;
-    -webkit-flex-direction: row;
-    box-sizing: border-box;
-    flex-wrap: nowrap;
+    height: 388rpx;
+    white-space: nowrap;
+    overflow: hidden;
 }
 .scroll_view .big_img {
     width: 488rpx;
     height: 388rpx;
     background: #ffffff;
-    flex: 1;
+    display: inline-block;
+    vertical-align: top;
     margin: 0 2rpx;
 }
 .scroll_view .big_img image {
@@ -865,8 +848,8 @@ swiper-item wx-image {
   left: 0;
   right: 0;
 }
-.big_listdata_bloc:first-child {
-  margin-top:0rpx;
+.big_listdata_bloc>searchlist:first-child {
+  margin-top:31rpx;
 }
 .searchlist {
   //width: 100%;

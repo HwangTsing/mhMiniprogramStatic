@@ -186,10 +186,12 @@ Page({
                             listData:true,
                             isScroll:false,
                             message: that.data.total > page_num ? '加载更多...' : '没有更多了',//提示语
-                            networkType:true
+                            networkType:true,
+                            noSearch:true
                         })
                     }else if (data.data.data.data.length === 0){//搜索没有匹配的数据时提示图
                         that.setData({
+                            searchList:[],
                             noSearch:false
                         })
                     }
@@ -311,7 +313,8 @@ Page({
     focusInputEvent: function () {
           var that= this;
         this.setData({
-            isOpacity: true
+            isOpacity: true,
+            isScroll:false
         })
     },
     blurInputEvent: function () {
@@ -344,6 +347,9 @@ Page({
                     that.data.scrolType = '';
                     that.searchData.page_num = 1;
                 }else {
+                    that.setData({
+                        isScroll:false
+                    })
                     that.searchDatas();
                 }
             }

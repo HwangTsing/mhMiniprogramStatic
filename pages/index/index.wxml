@@ -1,6 +1,6 @@
 <!--index.wxml-->
 
-<view class="container">
+<scroll-view class="container" scroll-y="{{isScroll}}">
     <!--弹层男女选择-->
     <view wx:if="{{networkType === true}}" class="{{boyid || girlid? 'fix_view_hidden':'fix_view'}}">
             <view class="choose_view">
@@ -151,21 +151,19 @@
 
         <!--img+content 图片区域内容可滑动--精品佳作-->
         <scroll-view class="scroll_view" scroll-x="{{true}}">
-            <view>
-                <block wx:if="{{girlFineWorks}}" wx:for="{{girlFineWorks}}" wx:key="index">
-                    <navigator class="big_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                        <image mode="aspectFill" lazy-load="true" src="../../images/hcover.png"
-                               style="position: relative;top: 0;left: 0;">
-                            <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"
-                                   style="position: absolute;left: 0;top: 0;"></image>
-                        </image>
-                        <view class="word_info">
-                            <text class="name_name">{{item.extra.name}}</text>
-                            <text class="name_info">{{item.extra.watching_focus}}</text>
-                        </view>
-                    </navigator>
-                </block>
-            </view>
+            <block wx:if="{{girlFineWorks}}" wx:for="{{girlFineWorks}}" wx:key="index">
+                <navigator class="big_img" url="../details/details?comic_id={{item.extra.comic_id}}">
+                    <image mode="aspectFill" lazy-load="true" src="../../images/hcover.png"
+                           style="position: relative;top: 0;left: 0;">
+                        <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"
+                               style="position: absolute;left: 0;top: 0;"></image>
+                    </image>
+                    <view class="word_info">
+                        <text class="name_name">{{item.extra.name}}</text>
+                        <text class="name_info">{{item.extra.watching_focus}}</text>
+                    </view>
+                </navigator>
+            </block>
         </scroll-view>
         <view class="bg_more" catchtap="bindMoreTap" data-index="{{keyIndex[1]}}"
               data-title="{{title_fine}}"><text>查看更多</text></view>
@@ -323,5 +321,5 @@
     </block>
     <import src="./template/message.wxml"></import>
     <template is="message" data="{{networkType,isLoad}}"></template>
-</view>
+</scroll-view>
 
