@@ -18,7 +18,6 @@ Page({
           circular:true,  //衔接滑动
           vertical: false,  //滑动方向是否纵向
           networkType:true,  //是否有网络
-          recommendList:[],   //推荐页数据
           isScroll:true,   //scroll-view滚动条
           isOpacity:false,  //蒙层
           listData:false,    //搜索显示隐藏
@@ -58,51 +57,37 @@ Page({
                 //console.log(data)
                 var site_image = data.data.data.site_image;
                 var location_list = data.data.data.location_list;
-                //console.log(location_list);
-                var recommendList = that.data.recommendList;
+                console.log(location_list);
+                var recommendList = {};
                 var title= that.data.title,keyIndex = that.data.keyIndex;
                 if (data.data.code == 1){
                     if (that.data.id === 0 || that.data.id === 1){
-                        recommendList = [];
+                        //recommendList = {};
                         title = [];
                         keyIndex = [];
                     }
                     location_list.forEach((item,index)=> {
                         //console.log(item.location_en);
                         var key = item.location_en;
-                        //console.log(key);
+                        recommendList[key] = data.data.data[key];
                         //console.log(data.data.data[key]);
                         title.push(item.location_cn);
                         keyIndex.push(key)
-                        recommendList.push(data.data.data[key]);
                     });
+                    console.log('recommendList', recommendList);
 
-                    //console.log(recommendList);
-                    if (recommendList[2].length >=4){
-                        var girlPopularWorks = recommendList[2].slice(0,4);
-                    }else  if (recommendList[2].length < 4){
-                        var girlPopularWorks = recommendList[2]
-                    }
-                    if  (recommendList[3].length >=3){
-                        var newArrivalWorks = recommendList[3].slice(0,3);
-                    }else if (recommendList[3].length < 3) {
-                        var newArrivalWorks = recommendList[3]
-                    }
-                    if (recommendList[4].length >= 4) {
-                        var hotSerialWorks = recommendList[4].slice(0,4);
-                    }else if (recommendList[4].length < 4){
-                        var hotSerialWorks = recommendList[4]
-                    }
-                    if  (recommendList[5].length >=3){
-                        var xiaobianRecommend = recommendList[5].slice(0,3);
-                    }else if (recommendList[5].length < 3) {
-                        var xiaobianRecommend = recommendList[5]
-                    }
-                    if (recommendList[6].length >= 4) {
-                        var weekRecommend = recommendList[6].slice(0,4);
-                    }else  if (recommendList[6].length < 4){
-                        var weekRecommend = recommendList[6]
-                    }
+                    const imgUrls = recommendList['h5_recommend_male_rotation_map'];
+                    //精品佳作
+                    const FineWorks = recommendList['h5_recommend_male_fine_works'];
+                    //人气作品
+                    const PopularWorks = recommendList['h5_recommend_male_popular_works'].slice(0,4);
+                    //最新上架
+                    const newArrivalWorks = recommendList['h5_recommend_male_new_arrival'].slice(0,3);
+                    //热门连载
+                    const hotSerialWorks = recommendList['h5_recommend_male_hot_serial'].slice(0,4);
+                    const xiaobianRecommend = recommendList['h5_recommend_male_xiaobian_recommend'].slice(0,3);
+                    const weekRecommend = recommendList['h5_recommend_male_week_recommend'].slice(0,4);
+
                     that.setData({
                         keyIndex:keyIndex,
                         title_fine:title[1],
@@ -111,14 +96,13 @@ Page({
                         title_hotserial:title[4],
                         title_xbrecommend:title[5],
                         title_weekrecommend:title[6],
-                        recommendList:recommendList,
-                        imgUrls:recommendList[0],
-                        girlFineWorks:recommendList[1],
-                        girlPopularWorks:girlPopularWorks,
-                        newArrivalWorks:newArrivalWorks,
-                        hotSerialWorks:hotSerialWorks,
-                        xiaobianRecommend:xiaobianRecommend,
-                        weekRecommend:weekRecommend,
+                        imgUrls,
+                        FineWorks,
+                        PopularWorks,
+                        newArrivalWorks,
+                        hotSerialWorks,
+                        xiaobianRecommend,
+                        weekRecommend,
                         isToast:false,
                         networkType:true
                     })
@@ -237,7 +221,7 @@ Page({
             }else {
                 //有网络
                 if (boyid) {
-                    this.metaData.mca = "h5_recommend_male";
+                    this.metaData.mca = "mini_recommend_male";
                     this.initData();
                 }
                 //#############本地存储############//
