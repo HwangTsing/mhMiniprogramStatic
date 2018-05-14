@@ -3,6 +3,7 @@ var wxApi = require("../../utils/util.js");
 
 Page({
       data: {
+          windowWidth: '320px',
           isBoy:false,   //男版
           isGirl:false,   //女版
           timer:null,     //倒计时
@@ -69,24 +70,22 @@ Page({
                     location_list.forEach((item,index)=> {
                         //console.log(item.location_en);
                         var key = item.location_en;
-                        recommendList[key] = data.data.data[key];
+                        recommendList[key] = data.data.data[key]||[];
                         //console.log(data.data.data[key]);
                         title.push(item.location_cn);
                         keyIndex.push(key)
                     });
-                    console.log('recommendList', recommendList);
-
-                    const imgUrls = recommendList['h5_recommend_male_rotation_map'];
+                    const imgUrls = recommendList[mca+'_rotation_map'];
                     //精品佳作
-                    const FineWorks = recommendList['h5_recommend_male_fine_works'];
+                    const FineWorks = recommendList[mca+'_fine_works'];
                     //人气作品
-                    const PopularWorks = recommendList['h5_recommend_male_popular_works'].slice(0,4);
+                    const PopularWorks = recommendList[mca +'_popular_works'].slice(0,4);
                     //最新上架
-                    const newArrivalWorks = recommendList['h5_recommend_male_new_arrival'].slice(0,3);
+                    const newArrivalWorks = recommendList[mca +'_new_arrival'].slice(0,3);
                     //热门连载
-                    const hotSerialWorks = recommendList['h5_recommend_male_hot_serial'].slice(0,4);
-                    const xiaobianRecommend = recommendList['h5_recommend_male_xiaobian_recommend'].slice(0,3);
-                    const weekRecommend = recommendList['h5_recommend_male_week_recommend'].slice(0,4);
+                    const hotSerialWorks = recommendList[mca +'_hot_serial'].slice(0,4);
+                    const xiaobianRecommend = recommendList[mca +'_xiaobian_recommend'].slice(0,3);
+                    const weekRecommend = recommendList[mca +'_week_recommend'].slice(0,4);
 
                     that.setData({
                         keyIndex:keyIndex,
@@ -431,6 +430,11 @@ Page({
     onLoad: function (options) {
         var that = this;
         //判断网络类型
+        let { windowWidth } = wxApi.getSystemInfoSync()
+        if (windowWidth > 0) {
+            windowWidth = windowWidth + 'px'
+            this.setData({ windowWidth })
+        }
         wxApi.getNetworkType().then((res) =>{
             let networkType = res.networkType;
             if (networkType === 'none' || networkType === 'unknown') {
