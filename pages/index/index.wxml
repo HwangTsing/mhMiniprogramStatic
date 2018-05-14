@@ -99,8 +99,8 @@
                         indicator-active-color ="{{indicatorActiveColor}}" circular="{{circular}}" vertical ="{{vertical}}">
                     <block wx:if="{{boyid}}" wx:for="{{imgUrls}}" wx:key="index">
                         <swiper-item>
-                            <image class="slide-image"
-                                   style="background: url('../../images/banner_bitmap.png') no-repeat;background-size:100% 100%;position: relative;left: 0;top: 0;">
+                            <image class="slide-image" src="../../images/banner_bitmap.png"
+                                   style="position: relative;left: 0;top: 0;">
                                 <image src="{{item.image_url}}" data-typeid="{{item.object_id}}" class="slide-image"
                                        catchtap="swipTap" style="position: absolute;left: 0;top: 0;"></image>
                             </image>
@@ -108,8 +108,8 @@
                     </block>
                     <block wx:if="{{girlid}}" wx:for="{{imgUrls}}" wx:key="index">
                         <swiper-item>
-                            <image class="slide-image"
-                                   style="background: url('../../images/banner_bitmap.png')no-repeat;-webkit-background-size: 100% 100%;background-size: 100% 100%;position: relative;left: 0;top: 0;">
+                            <image class="slide-image" src="../../images/banner_bitmap.png"
+                                   style="position: relative;left: 0;top: 0;">
                                 <image src="{{item.image_url}}" data-typeid="{{item.object_id}}"
                                        class="slide-image" catchtap="swipTap" style="position: absolute;left: 0;top: 0;"></image>
                             </image>
@@ -122,8 +122,8 @@
                 <swiper>
                     <block wx:if="{{boyid}}" wx:for="{{imgUrls}}" wx:key="index">
                         <swiper-item>
-                            <image class="slide-image"
-                                   style="background: url('../../images/banner_bitmap.png') no-repeat;background-size:100% 100%;position: relative;left: 0;top: 0;">
+                            <image class="slide-image" src="../../images/banner_bitmap.png"
+                                   style="position: relative;left: 0;top: 0;">
                                 <image src="{{item.image_url}}" data-typeid="{{item.object_id}}" class="slide-image"
                                        catchtap="swipTap" style="position: absolute;left: 0;top: 0;"></image>
                             </image>
@@ -131,8 +131,8 @@
                     </block>
                     <block wx:if="{{girlid}}" wx:for="{{imgUrls}}" wx:key="index">
                         <swiper-item>
-                            <image class="slide-image"
-                                   style="background: url('../../images/banner_bitmap.png')no-repeat;-webkit-background-size: 100% 100%;background-size: 100% 100%;position: relative;left: 0;top: 0;">
+                            <image class="slide-image" src="../../images/banner_bitmap.png"
+                                   style="position: relative;left: 0;top: 0;">
                                 <image src="{{item.image_url}}" data-typeid="{{item.object_id}}"
                                        class="slide-image" catchtap="swipTap" style="position: absolute;left: 0;top: 0;"></image>
                             </image>
@@ -154,8 +154,8 @@
             <view>
                 <block wx:if="{{girlFineWorks}}" wx:for="{{girlFineWorks}}" wx:key="index">
                     <navigator class="big_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                        <image mode="aspectFill" lazy-load="true"
-                               style="background: url('../../images/hcover.png')no-repeat;background-size: 100% 100%;position: relative;top: 0;left: 0;">
+                        <image mode="aspectFill" lazy-load="true" src="../../images/hcover.png"
+                               style="position: relative;top: 0;left: 0;">
                             <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"
                                    style="position: absolute;left: 0;top: 0;"></image>
                         </image>
@@ -179,8 +179,8 @@
         <view class="hot_view">
             <block wx:for="{{girlPopularWorks}}" wx:key="index">
                 <navigator class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                    <image mode="aspectFill"
-                           style="background: url('../../images/hcover.png')no-repeat;background-size: 100% 100%;position: relative;top: 0;left: 0;">
+                    <image mode="aspectFill" src="../../images/hcover.png"
+                           style="position: relative;top: 0;left: 0;">
                         <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}" style="position: absolute;top: 0;left: 0;"></image>
                     </image>
                     <view class="word_info">
@@ -202,8 +202,8 @@
                 <view class="big_new_view">
                     <block wx:for="{{newArrivalWorks}}" wx:key="index">
                         <navigator class="new_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                            <image mode="aspectFill" lazy-load="true"
-                            style="background: url('../../images/hcover.png')no-repeat;background-size: 100% 100%;position: relative;top: 0;left: 0;">
+                            <image mode="aspectFill" lazy-load="true" src="../../images/hcover.png"
+                            style="position: relative;top: 0;left: 0;">
                                 <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"
                                 style="position: absolute;left: 0;top: 0;"></image>
                             </image>
@@ -227,8 +227,8 @@
         <view class="hot_view">
             <block wx:for="{{hotSerialWorks}}" wx:key="index">
                 <navigator class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                    <image mode="aspectFill" lazy-load="true"
-                    style="background: url('../../images/hcover.png')no-repeat;background-size: 100% 100%;position: relative;top: 0;left: 0;;">
+                    <image mode="aspectFill" lazy-load="true" src="../../images/hcover.png"
+                    style="position: relative;top: 0;left: 0;;">
                         <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"
                         style="position: absolute;left: 0;top: 0;"></image>
                     </image>
@@ -251,8 +251,8 @@
             <view class="big_new_view">
                 <block wx:for="{{xiaobianRecommend}}" wx:key="index">
                     <navigator class="new_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                        <image mode="aspectFill" lazy-load="true"
-                               style="background: url('../../images/hcover.png')no-repeat;background-size: 100% 100%;position: relative;top: 0;left: 0;;">
+                        <image mode="aspectFill" lazy-load="true" src="../../images/hcover.png"
+                               style="position: relative;top: 0;left: 0;;">
                             <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"
                                    style="position: absolute;left: 0;top: 0;"></image>
                         </image>
@@ -275,8 +275,8 @@
         <view class="hot_view">
             <block wx:for="{{weekRecommend}}" wx:key="index">
                 <navigator class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                    <image mode="aspectFill" lazy-load="true"
-                           style="background: url('../../images/hcover.png')no-repeat;background-size: 100% 100%;position: relative;top: 0;left: 0;;">
+                    <image mode="aspectFill" lazy-load="true" src="../../images/hcover.png"
+                           style="position: relative;top: 0;left: 0;;">
                         <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"
                                style="position: absolute;left: 0;top: 0;"></image>
                     </image>
