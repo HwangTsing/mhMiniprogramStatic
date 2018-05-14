@@ -252,7 +252,7 @@ Page({
             }else {
                 //有网络
                 if (boyid) {
-                    this.metaData.mca = "mini_recommend_male";
+                    this.metaData.mca = "h5_recommend_male";
                     this.initData();
                 }
                 //#############本地存储############//
