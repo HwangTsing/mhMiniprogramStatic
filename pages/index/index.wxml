@@ -312,7 +312,7 @@
             ></searchlist>
         </block>
         <view class="load_view">
-            <view class="load_img_bg" wx:if="{{searchList.length <= 10}}">
+            <view class="load_img_bg" wx:if="{{ message != '没有更多了' }}">
                 <image class="load_image" src="../../images/icon_load.png"></image>
             </view>
             <view class="comment_message">{{message}}</view>
