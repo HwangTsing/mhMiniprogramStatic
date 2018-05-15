@@ -4,8 +4,8 @@
 }
 .comic-nav-holder{
   height: 95rpx;
+  background-color: #fff;
 }
-
 .vcomic-wrap{
   width: 100%;
 }
