@@ -643,10 +643,14 @@ swiper-item wx-image {
   vertical-align: top;
 }
 .hot_view .hot_img:nth-child(2) {
-  margin-left: 5rpx;
+  margin-left: 4rpx;
+}
+.hot_view .hot_img:nth-child(3),
+.hot_view .hot_img:nth-child(4) {
+  margin-top: 16rpx;
 }
 .hot_view .hot_img:nth-child(4) {
-  margin-left: 5rpx;
+  margin-left: 4rpx;
 }
 .hot_view .hot_img image {
   display: inline-block;
@@ -677,7 +681,7 @@ swiper-item wx-image {
   font-size: 30rpx;
 }
 .hot_view .word_info .name_info {
-  width: 240rpx;
+  width: 320rpx;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -729,7 +733,7 @@ swiper-item wx-image {
   font-size: 30rpx;
 }
 .big_new_view .new_img:first-child .word_info .name_info {
-  width: 240rpx;
+  width: 92%;
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -738,11 +742,11 @@ swiper-item wx-image {
   font-size: 26rpx;
 }
 .big_new_view .new_img:nth-child(3) {
-  margin-left: 5rpx;
+  margin-left: 4rpx;
 }
 .big_new_view .new_img:nth-child(2),
 .big_new_view .new_img:nth-child(3) {
-  width: 369rpx;
+  width: 370rpx;
   height: 212rpx;
   display: inline-block;
   vertical-align: top;
@@ -786,10 +790,8 @@ swiper-item wx-image {
 .layer,
 .search_message {
   width: 100%;
-  height: 93% ;
-  /*background: rgba(0,0,0,.5);*/
+  height: 100% ;
   background: #fff;
-  opacity: 0.95;
   position: fixed;
   bottom: 0;
   left: 0;
