@@ -1,13 +1,13 @@
   /**app.wxss**/
   .container {
     height: 100%;
-    display: flex;
+    /*display: flex;
     flex-direction: column;
     -webkit-box-orient: vertical;
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-between;*/
     /*padding: 200rpx 0;*/
     box-sizing: border-box;
 

@@ -101,7 +101,7 @@
                         <swiper-item>
                             <image class="slide-image" src="../../images/banner_bitmap.png"
                                    style="position: relative;left: 0;top: 0;">
-                                <image src="{{item.image_url}}" data-typeid="{{item.object_id}}" class="slide-image"
+                                <image src="{{item.image_ext_url}}" data-typeid="{{item.object_id}}" class="slide-image"
                                        catchtap="swipTap" style="position: absolute;left: 0;top: 0;"></image>
                             </image>
                         </swiper-item>
@@ -110,7 +110,7 @@
                         <swiper-item>
                             <image class="slide-image" src="../../images/banner_bitmap.png"
                                    style="position: relative;left: 0;top: 0;">
-                                <image src="{{item.image_url}}" data-typeid="{{item.object_id}}"
+                                <image src="{{item.image_ext_url}}" data-typeid="{{item.object_id}}"
                                        class="slide-image" catchtap="swipTap" style="position: absolute;left: 0;top: 0;"></image>
                             </image>
                         </swiper-item>
@@ -124,7 +124,7 @@
                         <swiper-item>
                             <image class="slide-image" src="../../images/banner_bitmap.png"
                                    style="position: relative;left: 0;top: 0;">
-                                <image src="{{item.image_url}}" data-typeid="{{item.object_id}}" class="slide-image"
+                                <image src="{{item.image_ext_url}}" data-typeid="{{item.object_id}}" class="slide-image"
                                        catchtap="swipTap" style="position: absolute;left: 0;top: 0;"></image>
                             </image>
                         </swiper-item>
@@ -133,7 +133,7 @@
                         <swiper-item>
                             <image class="slide-image" src="../../images/banner_bitmap.png"
                                    style="position: relative;left: 0;top: 0;">
-                                <image src="{{item.image_url}}" data-typeid="{{item.object_id}}"
+                                <image src="{{item.image_ext_url}}" data-typeid="{{item.object_id}}"
                                        class="slide-image" catchtap="swipTap" style="position: absolute;left: 0;top: 0;"></image>
                             </image>
                         </swiper-item>
@@ -307,7 +307,7 @@
                 idx="{{item.comic_id}}"
                 src="{{item.cover}}"
                 name="{{item.name}}"
-                artists="{{item.artists}}"
+                artists="{{item.sina_nickname}}"
                 cates="{{item.cates}}"
             ></searchlist>
         </block>
