@@ -88,13 +88,13 @@ Page({
                     //精品佳作
                     const FineWorks = recommendList[mca+'_fine_works'];
                     //人气作品
-                    const PopularWorks = recommendList[mca+'_popular_works'].slice(0,4);
+                    const PopularWorks = recommendList[mca + '_popular_works'] ? recommendList[mca+'_popular_works'].slice(0,4) : [];
                     //最新上架
-                    const newArrivalWorks = recommendList[mca+'_new_arrival'].slice(0,3);
+                    const newArrivalWorks = recommendList[mca + '_new_arrival'] ? recommendList[mca+'_new_arrival'].slice(0,3) : [];
                     //热门连载
-                    const hotSerialWorks = recommendList[mca+'_hot_serial'].slice(0,4);
-                    const xiaobianRecommend = recommendList[mca+'_xiaobian_recommend'].slice(0,3);
-                    const weekRecommend = recommendList[mca+'_week_recommend'].slice(0,4);
+                    const hotSerialWorks = recommendList[mca + '_hot_serial'] ? recommendList[mca+'_hot_serial'].slice(0,4) : [];
+                    const xiaobianRecommend = recommendList[mca + '_xiaobian_recommend'] ? recommendList[mca+'_xiaobian_recommend'].slice(0,3) : [];
+                    const weekRecommend = recommendList[mca + '_week_recommend'] ? recommendList[mca+'_week_recommend'].slice(0,4) : [];
                     that.setData({
                         keyIndex:keyIndex,
                         title:title,
