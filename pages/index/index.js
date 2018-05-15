@@ -31,7 +31,7 @@ Page({
           searchList:[],   //搜索列表
           scrolType:'',
           message:'',    //提示语
-          total:1,    //总页码
+          total:0,    //总页码
           noSearch:true,   //是否有搜索结果
           isLoad:false,     //是否加载失败
       },
@@ -130,17 +130,14 @@ Page({
         if (!!this.searchData.rows_num){
             rows_num = this.searchData.rows_num;
         }
-        if (page_num >that.data.total){
-            return;
-        }else {
-            wxApi.searchList({
+
+        wxApi.searchList({
                 method:'GET',
                 data:{word,rows_num,page_num},
                 header:'',
                 success:function (data) {
                     if (data.data.data.data.length !==0){
                         //console.log(data.data);
-                        that.data.total = data.data.data.page_total;
                         var site_cover = data.data.data.site_cover;
 
                         if (that.data.scrolType !== ''){
@@ -164,12 +161,14 @@ Page({
                             var searchList = that.data.searchList;
                             //console.log(searchList);
                         }
+                        let page_total = data.data.data.page_total;
                         that.setData({
                             searchList:searchList,
                             inputValue: word,
                             listData:true,
                             isScroll:false,
-                            message: that.data.total > page_num ? '加载更多...' : '没有更多了',//提示语
+                            total:page_total,
+                            message: page_total > page_num ? '加载更多...' : '没有更多了',//提示语
                             networkType:true,
                             noSearch:true
                         })
@@ -188,7 +187,7 @@ Page({
                 }
 
             });
-        }
+
 
 
 
@@ -400,11 +399,18 @@ Page({
 
             }else {
                 //有网络
+                let total = that.data.total;
+                console.log(total);
                 that.searchData.page_num++;
-                that.searchDatas();
-                that.setData({
-                    isScroll:false
-                })
+                if (total < that.searchData.page_num){
+                    return;
+                }else {
+                    that.searchDatas();
+                    that.setData({
+                        isScroll:false
+                    })
+                }
+
             }
         }).catch((err) =>{
             this.setData({
@@ -421,7 +427,6 @@ Page({
         if (scrollTop >67){
             this.setData({
                 isScrollSearch:true,
-                isScroll:false
             })
         }
         if (scrollTop === 0){
