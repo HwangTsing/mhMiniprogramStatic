@@ -246,7 +246,10 @@ class wxApi {
 
 
   setNavigationBarTitle(title) {
-    if (title) wx.setNavigationBarTitle({title})
+    if (title) {
+      title = decodeURIComponent(title)
+      wx.setNavigationBarTitle({title})
+    }  
   }
 
   appendParams(route, params={}) {
