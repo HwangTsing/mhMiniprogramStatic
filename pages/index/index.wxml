@@ -143,14 +143,14 @@
 
         </view>
 
-        <view class="fine_works">
+        <view class="fine_works" wx:if="{{FineWorks.length > 0}}">
             <view class="border"></view>
-            <view class="fine_text">{{title_fine}}</view>
+            <view class="fine_text">{{title[0]}}</view>
             <view class="border" style="margin-left: 10rpx;"></view>
         </view>
 
         <!--img+content 图片区域内容可滑动-精品佳作-->
-        <scroll-view class="scroll_view" scroll-x="{{true}}">
+        <scroll-view class="scroll_view" scroll-x="{{true}}" wx:if="{{FineWorks.length > 0}}">
             <view style="width: {{windowWidth}}">
                 <block wx:if="{{FineWorks}}" wx:for="{{FineWorks}}" wx:key="index">
                     <navigator class="big_img" url="../details/details?comic_id={{item.extra.comic_id}}">
@@ -167,12 +167,12 @@
                 </block>
             </view>
         </scroll-view>
-        <view class="bg_more" catchtap="bindMoreTap" data-index="{{keyIndex[1]}}"
+        <view class="bg_more" wx:if="{{FineWorks.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex[1]}}"
               data-title="{{title_fine}}"><text>查看更多</text></view>
 
-        <view class="hot_works">
+        <view class="hot_works" wx:if="{{PopularWorks.length >0}}">
             <view class="border"></view>
-            <view class="fine_text">{{title_hot}}</view>
+            <view class="fine_text">{{title[1]}}</view>
             <view class="border" style="margin-left: 10rpx;"></view>
         </view>
         <!--img+content 人气作品-->
@@ -190,12 +190,12 @@
                 </navigator>
             </block>
         </view>
-        <view class="bg_more" catchtap="bindMoreTap" data-index="{{keyIndex[2]}}"
+        <view class="bg_more" wx:if="{{PopularWorks.length >0}}" catchtap="bindMoreTap" data-index="{{keyIndex[2]}}"
               data-title="{{title_hot}}">查看更多</view>
         <!--最新上架-->
-        <view class="new_works">
+        <view class="new_works" wx:if="{{newArrivalWorks.length > 0}}">
             <view class="border"></view>
-            <view class="fine_text">{{title_new}}</view>
+            <view class="fine_text">{{title[2]}}</view>
             <view class="border" style="margin-left: 10rpx;"></view>
         </view>
         <view class="new_view">
@@ -215,12 +215,12 @@
                     </block>
                 </view>
         </view>
-        <view class="bg_more" catchtap="bindMoreTap" data-index="{{keyIndex[3]}}"
+        <view class="bg_more" wx:if="{{newArrivalWorks.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex[3]}}"
               data-title="{{title_new}}">查看更多</view>
         <!--热门连载-->
-        <view class="hot_works">
+        <view class="hot_works" wx:if="{{hotSerialWorks.length > 0}}">
             <view class="border"></view>
-            <view class="fine_text">{{title_hotserial}}</view>
+            <view class="fine_text">{{title[3]}}</view>
             <view class="border" style="margin-left: 10rpx;"></view>
         </view>
         <!--img+content 图片区域内容-->
@@ -239,12 +239,12 @@
                 </navigator>
             </block>
         </view>
-        <view class="bg_more" catchtap="bindMoreTap" data-index="{{keyIndex[4]}}"
+        <view class="bg_more" wx:if="{{hotSerialWorks.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex[4]}}"
               data-title="{{title_hotserial}}">查看更多</view>
         <!--小编推荐-->
-        <view class="new_works">
+        <view class="new_works" wx:if="{{xiaobianRecommend.length > 0}}">
             <view class="border"></view>
-            <view class="fine_text">{{title_xbrecommend}}</view>
+            <view class="fine_text">{{title[4]}}</view>
             <view class="border" style="margin-left: 10rpx;"></view>
         </view>
         <view class="new_view">
@@ -264,12 +264,12 @@
                 </block>
             </view>
         </view>
-        <view class="bg_more" catchtap="bindMoreTap" data-index="{{keyIndex[5]}}"
+        <view class="bg_more" wx:if="{{xiaobianRecommend.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex[5]}}"
               data-title="{{title_xbrecommend}}">查看更多</view>
         <!--img+content 本周推荐-->
-        <view class="hot_works">
+        <view class="hot_works" wx:if="{{weekRecommend.length > 0}}">
             <view class="border"></view>
-            <view class="fine_text">{{title_weekrecommend}}</view>
+            <view class="fine_text">{{title[5]}}</view>
             <view class="border" style="margin-left: 10rpx;"></view>
         </view>
         <view class="hot_view">
@@ -287,7 +287,7 @@
                 </navigator>
             </block>
         </view>
-        <view class="bg_more" catchtap="bindMoreTap" data-index="{{keyIndex[6]}}"
+        <view class="bg_more" wx:if="{{weekRecommend.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex[6]}}"
               data-title="{{title_weekrecommend}}">查看更多</view>
         <!--滑动到底部没有数据了提示-->
         <view class="bottom_img">
@@ -312,7 +312,7 @@
             ></searchlist>
         </block>
         <view class="load_view">
-            <view class="load_img_bg" wx:if="{{searchList.length === 18}}">
+            <view class="load_img_bg" wx:if="{{searchList.length <= 10}}">
                 <image class="load_image" src="../../images/icon_load.png"></image>
             </view>
             <view class="comment_message">{{message}}</view>

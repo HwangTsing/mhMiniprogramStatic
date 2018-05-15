@@ -41,7 +41,7 @@ Page({
     searchData:{
        word:'',
        page_num:1,
-       rows_num:20
+       rows_num:10
     },
 
     initData: function () {
@@ -71,10 +71,18 @@ Page({
                         //console.log(item.location_en);
                         var key = item.location_en;
                         recommendList[key] = data.data.data[key]||[];
-                        //console.log(data.data.data[key]);
-                        title.push(item.location_cn);
-                        keyIndex.push(key)
+                        if (recommendList[key].length === 0){
+                            return;
+                        }else {
+                            console.log(recommendList[key]);
+                            console.log(data.data.data[key]);
+                            title.push(item.location_cn);
+                            keyIndex.push(key)
+                        }
+
                     });
+                    title.shift();
+                    console.log(title);
                     console.log('recommendList', recommendList);
                     const imgUrls = recommendList[mca+'_rotation_map'];
                     //精品佳作
@@ -89,12 +97,7 @@ Page({
                     const weekRecommend = recommendList[mca+'_week_recommend'].slice(0,4);
                     that.setData({
                         keyIndex:keyIndex,
-                        title_fine:title[1],
-                        title_hot:title[2],
-                        title_new:title[3],
-                        title_hotserial:title[4],
-                        title_xbrecommend:title[5],
-                        title_weekrecommend:title[6],
+                        title:title,
                         imgUrls,
                         FineWorks,
                         PopularWorks,
@@ -220,7 +223,7 @@ Page({
             }else {
                 //有网络
                 if (boyid) {
-                    this.metaData.mca = "h5_recommend_male";
+                    this.metaData.mca = "mini_recommend_male";
                     this.initData();
                 }
                 //#############本地存储############//
@@ -266,7 +269,7 @@ Page({
             }else {
                 //有网络
                 if(girlid){
-                    this.metaData.mca = "h5_recommend_female";
+                    this.metaData.mca = "mini_recommend_female";
                     this.initData();
                 }
                 //#############本地存储############//
@@ -466,13 +469,13 @@ Page({
                             that.setData({
                                 boyid:"0"
                             });
-                            that.metaData.mca = "h5_recommend_male";
+                            that.metaData.mca = "mini_recommend_male";
                             that.initData();
                         }else  if (data === "1"){
                             that.setData({
                                 girlid:"1"
                             });
-                            that.metaData.mca = "h5_recommend_female";
+                            that.metaData.mca = "mini_recommend_female";
                             that.initData();
                         }
                     }
@@ -485,7 +488,7 @@ Page({
                         //console.log(res);
                         var id = res.data;
                         if (id === 0){
-                            that.metaData.mca = "h5_recommend_female";
+                            that.metaData.mca = "mini_recommend_female";
                             that.initData();
                             that.setData({
                                 id:1,
@@ -493,7 +496,7 @@ Page({
                                 boyid:"0"
                             })
                         }else if (id === 1){
-                            that.metaData.mca = "h5_recommend_male";
+                            that.metaData.mca = "mini_recommend_male";
                             that.initData();
                             that.setData({
                                 id:0,
@@ -535,7 +538,7 @@ Page({
                     this.setData({
                         imgUrls:[]
                     })
-                    this.metaData.mca = "h5_recommend_female";
+                    this.metaData.mca = "mini_recommend_female";
                     this.initData();
                     this.setData({
                         isToast:true,
@@ -545,7 +548,7 @@ Page({
                     this.setData({
                         imgUrls:[]
                     })
-                    this.metaData.mca = "h5_recommend_male";
+                    this.metaData.mca = "mini_recommend_male";
                     this.initData();
                     this.setData({
                         isToast:true,
@@ -590,7 +593,7 @@ Page({
                     that.setData({
                         imgUrls:[]
                     })
-                    this.metaData.mca = "h5_recommend_male";
+                    this.metaData.mca = "mini_recommend_male";
                     this.initData();
                     this.setData({
                         isToast:true,
@@ -601,7 +604,7 @@ Page({
                     this.setData({
                         imgUrls:[]
                     })
-                    this.metaData.mca = "h5_recommend_female";
+                    this.metaData.mca = "mini_recommend_female";
                     this.initData();
                     that.setData({
                         isToast:true,
