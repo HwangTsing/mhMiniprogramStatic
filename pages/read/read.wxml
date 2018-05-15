@@ -6,7 +6,7 @@
             class="vcomic-wrap"
             wx:for="{{json_content.page}}" 
             wx:key="{{item.image_id}}" 
-            order="{{index}}"
+            order="{{index+1}}"
             width="{{windowWidth}}"
             scale="{{item.mobileImgWidth/item.mobileImgHeight}}"
             image_id="vcomic-{{item.image_id}}"
