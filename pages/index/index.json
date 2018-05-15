@@ -4,7 +4,7 @@
   "backgroundTextStyle": "dark",
   "navigationBarBackgroundColor": "#FF4D6A",
   "disableScroll": true,
-  "enablePullDownRefresh":true,
+  "enablePullDownRefresh":false,
   "usingComponents":{
     "searchlist":"/components/searchList/searchList",
     "message": "/components/message/message"

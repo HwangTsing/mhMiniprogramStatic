@@ -156,7 +156,7 @@
                     <navigator class="big_img" url="../details/details?comic_id={{item.extra.comic_id}}">
                         <image mode="aspectFill" lazy-load="true" src="../../images/hcover.png"
                                style="position: relative;top: 0;left: 0;">
-                            <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"
+                            <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"
                                    style="position: absolute;left: 0;top: 0;"></image>
                         </image>
                         <view class="word_info">
@@ -181,7 +181,7 @@
                 <navigator class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}">
                     <image mode="aspectFill" src="../../images/hcover.png"
                            style="position: relative;top: 0;left: 0;">
-                        <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}" style="position: absolute;top: 0;left: 0;"></image>
+                        <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}" style="position: absolute;top: 0;left: 0;"></image>
                     </image>
                     <view class="word_info">
                         <text class="name_name">{{item.extra.name}}</text>
@@ -204,7 +204,7 @@
                         <navigator class="new_img" url="../details/details?comic_id={{item.extra.comic_id}}">
                             <image mode="aspectFill" lazy-load="true" src="../../images/hcover.png"
                             style="position: relative;top: 0;left: 0;">
-                                <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"
+                                <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"
                                 style="position: absolute;left: 0;top: 0;"></image>
                             </image>
                             <view class="word_info">
@@ -229,7 +229,7 @@
                 <navigator class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}">
                     <image mode="aspectFill" lazy-load="true" src="../../images/hcover.png"
                     style="position: relative;top: 0;left: 0;;">
-                        <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"
+                        <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"
                         style="position: absolute;left: 0;top: 0;"></image>
                     </image>
                     <view class="word_info">
@@ -253,7 +253,7 @@
                     <navigator class="new_img" url="../details/details?comic_id={{item.extra.comic_id}}">
                         <image mode="aspectFill" lazy-load="true" src="../../images/hcover.png"
                                style="position: relative;top: 0;left: 0;;">
-                            <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"
+                            <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"
                                    style="position: absolute;left: 0;top: 0;"></image>
                         </image>
                         <view class="word_info">
@@ -277,7 +277,7 @@
                 <navigator class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}">
                     <image mode="aspectFill" lazy-load="true" src="../../images/hcover.png"
                            style="position: relative;top: 0;left: 0;;">
-                        <image mode="aspectFill" lazy-load="true" src="{{item.extra.hcover}}"
+                        <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"
                                style="position: absolute;left: 0;top: 0;"></image>
                     </image>
                     <view class="word_info">
@@ -312,7 +312,7 @@
             ></searchlist>
         </block>
         <view class="load_view">
-            <view class="load_img_bg" wx:if="{{searchList.length <= 10}}">
+            <view class="load_img_bg" wx:if="{{ message != '没有更多了' }}">
                 <image class="load_image" src="../../images/icon_load.png"></image>
             </view>
             <view class="comment_message">{{message}}</view>
