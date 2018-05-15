@@ -53,7 +53,6 @@ Page({
    */
   onReady: function () {
     wxApi.setNavigationBarTitle(this.chapter_name);
-
   },
 
   /**
@@ -98,11 +97,11 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    return {
-      path: '/pages/index/index',
-      success: function(res) {},
-      fail: function(res) {}
-    }
+    // return {
+    //   path: '/pages/index/index',
+    //   success: function(res) {},
+    //   fail: function(res) {}
+    // }
   },
 
   setPageMessage: function (type) {
