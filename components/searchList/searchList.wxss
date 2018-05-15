@@ -24,19 +24,27 @@
   -webkit-flex: 1;
   height: 231rpx;
   margin-top:40rpx;
-  margin-left:24rpx;
-  float: left;
+  /*float: left;*/
+}
+.book_data .book_name, .book_data .explain {
+    margin-left: 27rpx;
+    display: inline-block;
 }
 .book_data .book_name {
+  width:400rpx;
   color: #333333;
   font-size: 32rpx;
-  display: block;
   font-weight: bold;
   margin-bottom:14rpx;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+
 }
 .book_data .author {
   margin-bottom:16rpx;
   display: block;
+  margin-left:200rpx;
 }
 .book_data .explain {
     display:inline-block ;
