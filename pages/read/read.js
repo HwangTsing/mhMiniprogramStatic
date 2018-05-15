@@ -137,6 +137,7 @@ Page({
         comic,
         chapter
       })
+      this.isAllowRead = is_allow_read;
 
       if (page && page.length) this.setData({ json_content })
 
@@ -176,17 +177,40 @@ Page({
     const length = chapter_list.length
     const { comic_id} = this.data.comic
     let next_url = '', prev_url = '', next = null, prev = null
+    const { comic = { try_read_chapters: [] }, comic: { try_read_chapters } } = this.isAllowRead
     const index = _.findIndex(chapter_list, { chapter_id })
-
+    this.tryReadChapters = try_read_chapters
+    let time = +new Date()
     if (index != -1) {
-      next = index + 1 > length ? null : chapter_list[index + 1]
-      prev = index - 1 < 0 ? null : chapter_list[index - 1]
+      next = this.findNextChapter(index, chapter_list)
+      prev = this.findPrevChapter(index, chapter_list)
     }
-
+    console.log(+new Date() - time)
     if (prev) prev_url = this.getReadurlByParam({ ...prev, comic_id})
     if (next) next_url = this.getReadurlByParam({ ...next, comic_id})
 
     return { prev_url, next_url}
+  },
+
+  findNextChapter: function (index, chapters){
+    const length = chapters.length
+    const _index = index + 1
+    if (_index >= length) return null 
+    const { chapter_id, chapter_name, chapter_pay_price } = chapters[_index]
+    console.log('next', chapter_id, chapter_name, chapter_pay_price, _.indexOf(this.tryReadChapters, chapter_id))
+    if (chapter_pay_price > 0 && _.indexOf(this.tryReadChapters, chapter_id) == -1) return this.findNextChapter(_index, chapters) 
+
+    return { chapter_id, chapter_name }
+  },
+  
+  findPrevChapter: function (index, chapters) {
+    const _index = index - 1
+    if (_index < 0) return null 
+    const { chapter_id, chapter_name, chapter_pay_price } = chapters[_index]
+    console.log('prev', chapter_id, chapter_name, chapter_pay_price, _.indexOf(this.tryReadChapters, chapter_id))
+    if (chapter_pay_price > 0 && _.indexOf(this.tryReadChapters, chapter_id) == -1) return this.findPrevChapter(_index, chapters)
+
+    return { chapter_id, chapter_name }
   },
 
   getReadurlByParam: function ({chapter_id, chapter_name, comic_id}, url = '/pages/read/read') {
@@ -195,7 +219,7 @@ Page({
 
   findChapterList: function (chapter_id, chapter_list=[]){
     const chapter_nav = { ...this.createNavUrlByIndex(chapter_id, chapter_list)}
-    const { json_content: { page }} = this.data
+    const { json_content: { page } } = this.data
     const comicNavHolder = page.length > 0
     this.setData({ chapter_nav, comicNavHolder })
   },
