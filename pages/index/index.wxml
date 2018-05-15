@@ -97,21 +97,12 @@
                 <swiper indicator-dots="{{indicatorDots}}"
                         autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color ="{{indicatorColor}}"
                         indicator-active-color ="{{indicatorActiveColor}}" circular="{{circular}}" vertical ="{{vertical}}">
-                    <block wx:if="{{boyid}}" wx:for="{{imgUrls}}" wx:key="index">
+                    <block wx:for="{{imgUrls}}" wx:key="index">
                         <swiper-item>
                             <image class="slide-image" src="../../images/banner_bitmap.png"
                                    style="position: relative;left: 0;top: 0;">
                                 <image src="{{item.image_ext_url}}" data-typeid="{{item.object_id}}" class="slide-image"
                                        catchtap="swipTap" style="position: absolute;left: 0;top: 0;"></image>
-                            </image>
-                        </swiper-item>
-                    </block>
-                    <block wx:if="{{girlid}}" wx:for="{{imgUrls}}" wx:key="index">
-                        <swiper-item>
-                            <image class="slide-image" src="../../images/banner_bitmap.png"
-                                   style="position: relative;left: 0;top: 0;">
-                                <image src="{{item.image_ext_url}}" data-typeid="{{item.object_id}}"
-                                       class="slide-image" catchtap="swipTap" style="position: absolute;left: 0;top: 0;"></image>
                             </image>
                         </swiper-item>
                     </block>
@@ -120,21 +111,12 @@
 
             <block wx:else>
                 <swiper>
-                    <block wx:if="{{boyid}}" wx:for="{{imgUrls}}" wx:key="index">
+                    <block wx:for="{{imgUrls}}" wx:key="index">
                         <swiper-item>
                             <image class="slide-image" src="../../images/banner_bitmap.png"
                                    style="position: relative;left: 0;top: 0;">
                                 <image src="{{item.image_ext_url}}" data-typeid="{{item.object_id}}" class="slide-image"
                                        catchtap="swipTap" style="position: absolute;left: 0;top: 0;"></image>
-                            </image>
-                        </swiper-item>
-                    </block>
-                    <block wx:if="{{girlid}}" wx:for="{{imgUrls}}" wx:key="index">
-                        <swiper-item>
-                            <image class="slide-image" src="../../images/banner_bitmap.png"
-                                   style="position: relative;left: 0;top: 0;">
-                                <image src="{{item.image_ext_url}}" data-typeid="{{item.object_id}}"
-                                       class="slide-image" catchtap="swipTap" style="position: absolute;left: 0;top: 0;"></image>
                             </image>
                         </swiper-item>
                     </block>
