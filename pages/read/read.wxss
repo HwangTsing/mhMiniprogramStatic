@@ -1,16 +1,11 @@
 /* pages/read/read.wxss */
 .container {
   background-color: #3D454D;
-  padding-bottom: 95rpx;
 }
-.net.container,
-.server.container,
-.out.container,
-.noExist.container,
-.loading.container,
-.lose.container{
-  padding-bottom: 0;
+.comic-nav-holder{
+  height: 95rpx;
 }
+
 .vcomic-wrap{
   width: 100%;
 }

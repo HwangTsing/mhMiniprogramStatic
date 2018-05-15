@@ -10,6 +10,7 @@ Page({
   data: {
     windowWidth: 320,
     scrollY: 0,
+    comicNavHolder: false,
     messageType: '',
     chapter: {},
     comic: {},
@@ -120,6 +121,7 @@ Page({
         this.setPageMessage('server')
         return {}
       }
+      
       const {
         chapter = {},
         chapter_list = [],
@@ -136,11 +138,15 @@ Page({
         chapter
       })
 
-        if (page && page.length) this.setData({ json_content })
+      if (page && page.length) this.setData({ json_content })
 
-        if (!chapter_list.length) this.setPageMessage('out')
-        else if (!(page&&page.length)) this.setPageMessage('lose')
-        return { chapter_list, comic_id, chapter_id, chapter_name}
+      if (!chapter_list.length) {
+        this.setPageMessage('out')
+      } else if (!(page&&page.length)) {
+        this.setPageMessage('lose')
+      } 
+      
+      return { chapter_list, comic_id, chapter_id, chapter_name}
     }, () => {
         this.setPageMessage('server')
     })
@@ -158,7 +164,7 @@ Page({
     //wxApi.pageScrollTo({scrollTop: 0});
     if (!chapter_id) return this.setPageMessage('noExist')
     this.fetchComic(chapter_id).then(({ chapter_list, comic_id, chapter_id, chapter_name} = {})=>{
-      if (!comic_id) return
+      if (!comic_id || !chapter_id) return
       wxApi.setNavigationBarTitle(chapter_name)
       this.findChapterList(chapter_id, chapter_list)
       this.setReadingLog({ comic_id, chapter_id, chapter_name })
@@ -189,7 +195,9 @@ Page({
 
   findChapterList: function (chapter_id, chapter_list=[]){
     const chapter_nav = { ...this.createNavUrlByIndex(chapter_id, chapter_list)}
-    this.setData({ chapter_nav })
+    const { json_content: { page }} = this.data
+    const comicNavHolder = page.length > 0
+    this.setData({ chapter_nav, comicNavHolder })
   },
 
   chapterNavTap: function (e){
