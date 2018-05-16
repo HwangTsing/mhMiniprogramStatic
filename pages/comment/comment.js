@@ -138,7 +138,7 @@ Page({
                     isLoads: false,//改为可以下拉加载
                     pageNum: Number(pageNum) + 1,//修改页码状态
                     pageTotal: page_total,//保存可以下拉加载的次数
-                    message: page_total > pageNum ? '加载中' : '没更多了',//存储提示词
+                    message: page_total > pageNum ? '加载中' : '没有更多了',//存储提示词
                     isMessage:true,
                     comicId: comicId,//记录漫画的id
                     networkType: true,//是否有网络,

@@ -38,7 +38,7 @@
 
 /* 九宫格样式 */
 .comic_catalog_one{
-    padding: 28rpx 16rpx;
+    padding: 28rpx 15rpx;
     height: auto;
     display: flex;
     -webkit-flex-wrap: wrap;
@@ -51,7 +51,7 @@
     align-items: center;
     justify-items: center;
     margin-bottom: 28rpx;
-    margin-right: 24rpx;
+    margin-right: 25rpx;
     min-width:220rpx;
     max-width:220rpx;
     width: 220rpx;
