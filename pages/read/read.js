@@ -172,14 +172,25 @@ Page({
   },
 
   createNavUrlByIndex: function (chapter_id, chapter_list=[]) {
+    let time = +new Date()
     chapter_id = chapter_id+''
-    const length = chapter_list.length
     const { comic_id} = this.data.comic
     let next_url = '', prev_url = '', next = null, prev = null
-    const { comic = { try_read_chapters: [] }, comic: { try_read_chapters } } = this.isAllowRead
+    const { comic = { try_read_chapters: [] }, chapter_order = {}, comic: { try_read_chapters, pay_status, pay_price } } = this.isAllowRead
+    
+    const { chapter_id_arr = [] } = chapter_order
+    this.comicPayStatus = pay_status
+    this.comicPayPrice = pay_price
+
+    if (pay_status == 2 && pay_price > 0) {
+      this.can_read_chapters = _.union(try_read_chapters, chapter_id_arr)
+    } else {
+      this.can_read_chapters = try_read_chapters
+    }
+
+    // console.log('can_read_chapters', this.can_read_chapters, chapter_id_arr)
     const index = _.findIndex(chapter_list, { chapter_id })
-    this.tryReadChapters = try_read_chapters
-    let time = +new Date()
+    
     if (index != -1) {
       next = this.findNextChapter(index, chapter_list)
       prev = this.findPrevChapter(index, chapter_list)
@@ -192,26 +203,36 @@ Page({
   },
 
   findNextChapter: function (index, chapters){
-    const length = chapters.length
     const _index = index + 1
-    if (_index >= length) return null 
-    const { chapter_id, chapter_name, chapter_pay_price } = chapters[_index]
-    console.log('next', chapter_id, chapter_name, chapter_pay_price, _.indexOf(this.tryReadChapters, chapter_id))
-    if (chapter_pay_price > 0 && _.indexOf(this.tryReadChapters, chapter_id) == -1) return this.findNextChapter(_index, chapters) 
+    const length = chapters.length
+    if (_index >= length) return null
+    return this.findChapter(_index, chapters, 'findNextChapter')
+  },
+
+  findPrevChapter: function (index, chapters) {
+    const _index = index - 1
+    if (_index < 0) return null
+    return this.findChapter(_index, chapters, 'findPrevChapter')
+  },
+
+  findChapter: function (index, chapters, action) {
+    const can_read_chapters = this.can_read_chapters
+    const { chapter_id, chapter_name, chapter_pay_price } = chapters[index]
+    let isNeed = false
+    console.log(action, chapter_id, chapter_name, chapter_pay_price, _.indexOf(can_read_chapters, chapter_id))
+    if (this.comicPayStatus == 2 && this.comicPayPrice > 0) {
+      if (_.indexOf(can_read_chapters, chapter_id) == -1) isNeed = true
+    } else {
+      if (chapter_pay_price > 0 && _.indexOf(can_read_chapters, chapter_id) == -1) isNeed = true
+    }
+    
+    if (isNeed) {
+      return this[action](index, chapters)
+    }
 
     return { chapter_id, chapter_name }
   },
   
-  findPrevChapter: function (index, chapters) {
-    const _index = index - 1
-    if (_index < 0) return null 
-    const { chapter_id, chapter_name, chapter_pay_price } = chapters[_index]
-    console.log('prev', chapter_id, chapter_name, chapter_pay_price, _.indexOf(this.tryReadChapters, chapter_id))
-    if (chapter_pay_price > 0 && _.indexOf(this.tryReadChapters, chapter_id) == -1) return this.findPrevChapter(_index, chapters)
-
-    return { chapter_id, chapter_name }
-  },
-
   getReadurlByParam: function ({chapter_id, chapter_name, comic_id}, url = '/pages/read/read') {
     return wxApi.appendParams(url, { chapter_id, chapter_name, comic_id });
   },
