@@ -41,7 +41,7 @@
                     </view>
                     <view class="span"
                           cate_id="{{item.cate_id}}"
-                          wx:if="{{thisData.wbcomic_cate && thisData.wbcomic_cate.length!==0 && index>=5 }}" 
+                          wx:if="{{thisData.wbcomic_cate && thisData.wbcomic_cate.length!==0 && index>=5 }}"
                           wx:for="{{thisData.wbcomic_cate}}"
                           wx:key="index"
                     >

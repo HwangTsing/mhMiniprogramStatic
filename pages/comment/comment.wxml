@@ -22,6 +22,7 @@
             contentId="{{ item.data.item }}"
             replyContent="{{item.reply_content?item.reply_content:null}}"
             isReplyContent="{{true}}"
+            userList="{{ userList ? userList : null }}"
         ></commentList>
         <!-- 评论列表 E -->
         <view class="comment_message"

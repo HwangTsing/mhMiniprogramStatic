@@ -47,6 +47,7 @@
                 contentId="{{ item.contentId }}"
                 replyContent="{{item.replyContent?item.replyContent:null}}"
                 isReplyContent="{{false}}"
+                userList="{{ userList }}"
             ></commentList>
             <!-- 首次加载网络差提示 S -->
             <message

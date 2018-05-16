@@ -28,18 +28,38 @@
             {{content.comment_content ? content.comment_content:""}}
         </view>
         <view class="comment_content" wx:if="{{content.reply_content}}">
-            {{content.reply_content?content.reply_content:""}}
+            <span
+                wx:if="{{ content.reply_content && contentId.parent_uid > 0 && userList[contentId.parent_uid] }}"
+            >回复</span>
+            <span
+                wx:if="{{ content.reply_content && contentId.parent_uid > 0 && userList[contentId.parent_uid] }}"
+                style="color:#33BBFF;"
+            >{{'@'+userList[contentId.parent_uid].user_nickname}}</span>{{content.reply_content?content.reply_content:""}}
         </view>
         <!-- 评论内容 E -->
 
         <!-- 二级评论 S -->
-        <view class="reply_content"  wx:if="{{ replyContent && contentId.reply_num >0 && isReplyContent }}">
+        <view class="reply_content"
+              wx:if="{{ replyContent && replyContent.length > 0 && contentId.reply_num >0 && isReplyContent }}"
+        >
             <view class="reply_content_item"
                   wx:for="{{ replyContent }}"
                   wx:key="index"
             >
-                <view class="reply_user_nickname">{{item.user.user_nickname+': '}}</view>
-                <view class="reply_content_text">{{item.data.reply_content}}</view>
+                <view class="reply_user_nickname">
+                    <text>{{item.user.user_nickname}}</text>
+                    <text  wx:if="{{ !item.parent_uid && !item.parent_uid > 0 && !userList}}"> :</text>
+                    <text
+                        style="color:#333;"
+                        wx:if="{{ item.parent_uid && item.parent_uid > 0 && userList}}"
+                    >{{ item.parent_uid && item.parent_uid>0?'回复':''}}</text>
+                    <text wx:if="{{ item.parent_uid && userList }}">
+                        {{ item.parent_uid && item.parent_uid>0?'@'+ userList[item.parent_uid].user_nickname:'' }}:
+                    </text>
+                </view>
+                <view class="reply_content_text">
+                    {{' '+item.data.reply_content}}
+                </view>
             </view>
             <view
                 class="reply_total"

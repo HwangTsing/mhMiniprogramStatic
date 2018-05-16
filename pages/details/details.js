@@ -26,14 +26,14 @@ Page({
         ],
         status: 0,
         networkType: true,//是否有网络
-        type:'loading',
+        type: 'loading',
     },
 
     //点击开始阅读|和据需阅读的事件
     onReadClick: function (event) {
         let key = "comic_id_" + this.data.dataAry.comic.comic_id;
 
-        wxApi.getStorage(key).then((res)=>{ //获取阅读历史
+        wxApi.getStorage(key).then((res) => { //获取阅读历史
             let data = res.data;
             wx.navigateTo({
                 url: `/pages/read/read?chapter_id=${data.chapter_id}&comic_id=${data.comic_id}`
@@ -61,10 +61,10 @@ Page({
             return
         }
         let key = "comic_id_" + this.data.dataAry.comic.comic_id;
-        wxApi.getStorage(key).then((res)=>{
-                this.setData({
-                      history: res.data
-                })
+        wxApi.getStorage(key).then((res) => {
+            this.setData({
+                history: res.data
+            })
         }).catch((err) => {
             this.setData({
                 history: null
@@ -129,7 +129,7 @@ Page({
                 //无网络什么都不做
                 this.setData({
                     networkType: false,
-                    type:'net'
+                    type: 'net'
                 })
             } else {
                 //有网络
@@ -149,13 +149,29 @@ Page({
                             //存储 comic信息
                             let DATA = res.data;
                             let chapterList = null;
+
+                            //获取阅读信息
+                            let tryReadChapters=DATA.is_allow_read.comic.try_read_chapters; //试读章节
+                            //console.log(tryReadChapters);
+
                             if (DATA.chapter_list && DATA.chapter_list.length !== 0) {
                                 chapterList = [];
                                 DATA.chapter_list.forEach((item, index) => {
+                                    // console.log(item)
+                                    if( tryReadChapters.length > 0 ){
+                                        //试读章节 不是空数组的情况下
+                                        tryReadChapters.forEach((id,i)=>{
+                                            if(item.chapter_id===id){ //如果相等,就修改付费为免费章节,忽略过滤
+                                                item.chapter_pay_vcoin=0;
+                                                item.chapter_pay_vcoin='0'
+                                            }
+                                        });
+                                    }
                                     if (item.chapter_pay_vcoin === 0 || item.chapter_pay_vcoin === '0') {
                                         chapterList.push(item)
                                     }
                                 })
+
                                 DATA.chapterList = chapterList;
                                 DATA.chapterList.reverse();
                                 chapterList = null;
@@ -164,11 +180,11 @@ Page({
                             }
                             this.setData({
                                 dataAry: DATA,
-                                type:null
+                                type: null
                             })
 
                             let key = "comic_id_" + res.data.comic.comic_id;
-                            wxApi.getStorage(key).then((res)=>{ //获取阅读历史
+                            wxApi.getStorage(key).then((res) => { //获取阅读历史
                                 this.setData({
                                     history: res.data
                                 })
@@ -180,15 +196,16 @@ Page({
                         }
                         else {
                             this.setData({
-                                dataAry:"{}",
-                                type:'out'
+                                dataAry: "{}",
+                                type: 'out'
                             })
                         }
                     }
                 }).catch((err) => {
+                    console.log(err)
                     this.setData({
                         networkType: false,
-                        type:'net'
+                        type: 'net'
                     })//错误时候
                 });
 
@@ -227,7 +244,7 @@ Page({
                             reply_list = reply_list && reply_list.length > 0 ? reply_list : null;//判断格式化后的数组是否为空
 
                             let reply_content; //存储回复评论的数据
-                            if (reply_list && reply_list.length>0) {
+                            if (reply_list && reply_list.length > 0) {
                                 reply_content = [];//给回复对象重新赋值
                                 reply_list.forEach((item, index) => {
                                     if (dataList.reply_content[item.reply_id]) { //判断当前的回复评论id是否存在
@@ -235,7 +252,7 @@ Page({
                                             data: dataList.reply_content[item.reply_id],
                                             user: dataList.user[item.user_id]
                                         }
-                                        if(data.user && data.user.user_nickname){
+                                        if (data.user && data.user.user_nickname) {
                                             reply_content.push(data);//存储找到的数据
                                         }
                                     }
@@ -297,7 +314,7 @@ Page({
         }).catch((err) => {
             this.setData({
                 networkType: true,
-                type:'server'
+                type: 'server'
             })
         })
 

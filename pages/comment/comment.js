@@ -8,6 +8,7 @@ Page({
      */
     data: {
         comicCommentData: null,//存储的数据
+        userList:null,//存储用户信息
         pageNum: 1,//页码
         rowsNum: 10,//每次获取的数据条数
         height: 0, //滚动区的高度
@@ -42,7 +43,9 @@ Page({
             //res {code, message, data}
             let dataList = res.data ? res.data : null; //存储数据变量
             let dataArray = this.data.comicCommentData ? this.data.comicCommentData : []; //定义空数组 , 存储格式化后的数据列表
+            let userList = this.data.userList ? this.data.userList : {}; //定义空数组 , 存储格式化后的数据列表
             //判断是否存在数据,存在进行格式化数据,不存在什么都不做
+
             if (res.code === 1 && dataList && dataList.data) {
                 if (dataList.data.length !== 0) {
                     dataList.data.forEach((item, index) => { //循环整个数据组
@@ -113,7 +116,17 @@ Page({
                     })
                 }
 
-
+                if( dataList.user){
+                    for(let key in dataList.user){
+                        let datas=dataList.user[key];
+                        userList[key]=datas;
+                    }
+                    console.log(dataList.user)
+                    // dataList.user.forEach((item,index)=>{
+                    //     console.log(item)
+                    //     //userList[item] //存储用户信息
+                    // });
+                }
                 /*
                * *** 赋值到this 中 comicCommentData
                * */
@@ -121,6 +134,7 @@ Page({
                 let page_total=dataList.page_total;
                 this.setData({
                     comicCommentData: dataArray, //存储数据
+                    userList:userList,
                     isLoads: false,//改为可以下拉加载
                     pageNum: Number(pageNum) + 1,//修改页码状态
                     pageTotal: page_total,//保存可以下拉加载的次数

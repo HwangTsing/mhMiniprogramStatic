@@ -8,6 +8,7 @@ Page({
      */
     data: {
         commentData: null,//存储的数据
+        userList:null,
         replyList:null,
         pageNum: 1,//页码
         rowsNum: 10,//每次获取的数据条数
@@ -40,6 +41,8 @@ Page({
             }
         }).then(({code,message,data}) => {
             let replyList=this.data.replyList?this.data.replyList:[];
+            let userList = this.data.userList ? this.data.userList : {}; //定义空数组 , 存储格式化后的数据列表
+
             //console.log(code,message,data)
             if(code===1&&data.data.length!==0){
                 data.data.forEach((item,index)=>{
@@ -70,10 +73,19 @@ Page({
                     }
                     replyList.push(Data); //保存到创建的数组中
                 })
+
+                /* 存储用户信息 */
+                if( data.user){ //未修改改完成
+                    for(let key in data.user){
+                        let datas=data.user[key];
+                        userList[key]=datas;
+                    }
+                }
             }
             let page_total=data.page_total;
             this.setData({
                 replyList: replyList, //存储数据
+                userList:userList,
                 isLoads: false,//改为可以下拉加载
                 pageNum: Number(pageNum) + 1,//修改页码状态
                 pageTotal: page_total,//保存可以下拉加载的次数
