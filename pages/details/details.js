@@ -152,6 +152,7 @@ Page({
 
                             //获取阅读信息
                             let tryReadChapters=DATA.is_allow_read.comic.try_read_chapters; //试读章节
+                            let payStatus=DATA.is_allow_read.comic.pay_status;
                             //console.log(tryReadChapters);
 
                             if (DATA.chapter_list && DATA.chapter_list.length !== 0) {
@@ -163,11 +164,11 @@ Page({
                                         tryReadChapters.forEach((id,i)=>{
                                             if(item.chapter_id===id){ //如果相等,就修改付费为免费章节,忽略过滤
                                                 item.chapter_pay_vcoin=0;
-                                                item.chapter_pay_vcoin='0'
+                                                chapterList.push(item)
                                             }
                                         });
                                     }
-                                    if (item.chapter_pay_vcoin === 0 || item.chapter_pay_vcoin === '0') {
+                                    if ( payStatus===1 && item.chapter_pay_vcoin === 0 ) {
                                         chapterList.push(item)
                                     }
                                 })

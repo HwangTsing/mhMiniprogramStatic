@@ -34,7 +34,12 @@
             <span
                 wx:if="{{ content.reply_content && contentId.parent_uid > 0 && userList[contentId.parent_uid] }}"
                 style="color:#33BBFF;"
-            >{{'@'+userList[contentId.parent_uid].user_nickname}}</span>{{content.reply_content?content.reply_content:""}}
+            >
+                {{'@'+userList[contentId.parent_uid].user_nickname}}</span>
+            <span
+                wx:if="{{ content.reply_content && contentId.parent_uid > 0 && userList[contentId.parent_uid] }}"
+            >:</span>
+            {{content.reply_content?content.reply_content:""}}
         </view>
         <!-- 评论内容 E -->
 
