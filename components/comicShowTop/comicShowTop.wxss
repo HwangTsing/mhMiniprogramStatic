@@ -123,19 +123,21 @@
 .details_comic .details_comic_top{
     display: flex;
     align-items:center;
-    padding: 16rpx 16rpx 16rpx 30rpx;
+    padding: 16rpx 16rpx 10rpx 30rpx;
 }
 .details_comic .comic_top_text{
-    align-items: center;
     max-width: 85%;
-    min-width:90rpx;
-    height: 24px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
+    align-items: center;
     color:#fff
 }
 .details_comic .comic_top_text text{
+    display: inline-block;
+    max-width: 100%;
+    min-width:90rpx;
+    height: 52rpx;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
     line-height: 48rpx;
     font-size: 40rpx;
     color: #fff;
