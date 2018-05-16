@@ -1,6 +1,6 @@
 <!--index.wxml-->
 
-<scroll-view class="container" scroll-y="{{isScroll}}">
+<scroll-view class="container" style="height: {{windowHeight}};" scroll-y="{{isScroll}}">
     <!--弹层男女选择-->
     <view wx:if="{{networkType === true}}" class="{{boyid || girlid? 'fix_view_hidden':'fix_view'}}">
             <view class="choose_view">
@@ -72,7 +72,9 @@
             <input class="{{isOpacity === true?'search_input_focus':'search_input'}}" type="text" cursor-spacing="3px" value="{{inputValue}}"
                    placeholder="搜索作品或作者名称" placeholder-style="color:#fff;font-size:28rpx;" bindfocus="focusInputEvent" bindinput="bindInputChange"/>
             <image class="{{isOpacity === true && searchList.length !== 0 || noSearch === false? 'del':'del_hidden'}}"
-                   src="../../images/delete.png" catchtap="onDel"></image>
+                   src="../../images/delete.png"></image>
+            <view class="{{isOpacity === true && searchList.length !== 0 || noSearch === false? 'bg_del':'bg_del_hidden'}}"
+                  catchtap="onDel"></view>
             <view class="{{isOpacity?'qx_view':'qx_view_hidden'}}}" catchtap="onCancel">取消</view>
             <block wx:if="{{boyid}}">
                 <image class="{{isOpacity || id !== 0? 'boy_img_hidden':'boy_img'}}" data-index="{{boyid}}"
@@ -127,10 +129,9 @@
 
         <view class="fine_works" wx:if="{{FineWorks.length > 0}}">
             <view class="border"></view>
-            <view class="fine_text">{{title[0]}}</view>
+            <view class="fine_text">{{title_f}}</view>
             <view class="border" style="margin-left: 10rpx;"></view>
         </view>
-
         <!--img+content 图片区域内容可滑动-精品佳作-->
         <scroll-view class="scroll_view" scroll-x="{{true}}" wx:if="{{FineWorks.length > 0}}">
             <view style="width: {{windowWidth}}">
@@ -150,11 +151,11 @@
             </view>
         </scroll-view>
         <view class="bg_more" wx:if="{{FineWorks.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex[1]}}"
-              data-title="{{title[0]}}"><text>查看更多</text></view>
+              data-title="{{title_f}}"><text>查看更多</text></view>
 
         <view class="hot_works" wx:if="{{PopularWorks.length >0}}">
             <view class="border"></view>
-            <view class="fine_text">{{title[1]}}</view>
+            <view class="fine_text">{{title_p}}</view>
             <view class="border" style="margin-left: 10rpx;"></view>
         </view>
         <!--img+content 人气作品-->
@@ -173,11 +174,11 @@
             </block>
         </view>
         <view class="bg_more" wx:if="{{PopularWorks.length >0}}" catchtap="bindMoreTap" data-index="{{keyIndex[2]}}"
-              data-title="{{title[1]}}">查看更多</view>
+              data-title="{{title_p}}">查看更多</view>
         <!--最新上架-->
         <view class="new_works" wx:if="{{newArrivalWorks.length > 0}}">
             <view class="border"></view>
-            <view class="fine_text">{{title[2]}}</view>
+            <view class="fine_text">{{title_n}}</view>
             <view class="border" style="margin-left: 10rpx;"></view>
         </view>
         <view class="new_view">
@@ -198,11 +199,11 @@
                 </view>
         </view>
         <view class="bg_more" wx:if="{{newArrivalWorks.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex[3]}}"
-              data-title="{{title[2]}}">查看更多</view>
+              data-title="{{title_n}}">查看更多</view>
         <!--热门连载-->
         <view class="hot_works" wx:if="{{hotSerialWorks.length > 0}}">
             <view class="border"></view>
-            <view class="fine_text">{{title[3]}}</view>
+            <view class="fine_text">{{title_h}}</view>
             <view class="border" style="margin-left: 10rpx;"></view>
         </view>
         <!--img+content 图片区域内容-->
@@ -222,11 +223,11 @@
             </block>
         </view>
         <view class="bg_more" wx:if="{{hotSerialWorks.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex[4]}}"
-              data-title="{{title[3]}}">查看更多</view>
+              data-title="{{title_h}}">查看更多</view>
         <!--小编推荐-->
         <view class="new_works" wx:if="{{xiaobianRecommend.length > 0}}">
             <view class="border"></view>
-            <view class="fine_text">{{title[4]}}</view>
+            <view class="fine_text">{{title_x}}</view>
             <view class="border" style="margin-left: 10rpx;"></view>
         </view>
         <view class="new_view">
@@ -247,11 +248,11 @@
             </view>
         </view>
         <view class="bg_more" wx:if="{{xiaobianRecommend.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex[5]}}"
-              data-title="{{title[4]}}">查看更多</view>
+              data-title="{{title_x}}">查看更多</view>
         <!--img+content 本周推荐-->
         <view class="hot_works" wx:if="{{weekRecommend.length > 0}}">
             <view class="border"></view>
-            <view class="fine_text">{{title[5]}}</view>
+            <view class="fine_text">{{title_w}}</view>
             <view class="border" style="margin-left: 10rpx;"></view>
         </view>
         <view class="hot_view">
@@ -270,10 +271,10 @@
             </block>
         </view>
         <view class="bg_more" wx:if="{{weekRecommend.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex[6]}}"
-              data-title="{{title[5]}}">查看更多</view>
+              data-title="{{title_w}}">查看更多</view>
         <!--滑动到底部没有数据了提示-->
-        <view class="bottom_img">
-            <image src="../../images/prompt.png"></image>
+        <view class="{{imgUrls?'bottom_img':'bottom_img_hidden'}}">
+            <view>下面没有了QAQ</view>
         </view>
     </scroll-view>
 
@@ -281,8 +282,8 @@
     <view class="{{isOpacity? 'layer' :'layer_n'}}" catchtouchmove='noScrollMove' catchtap="blurInputEvent"></view>
     <!--根据搜索结果渲染数据-->
     <scroll-view class="{{listData ? 'big_listdata_bloc':'big_listdata'}}" wx:if="{{searchList&&searchList.length>0}}"
-                 enable-back-to-top="true" scroll-y="{{true}}" bindscrolltolower="lower" bindscroll="scroll"
-                 scroll-top="{{scrollTop}}" lower-threshold="40">
+                 enable-back-to-top="true" scroll-y="{{true}}" bindscrolltolower="lower"
+                 lower-threshold="{{50}}" scroll-with-animation="true">
         <block wx:for="{{searchList}}" wx:key="index">
             <searchlist
                 class="searchlist"

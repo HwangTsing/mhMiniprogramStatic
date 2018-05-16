@@ -4,11 +4,11 @@ var wxApi = require("../../utils/util.js");
 Page({
       data: {
           windowWidth: '320px',
+          windowHeight:'504px',
           isBoy:false,   //男版
           isGirl:false,   //女版
           timer:null,     //倒计时
           imgUrls:[],
-          title:[],
           keyIndex:[],
           indicatorDots: true, //是否显示指示点
           autoplay: true, //是否自动切换
@@ -59,12 +59,10 @@ Page({
                 var site_image = data.data.data.site_image;
                 var location_list = data.data.data.location_list;
                 console.log(location_list);
-                var recommendList = {};
-                var title= that.data.title,keyIndex = that.data.keyIndex;
+                var recommendList = {}, title={};
+                var keyIndex = that.data.keyIndex;
                 if (data.data.code == 1){
                     if (that.data.id === 0 || that.data.id === 1){
-                        //recommendList = {};
-                        title = [];
                         keyIndex = [];
                     }
                     location_list.forEach((item,index)=> {
@@ -74,17 +72,23 @@ Page({
                         if (recommendList[key].length === 0){
                             return;
                         }else {
-                            console.log(recommendList[key]);
-                            console.log(data.data.data[key]);
-                            title.push(item.location_cn);
+                            //console.log(recommendList[key]);
+                            //console.log(data.data.data[key]);
+                            title[key] = item.location_cn;
                             keyIndex.push(key)
                         }
 
                     });
-                    title.shift();
-                    console.log(title);
-                    console.log('recommendList', recommendList);
-                    const imgUrls = recommendList[mca+'_rotation_map'];
+                    //console.log('title',title);
+                    //console.log('recommendList', recommendList);
+                    //轮播图
+                    const imgUrls = recommendList[mca+'_rotation_map'] ? recommendList[mca+'_rotation_map'] : [];
+                    const title_f = title[mca+'_fine_works'] ? title[mca+'_fine_works'] :'';
+                    const title_p = title[mca+'_popular_works'] ? title[mca+'_popular_works'] : '';
+                    const title_n = title[mca+'_new_arrival'] ? title[mca+'_new_arrival'] : '';
+                    const title_h = title[mca+'_hot_serial'] ? title[mca+'_hot_serial'] : '';
+                    const title_x = title[mca+'_xiaobian_recommend'] ? title[mca+'_xiaobian_recommend'] :'';
+                    const title_w = title[mca+'_week_recommend'] ? title[mca+'_week_recommend'] : '';
                     //精品佳作
                     const FineWorks = recommendList[mca+'_fine_works'];
                     //人气作品
@@ -97,7 +101,12 @@ Page({
                     const weekRecommend = recommendList[mca + '_week_recommend'] ? recommendList[mca+'_week_recommend'].slice(0,4) : [];
                     that.setData({
                         keyIndex:keyIndex,
-                        title:title,
+                        title_f,
+                        title_p,
+                        title_n,
+                        title_h,
+                        title_x,
+                        title_w,
                         imgUrls,
                         FineWorks,
                         PopularWorks,
@@ -443,10 +452,11 @@ Page({
     onLoad: function (options) {
         var that = this;
         //判断网络类型
-        let { windowWidth } = wxApi.getSystemInfoSync()
+        let { windowWidth,windowHeight } = wxApi.getSystemInfoSync();
         if (windowWidth > 0) {
-            windowWidth = windowWidth + 'px'
-            this.setData({ windowWidth })
+            windowWidth = windowWidth + 'px';
+            windowHeight = windowHeight + 'px';
+            this.setData({ windowWidth, windowHeight})
         }
         wxApi.getNetworkType().then((res) =>{
             let networkType = res.networkType;
