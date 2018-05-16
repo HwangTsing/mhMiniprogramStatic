@@ -18,17 +18,12 @@
 
 }
 .book_data {
-  /*display: inline-block;*/
   flex: 1;
   -webkit-box-flex: 1;
   -webkit-flex: 1;
   height: 231rpx;
   margin-top:40rpx;
-  /*float: left;*/
-}
-.book_data .book_name, .book_data .explain {
-    margin-left: 27rpx;
-    display: inline-block;
+  margin-left:207rpx;
 }
 .book_data .book_name {
   width:400rpx;
@@ -44,7 +39,6 @@
 .book_data .author {
   margin-bottom:16rpx;
   display: block;
-  margin-left:200rpx;
 }
 .book_data .explain {
     display:inline-block ;

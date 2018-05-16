@@ -9,11 +9,11 @@
         </image>
     </view>
     <view class="book_data">
-        <p class="book_name">{{name}}</p>
-        <p class="author">作者：{{artists}}</p>
+        <view class="book_name">{{name}}</view>
+        <view class="author">作者：{{artists}}</view>
         <block wx:for="{{cates}}" wx:key="index">
-            <p class="explain" wx:if="{{cates.length-1===index}}">{{item.cate_name}}</p>
-            <p class="explain" wx:else>{{item.cate_name}}\</p>
+            <text class="explain" wx:if="{{cates.length-1===index}}">{{item.cate_name}}</text>
+            <text class="explain" decode="{{true}}" space="{{true}}" wx:else>{{item.cate_name}}&nbsp;\&nbsp;</text>
         </block>
 
     </view>
