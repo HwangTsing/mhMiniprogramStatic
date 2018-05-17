@@ -138,11 +138,11 @@
         <scroll-view class="scroll_view" scroll-x="{{true}}" wx:if="{{FineWorks.length > 0}}">
             <view style="width: {{windowWidth}}">
                 <block wx:if="{{FineWorks}}" wx:for="{{FineWorks}}" wx:key="index">
-                    <navigator class="big_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                        <image mode="aspectFill" lazy-load="true" src="../../images/hcover.png"
+                    <navigator class="big_img" url="../details/details?comic_id={{item.extra.comic_id}}"
                                style="position: relative;top: 0;left: 0;">
+                        <image mode="aspectFill" lazy-load="true" src="../../images/hcover.png">
                             <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"
-                                   style="position: absolute;left: 0;top: 0;"></image>
+                                   style="position: absolute;left: 0;top: 0;z-index: 1;"></image>
                         </image>
                         <view class="word_info">
                             <text class="name_name">{{item.extra.name}}</text>
