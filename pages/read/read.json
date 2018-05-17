@@ -4,7 +4,6 @@
   "backgroundTextStyle": "dark",
   "navigationBarBackgroundColor": "#FF4D6A",
   "enablePullDownRefresh": false,
-  "disableScroll":true,
   "usingComponents": {
     "vcomic": "/components/comicImg/comicImg",
     "comcicNav": "/components/comicNav/comicNav",
