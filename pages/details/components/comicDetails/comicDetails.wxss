@@ -62,7 +62,7 @@
   margin-left:8rpx;
   max-width:192rpx;
   line-height:50rpx;
-  font-size: 28rpx;
+  font-size: 24rpx;
   color: #333333;
   overflow: hidden;
   text-overflow:ellipsis;
@@ -76,6 +76,7 @@
     width: 100%;
     line-height: 88rpx;
     font-size: 36rpx;
+    font-weight: bold;
     color: #333;
 }
 /*  评论外框S   */

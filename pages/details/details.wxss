@@ -35,7 +35,7 @@
     background: #fff;
 }
 .read_view .read_r {
-    width: 248rpx;
+    width: 30%;
     display: inline-block;
     height: 100rpx ;
     line-height: 100rpx;
@@ -74,6 +74,7 @@
     box-sizing: border-box;
 }
 .comic_nav .activeChecked {
+    font-weight: bold;
     color: #FF4C6A;
     font-size: 36rpx;
 }
@@ -105,7 +106,7 @@
     margin: 10rpx auto 40rpx auto;
     width: 188rpx;
     line-height:56rpx;
-    border: 1px solid #999999;
+    border: 1rpx solid #999999;
     border-radius: 28rpx;
     text-align: center;
     font-size: 24rpx;
@@ -124,7 +125,7 @@
 .comic_catalog_top_text{
     flex: 3;
     align-items: center;
-    width: 70%;
+    min-width:70%;
     line-height: 80rpx;
     font-size: 28rpx;
     color: #999999;

@@ -13,7 +13,7 @@
 }
 .comic_catalog_chapter_name{
     align-items: center;
-    flex: 2;
+    min-width: 70%;
     height: 48rpx;
     line-height: 48rpx;
     font-size: 35rpx;
@@ -25,7 +25,7 @@
 .comic_catalog_chapter_btn{
     position: relative;
     align-items: center;
-    flex: 1;
+    width: 30%;
 }
 .comic_catalog_chapter_btn image{
     position: absolute;
@@ -45,6 +45,7 @@
     flex-wrap: wrap;
 }
 .comic_catalog_one_item{
+    padding:0 10rpx;
     flex: 1;
     align-content: center;
     justify-items: center;
@@ -52,9 +53,9 @@
     justify-items: center;
     margin-bottom: 28rpx;
     margin-right: 25rpx;
-    min-width:220rpx;
-    max-width:220rpx;
-    width: 220rpx;
+    min-width:200rpx;
+    max-width:200rpx;
+    width: 200rpx;
     height: 76rpx;
     line-height: 76rpx;
     border: 2rpx solid #E9EAEA;
@@ -69,9 +70,10 @@
 
 /* 九宫格选中样式 */
 .comic_catalog_one .active{
-    min-width:224rpx;
-    max-width:224rpx;
-    width: 224rpx;
+    padding:0 10rpx;
+    min-width:204rpx;
+    max-width:204rpx;
+    width: 204rpx;
     height: 80rpx;
     line-height: 80rpx;
     text-align: center;
