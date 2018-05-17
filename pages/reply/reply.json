@@ -3,6 +3,7 @@
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#FF4D6A",
     "navigationBarTextStyle": "white",
+    "disableScroll":true,
     "usingComponents": {
         "commentList": "/components/commentList/commentList",
         "message": "/components/message/message"

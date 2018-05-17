@@ -1,12 +1,13 @@
 {
-  "navigationBarTitleText": "微博动漫",
-  "backgroundTextStyle": "light",
-  "navigationBarBackgroundColor": "#FF4D6A",
-  "navigationBarTextStyle": "white",
-  "usingComponents": {
-      "comicShowTop": "/components/comicShowTop/comicShowTop",
-      "comicDetails": "./components/comicDetails/comicDetails",
-      "comicCatalog": "./components/comicCatalog/comicCatalog",
-      "message": "/components/message/message"
-  }
+    "navigationBarTitleText": "微博动漫",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#FF4D6A",
+    "navigationBarTextStyle": "white",
+    "disableScroll": true,
+    "usingComponents": {
+        "comicShowTop": "/components/comicShowTop/comicShowTop",
+        "comicDetails": "./components/comicDetails/comicDetails",
+        "comicCatalog": "./components/comicCatalog/comicCatalog",
+        "message": "/components/message/message"
+    }
 }
