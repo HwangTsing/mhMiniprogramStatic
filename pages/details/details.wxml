@@ -14,7 +14,7 @@
 
 
         <!--  中间阅读表示区S  -->
-        <view class="read_view">
+        <view class="read_view" wx:if="{{dataAry && dataAry.chapterList && dataAry.chapterList.length != 0 }}">
             <!--根据状态判断是否阅读？暂未阅读 or 阅读的章节 wx:if wx:elif-->
             <view class="read_r">{{history?'看到:'+history.chapter_name:'暂未阅读'}}</view>
             <!--根据状态判断是否阅读？开始阅读 or 继续阅读 wx:if wx:elif-->
