@@ -33,6 +33,7 @@ Page({
           total:0,    //总页码
           noSearch:true,   //是否有搜索结果
           isLoad:false,     //是否加载失败
+          type:'loading'
       },
       metaData:{
         mca:''
@@ -126,7 +127,8 @@ Page({
                         xiaobianRecommend,
                         weekRecommend,
                         isToast:false,
-                        networkType:true
+                        networkType:true,
+                        type:null
                     })
 
                 }
@@ -198,7 +200,8 @@ Page({
                     }else if (data.data.data.data.length === 0){//搜索没有匹配的数据时提示图
                         that.setData({
                             searchList:[],
-                            noSearch:false
+                            noSearch:false,
+                            isScroll:false
                         })
                     }
                 },
