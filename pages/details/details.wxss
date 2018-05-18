@@ -106,7 +106,7 @@
     margin: 10rpx auto 40rpx auto;
     width: 188rpx;
     line-height:56rpx;
-    border: 1rpx solid #999999;
+    border: 1px solid #999999;
     border-radius: 28rpx;
     text-align: center;
     font-size: 24rpx;
