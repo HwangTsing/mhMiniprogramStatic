@@ -137,7 +137,8 @@ Page({
             fail:function (data) {
                 that.setData({
                     networkType:true,
-                    isLoad:true
+                    isLoad:true,
+                    isToast:false
                 })
             }
         })
