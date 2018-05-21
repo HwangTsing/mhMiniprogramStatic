@@ -27,6 +27,7 @@ Page({
     this.chapter_id = chapter_id
     this.chapter_name = chapter_name
     this.windowHeight = windowHeight
+    this.windowWidth = windowWidth
 
     wxApi.getNetworkType().then(({ networkType }) => {
       if (_.indexOf(['none', '2g'], networkType) != -1) {
@@ -90,7 +91,12 @@ Page({
 
   },
 
-  onPageScroll: function () {
+  onPageScroll: function ({ scrollTop }) {
+    if (this.scrollTimer) clearTimeout(this.scrollTimer)
+    this.scrollTimer = setTimeout( ()=> {
+      this.setReadingLog({ ...this.readingLog, scrollTop} )
+    }, 60 )
+    
   },
 
   /**
@@ -121,13 +127,11 @@ Page({
         return {}
       }
 
-      if (data.json_content == null) data.json_content = { page: [] }
-
       const {
         chapter = {},
         chapter_list = [],
-        json_content = { page: [] },
-        json_content: { page },
+        json_content = {},
+        json_content: { page = [] },
         is_allow_read,
         comic
       } = data;
@@ -161,14 +165,26 @@ Page({
     wxApi.pageScrollTo({ scrollTop })
   },
 
-  render: function (chapter_id){
+  render: function (chapter_id = 260743){
     //wxApi.pageScrollTo({scrollTop: 0});
     if (!chapter_id) return this.setPageMessage('noExist')
     this.fetchComic(chapter_id).then(({ chapter_list, comic_id, chapter_id, chapter_name} = {})=>{
       if (!comic_id || !chapter_id) return
       wxApi.setNavigationBarTitle(chapter_name)
+
+      const _windowWidth = this.windowWidth
+      const PREFIX = 'comic_id_'
+      const KEY = PREFIX + comic_id
+      
       this.findChapterList(chapter_id, chapter_list)
-      this.setReadingLog({ comic_id, chapter_id, chapter_name })
+      this.readingLog = { comic_id, chapter_id, chapter_name, scrollTop: 0, windowWidth: _windowWidth }
+
+      wxApi.getStorage(KEY).then(({ data = {}, data: {scrollTop = 0, windowWidth} })=>{
+        scrollTop = scrollTop * (windowWidth > 0 ? _windowWidth / windowWidth : 1)
+        wxApi.pageScrollTo({ scrollTop, duration: 0});
+        this.setReadingLog({ ...this.readingLog, scrollTop, windowWidth: _windowWidth})
+      }) 
+
     });
   },
 
@@ -221,7 +237,7 @@ Page({
     const can_read_chapters = this.can_read_chapters
     const { chapter_id, chapter_name, chapter_pay_price } = chapters[index]
     let isNeed = false
-    console.log(action, chapter_id, chapter_name, chapter_pay_price, _.indexOf(can_read_chapters, chapter_id))
+    //console.log(action, chapter_id, chapter_name, chapter_pay_price, _.indexOf(can_read_chapters, chapter_id))
     if (this.comicPayStatus == 2 && this.comicPayPrice > 0) {
       if (_.indexOf(can_read_chapters, chapter_id) == -1) isNeed = true
     } else {
@@ -253,12 +269,14 @@ Page({
     //this.triggerEvent('navchapter',{}, {})
   },
 
-  setReadingLog: function (values) {
+  setReadingLog: function (values, position = 0) {
     const PREFIX = 'comic_id_'
     const { comic_id = '' } = values
     const KEY = PREFIX + comic_id
 
-    if (comic_id) wxApi.setStorage(KEY, {...values})
+    if (comic_id) {
+      wxApi.setStorage(KEY, {...values})
+    }
   },
 
   onMyEvent: function(){

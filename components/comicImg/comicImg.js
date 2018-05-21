@@ -23,8 +23,9 @@ Component({
     });
   },
   methods: {
-    load({ detail = {} }) {
-      const { width, height } = detail
+    load(e) {
+      // console.log('load')
+      const { detail = {}, detail: {width, height} } = e
       const scale = width / height
       const { width: _width, scale: _scale} = this.properties
       if (_scale != scale)  {
