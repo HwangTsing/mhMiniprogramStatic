@@ -127,11 +127,12 @@ Page({
         return {}
       }
 
+      if (data.json_content == null) data.json_content = {}
       const {
         chapter = {},
         chapter_list = [],
         json_content = {},
-        json_content: { page = [] },
+        json_content: {page=[]},
         is_allow_read,
         comic
       } = data;
