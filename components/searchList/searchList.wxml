@@ -11,10 +11,11 @@
     <view class="book_data">
         <view class="book_name">{{name}}</view>
         <view class="author">作者：{{artists}}</view>
-        <block wx:for="{{cates}}" wx:key="index">
-            <text class="explain" wx:if="{{cates.length-1===index}}">{{item.cate_name}}</text>
-            <text class="explain" decode="{{true}}" space="{{true}}" wx:else>{{item.cate_name}}&nbsp;\&nbsp;</text>
-        </block>
-
+        <view class="cate_view">
+            <block wx:for="{{cates}}" wx:key="index">
+                <text class="explain" wx:if="{{cates.length-1===index}}">{{item.cate_name}}</text>
+                <text class="explain" decode="{{true}}" space="{{true}}" wx:else>{{item.cate_name}}&nbsp;\&nbsp;</text>
+            </block>
+        </view>
     </view>
 </view>

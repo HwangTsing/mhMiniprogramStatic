@@ -47,3 +47,10 @@
     color: #999;
     font-size: 26rpx;
 }
+.cate_view {
+    width:450rpx;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2;
+}
