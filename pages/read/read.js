@@ -121,11 +121,13 @@ Page({
         return {}
       }
 
+      if (data.json_content == null) data.json_content = { page: [] }
+
       const {
         chapter = {},
         chapter_list = [],
-        json_content = {page: []},
-        json_content: {page},
+        json_content = { page: [] },
+        json_content: { page },
         is_allow_read,
         comic
       } = data;
@@ -138,8 +140,7 @@ Page({
       })
       this.isAllowRead = is_allow_read;
 
-      if (page && page.length) this.setData({ json_content })
-
+      if ( page.length > 0) this.setData({ json_content })
       if (!chapter_list.length) {
         this.setPageMessage('out')
       } else if (!(page&&page.length)) {
@@ -160,7 +161,7 @@ Page({
     wxApi.pageScrollTo({ scrollTop })
   },
 
-  render: function (chapter_id){
+  render: function (chapter_id = 9){
     //wxApi.pageScrollTo({scrollTop: 0});
     if (!chapter_id) return this.setPageMessage('noExist')
     this.fetchComic(chapter_id).then(({ chapter_list, comic_id, chapter_id, chapter_name} = {})=>{
