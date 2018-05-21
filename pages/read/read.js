@@ -185,6 +185,8 @@ Page({
         scrollTop = scrollTop * (windowWidth > 0 ? _windowWidth / windowWidth : 1)
         if (_chapter_id == chapter_id) wxApi.pageScrollTo({ scrollTop, duration: 0});
         this.setReadingLog({ ...this.readingLog, scrollTop, windowWidth: _windowWidth})
+      }, ()=> {
+        this.setReadingLog({ ...this.readingLog})
       }) 
 
     });
