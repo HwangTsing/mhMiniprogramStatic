@@ -173,15 +173,16 @@ Page({
       wxApi.setNavigationBarTitle(chapter_name)
 
       const _windowWidth = this.windowWidth
+      const _chapter_id = chapter_id
       const PREFIX = 'comic_id_'
       const KEY = PREFIX + comic_id
       
       this.findChapterList(chapter_id, chapter_list)
       this.readingLog = { comic_id, chapter_id, chapter_name, scrollTop: 0, windowWidth: _windowWidth }
 
-      wxApi.getStorage(KEY).then(({ data = {}, data: {scrollTop = 0, windowWidth} })=>{
+      wxApi.getStorage(KEY).then(({ data = {}, data: {chapter_id, scrollTop = 0, windowWidth} })=>{
         scrollTop = scrollTop * (windowWidth > 0 ? _windowWidth / windowWidth : 1)
-        wxApi.pageScrollTo({ scrollTop, duration: 0});
+        if (_chapter_id == chapter_id) wxApi.pageScrollTo({ scrollTop, duration: 0});
         this.setReadingLog({ ...this.readingLog, scrollTop, windowWidth: _windowWidth})
       }) 
 
