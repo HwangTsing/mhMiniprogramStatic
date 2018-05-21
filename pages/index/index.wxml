@@ -69,10 +69,12 @@
             <!--search搜索-->
             <!--搜索框聚焦时显示-->
             <view class="{{isOpacity? 'search_view_show':'search_view'}}">
-                <view class="search_img">
+                <view class="search_img"
+                      style="{{isOpacity === true? 'background:rgba(245,245,245,1);border-radius: 30rpx;-webkit-border-radius: 30rpx;-moz-border-radius: 30rpx;-mz-border-radius: 30rpx;':''}}">
                     <image class="search_images" src="{{isOpacity === true ? '../../images/search_gray_02.png':'../../images/search_gray.png'}}"></image>
-                    <input class="{{isOpacity === true?'search_input_focus':'search_input'}}" type="text" cursor-spacing="3px" value="{{inputValue}}"
-                           placeholder="搜索作品或作者名称" placeholder-style="color:#fff;font-size:28rpx;" bindfocus="focusInputEvent" bindinput="bindInputChange"/>
+                    <input class="{{isOpacity === true?'search_input_focus':'search_input'}}" type="text" value="{{inputValue}}"
+                           placeholder="搜索作品或作者名称" placeholder-style="color:#fff;font-size:28rpx;"
+                           bindfocus="focusInputEvent" bindinput="bindInputChange"/>
                     <image class="{{isOpacity === true && searchList.length !== 0 || noSearch === false? 'del':'del_hidden'}}"
                            src="../../images/delete.png"></image>
                     <view class="{{isOpacity === true && searchList.length !== 0 || noSearch === false? 'bg_del':'bg_del_hidden'}}"
