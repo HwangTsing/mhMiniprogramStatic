@@ -12,8 +12,8 @@
             </view>
             <view class="brief_introduction">
                 <p class="book_name">{{item.name}}</p>
-                <p class="author">作者：{{item.sina_nickname}}</p>
-                <p class="explain">{{item.watching_focus}}</p>
+                <text class="author">作者：{{item.sina_nickname}}</text>
+                <text class="explain">{{item.watching_focus}}</text>
             </view>
         </navigator>
     </block>

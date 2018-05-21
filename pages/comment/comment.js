@@ -96,36 +96,32 @@ Page({
                         if (user && user.user_avatar && !/^http[s]?:\/\//ig.test(user.user_avatar)) {
                             user.user_avatar = dataList.site_image + user.user_avatar;
                         }
+                        if(user){
+                            //格式化时间
+                            item.create_time = wxApi.formatTime(item.create_time, {y: true, h: true});
 
-                        //格式化时间
-                        item.create_time = wxApi.formatTime(item.create_time, {y: true, h: true});
+                            //存储单个格式后的数据
+                            let obj = {
+                                data: {
+                                    item,
+                                    user
+                                },
+                                content,
+                                reply_list,
+                                reply_content
+                            }
 
-                        //存储单个格式后的数据
-                        let obj = {
-                            data: {
-                                item,
-                                user
-                            },
-                            content,
-                            reply_list,
-                            reply_content
+                            dataArray.push(obj) //存储格式化的数据到列表
                         }
-
-                        dataArray.push(obj) //存储格式化的数据到列表
 
                     })
                 }
 
-                if( dataList.user){
+                if( dataList.user){//存储用户列表
                     for(let key in dataList.user){
                         let datas=dataList.user[key];
                         userList[key]=datas;
                     }
-                    console.log(dataList.user)
-                    // dataList.user.forEach((item,index)=>{
-                    //     console.log(item)
-                    //     //userList[item] //存储用户信息
-                    // });
                 }
                 /*
                * *** 赋值到this 中 comicCommentData
@@ -138,7 +134,7 @@ Page({
                     isLoads: false,//改为可以下拉加载
                     pageNum: Number(pageNum) + 1,//修改页码状态
                     pageTotal: page_total,//保存可以下拉加载的次数
-                    message: page_total > pageNum ? '加载中' : '没更多了',//存储提示词
+                    message: page_total > pageNum ? '加载中' : '没有更多了',//存储提示词
                     isMessage:true,
                     comicId: comicId,//记录漫画的id
                     networkType: true,//是否有网络,

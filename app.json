@@ -12,5 +12,8 @@
         "navigationBarBackgroundColor": "#fff",
         "navigationBarTitleText": "",
         "navigationBarTextStyle": "black"
+    },
+    "networkTimeout": {
+        "request": 10000
     }
 }

@@ -27,7 +27,7 @@ Page({
     this.chapter_id = chapter_id
     this.chapter_name = chapter_name
     this.windowHeight = windowHeight
-    
+
     wxApi.getNetworkType().then(({ networkType }) => {
       if (_.indexOf(['none', '2g'], networkType) != -1) {
         this.setPageMessage('net')
@@ -107,7 +107,7 @@ Page({
   setPageMessage: function (type) {
     wxApi.setMessageType(this, type)
   },
-  
+
   fetchComic: function (chapter_id) {
     const create_source = "microprogram";
     return wxApi.get('wbcomic/comic/comic_play', {
@@ -120,7 +120,7 @@ Page({
         this.setPageMessage('server')
         return {}
       }
-      
+
       const {
         chapter = {},
         chapter_list = [],
@@ -144,8 +144,8 @@ Page({
         this.setPageMessage('out')
       } else if (!(page&&page.length)) {
         this.setPageMessage('lose')
-      } 
-      
+      }
+
       return { chapter_list, comic_id, chapter_id, chapter_name}
     }, () => {
         this.setPageMessage('server')
@@ -177,7 +177,7 @@ Page({
     const { comic_id} = this.data.comic
     let next_url = '', prev_url = '', next = null, prev = null
     const { comic = { try_read_chapters: [] }, chapter_order = {}, comic: { try_read_chapters, pay_status, pay_price } } = this.isAllowRead
-    
+
     const { chapter_id_arr = [] } = chapter_order
     this.comicPayStatus = pay_status
     this.comicPayPrice = pay_price
@@ -190,7 +190,7 @@ Page({
 
     // console.log('can_read_chapters', this.can_read_chapters, chapter_id_arr)
     const index = _.findIndex(chapter_list, { chapter_id })
-    
+
     if (index != -1) {
       next = this.findNextChapter(index, chapter_list)
       prev = this.findPrevChapter(index, chapter_list)
@@ -226,14 +226,14 @@ Page({
     } else {
       if (chapter_pay_price > 0 && _.indexOf(can_read_chapters, chapter_id) == -1) isNeed = true
     }
-    
+
     if (isNeed) {
       return this[action](index, chapters)
     }
 
     return { chapter_id, chapter_name }
   },
-  
+
   getReadurlByParam: function ({chapter_id, chapter_name, comic_id}, url = '/pages/read/read') {
     return wxApi.appendParams(url, { chapter_id, chapter_name, comic_id });
   },

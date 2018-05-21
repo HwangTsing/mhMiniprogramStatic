@@ -159,7 +159,7 @@ Page({
                                 chapterList = [];
                                 DATA.chapter_list.forEach((item, index) => {
                                     // console.log(item)
-                                    if( tryReadChapters.length > 0 ){
+                                    if(  tryReadChapters.length > 0 ){
                                         //试读章节 不是空数组的情况下
                                         tryReadChapters.forEach((id,i)=>{
                                             if(item.chapter_id===id){ //如果相等,就修改付费为免费章节,忽略过滤
@@ -169,7 +169,15 @@ Page({
                                         });
                                     }
                                     if ( payStatus===1 && item.chapter_pay_vcoin === 0 ) {
-                                        chapterList.push(item)
+                                        let isRepeat=false;
+                                        chapterList.forEach((data,k)=>{
+                                            if(data.chapter_id===item.chapter_id){
+                                                isRepeat=true
+                                            }
+                                        })
+                                        if(!isRepeat){
+                                            chapterList.push(item);
+                                        }
                                     }
                                 })
 

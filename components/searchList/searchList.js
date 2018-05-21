@@ -51,10 +51,11 @@ Component({
       //点击跳转详情页事件
       listTap(event){
           //console.log(event);
-          let comic_id=JSON.stringify(event.currentTarget.dataset.comic_id);
-          //console.log(comic_id);
+          //let comic_id=event.currentTarget.dataset.comic_id;
+
+          //console.log(`/pages/details/details?comic_id=${comic_id}`);
           wx.navigateTo({
-              url:`/pages/details/details?comic_id=${comic_id}`
+              url:`/pages/details/details?comic_id=${event.currentTarget.dataset.comic_id}`
           })
       }
   }

@@ -35,6 +35,7 @@ Component({
       search: '未搜索到任何相关内容',
       out: '主人，此作品已经下架了～去看看其他作品吧',
       noExist: '很遗憾，此内容不存在哦～',
+      nothing:'还什么都没有呢QAQ',
       loading: '页面加载中…',
       lose: '主人，本章节暂时丢失了～直接观看下一章节吧～'
     },
@@ -44,6 +45,7 @@ Component({
       search: MESSAGE_SEARCH_IMG,
       out: MESSAGE_IMG,
       noExist: MESSAGE_NOEXIT_IMG,
+      nothing: MESSAGE_NOEXIT_IMG,
       loading: MESSAGE_LOADING_IMG,
       lose: MESSAGE_NOEXIT_IMG
     },
@@ -53,6 +55,7 @@ Component({
       search: MESSAGE_SEARCH_IMG_CLASS,
       out: MESSAGE_OUT_IMG_CLASS,
       noExist: MESSAGE_IMG_CLASS,
+      nothing: MESSAGE_IMG_CLASS,
       loading: MESSAGE_IMG_CLASS,
       lose: MESSAGE_OUT_IMG_CLASS
     }
@@ -72,6 +75,6 @@ Component({
     this.setData({ url })
   },
   methods: {
-   
+
   }
 })

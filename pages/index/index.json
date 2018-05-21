@@ -3,7 +3,6 @@
   "navigationBarTextStyle": "white",
   "backgroundTextStyle": "dark",
   "navigationBarBackgroundColor": "#FF4D6A",
-  "disableScroll": true,
   "enablePullDownRefresh":false,
   "usingComponents":{
     "searchlist":"/components/searchList/searchList",

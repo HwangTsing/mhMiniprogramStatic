@@ -50,7 +50,7 @@
     white-space: nowrap;
 }
 .comment_right .comment_content{
-    padding-top: 12rpx;
+    padding-top: 6rpx;
     padding-bottom: 12rpx;
     line-height: 44rpx;
     font-size:28rpx;

@@ -4,12 +4,11 @@ var wxApi = require("../../utils/util.js");
 Page({
       data: {
           windowWidth: '320px',
+          windowHeight:'504px',
           isBoy:false,   //男版
           isGirl:false,   //女版
           timer:null,     //倒计时
           imgUrls:[],
-          title:[],
-          keyIndex:[],
           indicatorDots: true, //是否显示指示点
           autoplay: true, //是否自动切换
           interval: 3000, //自动切换间隔时长
@@ -34,6 +33,7 @@ Page({
           total:0,    //总页码
           noSearch:true,   //是否有搜索结果
           isLoad:false,     //是否加载失败
+          type:'loading'
       },
       metaData:{
         mca:''
@@ -59,13 +59,10 @@ Page({
                 var site_image = data.data.data.site_image;
                 var location_list = data.data.data.location_list;
                 console.log(location_list);
-                var recommendList = {};
-                var title= that.data.title,keyIndex = that.data.keyIndex;
+                var recommendList = {}, title={},keyIndex = {};
                 if (data.data.code == 1){
                     if (that.data.id === 0 || that.data.id === 1){
-                        //recommendList = {};
-                        title = [];
-                        keyIndex = [];
+
                     }
                     location_list.forEach((item,index)=> {
                         //console.log(item.location_en);
@@ -74,17 +71,31 @@ Page({
                         if (recommendList[key].length === 0){
                             return;
                         }else {
-                            console.log(recommendList[key]);
-                            console.log(data.data.data[key]);
-                            title.push(item.location_cn);
-                            keyIndex.push(key)
+                            //console.log(recommendList[key]);
+                            //console.log(data.data.data[key]);
+                            title[key] = item.location_cn || '';
+                            keyIndex[key] = key;
                         }
 
                     });
-                    title.shift();
-                    console.log(title);
-                    console.log('recommendList', recommendList);
-                    const imgUrls = recommendList[mca+'_rotation_map'];
+                    //console.log('title',title);
+                    //console.log('recommendList', recommendList);
+                    //轮播图
+                    const imgUrls = recommendList[mca+'_rotation_map'] ? recommendList[mca+'_rotation_map'] : [];
+                    //标题
+                    const title_f = title[mca+'_fine_works'] ? title[mca+'_fine_works'] :'';
+                    const title_p = title[mca+'_popular_works'] ? title[mca+'_popular_works'] : '';
+                    const title_n = title[mca+'_new_arrival'] ? title[mca+'_new_arrival'] : '';
+                    const title_h = title[mca+'_hot_serial'] ? title[mca+'_hot_serial'] : '';
+                    const title_x = title[mca+'_xiaobian_recommend'] ? title[mca+'_xiaobian_recommend'] :'';
+                    const title_w = title[mca+'_week_recommend'] ? title[mca+'_week_recommend'] : '';
+                    //key
+                    const keyIndex_f = keyIndex[mca+'_fine_works'] ? keyIndex[mca+'_fine_works'] : '';
+                    const keyIndex_p = keyIndex[mca+'_popular_works'] ? keyIndex[mca+'_popular_works'] : '';
+                    const keyIndex_n = keyIndex[mca+'_new_arrival'] ? keyIndex[mca+'_new_arrival'] : '';
+                    const keyIndex_h = keyIndex[mca+'_hot_serial'] ? keyIndex[mca+'_hot_serial'] : '';
+                    const keyIndex_x = keyIndex[mca+'_xiaobian_recommend'] ? keyIndex[mca+'_xiaobian_recommend'] : '';
+                    const keyIndex_w = keyIndex[mca+'_week_recommend'] ? keyIndex[mca+'_week_recommend'] : '';
                     //精品佳作
                     const FineWorks = recommendList[mca+'_fine_works'];
                     //人气作品
@@ -96,9 +107,19 @@ Page({
                     const xiaobianRecommend = recommendList[mca + '_xiaobian_recommend'] ? recommendList[mca+'_xiaobian_recommend'].slice(0,3) : [];
                     const weekRecommend = recommendList[mca + '_week_recommend'] ? recommendList[mca+'_week_recommend'].slice(0,4) : [];
                     that.setData({
-                        keyIndex:keyIndex,
-                        title:title,
                         imgUrls,
+                        title_f,
+                        title_p,
+                        title_n,
+                        title_h,
+                        title_x,
+                        title_w,
+                        keyIndex_f,
+                        keyIndex_p,
+                        keyIndex_n,
+                        keyIndex_h,
+                        keyIndex_x,
+                        keyIndex_w,
                         FineWorks,
                         PopularWorks,
                         newArrivalWorks,
@@ -106,7 +127,8 @@ Page({
                         xiaobianRecommend,
                         weekRecommend,
                         isToast:false,
-                        networkType:true
+                        networkType:true,
+                        type:null
                     })
 
                 }
@@ -115,7 +137,8 @@ Page({
             fail:function (data) {
                 that.setData({
                     networkType:true,
-                    isLoad:true
+                    isLoad:true,
+                    isToast:false
                 })
             }
         })
@@ -178,7 +201,8 @@ Page({
                     }else if (data.data.data.data.length === 0){//搜索没有匹配的数据时提示图
                         that.setData({
                             searchList:[],
-                            noSearch:false
+                            noSearch:false,
+                            isScroll:false
                         })
                     }
                 },
@@ -423,30 +447,15 @@ Page({
         })
 
     },
-    //滚动条滚动后触发
-    scroll: function(e) {
-        var that = this;
-        var scrollTop = e.detail.scrollTop;
-        if (scrollTop >67){
-            this.setData({
-                isScrollSearch:true,
-            })
-        }
-        if (scrollTop === 0){
-            this.setData({
-                isScrollSearch:false
-            })
-
-        }
-    },
 
     onLoad: function (options) {
         var that = this;
         //判断网络类型
-        let { windowWidth } = wxApi.getSystemInfoSync()
+        let { windowWidth,windowHeight } = wxApi.getSystemInfoSync();
         if (windowWidth > 0) {
-            windowWidth = windowWidth + 'px'
-            this.setData({ windowWidth })
+            windowWidth = windowWidth + 'px';
+            windowHeight = windowHeight + 'px';
+            this.setData({ windowWidth, windowHeight})
         }
         wxApi.getNetworkType().then((res) =>{
             let networkType = res.networkType;

@@ -42,7 +42,7 @@
 .comicShowTop .details_img {
   width: 100%;
   height: 420rpx;
-  background: rgba(0, 0, 0, 0.65);
+  background: rgba(0, 0, 0, 0.8);
 }
 .comicShowTop .details_img .detail_src {
   position: relative;

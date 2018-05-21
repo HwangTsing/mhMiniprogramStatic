@@ -1,6 +1,6 @@
 <!--index.wxml-->
 
-<scroll-view class="container" scroll-y="{{isScroll}}">
+<view class="{{isScroll?'container':'container_noscroll'}}">
     <!--弹层男女选择-->
     <view wx:if="{{networkType === true}}" class="{{boyid || girlid? 'fix_view_hidden':'fix_view'}}">
             <view class="choose_view">
@@ -56,90 +56,93 @@
             </view>
         </view>
     <!--toast-->
-    <view id="{{isToast ? 'toast':'toast_hidden'}}"></view>
-    <view class="{{isToast ? 'toast_img':'toast_img_hidden'}}">
+    <view id="{{isToast ? 'toast':'toast_hidden'}}" catchtouchmove='noScrollMove'></view>
+    <view class="{{isToast ? 'toast_img':'toast_img_hidden'}}" catchtouchmove='noScrollMove'>
         <view class="toast_view">
             <image class="toast_images" src="../../images/toast.png"></image>
             <view class="toast_word">正在加载中...</view>
         </view>
     </view>
 
-    <!--search搜索-->
-    <!--搜索框聚焦时显示-->
-    <view class="{{isOpacity? 'search_view_show':'search_view'}}" style="{{isScrollSearch === true && isOpacity === false? 'background:#fff;opacity:0.95;':''}}">
-        <view class="search_img">
-            <image class="search_images" src="{{isOpacity === true ? '../../images/search_gray_02.png':'../../images/search_gray.png'}}"></image>
-            <input class="{{isOpacity === true?'search_input_focus':'search_input'}}" type="text" cursor-spacing="3px" value="{{inputValue}}"
-                   placeholder="搜索作品或作者名称" placeholder-style="color:#fff;font-size:28rpx;" bindfocus="focusInputEvent" bindinput="bindInputChange"/>
-            <image class="{{isOpacity === true && searchList.length !== 0 || noSearch === false? 'del':'del_hidden'}}"
-                   src="../../images/delete.png" catchtap="onDel"></image>
-            <view class="{{isOpacity?'qx_view':'qx_view_hidden'}}}" catchtap="onCancel">取消</view>
-            <block wx:if="{{boyid}}">
-                <image class="{{isOpacity || id !== 0? 'boy_img_hidden':'boy_img'}}" data-index="{{boyid}}"
-                       src="../../images/boy.png" catchtap="onToastTap" data-id="{{id}}"></image>
-                <image class="{{id === 0 || isOpacity === true ? 'girl_img_hidden':'girl_img'}}" data-index="{{girlid}}"
-                       src="../../images/girl.png" catchtap="onToastTap" data-id="{{id}}"></image>
-            </block>
-            <block wx:elif="{{girlid}}">
-                <image class="{{isOpacity || idg !== 1? 'girl_img_hidden':'girl_img'}}" data-index="{{girlid}}"
-                       src="../../images/girl.png" catchtap="onToastTap02" data-id="{{idg}}"></image>
-                <image class="{{idg === 1 || isOpacity === true? 'boy_img_hidden':'boy_img'}}" data-index="{{boyid}}"
-                       src="../../images/boy.png" catchtap="onToastTap02" data-id="{{idg}}"></image>
-            </block>
-
-        </view>
-    </view>
-
-    <scroll-view class="content_view" scroll-y="{{isScroll}}" bindscroll="scroll">
-        <!--banner图-->
-        <view class="banner" id="haha">
-            <block wx:if="{{imgUrls.length>1}}">
-                <swiper indicator-dots="{{indicatorDots}}"
-                        autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color ="{{indicatorColor}}"
-                        indicator-active-color ="{{indicatorActiveColor}}" circular="{{circular}}" vertical ="{{vertical}}">
-                    <block wx:for="{{imgUrls}}" wx:key="index">
-                        <swiper-item>
-                            <image class="slide-image" src="../../images/banner_bitmap.png"
-                                   style="position: relative;left: 0;top: 0;">
-                                <image src="{{item.image_ext_url}}" data-typeid="{{item.object_id}}" class="slide-image"
-                                       catchtap="swipTap" style="position: absolute;left: 0;top: 0;"></image>
-                            </image>
-                        </swiper-item>
+    <view class="content_view">
+        <view class="con_banner">
+            <!--search搜索-->
+            <!--搜索框聚焦时显示-->
+            <view class="{{isOpacity? 'search_view_show':'search_view'}}">
+                <view class="search_img">
+                    <image class="search_images" src="{{isOpacity === true ? '../../images/search_gray_02.png':'../../images/search_gray.png'}}"></image>
+                    <input class="{{isOpacity === true?'search_input_focus':'search_input'}}" type="text" cursor-spacing="3px" value="{{inputValue}}"
+                           placeholder="搜索作品或作者名称" placeholder-style="color:#fff;font-size:28rpx;" bindfocus="focusInputEvent" bindinput="bindInputChange"/>
+                    <image class="{{isOpacity === true && searchList.length !== 0 || noSearch === false? 'del':'del_hidden'}}"
+                           src="../../images/delete.png"></image>
+                    <view class="{{isOpacity === true && searchList.length !== 0 || noSearch === false? 'bg_del':'bg_del_hidden'}}"
+                          catchtap="onDel"></view>
+                    <view class="{{isOpacity?'qx_view':'qx_view_hidden'}}}" catchtap="onCancel">取消</view>
+                    <block wx:if="{{boyid}}">
+                        <image class="{{isOpacity || id !== 0? 'boy_img_hidden':'boy_img'}}" data-index="{{boyid}}"
+                               src="../../images/boy.png" catchtap="onToastTap" data-id="{{id}}"></image>
+                        <image class="{{id === 0 || isOpacity === true ? 'girl_img_hidden':'girl_img'}}" data-index="{{girlid}}"
+                               src="../../images/girl.png" catchtap="onToastTap" data-id="{{id}}"></image>
                     </block>
-                </swiper>
-            </block>
-
-            <block wx:else>
-                <swiper>
-                    <block wx:for="{{imgUrls}}" wx:key="index">
-                        <swiper-item>
-                            <image class="slide-image" src="../../images/banner_bitmap.png"
-                                   style="position: relative;left: 0;top: 0;">
-                                <image src="{{item.image_ext_url}}" data-typeid="{{item.object_id}}" class="slide-image"
-                                       catchtap="swipTap" style="position: absolute;left: 0;top: 0;"></image>
-                            </image>
-                        </swiper-item>
+                    <block wx:elif="{{girlid}}">
+                        <image class="{{isOpacity || idg !== 1? 'girl_img_hidden':'girl_img'}}" data-index="{{girlid}}"
+                               src="../../images/girl.png" catchtap="onToastTap02" data-id="{{idg}}"></image>
+                        <image class="{{idg === 1 || isOpacity === true? 'boy_img_hidden':'boy_img'}}" data-index="{{boyid}}"
+                               src="../../images/boy.png" catchtap="onToastTap02" data-id="{{idg}}"></image>
                     </block>
-                </swiper>
-            </block>
 
+                </view>
+            </view>
+            <!--banner图-->
+            <view class="banner" id="haha">
+                <block wx:if="{{imgUrls.length>1}}">
+                    <swiper indicator-dots="{{indicatorDots}}"
+                            autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color ="{{indicatorColor}}"
+                            indicator-active-color ="{{indicatorActiveColor}}" circular="{{circular}}" vertical ="{{vertical}}">
+                        <block wx:for="{{imgUrls}}" wx:key="index">
+                            <swiper-item>
+                                <image class="slide-image" src="../../images/banner_bitmap.png"
+                                       style="position: relative;left: 0;top: 0;">
+                                    <image src="{{item.image_ext_url}}" data-typeid="{{item.object_id}}" class="slide-image"
+                                           catchtap="swipTap" style="position: absolute;left: 0;top: 0;"></image>
+                                </image>
+                            </swiper-item>
+                        </block>
+                    </swiper>
+                </block>
+
+                <block wx:else>
+                    <swiper>
+                        <block wx:for="{{imgUrls}}" wx:key="index">
+                            <swiper-item>
+                                <image class="slide-image" src="../../images/banner_bitmap.png"
+                                       style="position: relative;left: 0;top: 0;">
+                                    <image src="{{item.image_ext_url}}" data-typeid="{{item.object_id}}" class="slide-image"
+                                           catchtap="swipTap" style="position: absolute;left: 0;top: 0;"></image>
+                                </image>
+                            </swiper-item>
+                        </block>
+                    </swiper>
+                </block>
+
+            </view>
         </view>
+
 
         <view class="fine_works" wx:if="{{FineWorks.length > 0}}">
             <view class="border"></view>
-            <view class="fine_text">{{title[0]}}</view>
+            <view class="fine_text">{{title_f}}</view>
             <view class="border" style="margin-left: 10rpx;"></view>
         </view>
-
         <!--img+content 图片区域内容可滑动-精品佳作-->
         <scroll-view class="scroll_view" scroll-x="{{true}}" wx:if="{{FineWorks.length > 0}}">
             <view style="width: {{windowWidth}}">
                 <block wx:if="{{FineWorks}}" wx:for="{{FineWorks}}" wx:key="index">
-                    <navigator class="big_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                        <image mode="aspectFill" lazy-load="true" src="../../images/hcover.png"
+                    <navigator class="big_img" url="../details/details?comic_id={{item.extra.comic_id}}"
                                style="position: relative;top: 0;left: 0;">
+                        <image mode="aspectFill" lazy-load="true" src="../../images/hcover.png">
                             <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"
-                                   style="position: absolute;left: 0;top: 0;"></image>
+                                   style="position: absolute;left: 0;top: 0;z-index: 1;"></image>
                         </image>
                         <view class="word_info">
                             <text class="name_name">{{item.extra.name}}</text>
@@ -149,12 +152,12 @@
                 </block>
             </view>
         </scroll-view>
-        <view class="bg_more" wx:if="{{FineWorks.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex[1]}}"
-              data-title="{{title[0]}}"><text>查看更多</text></view>
+        <view class="bg_more" wx:if="{{FineWorks.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex_f}}"
+              data-title="{{title_f}}"><text>查看更多</text></view>
 
         <view class="hot_works" wx:if="{{PopularWorks.length >0}}">
             <view class="border"></view>
-            <view class="fine_text">{{title[1]}}</view>
+            <view class="fine_text">{{title_p}}</view>
             <view class="border" style="margin-left: 10rpx;"></view>
         </view>
         <!--img+content 人气作品-->
@@ -172,12 +175,12 @@
                 </navigator>
             </block>
         </view>
-        <view class="bg_more" wx:if="{{PopularWorks.length >0}}" catchtap="bindMoreTap" data-index="{{keyIndex[2]}}"
-              data-title="{{title[1]}}">查看更多</view>
+        <view class="bg_more" wx:if="{{PopularWorks.length >0}}" catchtap="bindMoreTap" data-index="{{keyIndex_p}}"
+              data-title="{{title_p}}">查看更多</view>
         <!--最新上架-->
         <view class="new_works" wx:if="{{newArrivalWorks.length > 0}}">
             <view class="border"></view>
-            <view class="fine_text">{{title[2]}}</view>
+            <view class="fine_text">{{title_n}}</view>
             <view class="border" style="margin-left: 10rpx;"></view>
         </view>
         <view class="new_view">
@@ -197,12 +200,12 @@
                     </block>
                 </view>
         </view>
-        <view class="bg_more" wx:if="{{newArrivalWorks.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex[3]}}"
-              data-title="{{title[2]}}">查看更多</view>
+        <view class="bg_more" wx:if="{{newArrivalWorks.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex_n}}"
+              data-title="{{title_n}}">查看更多</view>
         <!--热门连载-->
         <view class="hot_works" wx:if="{{hotSerialWorks.length > 0}}">
             <view class="border"></view>
-            <view class="fine_text">{{title[3]}}</view>
+            <view class="fine_text">{{title_h}}</view>
             <view class="border" style="margin-left: 10rpx;"></view>
         </view>
         <!--img+content 图片区域内容-->
@@ -221,12 +224,12 @@
                 </navigator>
             </block>
         </view>
-        <view class="bg_more" wx:if="{{hotSerialWorks.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex[4]}}"
-              data-title="{{title[3]}}">查看更多</view>
+        <view class="bg_more" wx:if="{{hotSerialWorks.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex_h}}"
+              data-title="{{title_h}}">查看更多</view>
         <!--小编推荐-->
         <view class="new_works" wx:if="{{xiaobianRecommend.length > 0}}">
             <view class="border"></view>
-            <view class="fine_text">{{title[4]}}</view>
+            <view class="fine_text">{{title_x}}</view>
             <view class="border" style="margin-left: 10rpx;"></view>
         </view>
         <view class="new_view">
@@ -246,12 +249,12 @@
                 </block>
             </view>
         </view>
-        <view class="bg_more" wx:if="{{xiaobianRecommend.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex[5]}}"
-              data-title="{{title[4]}}">查看更多</view>
+        <view class="bg_more" wx:if="{{xiaobianRecommend.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex_x}}"
+              data-title="{{title_x}}">查看更多</view>
         <!--img+content 本周推荐-->
         <view class="hot_works" wx:if="{{weekRecommend.length > 0}}">
             <view class="border"></view>
-            <view class="fine_text">{{title[5]}}</view>
+            <view class="fine_text">{{title_w}}</view>
             <view class="border" style="margin-left: 10rpx;"></view>
         </view>
         <view class="hot_view">
@@ -269,20 +272,20 @@
                 </navigator>
             </block>
         </view>
-        <view class="bg_more" wx:if="{{weekRecommend.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex[6]}}"
-              data-title="{{title[5]}}">查看更多</view>
+        <view class="bg_more" wx:if="{{weekRecommend.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex_w}}"
+              data-title="{{title_w}}">查看更多</view>
         <!--滑动到底部没有数据了提示-->
-        <view class="bottom_img">
-            <image src="../../images/prompt.png"></image>
+        <view class="{{imgUrls.length>0?'bottom_img':'bottom_img_hidden'}}">
+            <view>下面没有了QAQ</view>
         </view>
-    </scroll-view>
+    </view>
 
     <!--蒙层-->
     <view class="{{isOpacity? 'layer' :'layer_n'}}" catchtouchmove='noScrollMove' catchtap="blurInputEvent"></view>
     <!--根据搜索结果渲染数据-->
     <scroll-view class="{{listData ? 'big_listdata_bloc':'big_listdata'}}" wx:if="{{searchList&&searchList.length>0}}"
-                 enable-back-to-top="true" scroll-y="{{true}}" bindscrolltolower="lower" bindscroll="scroll"
-                 scroll-top="{{scrollTop}}" lower-threshold="40">
+                 enable-back-to-top="true" scroll-y="{{true}}" bindscrolltolower="lower"
+                 lower-threshold="{{50}}" scroll-with-animation="true">
         <block wx:for="{{searchList}}" wx:key="index">
             <searchlist
                 class="searchlist"
@@ -305,5 +308,10 @@
     </block>
     <import src="./template/message.wxml"></import>
     <template is="message" data="{{networkType,isLoad}}"></template>
-</scroll-view>
+    <!-- 网络慢提示loading -->
+    <import src="/tpls/message.wxml"/>
+    <view style="position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;">
+        <template is="message" wx:if="{{type}}" data="{{ type }}"/>
+    </view>
+</view>
 

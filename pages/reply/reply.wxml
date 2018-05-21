@@ -69,7 +69,7 @@
                   wx:if="{{ networkType && replyList.length>9 && isMessage }}"
             >
                 <image
-                    wx:if="{{ message != '没更多了' }}"
+                    wx:if="{{ message === '加载中' }}"
                     class="comment_src"
                     mode="aspectFill"
                     src="../../images/details/loads.png"
