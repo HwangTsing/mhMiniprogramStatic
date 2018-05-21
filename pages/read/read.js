@@ -204,18 +204,19 @@ Page({
 
   findNextChapter: function (index, chapters){
     const _index = index + 1
-    const length = chapters.length
-    if (_index >= length) return null
+    
     return this.findChapter(_index, chapters, 'findNextChapter')
   },
 
   findPrevChapter: function (index, chapters) {
     const _index = index - 1
-    if (_index < 0) return null
     return this.findChapter(_index, chapters, 'findPrevChapter')
   },
 
   findChapter: function (index, chapters, action) {
+    const length = chapters.length
+    if (index < 0 || index >= length) return null
+
     const can_read_chapters = this.can_read_chapters
     const { chapter_id, chapter_name, chapter_pay_price } = chapters[index]
     let isNeed = false
