@@ -1,7 +1,7 @@
 <!--pages/details/details.wxml-->
 
 <!--  摘要页 S   -->
-<view class="container" catchtap="ClickCatalog">
+<view class="details_container" catchtap="ClickCatalog">
 
     <!--  数据加载完成后显示S  -->
     <view wx:if="{{dataAry && dataAry!='{}' && !type }}" style='width:100%;'>
