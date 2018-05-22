@@ -81,10 +81,10 @@
                         <view class="bg_del"
                               catchtap="onDel"></view>
                     </block>
-                    <block wx:elif="{{word ===''}}">
+                    <block wx:if="{{word ===''}}">
                         <image class="del_hidden"
                                src="../../images/delete.png"></image>
-                        <view class="bg_del_hidden"
+                        <view class="{{word? 'bg_del':'bg_del_hidden'}}"
                               catchtap="onDel"></view>
                     </block>
 
@@ -294,7 +294,7 @@
     <!--蒙层-->
     <view class="{{isOpacity? 'layer' :'layer_n'}}" catchtouchmove='noScrollMove' catchtap="blurInputEvent"></view>
     <!--根据搜索结果渲染数据-->
-    <scroll-view class="{{isCancel===true?'big_listdata':'big_listdata_bloc'}}}" wx:if="{{searchList&&searchList.length>0}}"
+    <scroll-view class="{{isCancel===true?'big_listdata':'big_listdata_bloc'}}" wx:if="{{searchList&&searchList.length>0}}"
                  enable-back-to-top="true" scroll-y="{{true}}" bindscrolltolower="lower"
                  lower-threshold="{{50}}" scroll-with-animation="true">
         <block wx:for="{{searchList}}" wx:key="index">

@@ -398,6 +398,13 @@ Page({
         });
         that.data.scrolType = '';
         that.searchData.page_num = 1;
+        var timer = setTimeout(function () {
+            that.setData({
+                searchList:[],
+                noSearch:true
+            })
+
+        },1000)
     },
     /*查看更多*/
     bindMoreTap:function (e) {
