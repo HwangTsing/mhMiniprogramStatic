@@ -201,7 +201,7 @@ Page({
 
     const { chapter_id_arr = [] } = chapter_order
     this.comicPayStatus = pay_status
-    this.comicPayPrice = pay_price
+    //this.comicPayPrice = pay_price
 
     if (pay_status == 2 && pay_price > 0) {
       this.can_read_chapters = _.union(try_read_chapters, chapter_id_arr)
@@ -242,7 +242,7 @@ Page({
     const { chapter_id, chapter_name, chapter_pay_price } = chapters[index]
     let isNeed = false
     //console.log(action, chapter_id, chapter_name, chapter_pay_price, _.indexOf(can_read_chapters, chapter_id))
-    if (this.comicPayStatus == 2 && this.comicPayPrice > 0) {
+    if (this.comicPayStatus == 2) { // pay_status 收费漫画
       if (_.indexOf(can_read_chapters, chapter_id) == -1) isNeed = true
     } else {
       if (chapter_pay_price > 0 && _.indexOf(can_read_chapters, chapter_id) == -1) isNeed = true
