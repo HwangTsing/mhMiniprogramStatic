@@ -197,13 +197,13 @@ Page({
     chapter_id = chapter_id+''
     const { comic_id} = this.data.comic
     let next_url = '', prev_url = '', next = null, prev = null
-    const { comic = { try_read_chapters: [] }, chapter_order = {}, comic: { try_read_chapters, pay_status, pay_price } } = this.isAllowRead
+    const { comic = { try_read_chapters: [] }, chapter_order = {}, comic: { try_read_chapters, pay_status } } = this.isAllowRead
 
     const { chapter_id_arr = [] } = chapter_order
     this.comicPayStatus = pay_status
     //this.comicPayPrice = pay_price
 
-    if (pay_status == 2 && pay_price > 0) {
+    if (pay_status == 2) {
       this.can_read_chapters = _.union(try_read_chapters, chapter_id_arr)
     } else {
       this.can_read_chapters = try_read_chapters
