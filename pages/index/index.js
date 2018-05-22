@@ -33,7 +33,8 @@ Page({
           total:0,    //总页码
           noSearch:true,   //是否有搜索结果
           isLoad:false,     //是否加载失败
-          type:'loading'
+          type:'loading',
+          isCancel:false,  //是否点击了取消按钮
       },
       metaData:{
         mca:''
@@ -164,46 +165,55 @@ Page({
                 success:function (data) {
                     if (data.data.data.data.length !==0){
                         //console.log(data.data);
-                        var site_cover = data.data.data.site_cover;
-
-                        if (that.data.scrolType !== ''){
-                            data.data.data.data.forEach((item,index) =>{
-                                //判断图片路径是否带有https||http前缀，有则什么都不做，没有加上
-                                if (item.cover && !/^http[s]?:\/\//ig.test(item.cover)){
-                                    item.cover = site_cover + item.cover;
-                                }
-                            })
-                            var searchList = that.data.searchList.concat(data.data.data.data);
-                            //console.log(searchList);
-
+                        if (that.data.isCancel === true){
+                            return;
                         }else {
-                            that.data.searchList = data.data.data.data;
-                            that.data.searchList.forEach((item,index) =>{
-                                //判断图片路径是否带有https||http前缀，有则什么都不做，没有加上
-                                if (item.cover && !/^http[s]?:\/\//ig.test(item.cover)){
-                                    item.cover = site_cover + item.cover;
-                                }
+                            var site_cover = data.data.data.site_cover;
+
+                            if (that.data.scrolType !== ''){
+                                data.data.data.data.forEach((item,index) =>{
+                                    //判断图片路径是否带有https||http前缀，有则什么都不做，没有加上
+                                    if (item.cover && !/^http[s]?:\/\//ig.test(item.cover)){
+                                        item.cover = site_cover + item.cover;
+                                    }
+                                })
+                                var searchList = that.data.searchList.concat(data.data.data.data);
+                                //console.log(searchList);
+
+                            }else {
+                                that.data.searchList = data.data.data.data;
+                                that.data.searchList.forEach((item,index) =>{
+                                    //判断图片路径是否带有https||http前缀，有则什么都不做，没有加上
+                                    if (item.cover && !/^http[s]?:\/\//ig.test(item.cover)){
+                                        item.cover = site_cover + item.cover;
+                                    }
+                                })
+                                var searchList = that.data.searchList;
+                                //console.log(searchList);
+                            }
+                            let page_total = data.data.data.page_total;
+                            that.setData({
+                                searchList:searchList,
+                                inputValue: word,
+                                listData:true,
+                                isScroll:false,
+                                total:page_total,
+                                message: page_total > page_num ? '加载更多...' : '没有更多了',//提示语
+                                networkType:true,
+                                noSearch:true
                             })
-                            var searchList = that.data.searchList;
-                            //console.log(searchList);
                         }
-                        let page_total = data.data.data.page_total;
-                        that.setData({
-                            searchList:searchList,
-                            inputValue: word,
-                            listData:true,
-                            isScroll:false,
-                            total:page_total,
-                            message: page_total > page_num ? '加载更多...' : '没有更多了',//提示语
-                            networkType:true,
-                            noSearch:true
-                        })
+
                     }else if (data.data.data.data.length === 0){//搜索没有匹配的数据时提示图
-                        that.setData({
-                            searchList:[],
-                            noSearch:false,
-                            isScroll:false
-                        })
+                        if (that.data.isCancel === true){
+                            return;
+                        }else {
+                            that.setData({
+                                searchList:[],
+                                noSearch:false,
+                                isScroll:false
+                            })
+                        }
                     }
                 },
                 fail:function (data) {
@@ -385,13 +395,14 @@ Page({
     //取消
     onCancel:function(){
         var that = this;
-        this.setData({
+        that.setData({
             isOpacity:false,
             listData:false,
             isScroll:true,
+            noSearch:true,
             inputValue:'',
             searchList:[],
-            noSearch:true,
+            isCancel:!that.data.isCancel,
 
         });
         that.data.scrolType = '';
