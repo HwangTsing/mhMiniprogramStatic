@@ -8,18 +8,18 @@ Page({
      */
     data: {
         commentData: null,//存储的数据
-        userList:null,
-        replyList:null,
+        userList: null,
+        replyList: null,
         pageNum: 1,//页码
         rowsNum: 10,//每次获取的数据条数
         height: 0, //滚动区的高度
         isLoads: false,//是否先加载完效果成图
         pageTotal: 0,//一共可以下拉加载次数
         message: '',//加载提示语,
-        isMessage:true,//是否显示加载提示语
+        isMessage: true,//是否显示加载提示语
         commentId: 0,//记录评论的id
         networkType: true,//是否有网络
-        type:'loading'
+        type: 'loading'
     },
 
     /*
@@ -39,67 +39,69 @@ Page({
                 page_num: pageNum,
                 rows_num: rowsNum
             }
-        }).then(({code,message,data}) => {
-            let replyList=this.data.replyList?this.data.replyList:[];
+        }).then(({code, message, data}) => {
+            let replyList = this.data.replyList ? this.data.replyList : [];
             let userList = this.data.userList ? this.data.userList : {}; //定义空数组 , 存储格式化后的数据列表
 
             //console.log(code,message,data)
-            if(code===1&&data.data.length!==0){
-                data.data.forEach((item,index)=>{
+            if (code === 1 && data.data.length !== 0) {
+                data.data.forEach((item, index) => {
                     /* 存储用户信息 */
-                    let user=data.user[item.user_id]?data.user[item.user_id]:{
-                        user_avatar:'',
-                        user_nickname:''
+                    let user = data.user[item.user_id] ? data.user[item.user_id] : {
+                        user_avatar: '',
+                        user_nickname: ''
                     };
                     //判断用户头是否有HTTPS|http 有什么也不做,没有拼接前缀
-                    if (user && user.user_avatar && !/^http[s]?:\/\//ig.test(user.user_avatar)) {
-                        user.user_avatar = data.site_image + user.user_avatar;
-                    }
-                    /* 存储评论内容 */
-                    let content=data.content[item.reply_id]?data.content[item.reply_id]:{
-                        reply_id:item.reply_id,
-                        reply_content:''
-                    };
+                    if (user.user_nickname) {
+                        if (user && user.user_avatar && !/^http[s]?:\/\//ig.test(user.user_avatar)) {
+                            user.user_avatar = data.site_image + user.user_avatar;
+                        }
+                        /* 存储评论内容 */
+                        let content = data.content[item.reply_id] ? data.content[item.reply_id] : {
+                            reply_id: item.reply_id,
+                            reply_content: ''
+                        };
 
-                    /* 存储评论信息(id,时间戳等) */
-                    let contentId= item;
-                    contentId.create_time=wxApi.formatTime(contentId.create_time, {y: true, h: true});//格式化时间
-                    let Data={
-                        user,
-                        content,
-                        contentId,
-                        replyContent:null,
-                        isReplyContent:false
+                        /* 存储评论信息(id,时间戳等) */
+                        let contentId = item;
+                        contentId.create_time = wxApi.formatTime(contentId.create_time, {y: true, h: true});//格式化时间
+                        let Data = {
+                            user,
+                            content,
+                            contentId,
+                            replyContent: null,
+                            isReplyContent: false
+                        }
+                        replyList.push(Data); //保存到创建的数组中
                     }
-                    replyList.push(Data); //保存到创建的数组中
                 })
 
                 /* 存储用户信息 */
-                if( data.user){ //未修改改完成
-                    for(let key in data.user){
-                        let datas=data.user[key];
-                        userList[key]=datas;
+                if (data.user) { //未修改改完成
+                    for (let key in data.user) {
+                        let datas = data.user[key];
+                        userList[key] = datas;
                     }
                 }
             }
-            let page_total=data.page_total;
+            let page_total = data.page_total;
             this.setData({
                 replyList: replyList, //存储数据
-                userList:userList,
+                userList: userList,
                 isLoads: false,//改为可以下拉加载
                 pageNum: Number(pageNum) + 1,//修改页码状态
                 pageTotal: page_total,//保存可以下拉加载的次数
                 message: page_total > pageNum ? '加载中' : '没有更多了',//存储提示词
-                isMessage:true,
+                isMessage: true,
                 commentId: commentId,//记录漫画的id
                 networkType: true,//是否有网络
-                type:null
+                type: null
             })
-        }).catch((err)=>{
+        }).catch((err) => {
             this.setData({
                 isLoads: false,
                 networkType: false,//是否有网络
-                isMessage:false,
+                isMessage: false,
             })
         });
 
@@ -116,10 +118,10 @@ Page({
 
         let pageTotal = this.data.pageTotal;
         let isLoads = this.data.isLoads;
-        if(isLoads){
+        if (isLoads) {
             return
         }
-        if ( pageTotal < pageNum) {
+        if (pageTotal < pageNum) {
             //如果加载状态是true,一共可以下拉加载次数是否小于当前页码
             // 条件成立 什么都不做
             return
@@ -131,36 +133,36 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        wxApi.getNetworkType().then((NetworkType)=>{
+        wxApi.getNetworkType().then((NetworkType) => {
             let networkType = NetworkType.networkType;
 
             if (networkType === 'none' || networkType === 'unknown') {
                 //无网络什么都不做
                 this.setData({
                     networkType: false,
-                    type:'net'
+                    type: 'net'
                 })
                 return
             } else {
                 //有网络
-                let commentData=JSON.parse(options.data);
+                let commentData = JSON.parse(options.data);
                 //console.log(commentData)
-                let Data={
-                    user:{
-                        user_avatar:commentData.user_avatar,
-                        user_nickname:commentData.user_nickname
+                let Data = {
+                    user: {
+                        user_avatar: commentData.user_avatar,
+                        user_nickname: commentData.user_nickname
                     },
-                    content:{
-                        comment_id:commentData.comment_id,
-                        comment_content:commentData.comment_content
+                    content: {
+                        comment_id: commentData.comment_id,
+                        comment_content: commentData.comment_content
                     },
-                    contentId:{
-                        comment_id:commentData.comment_id,
-                        comic_id:commentData.comic_id,
-                        create_time:commentData.create_time,
+                    contentId: {
+                        comment_id: commentData.comment_id,
+                        comic_id: commentData.comic_id,
+                        create_time: commentData.create_time,
                     },
-                    replyContent:null,
-                    isReplyContent:false
+                    replyContent: null,
+                    isReplyContent: false
                 }
                 this.setData({
                     commentData: Data
@@ -170,16 +172,16 @@ Page({
                 let pageNum = this.data.pageNum;
                 let rowsNum = this.data.rowsNum;
 
-                this.getDataInfo(commentId,pageNum,rowsNum); //初始化数据
+                this.getDataInfo(commentId, pageNum, rowsNum); //初始化数据
             }
-        }).catch((err)=>{
+        }).catch((err) => {
             this.setData({
                 networkType: false,
-                type:'net'
+                type: 'net'
             })
         })
 
-        const { windowHeight } = wxApi.getSystemInfoSync(); //获取设备信息
+        const {windowHeight} = wxApi.getSystemInfoSync(); //获取设备信息
         this.setData({
             height: windowHeight
         })
