@@ -53,7 +53,7 @@
             >
                 <view class="reply_user_nickname">
                     <text>{{item.user.user_nickname}}</text>
-                    <text  wx:if="{{ !item.parent_uid && !item.parent_uid > 0 && !userList}}"> :</text>
+                    <text  wx:if="{{ !item.parent_uid && !item.parent_uid > 0 }}"> :</text>
                     <text
                         style="color:#333;"
                         wx:if="{{ item.parent_uid && item.parent_uid > 0 && userList}}"
