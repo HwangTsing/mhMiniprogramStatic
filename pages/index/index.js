@@ -21,9 +21,9 @@ Page({
           isScroll:true,   //scroll-view滚动条
           isOpacity:false,  //蒙层
           listData:false,    //搜索显示隐藏
+          isCancel:false,
           isScrollSearch:false,    //滚动
           searchListData:[],
-          inputValue:'',
           isToast:false,   //男女分版切换toast
           id:0,
           idg:1,
@@ -33,8 +33,7 @@ Page({
           total:0,    //总页码
           noSearch:true,   //是否有搜索结果
           isLoad:false,     //是否加载失败
-          type:'loading',
-          isCancel:false,  //是否点击了取消按钮
+          type:'loading'
       },
       metaData:{
         mca:''
@@ -165,55 +164,44 @@ Page({
                 success:function (data) {
                     if (data.data.data.data.length !==0){
                         //console.log(data.data);
-                        if (that.data.isCancel === true){
-                            return;
-                        }else {
-                            var site_cover = data.data.data.site_cover;
+                        var site_cover = data.data.data.site_cover;
 
-                            if (that.data.scrolType !== ''){
-                                data.data.data.data.forEach((item,index) =>{
-                                    //判断图片路径是否带有https||http前缀，有则什么都不做，没有加上
-                                    if (item.cover && !/^http[s]?:\/\//ig.test(item.cover)){
-                                        item.cover = site_cover + item.cover;
-                                    }
-                                })
-                                var searchList = that.data.searchList.concat(data.data.data.data);
-                                //console.log(searchList);
-
-                            }else {
-                                that.data.searchList = data.data.data.data;
-                                that.data.searchList.forEach((item,index) =>{
-                                    //判断图片路径是否带有https||http前缀，有则什么都不做，没有加上
-                                    if (item.cover && !/^http[s]?:\/\//ig.test(item.cover)){
-                                        item.cover = site_cover + item.cover;
-                                    }
-                                })
-                                var searchList = that.data.searchList;
-                                //console.log(searchList);
-                            }
-                            let page_total = data.data.data.page_total;
-                            that.setData({
-                                searchList:searchList,
-                                inputValue: word,
-                                listData:true,
-                                isScroll:false,
-                                total:page_total,
-                                message: page_total > page_num ? '加载更多...' : '没有更多了',//提示语
-                                networkType:true,
-                                noSearch:true
+                        if (that.data.scrolType !== ''){
+                            data.data.data.data.forEach((item,index) =>{
+                                //判断图片路径是否带有https||http前缀，有则什么都不做，没有加上
+                                if (item.cover && !/^http[s]?:\/\//ig.test(item.cover)){
+                                    item.cover = site_cover + item.cover;
+                                }
                             })
-                        }
+                            var searchList = that.data.searchList.concat(data.data.data.data);
+                            //console.log(searchList);
 
+                        }else {
+                            that.data.searchList = data.data.data.data;
+                            that.data.searchList.forEach((item,index) =>{
+                                //判断图片路径是否带有https||http前缀，有则什么都不做，没有加上
+                                if (item.cover && !/^http[s]?:\/\//ig.test(item.cover)){
+                                    item.cover = site_cover + item.cover;
+                                }
+                            })
+                            var searchList = that.data.searchList;
+                            //console.log(searchList);
+                        }
+                        let page_total = data.data.data.page_total;
+                        that.setData({
+                            searchList:searchList,
+                            isScroll:false,
+                            total:page_total,
+                            message: page_total > page_num ? '加载更多...' : '没有更多了',//提示语
+                            networkType:true,
+                            noSearch:true
+                        })
                     }else if (data.data.data.data.length === 0){//搜索没有匹配的数据时提示图
-                        if (that.data.isCancel === true){
-                            return;
-                        }else {
-                            that.setData({
-                                searchList:[],
-                                noSearch:false,
-                                isScroll:false
-                            })
-                        }
+                        that.setData({
+                            searchList:[],
+                            noSearch:false,
+                            isScroll:false
+                        })
                     }
                 },
                 fail:function (data) {
@@ -341,7 +329,7 @@ Page({
           var that = this;
         this.setData({
             isOpacity:false,
-            isScroll:true
+            isScroll:true,
         })
     },
     bindInputChange:function (e) {
@@ -362,13 +350,16 @@ Page({
                 if (word === ''){
                     this.setData({
                         searchList:[],
-                        noSearch:true
+                        noSearch:true,
+                        word:''
                     })
                     that.data.scrolType = '';
                     that.searchData.page_num = 1;
                 }else {
                     that.setData({
-                        isScroll:false
+                        isScroll:false,
+                        isCancel:false,
+                        word:that.searchData.word
                     })
                     that.searchDatas();
                 }
@@ -385,7 +376,7 @@ Page({
     onDel:function () {
         var that = this;
         this.setData({
-            inputValue:'',
+            word:'',
             searchList:[],
             noSearch:true   //关闭提示重新搜索
         });
@@ -400,9 +391,9 @@ Page({
             listData:false,
             isScroll:true,
             noSearch:true,
-            inputValue:'',
+            word:'',
             searchList:[],
-            isCancel:!that.data.isCancel,
+            isCancel:true
 
         });
         that.data.scrolType = '';
@@ -477,6 +468,9 @@ Page({
                 })
 
             }else {
+                that.setData({
+                    word:that.searchData.word
+                })
                 //有网络
                 //########### 获取初次男女分版存储 ##############//
                 wx.getStorage({

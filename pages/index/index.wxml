@@ -72,13 +72,22 @@
                 <view class="search_img"
                       style="{{isOpacity === true? 'background:rgba(245,245,245,1);border-radius: 30rpx;-webkit-border-radius: 30rpx;-moz-border-radius: 30rpx;-mz-border-radius: 30rpx;':''}}">
                     <image class="search_images" src="{{isOpacity === true ? '../../images/search_gray_02.png':'../../images/search_gray.png'}}"></image>
-                    <input class="{{isOpacity === true?'search_input_focus':'search_input'}}" type="text" value="{{inputValue}}"
+                    <input class="{{isOpacity === true?'search_input_focus':'search_input'}}" type="text" value="{{word}}"
                            placeholder="搜索作品或作者名称" placeholder-style="color:#fff;font-size:28rpx;"
                            bindfocus="focusInputEvent" bindinput="bindInputChange"/>
-                    <image class="{{isOpacity === true && searchList.length !== 0 || noSearch === false? 'del':'del_hidden'}}"
-                           src="../../images/delete.png"></image>
-                    <view class="{{isOpacity === true && searchList.length !== 0 || noSearch === false? 'bg_del':'bg_del_hidden'}}"
-                          catchtap="onDel"></view>
+                    <block wx:if="{{word!==''}}">
+                        <image class="del"
+                               src="../../images/delete.png"></image>
+                        <view class="bg_del"
+                              catchtap="onDel"></view>
+                    </block>
+                    <block wx:elif="{{word ===''}}">
+                        <image class="del_hidden"
+                               src="../../images/delete.png"></image>
+                        <view class="bg_del_hidden"
+                              catchtap="onDel"></view>
+                    </block>
+
                     <view class="{{isOpacity?'qx_view':'qx_view_hidden'}}}" catchtap="onCancel">取消</view>
                     <block wx:if="{{boyid}}">
                         <image class="{{isOpacity || id !== 0? 'boy_img_hidden':'boy_img'}}" data-index="{{boyid}}"
@@ -285,7 +294,7 @@
     <!--蒙层-->
     <view class="{{isOpacity? 'layer' :'layer_n'}}" catchtouchmove='noScrollMove' catchtap="blurInputEvent"></view>
     <!--根据搜索结果渲染数据-->
-    <scroll-view class="{{listData ? 'big_listdata_bloc':'big_listdata'}}" wx:if="{{searchList&&searchList.length>0}}"
+    <scroll-view class="{{isCancel===true?'big_listdata':'big_listdata_bloc'}}}" wx:if="{{searchList&&searchList.length>0}}"
                  enable-back-to-top="true" scroll-y="{{true}}" bindscrolltolower="lower"
                  lower-threshold="{{50}}" scroll-with-animation="true">
         <block wx:for="{{searchList}}" wx:key="index">
@@ -306,7 +315,7 @@
         </view>
     </scroll-view>
     <block wx:if="{{noSearch === false}}">
-        <message class="search_message" modal="{{false}}" type="search"></message>
+        <message class="{{isCancel===true? 'search_message_hidden':'search_message'}}" modal="{{false}}" type="search"></message>
     </block>
     <import src="./template/message.wxml"></import>
     <template is="message" data="{{networkType,isLoad}}"></template>

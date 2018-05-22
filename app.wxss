@@ -1,6 +1,5 @@
   /**app.wxss**/
   .container {
-    height: 100vh;
     /*display: flex;
     flex-direction: column;
     -webkit-box-orient: vertical;
