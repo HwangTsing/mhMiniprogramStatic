@@ -11,7 +11,7 @@
         sina_nickname="{{thisData.comic.sina_nickname?thisData.comic.sina_nickname:''}}"
         sina_object_id="{{thisData.comic.sina_object_id?thisData.comic.sina_object_id:''}}"
         class="details_view"
-        style="background: url('{{thisData.site_image+thisData.comic.hcover}}') no-repeat center center; background-size: cover;"
+        style="background: url('{{thisData.comic.cover}}') no-repeat center center; background-size: cover;"
     >
         <view class="details_img">
             <image
@@ -21,7 +21,7 @@
             >
                 <viem
                     class="detail_src_bg"
-                    style="background: url('{{thisData.site_image+thisData.comic.hcover}}') no-repeat center center; background-size: cover;"
+                    style="background: url('{{thisData.comic.cover}}') no-repeat center center; background-size: cover;"
                 ></viem>
             </image>
             <view class="info_content">
