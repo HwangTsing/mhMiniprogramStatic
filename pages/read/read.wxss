@@ -1,5 +1,6 @@
 /* pages/read/read.wxss */
 .container {
+  height: auto;
   background-color: #3D454D;
 }
 .comic-nav-holder{
