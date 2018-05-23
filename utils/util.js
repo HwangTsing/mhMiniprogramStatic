@@ -67,7 +67,9 @@ class wxApi {
     ajax(url, cfg = {data: {}}) {
         const {
             data,
-            header,
+            header = {
+                'content-type': 'application/json'
+            },
             method,
             dataType,
             complete,
@@ -105,7 +107,7 @@ class wxApi {
         return this.ajax(url, cfg);
     }
 
-    request(url, cfg = {method: 'GET'}) {
+    request(url, cfg = { method: 'GET', header: { 'content-type': 'application/json' }}) {
         return wx.request({
             url: this.getPaths(url),
             ...cfg,

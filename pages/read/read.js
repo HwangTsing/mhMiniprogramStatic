@@ -204,13 +204,13 @@ Page({
     //order_status 订单状态  0:默认 1:末付款 2:已付款
     //pay_status   付费状态  0:默认 1:免费 2:收费
 
-    if (comic_buy == 2 && order_status == 2) { //漫画全本购买并已付款
+    if (comic_buy == 2 && order_status == 2 || pay_status == 1) { //漫画全本购买并已付款 or 免费章节
       this.can_read_chapters = chapter_list
     } else { //漫画章节购买
       if (pay_status == 2) { //收费
         this.can_read_chapters = _.union(try_read_chapters, chapter_id_arr)
-      } else {
-        this.can_read_chapters = try_read_chapters
+      } else { //免费
+        this.can_read_chapters = chapter_list
       }
     }
 

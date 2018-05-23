@@ -46,14 +46,13 @@ Page({
 
     initData: function () {
         var that = this;
-        var mca = '',header = 'application/json';
+        var mca = '';
         if (!!this.metaData.mca){
             mca = this.metaData.mca;
         }
         wxApi.recommendList({
             method:'GET',
             data:{mca},
-            header:{header},
             success:function (data) {
                 var site_image = data.data.data.site_image;
                 var location_list = data.data.data.location_list;
@@ -141,7 +140,7 @@ Page({
     },
     searchDatas:function () {
         var that = this;
-        var page_num = '',rows_num='',word='',header = 'application/json';
+        var page_num = '',rows_num='',word='';
         if (!!this.searchData.word){
             word = this.searchData.word;
         }
@@ -155,7 +154,6 @@ Page({
         wxApi.searchList({
                 method:'GET',
                 data:{word,rows_num,page_num},
-                header:{header},
                 success:function (data) {
                     if (data.data.data.data.length !==0){
                         var site_cover = data.data.data.site_cover;
