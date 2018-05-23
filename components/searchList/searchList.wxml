@@ -1,9 +1,8 @@
 <!--components/searchList/searchList.wxml-->
 
 <view class="list_data" catchtap="listTap" data-comic_id="{{idx}}">
-    <view class="img_view">
-        <image mode="aspectFit" lazy-load="true" src="../../images/cover.png"
-               style="background:url(../../images/cover.png)no-repeat;background-size:cover;position: relative;top: 0;left: 0;">
+    <view class="img_view" style="position: relative;top: 0;left: 0;">
+        <image mode="aspectFit" lazy-load="true" src="../../images/cover.png">
             <image mode="aspectFit" lazy-load="true" src="{{src}}"
                    style="position: absolute;left: 0;top: 0;"></image>
         </image>
