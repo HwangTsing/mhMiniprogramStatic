@@ -46,26 +46,23 @@ Page({
 
     initData: function () {
         var that = this;
-        var mca = '';
+        var mca = '',header = 'application/json';
         if (!!this.metaData.mca){
             mca = this.metaData.mca;
         }
         wxApi.recommendList({
             method:'GET',
             data:{mca},
-            header:'application/html',
+            header:{header},
             success:function (data) {
-                //console.log(data)
                 var site_image = data.data.data.site_image;
                 var location_list = data.data.data.location_list;
-                console.log(location_list);
                 var recommendList = {}, title={},keyIndex = {};
                 if (data.data.code == 1){
                     if (that.data.id === 0 || that.data.id === 1){
 
                     }
                     location_list.forEach((item,index)=> {
-                        //console.log(item.location_en);
                         var key = item.location_en;
                         recommendList[key] = data.data.data[key]||[];
                         if (recommendList[key].length === 0){
@@ -78,8 +75,6 @@ Page({
                         }
 
                     });
-                    //console.log('title',title);
-                    //console.log('recommendList', recommendList);
                     //轮播图
                     const imgUrls = recommendList[mca+'_rotation_map'] ? recommendList[mca+'_rotation_map'] : [];
                     //标题
@@ -146,7 +141,7 @@ Page({
     },
     searchDatas:function () {
         var that = this;
-        var page_num = '',rows_num='',word='';
+        var page_num = '',rows_num='',word='',header = 'application/json';
         if (!!this.searchData.word){
             word = this.searchData.word;
         }
@@ -160,10 +155,9 @@ Page({
         wxApi.searchList({
                 method:'GET',
                 data:{word,rows_num,page_num},
-                header:'',
+                header:{header},
                 success:function (data) {
                     if (data.data.data.data.length !==0){
-                        //console.log(data.data);
                         var site_cover = data.data.data.site_cover;
 
                         if (that.data.scrolType !== ''){
@@ -174,7 +168,6 @@ Page({
                                 }
                             })
                             var searchList = that.data.searchList.concat(data.data.data.data);
-                            //console.log(searchList);
 
                         }else {
                             that.data.searchList = data.data.data.data;
@@ -185,7 +178,6 @@ Page({
                                 }
                             })
                             var searchList = that.data.searchList;
-                            //console.log(searchList);
                         }
                         let page_total = data.data.data.page_total;
                         that.setData({
@@ -253,7 +245,7 @@ Page({
                     key:'id',
                     data:boyid,
                     success:function (res) {
-                        //console.log(res);
+
                     }
                 })
             }
@@ -299,7 +291,7 @@ Page({
                     key:'id',
                     data:girlid,
                     success:function (res) {
-                        //console.log(res);
+
                     }
                 })
             }
@@ -436,7 +428,7 @@ Page({
             }else {
                 //有网络
                 let total = that.data.total;
-                console.log(total);
+                //console.log(total);
                 that.searchData.page_num++;
                 if (total < that.searchData.page_num){
                     return;
@@ -581,7 +573,7 @@ Page({
                     key:'id',
                     data:id,
                     success:function (res) {
-                        //console.log(res);
+
                     }
 
                 })
@@ -637,7 +629,7 @@ Page({
                     key:'id',
                     data:idg,
                     success:function (res) {
-                        //console.log(res);
+
                     }
                 })
             }

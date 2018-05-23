@@ -43,16 +43,14 @@ Page({
       })
   },
   moreList:function (location_en) {
-    var that = this;
+    var that = this,header = 'application/json';
     wxApi.moreList({
         method:'GET',
         data:{location_en},
-        header:'',
+        header:{header},
         success:function (data) {
-            console.log(data.data.data);
             if (data.data.data !== null){
                 that.data.moreData = data.data.data;
-                //console.log(that.data.moreData);
                 var extra = [];
                 for (var i in that.data.moreData){
                     var moreData = data.data.data[i];
