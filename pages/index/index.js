@@ -393,7 +393,8 @@ Page({
         var timer = setTimeout(function () {
             that.setData({
                 searchList:[],
-                noSearch:true
+                noSearch:true,
+                isScroll:true,
             })
 
         },1000)
