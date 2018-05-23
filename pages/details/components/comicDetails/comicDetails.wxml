@@ -2,9 +2,7 @@
 <view class='comic_details' wx:if="{{thisData}}">
 
     <!-- 漫画简介 S -->
-    <view class="introduce_text">
-        {{thisData.comic.description?thisData.comic.description:'暂无介绍'}}
-    </view>
+    <view class="introduce_text">{{thisData.comic.description?thisData.comic.description:'暂无介绍'}}</view>
     <!-- 漫画简介 E -->
 
     <!--  作者 S  -->
