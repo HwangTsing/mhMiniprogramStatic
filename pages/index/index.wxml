@@ -3,6 +3,7 @@
 <view class="{{isScroll?'container':'container_noscroll'}}">
     <!--弹层男女选择-->
     <view wx:if="{{networkType === true}}" class="{{boyid || girlid? 'fix_view_hidden':'fix_view'}}">
+        <view class="choose_view_top">
             <view class="choose_view">
                 <image class="choose_view_img" src="../../images/edition/rectangle.png"></image>
             </view>
@@ -55,6 +56,7 @@
                 <image class="logo_logo" src="../../images/edition/logo.png"></image>
             </view>
         </view>
+    </view>
     <!--toast-->
     <view id="{{isToast ? 'toast':'toast_hidden'}}" catchtouchmove='noScrollMove'></view>
     <view class="{{isToast ? 'toast_img':'toast_img_hidden'}}" catchtouchmove='noScrollMove'>
@@ -297,7 +299,7 @@
     <scroll-view class="{{isCancel===true?'big_listdata':'big_listdata_bloc'}}" wx:if="{{searchList&&searchList.length>0}}"
                  enable-back-to-top="true" scroll-y="{{true}}" bindscrolltolower="lower"
                  lower-threshold="{{50}}" scroll-with-animation="true">
-        <block wx:for="{{searchList}}" wx:key="index">
+        <block wx:for="{{searchList}}" wx:key="{{index}}">
             <searchlist
                 class="searchlist"
                 idx="{{item.comic_id}}"
