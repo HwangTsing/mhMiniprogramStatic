@@ -149,7 +149,8 @@ Page({
                             //存储 comic信息
                             let DATA = res.data;
                             let chapterList = null;
-
+                            DATA.comic.cover=DATA.comic.cover.replace ( /_(s|m)\./img , '_b.' )
+                            console.log(DATA.comic.cover)
 
                             const {
                                 comic = {
@@ -171,7 +172,7 @@ Page({
                             //comic_buy    1章节购买 2全本购买
                             //order_status 订单状态  0:默认 1:末付款 2:已付款
                             //pay_status   付费状态  0:默认 1:免费 2:收费
-
+                            console.log(this)
                             if (comic_buy == 2 && order_status == 2) { //漫画全本购买并已付款
                                 this.can_read_chapters = false;
                             } else { //漫画章节购买

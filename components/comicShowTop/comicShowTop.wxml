@@ -21,7 +21,7 @@
             >
                 <viem
                     class="detail_src_bg"
-                    style="background: url('{{thisData.comic.cover}}') no-repeat center center; background-size: cover;"
+                    style="background: url('{{ thisData.comic.cover }}') no-repeat center center; background-size: cover;"
                 ></viem>
             </image>
             <view class="info_content">
