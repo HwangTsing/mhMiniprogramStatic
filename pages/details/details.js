@@ -1,6 +1,6 @@
 // pages/details/details.js
 var wxApi = require("../../utils/util.js");//导入wxApi
-
+const { _ } = require('../../utils/underscore.js');
 Page({
     /**
      * 页面的初始数据
@@ -150,43 +150,52 @@ Page({
                             let DATA = res.data;
                             let chapterList = null;
 
-                            //获取阅读信息
-                            let tryReadChapters=DATA.is_allow_read.comic.try_read_chapters; //试读章节
-                            let payStatus=DATA.is_allow_read.comic.pay_status;
-                            //console.log(tryReadChapters);
 
-                            if (DATA.chapter_list && DATA.chapter_list.length !== 0) {
+                            const {
+                                comic = {
+                                    try_read_chapters: []
+                                },
+                                comic_order = {},
+                                chapter_order = {},
+                                comic: {
+                                    comic_buy,
+                                    try_read_chapters,
+                                    pay_status
+                                },
+                                comic_order: {
+                                    order_status
+                                }
+                            } = DATA.is_allow_read
+                            const { chapter_id_arr = [] } = chapter_order
+
+                            //comic_buy    1章节购买 2全本购买
+                            //order_status 订单状态  0:默认 1:末付款 2:已付款
+                            //pay_status   付费状态  0:默认 1:免费 2:收费
+
+                            if (comic_buy == 2 && order_status == 2) { //漫画全本购买并已付款
+                                this.can_read_chapters = false;
+                            } else { //漫画章节购买
+                                if (pay_status == 2) { //收费
+                                    this.can_read_chapters = _.union(try_read_chapters, chapter_id_arr)
+                                } else {
+                                    this.can_read_chapters = try_read_chapters
+                                }
+                            }
+                            if( this.can_read_chapters ){
                                 chapterList = [];
                                 DATA.chapter_list.forEach((item, index) => {
-                                    // console.log(item)
-                                    if(  tryReadChapters.length > 0 ){
-                                        //试读章节 不是空数组的情况下
-                                        tryReadChapters.forEach((id,i)=>{
-                                            if(item.chapter_id===id){ //如果相等,就修改付费为免费章节,忽略过滤
-                                                item.chapter_pay_vcoin=0;
-                                                chapterList.push(item)
-                                            }
-                                        });
-                                    }
-                                    if ( payStatus===1 && item.chapter_pay_vcoin === 0 ) {
-                                        let isRepeat=false;
-                                        chapterList.forEach((data,k)=>{
-                                            if(data.chapter_id===item.chapter_id){
-                                                isRepeat=true
-                                            }
-                                        })
-                                        if(!isRepeat){
-                                            chapterList.push(item);
+                                    this.can_read_chapters.forEach((id,i)=>{
+                                        if(item.chapter_id===id){ //如果相等,就修改付费为免费章节,忽略过滤
+                                            chapterList.push(item)
                                         }
-                                    }
-                                })
-
-                                DATA.chapterList = chapterList;
-                                DATA.chapterList.reverse();
-                                chapterList = null;
-                            } else {
-                                DATA.chapterList = null;
+                                    });
+                                });
+                                DATA.chapterList=chapterList;
+                            }else {
+                                DATA.chapterList=DATA.chapter_list;
                             }
+                            DATA.chapterList.reverse();
+
                             this.setData({
                                 dataAry: DATA,
                                 type: null
