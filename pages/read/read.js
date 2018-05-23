@@ -200,18 +200,18 @@ Page({
     const { comic = { try_read_chapters: [] }, comic_order = {}, chapter_order = {}, comic: { comic_buy, try_read_chapters, pay_status }, comic_order: { order_status } } = this.isAllowRead
     const { chapter_id_arr = [] } = chapter_order
 
+
     //comic_buy    1章节购买 2全本购买
     //order_status 订单状态  0:默认 1:末付款 2:已付款
     //pay_status   付费状态  0:默认 1:免费 2:收费
 
     if (comic_buy == 2 && order_status == 2 || pay_status == 1) { //漫画全本购买并已付款 or 免费章节
       this.can_read_chapters = chapter_list
+      this.allowRead = true
     } else { //漫画章节购买
       if (pay_status == 2) { //收费
         this.can_read_chapters = _.union(try_read_chapters, chapter_id_arr)
-      } else { //免费
-        this.can_read_chapters = chapter_list
-      }
+      } 
     }
 
     // console.log('can_read_chapters', this.can_read_chapters, chapter_id_arr)
@@ -245,11 +245,12 @@ Page({
     const { chapter_id, chapter_name } = chapters[index]
     
     //console.log(action, chapter_id, chapter_name, chapter_pay_price, _.indexOf(can_read_chapters, chapter_id))
-    if (_.indexOf(can_read_chapters, chapter_id) == -1) {
+    if (this.allowRead) {
+      return { chapter_id, chapter_name }
+    } else if(_.indexOf(can_read_chapters, chapter_id) == -1) {
       return this[action](index, chapters)
     }
-   
-    return { chapter_id, chapter_name }
+    
   },
 
   getReadurlByParam: function ({chapter_id, chapter_name, comic_id}, url = '/pages/read/read') {
