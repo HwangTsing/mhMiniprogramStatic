@@ -1,6 +1,6 @@
 <!--index.wxml-->
 
-<view class="{{isScroll?'container':'container_noscroll'}}">
+<view class="container" scroll-y="{{isScroll}}">
     <!--弹层男女选择-->
     <view wx:if="{{networkType === true}}" class="{{boyid || girlid? 'fix_view_hidden':'fix_view'}}">
         <view class="choose_view_top">
@@ -323,7 +323,7 @@
     <template is="message" data="{{networkType,isLoad}}"></template>
     <!-- 网络慢提示loading -->
     <import src="/tpls/message.wxml"/>
-    <view style="position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;">
+    <view style="position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;">
         <template is="message" wx:if="{{type}}" data="{{ type }}"/>
     </view>
 </view>
