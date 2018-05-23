@@ -197,21 +197,25 @@ Page({
     chapter_id = chapter_id+''
     const { comic_id} = this.data.comic
     let next_url = '', prev_url = '', next = null, prev = null
-    const { comic = { try_read_chapters: [] }, chapter_order = {}, comic: { try_read_chapters, pay_status } } = this.isAllowRead
-
+    const { comic = { try_read_chapters: [] }, comic_order = {}, chapter_order = {}, comic: { comic_buy, try_read_chapters, pay_status }, comic_order: { order_status } } = this.isAllowRead
     const { chapter_id_arr = [] } = chapter_order
-    this.comicPayStatus = pay_status
-    //this.comicPayPrice = pay_price
 
-    if (pay_status == 2) {
-      this.can_read_chapters = _.union(try_read_chapters, chapter_id_arr)
-    } else {
-      this.can_read_chapters = try_read_chapters
+    //comic_buy    1章节购买 2全本购买
+    //order_status 订单状态  0:默认 1:末付款 2:已付款
+    //pay_status   付费状态  0:默认 1:免费 2:收费
+
+    if (comic_buy == 2 && order_status == 2) { //漫画全本购买并已付款
+      this.can_read_chapters = chapter_list
+    } else { //漫画章节购买
+      if (pay_status == 2) { //收费
+        this.can_read_chapters = _.union(try_read_chapters, chapter_id_arr)
+      } else {
+        this.can_read_chapters = try_read_chapters
+      }
     }
 
     // console.log('can_read_chapters', this.can_read_chapters, chapter_id_arr)
     const index = _.findIndex(chapter_list, { chapter_id })
-
     if (index != -1) {
       next = this.findNextChapter(index, chapter_list)
       prev = this.findPrevChapter(index, chapter_list)
@@ -225,7 +229,6 @@ Page({
 
   findNextChapter: function (index, chapters){
     const _index = index + 1
-    
     return this.findChapter(_index, chapters, 'findNextChapter')
   },
 
@@ -239,19 +242,13 @@ Page({
     if (index < 0 || index >= length) return null
 
     const can_read_chapters = this.can_read_chapters
-    const { chapter_id, chapter_name, chapter_pay_price } = chapters[index]
-    let isNeed = false
+    const { chapter_id, chapter_name } = chapters[index]
+    
     //console.log(action, chapter_id, chapter_name, chapter_pay_price, _.indexOf(can_read_chapters, chapter_id))
-    if (this.comicPayStatus == 2) { // pay_status 收费漫画
-      if (_.indexOf(can_read_chapters, chapter_id) == -1) isNeed = true
-    } else {
-      if (chapter_pay_price > 0 && _.indexOf(can_read_chapters, chapter_id) == -1) isNeed = true
-    }
-
-    if (isNeed) {
+    if (_.indexOf(can_read_chapters, chapter_id) == -1) {
       return this[action](index, chapters)
     }
-
+   
     return { chapter_id, chapter_name }
   },
 
