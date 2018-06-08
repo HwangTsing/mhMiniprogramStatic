@@ -229,7 +229,8 @@ Page({
             if (networkType === 'none' || networkType === 'unknown') {
                 //无网络不进行任何操作
                 this.setData({
-                    networkType: false
+                    networkType: false,
+                    isLoad: true
                 })
 
             }else {
@@ -275,7 +276,8 @@ Page({
             if (networkType === 'none' || networkType === 'unknown') {
                 //无网络不进行任何操作
                 this.setData({
-                    networkType: false
+                    networkType: false,
+                    isLoad: true
                 })
 
             }else {
@@ -464,7 +466,8 @@ Page({
             if (networkType === 'none' || networkType === 'unknown') {
                 //无网络不进行任何操作
                 this.setData({
-                    networkType: false
+                    networkType: false,
+                    isLoad: true
                 })
 
             }else {

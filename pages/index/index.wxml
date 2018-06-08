@@ -153,7 +153,7 @@
                 <block wx:if="{{FineWorks}}" wx:for="{{FineWorks}}" wx:key="index">
                     <navigator class="big_img" url="../details/details?comic_id={{item.extra.comic_id}}"
                                style="position: relative;top: 0;left: 0;">
-                        <image mode="aspectFill" lazy-load="true" src="../../images/hcover.png">
+                        <image mode="aspectFill" src="../../images/hcover.png">
                             <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"
                                    style="position: absolute;left: 0;top: 0;z-index: 1;"></image>
                         </image>
@@ -200,7 +200,7 @@
                 <view class="big_new_view">
                     <block wx:for="{{newArrivalWorks}}" wx:key="index">
                         <navigator class="new_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                            <image mode="aspectFill" lazy-load="true" src="../../images/hcover.png"
+                            <image mode="aspectFill" src="../../images/hcover.png"
                             style="position: relative;top: 0;left: 0;">
                                 <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"
                                 style="position: absolute;left: 0;top: 0;"></image>
@@ -225,7 +225,7 @@
         <view class="hot_view">
             <block wx:for="{{hotSerialWorks}}" wx:key="index">
                 <navigator class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                    <image mode="aspectFill" lazy-load="true" src="../../images/hcover.png"
+                    <image mode="aspectFill" src="../../images/hcover.png"
                     style="position: relative;top: 0;left: 0;;">
                         <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"
                         style="position: absolute;left: 0;top: 0;"></image>
@@ -249,7 +249,7 @@
             <view class="big_new_view">
                 <block wx:for="{{xiaobianRecommend}}" wx:key="index">
                     <navigator class="new_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                        <image mode="aspectFill" lazy-load="true" src="../../images/hcover.png"
+                        <image mode="aspectFill" src="../../images/hcover.png"
                                style="position: relative;top: 0;left: 0;;">
                             <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"
                                    style="position: absolute;left: 0;top: 0;"></image>
@@ -273,7 +273,7 @@
         <view class="hot_view">
             <block wx:for="{{weekRecommend}}" wx:key="index">
                 <navigator class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                    <image mode="aspectFill" lazy-load="true" src="../../images/hcover.png"
+                    <image mode="aspectFill" src="../../images/hcover.png"
                            style="position: relative;top: 0;left: 0;;">
                         <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"
                                style="position: absolute;left: 0;top: 0;"></image>
@@ -319,11 +319,13 @@
     <block wx:if="{{noSearch === false}}">
         <message class="{{isCancel===true? 'search_message_hidden':'search_message'}}" modal="{{false}}" type="search"></message>
     </block>
+
     <import src="./template/message.wxml"></import>
     <template is="message" data="{{networkType,isLoad}}"></template>
+    
     <!-- 网络慢提示loading -->
     <import src="/tpls/message.wxml"/>
-    <view style="position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;">
+    <view wx:if="{{!isLoad}}" style="position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;">
         <template is="message" wx:if="{{type}}" data="{{ type }}"/>
     </view>
 </view>
