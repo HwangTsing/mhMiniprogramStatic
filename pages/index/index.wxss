@@ -447,6 +447,9 @@ page {
   background: #f5f5f5;
   vertical-align: top;
 }
+search_input_focus:focus{
+  color: #333;
+}
 .search_img .boy_img,
 .search_img .girl_img {
   width: 120rpx ;

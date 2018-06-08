@@ -75,7 +75,7 @@
                       style="{{isOpacity === true? 'background:rgba(245,245,245,1);border-radius: 30rpx;-webkit-border-radius: 30rpx;-moz-border-radius: 30rpx;-mz-border-radius: 30rpx;':''}}">
                     <image class="search_images" src="{{isOpacity === true ? '../../images/search_gray_02.png':'../../images/search_gray.png'}}"></image>
                     <input class="{{isOpacity === true?'search_input_focus':'search_input'}}" type="text" value="{{word}}"
-                           placeholder="搜索作品或作者名称" placeholder-style="color:#fff;font-size:28rpx;"
+                           placeholder="搜索作品或作者名称" placeholder-style="color:{{isOpacity?'#ccc':'#fff'}};font-size:28rpx;"
                            bindfocus="focusInputEvent" bindinput="bindInputChange"/>
                     <block wx:if="{{word!==''}}">
                         <image class="del"
