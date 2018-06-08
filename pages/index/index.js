@@ -236,6 +236,9 @@ Page({
                 //有网络
                 if (boyid) {
                     this.metaData.mca = "mini_recommend_male";
+                    this.setData({
+                        type:'loading'
+                    })
                     this.initData();
                 }
                 //#############本地存储############//
@@ -283,6 +286,9 @@ Page({
                 //有网络
                 if(girlid){
                     this.metaData.mca = "mini_recommend_female";
+                    this.setData({
+                        type:'loading'
+                    })
                     this.initData();
                 }
                 //#############本地存储############//
