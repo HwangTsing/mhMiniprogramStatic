@@ -16,8 +16,7 @@ Component({
     
   },
   attached() {
-    const {width, scale, src} = this.properties;
-    console.log('src', src)
+    const {width, scale, src} = this.properties
     this.setData({
       width: width,
       height: width/scale,

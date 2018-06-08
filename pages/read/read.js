@@ -218,7 +218,7 @@ Page({
       next = this.findNextChapter(index, chapter_list)
       prev = this.findPrevChapter(index, chapter_list)
     }
-    console.log(+new Date() - time)
+    // console.log(+new Date() - time)
     if (prev) prev_url = this.getReadurlByParam({ ...prev, comic_id})
     if (next) next_url = this.getReadurlByParam({ ...next, comic_id})
 

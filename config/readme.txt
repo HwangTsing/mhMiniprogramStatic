@@ -11,3 +11,12 @@ http://manhua.weibo.cn/wbcomic/home/page_recommend_list
 http://manhua.weibo.cn/wbcomic/home/recommend_list
 http://manhua.weibo.cn/wbcomic/comic/comic_comment_list
 http://manhua.weibo.cn/wbcomic/comic/comic_reply_list
+
+
+
+zy513318730 
+wxid_oiyqsmxt7j7l22 
+测试小米
+yangtao9189
+QUARTZ
+__STATIC__
