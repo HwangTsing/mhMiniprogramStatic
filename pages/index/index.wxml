@@ -66,7 +66,7 @@
         </view>
     </view>
 
-    <view class="content_view">
+    <view class="content_view" wx:if="{{networkType === true}}">
         <view class="con_banner">
             <!--search搜索-->
             <!--搜索框聚焦时显示-->
@@ -323,7 +323,7 @@
     <template is="message" data="{{networkType,isLoad}}"></template>
     <!-- 网络慢提示loading -->
     <import src="/tpls/message.wxml"/>
-    <view style="position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;">
+    <view wx:if="{{type}}" style="position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;">
         <template is="message" wx:if="{{type}}" data="{{ type }}"/>
     </view>
 </view>
