@@ -59,7 +59,7 @@ class wxApi {
 
     getPaths(url = '') {
         if (!/^(http[s]?:)/.test(url)) {
-            return baseUrl + url;
+            return baseUrl + 'wap' + url;
         }
         return url;
     }

@@ -103,11 +103,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    // return {
-    //   path: '/pages/index/index',
-    //   success: function(res) {},
-    //   fail: function(res) {}
-    // }
+    return {
+      title: '各种有爱的动漫分享'
+    }
   },
 
   setPageMessage: function (type) {

@@ -126,5 +126,11 @@ Page({
   onReachBottom: function () {
 
   },
+  
+  onShareAppMessage: function () {
+    return {
+      title: '各种有爱的动漫分享'
+    }
+  }
 
 })
