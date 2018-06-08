@@ -33,7 +33,6 @@ Page({
           total:0,    //总页码
           noSearch:true,   //是否有搜索结果
           isLoad:false,     //是否加载失败
-          type:'loading'
       },
       metaData:{
         mca:''
@@ -484,12 +483,14 @@ Page({
                         //console.log(data);
                         if (data === "0"){
                             that.setData({
+                                type:'loading',
                                 boyid:"0"
                             });
                             that.metaData.mca = "mini_recommend_male";
                             that.initData();
                         }else  if (data === "1"){
                             that.setData({
+                                type:'loading',
                                 girlid:"1"
                             });
                             that.metaData.mca = "mini_recommend_female";
@@ -508,6 +509,7 @@ Page({
                             that.metaData.mca = "mini_recommend_female";
                             that.initData();
                             that.setData({
+                                type:'loading',
                                 id:1,
                                 idg : 1,
                                 boyid:"0"
@@ -516,6 +518,7 @@ Page({
                             that.metaData.mca = "mini_recommend_male";
                             that.initData();
                             that.setData({
+                                type:'loading',
                                 id:0,
                                 idg : 0,
                                 girlid:"1"
