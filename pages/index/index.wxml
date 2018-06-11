@@ -3,15 +3,15 @@
 <view class="container" scroll-y="{{isScroll}}">
     <!--弹层男女选择-->
     <view wx:if="{{networkType === true}}" class="{{boyid || girlid? 'fix_view_hidden':'fix_view'}}">
-        <view class="choose_view_top">
-            <view class="choose_view">
+        <view class="{{boyid || girlid? 'choose_top_hidden':'choose_view_top'}}">
+            <view class="{{boyid || girlid? 'choose_view_hidden':'choose_view'}}">
                 <image class="choose_view_img" src="../../images/edition/rectangle.png"></image>
             </view>
-            <view class="icon_image">
+            <view class="{{boyid || girlid? 'icon_image_hidden':'icon_image'}}">
                 <image src="../../images/edition/boy_org.png"></image>
             </view>
-            <view class="bg_view">
-                <view class="boy_view">
+            <view class="{{boyid || girlid? 'bg_view_hidden':'bg_view'}}">
+                <view class="{{boyid || girlid? 'boy_view_hidden':'boy_view'}}">
                     <block wx:if="{{isBoy}}}">
                         <view style="{{isBoy === true ? 'display:block':'display:none'}}">
                             <image class="boy_s" src="../../images/edition/Rectangle_w.png"></image>
@@ -31,13 +31,13 @@
                     </view>
                 </view>
 
-                <view class="girl_view">
+                <view class="{{boyid || girlid? 'girl_view_hidden':'girl_view'}}">
 
                     <view style="{{isBoy === true ? 'display:block;':'display:none;'}}">
                         <image class="girl_s" src="../../images/edition/girl_k.png"></image>
                         <image class="girl_btn" data-index="1" src="../../images/edition/CShape_g.png"></image>
                     </view>
-                    <view style="{{isBoy ===  true? 'display:none;':'display:block;'}}">
+                    <view style="{{isBoy ===  true || idsed === 3? 'display:none;':'display:block;'}}">
                         <image class="{{idsed === 3?'hidden_s':'girl_s'}}" src="../../images/edition/girl_s.png"></image>
                         <image class="{{isGirl === true ? 'girl_btn_hidden':'girl_btn'}}" data-index="1" src="../../images/edition/CShape_g.png"
                                catchtap="onGirlTap"></image>
@@ -52,7 +52,7 @@
                 </view>
             </view>
 
-            <view class="logo_view">
+            <view class="{{boyid || girlid? 'logo_view_hidden':'logo_view'}}">
                 <image class="logo_logo" src="../../images/edition/logo.png"></image>
             </view>
         </view>
@@ -322,7 +322,7 @@
 
     <import src="./template/message.wxml"></import>
     <template is="message" data="{{networkType,isLoad}}"></template>
-    
+
     <!-- 网络慢提示loading -->
     <import src="/tpls/message.wxml"/>
     <view wx:if="{{!isLoad}}" style="position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;">
