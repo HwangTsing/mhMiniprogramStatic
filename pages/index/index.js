@@ -7,6 +7,7 @@ Page({
           windowHeight:'504px',
           isBoy:false,   //男版
           isGirl:false,   //女版
+          genderButtonDisabled: true,
           isShowGenderView: false,//是否显示男女版选择层
           timer:null,     //倒计时
           imgUrls:[],
@@ -100,6 +101,8 @@ Page({
                     const hotSerialWorks = recommendList[mca + '_hot_serial'] ? recommendList[mca+'_hot_serial'].slice(0,4) : [];
                     const xiaobianRecommend = recommendList[mca + '_xiaobian_recommend'] ? recommendList[mca+'_xiaobian_recommend'].slice(0,3) : [];
                     const weekRecommend = recommendList[mca + '_week_recommend'] ? recommendList[mca+'_week_recommend'].slice(0,4) : [];
+                    //重置轮播图
+                    that.setData({imgUrls:[]})
                     that.setData({
                         imgUrls,
                         title_f,
@@ -212,17 +215,19 @@ Page({
     /*boy and girl*/
     onBoyTap:function (event) {
         var that = this;
-        var boyid=event.currentTarget.dataset.index;
+        var boyid = event.currentTarget.dataset.index;
+        const { genderButtonDisabled } = this.data
         //console.log(boyid);
         this.setData({
-            isBoy:!that.data.isBoy
-
+            isBoy:!that.data.isBoy,
+            genderButtonDisabled: false
         });
-        that.data.timer = setTimeout(function () {
-            that.setData({
-                boyid:boyid
-            })
-        },1000);
+        // setTimeout(()=>{ this.setData({genderButtonDisabled: true})}, 10000)
+        // that.data.timer = setTimeout(function () {
+        //     that.setData({
+        //         boyid:boyid
+        //     })
+        // },1000);
         //判断网络类型
         wxApi.getNetworkType().then((res) =>{
             let networkType = res.networkType;
@@ -232,24 +237,20 @@ Page({
                     networkType: false,
                     isLoad: true
                 })
-
             }else {
                 //有网络
                 if (boyid) {
                     this.metaData.mca = "mini_recommend_male";
                     this.setData({
-                        type:'loading'
+                        type:'loading',
+                        id: 1,
+                        boyid
                     })
                     this.initData();
+                    try {
+                        wx.setStorageSync('id', boyid + '')
+                    }catch(e){}
                 }
-                //#############本地存储############//
-                wx.setStorage({
-                    key:'id',
-                    data:boyid + '',
-                    success:function (res) {
-
-                    }
-                })
             }
         }).catch((err) =>{
             this.setData({
@@ -264,15 +265,12 @@ Page({
         var that = this;
         var girlid=event.currentTarget.dataset.index;
         //console.log(girlid);
+        
         this.setData({
             isGirl:!that.data.isGirl,
             idsed:3
         });
-        that.data.timer = setTimeout(function () {
-            that.setData({
-                girlid:girlid
-            })
-        },1000);
+       
         //判断网络类型
         wxApi.getNetworkType().then((res) =>{
             let networkType = res.networkType;
@@ -287,19 +285,17 @@ Page({
                 //有网络
                 if(girlid){
                     this.metaData.mca = "mini_recommend_female";
+                    
                     this.setData({
-                        type:'loading'
+                        type:'loading',
+                        girlid,
+                        id: 0
                     })
                     this.initData();
+                    try {
+                        wx.setStorageSync('id', girlid + '')
+                    }catch(e){}
                 }
-                //#############本地存储############//
-                wx.setStorage({
-                    key:'id',
-                    data:girlid + '',
-                    success:function (res) {
-
-                    }
-                })
             }
         }).catch((err) =>{
             this.setData({
@@ -317,14 +313,14 @@ Page({
     },
     /*input聚焦和失焦,监听*/
     focusInputEvent: function () {
-          var that= this;
+        var that= this;
         this.setData({
             isOpacity: true,
             isScroll:false
         })
     },
     blurInputEvent: function () {
-          var that = this;
+        var that = this;
         this.setData({
             isOpacity:false,
             isScroll:true,
@@ -574,9 +570,7 @@ Page({
             }else {
                 //有网络
                 if (id === 0){
-                    this.setData({
-                        imgUrls:[]
-                    })
+
                     this.metaData.mca = "mini_recommend_female";
                     this.initData();
                     this.setData({
@@ -584,9 +578,6 @@ Page({
                         id : 1
                     })
                 }else  if (id === 1){
-                    this.setData({
-                        imgUrls:[]
-                    })
                     this.metaData.mca = "mini_recommend_male";
                     this.initData();
                     this.setData({
@@ -685,6 +676,9 @@ Page({
         wx.stopPullDownRefresh();
     },
 
+    onPageScroll() {
+        //if(this.__pageScrollState == 1) return false;
+    }, 
     /**
      * 用户点击右上角分享
      */

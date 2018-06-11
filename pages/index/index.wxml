@@ -15,8 +15,7 @@
                     <block wx:if="{{isBoy}}}">
                         <view style="{{isBoy === true ? 'display:block':'display:none'}}">
                             <image class="boy_s" src="../../images/edition/Rectangle_w.png"></image>
-                            <image class="boy_btn" data-index="0" src="../../images/edition/CShape_bactive.png"
-                                   catchtap="onBoyTap"></image>
+                            <image class="boy_btn" data-index="0" src="../../images/edition/CShape_bactive.png"></image>
                         </view>
                         <view style="{{isBoy === true ? 'display:none':'display:block'}}">
                             <image class="{{idsed === 3?'hidden_b':'boy_s'}}" src="../../images/edition/Rectangle_s.png"></image>
@@ -26,8 +25,7 @@
                     </block>
                     <view style="{{isGirl === true ? 'display:block;':'display:none;'}}">
                         <image class="boy_s" src="../../images/edition/Rectangle_k.png"></image>
-                        <image class="boy_btn" data-index="0" src="../../images/edition/CShape_b.png"
-                               catchtap="onBoyTap"></image>
+                        <image class="boy_btn" data-index="0" src="../../images/edition/CShape_b.png" ></image>
                     </view>
                 </view>
 
@@ -35,7 +33,7 @@
 
                     <view style="{{isBoy === true ? 'display:block;':'display:none;'}}">
                         <image class="girl_s" src="../../images/edition/girl_k.png"></image>
-                        <image class="girl_btn" data-index="1" src="../../images/edition/CShape_g.png"></image>
+                        <image class="girl_btn" data-index="1" src="../../images/edition/CShape_g.png" ></image>
                     </view>
                     <view style="{{isBoy ===  true || idsed === 3? 'display:none;':'display:block;'}}">
                         <image class="{{idsed === 3?'hidden_s':'girl_s'}}" src="../../images/edition/girl_s.png"></image>
@@ -45,8 +43,7 @@
                     <block wx:if="{{isGirl}}">
                         <view style="{{isGirl === true}}">
                             <image class="girl_s" src="../../images/edition/girl_w.png"></image>
-                            <image class="girl_btn" data-index="1" src="../../images/edition/CShape_gative.png"
-                                   catchtap="onGirlTap"></image>
+                            <image class="girl_btn" data-index="1" src="../../images/edition/CShape_gative.png"></image>
                         </view>
                     </block>
                 </view>
