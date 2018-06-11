@@ -7,6 +7,7 @@ Page({
           windowHeight:'504px',
           isBoy:false,   //男版
           isGirl:false,   //女版
+          isShowGenderView: false,//是否显示男女版选择层
           timer:null,     //倒计时
           imgUrls:[],
           indicatorDots: true, //是否显示指示点
@@ -244,7 +245,7 @@ Page({
                 //#############本地存储############//
                 wx.setStorage({
                     key:'id',
-                    data:boyid,
+                    data:boyid + '',
                     success:function (res) {
 
                     }
@@ -294,7 +295,7 @@ Page({
                 //#############本地存储############//
                 wx.setStorage({
                     key:'id',
-                    data:girlid,
+                    data:girlid + '',
                     success:function (res) {
 
                     }
@@ -481,37 +482,41 @@ Page({
                 })
                 //有网络
                 //########### 获取初次男女分版存储 ##############//
-                wx.getStorage({
-                    key:'id',
-                    success:function (res) {
-                        //console.log(res.data);
-                        var data = res.data;
-                        //console.log(data);
-                        if (data === "0"){
-                            that.setData({
-                                type:'loading',
-                                boyid:"0"
-                            });
-                            that.metaData.mca = "mini_recommend_male";
-                            that.initData();
-                        }else  if (data === "1"){
-                            that.setData({
-                                type:'loading',
-                                girlid:"1"
-                            });
-                            that.metaData.mca = "mini_recommend_female";
-                            that.initData();
-                        }
-                    }
-                });
-
+                // wx.getStorage({
+                //     key:'id',
+                //     success:function (res) {
+                //         //console.log(res.data);
+                //         var data = res.data;
+                //         //console.log(data);
+                //         console.log('isShowGenderView')
+                //         if (data === "0"){
+                //             that.setData({
+                //                 type:'loading',
+                //                 boyid:"0"
+                //             });
+                //             that.metaData.mca = "mini_recommend_male";
+                //             that.initData();
+                //         }else  if (data === "1"){
+                //             that.setData({
+                //                 type:'loading',
+                //                 girlid:"1"
+                //             });
+                //             that.metaData.mca = "mini_recommend_female";
+                //             that.initData();
+                //         } else {
+                            
+                //             that.setData({ 
+                //                 isShowGenderView: true 
+                //             })
+                //         }
+                //     }
+                // });
                 //################# 获取推荐页男女选择存储 #########################//
                 wx.getStorage({
                     key:'id',
                     success:function (res) {
-                        //console.log(res);
                         var id = res.data;
-                        if (id === 0){
+                        if (id === '0'){
                             that.metaData.mca = "mini_recommend_female";
                             that.initData();
                             that.setData({
@@ -520,7 +525,7 @@ Page({
                                 idg : 1,
                                 boyid:"0"
                             })
-                        }else if (id === 1){
+                        }else if (id === '1'){
                             that.metaData.mca = "mini_recommend_male";
                             that.initData();
                             that.setData({
@@ -529,8 +534,16 @@ Page({
                                 idg : 0,
                                 girlid:"1"
                             })
+                        }else {
+                            that.setData({ 
+                                isShowGenderView: true 
+                            })
                         }
-
+                    },
+                    fail() {
+                        that.setData({ 
+                            isShowGenderView: true 
+                        })
                     }
                 });
             }
@@ -584,7 +597,7 @@ Page({
                 //#############本地存储############//
                 wx.setStorage({
                     key:'id',
-                    data:id,
+                    data: id + '',
                     success:function (res) {
 
                     }
@@ -640,7 +653,7 @@ Page({
                 //#############本地存储############//
                 wx.setStorage({
                     key:'id',
-                    data:idg,
+                    data:idg + '',
                     success:function (res) {
 
                     }
