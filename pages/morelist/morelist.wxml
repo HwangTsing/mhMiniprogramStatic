@@ -4,7 +4,7 @@
     <block wx:for="{{moreData}}" wx:key="index">
         <navigator class="more_list" url="../details/details?comic_id={{item.comic_id}}">
             <view class="left_img">
-                <image mode="aspectFit" src="../../images/hcover.png"
+                <image mode="aspectFill" src="../../images/hcover.png"
                        style="position: relative;top: 0;left: 0;">
                     <image mode="aspectFill" lazy-load="true" src="{{item.hcover}}"
                            style="position: absolute;left: 0;top: 0;"></image>

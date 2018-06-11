@@ -313,8 +313,11 @@
             <view class="comment_message">{{message}}</view>
         </view>
     </scroll-view>
+    <!--搜索没有结果提示loading-->
     <block wx:if="{{noSearch === false}}">
-        <message class="{{isCancel===true? 'search_message_hidden':'search_message'}}" modal="{{false}}" type="search"></message>
+        <view class="bg_search_mess" catchtouchmove='noScrollMove'>
+            <message class="{{isCancel===true? 'search_message_hidden':'search_message'}}" modal="{{false}}" type="search"></message>
+        </view>
     </block>
 
     <import src="./template/message.wxml"></import>
