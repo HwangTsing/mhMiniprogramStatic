@@ -80,8 +80,8 @@
                             <image
                                 mode="aspectFill"
                                 class="top_btn"
-                                style="background: url('../../images/details/{{isSort==1?'no.png':'yes.png'}}')  center center/cover ;"
-                                src="../../images/details/{{isSort==1?'no.png':'yes.png'}}"
+                                style="background: url('../../images/details/{{isSort==1?'yes.png':'no.png'}}')  center center/cover ;"
+                                src="../../images/details/{{isSort==1?'yes.png':'no.png'}}"
                                 catchtap="catalogSort"
                             ></image>
                         </view>
