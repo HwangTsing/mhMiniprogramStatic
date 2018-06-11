@@ -867,12 +867,34 @@ swiper-item wx-image {
   color: #666;
   font-size: 26rpx;
 }
-.layer,
+.bg_search_mess {
+  width: 100%;
+  height: 100% ;
+  background: #fff;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+.layer {
+  width: 100%;
+  height: 100% ;
+  background: #fff;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
 .search_message {
   width: 100%;
   height: 100% ;
   background: #fff;
   position: fixed;
+  top: 80rpx;
   bottom: 0;
   left: 0;
   right: 0;
@@ -885,6 +907,7 @@ swiper-item wx-image {
   background: #fff;
   opacity: 0.95;
   position: fixed;
+  top: 0;
   bottom: 0;
   left: 0;
   right: 0;
