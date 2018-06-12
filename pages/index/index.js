@@ -7,7 +7,7 @@ Page({
           windowHeight:'504px',
           isBoy:false,   //男版
           isGirl:false,   //女版
-          genderButtonDisabled: true,
+          genderButtonDisabled: false,
           isShowGenderView: false,//是否显示男女版选择层
           timer:null,     //倒计时
           imgUrls:[],
@@ -216,18 +216,19 @@ Page({
     onBoyTap:function (event) {
         var that = this;
         var boyid = event.currentTarget.dataset.index;
-        const { genderButtonDisabled } = this.data
-        //console.log(boyid);
+        const { genderButtonDisabled } = that.data
+        const id = 0
+
+        if(genderButtonDisabled) return
         this.setData({
             isBoy:!that.data.isBoy,
-            genderButtonDisabled: false
+            genderButtonDisabled: true
         });
-        // setTimeout(()=>{ this.setData({genderButtonDisabled: true})}, 10000)
-        // that.data.timer = setTimeout(function () {
-        //     that.setData({
-        //         boyid:boyid
-        //     })
-        // },1000);
+
+        that.data.timer = setTimeout(function () {
+            that.setData({ boyid, id })
+        },1000);
+        setTimeout(()=>this.setData({genderButtonDisabled: false}), 20000)
         //判断网络类型
         wxApi.getNetworkType().then((res) =>{
             let networkType = res.networkType;
@@ -242,9 +243,7 @@ Page({
                 if (boyid) {
                     this.metaData.mca = "mini_recommend_male";
                     this.setData({
-                        type:'loading',
-                        id: 1,
-                        boyid
+                        type:'loading'
                     })
                     this.initData();
                     try {
@@ -264,12 +263,21 @@ Page({
     onGirlTap:function (event) {
         var that = this;
         var girlid=event.currentTarget.dataset.index;
-        //console.log(girlid);
-
+        const { genderButtonDisabled } = that.data
+        const id = 1
+        if(genderButtonDisabled) return
         this.setData({
             isGirl:!that.data.isGirl,
+            genderButtonDisabled: true,
             idsed:3
         });
+
+
+        setTimeout(function () {
+            that.setData({ girlid, id })
+        },1000);
+
+        setTimeout(()=>this.setData({genderButtonDisabled: false}), 20000)
 
         //判断网络类型
         wxApi.getNetworkType().then((res) =>{
@@ -287,9 +295,7 @@ Page({
                     this.metaData.mca = "mini_recommend_female";
 
                     this.setData({
-                        type:'loading',
-                        girlid,
-                        id: 0
+                        type:'loading'
                     })
                     this.initData();
                     try {
@@ -477,59 +483,31 @@ Page({
                     word:that.searchData.word
                 })
                 //有网络
-                //########### 获取初次男女分版存储 ##############//
-                // wx.getStorage({
-                //     key:'id',
-                //     success:function (res) {
-                //         //console.log(res.data);
-                //         var data = res.data;
-                //         //console.log(data);
-                //         console.log('isShowGenderView')
-                //         if (data === "0"){
-                //             that.setData({
-                //                 type:'loading',
-                //                 boyid:"0"
-                //             });
-                //             that.metaData.mca = "mini_recommend_male";
-                //             that.initData();
-                //         }else  if (data === "1"){
-                //             that.setData({
-                //                 type:'loading',
-                //                 girlid:"1"
-                //             });
-                //             that.metaData.mca = "mini_recommend_female";
-                //             that.initData();
-                //         } else {
 
-                //             that.setData({
-                //                 isShowGenderView: true
-                //             })
-                //         }
-                //     }
-                // });
                 //################# 获取推荐页男女选择存储 #########################//
                 wx.getStorage({
                     key:'id',
                     success:function (res) {
                         var id = res.data;
+
                         if (id === '0'){
-                            that.metaData.mca = "mini_recommend_female";
-                            that.initData();
+                            that.metaData.mca = "mini_recommend_male";
                             that.setData({
                                 type:'loading',
-                                id:1,
-                                idg : 1,
+                                id: 0,
+                                idg : 0,
                                 boyid:"0"
                             })
+                            that.initData()
                         }else if (id === '1'){
-                            that.metaData.mca = "mini_recommend_male";
-                            that.initData();
+                            that.metaData.mca = "mini_recommend_female";
                             that.setData({
                                 type:'loading',
-                                id:0,
-                                idg : 0,
+                                id:  1,
+                                idg: 1,
                                 girlid:"1"
                             })
+                            that.initData()
                         }else {
                             that.setData({
                                 isShowGenderView: true
@@ -557,6 +535,7 @@ Page({
         var that = this;
         that.data.id = Number(e.currentTarget.dataset.id);
         var id = that.data.id;
+        let _saveId;
         //console.log(id);
         //判断网络类型
         wxApi.getNetworkType().then((res) =>{
@@ -570,13 +549,13 @@ Page({
             }else {
                 //有网络
                 if (id === 0){
-
                     this.metaData.mca = "mini_recommend_female";
                     this.initData();
                     this.setData({
                         isToast:true,
                         id : 1
                     })
+                    _saveId = 1
                 }else  if (id === 1){
                     this.metaData.mca = "mini_recommend_male";
                     this.initData();
@@ -584,11 +563,12 @@ Page({
                         isToast:true,
                         id : 0
                     })
+                    _saveId = 0
                 }
                 //#############本地存储############//
                 wx.setStorage({
                     key:'id',
-                    data: id + '',
+                    data: _saveId + '',
                     success:function (res) {
 
                     }
@@ -607,6 +587,7 @@ Page({
         var that = this;
         that.data.idg = Number(e.currentTarget.dataset.id);
         var idg = that.data.idg;
+        let _saveId;
         //console.log(idg);
         //判断网络类型
         wxApi.getNetworkType().then((res) =>{
@@ -629,6 +610,7 @@ Page({
                         isToast:true,
                         idg : 0
                     })
+                    _saveId = 0
                 }
                 else if (idg === 0){
                     this.setData({
@@ -640,11 +622,12 @@ Page({
                         isToast:true,
                         idg : 1
                     })
+                    _saveId = 1
                 }
                 //#############本地存储############//
                 wx.setStorage({
                     key:'id',
-                    data:idg + '',
+                    data:_saveId + '',
                     success:function (res) {
 
                     }
