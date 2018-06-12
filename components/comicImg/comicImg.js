@@ -20,6 +20,7 @@ Component({
   attached() {
     const {width, scale, src} = this.properties
     this.loaded = 0
+    this.loadingState = false
     this.src = src.replace(/http:\/\//i, 'https://')
     this.setData({
       width: width,
@@ -51,7 +52,8 @@ Component({
     },
     error(e) {
       //console.log('this.loaded', this.loaded)
-      if(this.loaded < 3) {
+      this.loadingState = false
+      if (this.loaded < 3) {
         this.downloadImg()
       } else {
         this.setButtonState(false)
@@ -61,6 +63,8 @@ Component({
       let { src, disabled, loading } = this.data
       const version = +new Date()
       src = this.src + '?v=' + version
+      if (this.loadingState) return
+      this.loadingState = true
       disabled = !disabled
       loading = !loading
       this.loaded += 1
