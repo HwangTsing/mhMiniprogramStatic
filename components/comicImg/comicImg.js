@@ -50,7 +50,7 @@ Component({
       })
     },
     error(e) {
-      console.log('this.loaded', this.loaded)
+      //console.log('this.loaded', this.loaded)
       if(this.loaded < 3) {
         this.downloadImg()
       } else {
