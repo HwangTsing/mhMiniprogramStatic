@@ -96,9 +96,9 @@
                     </block>
                     <block wx:elif="{{girlid}}">
                         <image class="{{isOpacity || idg !== 1? 'girl_img_hidden':'girl_img'}}" data-index="{{girlid}}"
-                               src="../../images/girl.png" catchtap="onToastTap02" data-id="{{idg}}"></image>
+                               src="../../images/girl.png" catchtap="onToastTap" data-id="{{idg}}"></image>
                         <image class="{{idg === 1 || isOpacity === true? 'boy_img_hidden':'boy_img'}}" data-index="{{boyid}}"
-                               src="../../images/boy.png" catchtap="onToastTap02" data-id="{{idg}}"></image>
+                               src="../../images/boy.png" catchtap="onToastTap" data-id="{{idg}}"></image>
                     </block>
 
                 </view>

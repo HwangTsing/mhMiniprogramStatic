@@ -271,7 +271,7 @@ Page({
             genderButtonDisabled: true,
             idsed:3
         });
-        
+
         setTimeout(function () {
             that.setData({ girlid, id })
         },1000);
@@ -550,7 +550,8 @@ Page({
                     this.initData();
                     this.setData({
                         isToast:true,
-                        id : 1
+                        id : 1,
+                        idg : 1
                     })
                     _saveId = 1
                 }else  if (id === 1){
@@ -558,7 +559,8 @@ Page({
                     this.initData();
                     this.setData({
                         isToast:true,
-                        id : 0
+                        id : 0,
+                        idg : 0
                     })
                     _saveId = 0
                 }
@@ -570,57 +572,6 @@ Page({
 
                     }
 
-                })
-            }
-        }).catch((err) =>{
-            this.setData({
-                networkType: true,
-                isLoad:true
-            })
-        })
-
-    },
-    onToastTap02:function (e) {
-        var that = this;
-        that.data.idg = Number(e.currentTarget.dataset.id);
-        var idg = that.data.idg;
-        let _saveId;
-        //判断网络类型
-        wxApi.getNetworkType().then((res) =>{
-            let networkType = res.networkType;
-            if (networkType === 'none' || networkType === 'unknown') {
-                //无网络不进行任何操作
-                this.setData({
-                    networkType: false
-                })
-
-            }else {
-                //有网络
-                if (idg === 1){
-                    this.metaData.mca = "mini_recommend_male";
-                    this.initData();
-                    this.setData({
-                        isToast:true,
-                        idg : 0
-                    })
-                    _saveId = 0
-                }
-                else if (idg === 0){
-                    this.metaData.mca = "mini_recommend_female";
-                    this.initData();
-                    that.setData({
-                        isToast:true,
-                        idg : 1
-                    })
-                    _saveId = 1
-                }
-                //#############本地存储############//
-                wx.setStorage({
-                    key:'id',
-                    data:_saveId + '',
-                    success:function (res) {
-
-                    }
                 })
             }
         }).catch((err) =>{
