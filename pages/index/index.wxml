@@ -2,21 +2,20 @@
 
 <view class="container" scroll-y="{{isScroll}}">
     <!--弹层男女选择-->
-    <view wx:if="{{networkType === true}}" class="{{boyid || girlid? 'fix_view_hidden':'fix_view'}}">
-        <view class="choose_view_top">
-            <view class="choose_view">
+    <view hidden="{{!isShowGenderView}}" class="{{boyid || girlid? 'fix_view_hidden':'fix_view'}}">
+        <view class="{{boyid || girlid? 'choose_top_hidden':'choose_view_top'}}">
+            <view class="{{boyid || girlid? 'choose_view_hidden':'choose_view'}}">
                 <image class="choose_view_img" src="../../images/edition/rectangle.png"></image>
             </view>
-            <view class="icon_image">
+            <view class="{{boyid || girlid? 'icon_image_hidden':'icon_image'}}">
                 <image src="../../images/edition/boy_org.png"></image>
             </view>
-            <view class="bg_view">
-                <view class="boy_view">
+            <view class="{{boyid || girlid? 'bg_view_hidden':'bg_view'}}">
+                <view class="{{boyid || girlid? 'boy_view_hidden':'boy_view'}}">
                     <block wx:if="{{isBoy}}}">
                         <view style="{{isBoy === true ? 'display:block':'display:none'}}">
                             <image class="boy_s" src="../../images/edition/Rectangle_w.png"></image>
-                            <image class="boy_btn" data-index="0" src="../../images/edition/CShape_bactive.png"
-                                   catchtap="onBoyTap"></image>
+                            <image class="boy_btn" data-index="0" src="../../images/edition/CShape_bactive.png"></image>
                         </view>
                         <view style="{{isBoy === true ? 'display:none':'display:block'}}">
                             <image class="{{idsed === 3?'hidden_b':'boy_s'}}" src="../../images/edition/Rectangle_s.png"></image>
@@ -26,18 +25,17 @@
                     </block>
                     <view style="{{isGirl === true ? 'display:block;':'display:none;'}}">
                         <image class="boy_s" src="../../images/edition/Rectangle_k.png"></image>
-                        <image class="boy_btn" data-index="0" src="../../images/edition/CShape_b.png"
-                               catchtap="onBoyTap"></image>
+                        <image class="boy_btn" data-index="0" src="../../images/edition/CShape_b.png" ></image>
                     </view>
                 </view>
 
-                <view class="girl_view">
+                <view class="{{boyid || girlid? 'girl_view_hidden':'girl_view'}}">
 
                     <view style="{{isBoy === true ? 'display:block;':'display:none;'}}">
                         <image class="girl_s" src="../../images/edition/girl_k.png"></image>
-                        <image class="girl_btn" data-index="1" src="../../images/edition/CShape_g.png"></image>
+                        <image class="girl_btn" data-index="1" src="../../images/edition/CShape_g.png" ></image>
                     </view>
-                    <view style="{{isBoy ===  true? 'display:none;':'display:block;'}}">
+                    <view style="{{isBoy ===  true || idsed === 3? 'display:none;':'display:block;'}}">
                         <image class="{{idsed === 3?'hidden_s':'girl_s'}}" src="../../images/edition/girl_s.png"></image>
                         <image class="{{isGirl === true ? 'girl_btn_hidden':'girl_btn'}}" data-index="1" src="../../images/edition/CShape_g.png"
                                catchtap="onGirlTap"></image>
@@ -45,14 +43,13 @@
                     <block wx:if="{{isGirl}}">
                         <view style="{{isGirl === true}}">
                             <image class="girl_s" src="../../images/edition/girl_w.png"></image>
-                            <image class="girl_btn" data-index="1" src="../../images/edition/CShape_gative.png"
-                                   catchtap="onGirlTap"></image>
+                            <image class="girl_btn" data-index="1" src="../../images/edition/CShape_gative.png"></image>
                         </view>
                     </block>
                 </view>
             </view>
 
-            <view class="logo_view">
+            <view class="{{boyid || girlid? 'logo_view_hidden':'logo_view'}}">
                 <image class="logo_logo" src="../../images/edition/logo.png"></image>
             </view>
         </view>
@@ -66,7 +63,7 @@
         </view>
     </view>
 
-    <view class="content_view">
+    <view class="content_view" wx:if="{{networkType === true}}">
         <view class="con_banner">
             <!--search搜索-->
             <!--搜索框聚焦时显示-->
@@ -75,7 +72,7 @@
                       style="{{isOpacity === true? 'background:rgba(245,245,245,1);border-radius: 30rpx;-webkit-border-radius: 30rpx;-moz-border-radius: 30rpx;-mz-border-radius: 30rpx;':''}}">
                     <image class="search_images" src="{{isOpacity === true ? '../../images/search_gray_02.png':'../../images/search_gray.png'}}"></image>
                     <input class="{{isOpacity === true?'search_input_focus':'search_input'}}" type="text" value="{{word}}"
-                           placeholder="搜索作品或作者名称" placeholder-style="color:#fff;font-size:28rpx;"
+                           placeholder="搜索作品或作者名称" placeholder-style="color:{{isOpacity?'#ccc':'#fff'}};font-size:28rpx;"
                            bindfocus="focusInputEvent" bindinput="bindInputChange"/>
                     <block wx:if="{{word!==''}}">
                         <image class="del"
@@ -153,7 +150,7 @@
                 <block wx:if="{{FineWorks}}" wx:for="{{FineWorks}}" wx:key="index">
                     <navigator class="big_img" url="../details/details?comic_id={{item.extra.comic_id}}"
                                style="position: relative;top: 0;left: 0;">
-                        <image mode="aspectFill" lazy-load="true" src="../../images/hcover.png">
+                        <image mode="aspectFill" src="../../images/hcover.png">
                             <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"
                                    style="position: absolute;left: 0;top: 0;z-index: 1;"></image>
                         </image>
@@ -200,7 +197,7 @@
                 <view class="big_new_view">
                     <block wx:for="{{newArrivalWorks}}" wx:key="index">
                         <navigator class="new_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                            <image mode="aspectFill" lazy-load="true" src="../../images/hcover.png"
+                            <image mode="aspectFill" src="../../images/hcover.png"
                             style="position: relative;top: 0;left: 0;">
                                 <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"
                                 style="position: absolute;left: 0;top: 0;"></image>
@@ -225,7 +222,7 @@
         <view class="hot_view">
             <block wx:for="{{hotSerialWorks}}" wx:key="index">
                 <navigator class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                    <image mode="aspectFill" lazy-load="true" src="../../images/hcover.png"
+                    <image mode="aspectFill" src="../../images/hcover.png"
                     style="position: relative;top: 0;left: 0;;">
                         <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"
                         style="position: absolute;left: 0;top: 0;"></image>
@@ -249,7 +246,7 @@
             <view class="big_new_view">
                 <block wx:for="{{xiaobianRecommend}}" wx:key="index">
                     <navigator class="new_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                        <image mode="aspectFill" lazy-load="true" src="../../images/hcover.png"
+                        <image mode="aspectFill" src="../../images/hcover.png"
                                style="position: relative;top: 0;left: 0;;">
                             <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"
                                    style="position: absolute;left: 0;top: 0;"></image>
@@ -273,7 +270,7 @@
         <view class="hot_view">
             <block wx:for="{{weekRecommend}}" wx:key="index">
                 <navigator class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                    <image mode="aspectFill" lazy-load="true" src="../../images/hcover.png"
+                    <image mode="aspectFill" src="../../images/hcover.png"
                            style="position: relative;top: 0;left: 0;;">
                         <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"
                                style="position: absolute;left: 0;top: 0;"></image>
@@ -316,14 +313,19 @@
             <view class="comment_message">{{message}}</view>
         </view>
     </scroll-view>
+    <!--搜索没有结果提示loading-->
     <block wx:if="{{noSearch === false}}">
-        <message class="{{isCancel===true? 'search_message_hidden':'search_message'}}" modal="{{false}}" type="search"></message>
+        <view class="bg_search_mess" catchtouchmove='noScrollMove'>
+            <message class="{{isCancel===true? 'search_message_hidden':'search_message'}}" modal="{{false}}" type="search"></message>
+        </view>
     </block>
+
     <import src="./template/message.wxml"></import>
     <template is="message" data="{{networkType,isLoad}}"></template>
+
     <!-- 网络慢提示loading -->
     <import src="/tpls/message.wxml"/>
-    <view style="position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;">
+    <view wx:if="{{!isLoad}}" style="position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;">
         <template is="message" wx:if="{{type}}" data="{{ type }}"/>
     </view>
 </view>

@@ -8,8 +8,8 @@
 page {
   position: relative;
   font-family: Arial, "Microsoft YaHei", sans-serif;
-
   background-color: #f5f5f5;
+
 }
 .container {
   height: 100vh;
@@ -83,11 +83,24 @@ page {
     background:#ff4c6a;
 
 }
+.fix_view .choose_top_hidden {
+    width: 100%;
+    margin-top:110rpx;
+    background:#ff4c6a;
+    display: none;
+}
 .choose_view {
     width: 100%;
     height: 186rpx;
     background:rgba(255,76,106,1);
     text-align: center;
+}
+.choose_view_hidden {
+    width: 100%;
+    height: 186rpx;
+    background:rgba(255,76,106,1);
+    text-align: center;
+    display: none;
 }
 .choose_view .choose_view_img {
     width: 480rpx;
@@ -100,6 +113,14 @@ page {
     text-align: center;
     margin-top: 16rpx;
 }
+.icon_image_hidden {
+    width: 100%;
+    height: 280rpx;
+    background:rgba(255,76,106,1);
+    text-align: center;
+    margin-top: 16rpx;
+    display: none;
+}
 .icon_image image {
     width:276rpx;
     height:280rpx;
@@ -111,6 +132,13 @@ page {
     text-align: center;
     height: 452rpx;
 }
+.bg_view_hidden {
+    width: 100%;
+    background:rgba(255,76,106,1);
+    text-align: center;
+    height: 452rpx;
+    display: none;
+}
 .boy_view, .girl_view{
     width:292rpx;
     height:452rpx;
@@ -118,6 +146,15 @@ page {
     border-radius: 16px ;
     display: inline-block;
     margin: 0 14rpx;
+}
+.boy_view_hidden, .girl_view_hidden {
+    width:292rpx;
+    height:452rpx;
+    background:rgba(255,255,255,1);
+    border-radius: 16px ;
+    display: inline-block;
+    margin: 0 14rpx;
+    display: none;
 }
 .boy_view .boy_s {
     width:292rpx;
@@ -169,6 +206,14 @@ page {
     text-align: center;
     height: 76rpx;
     margin-top: 66rpx;
+}
+.logo_view_hidden {
+    width: 100%;
+    background:rgba(255,76,106,1);
+    text-align: center;
+    height: 76rpx;
+    margin-top: 66rpx;
+    display: none;
 }
 .logo_view .logo_logo {
     width: 200rpx;
@@ -817,15 +862,38 @@ swiper-item wx-image {
   font-size: 26rpx;
 }
 
-.layer, .search_message {
+.bg_search_mess {
+    width: 100%;
+    height: 100% ;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+.layer{
   width: 100%;
   height: 100% ;
   background: #fff;
   position: fixed;
+  top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: 10;
+}
+.search_message {
+    width: 100%;
+    height: 100% ;
+    background: #fff;
+    position: fixed;
+    top: 80rpx;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
 }
 .layer_n, .search_message_hidden {
   width: 100%;
@@ -833,6 +901,7 @@ swiper-item wx-image {
   background: #fff;
   opacity: 0.95;
   position: fixed;
+  top: 0;
   bottom: 0;
   left: 0;
   right: 0;

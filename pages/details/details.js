@@ -180,7 +180,7 @@ Page({
                                     this.can_read_chapters = 'false'
                                 }
                             }
-                            //console.log(this.can_read_chapters)
+                            // console.log(this.can_read_chapters)
                             if( this.can_read_chapters!=='false' && this.can_read_chapters && this.can_read_chapters.length>0){
                                 chapterList = [];
                                 DATA.chapter_list.forEach((item, index) => {
@@ -384,7 +384,9 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function () {
-
+        return {
+          title: '各种有爱的动漫分享'
+        }
     }
 
 })

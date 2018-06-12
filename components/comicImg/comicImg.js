@@ -16,10 +16,11 @@ Component({
     
   },
   attached() {
-    const {width, scale} = this.properties;
+    const {width, scale, src} = this.properties
     this.setData({
       width: width,
       height: width/scale,
+      src: src.replace(/http:\/\//i, 'https://')
     });
   },
   methods: {

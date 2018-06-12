@@ -103,11 +103,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    // return {
-    //   path: '/pages/index/index',
-    //   success: function(res) {},
-    //   fail: function(res) {}
-    // }
+    return {
+      title: '各种有爱的动漫分享'
+    }
   },
 
   setPageMessage: function (type) {
@@ -220,7 +218,7 @@ Page({
       next = this.findNextChapter(index, chapter_list)
       prev = this.findPrevChapter(index, chapter_list)
     }
-    console.log(+new Date() - time)
+    // console.log(+new Date() - time)
     if (prev) prev_url = this.getReadurlByParam({ ...prev, comic_id})
     if (next) next_url = this.getReadurlByParam({ ...next, comic_id})
 

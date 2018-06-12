@@ -59,7 +59,7 @@ class wxApi {
 
     getPaths(url = '') {
         if (!/^(http[s]?:)/.test(url)) {
-            return baseUrl + url;
+            return baseUrl + 'wap' + url;
         }
         return url;
     }
@@ -258,8 +258,12 @@ class wxApi {
     if (!route) return ''
     let param = [];
     const join = route.indexOf('?') != -1 ? '&' : '?'
-    for (let [key, value] of Object.entries(params)) {
-      if (!!value) param.push(key + '=' + value);
+    // console.log('params', params)
+    for (let key in params) {
+      if (params.hasOwnProperty(key)) {
+        let value = params[key]
+        if (!!value) param.push(key + '=' + value)
+      }
     }
     return route + (param.length > 0 ? join + param.join('&') : '');
   }
@@ -295,7 +299,6 @@ class wxApi {
     const route = this.getCurrentRoute()
     const options = this.getCurrentPageParams()
     const url = this.appendParams(route, options)
-
     return url
   }
 
