@@ -15,7 +15,7 @@ Component({
 
   attached() {
     //组件生命周期函数，在组件实例进入页面节点树时执行
-    //console.log(this.properties.thisData, this.data)
+    console.log(this.properties.thisData)
   },
   moved () {
     //组件生命周期函数，在组件实例被移动到节点树另一个位置时执行
