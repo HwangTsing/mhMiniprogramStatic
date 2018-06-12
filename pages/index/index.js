@@ -271,8 +271,7 @@ Page({
             genderButtonDisabled: true,
             idsed:3
         });
-
-
+        
         setTimeout(function () {
             that.setData({ girlid, id })
         },1000);
@@ -483,7 +482,6 @@ Page({
                     word:that.searchData.word
                 })
                 //有网络
-
                 //################# 获取推荐页男女选择存储 #########################//
                 wx.getStorage({
                     key:'id',
@@ -536,7 +534,6 @@ Page({
         that.data.id = Number(e.currentTarget.dataset.id);
         var id = that.data.id;
         let _saveId;
-        //console.log(id);
         //判断网络类型
         wxApi.getNetworkType().then((res) =>{
             let networkType = res.networkType;
@@ -588,7 +585,6 @@ Page({
         that.data.idg = Number(e.currentTarget.dataset.id);
         var idg = that.data.idg;
         let _saveId;
-        //console.log(idg);
         //判断网络类型
         wxApi.getNetworkType().then((res) =>{
             let networkType = res.networkType;
@@ -601,9 +597,6 @@ Page({
             }else {
                 //有网络
                 if (idg === 1){
-                    that.setData({
-                        imgUrls:[]
-                    })
                     this.metaData.mca = "mini_recommend_male";
                     this.initData();
                     this.setData({
@@ -613,9 +606,6 @@ Page({
                     _saveId = 0
                 }
                 else if (idg === 0){
-                    this.setData({
-                        imgUrls:[]
-                    })
                     this.metaData.mca = "mini_recommend_female";
                     this.initData();
                     that.setData({
