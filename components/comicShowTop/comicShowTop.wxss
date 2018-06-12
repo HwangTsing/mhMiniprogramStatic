@@ -96,7 +96,7 @@
 
 
     border-radius: 18rpx;
-    margin-right: 36rpx;
+    margin-right: 8rpx;
     margin-bottom: 20rpx;
 }
 .comicShowTop .detail_label .span text{
