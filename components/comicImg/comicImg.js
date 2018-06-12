@@ -13,19 +13,22 @@ Component({
     width: Number,
   },
   data: {
-    
+    loading: false,
+    disabled: false,
+    showDoanloadImgBtn: true,
   },
   attached() {
     const {width, scale, src} = this.properties
+    this.loaded = 0
+    this.src = src.replace(/http:\/\//i, 'https://')
     this.setData({
       width: width,
       height: width/scale,
-      src: src.replace(/http:\/\//i, 'https://')
+      src: this.src
     });
   },
   methods: {
     load(e) {
-      // console.log('load')
       const { detail = {}, detail: {width, height} } = e
       const scale = width / height
       const { width: _width, scale: _scale} = this.properties
@@ -34,9 +37,34 @@ Component({
           height: _width / scale,
         })
       }
+      this.setButtonState(true)
+    },
+    setButtonState(hidden = true) {
+      const showDoanloadImgBtn = hidden 
+      const loading = hidden
+      const disabled = hidden
+      this.setData({
+        showDoanloadImgBtn,
+        disabled,
+        loading
+      })
     },
     error(e) {
-      // console.log(e)
+      console.log('this.loaded', this.loaded)
+      if(this.loaded < 3) {
+        this.downloadImg()
+      } else {
+        this.setButtonState(false)
+      }
     },
+    downloadImg() {
+      let { src, disabled, loading } = this.data
+      const version = +new Date()
+      src = this.src + '?v=' + version
+      disabled = !disabled
+      loading = !loading
+      this.loaded += 1
+      this.setData({ src, disabled, loading })
+    }
   }
 })

@@ -14,3 +14,37 @@
   position: relative;
   z-index: 1;
 }
+.vcomic-error{
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 10;
+  background-color: #3D454D;
+}
+.error-hover{
+  opacity: 0.8;
+}
+.vcomic-placeholder{
+  position: relative;
+  top: 50%;
+  text-align: center;
+  height: 162rpx;
+  margin-top: -81rpx;
+}
+.download-img{
+  font-size: 32rpx;
+  margin-top: 10rpx;
+  color: #666!important;
+  border: 1px solid transparent!important;
+  background: transparent!important;
+}
+.button-hover{
+  background-color: #eaeaea; 
+  opacity: 1;
+}
+.vcomic-error-hodler{
+  width: 88rpx;
+  height: 64rpx;
+}

@@ -1,5 +1,18 @@
 <view class="vcomic-item" style="width:{{width}}px;height:{{height}}px">
   <view class="vcomic-order">{{order}}</view>
+  <view class="vcomic-error" hidden="{{showDoanloadImgBtn}}"catchtap="downloadImg">
+    <view class="vcomic-placeholder" hover-class="error-hover">
+      <image class="vcomic-error-hodler" src="/images/error_holder.png" mode="aspectFit"></image>
+      <button 
+        class="download-img" 
+        loading="{{loading}}" 
+        disabled="{{disabled}}" 
+        plain="{{true}}" 
+        hover-class="none"
+        catchtap="downloadImg">图片加载失败，点击重新加载
+      </button>
+    </view>
+  </view>
   <image 
     id="{{image_id}}"
     class="vcomic-img" 
