@@ -265,12 +265,12 @@ Page({
         var that = this;
         var girlid=event.currentTarget.dataset.index;
         //console.log(girlid);
-        
+
         this.setData({
             isGirl:!that.data.isGirl,
             idsed:3
         });
-       
+
         //判断网络类型
         wxApi.getNetworkType().then((res) =>{
             let networkType = res.networkType;
@@ -285,7 +285,7 @@ Page({
                 //有网络
                 if(girlid){
                     this.metaData.mca = "mini_recommend_female";
-                    
+
                     this.setData({
                         type:'loading',
                         girlid,
@@ -500,9 +500,9 @@ Page({
                 //             that.metaData.mca = "mini_recommend_female";
                 //             that.initData();
                 //         } else {
-                            
-                //             that.setData({ 
-                //                 isShowGenderView: true 
+
+                //             that.setData({
+                //                 isShowGenderView: true
                 //             })
                 //         }
                 //     }
@@ -531,14 +531,14 @@ Page({
                                 girlid:"1"
                             })
                         }else {
-                            that.setData({ 
-                                isShowGenderView: true 
+                            that.setData({
+                                isShowGenderView: true
                             })
                         }
                     },
                     fail() {
-                        that.setData({ 
-                            isShowGenderView: true 
+                        that.setData({
+                            isShowGenderView: true
                         })
                     }
                 });
@@ -678,7 +678,7 @@ Page({
 
     onPageScroll() {
         //if(this.__pageScrollState == 1) return false;
-    }, 
+    },
     /**
      * 用户点击右上角分享
      */
