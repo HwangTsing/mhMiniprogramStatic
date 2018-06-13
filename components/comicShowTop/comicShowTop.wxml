@@ -26,7 +26,7 @@
                     <view class="span"
                           wx:for="{{thisData.wbcomic_cate}}"
                           cate_id="{{item.cate_id}}"
-                          wx:if="{{thisData.wbcomic_cate && thisData.wbcomic_cate.length > 0 && index <= 5 }}"
+                          wx:if="{{thisData.wbcomic_cate && thisData.wbcomic_cate.length > 0 && index < 5 }}"
                           wx:key="index"
                     >
                         <text>{{item.cate_cn_name}}</text>
@@ -55,7 +55,7 @@
             <view class="detail_comic_label cls">
                 <view class="comic_label"
                       wx:for="{{ thisData.wbcomic_cate }}"
-                      wx:if="{{ thisData.wbcomic_cate && thisData.wbcomic_cate.length > 0 && index <=5 }}"
+                      wx:if="{{ thisData.wbcomic_cate && thisData.wbcomic_cate.length > 0 && index <5 }}"
                       cate_id="{{ item.cate_id }}"
                       wx:key="index"
                 >

@@ -224,7 +224,7 @@ Page({
             isBoy:!that.data.isBoy,
             genderButtonDisabled: true
         });
-        
+
         that.data.timer = setTimeout(function () {
             that.setData({ boyid, id })
         },1000);
@@ -266,20 +266,18 @@ Page({
         const { genderButtonDisabled } = that.data
         const id = 1
         if(genderButtonDisabled) return
-        //console.log(girlid);
         this.setData({
             isGirl:!that.data.isGirl,
             genderButtonDisabled: true,
             idsed:3
         });
 
-        
         setTimeout(function () {
             that.setData({ girlid, id })
         },1000);
 
         setTimeout(()=>this.setData({genderButtonDisabled: false}), 20000)
-       
+
         //判断网络类型
         wxApi.getNetworkType().then((res) =>{
             let networkType = res.networkType;
@@ -294,7 +292,7 @@ Page({
                 //有网络
                 if(girlid){
                     this.metaData.mca = "mini_recommend_female";
-                    
+
                     this.setData({
                         type:'loading'
                     })
@@ -489,7 +487,7 @@ Page({
                     key:'id',
                     success:function (res) {
                         var id = res.data;
-                        
+
                         if (id === '0'){
                             that.metaData.mca = "mini_recommend_male";
                             that.setData({
@@ -509,14 +507,14 @@ Page({
                             })
                             that.initData()
                         }else {
-                            that.setData({ 
-                                isShowGenderView: true 
+                            that.setData({
+                                isShowGenderView: true
                             })
                         }
                     },
                     fail() {
-                        that.setData({ 
-                            isShowGenderView: true 
+                        that.setData({
+                            isShowGenderView: true
                         })
                     }
                 });
@@ -536,7 +534,6 @@ Page({
         that.data.id = Number(e.currentTarget.dataset.id);
         var id = that.data.id;
         let _saveId;
-        //console.log(id);
         //判断网络类型
         wxApi.getNetworkType().then((res) =>{
             let networkType = res.networkType;
@@ -553,7 +550,8 @@ Page({
                     this.initData();
                     this.setData({
                         isToast:true,
-                        id : 1
+                        id : 1,
+                        idg : 1
                     })
                     _saveId = 1
                 }else  if (id === 1){
@@ -561,7 +559,8 @@ Page({
                     this.initData();
                     this.setData({
                         isToast:true,
-                        id : 0
+                        id : 0,
+                        idg : 0
                     })
                     _saveId = 0
                 }
@@ -573,64 +572,6 @@ Page({
 
                     }
 
-                })
-            }
-        }).catch((err) =>{
-            this.setData({
-                networkType: true,
-                isLoad:true
-            })
-        })
-
-    },
-    onToastTap02:function (e) {
-        var that = this;
-        that.data.idg = Number(e.currentTarget.dataset.id);
-        var idg = that.data.idg;
-        let _saveId;
-        //console.log(idg);
-        //判断网络类型
-        wxApi.getNetworkType().then((res) =>{
-            let networkType = res.networkType;
-            if (networkType === 'none' || networkType === 'unknown') {
-                //无网络不进行任何操作
-                this.setData({
-                    networkType: false
-                })
-
-            }else {
-                //有网络
-                if (idg === 1){
-                    that.setData({
-                        imgUrls:[]
-                    })
-                    this.metaData.mca = "mini_recommend_male";
-                    this.initData();
-                    this.setData({
-                        isToast:true,
-                        idg : 0
-                    })
-                    _saveId = 0
-                }
-                else if (idg === 0){
-                    this.setData({
-                        imgUrls:[]
-                    })
-                    this.metaData.mca = "mini_recommend_female";
-                    this.initData();
-                    that.setData({
-                        isToast:true,
-                        idg : 1
-                    })
-                    _saveId = 1
-                }
-                //#############本地存储############//
-                wx.setStorage({
-                    key:'id',
-                    data:_saveId + '',
-                    success:function (res) {
-
-                    }
                 })
             }
         }).catch((err) =>{
@@ -662,7 +603,7 @@ Page({
 
     onPageScroll() {
         //if(this.__pageScrollState == 1) return false;
-    }, 
+    },
     /**
      * 用户点击右上角分享
      */

@@ -27,7 +27,9 @@
   opacity: 0.8;
 }
 .vcomic-placeholder{
-  position: relative;
+  position: absolute;
+  width: 100%;
+  left: 0;
   top: 50%;
   text-align: center;
   height: 162rpx;
