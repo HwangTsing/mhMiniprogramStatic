@@ -638,7 +638,24 @@ swiper-item wx-image {
   display: flex;
   white-space: nowrap;
 }
-.scroll_view .s-view {
+.scrollx_img {
+  display: inline-block;
+  width: 488rpx;
+  height: 276rpx;
+}
+.hot_hoder {
+  display: inline-block;
+  width: 372rpx;
+  height: 212rpx;
+}
+.scroll_view .ext_img,
+.hot_img .ext_img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+.scroll_view .img-view {
   height: 388rpx;
   width: 320px;
   display: flex;
@@ -666,6 +683,9 @@ swiper-item wx-image {
   background: #ffffff;
   margin: 0 2rpx;
   display: inline-block;
+  position: relative;
+  left: 0;
+  top: 0;
 }
 .scroll_view .big_img image {
   display: inline-block;
@@ -741,6 +761,9 @@ swiper-item wx-image {
   display: inline-block;
   width: 372rpx;
   vertical-align: top;
+  position: relative;
+  top: 0;
+  left: 0;
 }
 .hot_view .hot_img:nth-child(2) {
   margin-left: 4rpx;
@@ -756,7 +779,6 @@ swiper-item wx-image {
   display: inline-block;
   width: 372rpx;
   height: 212rpx;
-  vertical-align: top;
 }
 .hot_view .word_info {
   width: 372rpx;
@@ -856,7 +878,6 @@ swiper-item wx-image {
   width: 370rpx;
   height: 212rpx;
   display: inline-block;
-  vertical-align: top;
 }
 .big_new_view .new_img:nth-child(2) .word_info,
 .big_new_view .new_img:nth-child(3) .word_info {

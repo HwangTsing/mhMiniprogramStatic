@@ -6,6 +6,7 @@
   "enablePullDownRefresh":false,
   "usingComponents":{
     "searchlist":"/components/searchList/searchList",
-    "message": "/components/message/message"
+    "message": "/components/message/message",
+    "imghoder":"/components/imgHoder/imgHoder"
   }
 }

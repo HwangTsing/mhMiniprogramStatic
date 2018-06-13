@@ -637,6 +637,22 @@ swiper-item wx-image {
     display: flex;
     white-space: nowrap;
 }
+.scrollx_img {
+    display:inline-block;
+    width:488rpx;
+    height:276rpx;
+}
+.hot_hoder{
+    display:inline-block;
+    width:372rpx;
+    height:212rpx;
+}
+.scroll_view .ext_img, .hot_img .ext_img{
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+}
 .scroll_view .img-view{
     height: 388rpx;
     width: 320px;
@@ -665,6 +681,9 @@ swiper-item wx-image {
     background: #ffffff;
     margin: 0 2rpx;
     display: inline-block;
+    position: relative;
+    left: 0;
+    top: 0;
 }
 .scroll_view .big_img image {
   display: inline-block;
@@ -739,6 +758,9 @@ swiper-item wx-image {
   display: inline-block;
   width: 372rpx;
   vertical-align: top;
+  position: relative;
+  top: 0;
+  left: 0;
 }
 .hot_view .hot_img:nth-child(2) {
   margin-left:4rpx;

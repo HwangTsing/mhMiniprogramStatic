@@ -111,9 +111,10 @@
                             indicator-active-color ="{{indicatorActiveColor}}" circular="{{circular}}" vertical ="{{vertical}}">
                         <block wx:for="{{imgUrls}}" wx:key="index">
                             <swiper-item>
-                                <view class="slide-image hcover" >
-                                    <image src="{{item.image_ext_url}}" data-typeid="{{item.object_id}}" class="slide-image" catchtap="swipTap"></image>
-                                </view>
+                                <imghoder type="hcover">
+                                    <image src="{{item.image_ext_url}}" data-typeid="{{item.object_id}}"
+                                           catchtap="swipTap" style="position: absolute;left: 0;top: 0;z-index:1;"></image>
+                                </imghoder>
                             </swiper-item>
                         </block>
                     </swiper>
@@ -123,9 +124,10 @@
                     <swiper>
                         <block wx:for="{{imgUrls}}" wx:key="index">
                             <swiper-item>
-                                <view class="slide-image hcover">
-                                    <image src="{{item.image_ext_url}}" data-typeid="{{item.object_id}}" class="slide-image" catchtap="swipTap"></image>
-                                </view>
+                                <imghoder type="hcover">
+                                    <image src="{{item.image_ext_url}}" data-typeid="{{item.object_id}}"
+                                           catchtap="swipTap" style="position: absolute;left: 0;top: 0;z-index:1;"></image>
+                                </imghoder>
                             </swiper-item>
                         </block>
                     </swiper>
@@ -142,11 +144,10 @@
         <!--img+content 图片区域内容可滑动-精品佳作-->
         <scroll-view class="scroll_view" scroll-x="{{true}}" wx:if="{{FineWorks.length > 0}}">
             <block wx:if="{{FineWorks}}" wx:for="{{FineWorks}}" wx:key="index">
-                <navigator class="big_img" url="../details/details?comic_id={{item.extra.comic_id}}"
-                            style="position: relative;top: 0;left: 0;">
-                    <view class="hcover">
-                        <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"></image>
-                    </view>
+                <navigator class="big_img" url="../details/details?comic_id={{item.extra.comic_id}}">
+                    <imghoder class="scrollx_img" type="hcover">
+                        <image class="ext_img" mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"></image>
+                    </imghoder>
                     <view class="word_info">
                         <text class="name_name">{{item.extra.name}}</text>
                         <text class="name_info">{{item.extra.watching_focus}}</text>
@@ -166,9 +167,9 @@
         <view class="hot_view">
             <block wx:for="{{PopularWorks}}" wx:key="index">
                 <navigator class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                    <view class="hcover">
-                        <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"></image>
-                    </view>
+                    <imghoder class="hot_hoder" type="hcover">
+                        <image class="ext_img" mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"></image>
+                    </imghoder>
                     <view class="word_info">
                         <text class="name_name">{{item.extra.name}}</text>
                         <text class="name_info">{{item.extra.watching_focus}}</text>
@@ -188,9 +189,11 @@
                 <view class="big_new_view">
                     <block wx:for="{{newArrivalWorks}}" wx:key="index">
                         <navigator class="new_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                            <view class="hcover">
-                                <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"></image>
-                            </view>
+                            <image mode="aspectFill" src="../../images/hcover.png"
+                                   style="position: relative;top: 0;left: 0;">
+                                <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"
+                                       style="position: absolute;left: 0;top: 0;"></image>
+                            </image>
                             <view class="word_info">
                                 <text class="name_name">{{item.extra.name}}</text>
                                 <text class="name_info">{{item.extra.watching_focus}}</text>
@@ -211,9 +214,9 @@
         <view class="hot_view">
             <block wx:for="{{hotSerialWorks}}" wx:key="index">
                 <navigator class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                    <view class="hcover">
-                        <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"></image>
-                    </view>
+                    <imghoder class="hot_hoder" type="hcover">
+                        <image class="ext_img" mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"></image>
+                    </imghoder>
                     <view class="word_info">
                         <text class="name_name">{{item.extra.name}}</text>
                         <text class="name_info">{{item.extra.watching_focus}}</text>
@@ -233,9 +236,11 @@
             <view class="big_new_view">
                 <block wx:for="{{xiaobianRecommend}}" wx:key="index">
                     <navigator class="new_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                        <view class="hcover">
-                            <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"></image>
-                        </view>
+                        <image mode="aspectFill" src="../../images/hcover.png"
+                               style="position: relative;top: 0;left: 0;">
+                            <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"
+                                   style="position: absolute;left: 0;top: 0;"></image>
+                        </image>
                         <view class="word_info">
                             <text class="name_name">{{item.extra.name}}</text>
                             <text class="name_info">{{item.extra.watching_focus}}</text>
@@ -255,9 +260,9 @@
         <view class="hot_view">
             <block wx:for="{{weekRecommend}}" wx:key="index">
                 <navigator class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                    <view class="hcover">
-                        <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"></image>
-                    </view>
+                    <imghoder class="hot_hoder" type="hcover">
+                        <image class="ext_img" mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"></image>
+                    </imghoder>
                     <view class="word_info">
                         <text class="name_name">{{item.extra.name}}</text>
                         <text class="name_info">{{item.extra.watching_focus}}</text>

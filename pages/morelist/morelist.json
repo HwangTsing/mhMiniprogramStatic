@@ -4,6 +4,7 @@
   "backgroundTextStyle": "dark",
   "navigationBarBackgroundColor": "#FF4D6A",
     "usingComponents":{
-      "message": "/components/message/message"
+      "message": "/components/message/message",
+      "imghoder":"/components/imgHoder/imgHoder"
     }
 }

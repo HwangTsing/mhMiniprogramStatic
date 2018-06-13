@@ -1,0 +1,4 @@
+<image class="{{clamm[type]}}"></image>
+<slot></slot>
+
+

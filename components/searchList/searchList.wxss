@@ -11,11 +11,19 @@
   -webkit-box-flex: 1;
   -webkit-flex: 1;
   float: left;
+  position :relative;
+  left:0;
+  top:0;
 }
 .img_view image {
   width: 180rpx;
   height: 231rpx;
-
+}
+.img_view .ext_img {
+    position: absolute;
+    left:0;
+    top:0;
+    z-index:1;
 }
 .book_data {
   flex: 1;

@@ -1,4 +1,6 @@
 {
   "component": true,
-  "usingComponents": {}
+  "usingComponents": {
+      "imghoder":"/components/imgHoder/imgHoder"
+  }
 }
