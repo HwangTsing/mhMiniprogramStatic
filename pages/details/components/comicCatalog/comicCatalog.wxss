@@ -36,22 +36,48 @@
 }
 
 
+/* 公共S */
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+/* 清除浮动 */
+.cls {
+}
+
+.cls::before, .cls::after {
+    display: block;
+    content: " ";
+    clear: both;
+    height: 0;
+    font-size: 0;
+    line-height: 0;
+    overflow: hidden;
+}
+/* 公共E */
+
 /* 九宫格样式 */
 .comic_catalog_one{
+    box-sizing: border-box;
+    max-width: 750rpx;
+    
     padding: 28rpx 15rpx;
     height: auto;
-    display: flex;
+    /* display: flex;
     -webkit-flex-wrap: wrap;
-    flex-wrap: wrap;
+    flex-wrap: wrap; */
 }
 .comic_catalog_one_item{
-    padding:0 10rpx;
-    flex: 1;
+    padding:0 1%;
+    box-sizing: border-box;
     margin-bottom: 28rpx;
-    margin-right: 25rpx;
-    min-width:200rpx;
-    max-width:200rpx;
-    width: 200rpx;
+    margin-right: 2%;
+    width: 32%;
+   
     height: 76rpx;
     line-height: 76rpx;
     border: 2rpx solid #E9EAEA;
@@ -66,16 +92,18 @@
 
 /* 九宫格选中样式 */
 .comic_catalog_one .active{
-    padding:0 10rpx;
-    min-width:204rpx;
-    max-width:204rpx;
-    width: 204rpx;
+    padding:0 1%;
+    box-sizing: border-box;
+    margin-bottom: 28rpx;
+    margin-right: 2%;
+    width: 32%;
     height: 80rpx;
     line-height: 80rpx;
     text-align: center;
     background: #FF4C6A;
     color: #fff;
     border: none;
+    
 }
 
 .active .comic_catalog_chapter_name{
