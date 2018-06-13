@@ -4,11 +4,9 @@
     <block wx:for="{{moreData}}" wx:key="index">
         <navigator class="more_list" url="../details/details?comic_id={{item.comic_id}}">
             <view class="left_img">
-                <image mode="aspectFill" src="../../images/hcover.png"
-                       style="position: relative;top: 0;left: 0;">
-                    <image mode="aspectFill" lazy-load="true" src="{{item.hcover}}"
-                           style="position: absolute;left: 0;top: 0;"></image>
-                </image>
+                <view class="hcover">
+                    <image mode="aspectFill" lazy-load="true" src="{{item.hcover}}"></image>
+                </view>
             </view>
             <view class="brief_introduction">
                 <p class="book_name">{{item.name}}</p>

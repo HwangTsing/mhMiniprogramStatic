@@ -1,9 +1,5 @@
 <!--  摘要页头部S  -->
-<image
-    class='comicShowTop'
-    mode="aspectFill"
-    src="../../images/banner_bitmap.png"
->
+<view class='comicShowTop hcover'>
     <view
         wx:if="{{thisData.comic.cover_display==1}}"
         comic_id="{{thisData.comic.comic_id?thisData.comic.comic_id:''}}"
@@ -14,16 +10,12 @@
         style="background: url('{{thisData.comic.cover}}') no-repeat center center; background-size: cover;"
     >
         <view class="details_img">
-            <image
-                class="detail_src"
-                mode="aspectFill"
-                src="../../images/cover.png"
-            >
+            <view class="detail_src vcover">
                 <viem
                     class="detail_src_bg"
                     style="background: url('{{ thisData.comic.cover }}') no-repeat center center; background-size: cover;"
                 ></viem>
-            </image>
+            </view>
             <view class="info_content">
                 <!-- 标题S -->
                 <view class="detail_title">{{thisData.comic.name?thisData.comic.name:''}}</view>
@@ -72,5 +64,5 @@
             </view>
         </view>
     </view>
-</image>
+</view>
 <!--  摘要页头部E  -->

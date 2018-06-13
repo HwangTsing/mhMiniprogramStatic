@@ -47,10 +47,6 @@
 .comic_catalog_one_item{
     padding:0 10rpx;
     flex: 1;
-    align-content: center;
-    justify-items: center;
-    align-items: center;
-    justify-items: center;
     margin-bottom: 28rpx;
     margin-right: 25rpx;
     min-width:200rpx;

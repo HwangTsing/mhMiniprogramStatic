@@ -1,12 +1,10 @@
 <!--components/searchList/searchList.wxml-->
 
 <view class="list_data" catchtap="listTap" data-comic_id="{{idx}}">
-    <view class="img_view" style="position: relative;top: 0;left: 0;">
-        <image mode="aspectFill" src="../../images/cover.png" style="position: relative;">
-            <image mode="aspectFill" lazy-load="true" src="{{src}}"
-                style="position: absolute;left: 0;top: 0;">
-            </image>
-        </image>
+    <view class="img_view">
+        <view class="vcover">
+            <image mode="aspectFill" lazy-load="true" src="{{src}}"></image>
+        </view>
     </view>
     <view class="book_data">
         <view class="book_name">{{name}}</view>

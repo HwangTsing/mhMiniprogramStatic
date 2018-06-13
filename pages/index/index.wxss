@@ -634,14 +634,13 @@ swiper-item wx-image {
 /*img*/
 .scroll_view {
   width: 100%;
-}
-.scroll_view view {
-  height: 388rpx;
-  width: 320px;
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;
+  white-space: nowrap;
+  height: 388rpx;
+}
+.scroll_view .img-view {
+  
+  
 }
 .scroll_view .big_img {
   width: 488rpx;
@@ -738,6 +737,7 @@ swiper-item wx-image {
   display: inline-block;
   width: 372rpx;
   height: 212rpx;
+  vertical-align: top;
 }
 .hot_view .word_info {
   width: 372rpx;
@@ -837,6 +837,7 @@ swiper-item wx-image {
   width: 370rpx;
   height: 212rpx;
   display: inline-block;
+  vertical-align: top;
 }
 .big_new_view .new_img:nth-child(2) .word_info,
 .big_new_view .new_img:nth-child(3) .word_info {

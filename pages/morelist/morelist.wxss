@@ -21,7 +21,7 @@
   -webkit-flex: 1;
   float: left;
 }
-.left_img image {
+.left_img image, .left_img .hcover {
   width: 272rpx;
   height: 152rpx;
 }

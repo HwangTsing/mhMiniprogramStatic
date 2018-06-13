@@ -2,18 +2,13 @@
 <view class="comment_list_box {{!isBorder? 'comment_list_box_border':''}}">
     <view class="comment_left">
         <!-- 头像S -->
-        <image
-            class="user_avatar_bg"
-            src="../../images/user_cover.png"
-            style="background:url(../../images/user_cover.png) center center/cover;"
-        >
-            <!-- ?user.user_avatar:'../../images/user_cover.png' -->
+        <view class="ucover" >
             <image
                 mode="aspectFill"
                 class="user_avatar"
                 src="{{ user.user_avatar }}"
             ></image>
-        </image>
+        </view>
         <!-- 头像E -->
     </view>
     <view class="comment_right">

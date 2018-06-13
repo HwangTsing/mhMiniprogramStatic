@@ -648,6 +648,7 @@ Page({
     onReady: function () {
         this.searchlist = this.selectComponent("#searchlist");
     },
+
     onShow: function () {
 
     },

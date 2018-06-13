@@ -21,7 +21,10 @@ Component({
     const {width, scale, src} = this.properties
     this.loaded = 0
     this.loadingState = false
+    this.loaderror = false
     this.src = src.replace(/http:\/\//i, 'https://')
+
+    console.log('loading...', this.src)
     this.setData({
       width: width,
       height: width/scale,
@@ -38,7 +41,13 @@ Component({
           height: _width / scale,
         })
       }
-      this.setButtonState(true)
+      if (this.loaded > 3) {
+        this.setButtonState(true)
+      }
+      if (this.loaderror && !this.loadingState) {
+        this.loaderror = false
+        this.downloadImg()
+      }
     },
     setButtonState(hidden = true) {
       const showDoanloadImgBtn = hidden 
@@ -51,8 +60,9 @@ Component({
       })
     },
     error(e) {
-      //console.log('this.loaded', this.loaded)
+      console.log('error.')
       this.loadingState = false
+      this.loaderror = true
       if (this.loaded < 3) {
         this.downloadImg()
       } else {
@@ -63,6 +73,7 @@ Component({
       let { src, disabled, loading } = this.data
       const version = +new Date()
       src = this.src + '?v=' + version
+      console.log('downloadImg.', src)
       if (this.loadingState) return
       this.loadingState = true
       disabled = !disabled
