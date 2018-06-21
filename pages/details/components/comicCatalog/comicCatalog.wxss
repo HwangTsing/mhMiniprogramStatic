@@ -71,7 +71,7 @@
     -webkit-flex-wrap: wrap;
     flex-wrap: wrap; */
 }
-.comic_catalog_one_item{
+.comic_catalog_one .comic_catalog_one_item{
     padding:0 1%;
     box-sizing: border-box;
     margin-bottom: 28rpx;
@@ -91,14 +91,14 @@
 }
 
 /* 九宫格选中样式 */
-.comic_catalog_one .active{
+.comic_catalog_one .comic_catalog_one_active{
     padding:0 1%;
     box-sizing: border-box;
     margin-bottom: 28rpx;
     margin-right: 2%;
     width: 32%;
-    height: 80rpx;
-    line-height: 80rpx;
+    border: 2rpx solid #FF4C6A;
+    border-radius: 8rpx;
     text-align: center;
     background: #FF4C6A;
     color: #fff;

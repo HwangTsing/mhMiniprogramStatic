@@ -39,9 +39,17 @@ Page({
                 url: `/pages/read/read?chapter_id=${data.chapter_id}&comic_id=${data.comic_id}`
             })
         }).catch((err) => {
-            if (this.data.dataAry.chapter_list && this.data.dataAry.chapter_list[0]) {
+            let isSort=this.data.isSort;
+            let arr=this.data.dataAry.chapter_list;
+            if (arr && arr[0]) {
+                let index=0;
+                if(isSort===2){
+                    index=arr.length-1;
+                }else if(isSort===1){
+                    index=0;
+                }
                 wx.navigateTo({
-                    url: `/pages/read/read?chapter_id=${this.data.dataAry.chapter_list[0].chapter_id}&comic_id=${this.data.dataAry.comic.comic_id}`
+                    url: `/pages/read/read?chapter_id=${this.data.dataAry.chapter_list[index].chapter_id}&comic_id=${this.data.dataAry.comic.comic_id}`
                 })
             }//错误时候
         });
