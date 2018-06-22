@@ -4,9 +4,9 @@
     <block wx:for="{{moreData}}" wx:key="index">
         <navigator class="more_list" url="../details/details?comic_id={{item.comic_id}}">
             <view class="left_img">
-                <imghoder type="hcover">
+                <imgholder type="hcover">
                     <image mode="aspectFill" lazy-load="true" src="{{item.hcover}}"></image>
-                </imghoder>
+                </imgholder>
             </view>
             <view class="brief_introduction">
                 <p class="book_name">{{item.name}}</p>

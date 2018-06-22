@@ -5,6 +5,6 @@
   "navigationBarBackgroundColor": "#FF4D6A",
     "usingComponents":{
       "message": "/components/message/message",
-      "imghoder":"/components/imgHoder/imgHoder"
+      "imgholder":"/components/imgHolder/imgHolder"
     }
 }

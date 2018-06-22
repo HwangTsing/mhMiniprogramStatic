@@ -111,10 +111,10 @@
                             indicator-active-color ="{{indicatorActiveColor}}" circular="{{circular}}" vertical ="{{vertical}}">
                         <block wx:for="{{imgUrls}}" wx:key="index">
                             <swiper-item>
-                                <imghoder type="hcover">
+                                <imgholder type="hcover">
                                     <image src="{{item.image_ext_url}}" data-typeid="{{item.object_id}}"
                                            catchtap="swipTap"></image>
-                                </imghoder>
+                                </imgholder>
                             </swiper-item>
                         </block>
                     </swiper>
@@ -124,10 +124,10 @@
                     <swiper>
                         <block wx:for="{{imgUrls}}" wx:key="index">
                             <swiper-item>
-                                <imghoder type="hcover">
+                                <imgholder type="hcover">
                                     <image src="{{item.image_ext_url}}" data-typeid="{{item.object_id}}"
                                            catchtap="swipTap"></image>
-                                </imghoder>
+                                </imgholder>
                             </swiper-item>
                         </block>
                     </swiper>
@@ -145,9 +145,9 @@
         <scroll-view class="scroll_view" scroll-x="{{true}}" wx:if="{{FineWorks.length > 0}}">
             <block wx:if="{{FineWorks}}" wx:for="{{FineWorks}}" wx:key="index">
                 <navigator class="big_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                    <imghoder class="scrollx_img" type="hcover">
+                    <imgholder class="scrollx_img" type="hcover">
                         <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"></image>
-                    </imghoder>
+                    </imgholder>
                     <view class="word_info">
                         <text class="name_name">{{item.extra.name}}</text>
                         <text class="name_info">{{item.extra.watching_focus}}</text>
@@ -167,9 +167,9 @@
         <view class="hot_view">
             <block wx:for="{{PopularWorks}}" wx:key="index">
                 <navigator class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                    <imghoder class="hot_hoder" type="hcover">
+                    <imgholder class="hot_hoder" type="hcover">
                         <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"></image>
-                    </imghoder>
+                    </imgholder>
                     <view class="word_info">
                         <text class="name_name">{{item.extra.name}}</text>
                         <text class="name_info">{{item.extra.watching_focus}}</text>
@@ -214,9 +214,9 @@
         <view class="hot_view">
             <block wx:for="{{hotSerialWorks}}" wx:key="index">
                 <navigator class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                    <imghoder class="hot_hoder" type="hcover">
+                    <imgholder class="hot_hoder" type="hcover">
                         <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"></image>
-                    </imghoder>
+                    </imgholder>
                     <view class="word_info">
                         <text class="name_name">{{item.extra.name}}</text>
                         <text class="name_info">{{item.extra.watching_focus}}</text>
@@ -260,9 +260,9 @@
         <view class="hot_view">
             <block wx:for="{{weekRecommend}}" wx:key="index">
                 <navigator class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}">
-                    <imghoder class="hot_hoder" type="hcover">
+                    <imgholder class="hot_hoder" type="hcover">
                         <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"></image>
-                    </imghoder>
+                    </imgholder>
                     <view class="word_info">
                         <text class="name_name">{{item.extra.name}}</text>
                         <text class="name_info">{{item.extra.watching_focus}}</text>

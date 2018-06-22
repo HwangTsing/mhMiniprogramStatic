@@ -1,6 +1,6 @@
 {
   "component": true,
   "usingComponents": {
-    "imgHoder": "/components/imgHoder/imgHoder"
+    "imgholder": "/components/imgHolder/imgHolder"
   }
 }

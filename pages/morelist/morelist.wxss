@@ -30,8 +30,7 @@
   left: 0;
   top: 0;
 }
-.left_img image,
-.left_img .hcover {
+.left_img image{
   width: 272rpx;
   height: 152rpx;
 }

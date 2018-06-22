@@ -12,18 +12,16 @@
         </view>
         <!--  作者是 1 个的情况下 S -->
         <view class="author_info" wx:if="{{thisData.comic.upload_type==0}}">
-            <imghoder type="ucover" class="author_cover_bg">
+            <imgholder type="ucover" class="author_cover_bg">
                 <image
                   wx:if="{{item.comic.user_avatar}}"
                   mode="aspectFill"
                   class="author_cover"
                   src="{{item.comic.user_avatar}}"
                 ></image>
-            </imghoder>
+            </imgholder>
 
-            <view
-              class='text'
-            >
+            <view class='text'>
               {{thisData.comic.sina_nickname}}
             </view>
         </view>
@@ -37,14 +35,14 @@
             wx:key="index"
             style="{{index>0 ? 'margin-left:42rpx':''}}"
         >
-            <imghoder type="ucover" class="author_cover_bg">
+            <imgholder type="ucover" class="author_cover_bg">
                 <image
                     mode="aspectFill"
                     class="author_cover"
                     style="background:url(../../../../images/user_cover.png) no-repeat center center/cover ;"
                     src="{{item.user_avatar}}"
                 ></image>
-            </imghoder>
+            </imgholder>
 
             <view class='text fl'>{{item.pen_name}}</view>
         </view>

@@ -24,7 +24,7 @@ Component({
     this.loaderror = false
     this.src = src.replace(/http:\/\//i, 'https://')
 
-    console.log('loading...', this.src)
+    // console.log('loading...', this.src)
     this.setData({
       width: width,
       height: width/scale,
@@ -60,7 +60,7 @@ Component({
       })
     },
     error(e) {
-      console.log('error.')
+      // console.log('error.')
       this.loadingState = false
       this.loaderror = true
       if (this.loaded < 3) {
@@ -73,7 +73,7 @@ Component({
       let { src, disabled, loading } = this.data
       const version = +new Date()
       src = this.src + '?v=' + version
-      console.log('downloadImg.', src)
+      // console.log('downloadImg.', src)
       if (this.loadingState) return
       this.loadingState = true
       disabled = !disabled

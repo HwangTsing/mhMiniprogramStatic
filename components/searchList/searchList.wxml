@@ -2,9 +2,9 @@
 
 <view class="list_data" catchtap="listTap" data-comic_id="{{idx}}">
     <view class="img_view">
-        <imghoder type="vcover">
+        <imgholder type="vcover">
             <image class="ext_img" mode="aspectFill" lazy-load="true" src="{{src}}"></image>
-        </imghoder>
+        </imgholder>
     </view>
     <view class="book_data">
         <view class="book_name">{{name}}</view>
