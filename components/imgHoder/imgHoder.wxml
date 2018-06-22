@@ -1,4 +1,2 @@
-<image class="{{clamm[type]}}"></image>
+<view class="{{clamm[type]}}"></view>
 <slot></slot>
-
-

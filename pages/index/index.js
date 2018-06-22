@@ -68,8 +68,6 @@ Page({
                         if (recommendList[key].length === 0){
                             return;
                         }else {
-                            //console.log(recommendList[key]);
-                            //console.log(data.data.data[key]);
                             title[key] = item.location_cn || '';
                             keyIndex[key] = key;
                         }
@@ -204,10 +202,7 @@ Page({
                     })
                 }
 
-            });
-
-
-
+        });
 
     },
 
