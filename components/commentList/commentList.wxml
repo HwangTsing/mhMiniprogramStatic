@@ -2,13 +2,13 @@
 <view class="comment_list_box {{!isBorder? 'comment_list_box_border':''}}">
     <view class="comment_left">
         <!-- 头像S -->
-        <view class="ucover" >
+        <imghoder type="ucover">
             <image
                 mode="aspectFill"
                 class="user_avatar"
                 src="{{ user.user_avatar }}"
             ></image>
-        </view>
+        </imghoder>
         <!-- 头像E -->
     </view>
     <view class="comment_right">

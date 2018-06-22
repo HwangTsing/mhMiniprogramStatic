@@ -18,7 +18,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-    clamm:{
+    clazz:{
         'vcover':COVER_CLASS,
         'hcover':HCOVER_CLASS,
         'ucover':UCOVER_CLASS

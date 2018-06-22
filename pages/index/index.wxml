@@ -113,7 +113,7 @@
                             <swiper-item>
                                 <imghoder type="hcover">
                                     <image src="{{item.image_ext_url}}" data-typeid="{{item.object_id}}"
-                                           catchtap="swipTap" style="position: absolute;left: 0;top: 0;z-index:1;"></image>
+                                           catchtap="swipTap"></image>
                                 </imghoder>
                             </swiper-item>
                         </block>
@@ -126,7 +126,7 @@
                             <swiper-item>
                                 <imghoder type="hcover">
                                     <image src="{{item.image_ext_url}}" data-typeid="{{item.object_id}}"
-                                           catchtap="swipTap" style="position: absolute;left: 0;top: 0;z-index:1;"></image>
+                                           catchtap="swipTap"></image>
                                 </imghoder>
                             </swiper-item>
                         </block>
@@ -146,7 +146,7 @@
             <block wx:if="{{FineWorks}}" wx:for="{{FineWorks}}" wx:key="index">
                 <navigator class="big_img" url="../details/details?comic_id={{item.extra.comic_id}}">
                     <imghoder class="scrollx_img" type="hcover">
-                        <image class="ext_img" mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"></image>
+                        <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"></image>
                     </imghoder>
                     <view class="word_info">
                         <text class="name_name">{{item.extra.name}}</text>
@@ -168,7 +168,7 @@
             <block wx:for="{{PopularWorks}}" wx:key="index">
                 <navigator class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}">
                     <imghoder class="hot_hoder" type="hcover">
-                        <image class="ext_img" mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"></image>
+                        <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"></image>
                     </imghoder>
                     <view class="word_info">
                         <text class="name_name">{{item.extra.name}}</text>
@@ -215,7 +215,7 @@
             <block wx:for="{{hotSerialWorks}}" wx:key="index">
                 <navigator class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}">
                     <imghoder class="hot_hoder" type="hcover">
-                        <image class="ext_img" mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"></image>
+                        <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"></image>
                     </imghoder>
                     <view class="word_info">
                         <text class="name_name">{{item.extra.name}}</text>
@@ -261,7 +261,7 @@
             <block wx:for="{{weekRecommend}}" wx:key="index">
                 <navigator class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}">
                     <imghoder class="hot_hoder" type="hcover">
-                        <image class="ext_img" mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"></image>
+                        <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"></image>
                     </imghoder>
                     <view class="word_info">
                         <text class="name_name">{{item.extra.name}}</text>

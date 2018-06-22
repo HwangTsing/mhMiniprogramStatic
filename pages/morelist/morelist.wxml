@@ -5,7 +5,7 @@
         <navigator class="more_list" url="../details/details?comic_id={{item.comic_id}}">
             <view class="left_img">
                 <imghoder type="hcover">
-                    <image class="ext_img" mode="aspectFill" lazy-load="true" src="{{item.hcover}}"></image>
+                    <image mode="aspectFill" lazy-load="true" src="{{item.hcover}}"></image>
                 </imghoder>
             </view>
             <view class="brief_introduction">

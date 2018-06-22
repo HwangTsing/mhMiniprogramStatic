@@ -1,2 +1,3 @@
-<view class="{{clamm[type]}}"></view>
-<slot></slot>
+<view class="{{clazz[type]}}">
+    <slot></slot>
+</view>

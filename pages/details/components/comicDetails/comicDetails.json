@@ -1,7 +1,8 @@
 {
   "component": true,
   "usingComponents": {
-     "commentList":"/components/commentList/commentList",
-      "message": "/components/message/message"
+    "commentList":"/components/commentList/commentList",
+    "message": "/components/message/message",
+    "imghoder": "/components/imgHoder/imgHoder"
   }
 }
