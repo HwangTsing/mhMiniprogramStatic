@@ -18,9 +18,19 @@
                 ></view>
             </imgholder>
             <view class="info_content">
-                <!-- 标题S -->
-                <view class="detail_title">{{thisData.comic.name?thisData.comic.name:''}}</view>
-                <!-- 标题 E -->
+                <view class="detail_title_box">
+                    <!-- 标题S -->
+                    <view class="detail_title">{{thisData.comic.name?thisData.comic.name:''}}</view>
+                    <!-- 标题 E -->
+
+                    <!--  icon S  -->
+                    <image 
+                        wx-if="{{ thisData.comic.comic_type == 2 }}"
+                        class="detail_title_icon" 
+                        src="../../images/details/wb_works.png" 
+                    />
+                    <!--  icon S  -->
+                </view>
 
                 <!-- 标签 S -->
                 <view class="detail_label">
@@ -48,9 +58,16 @@
                 <view class="comic_top_text">
                     <text>{{thisData.comic.name?thisData.comic.name:''}}</text>
                 </view>
-                <view class="comic_top_icon" style="display: none;">
+                <!-- <view class="comic_top_icon" style="display: none;">
                     付费
-                </view>
+                </view> -->
+                <!--  icon S  -->
+                <image 
+                    wx-if="{{ thisData.comic.comic_type == 2 }}"
+                    class="details_comic_top_icon" 
+                    src="../../images/details/wb_works.png" 
+                />
+                <!--  icon S  -->
             </view>
             <!-- wx:if="{{ thisData.wbcomic_cate && thisData.wbcomic_cate.length !==0 && index >= 5 }}" -->
             <view class="detail_comic_label cls">

@@ -108,7 +108,7 @@ Page({
         * */
         //comic_id
         let comic_id = options.comic_id;
-        // comic_id= options.comic_id ? options.comic_id : 24;//24 68491
+         //comic_id= options.comic_id ? options.comic_id : 68023;//24 68491
         // comic_id = 68491;
         let page_num = 1;//页码
         let rows_num = 10;//每页条数

@@ -66,13 +66,22 @@
   padding: 68rpx 40rpx 78rpx 40rpx;
   width: 448rpx;
 }
+.comicShowTop .info_content .detail_title_box{
+    padding:36rpx 0 32rpx 0;
+    display:flex;
+    align-items: center;
+}
 .comicShowTop .info_content .detail_title {
-  padding:36rpx 0 32rpx 0;
+  width:292rpx;
   color: #fff;
   font-size: 48rpx;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+}
+.comicShowTop .info_content .detail_title_icon{
+    width: 160rpx;
+    height: 44rpx;
 }
 .comicShowTop .info_content .detail_label {
   display: flex;
@@ -126,7 +135,9 @@
     padding: 16rpx 16rpx 10rpx 30rpx;
 }
 .details_comic .comic_top_text{
-    max-width: 85%;
+    box-sizing: border-box;
+    max-width: 70%;
+    padding-right: 2%;
     align-items: center;
     color:#fff
 }
@@ -157,6 +168,10 @@
     text-align: center;
     font-size: 20rpx;
     color: #fff;
+}
+.details_comic .details_comic_top_icon{
+    width: 160rpx;
+    height: 44rpx;
 }
 /* 标签 */
 .details_view_2 .detail_comic_label{
