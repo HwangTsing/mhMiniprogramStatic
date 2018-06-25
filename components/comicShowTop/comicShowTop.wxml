@@ -57,16 +57,17 @@
             <view class="details_comic_top">
                 <view class="comic_top_text">
                     <text>{{thisData.comic.name?thisData.comic.name:''}}</text>
+                    <image 
+                        wx-if="{{ thisData.comic.comic_type == 2 }}"
+                        class="details_comic_top_icon" 
+                        src="../../images/details/wb_works.png" 
+                    />
                 </view>
                 <!-- <view class="comic_top_icon" style="display: none;">
                     付费
                 </view> -->
                 <!--  icon S  -->
-                <image 
-                    wx-if="{{ thisData.comic.comic_type == 2 }}"
-                    class="details_comic_top_icon" 
-                    src="../../images/details/wb_works.png" 
-                />
+                
                 <!--  icon S  -->
             </view>
             <!-- wx:if="{{ thisData.wbcomic_cate && thisData.wbcomic_cate.length !==0 && index >= 5 }}" -->

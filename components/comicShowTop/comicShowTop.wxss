@@ -72,9 +72,10 @@
     align-items: center;
 }
 .comicShowTop .info_content .detail_title {
-  width:292rpx;
+  max-width: 98%;
   color: #fff;
   font-size: 48rpx;
+  flex: 1;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -138,14 +139,13 @@
     display: flex;
     align-items:center;
     box-sizing: border-box;
-    max-width: 70%;
-    padding-right: 2%;
+    width: 100%;
     align-items: center;
     color:#fff
 }
 .details_comic .comic_top_text text{
-    max-width: 100%;
-    min-width:90rpx;
+    max-width: 98%;
+    flex: 1;
     height: 52rpx;
     text-overflow: ellipsis;
     overflow: hidden;

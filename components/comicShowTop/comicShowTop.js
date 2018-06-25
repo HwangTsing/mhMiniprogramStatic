@@ -11,8 +11,6 @@ Component({
     imageheight: 0
     //组件的内部数据，和 properties 一同用于组件的模版渲染
   },
-  
-
   attached() {
     //组件生命周期函数，在组件实例进入页面节点树时执行
     //console.log(this.properties.thisData)
