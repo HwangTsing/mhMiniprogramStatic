@@ -13,6 +13,7 @@
         <!--  作者是 1 个的情况下 S -->
         <view class="author_info" 
             wx:if="{{thisData.comic.upload_type==0 && thisData.comic.comic_type==1}}"
+            style="max-width:80%;"
         >
             
             <imgholder type="ucover" class="author_cover_bg">
@@ -24,7 +25,7 @@
                 ></image>
             </imgholder>
 
-            <view class='text' wx:if="{{thisData.comic.comic_type==1}}">
+            <view class='text' wx:if="{{thisData.comic.comic_type==1}}" style="max-width:80%;">
               {{thisData.comic.sina_nickname}}
             </view>
         </view>
@@ -35,8 +36,9 @@
             class="author_info"
             wx:for="{{thisData.author}}"
             wx:if="{{thisData.comic.upload_type==1 && thisData.comic.comic_type==1 && index<2 }}"
+
             wx:key="index"
-            style="{{index>0 ? 'margin-left:42rpx':''}}"
+            style="{{thisData.author.length==1?'max-width:80%':(index>0 ? 'margin-left:42rpx':'')}}"
         >
             <imgholder type="ucover" class="author_cover_bg">
                 <image
@@ -47,7 +49,9 @@
                 ></image>
             </imgholder>
 
-            <view class='text fl'>{{item.sina_nickname}}</view>
+            <view class='text fl' 
+                style="{{thisData.author.length==1? 'max-width:80%':''}}"
+            >{{item.sina_nickname}}</view>
         </view>
 
 
@@ -57,7 +61,7 @@
             wx:for="{{thisData.new_author}}"
             wx:if="{{ thisData.comic.comic_type==2 && index<2 }}"
             wx:key="index"
-            style="{{index>0 ? 'margin-left:42rpx':''}}"
+            style="{{thisData.new_author.length==1?'max-width:80%':(index>0 ? 'margin-left:42rpx':'')}}"
         >
             <imgholder type="ucover" class="author_cover_bg">
                 <image
@@ -68,7 +72,9 @@
                 ></image>
             </imgholder>
 
-            <view class='text fl'>{{item.sina_nickname}}</view>
+            <view class='text fl'
+                 style="{{thisData.new_author.length==1? 'max-width:80%':''}}"
+            >{{item.sina_nickname}}</view>
         </view>
         <!-- kol 作者 E  -->
         <!--  作者是多个的情况下 E -->
