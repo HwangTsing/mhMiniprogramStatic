@@ -11,13 +11,23 @@
             <text>作者: </text>
         </view>
         <!--  作者是 1 个的情况下 S -->
-        <view class="author_info" wx:if="{{thisData.comic.upload_type==0}}">
+        <view class="author_info" 
+            wx:if="{{thisData.comic.upload_type==0}}"
+        >
+            
             <imgholder type="ucover" class="author_cover_bg">
                 <image
-                  wx:if="{{item.comic.user_avatar}}"
+                  wx:if="{{thisData.comic.comic_type==2 && thisData.new_author[0].user_avatar}}"
                   mode="aspectFill"
                   class="author_cover"
-                  src="{{item.comic.user_avatar}}"
+                  src="{{thisData.new_author[0].user_avatar}}"
+                ></image>
+
+                <image
+                  wx:if="{{thisData.comic.comic_type==1 && thisData.author[0].user_avatar}}"
+                  mode="aspectFill"
+                  class="author_cover"
+                  src="{{thisData.author[0].user_avatar}}"
                 ></image>
             </imgholder>
 
@@ -30,8 +40,28 @@
         <!--  作者是多个的情况下 S -->
         <view
             class="author_info"
-            wx:if="{{thisData.comic.upload_type==1}}"
             wx:for="{{thisData.author}}"
+            wx:if="{{thisData.comic.upload_type==1 && thisData.comic.comic_type==1 && index<2 }}"
+            wx:key="index"
+            style="{{index>0 ? 'margin-left:42rpx':''}}"
+        >
+            <imgholder type="ucover" class="author_cover_bg">
+                <image
+                    mode="aspectFill"
+                    class="author_cover"
+                    style="background:url(../../../../images/user_cover.png) no-repeat center center/cover ;"
+                    src="{{item.user_avatar}}"
+                ></image>
+            </imgholder>
+
+            <view class='text fl'>{{item.pen_name}}</view>
+        </view>
+
+
+        <view
+            class="author_info"
+            wx:for="{{thisData.new_author}}"
+            wx:if="{{thisData.comic.upload_type==1 && thisData.comic.comic_type==2 && index<2}}"
             wx:key="index"
             style="{{index>0 ? 'margin-left:42rpx':''}}"
         >
