@@ -54,10 +54,11 @@
                 ></image>
             </imgholder>
 
-            <view class='text fl'>{{item.pen_name}}</view>
+            <view class='text fl'>{{item.sina_nickname}}</view>
         </view>
 
 
+        <!-- kol 作者S  -->
         <view
             class="author_info"
             wx:for="{{thisData.new_author}}"
@@ -74,8 +75,9 @@
                 ></image>
             </imgholder>
 
-            <view class='text fl'>{{item.pen_name}}</view>
+            <view class='text fl'>{{item.sina_nickname}}</view>
         </view>
+        <!-- kol 作者 E  -->
         <!--  作者是多个的情况下 E -->
 
     </view>
