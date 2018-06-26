@@ -63,8 +63,8 @@
 }
 .comicShowTop .info_content {
   float: left;
-  padding: 68rpx 40rpx 78rpx 40rpx;
-  width: 448rpx;
+  padding: 68rpx 40rpx 78rpx 16rpx;
+  width: 472rpx;
 }
 .comicShowTop .info_content .detail_title_box{
     padding:36rpx 0 32rpx 0;
@@ -74,12 +74,14 @@
 .comicShowTop .info_content .detail_title {
     max-width:98%;
     color:#fff;
-    font-size:48rpx;
+    font-size:40rpx;
+    line-height: 48rpx;
     text-overflow:ellipsis;
     overflow:hidden;
     white-space:nowrap;    
 }
 .comicShowTop .info_content .detail_title_icon{
+    margin-top: 2rpx;
     width:160rpx;
     height:44rpx;
     flex-shrink:0;
