@@ -12,17 +12,10 @@
         </view>
         <!--  作者是 1 个的情况下 S -->
         <view class="author_info" 
-            wx:if="{{thisData.comic.upload_type==0}}"
+            wx:if="{{thisData.comic.upload_type==0 && thisData.comic.comic_type==1}}"
         >
             
             <imgholder type="ucover" class="author_cover_bg">
-                <image
-                  wx:if="{{thisData.comic.comic_type==2 && thisData.new_author[0].user_avatar}}"
-                  mode="aspectFill"
-                  class="author_cover"
-                  src="{{thisData.new_author[0].user_avatar}}"
-                ></image>
-
                 <image
                   wx:if="{{thisData.comic.comic_type==1 && thisData.author[0].user_avatar}}"
                   mode="aspectFill"
@@ -31,7 +24,7 @@
                 ></image>
             </imgholder>
 
-            <view class='text'>
+            <view class='text' wx:if="{{thisData.comic.comic_type==1}}">
               {{thisData.comic.sina_nickname}}
             </view>
         </view>
@@ -62,7 +55,7 @@
         <view
             class="author_info"
             wx:for="{{thisData.new_author}}"
-            wx:if="{{thisData.comic.upload_type==1 && thisData.comic.comic_type==2 && index<2}}"
+            wx:if="{{ thisData.comic.comic_type==2 && index<2 }}"
             wx:key="index"
             style="{{index>0 ? 'margin-left:42rpx':''}}"
         >

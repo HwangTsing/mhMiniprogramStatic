@@ -81,6 +81,7 @@
     white-space:nowrap;    
 }
 .comicShowTop .info_content .detail_title_icon{
+    margin-left: 8rpx;
     margin-top: 2rpx;
     width:160rpx;
     height:44rpx;
@@ -174,6 +175,7 @@
     color: #fff;
 }
 .details_comic .details_comic_top_icon{
+    margin-left: 8rpx;
     width: 160rpx;
     height: 44rpx;
     flex-shrink:0;
