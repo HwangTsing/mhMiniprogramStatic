@@ -75,7 +75,6 @@
   max-width: 98%;
   color: #fff;
   font-size: 48rpx;
-  flex: 1;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -83,6 +82,7 @@
 .comicShowTop .info_content .detail_title_icon{
     width: 160rpx;
     height: 44rpx;
+    flex-shrink: 0;
 }
 .comicShowTop .info_content .detail_label {
   display: flex;
@@ -145,7 +145,6 @@
 }
 .details_comic .comic_top_text text{
     max-width: 98%;
-    flex: 1;
     height: 52rpx;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -173,6 +172,7 @@
 .details_comic .details_comic_top_icon{
     width: 160rpx;
     height: 44rpx;
+    flex-shrink: 0;
 }
 /* 标签 */
 .details_view_2 .detail_comic_label{
