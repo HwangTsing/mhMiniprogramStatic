@@ -32,7 +32,7 @@
                         class="{{status === tabData.status ? 'activeChecked':'checked'}}"
                           data-status="{{tabData.status}}" catchtap="onTabTap"
                     >
-                        {{tabData.title}}
+                        <text>{{tabData.title}}</text>
                         <view
                             class="{{status === tabData.status ? 'activeCheckedBorder':'checkedBorder'}}"
                         ></view>
