@@ -49,6 +49,10 @@
     overflow: hidden;
 }
 .author_cover{
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 10;
   width: 50rpx;
   height: 50rpx;
   border-radius:50%;

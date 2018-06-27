@@ -6,47 +6,33 @@
     <!-- 漫画简介 E -->
 
     <!--  作者 S  -->
-    <view class="author cls">
+    <view class="author cls" wx:if="{{ authorAry.length!=0 }}">
         <view class='author_title fl'>
             <text>作者: </text>
         </view>
         <!--  作者是 1 个的情况下 S -->
-        <view class="author_info" wx:if="{{thisData.comic.upload_type==0}}">
-            <imgholder type="ucover" class="author_cover_bg">
-                <image
-                  wx:if="{{item.comic.user_avatar}}"
-                  mode="aspectFill"
-                  class="author_cover"
-                  src="{{item.comic.user_avatar}}"
-                ></image>
-            </imgholder>
-
-            <view class='text'>
-              {{thisData.comic.sina_nickname}}
-            </view>
-        </view>
-        <!--  作者是 1 个的情况下 E -->
-
-        <!--  作者是多个的情况下 S -->
-        <view
-            class="author_info"
-            wx:if="{{thisData.comic.upload_type==1}}"
-            wx:for="{{thisData.author}}"
+        <view class="author_info" 
+            wx:for="{{authorAry}}"
+            wx:if="{{ authorAry && authorAry.length!=0 && index<2 }}"
+            style="{{authorAry.length>1?'margin-right:42rpx;':'max-width:80%;'}}"
             wx:key="index"
-            style="{{index>0 ? 'margin-left:42rpx':''}}"
         >
             <imgholder type="ucover" class="author_cover_bg">
                 <image
-                    mode="aspectFill"
-                    class="author_cover"
-                    style="background:url(../../../../images/user_cover.png) no-repeat center center/cover ;"
-                    src="{{item.user_avatar}}"
+                  wx:if="{{item.user_avatar}}"
+                  mode="aspectFill"
+                  class="author_cover"
+                  src="{{item.user_avatar}}"
                 ></image>
             </imgholder>
 
-            <view class='text fl'>{{item.pen_name}}</view>
+            <view class='text' 
+                style="{{authorAry.length>1?'':'max-width:80%;'}}"
+            >
+              {{item.sina_nickname}}
+            </view>
         </view>
-        <!--  作者是多个的情况下 E -->
+        <!--  作者是 1 个的情况下 E -->
 
     </view>
     <!--  作者 E  -->

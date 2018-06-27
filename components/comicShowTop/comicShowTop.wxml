@@ -20,7 +20,9 @@
             <view class="info_content">
                 <view class="detail_title_box">
                     <!-- 标题S -->
-                    <view class="detail_title">{{thisData.comic.name?thisData.comic.name:''}}</view>
+                    <view class="detail_title">
+                    {{thisData.comic.name?thisData.comic.name:''}}
+                    </view>
                     <!-- 标题 E -->
 
                     <!--  icon S  -->
@@ -29,6 +31,8 @@
                         class="detail_title_icon" 
                         src="../../images/details/wb_works.png" 
                     />
+                    
+                    
                     <!--  icon S  -->
                 </view>
 

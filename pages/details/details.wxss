@@ -74,12 +74,14 @@
     box-sizing: border-box;
 }
 .comic_nav .activeChecked {
+    width: 72rpx;
     font-weight: bold;
     color: #FF4C6A;
     font-size: 36rpx;
 }
 
 .comic_nav .checked {
+    width: 72rpx;
     font-size: 36rpx;
     color: #333;
 }
