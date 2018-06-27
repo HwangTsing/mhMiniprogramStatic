@@ -6,14 +6,14 @@
     <!-- 漫画简介 E -->
 
     <!--  作者 S  -->
-    <view class="author cls">
+    <view class="author cls" wx:if="{{ authorAry.length!=0 }}">
         <view class='author_title fl'>
             <text>作者: </text>
         </view>
         <!--  作者是 1 个的情况下 S -->
         <view class="author_info" 
             wx:for="{{authorAry}}"
-            wx:if="{{ authorAry && index<2 }}"
+            wx:if="{{ authorAry && authorAry.length!=0 && index<2 }}"
             style="{{authorAry.length>1?'margin-right:42rpx;':'max-width:80%;'}}"
             wx:key="index"
         >

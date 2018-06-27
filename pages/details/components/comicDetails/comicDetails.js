@@ -7,7 +7,7 @@ const infoData=function ({
     let authorData=data;
     let authorAry=[]; //初始化存储对象
     let len=authorData.length;
-    
+    let sinaNickname=itemObj.sina_nickname
     if(len>0){
         //判断数据是否存在
         authorData.forEach((item,index) => {
@@ -23,7 +23,9 @@ const infoData=function ({
                 if(item.sina_nickname){
                     authorAry.push(obj)
                 }else{
-                    authorAry.push(itemObj)
+                    if(sinaNickname){
+                        authorAry.push(itemObj)
+                    }
                 }
 
             }else{
@@ -38,12 +40,16 @@ const infoData=function ({
 
         //循环完成后再次判断
         if( authorAry.length==0 ){
-            authorAry.push(itemObj);
+            if(sinaNickname){
+                authorAry.push(itemObj)
+            }
         }
 
     }else{
         if(authorData.length==0){
-            authorAry.push(itemObj);
+            if(sinaNickname){
+                authorAry.push(itemObj)
+            }
         }
     }
 
@@ -92,7 +98,7 @@ Component({
         }
         
         authorAry = infoData({ data , itemObj });
-
+        
         this.setData({
             authorAry
         })
