@@ -1,5 +1,6 @@
 const wxApi = require('../../utils/util.js');
 const app = getApp();
+
 // pages/read/read.js
 Page({
 

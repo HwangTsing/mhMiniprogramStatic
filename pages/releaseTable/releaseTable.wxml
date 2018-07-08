@@ -1,0 +1,17 @@
+<!--pages/comment/comment.wxml-->
+<!-- 全部评论S -->
+<view class="release_table_container">
+    <view class="release_table_nav_box">
+        <view class="release_table_nav">
+            <view class="release_table_nav_itme">11</view>
+            <view class="release_table_nav_itme">22</view>
+            <view class="release_table_nav_itme">33</view>
+            <view class="release_table_nav_itme">44</view>
+            <view class="release_table_nav_itme">55</view>
+            <view class="release_table_nav_itme">66</view>
+            <view class="release_table_nav_itme">77</view>
+        </view>
+    </view>
+
+</view>
+<!-- 全部评论S -->

@@ -1,5 +1,6 @@
 {
     "pages": [
+        "pages/releaseTable/releaseTable",
         "pages/index/index",
         "pages/details/details",
         "pages/comment/comment",
