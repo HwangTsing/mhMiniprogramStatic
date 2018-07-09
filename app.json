@@ -1,12 +1,13 @@
 {
   "pages": [
-      "pages/index/index",
-      "pages/details/details",
-      "pages/comment/comment",
-      "pages/morelist/morelist",
-      "pages/read/read",
-      "pages/reply/reply",
-      "pages/search/search"
+    "pages/index/index",
+    "pages/details/details",
+    "pages/comment/comment",
+    "pages/morelist/morelist",
+    "pages/read/read",
+    "pages/reply/reply",
+    "pages/search/search",
+    "pages/classification/classification"
   ],
   "window": {
     "backgroundTextStyle": "light",

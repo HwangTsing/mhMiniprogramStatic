@@ -134,6 +134,13 @@ Page({
         }
         that.hotChange(that.data.onIndex);
     },
+    onHotTap:function (e) {
+       let comic_id = e.currentTarget.dataset.hotid;
+        //console.log(comic_id);
+        wx.navigateTo({
+            url: '/pages/details/details?comic_id='+comic_id
+        })
+    },
     /*input聚焦和失焦,监听*/
     focusInputEvent: function () {
         var that= this;
