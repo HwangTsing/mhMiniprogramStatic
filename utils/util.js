@@ -306,6 +306,7 @@ class wxApi {
     wx.pageScrollTo(options);
   }
 
+
   setMessageType(page, type) {
     if (page && page.setData) page.setData({type})
   }
@@ -314,6 +315,25 @@ class wxApi {
     if (typeof callback == 'function') {
       wx.onNetworkStatusChange(callback)
     }
+  }
+
+  /* 获取节点(元素信息) WXML节点信息*/
+  getNodeInfo(node=null){
+    const promise = new Promise((resolve, reject) => {
+        if(!node||typeof node!="string"){
+            reject('请传递(id或者class)节点信息')
+            console.error('请传递(id或者class)节点信息')
+            return;
+        }
+        const query = wx.createSelectorQuery()
+        query.select(node).boundingClientRect(
+            (res)=>{
+                resolve(res)
+            }
+        ).exec()
+    });
+
+    return promise;
   }
 
 }

@@ -1,0 +1,27 @@
+<!-- 头部导航条 S -->
+<view 
+    class="release_table_nav_box" 
+    wx:if="{{tabList&&tabList.length!=0}}"
+>
+    <view 
+        class="release_table_nav" 
+    >
+        <view 
+            wx:for="{{tabList}}"
+            wx:if="{{ index < 7 }}"
+            class="release_table_nav_itme {{pubDay==item.pub_day||pubDay==''&&index==6?'release_table_nav_select':''}}"
+            data-pub_day="{{item.pub_day}}"
+            data-pub_name="{{item.pub_name}}"
+            data-item="{{index}}"
+            wx:key="{{index}}"
+            bindtap="ClickPubDay"
+        >
+            {{item.pub_name}}
+            <view 
+                class="nav_itme_select"
+                wx:if="{{pubDay==item.pub_day||pubDay==''&&index==6}}"
+            ></view>
+        </view>
+    </view>
+</view>
+<!-- 头部导航条 E -->

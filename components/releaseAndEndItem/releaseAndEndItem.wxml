@@ -1,0 +1,39 @@
+
+<!-- (放送|完结) 列表 S  -->
+<view class="releaseAndEndItem">
+    <!-- base64 背景图 and 卡槽 S -->
+    <view class="releaseAndEndItemBg">
+        <imgHolder type="hcover">
+            <view 
+                wx:if="{{comic.hcover}}"
+                class="itemBgHcover"
+                style="background: url('{{ siteImage + comic.hcover }}') no-repeat center center; background-size: cover;"
+            ></view>
+        </imgHolder>
+    </view>
+    <!-- base64 背景图 and 卡槽 E -->
+    
+    <view class="releaseAndEndItemBottm">
+        <view 
+            class="releaseAndEndItemCate"
+            wx:if="{{myCate}}"
+            style="background:{{myCate.color}}"
+        >
+            {{myCate.cate_cn_name}}
+        </view>
+
+        <view class="releaseAndEndItemTitle"
+            wx:if="{{ comic && comic.name }}"
+        >
+            {{comic.name}}
+        </view>
+
+        <view class="releaseAndEndItemRight" 
+            wx:if="{{ lastChapter && lastChapter.chapter_name }}"
+        >
+            更至 {{lastChapter.chapter_name}}
+        </view>
+    </view>
+
+</view>
+<!-- (放送|完结) 列表 E  -->

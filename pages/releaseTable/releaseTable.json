@@ -4,7 +4,8 @@
     "navigationBarBackgroundColor": "#FF4D6A",
     "navigationBarTextStyle": "white",
     "usingComponents": {
-        "commentList": "/components/commentList/commentList",
-        "message": "/components/message/message"
+        "topNav": "./components/topNav/topNav",
+        "message": "/components/message/message",
+        "releaseAndEndItem":"/components/releaseAndEndItem/releaseAndEndItem"
     }
 }
