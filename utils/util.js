@@ -245,13 +245,17 @@ class wxApi {
     moreList(cfg) {
         return this.request('wbcomic/home/recommend_list?', cfg)
     }
+    //搜索热门推荐接口
+    popRecList(cfg) {
+        return this.request('wbcomic/home/hot_words?', cfg)
+    }
 
 
   setNavigationBarTitle(title) {
     if (title) {
       title = decodeURIComponent(title)
       wx.setNavigationBarTitle({title})
-    }  
+    }
   }
 
   appendParams(route, params={}) {

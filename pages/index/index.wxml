@@ -67,42 +67,27 @@
         <view class="con_banner">
             <!--search搜索-->
             <!--搜索框聚焦时显示-->
-            <view class="{{isOpacity? 'search_view_show':'search_view'}}">
-                <view class="search_img"
-                      style="{{isOpacity === true? 'background:rgba(245,245,245,1);border-radius: 30rpx;-webkit-border-radius: 30rpx;-moz-border-radius: 30rpx;-mz-border-radius: 30rpx;':''}}">
-                    <image class="search_images" src="{{isOpacity === true ? '../../images/search_gray_02.png':'../../images/search_gray.png'}}"></image>
-                    <input class="{{isOpacity === true?'search_input_focus':'search_input'}}" type="text" value="{{word}}"
-                           placeholder="搜索作品或作者名称" placeholder-style="color:{{isOpacity?'#ccc':'#fff'}};font-size:28rpx;"
-                           bindfocus="focusInputEvent" bindinput="bindInputChange"/>
-                    <block wx:if="{{word!==''}}">
-                        <image class="del"
-                               src="../../images/delete.png"></image>
-                        <view class="bg_del"
-                              catchtap="onDel"></view>
-                    </block>
-                    <block wx:if="{{word ===''}}">
-                        <image class="del_hidden"
-                               src="../../images/delete.png"></image>
-                        <view class="{{word? 'bg_del':'bg_del_hidden'}}"
-                              catchtap="onDel"></view>
-                    </block>
-
-                    <view class="{{isOpacity?'qx_view':'qx_view_hidden'}}}" catchtap="onCancel">取消</view>
+            <view class="search_view">
+                <view class="search_img">
+                    <image class="search_images" src="../../images/search_gray.png"></image>
+                    <input class="'search_input" type="text" placeholder="搜索作品或作者名称"
+                           catchtap="onHref"/>
                     <block wx:if="{{boyid}}">
-                        <image class="{{isOpacity || id !== 0? 'boy_img_hidden':'boy_img'}}" data-index="{{boyid}}"
+                        <image class="{{id !== 0? 'boy_img_hidden':'boy_img'}}" data-index="{{boyid}}"
                                src="../../images/boy.png" catchtap="onToastTap" data-id="{{id}}"></image>
-                        <image class="{{id === 0 || isOpacity === true ? 'girl_img_hidden':'girl_img'}}" data-index="{{girlid}}"
+                        <image class="{{id === 0? 'girl_img_hidden':'girl_img'}}" data-index="{{girlid}}"
                                src="../../images/girl.png" catchtap="onToastTap" data-id="{{id}}"></image>
                     </block>
                     <block wx:elif="{{girlid}}">
-                        <image class="{{isOpacity || idg !== 1? 'girl_img_hidden':'girl_img'}}" data-index="{{girlid}}"
+                        <image class="{{idg !== 1? 'girl_img_hidden':'girl_img'}}" data-index="{{girlid}}"
                                src="../../images/girl.png" catchtap="onToastTap" data-id="{{idg}}"></image>
-                        <image class="{{idg === 1 || isOpacity === true? 'boy_img_hidden':'boy_img'}}" data-index="{{boyid}}"
+                        <image class="{{idg === 1? 'boy_img_hidden':'boy_img'}}" data-index="{{boyid}}"
                                src="../../images/boy.png" catchtap="onToastTap" data-id="{{idg}}"></image>
                     </block>
 
                 </view>
             </view>
+
             <!--banner图-->
             <view class="banner" id="haha">
                 <block wx:if="{{imgUrls.length>1}}">
@@ -136,10 +121,32 @@
             </view>
         </view>
 
+        <!--nav-->
+        <view class="nav_view">
+            <view class="release_view" bindtap="releaseTap">
+                <image mode="aspectFit" src="../../images/indexIcon/release.png"></image>
+                <view class="release_title">放送</view>
+            </view>
+            <view class="classif_view" bindtap="classTap">
+                <image mode="aspectFit" src="../../images/indexIcon/classif.png"></image>
+                <view class="classif_title">分类</view>
+            </view>
+            <view class="list_view" bindtap="listTap">
+                <image mode="aspectFit" src="../../images/indexIcon/list.png"></image>
+                <view class="list_title">榜单</view>
+            </view>
+            <view class="end_view" bindtap="endTap">
+                <image mode="aspectFit" src="../../images/indexIcon/end.png"></image>
+                <view class="end_title">完结</view>
+            </view>
+        </view>
         <view class="fine_works" wx:if="{{FineWorks.length > 0}}">
-            <view class="border"></view>
-            <view class="fine_text">{{title_f}}</view>
-            <view class="border" style="margin-left: 10rpx;"></view>
+            <view class="left_fine">
+                <image class="left_xian" src="../../images/left_xian.png"></image>
+                <view class="fine_text">{{title_f}}</view>
+            </view>
+            <view class="bg_more" wx:if="{{FineWorks.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex_f}}"
+                  data-title="{{title_f}}">查看更多</view>
         </view>
         <!--img+content 图片区域内容可滑动-精品佳作-->
         <scroll-view class="scroll_view" scroll-x="{{true}}" wx:if="{{FineWorks.length > 0}}">
@@ -155,13 +162,14 @@
                 </navigator>
             </block>
         </scroll-view>
-        <view class="bg_more" wx:if="{{FineWorks.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex_f}}"
-              data-title="{{title_f}}"><text>查看更多</text></view>
 
         <view class="hot_works" wx:if="{{PopularWorks.length >0}}">
-            <view class="border"></view>
-            <view class="fine_text">{{title_p}}</view>
-            <view class="border" style="margin-left: 10rpx;"></view>
+            <view class="left_fine">
+                <image class="left_xian" src="../../images/left_xian.png"></image>
+                <view class="fine_text">{{title_p}}</view>
+            </view>
+            <view class="bg_more" wx:if="{{PopularWorks.length >0}}" catchtap="bindMoreTap" data-index="{{keyIndex_p}}"
+                  data-title="{{title_p}}">查看更多</view>
         </view>
         <!--img+content 人气作品-->
         <view class="hot_view">
@@ -177,13 +185,14 @@
                 </navigator>
             </block>
         </view>
-        <view class="bg_more" wx:if="{{PopularWorks.length >0}}" catchtap="bindMoreTap" data-index="{{keyIndex_p}}"
-              data-title="{{title_p}}">查看更多</view>
         <!--最新上架-->
         <view class="new_works" wx:if="{{newArrivalWorks.length > 0}}">
-            <view class="border"></view>
-            <view class="fine_text">{{title_n}}</view>
-            <view class="border" style="margin-left: 10rpx;"></view>
+            <view class="left_fine">
+                <image class="left_xian" src="../../images/left_xian.png"></image>
+                <view class="fine_text">{{title_n}}</view>
+            </view>
+            <view class="bg_more" wx:if="{{newArrivalWorks.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex_n}}"
+                  data-title="{{title_n}}">查看更多</view>
         </view>
         <view class="new_view">
                 <view class="big_new_view">
@@ -202,13 +211,14 @@
                     </block>
                 </view>
         </view>
-        <view class="bg_more" wx:if="{{newArrivalWorks.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex_n}}"
-              data-title="{{title_n}}">查看更多</view>
         <!--热门连载-->
         <view class="hot_works" wx:if="{{hotSerialWorks.length > 0}}">
-            <view class="border"></view>
-            <view class="fine_text">{{title_h}}</view>
-            <view class="border" style="margin-left: 10rpx;"></view>
+            <view class="left_fine">
+                <image class="left_xian" src="../../images/left_xian.png"></image>
+                <view class="fine_text">{{title_h}}</view>
+            </view>
+            <view class="bg_more" wx:if="{{hotSerialWorks.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex_h}}"
+                  data-title="{{title_h}}">查看更多</view>
         </view>
         <!--img+content 图片区域内容-->
         <view class="hot_view">
@@ -224,13 +234,14 @@
                 </navigator>
             </block>
         </view>
-        <view class="bg_more" wx:if="{{hotSerialWorks.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex_h}}"
-              data-title="{{title_h}}">查看更多</view>
         <!--小编推荐-->
         <view class="new_works" wx:if="{{xiaobianRecommend.length > 0}}">
-            <view class="border"></view>
-            <view class="fine_text">{{title_x}}</view>
-            <view class="border" style="margin-left: 10rpx;"></view>
+            <view class="left_fine">
+                <image class="left_xian" src="../../images/left_xian.png"></image>
+                <view class="fine_text">{{title_x}}</view>
+            </view>
+            <view class="bg_more" wx:if="{{xiaobianRecommend.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex_x}}"
+                  data-title="{{title_x}}">查看更多</view>
         </view>
         <view class="new_view">
             <view class="big_new_view">
@@ -249,13 +260,14 @@
                 </block>
             </view>
         </view>
-        <view class="bg_more" wx:if="{{xiaobianRecommend.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex_x}}"
-              data-title="{{title_x}}">查看更多</view>
         <!--img+content 本周推荐-->
         <view class="hot_works" wx:if="{{weekRecommend.length > 0}}">
-            <view class="border"></view>
-            <view class="fine_text">{{title_w}}</view>
-            <view class="border" style="margin-left: 10rpx;"></view>
+            <view class="left_fine">
+                <image class="left_xian" src="../../images/left_xian.png"></image>
+                <view class="fine_text">{{title_w}}</view>
+            </view>
+            <view class="bg_more" wx:if="{{weekRecommend.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex_w}}"
+                  data-title="{{title_w}}">查看更多</view>
         </view>
         <view class="hot_view">
             <block wx:for="{{weekRecommend}}" wx:key="index">
@@ -270,44 +282,13 @@
                 </navigator>
             </block>
         </view>
-        <view class="bg_more" wx:if="{{weekRecommend.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex_w}}"
-              data-title="{{title_w}}">查看更多</view>
+
         <!--滑动到底部没有数据了提示-->
         <view class="{{imgUrls.length>0?'bottom_img':'bottom_img_hidden'}}">
             <view>下面没有了QAQ</view>
         </view>
     </view>
-
-    <!--蒙层-->
-    <view class="{{isOpacity? 'layer' :'layer_n'}}" catchtouchmove='noScrollMove' catchtap="blurInputEvent"></view>
-    <!--根据搜索结果渲染数据-->
-    <scroll-view class="{{isCancel===true?'big_listdata':'big_listdata_bloc'}}" wx:if="{{searchList&&searchList.length>0}}"
-                 enable-back-to-top="true" scroll-y="{{true}}" bindscrolltolower="lower"
-                 lower-threshold="{{50}}" scroll-with-animation="true">
-        <block wx:for="{{searchList}}" wx:key="{{index}}">
-            <searchlist
-                class="searchlist"
-                idx="{{item.comic_id}}"
-                src="{{item.cover}}"
-                name="{{item.name}}"
-                artists="{{item.sina_nickname}}"
-                cates="{{item.cates}}"
-            ></searchlist>
-        </block>
-        <view class="load_view">
-            <view class="load_img_bg" wx:if="{{ message != '没有更多了' }}">
-                <image class="load_image" src="../../images/icon_load.png"></image>
-            </view>
-            <view class="comment_message">{{message}}</view>
-        </view>
-    </scroll-view>
-    <!--搜索没有结果提示loading-->
-    <block wx:if="{{noSearch === false}}">
-        <view class="bg_search_mess" catchtouchmove='noScrollMove'>
-            <message class="{{isCancel===true? 'search_message_hidden':'search_message'}}" modal="{{false}}" type="search"></message>
-        </view>
-    </block>
-
+    <!--无网络，加载失败loading-->
     <import src="./template/message.wxml"></import>
     <template is="message" data="{{networkType,isLoad}}"></template>
 
