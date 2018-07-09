@@ -1,0 +1,12 @@
+{
+    "navigationBarTitleText": "微博动漫",
+    "navigationBarTextStyle": "white",
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#FF4D6A",
+    "enablePullDownRefresh":false,
+    "usingComponents":{
+        "searchlist":"/components/searchList/searchList",
+        "message": "/components/message/message",
+        "imgholder":"/components/imgHolder/imgHolder"
+    }
+}

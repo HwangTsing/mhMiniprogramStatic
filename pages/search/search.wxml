@@ -1,0 +1,67 @@
+<view class="container_search">
+    <view class="search_input">
+        <view class="search_img">
+            <image class="search_images" src="../../images/search_gray_02.png"></image>
+            <input class="input_input" type="text" placeholder="搜索作品或作者名称" value="{{word}}"
+                   placeholder-style="color:#ccc;font-size:28rpx;" focus="{{focus}}"
+                    bindinput="bindInputChange"/>
+            <block wx:if="{{word!==''}}">
+                <image class="del"
+                       src="../../images/del.png"></image>
+                <view class="bg_del"
+                      catchtap="onDel"></view>
+            </block>
+            <block wx:if="{{word ===''}}">
+                <image class="del_hidden"
+                       src="../../images/del.png"></image>
+                <view class="{{word? 'bg_del':'bg_del_hidden'}}"
+                      catchtap="onDel"></view>
+            </block>
+            <view class="qx_view" catchtap="onCancel">取消</view>
+        </view>
+    </view>
+    <!--热门搜索-->
+    <view class="pop_view" wx:if="{{allHotTitle.length > 0}}"
+          style="{{searchList.length > 0 ||noSearch === false ||isLoad === true ||networkType === false?'display:none':''}}">
+        <view class="pop_search">
+            <view class="search_title">热门搜索</view>
+            <view class="{{allHotTitle.length<=12?'refresh_view_hidden':'refresh_view'}}" catchtap="clickChange">
+                <image class="refresh_img" src="../../images/refresh_icon.png"></image>
+                <view class="refresh_txt">刷新</view>
+            </view>
+        </view>
+        <view class="search_list">
+            <view class="main_title" wx:for="{{searchTitle}}">{{item.title}}</view>
+        </view>
+    </view>
+    <!--根据搜索结果渲染数据-->
+    <scroll-view class="{{isCancel===true?'big_listdata':'big_listdata_bloc'}}" wx:if="{{searchList&&searchList.length>0}}"
+                 enable-back-to-top="true" scroll-y="{{true}}" bindscrolltolower="lower"
+                 lower-threshold="{{50}}" scroll-with-animation="true" catchtap="blurInputEvent">
+        <block wx:for="{{searchList}}" wx:key="{{index}}">
+            <searchlist
+                class="searchlist"
+                idx="{{item.comic_id}}"
+                src="{{item.cover}}"
+                name="{{item.name}}"
+                artists="{{item.sina_nickname}}"
+                cates="{{item.cates}}"
+            ></searchlist>
+        </block>
+        <view class="load_view">
+            <view class="load_img_bg" wx:if="{{ message != '没有更多了' }}">
+                <image class="load_image" src="../../images/icon_load.png"></image>
+            </view>
+            <view class="comment_message">{{message}}</view>
+        </view>
+    </scroll-view>
+    <!--搜索没有结果提示loading-->
+    <block wx:if="{{noSearch === false}}">
+        <view class="bg_search_mess" catchtouchmove='noScrollMove'>
+            <message class="{{isCancel===true? 'search_message_hidden':'search_message'}}" modal="{{false}}" type="search"></message>
+        </view>
+    </block>
+    <!--无网络，加载失败loading-->
+    <import src="./template/message.wxml"></import>
+    <template is="message" data="{{networkType,isLoad}}"></template>
+</view>
