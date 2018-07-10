@@ -50,9 +50,9 @@
         </block>
         <view class="load_view">
             <view class="load_img_bg" wx:if="{{ message != '没有更多了' }}">
-                <image class="load_image" src="../../images/icon_load.png"></image>
+                <image class="load_image" wx:if="{{searchList.length > 9 && scrolType !== ''}}" src="../../images/icon_load.png"></image>
             </view>
-            <view class="comment_message">{{message}}</view>
+            <view class="comment_message" wx:if="{{scrolType !== ''}}">{{message}}</view>
         </view>
     </scroll-view>
     <!--搜索没有结果提示loading-->

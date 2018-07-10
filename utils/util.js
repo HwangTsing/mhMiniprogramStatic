@@ -253,6 +253,10 @@ class wxApi {
     classLabelList(cfg) {
         return this.request('wbcomic/comic/filter_list?',cfg)
     }
+    //分类列表
+    classList(cfg) {
+        return this.request('wbcomic/comic/filter_result?',cfg)
+    }
 
 
 

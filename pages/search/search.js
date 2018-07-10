@@ -89,7 +89,7 @@ Page({
             fail:function (data) {
                 that.setData({
                     networkType:true,
-                    isLoad:true
+                    isLoad:true,
                 })
             }
 
@@ -224,8 +224,6 @@ Page({
     },
     //滚动条滚到底部的时候触发
     lower: function(e) {
-        console.log(1111)
-        console.log(e.type);
         var that = this;
         that.data.scrolType = e.type;
         console.log(that.data.scrolType)
@@ -247,6 +245,9 @@ Page({
                 if (total < that.searchData.page_num){
                     return;
                 }else {
+                    that.setData({
+                        scrolType:that.data.scrolType
+                    })
                     that.searchDatas();
                 }
 

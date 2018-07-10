@@ -256,7 +256,7 @@ Page({
     /*完结*/
     endTap:function () {
         wx.navigateTo({
-            url: '/pages/search/search'
+            url: '/pages/comicEnd/comicEnd'
         })
     },
 

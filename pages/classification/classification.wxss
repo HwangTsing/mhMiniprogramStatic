@@ -1,6 +1,20 @@
 /* pages/classification/classification.wxss */
+page {
+    background :#fff;
+}
 .container_classific {
     width :100%;
+    background :#fff;
+}
+.container_classific .top_view {
+    width:100%;
+    height:208rpx;
+    position:fixed;
+    top:0;
+    z-index:99;
+    left:0;
+    right:0;
+    background: #fff;
 }
 .container_classific .class_label_view {
     width:100%;
@@ -43,11 +57,10 @@
     overflow:hidden;
 }
 .checked_border{
-    /*width: 50%;
-    height: 2rpx;
-    margin: 12rpx auto;
+    width: 42%;
+    margin: 2rpx auto;
     border: 2rpx solid #fff;
-    border-radius:10rpx;*/
+    border-radius:10rpx;
     overflow: hidden;
     background: #fff;
 }
@@ -81,4 +94,80 @@
     border-radius:32rpx;
     margin-top:8rpx;
 }
-
+.class_content {
+    width:100%;
+    height:100%;
+    margin-top:216rpx;
+    background: #fff;
+}
+.class_content .class_list {
+    width:100%;
+    height:100vh;
+    display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    flex-direction: row;
+    -webkit-box-orient: vertical;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-wrap:wrap;
+    box-sizing: border-box;
+    background :#fff;
+}
+.class_list .list_view:nth-of-type(even) {
+    margin-left: 2rpx;
+}
+.class_list .list_view{
+    width:374rpx;
+    height:280rpx;
+}
+.class_list .list_view .list_img{
+    width:374rpx;
+    height:212rpx;
+    display: inline-block;
+}
+.class_list .list_view .list_title {
+    width:314rpx;
+    height:63rpx;
+    font-size:28rpx;
+    font-family:PingFangSC-Regular;
+    color:rgba(51,51,51,1);
+    margin-left:30rpx;
+    margin-top:5rpx;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+/*上拉加载loading*/
+.load_view {
+    width: 100%;
+    display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.load_img_bg {
+    width:36rpx;
+    height:36rpx;
+    text-align:center;
+    margin-top: 22rpx;
+}
+.load_image {
+    width: 36rpx;
+    height: 36rpx;
+    display: inline-block;
+}
+.comment_message{
+    font-size: 28rpx;
+    text-align: center;
+    line-height: 80rpx;
+    color: #999;
+    margin-left: 20rpx;
+    -webkit-transform:translate3d(0,0,0);
+    -moz-transform:translate3d(0,0,0);
+    transform:translate3d(0,0,0);
+    -webkit-animation:play 1s linear infinite;
+    -moz-animation:play 1s linear infinite;
+    animation:play 1s linear infinite;
+}

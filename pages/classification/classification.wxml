@@ -1,15 +1,33 @@
 <view class="container_classific">
-    <view class="class_label_view">
-        <view class="{{cate_id ===item.cate_id? 'label_title_active':'label_title'}}" wx:for="{{comicCate}}" wx:key="index" data-cateid="{{item.cate_id}}">
-            <text>{{item.cate_cn_name}}</text>
-            <view class="{{cate_id ===item.cate_id? 'active_border':'checked_border'}}"></view>
+    <view class="top_view">
+        <view class="class_label_view">
+            <view class="{{cate_id ===item.cate_id? 'label_title_active':'label_title'}}" wx:for="{{comicCate}}" wx:key="index"
+                  data-cateid="{{item.cate_id}}" bindtap="onCate">
+                <text>{{item.cate_cn_name}}</text>
+                <view class="{{cate_id ===item.cate_id? 'active_border':'checked_border'}}"></view>
+            </view>
+        </view>
+        <view class="small_label_view">
+            <view class="{{end_status ===item.end_status? 'small_title_active':'small_title'}}" wx:for="{{comicEnd}}"
+                  wx:key="index" data-endid="{{item.end_status}}" bindtap="onEnd">{{item.end_status_name}}</view>
         </view>
     </view>
-    <view class="small_label_view">
-        <view class="{{end_status ===item.end_status? 'small_title_active':'small_title'}}" wx:for="{{comicEnd}}" wx:key="index" data-endid="{{item.end_status}}">{{item.end_status_name}}</view>
-    </view>
     <!--根据分类条件进行渲染内容-->
-    <view class="class_content">
-
+    <scroll-view class="class_content" bindscrolltolower="lower" scroll-y="{{true}}">
+        <view class="class_list">
+            <view class="list_view" data-comic="{{item.comic_id}}"
+                  wx:if="{{classListData.length > 0}}" wx:for="{{classListData}}" wx:key="index">
+                <imgholder class="list_img" type="hcover">
+                    <image mode="scaleToFill" class="list_img" src="{{item.comic_hcover}}"></image>
+                </imgholder>
+                <view class="list_title">{{item.comic_name}}</view>
+            </view>
+        </view>
+    </scroll-view>
+    <view class="load_view">
+        <view class="load_img_bg" wx:if="{{ message != '没有更多了' }}">
+            <image class="load_image" wx:if="{{classListData.length > 19 && scrolType !== ''}}" src="../../images/icon_load.png"></image>
+        </view>
+        <view class="comment_message" wx:if="{{scrolType !== ''}}">{{message}}</view>
     </view>
 </view>
