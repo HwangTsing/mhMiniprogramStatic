@@ -22,7 +22,7 @@
     align-items: center;
 }
 .releaseAndEndItem .releaseAndEndItemCate{ /* 标签 */
-    margin-top:4rpx;
+    margin-top: 4rpx;
     margin-right: 8rpx;
     padding: 0 8rpx;
     max-width: 76rpx;
