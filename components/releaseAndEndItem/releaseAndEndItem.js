@@ -8,28 +8,28 @@ Component({
        *  siteImage 背景前缀(域名)
       */
         data: {
-            type: Object, // 类型（必填），目前接受的类型包括：String, Number, Boolean, Object, Array, null（表示任意类型）
-            value: null, // 属性初始值（可选），如果未指定则会根据类型选择一个
+            type: Object, // 类型String, Number, Boolean, Object, Array, null
+            value: null, // 属性初始值如果未指定则会根据类型选择一个
         },
         cate:{
-            type: Object, // 类型（必填），目前接受的类型包括：String, Number, Boolean, Object, Array, null（表示任意类型）
+            type: Object, // 类型String, Number, Boolean, Object, Array, null
             value: null, // 属性初始值（可选），如果未指定则会根据类型选择一个
         },
         lastChapter: {
-          type: Object, // 类型（必填），目前接受的类型包括：String, Number, Boolean, Object, Array, null（表示任意类型）
+          type: Object, // 类型String, Number, Boolean, Object, Array, null
           value: null, // 属性初始值（可选），如果未指定则会根据类型选择一个
         },
         comic : {
-          type: Object, // 类型（必填），目前接受的类型包括：String, Number, Boolean, Object, Array, null（表示任意类型）
+          type: Object, // 类型String, Number, Boolean, Object, Array, null
           value: null, // 属性初始值（可选），如果未指定则会根据类型选择一个
         },
         siteImage:{
-            type: String, // 类型（必填），目前接受的类型包括：String, Number, Boolean, Object, Array, null（表示任意类型）
+            type: String, // 类型String, Number, Boolean, Object, Array, null
             value: '', // 属性初始值（可选），如果未指定则会根据类型选择一个
         }
     },
     data: {
-        myCate:null
+        myCate:null,//存储格式化后的标签信息
         //组件的内部数据，和 properties 一同用于组件的模版渲染
     },
     attached() {
@@ -46,10 +46,10 @@ Component({
         let cate=this.properties.cate;
         
         if(cate){
-            let  cate_cn_name = cate.cate_cn_name?cate.cate_cn_name:null;
+            let  cate_cn_name = cate.cate_cn_name?cate.cate_cn_name:null; //获取标签名字
             let  cate_en_name = cate.cate_en_name?cate.cate_en_name:null;
-            let  cate_id = cate.cate_id?cate.cate_id:null;
-            let  color;
+            let  cate_id = cate.cate_id?cate.cate_id:null; //标签id
+            let  color;//标签颜色
 
             //处理标签名字  只保存前三个字符
             if(cate_cn_name.length>3){
@@ -94,8 +94,7 @@ Component({
     },
     methods: {
         goShow(e){
-            console.log(e)
-            let comic_id=e.currentTarget.dataset.comic_id
+            let comic_id=e.currentTarget.dataset.comic_id;
             if(comic_id){
                 wx.navigateTo({
                     url: `/pages/details/details?comic_id=${comic_id}`

@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/comicEnd/comicEnd",
     "pages/index/index",
     "pages/details/details",
     "pages/comment/comment",

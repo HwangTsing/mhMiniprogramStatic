@@ -1,0 +1,10 @@
+{
+    "navigationBarTitleText": "完结",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#FF4D6A",
+    "navigationBarTextStyle": "white",
+    "usingComponents": {
+        "releaseAndEndItem":"/components/releaseAndEndItem/releaseAndEndItem",
+        "message": "/components/message/message"
+    }
+}

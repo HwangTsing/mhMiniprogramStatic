@@ -39,7 +39,7 @@ Page({
         wxApi.pageScrollTo({ //滚动条回到顶部
             scrollTop: 0
         })
-        this.isLoad({
+        this.isLoad({ //开始调用 获取数据
             url:this.data.url,
             pubDay:this.data.pubDay,
             pageNum:this.data.pageNum,
@@ -174,7 +174,7 @@ Page({
             }
         }).catch((err) => {
             this.setData({
-                networkType: true,
+                networkType: false,
                 type: 'server',
                 isMessage:false,
             })
@@ -201,7 +201,7 @@ Page({
     },
 
     /**
-     * onPageScroll onPageScroll: 页面滚动
+     * isOnPageScroll onPageScroll:调用的页面滚动 方法
      * obj //滚动信息
     */
     isOnPageScroll(obj){
@@ -255,8 +255,8 @@ Page({
         })
     },
 
-    onPageScroll(obj){
-        this.isOnPageScroll(obj);
+    onPageScroll(obj){ //检测页面滚动条
+        this.isOnPageScroll(obj); 
     },
     /**
      * 生命周期函数--监听页面显示
