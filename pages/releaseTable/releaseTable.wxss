@@ -1,20 +1,40 @@
 /* pages/comment/comment.wxss */
-.comment_container {
+.releaseTable_container {
     background: #FFFFFF;
-    padding: 0 30rpx;
-    height: 100%;
+    width: 100%
 }
-.comment_container .scroll_view{
+.release_table_nav_box,.release_table_nav{
     width: 100%;
-    height: 100%;
+    height: 64rpx;
+    background: #FF4D6A; 
 }
-.comment_message{
+.release_table_nav{
+    box-sizing: border-box;
+    padding: 0 15rpx;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    top: 0;
+    left: 0;
+    background: #FF4D6A; 
+    z-index: 999;
+}
+.release_table_nav_itme{
+    flex: 1;
+    padding:0 15rpx;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 28rpx;
+}
+
+
+.release_message{
     padding: 30rpx 0;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.comment_message .comment_src{
+.release_message .release_src{
     margin-right: 20rpx;
     width: 36rpx;
     height: 36rpx;
@@ -28,12 +48,18 @@
     -moz-animation:play 1s linear infinite;
     animation:play 1s linear infinite;
 }
-.comment_message .text{
-    font-size: 28rpx;
+.release_message .text{
+    font-size: 24rpx;
     line-height: 36rpx;
     color: #999;
 }
-
+.release_message .text_message{
+    display: block;
+    margin: 0 auto;
+    padding: 16rpx 22rpx;
+    background: #F5F5F5;
+    border-radius: 50rpx; 
+}
 
 
 

@@ -1,0 +1,11 @@
+{
+    "navigationBarTitleText": "放送表",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#FF4D6A",
+    "navigationBarTextStyle": "white",
+    "usingComponents": {
+        "topNav": "./components/topNav/topNav",
+        "message": "/components/message/message",
+        "releaseAndEndItem":"/components/releaseAndEndItem/releaseAndEndItem"
+    }
+}

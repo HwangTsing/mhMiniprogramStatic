@@ -1,0 +1,50 @@
+
+<!-- (放送|完结) 列表 S  -->
+<view 
+    class="releaseAndEndItem" 
+    bindtap="goShow"
+    data-comic_id="{{data.comic_id}}"
+>
+    <!-- base64 背景图 and 卡槽 S -->
+    <view class="releaseAndEndItemBg">
+        <imgHolder type="hcover" wx:if="{{!comic.hcover}}"></imgHolder>
+        <view 
+            wx:if="{{comic.hcover}}"
+            class="itemBgHcover"
+            style="background: url('{{ siteImage + comic.hcover }}') no-repeat center center; background-size: cover;"
+        ></view>
+    </view>
+    <!-- base64 背景图 and 卡槽 E -->
+    
+    <!-- 底部 S -->
+    <view class="releaseAndEndItemBottm">
+
+        <!-- 标签 S -->
+        <view 
+            class="releaseAndEndItemCate"
+            wx:if="{{myCate}}"
+            style="background:{{myCate.color}}"
+        >{{myCate.cate_cn_name}}</view>
+        <!-- 标签 E -->
+
+        <!-- 漫画名字 S -->
+        <view class="releaseAndEndItemTitle"
+            wx:if="{{ comic && comic.name }}"
+        >
+            {{comic.name}}
+        </view>
+        <!-- 漫画名字 S -->
+
+        <!-- 更新的章节 S -->
+        <view class="releaseAndEndItemRight" 
+            wx:if="{{ lastChapter && lastChapter.chapter_name }}"
+        >
+            更至 {{lastChapter.chapter_name}}
+        </view>
+        <!-- 更新的章节 E -->
+
+    </view>
+    <!-- 底部 E -->
+
+</view>
+<!-- (放送|完结) 列表 E  -->
