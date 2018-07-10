@@ -238,7 +238,7 @@ Page({
     /*放送*/
     releaseTap:function () {
         wx.navigateTo({
-            url: '/pages/search/search'
+            url: '/pages/releaseTable/releaseTable'
         })
     },
     /*分类*/
