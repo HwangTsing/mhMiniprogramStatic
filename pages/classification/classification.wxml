@@ -1,0 +1,15 @@
+<view class="container_classific">
+    <view class="class_label_view">
+        <view class="{{cate_id ===item.cate_id? 'label_title_active':'label_title'}}" wx:for="{{comicCate}}" wx:key="index" data-cateid="{{item.cate_id}}">
+            <text>{{item.cate_cn_name}}</text>
+            <view class="{{cate_id ===item.cate_id? 'active_border':'checked_border'}}"></view>
+        </view>
+    </view>
+    <view class="small_label_view">
+        <view class="{{end_status ===item.end_status? 'small_title_active':'small_title'}}" wx:for="{{comicEnd}}" wx:key="index" data-endid="{{item.end_status}}">{{item.end_status_name}}</view>
+    </view>
+    <!--根据分类条件进行渲染内容-->
+    <view class="class_content">
+
+    </view>
+</view>

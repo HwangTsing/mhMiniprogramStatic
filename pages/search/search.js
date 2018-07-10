@@ -102,14 +102,14 @@ Page({
         wxApi.popRecList({
             method:'GET',
             success:function (data) {
-                console.log(data.data.data);
+                //console.log(data.data.data);
                 that.data.allHotTitle = data.data.data;
                 that.setData({
                     allHotTitle:that.data.allHotTitle
                 })
                 that.hotChange(that.data.onIndex);
             },
-            fail:function () {
+            fail:function (data) {
                 that.setData({
 
                 })
