@@ -49,18 +49,24 @@
     animation:play 1s linear infinite;
 }
 .release_message .text{
-    font-size: 28rpx;
+    font-size: 24rpx;
     line-height: 36rpx;
     color: #999;
 }
-
+.release_message .text_message{
+    display: block;
+    margin: 0 auto;
+    padding: 16rpx 22rpx;
+    background: #F5F5F5;
+    border-radius: 50rpx; 
+}
 
 
 
 
 @keyframes play{
     to  {
-        transform:rotate(-360deg);
+        transform:rotate(360deg);
         /*
         transform:rotateX(0deg);
         transform:rotate(0deg);

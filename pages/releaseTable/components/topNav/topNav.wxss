@@ -21,12 +21,15 @@
 .release_table_nav_itme{
     position: relative;
     flex: 1;
+    height: 64rpx;
+    
+}
+.release_table_nav_itme .text{
     padding:0 15rpx;
+    line-height:  64rpx;
     text-align: center;
     color: #FFFFFF;
     font-size: 28rpx;
-    height: 64rpx;
-    line-height:  64rpx;
 }
 .nav_itme_select{
     position: absolute;

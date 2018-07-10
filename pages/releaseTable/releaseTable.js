@@ -132,6 +132,7 @@ Page({
                 pageTotal:pageTotal,
                 message: pageTotal > pageNum ? '加载中' : '今天没有了，不如换一天看看～',//存储提示词,
                 isMessage:true,
+                type:null,
             });     
         }).catch((err)=>{ //错误的时候
             this.setData({

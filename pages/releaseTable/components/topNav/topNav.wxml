@@ -1,11 +1,14 @@
 <!-- 头部导航条 S -->
+<!-- 站位盒子 S -->
 <view 
     class="release_table_nav_box" 
     wx:if="{{tabList&&tabList.length!=0}}"
 >
+    <!-- 固定定位盒子 S -->
     <view 
         class="release_table_nav" 
     >
+        <!-- 日期盒子 S -->
         <view 
             wx:for="{{tabList}}"
             wx:if="{{ index < 7 }}"
@@ -16,12 +19,23 @@
             wx:key="{{index}}"
             bindtap="ClickPubDay"
         >
-            {{item.pub_name}}
+            <!-- 日期文本 S -->
+            <view class="text">{{item.pub_name}}</view>
+            <!-- 日期文本 E -->
+
+            <!-- 是否选中 S -->
             <view 
                 class="nav_itme_select"
                 wx:if="{{pubDay==item.pub_day||pubDay==''&&index==6}}"
             ></view>
+            <!-- 是否选中 E -->
+            
         </view>
+        <!-- 日期盒子 S -->
+
     </view>
+    <!-- 固定定位盒子 E -->
+
 </view>
+<!-- 站位盒子 E -->
 <!-- 头部导航条 E -->

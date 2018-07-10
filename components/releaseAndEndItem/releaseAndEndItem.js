@@ -93,6 +93,14 @@ Component({
       //组件生命周期函数，在组件实例被从页面节点树移除时执行
     },
     methods: {
-      
+        goShow(e){
+            console.log(e)
+            let comic_id=e.currentTarget.dataset.comic_id
+            if(comic_id){
+                wx.navigateTo({
+                    url: `/pages/details/details?comic_id=${comic_id}`
+                })
+            }
+        }
     }
 })

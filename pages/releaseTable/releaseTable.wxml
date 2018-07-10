@@ -37,14 +37,18 @@
     <!-- 列表 E  -->
 
 
-
-    
+    <!-- 空内容的时候 S -->
+    <message 
+        wx:if="{{comicList&&comicList.length==0}}" 
+        type="nothing"
+    ></message>    
+    <!-- 空内容的时候 E -->
 
 
     <!-- 提示信息 S  -->
     <import src="/tpls/message.wxml"/>
 
-    <template is="message" wx:if="{{ type && !comicList }}" data="{{ type }}"/>
+    <template is="message" wx:if="{{ type }}" data="{{ type }}"/>
     <!-- 提示信息 S  -->
 
 
@@ -57,7 +61,7 @@
             mode="aspectFill"
             src="../../images/details/loads.png"
         ></image>
-        <view class="text">
+        <view class="text {{message != '加载中'?'text_message':''}}">
             {{message}}
         </view>
     </view>
