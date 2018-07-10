@@ -83,9 +83,11 @@ Page({
                     let page_total = data.data.data.page_total;
                     console.log(page_total);
                     that.setData({
+                        type:null,
                         classListData:classListData,
                         total:page_total,
                         message: page_total > page_num ? '加载更多...' : '没有更多了',//提示语
+                        networkType:true,
 
                     })
                 }else if (data.data.data.data.length === 0) {  //分类没有数据
@@ -95,7 +97,10 @@ Page({
                 }
             },
             fail:function (data) {
-
+                that.setData({
+                    networkType:true,
+                    isLoad:true
+                })
             }
         })
     },
@@ -141,29 +146,102 @@ Page({
         var that = this;
         that.data.cate_id = event.currentTarget.dataset.cateid;
         console.log(that.data.cate_id);
-        that.setData({
-            cate_id:event.currentTarget.dataset.cateid
+        //判断网络类型
+        wxApi.getNetworkType().then((res) =>{
+            let networkType = res.networkType;
+            if (networkType === 'none' || networkType === 'unknown') {
+                //无网络不进行任何操作
+                this.setData({
+                    networkType: false,
+                    classListData:[]
+                })
+
+            }else {
+                //有网络
+                that.setData({
+                    type:'loading',
+                    classListData:[],
+                    cate_id:event.currentTarget.dataset.cateid
+                })
+                that.data.page_num  = 1;
+                this.classList();
+
+            }
+        }).catch((err) =>{
+            this.setData({
+                networkType: true,
+                isLoad:true
+            })
         })
-        this.classList();
     },
     onEnd:function (event) {
         var that = this;
         that.data.end_status = event.currentTarget.dataset.endid;
         console.log(that.data.end_status);
-        that.setData({
-            end_status:event.currentTarget.dataset.endid
-        })
-        this.classList();
-    },
+        //判断网络类型
+        wxApi.getNetworkType().then((res) =>{
+            let networkType = res.networkType;
+            if (networkType === 'none' || networkType === 'unknown') {
+                //无网络不进行任何操作
+                this.setData({
+                    networkType: false,
+                    classListData:[]
+                })
 
+            }else {
+                //有网络
+                that.setData({
+                    type:'loading',
+                    classListData:[],
+                    end_status:event.currentTarget.dataset.endid
+                })
+                that.data.page_num  = 1;
+                this.classList();
+
+            }
+        }).catch((err) =>{
+            this.setData({
+                networkType: true,
+                isLoad:true
+            })
+        })
+    },
+    goDetail:function (event) {
+        let comic_id = event.currentTarget.dataset.comic;
+        wx.navigateTo({
+            url: '/pages/details/details?comic_id='+comic_id
+        })
+    },
 
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.classLabelList();
-    this.classList();
+      //判断网络类型
+      wxApi.getNetworkType().then((res) =>{
+          let networkType = res.networkType;
+          if (networkType === 'none' || networkType === 'unknown') {
+              //无网络不进行任何操作
+              this.setData({
+                  networkType: false
+              })
+
+          }else {
+              //有网络
+              this.setData({
+                  type:'loading',
+              })
+              this.classLabelList();
+              this.classList();
+
+          }
+      }).catch((err) =>{
+          this.setData({
+              networkType: true,
+              isLoad:true
+          })
+      })
   },
 
   /**

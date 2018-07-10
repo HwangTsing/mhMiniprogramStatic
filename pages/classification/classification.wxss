@@ -96,13 +96,12 @@ page {
 }
 .class_content {
     width:100%;
-    height:100%;
+    height:100vh;
     margin-top:216rpx;
     background: #fff;
 }
 .class_content .class_list {
     width:100%;
-    height:100vh;
     display: flex;
     display: -webkit-box;
     display: -webkit-flex;

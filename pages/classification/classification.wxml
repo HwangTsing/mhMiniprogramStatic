@@ -13,9 +13,9 @@
         </view>
     </view>
     <!--根据分类条件进行渲染内容-->
-    <scroll-view class="class_content" bindscrolltolower="lower" scroll-y="{{true}}">
+    <scroll-view class="class_content" bindscrolltolower="lower" scroll-y="{{true}}" wx:if="{{networkType === true}}">
         <view class="class_list">
-            <view class="list_view" data-comic="{{item.comic_id}}"
+            <view class="list_view" data-comic="{{item.comic_id}}" catchtap="goDetail"
                   wx:if="{{classListData.length > 0}}" wx:for="{{classListData}}" wx:key="index">
                 <imgholder class="list_img" type="hcover">
                     <image mode="scaleToFill" class="list_img" src="{{item.comic_hcover}}"></image>
@@ -23,11 +23,20 @@
                 <view class="list_title">{{item.comic_name}}</view>
             </view>
         </view>
-    </scroll-view>
-    <view class="load_view">
-        <view class="load_img_bg" wx:if="{{ message != '没有更多了' }}">
-            <image class="load_image" wx:if="{{classListData.length > 19 && scrolType !== ''}}" src="../../images/icon_load.png"></image>
+        <view class="load_view">
+            <view class="load_img_bg" wx:if="{{ message != '没有更多了' }}">
+                <image class="load_image" wx:if="{{classListData.length > 19 && scrolType !== ''}}" src="../../images/icon_load.png"></image>
+            </view>
+            <view class="comment_message" wx:if="{{scrolType !== ''}}">{{message}}</view>
         </view>
-        <view class="comment_message" wx:if="{{scrolType !== ''}}">{{message}}</view>
+    </scroll-view>
+    <!--无网络，加载失败loading-->
+    <import src="./template/message.wxml"></import>
+    <template is="message" data="{{networkType,isLoad}}"></template>
+
+    <!-- 网络慢提示loading -->
+    <import src="/tpls/message.wxml"/>
+    <view wx:if="{{!isLoad}}" style="position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;">
+        <template is="message" wx:if="{{type}}" data="{{ type }}"/>
     </view>
 </view>
