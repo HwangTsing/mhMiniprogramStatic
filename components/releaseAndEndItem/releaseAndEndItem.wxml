@@ -1,18 +1,18 @@
-
 <!-- (放送|完结) 列表 S  -->
-<view 
+<navigator 
     class="releaseAndEndItem" 
-    bindtap="goShow"
     data-comic_id="{{data.comic_id}}"
+    url="../details/details?comic_id={{data.comic_id}}"
 >
     <!-- base64 背景图 and 卡槽 S -->
     <view class="releaseAndEndItemBg">
-        <imgHolder type="hcover" wx:if="{{!comic.hcover}}"></imgHolder>
-        <view 
-            wx:if="{{comic.hcover}}"
-            class="itemBgHcover"
-            style="background: url('{{ siteImage + comic.hcover }}') no-repeat center center; background-size: cover;"
-        ></view>
+        <imgHolder type="hcover">
+            <view 
+                wx:if="{{comic.hcover}}"
+                class="itemBgHcover"
+                style="background: url('{{ siteImage + comic.hcover }}') no-repeat center center; background-size: cover;"
+            ></view>
+        </imgHolder>
     </view>
     <!-- base64 背景图 and 卡槽 E -->
     
@@ -46,5 +46,5 @@
     </view>
     <!-- 底部 E -->
 
-</view>
+</navigator>
 <!-- (放送|完结) 列表 E  -->
