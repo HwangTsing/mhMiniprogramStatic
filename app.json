@@ -1,6 +1,5 @@
 {
   "pages": [
-    "pages/comicEnd/comicEnd",
     "pages/index/index",
     "pages/details/details",
     "pages/comment/comment",
@@ -9,7 +8,8 @@
     "pages/reply/reply",
     "pages/search/search",
     "pages/classification/classification",
-    "pages/releaseTable/releaseTable"
+    "pages/releaseTable/releaseTable",
+    "pages/comicEnd/comicEnd"
   ],
   "window": {
     "backgroundTextStyle": "light",
