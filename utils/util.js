@@ -249,6 +249,11 @@ class wxApi {
     popRecList(cfg) {
         return this.request('wbcomic/home/hot_words?', cfg)
     }
+    //分类标签接口
+    classLabelList(cfg) {
+        return this.request('wbcomic/comic/filter_list?',cfg)
+    }
+
 
 
   setNavigationBarTitle(title) {

@@ -244,7 +244,7 @@ Page({
     /*分类*/
     classTap:function () {
         wx.navigateTo({
-            url: '/pages/search/search'
+            url: '/pages/classification/classification'
         })
     },
     /*榜单*/
