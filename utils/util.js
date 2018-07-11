@@ -257,6 +257,18 @@ class wxApi {
     classList(cfg) {
         return this.request('wbcomic/comic/filter_result?',cfg)
     }
+    //阅读榜
+    readList(cfg) {
+        return this.request('wbcomic/home/rank_read?',cfg);
+    }
+    //新作榜
+    newList(cfg) {
+        return this.request('wbcomic/home/rank_share?',cfg);
+    }
+    //综合榜
+    rankList(cfg) {
+        return this.request('wbcomic/home/rank?',cfg);
+    }
 
 
 

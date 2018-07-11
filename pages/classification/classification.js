@@ -86,10 +86,10 @@ Page({
                     let page_total = data.data.data.page_total;
                     console.log(page_total);
                     that.setData({
-                        type:null,
                         classListData:classListData,
                         total:page_total,
                         message: page_total > page_num ? '加载更多...' : '没有更多了',//提示语
+                        type:null,
                         networkType:true,
 
                     })
