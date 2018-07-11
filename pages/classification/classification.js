@@ -66,6 +66,9 @@ Page({
         if (!!that.data.comic_pay_status){
             comic_pay_status = that.data.comic_pay_status;
         }
+        console.log(cate_id);
+        console.log(that.data.cate_id);
+
         wxApi.classList({
             method:'GET',
             data:{page_num,rows_num,cate_id,end_status,comic_pay_status},
@@ -191,7 +194,6 @@ Page({
             }else {
                 //有网络
                 that.setData({
-                    type:'loading',
                     classListData:[],
                     end_status:event.currentTarget.dataset.endid
                 })
@@ -284,6 +286,8 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+      return {
+          title: '各种有爱的动漫分享'
+      }
   }
 })

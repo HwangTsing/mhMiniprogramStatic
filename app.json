@@ -9,7 +9,8 @@
     "pages/search/search",
     "pages/classification/classification",
     "pages/releaseTable/releaseTable",
-    "pages/comicEnd/comicEnd"
+    "pages/comicEnd/comicEnd",
+    "pages/rankinglist/rankinglist"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -18,6 +19,6 @@
     "navigationBarTextStyle": "black"
   },
   "networkTimeout": {
-      "request": 10000
+    "request": 10000
   }
 }

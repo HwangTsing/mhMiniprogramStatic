@@ -250,7 +250,7 @@ Page({
     /*榜单*/
     listTap:function () {
         wx.navigateTo({
-            url: '/pages/search/search'
+            url: '/pages/rankinglist/rankinglist'
         })
     },
     /*完结*/
