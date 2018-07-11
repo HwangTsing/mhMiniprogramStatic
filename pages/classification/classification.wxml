@@ -15,13 +15,13 @@
     <!--根据分类条件进行渲染内容-->
     <scroll-view class="class_content" bindscrolltolower="lower" scroll-y="{{true}}" wx:if="{{networkType === true}}">
         <view class="class_list">
-            <view class="list_view" data-comic="{{item.comic_id}}" catchtap="goDetail"
-                  wx:if="{{classListData.length > 0}}" wx:for="{{classListData}}" wx:key="index">
+            <navigator class="list_view" url="../details/details?comic_id={{item.comic_id}}"
+                       data-comic="{{item.comic_id}}" wx:if="{{classListData.length > 0}}" wx:for="{{classListData}}" wx:key="index">
                 <imgholder class="list_img" type="hcover">
                     <image mode="scaleToFill" class="list_img" src="{{item.comic_hcover}}"></image>
                 </imgholder>
                 <view class="list_title">{{item.comic_name}}</view>
-            </view>
+            </navigator>
         </view>
         <view class="load_view">
             <view class="load_img_bg" wx:if="{{ message != '没有更多了' }}">

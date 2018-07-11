@@ -206,12 +206,6 @@ Page({
             })
         })
     },
-    goDetail:function (event) {
-        let comic_id = event.currentTarget.dataset.comic;
-        wx.navigateTo({
-            url: '/pages/details/details?comic_id='+comic_id
-        })
-    },
 
 
   /**
