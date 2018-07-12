@@ -21,8 +21,7 @@ Page({
           }
       ],
       status:0,
-      windowHeight:'',
-      onLoad:false
+      windowHeight:''
   },
     /*阅读榜数据*/
     readList:function () {
@@ -94,9 +93,9 @@ Page({
 
     /*tab事件*/
     onTabTap: function (event) {
+        //console.log(event)
         var that = this;
         var status = event.currentTarget.dataset.id;
-        console.log(status);
         if (that.data.status == status){
             return;
         }else {
@@ -126,30 +125,34 @@ Page({
     },
     /*** 滑动切换tab***/
     bindChange: function (e) {
+        //console.log(e)
         let currentId = e.detail.current;
-        console.log(currentId);
+        let source = e.detail.source;
         var that = this;
         that.setData({
-            status: e.detail.current
+            status: currentId
         });
-        if (currentId === 0) {
-            that.setData({
-                type:'loading'
-            })
-            that.readList();
+        if (source) {
+            if (currentId === 0) {
+                that.setData({
+                    type:'loading'
+                })
+                that.readList();
+            }
+            else if (currentId === 1) {
+                that.setData({
+                    type:'loading'
+                })
+                that.newList();
+            }
+            else if (currentId === 2) {
+                that.setData({
+                    type:'loading'
+                })
+                that.rankList();
+            }
         }
-        else if (currentId === 1) {
-            that.setData({
-                type:'loading'
-            })
-            that.newList();
-        }
-        else if (currentId === 2) {
-            that.setData({
-                type:'loading'
-            })
-            that.rankList();
-        }
+
     },
 
   /**
@@ -166,7 +169,6 @@ Page({
               var  calc=clientHeight*rpxR;
               that.data.windowHeight = calc;
               that.setData({
-                    onLoad:true,
                     type:'loading',
                   windowHeight: that.data.windowHeight
               });
