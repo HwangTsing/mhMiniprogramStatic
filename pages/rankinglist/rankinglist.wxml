@@ -20,10 +20,27 @@
                         </imgholder>
                     </view>
                     <view class="read_word">
-                        <view class="read_title">{{item.name}}</view>
-                        <view class="read_avatar">{{item.sina_nickname}}</view>
-                        <view class="read_introduction">{{item.description}}</view>
+                        <block wx:if="{{index === 0 || index === 1 || index === 2}}">
+                            <view class="read_title" style="width:280rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                {{item.name}}
+                            </view>
+                            <view class="read_avatar" style="width:280rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                {{item.sina_nickname}}
+                            </view>
+                            <view class="read_introduction" style="width:280rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                {{item.description}}
+                            </view>
+                        </block>
+                        <block wx:else>
+                            <view class="read_title">{{item.name}}</view>
+                            <view class="read_avatar">{{item.sina_nickname}}</view>
+                            <view class="read_introduction">{{item.description}}</view>
+                        </block>
+
                     </view>
+                    <image class="one_img"  wx:if="{{index === 0}}" src="../../images/one.png"></image>
+                    <image class="two_img" wx:if="{{index === 1}}" src="../../images/two.png"></image>
+                    <image class="three_img" wx:if="{{index === 2}}" src="../../images/three.png"></image>
                 </view>
             </scroll-view>
         </swiper-item>
@@ -36,10 +53,26 @@
                         </imgholder>
                     </view>
                     <view class="new_word">
-                        <view class="new_title">{{item.name}}</view>
-                        <view class="new_avatar">{{item.sina_nickname}}</view>
-                        <view class="new_introduction">{{item.description}}</view>
+                        <block wx:if="{{index === 0 || index === 1 || index === 2}}">
+                            <view class="new_title" style="width:280rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                {{item.name}}
+                            </view>
+                            <view class="new_avatar" style="width:280rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                {{item.sina_nickname}}
+                            </view>
+                            <view class="new_introduction" style="width:280rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                {{item.description}}
+                            </view>
+                        </block>
+                        <block wx:else>
+                            <view class="new_title">{{item.name}}</view>
+                            <view class="new_avatar">{{item.sina_nickname}}</view>
+                            <view class="new_introduction">{{item.description}}</view>
+                        </block>
                     </view>
+                    <image class="one_img"  wx:if="{{index === 0}}" src="../../images/one.png"></image>
+                    <image class="two_img" wx:if="{{index === 1}}" src="../../images/two.png"></image>
+                    <image class="three_img" wx:if="{{index === 2}}" src="../../images/three.png"></image>
                 </view>
             </scroll-view>
         </swiper-item>
@@ -52,10 +85,26 @@
                         </imgholder>
                     </view>
                     <view class="rank_word">
-                        <view class="rank_title">{{item.name}}</view>
-                        <view class="rank_avatar">{{item.sina_nickname}}</view>
-                        <view class="rank_introduction">{{item.description}}</view>
+                        <block wx:if="{{index === 0 || index === 1 || index === 2}}">
+                            <view class="rank_title" style="width:280rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                {{item.name}}
+                            </view>
+                            <view class="rank_avatar" style="width:280rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                {{item.sina_nickname}}
+                            </view>
+                            <view class="rank_introduction" style="width:280rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                {{item.description}}
+                            </view>
+                        </block>
+                        <block wx:else>
+                            <view class="rank_title">{{item.name}}</view>
+                            <view class="rank_avatar">{{item.sina_nickname}}</view>
+                            <view class="rank_introduction">{{item.description}}</view>
+                        </block>
                     </view>
+                    <image class="one_img"  wx:if="{{index === 0}}" src="../../images/one.png"></image>
+                    <image class="two_img" wx:if="{{index === 1}}" src="../../images/two.png"></image>
+                    <image class="three_img" wx:if="{{index === 2}}" src="../../images/three.png"></image>
                 </view>
             </scroll-view>
         </swiper-item>

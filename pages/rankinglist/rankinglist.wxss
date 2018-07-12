@@ -113,17 +113,32 @@
 .read_word .read_title, .new_word .new_title, .rank_word .rank_title{
     font-size:32rpx;
     color:#333333;
-
 }
 .read_word .read_avatar, .new_word .new_avatar, .rank_word .rank_avatar{
     font-size:24rpx;
     color:#999999;
     font-family:PingFangSC-Regular;
-
+    margin-bottom:4rpx;
 }
 .read_word .read_introduction, .new_word .new_introduction, .rank_word .rank_introduction{
     font-size:24rpx;
     color:#999999;
     font-family:PingFangSC-Regular;
     display: inline-block;
+    margin-bottom:4rpx;
 }
+.one_img, .two_img, .three_img{
+    width:100rpx;
+    height:100rpx;
+    margin-left:30rpx;
+}
+.one_img {
+
+}
+.two_img {
+
+}
+.three_img {
+
+}
+

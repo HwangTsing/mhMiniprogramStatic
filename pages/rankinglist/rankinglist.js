@@ -31,7 +31,12 @@ Page({
             success:function (data) {
                 console.log(data.data.data.week);
                 let readData=[];
-                readData = data.data.data.week;
+                data.data.data.week.forEach((item,index) => {
+                    readData.push(item);
+                    that.setData({
+                        index:index
+                    })
+                });
                 console.log(readData);
                 that.setData({
                     readData,
@@ -53,7 +58,12 @@ Page({
           success:function (data) {
               console.log(data.data.data.week);
               let newData = [];
-              newData = data.data.data.week;
+              data.data.data.week.forEach((item,index) => {
+                  newData.push(item);
+                  that.setData({
+                      index:index
+                  })
+              });
               console.log(newData);
               that.setData({
                   newData,
@@ -75,7 +85,12 @@ Page({
             success:function (data) {
                 console.log(data.data.data.week);
                 let rankData = [];
-                rankData = data.data.data.week;
+                data.data.data.week.forEach((item,index) => {
+                    rankData.push(item);
+                    that.setData({
+                        index:index
+                    })
+                });
                 console.log(rankData);
                 that.setData({
                     rankData,
