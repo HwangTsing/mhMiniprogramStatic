@@ -76,7 +76,7 @@
     <!-- 提示信息 S  -->
     <import src="/tpls/message.wxml"/>
 
-    <template is="message" wx:if="{{ type && !comicList }}" data="{{ type }}"/>
+    <template is="message" wx:if="{{ type }}" data="{{ type }}"/>
     <!-- 提示信息 S  -->
 </view>
 <!-- 放送表 E -->

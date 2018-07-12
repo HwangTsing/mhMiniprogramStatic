@@ -85,7 +85,20 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-       this.getComicEndList(this.data.url);
+        //调用是否存在网络
+        wxApi.getNetworkType().then((NetworkType) => {
+            let networkType = NetworkType.networkType;
+            if (networkType === 'none' || networkType === 'unknown') {
+                //无网络什么都不做
+                this.setData({
+                    networkType: false,
+                    type: 'net',
+                })
+            } else {
+                //网络没有问题的时候
+                this.getComicEndList(this.data.url);
+            }
+        });
     },
 
     /**
