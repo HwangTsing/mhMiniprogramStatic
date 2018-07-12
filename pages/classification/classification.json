@@ -7,5 +7,8 @@
     "usingComponents":{
         "message": "/components/message/message",
         "imgholder":"/components/imgHolder/imgHolder"
+    },
+    "networkTimeout": {
+        "request": 10000
     }
 }

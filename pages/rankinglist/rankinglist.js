@@ -21,34 +21,39 @@ Page({
           }
       ],
       status:0,
-      windowHeight:''
+      windowHeight:'',
+      networkType:true,  //是否有网络
+      isLoad:false,     //是否加载失败
   },
     /*阅读榜数据*/
     readList:function () {
         var that = this;
         wxApi.readList({
-            method:'GET',
-            success:function (data) {
-                console.log(data.data.data.week);
-                let readData=[];
-                data.data.data.week.forEach((item,index) => {
-                    readData.push(item);
+                method:'GET',
+                success:function (data) {
+                    console.log(data.data.data.week);
+                    let readData=[];
+                    data.data.data.week.forEach((item,index) => {
+                        readData.push(item);
+                        that.setData({
+                            index:index
+                        })
+                    });
+                    console.log(readData);
                     that.setData({
-                        index:index
+                        readData,
+                        type:null,
                     })
-                });
-                console.log(readData);
-                that.setData({
-                    readData,
-                    type:null,
-                })
-            },
-            fail:function (data) {
-                that.setData({
-
-                })
-            }
+                },
+                fail:function (data) {
+                    that.setData({
+                        networkType: true,
+                        isLoad:true
+                    })
+                }
         })
+
+
     },
     /*新作榜数据*/
     newList:function () {
@@ -72,7 +77,8 @@ Page({
           },
           fail:function (data) {
               this.setData({
-
+                  networkType: true,
+                  isLoad:true
               })
           }
       })
@@ -99,7 +105,8 @@ Page({
             },
             fail:function (data) {
                 this.setData({
-
+                    networkType: true,
+                    isLoad:true
                 })
             }
         })
@@ -117,24 +124,45 @@ Page({
             this.setData({
                 status :event.currentTarget.dataset.id
             });
-            if (status === 0) {
-                that.setData({
-                    type:'loading'
+            wxApi.getNetworkType().then((res) =>{
+                let networkType = res.networkType;
+                if (networkType === 'none' || networkType === 'unknown') {
+                    //无网络不进行任何操作
+                    this.setData({
+                        networkType: false,
+                        readData:[],
+                        newData:[],
+                        rankData:[]
+                    });
+
+                }else {
+                    //有网络
+                    if (status === 0) {
+                        that.setData({
+                            type:'loading'
+                        })
+                        that.readList();
+                    }
+                    else if (status === 1) {
+                        that.setData({
+                            type:'loading'
+                        })
+                        that.newList();
+                    }
+                    else if (status === 2) {
+                        that.setData({
+                            type:'loading'
+                        })
+                        that.rankList();
+                    }
+
+                }
+            }).catch((err) =>{
+                this.setData({
+                    networkType: true,
+                    isLoad:true
                 })
-                that.readList();
-            }
-            else if (status === 1) {
-                that.setData({
-                    type:'loading'
-                })
-                that.newList();
-            }
-            else if (status === 2) {
-                that.setData({
-                    type:'loading'
-                })
-                that.rankList();
-            }
+            })
         }
 
     },
@@ -148,26 +176,66 @@ Page({
             status: currentId
         });
         if (source) {
-            if (currentId === 0) {
-                that.setData({
-                    type:'loading'
+            wxApi.getNetworkType().then((res) =>{
+                let networkType = res.networkType;
+                if (networkType === 'none' || networkType === 'unknown') {
+                    //无网络不进行任何操作
+                    this.setData({
+                        networkType: false,
+                        readData:[],
+                        newData:[],
+                        rankData:[]
+                    })
+
+                }else {
+                    //有网络
+                    if (currentId === 0) {
+                        that.setData({
+                            type:'loading'
+                        })
+                        that.readList();
+                    }
+                    else if (currentId === 1) {
+                        that.setData({
+                            type:'loading'
+                        })
+                        that.newList();
+                    }
+                    else if (currentId === 2) {
+                        that.setData({
+                            type:'loading'
+                        })
+                        that.rankList();
+                    }
+
+                }
+            }).catch((err) =>{
+                this.setData({
+                    networkType: true,
+                    isLoad:true
                 })
-                that.readList();
-            }
-            else if (currentId === 1) {
-                that.setData({
-                    type:'loading'
-                })
-                that.newList();
-            }
-            else if (currentId === 2) {
-                that.setData({
-                    type:'loading'
-                })
-                that.rankList();
-            }
+            })
         }
 
+    },
+    /*页面跳转*/
+    readTap:function (event) {
+        var comic_id = event.currentTarget.dataset.id;
+        wx.navigateTo({
+            url: '/pages/details/details?comic_id='+comic_id
+        })
+    },
+    newTap:function (event) {
+        var comic_id = event.currentTarget.dataset.id;
+        wx.navigateTo({
+            url: '/pages/details/details?comic_id='+comic_id
+        })
+    },
+    rankTap:function (event) {
+        var comic_id = event.currentTarget.dataset.id;
+        wx.navigateTo({
+            url: '/pages/details/details?comic_id='+comic_id
+        })
     },
 
   /**
@@ -175,21 +243,39 @@ Page({
    */
   onLoad: function (options) {
       var that = this;
-      //  高度自适应
-      wx.getSystemInfo( {
-          success: function( res ) {
-              var clientHeight=res.windowHeight,
-                  clientWidth=res.windowWidth,
-                  rpxR=750/clientWidth;
-              var  calc=clientHeight*rpxR;
-              that.data.windowHeight = calc;
-              that.setData({
-                    type:'loading',
-                  windowHeight: that.data.windowHeight
+      wxApi.getNetworkType().then((res) =>{
+          let networkType = res.networkType;
+          if (networkType === 'none' || networkType === 'unknown') {
+              //无网络不进行任何操作
+              this.setData({
+                  networkType: false,
+              })
+
+          }else {
+              //有网络
+              //  高度自适应
+              wx.getSystemInfo( {
+                  success: function( res ) {
+                      var clientHeight=res.windowHeight,
+                          clientWidth=res.windowWidth,
+                          rpxR=750/clientWidth;
+                      var  calc=clientHeight*rpxR;
+                      that.data.windowHeight = calc;
+                      that.setData({
+                          type:'loading',
+                          windowHeight: that.data.windowHeight
+                      });
+                  }
               });
+              that.readList();
+
           }
-      });
-      that.readList();
+      }).catch((err) =>{
+          this.setData({
+              networkType: true,
+              isLoad:true
+          })
+      })
   },
 
   /**

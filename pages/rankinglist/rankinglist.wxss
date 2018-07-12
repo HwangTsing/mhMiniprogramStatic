@@ -82,7 +82,7 @@
     -webkit-flex-direction:column;
     -ms-flex-direction:column;
     box-sizing:border-box;
-    margin:0 20rpx 0;
+    padding:0 20rpx 0;
 }
 .read_view .left_view, .new_view .left_view, .rank_view .left_view{
     width:272rpx;
