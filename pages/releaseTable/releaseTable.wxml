@@ -1,70 +1,82 @@
 <!-- pages/release/release.wxml -->
 <!-- 放送表 S -->
-<view class="release_table_container" id="release_table_container">
-
+<view 
+    class="release_table_container" 
+    id="release_table_container"
+>
     <!--  头部导航S  -->
-    <!-- 
-        bindClickPubDay 接受子组件返送的事件
-        tabList 传递给子组件的日期数据(数组)
-        pubDay 传递给子组件的当前时间
-    -->
-    <topNav 
-        bindClickPubDay="ClickPubDay"
-        wx:if="{{ tabList && tabList.length!=0 }}"
-        tabList="{{tabList}}"
-        pubDay="{{pubDay}}"
-    ></topNav>
+        <!-- 
+            bindClickPubDay 接受子组件返送的事件
+            tabList 传递给子组件的日期数据(数组)
+            pubDay 传递给子组件的当前时间
+        -->
+        <topNav 
+            bindClickPubDay="ClickPubDay"
+            wx:if="{{ tabList && tabList.length!=0 }}"
+            tabList="{{tabList}}"
+            pubDay="{{pubDay}}"
+            id="topNav"
+        ></topNav>
     <!--  头部导航S  -->
+    <scroll-view
+        class="scroll_view"
+        style="height:{{height}}px"
+        wx:if="{{ comicList }}"
+        scroll-y
+        lower-threshold="{{50}}"
+        scroll-with-animation="true"
+        enable-back-to-top="true"
+        bindscrolltolower="onScroll"
+    >
+        <!-- 列表 S  -->
+        <!-- 
+            data:漫画id {comic_id:1},
+            cate:漫画分类(标签) {cate_cn_name:少年,cate_id:7}
+            lastChapter: 漫画最新章节{chapter_name:xxx,comic_id:xxx,chapter_id:xxx},
+            comic:漫画信息 {comic_id:1,name:xxx,cover:xxx,...}
+            siteImage:背景前缀(域名)
+        -->
+        <releaseAndEndItem
+            wx:if="{{ comicList && comicList.length!=0 }}"
+            wx:for="{{comicList}}"
+            wx:key="{{index}}"
+            data="{{item.data}}"
+            cate="{{item.cate}}"
+            lastChapter="{{item.lastChapter}}"
+            comic="{{item.comic}}"
+            siteImage="{{siteImage}}"
+        ></releaseAndEndItem>
+        <!-- 列表 E  -->
 
-    <!-- 列表 S  -->
-    <!-- 
-        data:漫画id {comic_id:1},
-        cate:漫画分类(标签) {cate_cn_name:少年,cate_id:7}
-        lastChapter: 漫画最新章节{chapter_name:xxx,comic_id:xxx,chapter_id:xxx},
-        comic:漫画信息 {comic_id:1,name:xxx,cover:xxx,...}
-        siteImage:背景前缀(域名)
-    -->
-    <releaseAndEndItem
-        wx:if="{{ comicList && comicList.length!=0 }}"
-        wx:for="{{comicList}}"
-        wx:key="{{index}}"
-        data="{{item.data}}"
-        cate="{{item.cate}}"
-        lastChapter="{{item.lastChapter}}"
-        comic="{{item.comic}}"
-        siteImage="{{siteImage}}"
-    ></releaseAndEndItem>
-    <!-- 列表 E  -->
+
+        <!-- 空内容的时候 S -->
+        <message 
+            wx:if="{{comicList&&comicList.length==0}}" 
+            type="nothing"
+        ></message>    
+        <!-- 空内容的时候 E -->
 
 
-    <!-- 空内容的时候 S -->
-    <message 
-        wx:if="{{comicList&&comicList.length==0}}" 
-        type="nothing"
-    ></message>    
-    <!-- 空内容的时候 E -->
 
+        <view class="release_message"
+                wx:if="{{ comicList&&comicList.length>9 && isMessage }}"
+        >
+            <image
+                wx:if="{{ message === '加载中' }}"
+                class="release_src"
+                mode="aspectFill"
+                src="../../images/details/loads.png"
+            ></image>
+            <view class="text {{message != '加载中'?'text_message':''}}">
+                {{message}}
+            </view>
+        </view>
+    </scroll-view>
 
     <!-- 提示信息 S  -->
     <import src="/tpls/message.wxml"/>
 
-    <template is="message" wx:if="{{ type }}" data="{{ type }}"/>
+    <template is="message" wx:if="{{ type && !comicList }}" data="{{ type }}"/>
     <!-- 提示信息 S  -->
-
-
-    <view class="release_message"
-            wx:if="{{ comicList&&comicList.length>9 && isMessage }}"
-    >
-        <image
-            wx:if="{{ message === '加载中' }}"
-            class="release_src"
-            mode="aspectFill"
-            src="../../images/details/loads.png"
-        ></image>
-        <view class="text {{message != '加载中'?'text_message':''}}">
-            {{message}}
-        </view>
-    </view>
-    
 </view>
 <!-- 放送表 E -->

@@ -36,14 +36,12 @@ Page({
             networkType: true,
             comicList:null,//数据列表
         });
-        wxApi.pageScrollTo({ //滚动条回到顶部
-            scrollTop: 0
-        })
         this.isLoad({ //开始调用 获取数据
             url:this.data.url,
             pubDay:this.data.pubDay,
             pageNum:this.data.pageNum,
-            rowsNum:this.data.rowsNum
+            rowsNum:this.data.rowsNum,
+            goTop:true
         })
     },
 
@@ -96,7 +94,7 @@ Page({
      * @ rowsNum 每次请求多少条数据 默认10
      *  目的存储当前页数据
     */
-    daypubList: function({ url='', pubDay="", pageNum=1, rowsNum=10 }={}){
+    daypubList: function({ url='', pubDay="", pageNum=1, rowsNum=10,goTop=false }={}){
         let data={
             page_num: pageNum,
             rows_num: rowsNum,
@@ -109,6 +107,15 @@ Page({
                     tabList,
                     pubDay:tabList[tabList.length-1].pub_day
                 });
+
+                wxApi.getNodeInfo('#topNav').then((res)=>{ //在这获取导航条的高度
+                    //console.log(res)
+                    if(res&&res.height){
+                        this.setData({ //不存在存储日期列表
+                            height:this.data.height-res.height
+                        });
+                    }
+                })
             };
             let {  //解构 res.data
                     data:myData,
@@ -124,7 +131,11 @@ Page({
                 chapterList,
                 cateList
             });
-            
+            if(goTop){ //如果是true  执行回到顶部
+                wxApi.pageScrollTo({ //滚动条回到顶部
+                    scrollTop: 0
+                })
+            }
             this.setData({ //存储数据
                 comicList:comicAry,
                 siteImage:siteImage,
@@ -151,7 +162,7 @@ Page({
      * @ pageNum 请求的第几页 默认1 用于请求(daypubList)
      * @ rowsNum 每次请求多少条数据 默认10  用于请求 (daypubList)
     */
-    isLoad:function ({ url='', pubDay="", pageNum=1, rowsNum=10 }={}){
+    isLoad:function ({ url='', pubDay="", pageNum=1, rowsNum=10 , goTop=false }={}){
         wxApi.getNetworkType().then((NetworkType) => {
             let networkType = NetworkType.networkType;
             if (networkType === 'none' || networkType === 'unknown') {
@@ -169,7 +180,8 @@ Page({
                     url,
                     pubDay,
                     pageNum,
-                    rowsNum
+                    rowsNum,
+                    goTop
                 })
             }
         }).catch((err) => {
@@ -191,13 +203,44 @@ Page({
             pageNum:this.data.pageNum,
             rowsNum:this.data.rowsNum
         });
+
     },
 
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady: function () {
+        
+        const { windowHeight } = wxApi.getSystemInfoSync(); //获取设备信息
+        this.setData({
+            height: windowHeight
+        })
+    },
 
+    /* 
+    * *** scroll-view 的上滑无限加载事件
+    *   **onScroll
+    */
+    onScroll(){
+        const data=this.data;
+        let {pageNum,rowsNum,pageTotal,isLoading}=data;
+
+        //topNav
+
+        if(!isLoading && pageNum<pageTotal){
+            this.setData({
+                pageNum:pageNum+1//条件成立后pageNum+1 然后在请求
+            });
+            this.isLoad({ //调用判断是否存在网络 
+                url:this.data.url,
+                pubDay:this.data.pubDay,
+                pageNum:this.data.pageNum,
+                rowsNum:this.data.rowsNum
+            });
+
+        }else{
+            return
+        }
     },
 
     /**
@@ -232,7 +275,7 @@ Page({
             }=res;// 格式化获取的元素信息
 
             let isBottom=(windowHeight+obj.scrollTop)+20;
-            //console.log(isBottom >= height , !isLoading , pageNum<pageTotal,pageNum,pageTotal,isBottom , height)
+            // console.log(isBottom >= height , !isLoading , pageNum < pageTotal,pageNum,pageTotal,isBottom , height)
 
             
             if( isBottom >= height && !isLoading && pageNum<pageTotal){
@@ -256,7 +299,7 @@ Page({
     },
 
     onPageScroll(obj){ //检测页面滚动条
-        this.isOnPageScroll(obj); 
+        //this.isOnPageScroll(obj); 
     },
     /**
      * 生命周期函数--监听页面显示
