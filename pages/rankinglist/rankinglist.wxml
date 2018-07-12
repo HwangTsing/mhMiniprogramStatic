@@ -10,7 +10,7 @@
             </block>
         </ul>
     </view>
-    <swiper current="{{status}}" class="swiper-box" style="height:{{windowHeight}}rpx;" bindchange="bindChange">
+    <swiper current="{{status}}" class="swiper-box"  duration="300"  style="height:{{windowHeight}}rpx;" bindchange="bindChange">
         <swiper-item class="read_content">
             <scroll-view scroll-y="true" class="swiper_scroll">
                 <view class="read_view" wx:for="{{readData}}" wx:key="{{index}}">
@@ -25,13 +25,66 @@
                         <view class="read_introduction">{{item.description}}</view>
                     </view>
                 </view>
+                <!--无网络，加载失败loading-->
+                <import src="./template/message.wxml"></import>
+                <template is="message" data="{{networkType,isLoad}}"></template>
+
+                <!-- 网络慢提示loading -->
+                <import src="/tpls/message.wxml"/>
+                <view wx:if="{{!isLoad}}" style="position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;">
+                    <template is="message" wx:if="{{type}}" data="{{ type }}"/>
+                </view>
             </scroll-view>
         </swiper-item>
-        <swiper-item style="background-color:green">
-            绿色内容
+        <swiper-item>
+            <scroll-view scroll-y="true" class="swiper_scroll">
+                <view class="new_view" wx:for="{{newData}}" wx:key="{{index}}">
+                    <view class="left_view">
+                        <imgholder type="hcover">
+                            <image class="left_img" src="{{item.hcover}}"></image>
+                        </imgholder>
+                    </view>
+                    <view class="new_word">
+                        <view class="new_title">{{item.name}}</view>
+                        <view class="new_avatar">{{item.sina_nickname}}</view>
+                        <view class="new_introduction">{{item.description}}</view>
+                    </view>
+                </view>
+                <!--无网络，加载失败loading-->
+                <import src="./template/message.wxml"></import>
+                <template is="message" data="{{networkType,isLoad}}"></template>
+
+                <!-- 网络慢提示loading -->
+                <import src="/tpls/message.wxml"/>
+                <view wx:if="{{!isLoad}}" style="position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;">
+                    <template is="message" wx:if="{{type}}" data="{{ type }}"/>
+                </view>
+            </scroll-view>
         </swiper-item>
-        <swiper-item style="background-color:yellow">
-            黑色内容
+        <swiper-item>
+            <scroll-view scroll-y="true" class="swiper_scroll">
+                <view class="rank_view" wx:for="{{rankData}}" wx:key="{{index}}">
+                    <view class="left_view">
+                        <imgholder type="hcover">
+                            <image class="left_img" src="{{item.hcover}}"></image>
+                        </imgholder>
+                    </view>
+                    <view class="rank_word">
+                        <view class="rank_title">{{item.name}}</view>
+                        <view class="rank_avatar">{{item.sina_nickname}}</view>
+                        <view class="rank_introduction">{{item.description}}</view>
+                    </view>
+                </view>
+                <!--无网络，加载失败loading-->
+                <import src="./template/message.wxml"></import>
+                <template is="message" data="{{networkType,isLoad}}"></template>
+
+                <!-- 网络慢提示loading -->
+                <import src="/tpls/message.wxml"/>
+                <view wx:if="{{!isLoad}}" style="position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;">
+                    <template is="message" wx:if="{{type}}" data="{{ type }}"/>
+                </view>
+            </scroll-view>
         </swiper-item>
     </swiper>
     <!--无网络，加载失败loading-->
@@ -40,7 +93,7 @@
 
     <!-- 网络慢提示loading -->
     <import src="/tpls/message.wxml"/>
-    <view wx:if="{{!isLoad}}" style="position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;">
+    <view wx:if="{{!isLoad && onLoad === true}}" style="position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;">
         <template is="message" wx:if="{{type}}" data="{{ type }}"/>
     </view>
 </view>

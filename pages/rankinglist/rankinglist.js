@@ -21,7 +21,8 @@ Page({
           }
       ],
       status:0,
-      windowHeight:''
+      windowHeight:'',
+      onLoad:false
   },
     /*阅读榜数据*/
     readList:function () {
@@ -34,7 +35,7 @@ Page({
                 readData = data.data.data.week;
                 console.log(readData);
                 that.setData({
-                    readData:readData,
+                    readData,
                     type:null,
                 })
             },
@@ -47,10 +48,18 @@ Page({
     },
     /*新作榜数据*/
     newList:function () {
+        var that = this;
       wxApi.newList({
           method:'GET',
           success:function (data) {
-              console.log(data);
+              console.log(data.data.data.week);
+              let newData = [];
+              newData = data.data.data.week;
+              console.log(newData);
+              that.setData({
+                  newData,
+                  type:null,
+              })
           },
           fail:function (data) {
               this.setData({
@@ -61,10 +70,18 @@ Page({
     },
     /*综合榜数据*/
     rankList:function () {
+        var that = this;
         wxApi.rankList({
             method:'GET',
             success:function (data) {
-
+                console.log(data.data.data.week);
+                let rankData = [];
+                rankData = data.data.data.week;
+                console.log(rankData);
+                that.setData({
+                    rankData,
+                    type:null,
+                })
             },
             fail:function (data) {
                 this.setData({
@@ -85,17 +102,54 @@ Page({
         }else {
             this.setData({
                 status :event.currentTarget.dataset.id
-            })
+            });
+            if (status === 0) {
+                that.setData({
+                    type:'loading'
+                })
+                that.readList();
+            }
+            else if (status === 1) {
+                that.setData({
+                    type:'loading'
+                })
+                that.newList();
+            }
+            else if (status === 2) {
+                that.setData({
+                    type:'loading'
+                })
+                that.rankList();
+            }
         }
 
     },
     /*** 滑动切换tab***/
     bindChange: function (e) {
-        console.log(e.detail.current);
+        let currentId = e.detail.current;
+        console.log(currentId);
         var that = this;
         that.setData({
             status: e.detail.current
         });
+        if (currentId === 0) {
+            that.setData({
+                type:'loading'
+            })
+            that.readList();
+        }
+        else if (currentId === 1) {
+            that.setData({
+                type:'loading'
+            })
+            that.newList();
+        }
+        else if (currentId === 2) {
+            that.setData({
+                type:'loading'
+            })
+            that.rankList();
+        }
     },
 
   /**
@@ -111,7 +165,8 @@ Page({
                   rpxR=750/clientWidth;
               var  calc=clientHeight*rpxR;
               that.data.windowHeight = calc;
-              that.setData( {
+              that.setData({
+                    onLoad:true,
                     type:'loading',
                   windowHeight: that.data.windowHeight
               });

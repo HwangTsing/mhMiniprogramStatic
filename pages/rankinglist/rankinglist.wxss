@@ -66,11 +66,12 @@
 .swiper_scroll{
     height: 100%;
 }
-.swiper_scroll .read_view:nth-child(1) {
+.swiper_scroll .read_view:nth-child(1), .swiper_scroll .new_view:nth-child(1), .swiper_scroll .rank_view:nth-child(1){
     margin-top:100rpx;
 }
 
-.read_view {
+
+.read_view, .new_view, .rank_view {
     width:100%;
     height:212rpx;
     display:flex;
@@ -83,7 +84,7 @@
     box-sizing:border-box;
     margin:0 20rpx 0;
 }
-.read_view .left_view {
+.read_view .left_view, .new_view .left_view, .rank_view .left_view{
     width:272rpx;
     height:152rpx;
     flex:1;
@@ -101,7 +102,7 @@
     top:0;
     z-index:1;
 }
-.read_view .read_word {
+.read_view .read_word, .new_view .new_word, .rank_view .rank_word{
     margin-left: 290rpx;
     flex:1;
     -webkit-box-flex:1;
@@ -109,18 +110,18 @@
     display: inline-block;
     margin-bottom:75rpx;
 }
-.read_word .read_title {
+.read_word .read_title, .new_word .new_title, .rank_word .rank_title{
     font-size:32rpx;
     color:#333333;
 
 }
-.read_word .read_avatar {
+.read_word .read_avatar, .new_word .new_avatar, .rank_word .rank_avatar{
     font-size:24rpx;
     color:#999999;
     font-family:PingFangSC-Regular;
 
 }
-.read_word .read_introduction {
+.read_word .read_introduction, .new_word .new_introduction, .rank_word .rank_introduction{
     font-size:24rpx;
     color:#999999;
     font-family:PingFangSC-Regular;
