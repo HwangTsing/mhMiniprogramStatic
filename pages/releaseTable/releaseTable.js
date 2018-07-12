@@ -41,13 +41,13 @@ Page({
             pubDay:this.data.pubDay,
             pageNum:this.data.pageNum,
             rowsNum:this.data.rowsNum,
-            goTop:true
+            goTop:false
         })
     },
 
     //http://api.manhua.weibo.com/wbcomic/comic/daypub_list?_debug_=yes&page_num=1&rows_num=20&pub_day=20180331
     /*
-    
+
     pub_day	    放送时间（第一次请求传空，以服务器时间为准，之后带相应参数）
     page_num	页数
     rows_num	每页条数
@@ -63,25 +63,25 @@ Page({
     formatData( { myData=[], comicList={}, chapterList={}, cateList={} }={} ){
         let ary=this.data.comicList;
         ary=ary?ary:[];
-    
-        myData.forEach( ( itme,index ) => { 
-            
+
+        myData.forEach( ( itme,index ) => {
+
             /* 格式化标签 */
             let cate=cateList[itme.comic_id];
             if(cate){
                 cate=cate[0]?cate[0]:null
             }else{
-                cate=null 
+                cate=null
             };
-            
+
              let obj={
                 data:itme,
-                comic:comicList[itme.comic_id]?comicList[itme.comic_id]:null, 
+                comic:comicList[itme.comic_id]?comicList[itme.comic_id]:null,
                 cate
-             } 
-              
+             }
+
              obj.lastChapter=chapterList[obj.comic.last_chapter_id]?chapterList[obj.comic.last_chapter_id]:null;
-                    
+
              ary.push(obj);
         });
         return ary;
@@ -100,7 +100,7 @@ Page({
             rows_num: rowsNum,
             pub_day: pubDay,
         }
-        
+
          wxApi.get(url,{data}).then(({code,data,message,tab_list:tabList})=>{
             if(!pubDay){ //如果 请求的日期存在不存储 日期列表
                 this.setData({ //不存在存储日期列表
@@ -120,7 +120,7 @@ Page({
             let {  //解构 res.data
                     data:myData,
                     comic_list:comicList ,
-                    chapter_list:chapterList , 
+                    chapter_list:chapterList ,
                     cate_list:cateList  ,
                     site_image:siteImage,
                     page_total:pageTotal
@@ -144,7 +144,7 @@ Page({
                 message: pageTotal > pageNum ? '加载中' : '今天没有了，不如换一天看看～',//存储提示词,
                 isMessage:true,
                 type:null,
-            });     
+            });
         }).catch((err)=>{ //错误的时候
             this.setData({
                 networkType: false,
@@ -152,7 +152,7 @@ Page({
                 isMessage:false,
             })//错误时候
         })
-        
+
     },
 
     /**
@@ -197,7 +197,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        this.isLoad({ //调用判断是否存在网络 
+        this.isLoad({ //调用判断是否存在网络
             url:this.data.url,
             pubDay:this.data.pubDay,
             pageNum:this.data.pageNum,
@@ -248,7 +248,7 @@ Page({
      * obj //滚动信息
     */
     isOnPageScroll(obj){
-        /* 
+        /*
             pageNum: 1,//页码
             rowsNum: 10,//每次获取的数据条数
             pageTotal:1,
@@ -269,7 +269,7 @@ Page({
                windowHeight, //设备的高度
                windowWidth //设备的宽度
             }=phoneInfo;//获取到的设备信息
-          
+
             let {  //格式化获取的元素信息
                  id , width, height, top, bottom, left, right, datase
             }=res;// 格式化获取的元素信息
@@ -277,12 +277,12 @@ Page({
             let isBottom=(windowHeight+obj.scrollTop)+20;
             // console.log(isBottom >= height , !isLoading , pageNum < pageTotal,pageNum,pageTotal,isBottom , height)
 
-            
+
             if( isBottom >= height && !isLoading && pageNum<pageTotal){
                 this.setData({
                     pageNum:pageNum+1//条件成立后pageNum+1 然后在请求
                 });
-                this.isLoad({ //调用判断是否存在网络 
+                this.isLoad({ //调用判断是否存在网络
                     url:this.data.url,
                     pubDay:this.data.pubDay,
                     pageNum:this.data.pageNum,
@@ -341,7 +341,7 @@ Page({
      */
     onShareAppMessage: function () {
         return {
-          title: '各种有爱的动漫分享'
+            title: '各种有爱的动漫分享'
         }
     }
 })

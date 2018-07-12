@@ -1,0 +1,128 @@
+.container_ranking {
+    width:100%;
+    /*height:100vh;*/
+
+}
+.container_ranking .tab_view {
+    width: 100%;
+    display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    flex-direction: row;
+    -webkit-box-orient: vertical;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    /*justify-content: space-around;*/
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    z-index: 99;
+    height:80rpx;
+}
+.tab_view .nav_tab {
+    width: 100%;
+    display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    flex-direction: row;
+    -webkit-box-orient: vertical;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    justify-content: space-around;
+}
+.tab_name {
+    color:#999999;
+    font-size:32rpx;
+    padding: 18rpx;
+    text-align: center;
+    font-family:PingFangSC-Regular;
+}
+.activeColor {
+    font-size:32rpx;
+    padding:18rpx;
+    text-align: center;
+    color:#333333;
+    font-family:PingFangSC-Medium;
+}
+.activeBorder {
+    width:40%;
+    margin:9rpx auto;
+    border:3rpx solid #FF4C6A;
+    background:#FF4C6A;
+    border-radius:200rpx;
+    -webkit-border-radius:200rpx;
+    -moz-border-radius:200rpx;
+    -mz-border-radius:200rpx;
+    overflow:hidden;
+}
+.swiper-box {
+    display: block;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+.swiper_scroll{
+    height: 100%;
+}
+.swiper_scroll .read_view:nth-child(1) {
+    margin-top:100rpx;
+}
+
+.read_view {
+    width:100%;
+    height:212rpx;
+    display:flex;
+    display:-webkit-flex;
+    display:-webkit-box;
+    flex-direction:column;
+    -webkit-box-orient:vertical;
+    -webkit-flex-direction:column;
+    -ms-flex-direction:column;
+    box-sizing:border-box;
+    margin:0 20rpx 0;
+}
+.read_view .left_view {
+    width:272rpx;
+    height:152rpx;
+    flex:1;
+    -webkit-box-flex:1;
+    -webkit-flex:1;
+    position:relative;
+    left:0;
+    top:0;
+}
+.left_view .left_img {
+    width:272rpx;
+    height:152rpx;
+    position:absolute;
+    left:0;
+    top:0;
+    z-index:1;
+}
+.read_view .read_word {
+    margin-left: 290rpx;
+    flex:1;
+    -webkit-box-flex:1;
+    -webkit-flex:1;
+    display: inline-block;
+    margin-bottom:75rpx;
+}
+.read_word .read_title {
+    font-size:32rpx;
+    color:#333333;
+
+}
+.read_word .read_avatar {
+    font-size:24rpx;
+    color:#999999;
+    font-family:PingFangSC-Regular;
+
+}
+.read_word .read_introduction {
+    font-size:24rpx;
+    color:#999999;
+    font-family:PingFangSC-Regular;
+    display: inline-block;
+}

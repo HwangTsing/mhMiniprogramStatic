@@ -1,0 +1,46 @@
+<!--pages/rankinglist/rankinglist.wxml-->
+<view class="container_ranking">
+    <view class="tab_view">
+        <ul class="nav_tab">
+            <block wx:for="{{statusList}}" wx:for-item="statusList" wx:key="status">
+                <li class="{{status === statusList.status ? 'activeColor' : 'tab_name'}}" data-id="{{statusList.status}}"bindtap="onTabTap">
+                    {{statusList.title}}
+                    <view class="{{status === statusList.status ? 'activeBorder':''}}"></view>
+                </li>
+            </block>
+        </ul>
+    </view>
+    <swiper current="{{status}}" class="swiper-box" style="height:{{windowHeight}}rpx;" bindchange="bindChange">
+        <swiper-item class="read_content">
+            <scroll-view scroll-y="true" class="swiper_scroll">
+                <view class="read_view" wx:for="{{readData}}" wx:key="{{index}}">
+                    <view class="left_view">
+                        <imgholder type="hcover">
+                            <image class="left_img" src="{{item.hcover}}"></image>
+                        </imgholder>
+                    </view>
+                    <view class="read_word">
+                        <view class="read_title">{{item.name}}</view>
+                        <view class="read_avatar">{{item.sina_nickname}}</view>
+                        <view class="read_introduction">{{item.description}}</view>
+                    </view>
+                </view>
+            </scroll-view>
+        </swiper-item>
+        <swiper-item style="background-color:green">
+            绿色内容
+        </swiper-item>
+        <swiper-item style="background-color:yellow">
+            黑色内容
+        </swiper-item>
+    </swiper>
+    <!--无网络，加载失败loading-->
+    <import src="./template/message.wxml"></import>
+    <template is="message" data="{{networkType,isLoad}}"></template>
+
+    <!-- 网络慢提示loading -->
+    <import src="/tpls/message.wxml"/>
+    <view wx:if="{{!isLoad}}" style="position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;">
+        <template is="message" wx:if="{{type}}" data="{{ type }}"/>
+    </view>
+</view>
