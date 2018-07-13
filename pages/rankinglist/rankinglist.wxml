@@ -115,7 +115,8 @@
 
     <!-- 网络慢提示loading -->
     <import src="/tpls/message.wxml"/>
-    <view wx:if="{{!isLoad}}" style="position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;">
+    <view wx:if="{{!isLoad}}"
+          style="{{statusList.length>0?'position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;margin-top: 100rpx;':'position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;'}}">
         <template is="message" wx:if="{{type}}" data="{{ type }}"/>
     </view>
 </view>

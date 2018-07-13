@@ -129,10 +129,7 @@ Page({
                 if (networkType === 'none' || networkType === 'unknown') {
                     //无网络不进行任何操作
                     this.setData({
-                        networkType: false,
-                        readData:[],
-                        newData:[],
-                        rankData:[]
+                        networkType: false
                     });
 
                 }else {
@@ -181,30 +178,18 @@ Page({
                 if (networkType === 'none' || networkType === 'unknown') {
                     //无网络不进行任何操作
                     this.setData({
-                        networkType: false,
-                        readData:[],
-                        newData:[],
-                        rankData:[]
+                        networkType: false
                     })
 
                 }else {
                     //有网络
                     if (currentId === 0) {
-                        that.setData({
-                            type:'loading'
-                        })
                         that.readList();
                     }
                     else if (currentId === 1) {
-                        that.setData({
-                            type:'loading'
-                        })
                         that.newList();
                     }
                     else if (currentId === 2) {
-                        that.setData({
-                            type:'loading'
-                        })
                         that.rankList();
                     }
 

@@ -34,6 +34,16 @@ Page({
                 console.log(that.data.comicCate);
                 that.data.comicEnd = data.data.data.end_status_list;
                 console.log(that.data.comicEnd);
+                that.data.comicCate.forEach((item,index) =>{
+                    that.setData({
+                        index
+                    })
+                })
+                that.data.comicEnd.forEach((item,index) =>{
+                    that.setData({
+                        index
+                    })
+                })
                 that.setData({
                     comicCate:that.data.comicCate,
                     comicEnd:that.data.comicEnd
