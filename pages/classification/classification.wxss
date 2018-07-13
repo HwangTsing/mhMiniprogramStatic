@@ -48,7 +48,7 @@ page {
 .active_border {
     width:42%;
     margin:2rpx auto;
-    border:2rpx solid #FF4C6A;
+    border:4rpx solid #FF4C6A;
     background:#FF4C6A;
     border-radius:10rpx;
     -webkit-border-radius:10rpx;

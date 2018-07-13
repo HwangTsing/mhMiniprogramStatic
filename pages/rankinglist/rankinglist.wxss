@@ -48,8 +48,8 @@
 }
 .activeBorder {
     width:40%;
-    margin:9rpx auto;
-    border:3rpx solid #FF4C6A;
+    margin:5rpx auto;
+    border:4rpx solid #FF4C6A;
     background:#FF4C6A;
     border-radius:200rpx;
     -webkit-border-radius:200rpx;
@@ -101,6 +101,7 @@
     left:0;
     top:0;
     z-index:1;
+    border:1rpx solid #e6e6e6;
 }
 .read_view .read_word, .new_view .new_word, .rank_view .rank_word{
     margin-left: 290rpx;
