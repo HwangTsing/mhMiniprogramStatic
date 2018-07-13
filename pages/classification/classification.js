@@ -159,6 +159,10 @@ Page({
         var that = this;
         that.data.cate_id = event.currentTarget.dataset.cateid;
         console.log(that.data.cate_id);
+        that.setData({
+            classListData:[],
+            cate_id:event.currentTarget.dataset.cateid
+        })
         //判断网络类型
         wxApi.getNetworkType().then((res) =>{
             let networkType = res.networkType;
@@ -191,6 +195,10 @@ Page({
         var that = this;
         that.data.end_status = event.currentTarget.dataset.endid;
         console.log(that.data.end_status);
+        that.setData({
+            classListData:[],
+            end_status:event.currentTarget.dataset.endid
+        })
         //判断网络类型
         wxApi.getNetworkType().then((res) =>{
             let networkType = res.networkType;
@@ -203,10 +211,6 @@ Page({
 
             }else {
                 //有网络
-                that.setData({
-                    classListData:[],
-                    end_status:event.currentTarget.dataset.endid
-                })
                 that.data.page_num  = 1;
                 this.classList();
 
@@ -224,13 +228,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+      this.classLabelList();
       //判断网络类型
       wxApi.getNetworkType().then((res) =>{
           let networkType = res.networkType;
           if (networkType === 'none' || networkType === 'unknown') {
               //无网络不进行任何操作
               this.setData({
-                  networkType: false
+                  networkType: false,
+                  onLoad:true
               })
 
           }else {
@@ -238,7 +244,6 @@ Page({
               this.setData({
                   type:'loading',
               })
-              this.classLabelList();
               this.classList();
 
           }
