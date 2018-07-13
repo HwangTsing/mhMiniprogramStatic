@@ -32,18 +32,26 @@ Page({
                 method:'GET',
                 success:function (data) {
                     console.log(data.data.data.week);
-                    let readData=[];
-                    data.data.data.week.forEach((item,index) => {
-                        readData.push(item);
+                    if (data.data.code == 1) {
+                        let readData=[];
+                        data.data.data.week.forEach((item,index) => {
+                            readData.push(item);
+                            that.setData({
+                                index:index
+                            })
+                        });
+                        console.log(readData);
                         that.setData({
-                            index:index
+                            readData,
+                            type:null,
                         })
-                    });
-                    console.log(readData);
-                    that.setData({
-                        readData,
-                        type:null,
-                    })
+                    }else if (data.data.data.week.length === 0) {
+                        that.setData({
+                            readData:[],
+
+                        })
+                    }
+
                 },
                 fail:function (data) {
                     that.setData({
@@ -62,18 +70,26 @@ Page({
           method:'GET',
           success:function (data) {
               console.log(data.data.data.week);
-              let newData = [];
-              data.data.data.week.forEach((item,index) => {
-                  newData.push(item);
+              if (data.data.code == 1) {
+                  let newData = [];
+                  data.data.data.week.forEach((item,index) => {
+                      newData.push(item);
+                      that.setData({
+                          index:index
+                      })
+                  });
+                  console.log(newData);
                   that.setData({
-                      index:index
+                      newData,
+                      type:null,
                   })
-              });
-              console.log(newData);
-              that.setData({
-                  newData,
-                  type:null,
-              })
+              }else  if (data.data.data.week.length === 0) {
+                that.setData({
+                    newData:[],
+
+                })
+              }
+
           },
           fail:function (data) {
               this.setData({
@@ -90,18 +106,26 @@ Page({
             method:'GET',
             success:function (data) {
                 console.log(data.data.data.week);
-                let rankData = [];
-                data.data.data.week.forEach((item,index) => {
-                    rankData.push(item);
+                if (data.data.code == 1) {
+                    let rankData = [];
+                    data.data.data.week.forEach((item,index) => {
+                        rankData.push(item);
+                        that.setData({
+                            index:index
+                        })
+                    });
+                    console.log(rankData);
                     that.setData({
-                        index:index
+                        rankData,
+                        type:null,
                     })
-                });
-                console.log(rankData);
-                that.setData({
-                    rankData,
-                    type:null,
-                })
+                }else if (data.data.data.week.length === 0) {
+                    that.setData({
+                        rankData:[],
+
+                    })
+                }
+
             },
             fail:function (data) {
                 this.setData({
