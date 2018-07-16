@@ -41,7 +41,6 @@ Page({
                                 index:index
                             })
                         });
-                        console.log(readData);
                         that.setData({
                             readData,
                             type:null,
@@ -80,7 +79,6 @@ Page({
                           index:index
                       })
                   });
-                  console.log(newData);
                   that.setData({
                       newData,
                       type:null,
@@ -117,7 +115,6 @@ Page({
                             index:index
                         })
                     });
-                    console.log(rankData);
                     that.setData({
                         rankData,
                         type:null,
