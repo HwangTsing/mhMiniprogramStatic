@@ -42,6 +42,7 @@
                     <image class="two_img" wx:if="{{index === 1}}" src="../../images/two.png"></image>
                     <image class="three_img" wx:if="{{index === 2}}" src="../../images/three.png"></image>
                 </view>
+                <message wx:if="{{readData&&readData.length==0 && hasData === false}}" type="nothing"></message>
                 <!--无网络，加载失败loading-->
                 <import src="./template/message.wxml"></import>
                 <template is="message" data="{{networkType,isLoad}}"></template>
@@ -77,6 +78,7 @@
                     <image class="two_img" wx:if="{{index === 1}}" src="../../images/two.png"></image>
                     <image class="three_img" wx:if="{{index === 2}}" src="../../images/three.png"></image>
                 </view>
+                <message wx:if="{{newData&&newData.length==0 && hasData === false}}" type="nothing"></message>
                 <!--无网络，加载失败loading-->
                 <import src="./template/message.wxml"></import>
                 <template is="message" data="{{networkType,isLoad}}"></template>
@@ -112,6 +114,7 @@
                     <image class="two_img" wx:if="{{index === 1}}" src="../../images/two.png"></image>
                     <image class="three_img" wx:if="{{index === 2}}" src="../../images/three.png"></image>
                 </view>
+                <message wx:if="{{rankData&&rankData.length==0 && hasData === false}}" type="nothing"></message>
                 <!--无网络，加载失败loading-->
                 <import src="./template/message.wxml"></import>
                 <template is="message" data="{{networkType,isLoad}}"></template>

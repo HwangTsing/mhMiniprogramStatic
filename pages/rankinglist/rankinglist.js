@@ -24,6 +24,7 @@ Page({
       windowHeight:'',
       networkType:true,  //是否有网络
       isLoad:false,     //是否加载失败
+      hasData:true,     //是否有内容
   },
     /*阅读榜数据*/
     readList:function () {
@@ -44,11 +45,12 @@ Page({
                         that.setData({
                             readData,
                             type:null,
+                            hasData:true
                         })
                     }else if (data.data.data.week.length === 0) {
                         that.setData({
                             readData:[],
-
+                            hasData:false
                         })
                     }
 
@@ -82,11 +84,12 @@ Page({
                   that.setData({
                       newData,
                       type:null,
+                      hasData:true
                   })
               }else  if (data.data.data.week.length === 0) {
                 that.setData({
                     newData:[],
-
+                    hasData:false
                 })
               }
 
@@ -118,11 +121,12 @@ Page({
                     that.setData({
                         rankData,
                         type:null,
+                        hasData:true
                     })
                 }else if (data.data.data.week.length === 0) {
                     that.setData({
                         rankData:[],
-
+                        hasData:false
                     })
                 }
 

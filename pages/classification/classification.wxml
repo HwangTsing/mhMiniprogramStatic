@@ -29,6 +29,8 @@
             </view>
             <view class="comment_message" wx:if="{{scrolType !== ''}}">{{message}}</view>
         </view>
+        <!-- 空内容的时候 S -->
+        <message wx:if="{{classListData&&classListData.length==0 && hasData === false}}" type="nothing"></message>
     </scroll-view>
     <!--无网络，加载失败loading-->
     <import src="./template/message.wxml"></import>

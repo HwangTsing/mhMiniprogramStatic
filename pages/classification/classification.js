@@ -20,6 +20,7 @@ Page({
       total:0,    //总页码
       scrolType:'',
       message:'',    //提示语
+      hasData:true,  //是否有内容
 
   },
 
@@ -34,7 +35,7 @@ Page({
                 console.log(that.data.comicCate);
                 that.data.comicEnd = data.data.data.end_status_list;
                 console.log(that.data.comicEnd);
-                that.data.comicCate.forEach((item,index) =>{
+               /* that.data.comicCate.forEach((item,index) =>{
                     that.setData({
                         index
                     })
@@ -43,7 +44,7 @@ Page({
                     that.setData({
                         index
                     })
-                })
+                })*/
                 that.setData({
                     comicCate:that.data.comicCate,
                     comicEnd:that.data.comicEnd
@@ -101,11 +102,13 @@ Page({
                         message: page_total > page_num ? '加载更多...' : '没有更多了',//提示语
                         type:null,
                         networkType:true,
+                        hasData:true
 
                     })
                 }else if (data.data.data.data.length === 0) {  //分类没有数据
                     that.setData({
-                        classListData:[]
+                        classListData:[],
+                        hasData:false
                     })
                 }
             },
