@@ -153,7 +153,10 @@ Page({
                 if (networkType === 'none' || networkType === 'unknown') {
                     //无网络不进行任何操作
                     this.setData({
-                        networkType: false
+                        networkType: false,
+                        readData:[],
+                        newData:[],
+                        rankData:[]
                     });
 
                 }else {
@@ -202,7 +205,10 @@ Page({
                 if (networkType === 'none' || networkType === 'unknown') {
                     //无网络不进行任何操作
                     this.setData({
-                        networkType: false
+                        networkType: false,
+                        readData:[],
+                        newData:[],
+                        rankData:[]
                     })
 
                 }else {
@@ -252,6 +258,19 @@ Page({
    */
   onLoad: function (options) {
       var that = this;
+      //  高度自适应
+      wx.getSystemInfo( {
+          success: function( res ) {
+              var clientHeight=res.windowHeight,
+                  clientWidth=res.windowWidth,
+                  rpxR=750/clientWidth;
+              var  calc=clientHeight*rpxR;
+              that.data.windowHeight = calc;
+              that.setData({
+                  windowHeight: that.data.windowHeight
+              });
+          }
+      });
       wxApi.getNetworkType().then((res) =>{
           let networkType = res.networkType;
           if (networkType === 'none' || networkType === 'unknown') {
@@ -262,20 +281,9 @@ Page({
 
           }else {
               //有网络
-              //  高度自适应
-              wx.getSystemInfo( {
-                  success: function( res ) {
-                      var clientHeight=res.windowHeight,
-                          clientWidth=res.windowWidth,
-                          rpxR=750/clientWidth;
-                      var  calc=clientHeight*rpxR;
-                      that.data.windowHeight = calc;
-                      that.setData({
-                          type:'loading',
-                          windowHeight: that.data.windowHeight
-                      });
-                  }
-              });
+              that.setData({
+                  type:'loading',
+              })
               that.readList();
 
           }

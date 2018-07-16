@@ -2,14 +2,14 @@
     <view class="top_view">
         <view class="class_label_view">
             <view class="{{cate_id ===item.cate_id? 'label_title_active':'label_title'}}" wx:for="{{comicCate}}" wx:key="index"
-                  data-cateid="{{item.cate_id}}" bindtap="onCate">
+                  data-cateid="{{item.cate_id}}" catchtap="onCate">
                 <text>{{item.cate_cn_name}}</text>
                 <view class="{{cate_id ===item.cate_id? 'active_border':'checked_border'}}"></view>
             </view>
         </view>
         <view class="small_label_view">
             <view class="{{end_status ===item.end_status? 'small_title_active':'small_title'}}" wx:for="{{comicEnd}}"
-                  wx:key="index" data-endid="{{item.end_status}}" bindtap="onEnd">{{item.end_status_name}}</view>
+                  wx:key="index" data-endid="{{item.end_status}}" catchtap="onEnd">{{item.end_status_name}}</view>
         </view>
     </view>
     <!--根据分类条件进行渲染内容-->
