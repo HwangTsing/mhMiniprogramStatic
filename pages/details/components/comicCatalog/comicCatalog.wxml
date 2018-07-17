@@ -15,8 +15,12 @@
             data-chapter_name="{{item.chapter_name?item.chapter_name:''}}"
             data-comic_id="{{comic_id}}"
             bindtap="ClickCatalog"
+            data-item="{{item}}"
         >
-            <text>{{item.chapter_name?item.chapter_name:''}}</text>
+          
+            <text >{{item.chapter_name?item.chapter_name:''}}</text>
+
+             <image  id="pay_lockImg"  wx-if="{{item.isLocked }}"   src="../../../../images/details/passWord_icon1.png" ></image>
         </view>
     </view>
 
@@ -30,6 +34,7 @@
         data-chapter_id="{{item.chapter_id}}"
         data-chapter_name="{{item.chapter_name?item.chapter_name:''}}"
         data-comic_id="{{comic_id}}"
+        data-item="{{item}}"
         bindtap="ClickCatalog"
     >
         <!-- 章节名称 S -->
@@ -37,6 +42,18 @@
             {{item.chapter_name?item.chapter_name:''}}
         </view>
         <!-- 章节名称 E -->
+
+         <!-- 付费章节锁 S -->
+              <view class="pay_lock"  wx-if="{{item.isLocked  }}"  >
+                   <image
+                    src="../../../../images/details/passWord_icon2.png"
+                   ></image>
+              </view>
+             
+         <!-- 付费章节锁 E -->
+
+
+
 
         <!-- 右侧箭头 S -->
         <view class="comic_catalog_chapter_btn">
@@ -54,3 +71,8 @@
 
 </view>
 <!-- 目录组件(章节)包含横版|九宫格 E -->
+
+
+   <!-- 弹出付费框 S  -->
+         <popUp  wx:if="{{floorstatus}}"  bind:myevent="onMyEvent"></popUp>
+     <!-- 弹出付费框 E  -->

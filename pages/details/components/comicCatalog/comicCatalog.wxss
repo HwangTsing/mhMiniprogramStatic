@@ -27,13 +27,20 @@
     align-items: center;
     width: 30%;
 }
-.comic_catalog_chapter_btn image{
+.pay_lock{
+    position: relative;
+    align-items: center;
+    width: 100%;
+}
+.comic_catalog_chapter_btn image,.pay_lock  image{
     position: absolute;
     right: 0;
     top: 0;
     width: 48rpx;
     height: 48rpx;
 }
+
+
 
 
 /* 公共S */
@@ -77,7 +84,7 @@
     margin-bottom: 28rpx;
     margin-right: 2%;
     width: 32%;
-   
+    position: relative;
     height: 76rpx;
     line-height: 76rpx;
     border: 2rpx solid #E9EAEA;
@@ -88,6 +95,13 @@
     overflow: hidden;
     text-overflow:ellipsis;
     white-space: nowrap;
+}
+.comic_catalog_one image{
+    position: absolute;
+    right:-5rpx;
+    top: 30rpx;
+    width: 48rpx;
+    height: 48rpx;
 }
 
 /* 九宫格选中样式 */
