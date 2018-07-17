@@ -2,8 +2,8 @@
 <view class="Dialog">
             <view class="Dialog_top" 
                >
-                 <image  src="../../../../images/details/dialog_top_bg.png"></image>
-                 <image src="../../../../images/details/comic_login_icon.png" />
+                 <image  src="../../images/details/dialog_top_bg.png"></image>
+                 <image src="../../images/details/comic_login_icon.png" />
             </view>
             <view class='Dialog_title'>
                     <view class='Dialog_conter_top'>   此章节为付费章节  </view>
