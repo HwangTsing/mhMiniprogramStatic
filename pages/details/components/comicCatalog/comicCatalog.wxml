@@ -20,7 +20,7 @@
           
             <text >{{item.chapter_name?item.chapter_name:''}}</text>
 
-             <image  id="pay_lockImg"  wx-if="{{item.isLocked }}"   src="../../../../images/details/passWord_icon1.png" ></image>
+             <image  id="pay_lockImg"  wx-if="{{item.isLocked }}"   src="../../../../images/details/passWord_icon.png" ></image>
         </view>
     </view>
 
@@ -46,7 +46,7 @@
          <!-- 付费章节锁 S -->
               <view class="pay_lock"  wx-if="{{item.isLocked  }}"  >
                    <image
-                    src="../../../../images/details/passWord_icon2.png"
+                    src="../../../../images/details/passWord_icon.png"
                    ></image>
               </view>
              
