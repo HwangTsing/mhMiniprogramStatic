@@ -35,20 +35,20 @@ page {
 }
 .class_label_view .label_title {
     font-size:28rpx;
-    padding:12rpx 14rpx;
+    padding:9rpx 14rpx;
     color: #999999;
     font-family:PingFangSC-Regular;
 }
 .label_title_active {
     font-size:28rpx;
-    padding:12rpx 14rpx;
+    padding:9rpx 14rpx;
     color: #333333;
     font-family:PingFangSC-Regular;
 }
 .active_border {
     width:42%;
     margin:2rpx auto;
-    border:2rpx solid #FF4C6A;
+    border:4rpx solid #FF4C6A;
     background:#FF4C6A;
     border-radius:10rpx;
     -webkit-border-radius:10rpx;
@@ -59,7 +59,7 @@ page {
 .checked_border{
     width: 42%;
     margin: 2rpx auto;
-    border: 2rpx solid #fff;
+    border: 4rpx solid #fff;
     border-radius:10rpx;
     overflow: hidden;
     background: #fff;

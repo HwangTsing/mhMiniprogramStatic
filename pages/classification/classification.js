@@ -20,6 +20,7 @@ Page({
       total:0,    //总页码
       scrolType:'',
       message:'',    //提示语
+      hasData:true,  //是否有内容
 
   },
 
@@ -91,11 +92,13 @@ Page({
                         message: page_total > page_num ? '加载更多...' : '没有更多了',//提示语
                         type:null,
                         networkType:true,
+                        hasData:true
 
                     })
                 }else if (data.data.data.data.length === 0) {  //分类没有数据
                     that.setData({
-                        classListData:[]
+                        classListData:[],
+                        hasData:false
                     })
                 }
             },
@@ -147,66 +150,76 @@ Page({
     },
     onCate:function (event) {
         var that = this;
-        that.data.cate_id = event.currentTarget.dataset.cateid;
-        console.log(that.data.cate_id);
-        //判断网络类型
-        wxApi.getNetworkType().then((res) =>{
-            let networkType = res.networkType;
-            if (networkType === 'none' || networkType === 'unknown') {
-                //无网络不进行任何操作
-                this.setData({
-                    networkType: false,
-                    classListData:[]
-                })
-
-            }else {
-                //有网络
-                that.setData({
-                    type:'loading',
-                    classListData:[],
-                    cate_id:event.currentTarget.dataset.cateid
-                })
-                that.data.page_num  = 1;
-                this.classList();
-
-            }
-        }).catch((err) =>{
-            this.setData({
-                networkType: true,
-                isLoad:true
+        var cate_id = event.currentTarget.dataset.cateid;
+        console.log(cate_id);
+        if (that.data.cate_id == cate_id) {
+            return;
+        }else  {
+            that.setData({
+                cate_id:event.currentTarget.dataset.cateid
             })
-        })
+            //判断网络类型
+            wxApi.getNetworkType().then((res) =>{
+                let networkType = res.networkType;
+                if (networkType === 'none' || networkType === 'unknown') {
+                    //无网络不进行任何操作
+                    this.setData({
+                        networkType: false,
+                        classListData:[]
+                    })
+
+                }else {
+                    //有网络
+                    that.setData({
+                        type:'loading',
+                        classListData:[],
+                        cate_id:event.currentTarget.dataset.cateid
+                    })
+                    that.data.page_num  = 1;
+                    this.classList();
+
+                }
+            }).catch((err) =>{
+                this.setData({
+                    networkType: true,
+                    isLoad:true
+                })
+            })
+        }
     },
     onEnd:function (event) {
         var that = this;
-        that.data.end_status = event.currentTarget.dataset.endid;
-        console.log(that.data.end_status);
-        //判断网络类型
-        wxApi.getNetworkType().then((res) =>{
-            let networkType = res.networkType;
-            if (networkType === 'none' || networkType === 'unknown') {
-                //无网络不进行任何操作
-                this.setData({
-                    networkType: false,
-                    classListData:[]
-                })
-
-            }else {
-                //有网络
-                that.setData({
-                    classListData:[],
-                    end_status:event.currentTarget.dataset.endid
-                })
-                that.data.page_num  = 1;
-                this.classList();
-
-            }
-        }).catch((err) =>{
-            this.setData({
-                networkType: true,
-                isLoad:true
+        var end_status = event.currentTarget.dataset.endid;
+        console.log(end_status);
+        if (that.data.end_status == end_status) {
+            return;
+        }else {
+            that.setData({
+                end_status:event.currentTarget.dataset.endid
             })
-        })
+            //判断网络类型
+            wxApi.getNetworkType().then((res) =>{
+                let networkType = res.networkType;
+                if (networkType === 'none' || networkType === 'unknown') {
+                    //无网络不进行任何操作
+                    this.setData({
+                        networkType: false,
+                        classListData:[]
+                    })
+
+                }else {
+                    //有网络
+                    that.data.page_num  = 1;
+                    this.classList();
+
+                }
+            }).catch((err) =>{
+                this.setData({
+                    networkType: true,
+                    isLoad:true
+                })
+            })
+        }
     },
 
 
@@ -214,13 +227,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+      this.classLabelList();
       //判断网络类型
       wxApi.getNetworkType().then((res) =>{
           let networkType = res.networkType;
           if (networkType === 'none' || networkType === 'unknown') {
               //无网络不进行任何操作
               this.setData({
-                  networkType: false
+                  networkType: false,
+                  onLoad:true
               })
 
           }else {
@@ -228,7 +243,6 @@ Page({
               this.setData({
                   type:'loading',
               })
-              this.classLabelList();
               this.classList();
 
           }

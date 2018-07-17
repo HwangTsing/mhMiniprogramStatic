@@ -1,15 +1,15 @@
 <view class="container_classific">
-    <view class="top_view" wx:if="{{networkType === true}}">
+    <view class="top_view">
         <view class="class_label_view">
-            <view class="{{cate_id ===item.cate_id? 'label_title_active':'label_title'}}" wx:for="{{comicCate}}" wx:key="index"
-                  data-cateid="{{item.cate_id}}" bindtap="onCate">
+            <view wx:for="{{comicCate}}" class="{{cate_id ===item.cate_id? 'label_title_active':'label_title'}}" wx:key="index"
+                  data-cateid="{{item.cate_id}}" catchtap="onCate">
                 <text>{{item.cate_cn_name}}</text>
                 <view class="{{cate_id ===item.cate_id? 'active_border':'checked_border'}}"></view>
             </view>
         </view>
         <view class="small_label_view">
-            <view class="{{end_status ===item.end_status? 'small_title_active':'small_title'}}" wx:for="{{comicEnd}}"
-                  wx:key="index" data-endid="{{item.end_status}}" bindtap="onEnd">{{item.end_status_name}}</view>
+            <view wx:for="{{comicEnd}}" class="{{end_status ===item.end_status? 'small_title_active':'small_title'}}"
+                  wx:key="index" data-endid="{{item.end_status}}" catchtap="onEnd">{{item.end_status_name}}</view>
         </view>
     </view>
     <!--根据分类条件进行渲染内容-->
@@ -29,14 +29,20 @@
             </view>
             <view class="comment_message" wx:if="{{scrolType !== ''}}">{{message}}</view>
         </view>
+        <!-- 空内容的时候 S -->
+        <message wx:if="{{classListData&&classListData.length==0 && hasData === false}}" type="nothing"></message>
     </scroll-view>
     <!--无网络，加载失败loading-->
     <import src="./template/message.wxml"></import>
-    <template is="message" data="{{networkType,isLoad}}"></template>
+    <view style="{{onLoad === true?'position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;':'position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;margin-top:217rpx'}}">
+        <template is="message" data="{{networkType,isLoad}}"></template>
+    </view>
+
 
     <!-- 网络慢提示loading -->
     <import src="/tpls/message.wxml"/>
-    <view wx:if="{{!isLoad}}" style="position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;">
+    <view wx:if="{{!isLoad}}"
+          style="{{comicCate.length>0?'position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;margin-top:217rpx':'position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;'}}">
         <template is="message" wx:if="{{type}}" data="{{ type }}"/>
     </view>
 </view>

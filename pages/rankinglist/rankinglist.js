@@ -24,6 +24,7 @@ Page({
       windowHeight:'',
       networkType:true,  //是否有网络
       isLoad:false,     //是否加载失败
+      hasData:true,     //是否有内容
   },
     /*阅读榜数据*/
     readList:function () {
@@ -32,18 +33,26 @@ Page({
                 method:'GET',
                 success:function (data) {
                     console.log(data.data.data.week);
-                    let readData=[];
-                    data.data.data.week.forEach((item,index) => {
-                        readData.push(item);
+                    if (data.data.code == 1) {
+                        let readData=[];
+                        data.data.data.week.forEach((item,index) => {
+                            readData.push(item);
+                            that.setData({
+                                index:index
+                            })
+                        });
                         that.setData({
-                            index:index
+                            readData,
+                            type:null,
+                            hasData:true
                         })
-                    });
-                    console.log(readData);
-                    that.setData({
-                        readData,
-                        type:null,
-                    })
+                    }else if (data.data.data.week.length === 0) {
+                        that.setData({
+                            readData:[],
+                            hasData:false
+                        })
+                    }
+
                 },
                 fail:function (data) {
                     that.setData({
@@ -62,18 +71,26 @@ Page({
           method:'GET',
           success:function (data) {
               console.log(data.data.data.week);
-              let newData = [];
-              data.data.data.week.forEach((item,index) => {
-                  newData.push(item);
+              if (data.data.code == 1) {
+                  let newData = [];
+                  data.data.data.week.forEach((item,index) => {
+                      newData.push(item);
+                      that.setData({
+                          index:index
+                      })
+                  });
                   that.setData({
-                      index:index
+                      newData,
+                      type:null,
+                      hasData:true
                   })
-              });
-              console.log(newData);
-              that.setData({
-                  newData,
-                  type:null,
-              })
+              }else  if (data.data.data.week.length === 0) {
+                that.setData({
+                    newData:[],
+                    hasData:false
+                })
+              }
+
           },
           fail:function (data) {
               this.setData({
@@ -90,18 +107,26 @@ Page({
             method:'GET',
             success:function (data) {
                 console.log(data.data.data.week);
-                let rankData = [];
-                data.data.data.week.forEach((item,index) => {
-                    rankData.push(item);
+                if (data.data.code == 1) {
+                    let rankData = [];
+                    data.data.data.week.forEach((item,index) => {
+                        rankData.push(item);
+                        that.setData({
+                            index:index
+                        })
+                    });
                     that.setData({
-                        index:index
+                        rankData,
+                        type:null,
+                        hasData:true
                     })
-                });
-                console.log(rankData);
-                that.setData({
-                    rankData,
-                    type:null,
-                })
+                }else if (data.data.data.week.length === 0) {
+                    that.setData({
+                        rankData:[],
+                        hasData:false
+                    })
+                }
+
             },
             fail:function (data) {
                 this.setData({
@@ -190,21 +215,12 @@ Page({
                 }else {
                     //有网络
                     if (currentId === 0) {
-                        that.setData({
-                            type:'loading'
-                        })
                         that.readList();
                     }
                     else if (currentId === 1) {
-                        that.setData({
-                            type:'loading'
-                        })
                         that.newList();
                     }
                     else if (currentId === 2) {
-                        that.setData({
-                            type:'loading'
-                        })
                         that.rankList();
                     }
 
@@ -243,6 +259,19 @@ Page({
    */
   onLoad: function (options) {
       var that = this;
+      //  高度自适应
+      wx.getSystemInfo( {
+          success: function( res ) {
+              var clientHeight=res.windowHeight,
+                  clientWidth=res.windowWidth,
+                  rpxR=750/clientWidth;
+              var  calc=clientHeight*rpxR;
+              that.data.windowHeight = calc;
+              that.setData({
+                  windowHeight: that.data.windowHeight
+              });
+          }
+      });
       wxApi.getNetworkType().then((res) =>{
           let networkType = res.networkType;
           if (networkType === 'none' || networkType === 'unknown') {
@@ -253,20 +282,9 @@ Page({
 
           }else {
               //有网络
-              //  高度自适应
-              wx.getSystemInfo( {
-                  success: function( res ) {
-                      var clientHeight=res.windowHeight,
-                          clientWidth=res.windowWidth,
-                          rpxR=750/clientWidth;
-                      var  calc=clientHeight*rpxR;
-                      that.data.windowHeight = calc;
-                      that.setData({
-                          type:'loading',
-                          windowHeight: that.data.windowHeight
-                      });
-                  }
-              });
+              that.setData({
+                  type:'loading',
+              })
               that.readList();
 
           }
