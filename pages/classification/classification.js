@@ -173,6 +173,7 @@ Page({
                     that.setData({
                         type:'loading',
                         classListData:[],
+                        scrolType:'',
                         cate_id:event.currentTarget.dataset.cateid
                     })
                     that.data.page_num  = 1;
@@ -209,6 +210,10 @@ Page({
 
                 }else {
                     //有网络
+                    that.setData({
+                        classListData:[],
+                        scrolType:'',
+                    })
                     that.data.page_num  = 1;
                     this.classList();
 
