@@ -932,38 +932,6 @@ swiper-item wx-image {
   color: #999;
   font-size: 24rpx;
 }
-.load_view {
-  width: 100%;
-  display: flex;
-  display: -webkit-box;
-  display: -webkit-flex;
-  flex-direction: row;
-  justify-content: center;
-}
-.load_img_bg {
-  width: 36rpx;
-  height: 36rpx;
-  text-align: center;
-  margin-top: 22rpx;
-}
-.load_image {
-  width: 36rpx;
-  height: 36rpx;
-  display: inline-block;
-}
-.comment_message {
-  font-size: 28rpx;
-  text-align: center;
-  line-height: 80rpx;
-  color: #999;
-  margin-left: 20rpx;
-  -webkit-transform: translate3d(0, 0, 0);
-  -moz-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
-  -webkit-animation: play 1s linear infinite;
-  -moz-animation: play 1s linear infinite;
-  animation: play 1s linear infinite;
-}
 .net_view,
 .server_view {
   width: 100%;
