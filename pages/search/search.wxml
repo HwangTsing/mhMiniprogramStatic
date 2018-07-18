@@ -36,7 +36,7 @@
     </view>
     <!--根据搜索结果渲染数据-->
     <scroll-view class="{{isCancel===true?'big_listdata':'big_listdata_bloc'}}" wx:if="{{searchList&&searchList.length>0}}"
-                 enable-back-to-top="true" scroll-y="{{true}}" bindscrolltolower="lower"
+                 enable-back-to-top="{{true}}" scroll-y="{{true}}" bindscrolltolower="lower"
                  lower-threshold="{{50}}" scroll-with-animation="true" catchtap="blurInputEvent">
         <block wx:for="{{searchList}}" wx:key="{{index}}">
             <searchlist

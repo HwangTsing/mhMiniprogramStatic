@@ -13,12 +13,11 @@ Page({
       networkType:true,  //是否有网络
       isLoad:false,     //是否加载失败
       page_num: 1,
-      rows_num: 20,
+      rows_num: 10,
       cate_id:0,
       comic_pay_status:'',
       end_status:0,
       total:0,    //总页码
-      isScroll:true,
       scrolType:'',
       message:'',    //提示语
       hasData:true,  //是否有内容
