@@ -18,6 +18,7 @@ Page({
       comic_pay_status:'',
       end_status:0,
       total:0,    //总页码
+      isScroll:true,
       scrolType:'',
       message:'',    //提示语
       hasData:true,  //是否有内容
