@@ -224,9 +224,18 @@
   margin-top: 22rpx;
 }
 .load_image {
+  margin-right: 20rpx;
   width: 36rpx;
   height: 36rpx;
   display: inline-block;
+  /* 设置默认样式，开启3d硬件加速 */
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  /* 设置动画，animation:动画名称 动画播放时长单位秒或微秒 动画播放的速度曲线linear为匀速 动画播放次数infinite为循环播放; */
+  -webkit-animation: play 1s linear infinite;
+  -moz-animation: play 1s linear infinite;
+  animation: play 1s linear infinite;
 }
 .comment_message {
   font-size: 28rpx;
@@ -234,12 +243,6 @@
   line-height: 80rpx;
   color: #999;
   margin-left: 20rpx;
-  -webkit-transform: translate3d(0, 0, 0);
-  -moz-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
-  -webkit-animation: play 1s linear infinite;
-  -moz-animation: play 1s linear infinite;
-  animation: play 1s linear infinite;
 }
 .bg_search_mess {
   width: 100%;
@@ -271,4 +274,12 @@
   right: 0;
   background: #fff;
   z-index: 99;
+}
+@keyframes play {
+  to {
+    transform: rotate(360deg);
+  }
+  from {
+    transform: rotate(0deg);
+  }
 }

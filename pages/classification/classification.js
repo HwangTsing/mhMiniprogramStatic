@@ -133,9 +133,6 @@ Page({
                 if (total < that.data.page_num){
                     return;
                 }else {
-                    that.setData({
-                        scrolType:that.data.scrolType
-                    })
                     that.classList();
                 }
 

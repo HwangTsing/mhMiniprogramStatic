@@ -245,9 +245,6 @@ Page({
                 if (total < that.searchData.page_num){
                     return;
                 }else {
-                    that.setData({
-                        scrolType:that.data.scrolType
-                    })
                     that.searchDatas();
                 }
 
