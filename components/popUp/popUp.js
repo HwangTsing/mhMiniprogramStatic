@@ -1,13 +1,14 @@
-
-
-
 Component({
   data: {
-    floorstatus:true
+    "visible": false
   },
   methods:{
-    btnSure: function () {
-      this.triggerEvent('myevent', { floorstatus:false});    
+    open () {
+      this.setData({"visible": true})
+    },
+    btnSure () {
+      this.setData({"visible": false})
+      //this.triggerEvent('myevent', { floorstatus:false});    
     }
   }
  

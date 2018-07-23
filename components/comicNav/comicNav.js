@@ -1,13 +1,19 @@
 Component({
   properties: {
     text: String,
-    url: String,
+    nav: Object,
     action: String
   },
   data: {
-    navClass: ''
+    navClass: '',
+    floorstatus: false
+  },
+  attached () {
+    this.popup = this.selectComponent('#popup')
   },
   methods: {
-    
+    chargePop () {
+      this.popup.open()
+    }
   }
 })

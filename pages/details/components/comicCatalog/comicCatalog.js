@@ -54,9 +54,11 @@ Component({
             })
           
             if(item.isLocked){
-                this.setData({ //存储 点击章节信息,到组件对象中
-                    floorstatus:true
-                })
+                const pop = this.selectComponent('#popup')
+                pop.open()
+                // this.setData({ //存储 点击章节信息,到组件对象中
+                //     floorstatus:true
+                // })
             }
            else if(comic_id && chapter_id){
                 wx.navigateTo({
