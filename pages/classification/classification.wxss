@@ -31,17 +31,18 @@ page {
     flex-wrap:wrap;
     align-content: center;
     padding-left: 20rpx;
+    margin-top:4rpx;
     border-bottom:1rpx solid #E6E6E6;
 }
 .class_label_view .label_title {
     font-size:28rpx;
-    padding:9rpx 14rpx;
+    padding:10rpx 14rpx;
     color: #999999;
     font-family:PingFangSC-Regular;
 }
 .label_title_active {
     font-size:28rpx;
-    padding:9rpx 14rpx;
+    padding:10rpx 14rpx;
     color: #333333;
     font-family:PingFangSC-Regular;
 }
