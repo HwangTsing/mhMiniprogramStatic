@@ -95,6 +95,7 @@
                         chapterList="{{dataAry.chapterList}}"
                         comic_id="{{dataAry.comic.comic_id}}"
                         history="{{history}}"
+                        pay_status="{{isPay_status}}"
                     ></comicCatalog>
                     <!-- 章节信息 组件 E -->
 
@@ -128,4 +129,6 @@
     <template is="message" wx:if="{{type}}" data="{{ type }}"/>
     <!-- 提示信息 S  -->
 
+
 </view>
+

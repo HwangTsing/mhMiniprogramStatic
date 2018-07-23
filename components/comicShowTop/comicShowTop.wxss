@@ -86,7 +86,7 @@
     width:160rpx;
     height:44rpx;
     flex-shrink:0;
-
+    display: none; /*  kol 图标注释  */
 }
 .comicShowTop .info_content .detail_label {
   display: flex;
@@ -179,6 +179,7 @@
     width: 160rpx;
     height: 44rpx;
     flex-shrink:0;
+    display: none; /*  kol 图标注释  */
 }
 /* 标签 */
 .details_view_2 .detail_comic_label{

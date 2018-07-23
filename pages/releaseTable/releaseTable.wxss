@@ -1,0 +1,89 @@
+/* pages/comment/comment.wxss */
+.releaseTable_container {
+    background: #FFFFFF;
+    width: 100%;
+    height: 100%;
+}
+.releaseTable_container .scroll_view{
+    width: 100%;
+    height: 100%;
+}
+.release_table_nav_box,.release_table_nav{
+    width: 100%;
+    height: 64rpx;
+    background: #FF4D6A; 
+}
+.release_table_nav{
+    box-sizing: border-box;
+    padding: 0 15rpx;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    top: 0;
+    left: 0;
+    background: #FF4D6A; 
+    z-index: 999;
+}
+.release_table_nav_itme{
+    flex: 1;
+    padding:0 15rpx;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 28rpx;
+}
+
+
+.release_message{
+    padding: 30rpx 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.release_message .release_src{
+    margin-right: 20rpx;
+    width: 36rpx;
+    height: 36rpx;
+
+    /* 设置默认样式，开启3d硬件加速 */
+    -webkit-transform:translate3d(0,0,0);
+    -moz-transform:translate3d(0,0,0);
+    transform:translate3d(0,0,0);
+    /* 设置动画，animation:动画名称 动画播放时长单位秒或微秒 动画播放的速度曲线linear为匀速 动画播放次数infinite为循环播放; */
+    -webkit-animation:play 1s linear infinite;
+    -moz-animation:play 1s linear infinite;
+    animation:play 1s linear infinite;
+}
+.release_message .text{
+    font-size: 24rpx;
+    line-height: 36rpx;
+    color: #999;
+}
+.release_message .text_message{
+    display: block;
+    margin: 0 auto;
+    padding: 16rpx 22rpx;
+    background: #F5F5F5;
+    border-radius: 50rpx; 
+}
+
+
+
+
+@keyframes play{
+    to  {
+        transform:rotate(360deg);
+        /*
+        transform:rotateX(0deg);
+        transform:rotate(0deg);
+        transform:rotate(0deg);
+        */
+    }
+    from {
+        transform:rotate(0deg);
+        /*
+        transform:rotateX(360deg);
+        transform:rotate(360deg);
+        transform:rotate(-360deg);
+        */
+    }
+}

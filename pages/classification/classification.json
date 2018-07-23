@@ -1,0 +1,14 @@
+{
+    "navigationBarTitleText": "分类",
+    "navigationBarTextStyle": "white",
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#FF4D6A",
+    "enablePullDownRefresh":false,
+    "usingComponents":{
+        "message": "/components/message/message",
+        "imgholder":"/components/imgHolder/imgHolder"
+    },
+    "networkTimeout": {
+        "request": 10000
+    }
+}

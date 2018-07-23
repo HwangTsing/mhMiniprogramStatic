@@ -1,0 +1,63 @@
+.popup{
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: -300rpx;
+    right: 0;
+    background:rgba(0,0,0,1);
+    opacity:0.6;
+    z-index: 9999;
+  
+}
+.Dialog{
+    position: fixed;
+    top:384rpx;
+    left: 106rpx;
+    width:540rpx;
+    height: 440rpx;
+    background: #ffffff;
+    border-radius: 24rpx;
+    z-index: 10000;
+}
+.Dialog  .Dialog_top{
+     height: 135rpx;
+     position: relative;
+     width: 100%;
+     border-radius: 24rpx 24rpx 0 0 ;
+
+}
+.Dialog  .Dialog_top image:nth-child(1){
+    height: 135rpx;
+    border-radius: 24rpx 24rpx 0 0 ;
+    width: 100%;
+}
+.Dialog  .Dialog_top image:nth-child(2){
+    width: 200rpx;
+    height: 180rpx;
+    position: absolute;
+    left: 164rpx;
+    top: -46rpx;
+}
+.Dialog_title{
+     text-align: center;
+     height: 108rpx;
+     margin-top: 36rpx;
+     line-height:58rpx;
+}
+.Dialog_conter_top{
+    color: #FF4C6A ;
+}
+.Dialog_conter{
+     font-size: 28rpx;
+     color: #2A2A2A;
+
+}
+.btnSure{
+    background: #FF4C6A;
+    width: 400rpx;
+    height: 88rpx;
+    border-radius: 200rpx;
+    font-size: 34rpx;
+    color: #ffffff;
+    margin-top: 34rpx;
+}

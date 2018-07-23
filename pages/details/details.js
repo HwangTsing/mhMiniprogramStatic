@@ -65,19 +65,23 @@ Page({
     * //通过组件传递的消息,执行事件
     * */
     ClickCatalog() { //通过组件传递的消息,执行事件
+        
         if (!this.data.dataAry) {
             return
         }
-        let key = "comic_id_" + this.data.dataAry.comic.comic_id;
-        wxApi.getStorage(key).then((res) => {
-            this.setData({
-                history: res.data
-            })
-        }).catch((err) => {
-            this.setData({
-                history: null
-            })//错误时候
-        });
+        else{
+            let key = "comic_id_" + this.data.dataAry.comic.comic_id;
+            wxApi.getStorage(key).then((res) => {
+                this.setData({
+                    history: res.data
+                })
+            }).catch((err) => {
+                this.setData({
+                    history: null
+                })//错误时候
+            });
+        }
+        
     },
     /*
     * 点击排序按钮 目录进行排序
@@ -86,8 +90,6 @@ Page({
     catalogSort() {
         let isSort = this.data.isSort == 1 ? 2 : 1; //设置点击后的值
         let dataAry = this.data.dataAry;//获取数据
-
-
         if (dataAry.chapterList && dataAry.chapterList.length !== 0) {
             dataAry.chapterList.reverse(); //翻转数组顺序
             this.setData({
@@ -121,6 +123,7 @@ Page({
         * @ comic_id 必要参数 传递的参数
         * */
         let comicShowFn = wxApi.get(`${comicShowUrl}?comic_id=${comic_id}`);
+
 
         /*
         * ***comicCommentListFn  摘要页评论promise对象
@@ -175,7 +178,7 @@ Page({
                                 }
                             } = DATA.is_allow_read
                             const { chapter_id_arr = [] } = chapter_order
-
+                           
                             //comic_buy    1章节购买 2全本购买
                             //order_status 订单状态  0:默认 1:末付款 2:已付款
                             //pay_status   付费状态  0:默认 1:免费 2:收费
@@ -188,22 +191,27 @@ Page({
                                     this.can_read_chapters = 'false'
                                 }
                             }
-                            // console.log(this.can_read_chapters)
+                        //    console.log(this.can_read_chapters)
                             if( this.can_read_chapters!=='false' && this.can_read_chapters){
                                 chapterList = [];
                                 DATA.chapter_list.forEach((item, index) => {
+                                    let tmpIsLocked = true;
                                     this.can_read_chapters.forEach((id,i)=>{
                                         if(item.chapter_id===id){ //如果相等,就修改付费为免费章节,忽略过滤
-                                            chapterList.push(item)
+                                            tmpIsLocked = false;
+                                            // chapterList.push(item)
                                         }
                                     });
+                                    item.isLocked = tmpIsLocked;
+                                    chapterList.push(item)
                                 });
                                 DATA.chapterList=chapterList;
-                            }else {
+                                
+                             }else {
                                 DATA.chapterList=DATA.chapter_list;
                             }
                             DATA.chapterList.reverse();
-
+                            console.log(DATA)
                             this.setData({
                                 dataAry: DATA,
                                 type: null
@@ -228,7 +236,6 @@ Page({
                         }
                     }
                 }).catch((err) => {
-                    console.log(err)
                     this.setData({
                         networkType: false,
                         type: 'net'

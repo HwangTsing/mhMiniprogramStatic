@@ -245,13 +245,38 @@ class wxApi {
     moreList(cfg) {
         return this.request('wbcomic/home/recommend_list?', cfg)
     }
+    //搜索热门推荐接口
+    popRecList(cfg) {
+        return this.request('wbcomic/home/hot_words?', cfg)
+    }
+    //分类标签接口
+    classLabelList(cfg) {
+        return this.request('wbcomic/comic/filter_list?',cfg)
+    }
+    //分类列表
+    classList(cfg) {
+        return this.request('wbcomic/comic/filter_result?',cfg)
+    }
+    //阅读榜
+    readList(cfg) {
+        return this.request('wbcomic/home/rank_read?',cfg);
+    }
+    //新作榜
+    newList(cfg) {
+        return this.request('wbcomic/home/rank_share?',cfg);
+    }
+    //综合榜
+    rankList(cfg) {
+        return this.request('wbcomic/home/rank?',cfg);
+    }
+
 
 
   setNavigationBarTitle(title) {
     if (title) {
       title = decodeURIComponent(title)
       wx.setNavigationBarTitle({title})
-    }  
+    }
   }
 
   appendParams(route, params={}) {
@@ -306,6 +331,7 @@ class wxApi {
     wx.pageScrollTo(options);
   }
 
+
   setMessageType(page, type) {
     if (page && page.setData) page.setData({type})
   }
@@ -314,6 +340,25 @@ class wxApi {
     if (typeof callback == 'function') {
       wx.onNetworkStatusChange(callback)
     }
+  }
+
+  /* 获取节点(元素信息) WXML节点信息*/
+  getNodeInfo(node=null){
+    const promise = new Promise((resolve, reject) => {
+        if(!node||typeof node!="string"){
+            reject('请传递(id或者class)节点信息')
+            console.error('请传递(id或者class)节点信息')
+            return;
+        }
+        const query = wx.createSelectorQuery()
+        query.select(node).boundingClientRect(
+            (res)=>{
+                resolve(res)
+            }
+        ).exec()
+    });
+
+    return promise;
   }
 
 }

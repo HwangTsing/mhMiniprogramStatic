@@ -64,7 +64,7 @@
 
 @keyframes play{
     to  {
-        transform:rotate(0deg);
+        transform:rotate(360deg);
         /*
         transform:rotateX(0deg);
         transform:rotate(0deg);
@@ -72,7 +72,7 @@
         */
     }
     from {
-        transform:rotate(360deg);
+        transform:rotate(0deg);
         /*
         transform:rotateX(360deg);
         transform:rotate(360deg);

@@ -24,6 +24,7 @@
     left:0;
     top:0;
     z-index:1;
+    border:1rpx solid #e6e6e6;
 }
 .book_data {
   flex: 1;

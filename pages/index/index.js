@@ -21,29 +21,14 @@ Page({
           vertical: false,  //滑动方向是否纵向
           networkType:true,  //是否有网络
           isScroll:true,   //scroll-view滚动条
-          isOpacity:false,  //蒙层
-          listData:false,    //搜索显示隐藏
-          isCancel:false,
-          isScrollSearch:false,    //滚动
-          searchListData:[],
           isToast:false,   //男女分版切换toast
           id:0,
           idg:1,
-          searchList:[],   //搜索列表
-          scrolType:'',
-          message:'',    //提示语
-          total:0,    //总页码
-          noSearch:true,   //是否有搜索结果
           isLoad:false,     //是否加载失败
       },
       metaData:{
         mca:''
       },
-    searchData:{
-       word:'',
-       page_num:1,
-       rows_num:10
-    },
 
     initData: function () {
         var that = this;
@@ -139,74 +124,13 @@ Page({
         })
 
     },
-    searchDatas:function () {
-        var that = this;
-        var page_num = '',rows_num='',word='';
-        if (!!this.searchData.word){
-            word = this.searchData.word;
-        }
-        if (!!this.searchData.page_num) {
-            page_num = +this.searchData.page_num;
-        }
-        if (!!this.searchData.rows_num){
-            rows_num = this.searchData.rows_num;
-        }
-
-        wxApi.searchList({
-                method:'GET',
-                data:{word,rows_num,page_num},
-                success:function (data) {
-                    if (data.data.data.data.length !==0){
-                        var site_cover = data.data.data.site_cover;
-
-                        if (that.data.scrolType !== ''){
-                            data.data.data.data.forEach((item,index) =>{
-                                //判断图片路径是否带有https||http前缀，有则什么都不做，没有加上
-                                if (item.cover && !/^http[s]?:\/\//ig.test(item.cover)){
-                                    item.cover = site_cover + item.cover;
-                                }
-                            })
-                            var searchList = that.data.searchList.concat(data.data.data.data);
-
-                        }else {
-                            that.data.searchList = data.data.data.data;
-                            that.data.searchList.forEach((item,index) =>{
-                                //判断图片路径是否带有https||http前缀，有则什么都不做，没有加上
-                                if (item.cover && !/^http[s]?:\/\//ig.test(item.cover)){
-                                    item.cover = site_cover + item.cover;
-                                }
-                            })
-                            var searchList = that.data.searchList;
-                        }
-                        let page_total = data.data.data.page_total;
-                        that.setData({
-                            searchList:searchList,
-                            isScroll:false,
-                            total:page_total,
-                            message: page_total > page_num ? '加载更多...' : '没有更多了',//提示语
-                            networkType:true,
-                            noSearch:true
-                        })
-                    }else if (data.data.data.data.length === 0){//搜索没有匹配的数据时提示图
-                        that.setData({
-                            searchList:[],
-                            noSearch:false,
-                            isScroll:false
-                        })
-                    }
-                },
-                fail:function (data) {
-                    that.setData({
-                        networkType:true,
-                        isLoad:true
-                    })
-                }
-
-        });
-
-    },
 
     /*事件处理函数*/
+    onHref:function () {
+        wx.navigateTo({
+            url: '/pages/search/search'
+        })
+    },
     /*boy and girl*/
     onBoyTap:function (event) {
         var that = this;
@@ -311,98 +235,31 @@ Page({
             url: '/pages/details/details?comic_id='+comic_id
         })
     },
-    /*input聚焦和失焦,监听*/
-    focusInputEvent: function () {
-        var that= this;
-        this.setData({
-            isOpacity: true,
-            isScroll:false
+    /*放送*/
+    releaseTap:function () {
+        wx.navigateTo({
+            url: '/pages/releaseTable/releaseTable'
         })
     },
-    blurInputEvent: function () {
-        var that = this;
-        this.setData({
-            isOpacity:false,
-            isScroll:true,
+    /*分类*/
+    classTap:function () {
+        wx.navigateTo({
+            url: '/pages/classification/classification'
         })
     },
-    bindInputChange:function (e) {
-        var that = this;
-         that.searchData.word = e.detail.value;
-        //console.log(that.searchData.word);
-        var word = that.searchData.word;//判断网络类型
-        wxApi.getNetworkType().then((res) =>{
-            let networkType = res.networkType;
-            if (networkType === 'none' || networkType === 'unknown') {
-                //无网络不进行任何操作
-                this.setData({
-                    networkType: false
-                })
-
-            }else {
-                //有网络
-                if (word === ''){
-                    this.setData({
-                        searchList:[],
-                        noSearch:true,
-                        word:''
-                    })
-                    that.data.scrolType = '';
-                    that.searchData.page_num = 1;
-                }else {
-                    that.setData({
-                        isScroll:false,
-                        isCancel:false,
-                        word:that.searchData.word
-                    })
-                    that.searchDatas();
-                }
-            }
-        }).catch((err) =>{
-            this.setData({
-                networkType: true,
-                isLoad:true
-            })
+    /*榜单*/
+    listTap:function () {
+        wx.navigateTo({
+            url: '/pages/rankinglist/rankinglist'
         })
-
     },
-    //删除搜索框内容事件
-    onDel:function () {
-        var that = this;
-        this.setData({
-            word:'',
-            searchList:[],
-            noSearch:true   //关闭提示重新搜索
-        });
-        that.data.scrolType = '';
-        that.searchData.page_num = 1;
+    /*完结*/
+    endTap:function () {
+        wx.navigateTo({
+            url: '/pages/comicEnd/comicEnd'
+        })
     },
-    //取消
-    onCancel:function(){
-        var that = this;
-        that.setData({
-            isOpacity:false,
-            listData:false,
-            isScroll:true,
-            noSearch:true,
-            word:'',
-            searchList:[],
-            isCancel:true
 
-        });
-        that.data.scrolType = '';
-        that.searchData.page_num = 1;
-        that.data.timer = setTimeout(function () {
-            that.setData({
-                searchList:[],
-                isScroll:true,
-                isOpacity:false,
-                listData:false,
-                noSearch:true
-            })
-
-        },500)
-    },
     /*查看更多*/
     bindMoreTap:function (e) {
         var location_en = e.currentTarget.dataset.index;
@@ -414,43 +271,6 @@ Page({
 
     //滚动条滚到顶部的时候触发
     upper: function(e) {
-
-    },
-    //滚动条滚到底部的时候触发
-    lower: function(e) {
-        //console.log(e.type);
-        var that = this;
-        that.data.scrolType = e.type;
-        //判断网络类型
-        wxApi.getNetworkType().then((res) =>{
-            let networkType = res.networkType;
-            if (networkType === 'none' || networkType === 'unknown') {
-                //无网络不进行任何操作
-                this.setData({
-                    networkType: false
-                })
-
-            }else {
-                //有网络
-                let total = that.data.total;
-                //console.log(total);
-                that.searchData.page_num++;
-                if (total < that.searchData.page_num){
-                    return;
-                }else {
-                    that.searchDatas();
-                    that.setData({
-                        isScroll:false
-                    })
-                }
-
-            }
-        }).catch((err) =>{
-            this.setData({
-                networkType: true,
-                isLoad:true
-            })
-        })
 
     },
 
@@ -473,9 +293,6 @@ Page({
                 })
 
             }else {
-                that.setData({
-                    word:that.searchData.word
-                })
                 //有网络
                 //################# 获取推荐页男女选择存储 #########################//
                 wx.getStorage({

@@ -17,11 +17,13 @@ Component({
         history:{
             type: Object, // 类型（必填），目前接受的类型包括：String, Number, Boolean, Object, Array, null（表示任意类型）
             value: null, // 属性初始值（可选），如果未指定则会根据类型选择一个
-        }
+        },
     },
     data: {
         //组件的内部数据，和 properties 一同用于组件的模版渲染
-        chapter:{id:null}
+        chapter:{id:null},
+        floorstatus:false,//是否显示弹出框
+       
     },
 
 
@@ -46,14 +48,26 @@ Component({
             let data=event.currentTarget.dataset;//元素对象信息
             let chapter_id = data.chapter_id;
             let comic_id = data.comic_id;
+            let item = data.item;
             this.setData({ //存储 点击章节信息,到组件对象中
                 chapter:data
             })
-            if(comic_id && chapter_id){
+          
+            if(item.isLocked){
+                this.setData({ //存储 点击章节信息,到组件对象中
+                    floorstatus:true
+                })
+            }
+           else if(comic_id && chapter_id){
                 wx.navigateTo({
                     url: `/pages/read/read?chapter_id=${chapter_id}`//&comic_id=${comic_id}
                 })
             }
+        },
+        onMyEvent(event){
+            this.setData({ //存储 点击章节信息,到组件对象中
+                floorstatus:false
+            })
         }
     }
 })

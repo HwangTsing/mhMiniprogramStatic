@@ -1,0 +1,191 @@
+/* pages/classification/classification.wxss */
+page {
+    background :#fff;
+}
+.container_classific {
+    width :100%;
+    background :#fff;
+}
+.container_classific .top_view {
+    width:100%;
+    /*height:208rpx;*/
+    position:fixed;
+    top:0;
+    z-index:99;
+    left:0;
+    right:0;
+    background: #fff;
+}
+.container_classific .class_label_view {
+    width:100%;
+    /*height:144rpx;*/
+    display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    flex-direction: row;
+    -webkit-box-orient: vertical;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    box-sizing: border-box;
+    text-align: center;
+    flex-wrap:wrap;
+    align-content: center;
+    padding-left: 20rpx;
+    border-bottom:1rpx solid #E6E6E6;
+}
+.class_label_view .label_title {
+    font-size:28rpx;
+    padding:9rpx 14rpx;
+    color: #999999;
+    font-family:PingFangSC-Regular;
+}
+.label_title_active {
+    font-size:28rpx;
+    padding:9rpx 14rpx;
+    color: #333333;
+    font-family:PingFangSC-Regular;
+}
+.active_border {
+    width:42%;
+    margin:2rpx auto;
+    border:4rpx solid #FF4C6A;
+    background:#FF4C6A;
+    border-radius:10rpx;
+    -webkit-border-radius:10rpx;
+    -moz-border-radius:10rpx;
+    -mz-border-radius:10rpx;
+    overflow:hidden;
+}
+.checked_border{
+    width: 42%;
+    margin: 2rpx auto;
+    border: 4rpx solid #fff;
+    border-radius:10rpx;
+    overflow: hidden;
+    background: #fff;
+}
+.container_classific .small_label_view {
+    width:100%;
+    height:64rpx;
+    display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    flex-direction: row;
+    -webkit-box-orient: vertical;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    box-sizing: border-box;
+    justify-content: flex-start;
+    padding-left: 20rpx;
+}
+.small_label_view .small_title {
+    font-size:28rpx;
+    padding:7rpx 14rpx;
+    color: #999999;
+    font-family:PingFangSC-Regular;
+    margin-top:8rpx;
+}
+.small_title_active {
+    font-size:28rpx;
+    padding:7rpx 14rpx;
+    color:rgba(255,77,106,1);
+    background:rgba(255,77,106,0.1);
+    font-family:PingFangSC-Regular;
+    border-radius:32rpx;
+    margin-top:8rpx;
+}
+.class_content {
+    width:100%;
+    height:82vh;
+    background:#fff;
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+}
+.class_content .class_list {
+    width:100%;
+    display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    flex-direction: row;
+    -webkit-box-orient: vertical;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-wrap:wrap;
+    box-sizing: border-box;
+    background :#fff;
+}
+.class_list .list_view:nth-of-type(even) {
+    margin-left: 2rpx;
+}
+.class_list .list_view{
+    width:374rpx;
+    height:280rpx;
+}
+.class_list .list_view .list_img{
+    width:374rpx;
+    height:212rpx;
+    display: inline-block;
+}
+.class_list .list_view .list_title {
+    width:314rpx;
+    height:63rpx;
+    font-size:28rpx;
+    font-family:PingFangSC-Regular;
+    color:rgba(51,51,51,1);
+    margin-left:30rpx;
+    margin-top:5rpx;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+/*上拉加载loading*/
+.load_view {
+    width: 100%;
+    display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top:20rpx;
+}
+.load_img_bg {
+    width:36rpx;
+    height:36rpx;
+    text-align:center;
+    margin-top: 22rpx;
+}
+.load_image {
+    width: 36rpx;
+    height: 36rpx;
+    display: inline-block;
+
+    /* 设置默认样式，开启3d硬件加速 */
+    -webkit-transform:translate3d(0,0,0);
+    -moz-transform:translate3d(0,0,0);
+    transform:translate3d(0,0,0);
+    /* 设置动画，animation:动画名称 动画播放时长单位秒或微秒 动画播放的速度曲线linear为匀速 动画播放次数infinite为循环播放; */
+    -webkit-animation:play 1s linear infinite;
+    -moz-animation:play 1s linear infinite;
+    animation:play 1s linear infinite;
+}
+.comment_message{
+    font-size: 28rpx;
+    text-align: center;
+    line-height: 80rpx;
+    color: #999;
+    margin-left: 20rpx;
+}
+
+
+@keyframes play{
+     to  {
+         transform:rotate(360deg);
+     }
+     from {
+         transform:rotate(0deg);
+     }
+ }
+
+

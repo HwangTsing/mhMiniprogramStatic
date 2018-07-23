@@ -1,0 +1,49 @@
+<view class="container_classific">
+    <view class="top_view">
+        <view class="class_label_view">
+            <view wx:for="{{comicCate}}" class="{{cate_id ===item.cate_id? 'label_title_active':'label_title'}}" wx:key="index"
+                  data-cateid="{{item.cate_id}}" catchtap="onCate">
+                <text>{{item.cate_cn_name}}</text>
+                <view class="{{cate_id ===item.cate_id? 'active_border':'checked_border'}}"></view>
+            </view>
+        </view>
+        <view class="small_label_view">
+            <view wx:for="{{comicEnd}}" class="{{end_status ===item.end_status? 'small_title_active':'small_title'}}"
+                  wx:key="index" data-endid="{{item.end_status}}" catchtap="onEnd">{{item.end_status_name}}</view>
+        </view>
+    </view>
+    <!--根据分类条件进行渲染内容-->
+    <scroll-view class="class_content" scroll-y="{{true}}" bindscrolltolower="lower" wx:if="{{networkType === true}}"
+                 enable-back-to-top="{{true}}" lower-threshold="{{50}}">
+        <view class="class_list">
+            <navigator class="list_view" url="../details/details?comic_id={{item.comic_id}}"
+                       data-comic="{{item.comic_id}}" wx:if="{{classListData.length > 0}}" wx:for="{{classListData}}" wx:key="index">
+                <imgholder class="list_img" type="hcover">
+                    <image mode="scaleToFill" class="list_img" src="{{item.comic_hcover}}"></image>
+                </imgholder>
+                <view class="list_title">{{item.comic_name}}</view>
+            </navigator>
+        </view>
+        <view class="load_view">
+            <view class="load_img_bg" wx:if="{{ message != '没有更多了' }}">
+                <image class="load_image" mode="aspectFill" wx:if="{{classListData.length > 9}}" src="../../images/icon_load.png"></image>
+            </view>
+            <view class="comment_message" wx:if="{{classListData.length > 0}}">{{message}}</view>
+        </view>
+        <!-- 空内容的时候 S -->
+        <message wx:if="{{classListData&&classListData.length==0 && hasData === false}}" type="nothing"></message>
+    </scroll-view>
+    <!--无网络，加载失败loading-->
+    <import src="./template/message.wxml"></import>
+    <view style="{{onLoad === true?'position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;':'position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;margin-top:217rpx'}}">
+        <template is="message" data="{{networkType,isLoad}}"></template>
+    </view>
+
+
+    <!-- 网络慢提示loading -->
+    <import src="/tpls/message.wxml"/>
+    <view wx:if="{{!isLoad}}"
+          style="{{comicCate.length>0?'position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;margin-top:217rpx':'position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;'}}">
+        <template is="message" wx:if="{{type}}" data="{{ type }}"/>
+    </view>
+</view>

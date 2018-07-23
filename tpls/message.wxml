@@ -6,4 +6,5 @@
     <message wx:if="{{type=='noExist'}}" type="noExist"></message>
     <message wx:if="{{type=='loading'}}" type="loading"></message>
     <message wx:if="{{type=='lose'}}" type="lose"></message>
+    <message wx:if="{{type=='nothing'}}" type="nothing"></message>
 </template>

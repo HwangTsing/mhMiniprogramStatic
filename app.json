@@ -1,19 +1,24 @@
 {
-    "pages": [
-        "pages/index/index",
-        "pages/details/details",
-        "pages/comment/comment",
-        "pages/morelist/morelist",
-        "pages/read/read",
-        "pages/reply/reply"
-    ],
-    "window": {
-        "backgroundTextStyle": "light",
-        "navigationBarBackgroundColor": "#fff",
-        "navigationBarTitleText": "",
-        "navigationBarTextStyle": "black"
-    },
-    "networkTimeout": {
-        "request": 10000
-    }
+  "pages": [
+    "pages/index/index",
+    "pages/details/details",
+    "pages/comment/comment",
+    "pages/morelist/morelist",
+    "pages/read/read",
+    "pages/reply/reply",
+    "pages/search/search",
+    "pages/classification/classification",
+    "pages/releaseTable/releaseTable",
+    "pages/comicEnd/comicEnd",
+    "pages/rankinglist/rankinglist"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "",
+    "navigationBarTextStyle": "black"
+  },
+  "networkTimeout": {
+    "request": 10000
+  }
 }

@@ -1,0 +1,29 @@
+<!--pages/comicEnd/comicEnd.wxml-->
+<!-- 完结 S -->
+<view class="comicEndContainer">
+
+     <!-- 
+        data:漫画id {comic_id:1},
+        cate:漫画分类(标签) {cate_cn_name:少年,cate_id:7}
+        lastChapter: 漫画最新章节{chapter_name:xxx,comic_id:xxx,chapter_id:xxx},
+        comic:漫画信息 {comic_id:1,name:xxx,cover:xxx,...}
+        siteImage:背景前缀(域名)
+    -->
+    <releaseAndEndItem
+        wx:if="{{ comicEndList && comicEndList.length!=0 }}"
+        wx:for="{{comicEndList}}"
+        wx:key="{{index}}"
+        data="{{item.data}}"
+        cate="{{item.cate}}"
+        lastChapter="{{item.lastChapter}}"
+        comic="{{item.comic}}"
+        siteImage="{{siteImage}}"
+    ></releaseAndEndItem>
+    <!-- 提示信息 S  -->
+    <import src="/tpls/message.wxml"/>
+
+    <template is="message" wx:if="{{ type }}" data="{{ type }}"/>
+    <!-- 提示信息 E  -->
+
+</view>
+<!-- 完结 E -->

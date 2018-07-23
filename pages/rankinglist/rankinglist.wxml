@@ -1,0 +1,131 @@
+<!--pages/rankinglist/rankinglist.wxml-->
+<view class="container_ranking">
+    <view class="tab_view">
+        <ul class="nav_tab">
+            <block wx:for="{{statusList}}" wx:for-item="statusList" wx:key="status">
+                <li class="{{status === statusList.status ? 'activeColor' : 'tab_name'}}" data-id="{{statusList.status}}"catchtap="onTabTap">
+                    {{statusList.title}}
+                    <view class="{{status === statusList.status ? 'activeBorder':''}}"></view>
+                </li>
+            </block>
+        </ul>
+    </view>
+    <swiper current="{{status}}" class="swiper-box"  duration="300"  style="height:{{windowHeight}}rpx;" bindchange="bindChange">
+        <swiper-item class="read_content">
+            <scroll-view scroll-y="true" class="swiper_scroll">
+                <view class="read_view" wx:for="{{readData}}" data-id="{{item.comic_id}}" wx:key="{{index}}" bindtap="readTap">
+                    <view class="left_view">
+                        <imgholder type="hcover">
+                            <image class="left_img" src="{{item.hcover}}"></image>
+                        </imgholder>
+                    </view>
+                    <view class="read_word">
+                        <block wx:if="{{index === 0 || index === 1 || index === 2}}">
+                            <view class="read_title" style="width:280rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                {{item.name}}
+                            </view>
+                            <view class="read_avatar" style="width:280rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                {{item.sina_nickname}}
+                            </view>
+                            <view class="read_introduction" style="width:280rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                {{item.description}}
+                            </view>
+                        </block>
+                        <block wx:else>
+                            <view class="read_title">{{item.name}}</view>
+                            <view class="read_avatar">{{item.sina_nickname}}</view>
+                            <view class="read_introduction">{{item.description}}</view>
+                        </block>
+
+                    </view>
+                    <image class="one_img"  wx:if="{{index === 0}}" src="../../images/one.png"></image>
+                    <image class="two_img" wx:if="{{index === 1}}" src="../../images/two.png"></image>
+                    <image class="three_img" wx:if="{{index === 2}}" src="../../images/three.png"></image>
+                </view>
+                <message wx:if="{{readData&&readData.length==0 && hasData === false}}" type="nothing"></message>
+                <!--无网络，加载失败loading-->
+                <import src="./template/message.wxml"></import>
+                <template is="message" data="{{networkType,isLoad}}"></template>
+            </scroll-view>
+        </swiper-item>
+        <swiper-item>
+            <scroll-view scroll-y="true" class="swiper_scroll">
+                <view class="new_view" wx:for="{{newData}}" data-id="{{item.comic_id}}" wx:key="{{index}}" bindtap="newTap">
+                    <view class="left_view">
+                        <imgholder type="hcover">
+                            <image class="left_img" src="{{item.hcover}}"></image>
+                        </imgholder>
+                    </view>
+                    <view class="new_word">
+                        <block wx:if="{{index === 0 || index === 1 || index === 2}}">
+                            <view class="new_title" style="width:280rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                {{item.name}}
+                            </view>
+                            <view class="new_avatar" style="width:280rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                {{item.sina_nickname}}
+                            </view>
+                            <view class="new_introduction" style="width:280rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                {{item.description}}
+                            </view>
+                        </block>
+                        <block wx:else>
+                            <view class="new_title">{{item.name}}</view>
+                            <view class="new_avatar">{{item.sina_nickname}}</view>
+                            <view class="new_introduction">{{item.description}}</view>
+                        </block>
+                    </view>
+                    <image class="one_img"  wx:if="{{index === 0}}" src="../../images/one.png"></image>
+                    <image class="two_img" wx:if="{{index === 1}}" src="../../images/two.png"></image>
+                    <image class="three_img" wx:if="{{index === 2}}" src="../../images/three.png"></image>
+                </view>
+                <message wx:if="{{newData&&newData.length==0 && hasData === false}}" type="nothing"></message>
+                <!--无网络，加载失败loading-->
+                <import src="./template/message.wxml"></import>
+                <template is="message" data="{{networkType,isLoad}}"></template>
+            </scroll-view>
+        </swiper-item>
+        <swiper-item>
+            <scroll-view scroll-y="true" class="swiper_scroll">
+                <view class="rank_view" wx:for="{{rankData}}" data-id="{{item.comic_id}}" wx:key="{{index}}" bindtap="rankTap">
+                    <view class="left_view">
+                        <imgholder type="hcover">
+                            <image class="left_img" src="{{item.hcover}}"></image>
+                        </imgholder>
+                    </view>
+                    <view class="rank_word">
+                        <block wx:if="{{index === 0 || index === 1 || index === 2}}">
+                            <view class="rank_title" style="width:280rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                {{item.name}}
+                            </view>
+                            <view class="rank_avatar" style="width:280rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                {{item.sina_nickname}}
+                            </view>
+                            <view class="rank_introduction" style="width:280rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                {{item.description}}
+                            </view>
+                        </block>
+                        <block wx:else>
+                            <view class="rank_title">{{item.name}}</view>
+                            <view class="rank_avatar">{{item.sina_nickname}}</view>
+                            <view class="rank_introduction">{{item.description}}</view>
+                        </block>
+                    </view>
+                    <image class="one_img"  wx:if="{{index === 0}}" src="../../images/one.png"></image>
+                    <image class="two_img" wx:if="{{index === 1}}" src="../../images/two.png"></image>
+                    <image class="three_img" wx:if="{{index === 2}}" src="../../images/three.png"></image>
+                </view>
+                <message wx:if="{{rankData&&rankData.length==0 && hasData === false}}" type="nothing"></message>
+                <!--无网络，加载失败loading-->
+                <import src="./template/message.wxml"></import>
+                <template is="message" data="{{networkType,isLoad}}"></template>
+            </scroll-view>
+        </swiper-item>
+    </swiper>
+
+    <!-- 网络慢提示loading -->
+    <import src="/tpls/message.wxml"/>
+    <view wx:if="{{!isLoad}}"
+          style="{{statusList.length>0?'position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;margin-top: 100rpx;':'position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;'}}">
+        <template is="message" wx:if="{{type}}" data="{{ type }}"/>
+    </view>
+</view>
