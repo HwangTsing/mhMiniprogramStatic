@@ -39,14 +39,14 @@ Page({
                 url: `/pages/read/read?chapter_id=${data.chapter_id}&comic_id=${data.comic_id}`
             })
         }).catch((err) => {
-            let isSort=this.data.isSort;
-            let arr=this.data.dataAry.chapter_list;
+            let isSort = this.data.isSort;
+            let arr = this.data.dataAry.chapter_list;
             if (arr && arr[0]) {
-                let index=0;
-                if(isSort===2){
-                    index=arr.length-1;
-                }else if(isSort===1){
-                    index=0;
+                let index = 0;
+                if (isSort === 2) {
+                    index = arr.length - 1;
+                } else if (isSort === 1) {
+                    index = 0;
                 }
                 wx.navigateTo({
                     url: `/pages/read/read?chapter_id=${this.data.dataAry.chapter_list[index].chapter_id}&comic_id=${this.data.dataAry.comic.comic_id}`
@@ -65,11 +65,11 @@ Page({
     * //通过组件传递的消息,执行事件
     * */
     ClickCatalog() { //通过组件传递的消息,执行事件
-        
+
         if (!this.data.dataAry) {
             return
         }
-        else{
+        else {
             let key = "comic_id_" + this.data.dataAry.comic.comic_id;
             wxApi.getStorage(key).then((res) => {
                 this.setData({
@@ -81,7 +81,7 @@ Page({
                 })//错误时候
             });
         }
-        
+
     },
     /*
     * 点击排序按钮 目录进行排序
@@ -110,7 +110,7 @@ Page({
         * */
         //comic_id
         let comic_id = options.comic_id;
-         //comic_id= options.comic_id ? options.comic_id : 68023;//24 68491
+        //comic_id= options.comic_id ? options.comic_id : 68023;//24 68491
         // comic_id = 68491;
         let page_num = 1;//页码
         let rows_num = 10;//每页条数
@@ -160,7 +160,7 @@ Page({
                             //存储 comic信息
                             let DATA = res.data;
                             let chapterList = null;
-                            DATA.comic.cover=DATA.comic.cover.replace ( /_(s|m)\./img , '_b.' )
+                            DATA.comic.cover = DATA.comic.cover.replace(/_(s|m)\./img, '_b.')
 
                             const {
                                 comic = {
@@ -178,11 +178,11 @@ Page({
                                 }
                             } = DATA.is_allow_read
                             const { chapter_id_arr = [] } = chapter_order
-                           
+
                             //comic_buy    1章节购买 2全本购买
                             //order_status 订单状态  0:默认 1:末付款 2:已付款
                             //pay_status   付费状态  0:默认 1:免费 2:收费
-                             if ( (comic_buy == 2 && order_status == 2)||pay_status==1) { //漫画全本购买并已付款
+                            if ((comic_buy == 2 && order_status == 2) || pay_status == 1) { //漫画全本购买并已付款
                                 this.can_read_chapters = 'false';
                             } else { //漫画章节购买
                                 if (pay_status == 2) { //收费
@@ -191,13 +191,13 @@ Page({
                                     this.can_read_chapters = 'false'
                                 }
                             }
-                        //    console.log(this.can_read_chapters)
-                            if( this.can_read_chapters!=='false' && this.can_read_chapters){
+                            //    console.log(this.can_read_chapters)
+                            if (this.can_read_chapters !== 'false' && this.can_read_chapters) {
                                 chapterList = [];
                                 DATA.chapter_list.forEach((item, index) => {
                                     let tmpIsLocked = true;
-                                    this.can_read_chapters.forEach((id,i)=>{
-                                        if(item.chapter_id===id){ //如果相等,就修改付费为免费章节,忽略过滤
+                                    this.can_read_chapters.forEach((id, i) => {
+                                        if (item.chapter_id === id) { //如果相等,就修改付费为免费章节,忽略过滤
                                             tmpIsLocked = false;
                                             // chapterList.push(item)
                                         }
@@ -205,10 +205,10 @@ Page({
                                     item.isLocked = tmpIsLocked;
                                     chapterList.push(item)
                                 });
-                                DATA.chapterList=chapterList;
-                                
-                             }else {
-                                DATA.chapterList=DATA.chapter_list;
+                                DATA.chapterList = chapterList;
+
+                            } else {
+                                DATA.chapterList = DATA.chapter_list;
                             }
                             DATA.chapterList.reverse();
                             console.log(DATA)
@@ -303,7 +303,7 @@ Page({
                             }
 
                             //格式化时间
-                            item.create_time = wxApi.formatTime(item.create_time, {y: true, h: true});
+                            item.create_time = wxApi.formatTime(item.create_time, { y: true, h: true });
 
                             //存储单个格式后的数据
                             let obj = {
@@ -400,7 +400,7 @@ Page({
      */
     onShareAppMessage: function () {
         return {
-          title: '各种有爱的动漫分享'
+            title: '各种有爱的动漫分享'
         }
     }
 
