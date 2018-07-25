@@ -1,13 +1,15 @@
-<view class="popup" ></view>
-<view class="Dialog">
-            <view class="Dialog_top" 
-               >
-                 <image  src="../../images/details/dialog_top_bg.png"></image>
-                 <image src="../../images/details/comic_login_icon.png" />
-            </view>
-            <view class='Dialog_title'>
-                    <view class='Dialog_conter_top'>   此章节为付费章节  </view>
-                   <view class='Dialog_conter'>建议打开微博动漫APP继续阅读～ </view> 
-             </view>
-            <button  bindtap="btnSure" class="btnSure">确定</button>
- </view>  
+<view hidden="{{!visible}}">
+  <view class="popup"></view>
+  <view class="Dialog">
+              <view class="Dialog_top" 
+                >
+                  <image  src="../../images/details/dialog_top_bg.png"></image>
+                  <image src="../../images/details/comic_login_icon.png" />
+              </view>
+              <view class='Dialog_title'>
+                      <view class='Dialog_conter_top'>   此章节为付费章节  </view>
+                    <view class='Dialog_conter'>建议打开微博动漫APP继续阅读～ </view> 
+              </view>
+              <button  bindtap="btnSure" class="btnSure">确定</button>
+  </view> 
+ </view> 

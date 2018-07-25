@@ -194,7 +194,7 @@ Page({
     let time = +new Date()
     chapter_id = chapter_id+''
     const { comic_id} = this.data.comic
-    let next_url = '', prev_url = '', next = null, prev = null
+    let prev_nav = {}, next_nav = {}, next = null, prev = null
     const { comic = { try_read_chapters: [] }, comic_order = {}, chapter_order = {}, comic: { comic_buy, try_read_chapters, pay_status }, comic_order: { order_status } } = this.isAllowRead
     const { chapter_id_arr = [] } = chapter_order
 
@@ -202,16 +202,16 @@ Page({
     //comic_buy    1章节购买 2全本购买
     //order_status 订单状态  0:默认 1:末付款 2:已付款
     //pay_status   付费状态  0:默认 1:免费 2:收费
-
+    this.chapter_ids = _.pluck(chapter_list, 'chapter_id')
     if ( (comic_buy == 2 && order_status == 2) || pay_status == 1) { //漫画全本购买并已付款 or 免费章节
-      this.can_read_chapters = chapter_list
+      this.can_read_chapters = this.chapter_ids
       this.allowRead = true
     } else { //漫画章节购买
       if (pay_status == 2) { //收费
         this.can_read_chapters = _.union(try_read_chapters, chapter_id_arr)
       } 
     }
-
+    // console.log('this.can_read_chapters', this.can_read_chapters)
     // console.log('can_read_chapters', this.can_read_chapters, chapter_id_arr)
     const index = _.findIndex(chapter_list, { chapter_id })
     if (index != -1) {
@@ -219,10 +219,10 @@ Page({
       prev = this.findPrevChapter(index, chapter_list)
     }
     // console.log(+new Date() - time)
-    if (prev) prev_url = this.getReadurlByParam({ ...prev, comic_id})
-    if (next) next_url = this.getReadurlByParam({ ...next, comic_id})
+    if (prev) prev_nav = this.getReadurlByParam({ ...prev, comic_id})
+    if (next) next_nav = this.getReadurlByParam({ ...next, comic_id})
 
-    return { prev_url, next_url}
+    return { prev_nav, next_nav}
   },
 
   findNextChapter: function (index, chapters){
@@ -235,22 +235,29 @@ Page({
     return this.findChapter(_index, chapters, 'findPrevChapter')
   },
 
-  findChapter: function (index, chapters, action) {
+  findChapter: function (index, chapters) {
     const length = chapters.length
     if (index < 0 || index >= length) return null
 
     const can_read_chapters = this.can_read_chapters
     const { chapter_id, chapter_name } = chapters[index]
     
-    //console.log(action, chapter_id, chapter_name, chapter_pay_price, _.indexOf(can_read_chapters, chapter_id))
-    if (!this.allowRead && _.indexOf(can_read_chapters, chapter_id) == -1) {
-      return this[action](index, chapters)
+    let is_charge = false 
+    let charge_chapters = _.difference(this.chapter_ids, can_read_chapters)
+    // console.log('charge_chapters', charge_chapters)
+    if( _.indexOf(charge_chapters, chapter_id) != -1 ) {
+      is_charge = true
     }
-    return { chapter_id, chapter_name }
+    //console.log(action, chapter_id, chapter_name, chapter_pay_price, _.indexOf(can_read_chapters, chapter_id))
+    // if (!this.allowRead && _.indexOf(can_read_chapters, chapter_id) == -1) {
+    //   return this[action](index, chapters)
+    // }
+    return { chapter_id, chapter_name, is_charge }
   },
 
-  getReadurlByParam: function ({chapter_id, chapter_name, comic_id}, url = '/pages/read/read') {
-    return wxApi.appendParams(url, { chapter_id, chapter_name, comic_id });
+  getReadurlByParam: function ({chapter_id, chapter_name, is_charge, comic_id}, url = '/pages/read/read') {
+    url = wxApi.appendParams(url, { chapter_id, chapter_name, comic_id })
+    return {url, is_charge}
   },
 
   findChapterList: function (chapter_id, chapter_list=[]){

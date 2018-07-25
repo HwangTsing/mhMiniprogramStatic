@@ -1,5 +1,6 @@
 const {
     baseUrl,
+    isDev
 } = require('../config/index.js')
 
 
@@ -59,7 +60,8 @@ class wxApi {
 
     getPaths(url = '') {
         if (!/^(http[s]?:)/.test(url)) {
-            return baseUrl + 'wap' + url;
+            const path = isDev ? '' : 'wap'
+            return baseUrl + path + url;
         }
         return url;
     }

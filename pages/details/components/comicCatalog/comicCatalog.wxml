@@ -74,5 +74,5 @@
 
 
    <!-- 弹出付费框 S  -->
-         <popUp  wx:if="{{floorstatus}}"  bind:myevent="onMyEvent"></popUp>
-     <!-- 弹出付费框 E  -->
+   <popUp id="popup"></popUp>
+   <!-- 弹出付费框 E  -->

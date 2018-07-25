@@ -1,6 +1,14 @@
-<block wx:if="{{url}}">
+<block wx:if="{{nav.is_charge}}">
+  <view
+    class="comic-nav-button"
+    bind:tap="chargePop"
+    hover-class="navigator-hover">
+    <view class="button {{action}}-button">{{text}}</view>
+  </view>
+</block>
+<block wx:elif="{{nav.url}}">
   <navigator
-    url="{{url}}"
+    url="{{nav.url}}"
     open-type="redirect"
     class="comic-nav-button"
     hover-class="navigator-hover">
@@ -13,3 +21,7 @@
     <view class="button {{action}}-button">{{text}}</view>
   </view>
 </block>
+
+<!-- 弹出付费框 S  -->
+<popUp id="popup"></popUp>
+<!-- 弹出付费框 E  -->
