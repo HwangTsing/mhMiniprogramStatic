@@ -21,7 +21,6 @@ Page({
       scrolType:'',
       message:'',    //提示语
       hasData:true,  //是否有内容
-
   },
 
     classLabelList:function () {
@@ -75,7 +74,7 @@ Page({
             data:{page_num,rows_num,cate_id,end_status,comic_pay_status},
             success:function (data) {
                 console.log(data.data.data.data);
-                if (data.data.code == 1){
+                if (data.data.data.data.length !== 0){
                     if (that.data.scrolType !== ''){
                         var classListData =that.data.classListData.concat(data.data.data.data);
                         console.log(classListData);
@@ -97,6 +96,7 @@ Page({
                     })
                 }else if (data.data.data.data.length === 0) {  //分类没有数据
                     that.setData({
+                        type:null,
                         classListData:[],
                         hasData:false
                     })
@@ -230,6 +230,22 @@ Page({
    */
   onLoad: function (options) {
       this.classLabelList();
+      var that = this;
+      wx.getSystemInfo({
+          success: function (res) {
+              console.info(res.windowHeight);
+              let height = res.windowHeight;
+              console.log(height);
+              wx.createSelectorQuery().selectAll('#top_view').boundingClientRect(function (rects) {
+                  rects.forEach(function (rect) {
+                      console.log(rect);
+                      that.setData({
+                          scrollHeight: res.windowHeight - rect.bottom
+                      });
+                  })
+              }).exec();
+          }
+      })
       //判断网络类型
       wxApi.getNetworkType().then((res) =>{
           let networkType = res.networkType;

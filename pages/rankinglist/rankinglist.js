@@ -33,7 +33,7 @@ Page({
                 method:'GET',
                 success:function (data) {
                     console.log(data.data.data.week);
-                    if (data.data.code == 1) {
+                    if (data.data.data.week.length !== 0) {
                         let readData=[];
                         data.data.data.week.forEach((item,index) => {
                             readData.push(item);
@@ -48,6 +48,7 @@ Page({
                         })
                     }else if (data.data.data.week.length === 0) {
                         that.setData({
+                            type:null,
                             readData:[],
                             hasData:false
                         })
@@ -71,7 +72,7 @@ Page({
           method:'GET',
           success:function (data) {
               console.log(data.data.data.week);
-              if (data.data.code == 1) {
+              if (data.data.data.week.length !== 0) {
                   let newData = [];
                   data.data.data.week.forEach((item,index) => {
                       newData.push(item);
@@ -86,6 +87,7 @@ Page({
                   })
               }else  if (data.data.data.week.length === 0) {
                 that.setData({
+                    type:null,
                     newData:[],
                     hasData:false
                 })
@@ -107,7 +109,7 @@ Page({
             method:'GET',
             success:function (data) {
                 console.log(data.data.data.week);
-                if (data.data.code == 1) {
+                if (data.data.data.week.length !== 0) {
                     let rankData = [];
                     data.data.data.week.forEach((item,index) => {
                         rankData.push(item);
@@ -122,6 +124,7 @@ Page({
                     })
                 }else if (data.data.data.week.length === 0) {
                     that.setData({
+                        type:null,
                         rankData:[],
                         hasData:false
                     })

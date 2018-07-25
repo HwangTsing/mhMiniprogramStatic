@@ -1,5 +1,5 @@
 <view class="container_classific">
-    <view class="top_view">
+    <view id="top_view">
         <view class="class_label_view">
             <view wx:for="{{comicCate}}" class="{{cate_id ===item.cate_id? 'label_title_active':'label_title'}}" wx:key="index"
                   data-cateid="{{item.cate_id}}" catchtap="onCate">
@@ -13,7 +13,7 @@
         </view>
     </view>
     <!--根据分类条件进行渲染内容-->
-    <scroll-view class="class_content" scroll-y="{{true}}" bindscrolltolower="lower" wx:if="{{networkType === true}}"
+    <scroll-view class="class_content" scroll-y="{{true}}" style="height:{{scrollHeight}}px;" bindscrolltolower="lower" wx:if="{{networkType === true}}"
                  enable-back-to-top="{{true}}" lower-threshold="{{50}}">
         <view class="class_list">
             <navigator class="list_view" url="../details/details?comic_id={{item.comic_id}}"
