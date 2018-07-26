@@ -20,24 +20,24 @@ const infoData=function ({
         authorData.forEach((item,index) => {
 
             //初始化一个默认对象
-            
+
             let obj={
                 sina_nickname:item.sina_nickname,
                 sina_user_id:item.sina_user_id,
                 user_avatar:item.user_avatar,
                 user_id:item.user_id
             }
-            if(comicType==1){
+            if(uploadType==1){
                 obj.sina_nickname=item.pen_name
             }
-        
+
             if(len===1){
                 //如果length是1的情况下
                 if( obj.user_id && obj.sina_nickname ){
                     authorAry.push(obj)
                 }else{
-                    if(comicType==1){
-                        authorAry.push(itemObj)
+                    if(uploadType==1){
+                        authorAry.push(obj)
                     }
                 }
 
@@ -49,7 +49,7 @@ const infoData=function ({
 
             }
 
-        }); 
+        });
 
 
         //循环完成后再次判断
@@ -57,7 +57,7 @@ const infoData=function ({
             if(comicType==1){
                 authorAry.push(itemObj)
             }
-            
+
         }
 
     }else{
@@ -89,7 +89,7 @@ Component({
 
 
     attached() {
-        
+
         //组件生命周期函数，在组件实例进入页面节点树时执行
         //console.log(this.properties.thisData, this.data)
         let thisData=this.properties.thisData;
@@ -99,7 +99,7 @@ Component({
             sina_nickname:comic.sina_nickname,
             sina_user_id:comic.sina_user_id,
             user_avatar:comic.user_avatar
-        }   
+        }
         let data,comicType=comic.comic_type,uploadType=comic.upload_type;
         /*  如果不是KOL作者  */
         if(comicType==1){
@@ -111,9 +111,9 @@ Component({
         }else{ /*  如果是未知作者  */
             data;
         }
-        
+
         authorAry = infoData({ data , itemObj , comicType , uploadType });
-        
+
         this.setData({
             authorAry
         })
@@ -127,8 +127,8 @@ Component({
     },
     methods: {
         // 组件的事件
-        
-        
+
+
     },
-    
+
 })
