@@ -119,6 +119,13 @@
     border: none;
     
 }
+.comic_catalog_one text{
+  display: block;
+  overflow: hidden;
+  font-size: 30rpx;
+  white-space: nowrap;
+  text-overflow:ellipsis;
+}
 
 .active .comic_catalog_chapter_name{
     color: #FF4C6A;

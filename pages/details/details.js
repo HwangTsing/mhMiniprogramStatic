@@ -31,9 +31,11 @@ Page({
 
     //点击开始阅读|和据需阅读的事件
     onReadClick: function (event) {
+
         let key = "comic_id_" + this.data.dataAry.comic.comic_id;
 
         wxApi.getStorage(key).then((res) => { //获取阅读历史
+
             let data = res.data;
             wx.navigateTo({
                 url: `/pages/read/read?chapter_id=${data.chapter_id}&comic_id=${data.comic_id}`
@@ -121,7 +123,8 @@ Page({
         * ***comicShowFn  摘要页接口promise对象
         * @ comicShowUrl 必要参数 请求接口前缀
         * @ comic_id 必要参数 传递的参数
-        * */
+        * */  
+       // comic_id  69273
         let comicShowFn = wxApi.get(`${comicShowUrl}?comic_id=${comic_id}`);
 
 
