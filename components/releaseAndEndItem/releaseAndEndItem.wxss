@@ -37,8 +37,8 @@
     overflow:hidden;
 }
 .releaseAndEndItem .releaseAndEndItemTitle{
+    padding-top:6rpx ;
     flex: 1;
-    line-height: 44rpx;
     font-family: PingFangSC-Regular;
     font-size: 32rpx;
     color: #333333;
