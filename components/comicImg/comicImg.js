@@ -1,3 +1,6 @@
+const { version } = require('../../config/index.js') 
+const wxApi = require('../../utils/util.js')
+
 Component({
   properties: {
     order: {
@@ -23,7 +26,7 @@ Component({
     this.loadingState = false
     this.loaderror = false
     this.src = src.replace(/http:\/\//i, 'https://')
-
+    this.src = wxApi.appendParams(this.src, {'comic_version': version})
     // console.log('loading...', this.src)
     this.setData({
       width: width,
@@ -32,6 +35,7 @@ Component({
     });
   },
   methods: {
+      
     load(e) {
       const { detail = {}, detail: {width, height} } = e
       const scale = width / height
@@ -72,7 +76,7 @@ Component({
     downloadImg() {
       let { src, disabled, loading } = this.data
       const version = +new Date()
-      src = this.src + '?v=' + version
+      src = wxApi.appendParams(this.src, {'random': version})
       // console.log('downloadImg.', src)
       if (this.loadingState) return
       this.loadingState = true
