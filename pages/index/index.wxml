@@ -70,8 +70,8 @@
             <view class="search_view">
                 <view class="search_img">
                     <image class="search_images" src="../../images/search_gray.png"></image>
-                    <input class="'search_input" type="text" placeholder="搜索作品或作者名称"
-                           catchtap="onHref"/>
+                    <navigator class="'search_input" type="text" placeholder="搜索作品或作者名称"
+                               catchtap="onHref"><text style="line-height:62rpx;">搜索作品或作者名称</text></navigator>
                     <block wx:if="{{boyid}}">
                         <image class="{{id !== 0? 'boy_img_hidden':'boy_img'}}" data-index="{{boyid}}"
                                src="../../images/boy.png" catchtap="onToastTap" data-id="{{id}}"></image>
