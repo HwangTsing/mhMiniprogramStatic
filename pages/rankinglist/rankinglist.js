@@ -167,19 +167,22 @@ Page({
                     //有网络
                     if (status === 0) {
                         that.setData({
-                            type:'loading'
+                            type:'loading',
+                            readData:[],
                         })
                         that.readList();
                     }
                     else if (status === 1) {
                         that.setData({
-                            type:'loading'
+                            type:'loading',
+                            newData:[],
                         })
                         that.newList();
                     }
                     else if (status === 2) {
                         that.setData({
-                            type:'loading'
+                            type:'loading',
+                            rankData:[],
                         })
                         that.rankList();
                     }
