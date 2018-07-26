@@ -33,7 +33,6 @@ Page({
             pageNum:1,
             rowsNum:10,
             type:'loading',
-            networkType: true,
             comicList:null,//数据列表
         });
         this.isLoad({ //开始调用 获取数据
