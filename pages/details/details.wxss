@@ -45,7 +45,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    margin-left: 60rpx;
+    margin-left: 58rpx;
 }
 .read_view .read_btn {
     width: 280rpx;
