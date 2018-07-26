@@ -210,14 +210,14 @@ Page({
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady: function () {
-        
+
         const { windowHeight } = wxApi.getSystemInfoSync(); //获取设备信息
         this.setData({
             height: windowHeight
         })
     },
 
-    /* 
+    /*
     * *** scroll-view 的上滑无限加载事件
     *   **onScroll
     */
@@ -231,7 +231,7 @@ Page({
             this.setData({
                 pageNum:pageNum+1//条件成立后pageNum+1 然后在请求
             });
-            this.isLoad({ //调用判断是否存在网络 
+            this.isLoad({ //调用判断是否存在网络
                 url:this.data.url,
                 pubDay:this.data.pubDay,
                 pageNum:this.data.pageNum,
@@ -299,7 +299,7 @@ Page({
     },
 
     onPageScroll(obj){ //检测页面滚动条
-        //this.isOnPageScroll(obj); 
+        //this.isOnPageScroll(obj);
     },
     /**
      * 生命周期函数--监听页面显示
