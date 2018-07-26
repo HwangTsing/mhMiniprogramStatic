@@ -125,7 +125,7 @@
         <view class="nav_view">
             <view class="release_view" bindtap="releaseTap">
                 <image mode="aspectFit" src="../../images/indexIcon/release.png"></image>
-                <view class="release_title">放送</view>
+                <view class="release_title">放送表</view>
             </view>
             <view class="classif_view" bindtap="classTap">
                 <image mode="aspectFit" src="../../images/indexIcon/classif.png"></image>
