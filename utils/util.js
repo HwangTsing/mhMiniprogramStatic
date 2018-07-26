@@ -60,7 +60,7 @@ class wxApi {
 
     getPaths(url = '') {
         if (!/^(http[s]?:)/.test(url)) {
-            const path = isDev ? 'wap' : ''
+            const path = !isDev ? 'wap' : ''
             return baseUrl + path + url;
         }
         return url;
