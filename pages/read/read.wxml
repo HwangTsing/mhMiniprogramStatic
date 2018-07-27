@@ -10,6 +10,7 @@
             width="{{windowWidth}}"
             scale="{{item.mobileImgWidth/item.mobileImgHeight}}"
             image_id="vcomic-{{item.image_id}}"
+            version="{{site_ver}}"
             src="{{item.mobileImgUrl}}"
         ></vcomic>
     </view>

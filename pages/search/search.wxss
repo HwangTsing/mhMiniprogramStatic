@@ -138,7 +138,7 @@
   color: #333333;
   padding: 12rpx 36rpx;
   background: #F4F4F4;
-  margin: 25rpx 30rpx;
+  margin: 15rpx 30rpx;
 }
 /*搜索结果数据样式*/
 .big_listdata {

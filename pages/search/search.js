@@ -155,6 +155,7 @@ Page({
         })
     },
     bindInputChange:function (e) {
+        let cursor = e.detail.cursor;
         var that = this;
         that.searchData.word = e.detail.value;
         //console.log(that.searchData.word);
@@ -169,7 +170,7 @@ Page({
 
             }else {
                 //有网络
-                if (word === ''){
+                if (word === '' && cursor === 0){
                     this.setData({
                         searchList:[],
                         noSearch:true,
@@ -181,8 +182,11 @@ Page({
                     that.setData({
                         isScroll:false,
                         isCancel:false,
+                        searchList:[],
                         word:that.searchData.word
                     })
+                    that.data.scrolType = '';
+                    that.searchData.page_num = 1;
                     that.searchDatas();
                 }
             }

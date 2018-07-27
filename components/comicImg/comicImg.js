@@ -1,4 +1,3 @@
-const { version } = require('../../config/index.js') 
 const wxApi = require('../../utils/util.js')
 
 Component({
@@ -11,6 +10,7 @@ Component({
       type: String,
       value: '',
     },
+    version: String,
     image_id: String,
     scale: Number,
     width: Number,
@@ -21,12 +21,12 @@ Component({
     showDoanloadImgBtn: true,
   },
   attached() {
-    const {width, scale, src} = this.properties
+    const {width, scale, src, version} = this.properties
     this.loaded = 0
     this.loadingState = false
     this.loaderror = false
     this.src = src.replace(/http:\/\//i, 'https://')
-    this.src = wxApi.appendParams(this.src, {'comic_version': version})
+    this.src = wxApi.appendParams(this.src, { 'site_ver': version })
     // console.log('loading...', this.src)
     this.setData({
       width: width,

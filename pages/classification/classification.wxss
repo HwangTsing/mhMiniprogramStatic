@@ -10,11 +10,11 @@ page {
 .container_classific #top_view {
     width:100%;
     min-height:218rpx;
-   /* position:absolute;
+    position:fixed;
     top:0;
     left:0;
     right:0;
-    z-index:99;*/
+    z-index:99;
     background: #fff;
 }
 .container_classific .class_label_view {
@@ -100,12 +100,25 @@ page {
     width:100%;
     height:80vh;
     background:#fff;
+    padding-top:220rpx;
     position:fixed;
    /* bottom:0;*/
     left:0;
     right:0;
+    top:0;
 }
-.class_content .class_list {
+ .class_content_style {
+     width:100%;
+     height:80vh;
+     background:#fff;
+     position:fixed;
+     bottom:0;
+     left:0;
+     right:0;
+     top:0;
+     padding-top:358rpx;
+ }
+.class_content .class_list, .class_content_style .class_list {
     width:100%;
     display: flex;
     display: -webkit-box;

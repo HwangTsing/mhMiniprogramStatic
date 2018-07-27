@@ -1,6 +1,7 @@
 const {
     baseUrl,
-    isDev
+    isDev,
+    version
 } = require('../config/index.js')
 
 
@@ -56,6 +57,10 @@ class wxApi {
     formatNumber(n) {
         n = n.toString()
         return n[1] ? n : '0' + n
+    }
+
+    getVersion () {
+        return version
     }
 
     getPaths(url = '') {
