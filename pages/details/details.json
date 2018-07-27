@@ -7,6 +7,7 @@
       "comicShowTop": "/components/comicShowTop/comicShowTop",
       "comicDetails": "./components/comicDetails/comicDetails",
       "comicCatalog": "./components/comicCatalog/comicCatalog",
-      "message": "/components/message/message"
+      "message": "/components/message/message",
+      "popUp": "/components/popUp/popUp"
   }
 }

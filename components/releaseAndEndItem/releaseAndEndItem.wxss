@@ -17,7 +17,7 @@
     box-sizing: border-box;
     padding:6rpx 20rpx 28rpx 20rpx; 
     width: 100%;
-    height: 78rpx;
+    height: 80rpx;
     display: flex;
     align-items: center;
 }
@@ -37,7 +37,6 @@
     overflow:hidden;
 }
 .releaseAndEndItem .releaseAndEndItemTitle{
-    padding-top:6rpx ;
     flex: 1;
     font-family: PingFangSC-Regular;
     font-size: 32rpx;
@@ -46,6 +45,7 @@
     white-space:nowrap;
     text-overflow:ellipsis;
     overflow:hidden;
+    line-height: 44rpx;
 }
 .releaseAndEndItem .releaseAndEndItemRight{
     margin-left: 32rpx;
@@ -54,8 +54,9 @@
     color: #999999;
     letter-spacing: 0;
     text-align: right;
-    line-height: 44rpx;
+    line-height: 32rpx;
     white-space:nowrap;
     text-overflow:ellipsis;
     overflow:hidden;
+    margin-right:6rpx;
 }
