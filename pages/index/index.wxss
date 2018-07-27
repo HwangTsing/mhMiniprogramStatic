@@ -147,14 +147,14 @@ page {
   height: 96rpx;
   position: relative;
   left: 0;
-  bottom: 162rpx;
+  bottom: 126rpx;
 }
 .boy_view .boy_btn_hidden {
   width: 240rpx;
   height: 96rpx;
   position: relative;
   left: 0;
-  bottom: 162rpx;
+  bottom: 126rpx;
   display: none;
 }
 .girl_view .girl_s {
@@ -172,14 +172,14 @@ page {
   height: 96rpx;
   position: relative;
   right: 0;
-  bottom: 162rpx;
+  bottom: 126rpx;
 }
 .girl_view .girl_btn_hidden {
   width: 240rpx;
   height: 96rpx;
   position: relative;
   right: 0;
-  bottom: 162rpx;
+  bottom: 126rpx;
   display: none;
 }
 .logo_view {
