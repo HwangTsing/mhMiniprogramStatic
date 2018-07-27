@@ -126,12 +126,14 @@ Page({
       }
 
       if (data.json_content == null) data.json_content = {}
+      const version = wxApi.getVersion()
       const {
         chapter = {},
         chapter_list = [],
         json_content = {},
-        json_content: {page=[]},
+        json_content: { page=[] },
         is_allow_read,
+        site_ver = version,
         comic
       } = data;
 
@@ -139,7 +141,8 @@ Page({
       const { comic_id } = comic
       this.setData({
         comic,
-        chapter
+        chapter,
+        site_ver
       })
       this.isAllowRead = is_allow_read;
 
