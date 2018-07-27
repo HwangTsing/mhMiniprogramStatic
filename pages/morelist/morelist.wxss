@@ -10,7 +10,6 @@
 .more_list {
   width: 100%;
   height: 212rpx;
-  border-bottom: 1rpx solid #E6E6E6;
 }
 .more_list .ext_img {
   position: absolute;
@@ -30,9 +29,11 @@
   left: 0;
   top: 0;
 }
-.left_img image{
+.left_img image,
+.left_img .hcover {
   width: 272rpx;
   height: 152rpx;
+  border: 1rpx solid #e6e6e6;
 }
 .brief_introduction {
   display: inline-block;
@@ -41,7 +42,7 @@
   -webkit-flex: 1;
   height: 152rpx;
   margin-top: 48rpx;
-  margin-left: 12rpx;
+  margin-left: 18rpx;
 }
 .brief_introduction .book_name {
   color: #333;
