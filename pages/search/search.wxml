@@ -27,7 +27,7 @@
             <view class="search_title">热门搜索</view>
             <view class="{{allHotTitle.length<=12?'refresh_view_hidden':'refresh_view'}}" catchtap="clickChange">
                 <image class="refresh_img" src="../../images/refresh_icon.png"></image>
-                <view class="refresh_txt">刷新</view>
+                <view class="refresh_txt">换一换</view>
             </view>
         </view>
         <view class="search_list">

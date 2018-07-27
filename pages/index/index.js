@@ -126,11 +126,6 @@ Page({
     },
 
     /*事件处理函数*/
-    onHref:function () {
-        wx.navigateTo({
-            url: '/pages/search/search'
-        })
-    },
     /*boy and girl*/
     onBoyTap:function (event) {
         var that = this;
