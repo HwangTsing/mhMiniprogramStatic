@@ -182,7 +182,7 @@ Page({
                     that.setData({
                         isScroll:false,
                         isCancel:false,
-                        searchList:[]
+                        searchList:[],
                         word:that.searchData.word
                     })
                     that.data.scrolType = '';
