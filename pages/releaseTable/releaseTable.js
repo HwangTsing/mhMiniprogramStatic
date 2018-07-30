@@ -159,10 +159,10 @@ Page({
     //判断今天没有了的message
     if (this.data.message === "今天没有了，不如换一天看看～") {
       var tabList = this.data.tabList; //总体的日期
-      var pubDay = this.data.pubDay; //当前页面的日期
+      var pubDay = parseInt(this.data.pubDay); //当前页面的日期
       var comicList = this.data.comicList;//当前页面的数据
       if (pubDay === parseInt(tabList[0].pub_day) || comicList.length < 0) {
-        pubDay = parseInt(tabList[6].pub_day)
+         pubDay = parseInt(tabList[6].pub_day)
       } else {
         pubDay = pubDay - 1
       }
