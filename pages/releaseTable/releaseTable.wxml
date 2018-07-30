@@ -16,7 +16,8 @@
             tabList="{{tabList}}"
             pubDay="{{pubDay}}"
             id="topNav"
-        ></topNav>
+        >
+        </topNav>
     <!--  头部导航S  -->
     <scroll-view
         class="scroll_view"
@@ -60,6 +61,7 @@
 
         <view class="release_message"
                 wx:if="{{ comicList&&comicList.length>9 && isMessage }}"
+                bindtap="release_message"
         >
             <image
                 wx:if="{{ message === '加载中' }}"
