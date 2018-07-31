@@ -95,8 +95,8 @@
     top:0;
 }
 .left_view .left_img {
-    width:272rpx;
-    height:152rpx;
+    width:271rpx;
+    height:151rpx;
     position:absolute;
     left:0;
     top:0;

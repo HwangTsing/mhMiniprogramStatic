@@ -16,8 +16,8 @@
   top:0;
 }
 .img_view image {
-  width: 180rpx;
-  height: 231rpx;
+  width: 179rpx;
+  height: 229rpx;
 }
 .img_view .ext_img {
     position: absolute;
