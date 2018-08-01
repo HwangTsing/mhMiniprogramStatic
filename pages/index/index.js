@@ -397,7 +397,9 @@ Page({
         this.searchlist = this.selectComponent("#searchlist");
     },
     onShow: function () {
-
+        wx.setNavigationBarTitle({//动态设置当前页面的标题
+            title: "微博动漫"
+        });
     },
 
     /**
