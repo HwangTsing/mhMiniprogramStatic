@@ -1,4 +1,5 @@
 Component({
+  preventTouchMove:function() {},
   data: {
     "visible": false
   },
@@ -11,5 +12,7 @@ Component({
       //this.triggerEvent('myevent', { floorstatus:false});    
     }
   }
+  
+    
  
 })
