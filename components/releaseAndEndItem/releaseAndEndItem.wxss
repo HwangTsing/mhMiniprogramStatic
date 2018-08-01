@@ -49,7 +49,7 @@
 }
 .releaseAndEndItem .releaseAndEndItemRight{
     margin-left: 32rpx;
-    max-width:300rpx;
+    max-width:310rpx;
     font-size: 24rpx;
     color: #999999;
     letter-spacing: 0;
@@ -58,5 +58,6 @@
     white-space:nowrap;
     text-overflow:ellipsis;
     overflow:hidden;
-    margin-right:6rpx;
+    padding-right:10rpx;
+    margin-right:5rpx;
 }
