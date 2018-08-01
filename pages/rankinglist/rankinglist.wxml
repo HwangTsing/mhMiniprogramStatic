@@ -27,7 +27,7 @@
                             <view class="read_avatar" style="width:280rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
                                 {{item.sina_nickname}}
                             </view>
-                            <view class="read_introduction" style="width:280rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                            <view class="read_introduction" style="width:275rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
                                 {{item.description}}
                             </view>
                         </block>

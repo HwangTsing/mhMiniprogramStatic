@@ -221,12 +221,21 @@ Page({
                 }else {
                     //有网络
                     if (currentId === 0) {
+                        that.setData({
+                            readData:[],
+                        })
                         that.readList();
                     }
                     else if (currentId === 1) {
+                        that.setData({
+                            newData:[],
+                        })
                         that.newList();
                     }
                     else if (currentId === 2) {
+                        that.setData({
+                            rankData:[],
+                        })
                         that.rankList();
                     }
 
