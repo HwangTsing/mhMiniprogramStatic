@@ -112,8 +112,10 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
-    },
+      wx.setNavigationBarTitle({//动态设置当前页面的标题
+        title: "完结"
+      });
+    }, 
 
     /**
      * 生命周期函数--监听页面隐藏
