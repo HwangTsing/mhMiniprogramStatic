@@ -21,7 +21,7 @@ Page({
   },
 
   onLoad: function (options) {
-    const { chapter_id, chapter_name } = options;
+    const { chapter_id, chapter_name = '' } = options;
     const { windowWidth, windowHeight } = wxApi.getSystemInfoSync()
 
     this.chapter_id = chapter_id
