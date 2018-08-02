@@ -1,4 +1,4 @@
-<view hidden="{{!visible}}">
+<view hidden="{{!visible}}"  catchtouchmove='preventTouchMove '>
   <view class="popup"></view>
   <view class="Dialog">
               <view class="Dialog_top" 

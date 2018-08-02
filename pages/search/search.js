@@ -47,44 +47,53 @@ Page({
             method:'GET',
             data:{word,rows_num,page_num},
             success:function (data) {
-                if (data.data.data.data.length !==0){
-                    var site_cover = data.data.data.site_cover;
+                if (data.data.data.length !== 0) {
+                    if (data.data.data.data.length !==0){
+                        var site_cover = data.data.data.site_cover;
 
-                    if (that.data.scrolType !== ''){
-                        data.data.data.data.forEach((item,index) =>{
-                            //判断图片路径是否带有https||http前缀，有则什么都不做，没有加上
-                            if (item.cover && !/^http[s]?:\/\//ig.test(item.cover)){
-                                item.cover = site_cover + item.cover;
-                            }
-                        })
-                        var searchList = that.data.searchList.concat(data.data.data.data);
+                        if (that.data.scrolType !== ''){
+                            data.data.data.data.forEach((item,index) =>{
+                                //判断图片路径是否带有https||http前缀，有则什么都不做，没有加上
+                                if (item.cover && !/^http[s]?:\/\//ig.test(item.cover)){
+                                    item.cover = site_cover + item.cover;
+                                }
+                            })
+                            var searchList = that.data.searchList.concat(data.data.data.data);
 
-                    }else {
-                        that.data.searchList = data.data.data.data;
-                        that.data.searchList.forEach((item,index) =>{
-                            //判断图片路径是否带有https||http前缀，有则什么都不做，没有加上
-                            if (item.cover && !/^http[s]?:\/\//ig.test(item.cover)){
-                                item.cover = site_cover + item.cover;
-                            }
+                        }else {
+                            that.data.searchList = data.data.data.data;
+                            that.data.searchList.forEach((item,index) =>{
+                                //判断图片路径是否带有https||http前缀，有则什么都不做，没有加上
+                                if (item.cover && !/^http[s]?:\/\//ig.test(item.cover)){
+                                    item.cover = site_cover + item.cover;
+                                }
+                            })
+                            var searchList = that.data.searchList;
+                        }
+                        let page_total = data.data.data.page_total;
+                        that.setData({
+                            searchList:searchList,
+                            isScroll:false,
+                            total:page_total,
+                            message: page_total > page_num ? '加载更多...' : '没有更多了',//提示语
+                            networkType:true,
+                            noSearch:true
                         })
-                        var searchList = that.data.searchList;
+                    }else if (data.data.data.data.length === 0){//搜索没有匹配的数据时提示图
+                        that.setData({
+                            searchList:[],
+                            noSearch:false,
+                            isScroll:false
+                        })
                     }
-                    let page_total = data.data.data.page_total;
-                    that.setData({
-                        searchList:searchList,
-                        isScroll:false,
-                        total:page_total,
-                        message: page_total > page_num ? '加载更多...' : '没有更多了',//提示语
-                        networkType:true,
-                        noSearch:true
-                    })
-                }else if (data.data.data.data.length === 0){//搜索没有匹配的数据时提示图
+                }else if (data.data.data.length === 0) {
                     that.setData({
                         searchList:[],
                         noSearch:false,
                         isScroll:false
                     })
                 }
+
             },
             fail:function (data) {
                 that.setData({
