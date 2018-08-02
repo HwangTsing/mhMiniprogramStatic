@@ -1,9 +1,9 @@
 <view class="container_search">
-    <view class="search_input">
+    <view class="{{onLoad === true?'search_input_hidden':'search_input'}}">
         <view class="search_img">
             <image class="search_images" src="../../images/search_gray_02.png"></image>
             <input class="input_input" type="text" placeholder="搜索作品或作者名称" value="{{word}}"
-                   placeholder-style="color:#ccc;font-size:28rpx;" focus="{{focus}}"
+                   placeholder-style="color:#ccc;font-size:28rpx;" focus="{{onLoad === true ?'':'focus'}}"
                     bindinput="bindInputChange"/>
             <block wx:if="{{word!==''}}">
                 <image class="del"

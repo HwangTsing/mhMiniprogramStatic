@@ -154,12 +154,10 @@ Page({
         var that = this;
         var cate_id = event.currentTarget.dataset.cateid;
         console.log(cate_id);
+        console.log(that.data.cate_id);
         if (that.data.cate_id == cate_id) {
             return;
         }else  {
-            that.setData({
-                cate_id:event.currentTarget.dataset.cateid
-            })
             //判断网络类型
             wxApi.getNetworkType().then((res) =>{
                 let networkType = res.networkType;
@@ -168,6 +166,7 @@ Page({
                     this.setData({
                         networkType: false,
                         type: null,
+                        cate_id:this.data.cate_id
                     })
                     wxApi.getShowToast(this.data.netTitle);
 
@@ -199,9 +198,6 @@ Page({
         if (that.data.end_status == end_status) {
             return;
         }else {
-            that.setData({
-                end_status:event.currentTarget.dataset.endid
-            })
             //判断网络类型
             wxApi.getNetworkType().then((res) =>{
                 let networkType = res.networkType;
@@ -210,6 +206,7 @@ Page({
                     this.setData({
                         networkType: false,
                         type: null,
+                        end_status:this.data.end_status
                     })
                     wxApi.getShowToast(this.data.netTitle);
 
@@ -218,6 +215,7 @@ Page({
                     that.setData({
                         classListData:[],
                         scrolType:'',
+                        end_status:event.currentTarget.dataset.endid
                     })
                     that.data.page_num  = 1;
                     this.classList();
