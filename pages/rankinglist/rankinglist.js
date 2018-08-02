@@ -24,6 +24,8 @@ Page({
       windowHeight:'',
       networkType:true,  //是否有网络
       isLoad:false,     //是否加载失败
+      netTitle:'主人，您目前的网络好像不太好呢~～',  //无网络提示
+      serverTitle:'主人，服务器开小差了～',        //加载失败
       hasData:true,     //是否有内容
   },
     /*阅读榜数据*/
@@ -58,8 +60,9 @@ Page({
                 fail:function (data) {
                     that.setData({
                         networkType: true,
-                        isLoad:true
+                        type:null
                     })
+                    wxApi.getShowToast(this.data.serverTitle);
                 }
         })
 
@@ -95,10 +98,11 @@ Page({
 
           },
           fail:function (data) {
-              this.setData({
+              that.setData({
                   networkType: true,
-                  isLoad:true
+                  type:null
               })
+              wxApi.getShowToast(this.data.serverTitle);
           }
       })
     },
@@ -132,10 +136,11 @@ Page({
 
             },
             fail:function (data) {
-                this.setData({
+                that.setData({
                     networkType: true,
-                    isLoad:true
+                    type:null
                 })
+                wxApi.getShowToast(this.data.serverTitle);
             }
         })
     },
@@ -149,19 +154,18 @@ Page({
         if (that.data.status == status){
             return;
         }else {
-            this.setData({
+            that.setData({
                 status :event.currentTarget.dataset.id
             });
             wxApi.getNetworkType().then((res) =>{
                 let networkType = res.networkType;
                 if (networkType === 'none' || networkType === 'unknown') {
                     //无网络不进行任何操作
-                    this.setData({
+                    that.setData({
                         networkType: false,
-                        readData:[],
-                        newData:[],
-                        rankData:[]
+                        type:null
                     });
+                    wxApi.getShowToast(this.data.netTitle);
 
                 }else {
                     //有网络
@@ -189,10 +193,11 @@ Page({
 
                 }
             }).catch((err) =>{
-                this.setData({
+                that.setData({
                     networkType: true,
-                    isLoad:true
+                    type:null
                 })
+                wxApi.getShowToast(this.data.serverTitle);
             })
         }
 
@@ -211,12 +216,11 @@ Page({
                 let networkType = res.networkType;
                 if (networkType === 'none' || networkType === 'unknown') {
                     //无网络不进行任何操作
-                    this.setData({
+                    that.setData({
                         networkType: false,
-                        readData:[],
-                        newData:[],
-                        rankData:[]
-                    })
+                        type:null
+                    });
+                    wxApi.getShowToast(this.data.netTitle);
 
                 }else {
                     //有网络
@@ -241,10 +245,11 @@ Page({
 
                 }
             }).catch((err) =>{
-                this.setData({
+                that.setData({
                     networkType: true,
-                    isLoad:true
+                    type:null
                 })
+                wxApi.getShowToast(this.data.serverTitle);
             })
         }
 
@@ -291,8 +296,9 @@ Page({
           let networkType = res.networkType;
           if (networkType === 'none' || networkType === 'unknown') {
               //无网络不进行任何操作
-              this.setData({
+              that.setData({
                   networkType: false,
+                  type:'net'
               })
 
           }else {
@@ -304,9 +310,9 @@ Page({
 
           }
       }).catch((err) =>{
-          this.setData({
+          that.setData({
               networkType: true,
-              isLoad:true
+              type:'server'
           })
       })
   },

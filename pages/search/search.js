@@ -11,6 +11,9 @@ Page({
       focus:true,
       timer:null,     //倒计时
       networkType:true,  //是否有网络
+      isLoad:false,     //是否加载失败
+      netTitle:'主人，您目前的网络好像不太好呢~～',  //无网络提示
+      serverTitle:'主人，服务器开小差了～',        //加载失败
       isScroll:true,   //scroll-view滚动条
       isCancel:false,
       searchList:[],   //搜索列表
@@ -18,7 +21,6 @@ Page({
       message:'',    //提示语
       total:0,    //总页码
       noSearch:true,   //是否有搜索结果
-      isLoad:false,     //是否加载失败
       allHotTitle:[],   //所有热词
       hotTitle:[],      //当前热词数组  12条
       onIndex:0,        //第几次点击热门搜索换一换
@@ -98,8 +100,9 @@ Page({
             fail:function (data) {
                 that.setData({
                     networkType:true,
-                    isLoad:true,
-                })
+                    type:null
+                });
+                wxApi.getShowToast(this.data.serverTitle);
             }
 
         });
@@ -174,8 +177,10 @@ Page({
             if (networkType === 'none' || networkType === 'unknown') {
                 //无网络不进行任何操作
                 this.setData({
-                    networkType: false
+                    networkType: false,
+                    type:null
                 })
+                wxApi.getShowToast(this.data.netTitle);
 
             }else {
                 //有网络
@@ -202,8 +207,9 @@ Page({
         }).catch((err) =>{
             this.setData({
                 networkType: true,
-                isLoad:true
-            })
+                type:null
+            });
+            wxApi.getShowToast(this.data.serverTitle);
         })
 
     },
@@ -247,8 +253,10 @@ Page({
                 //无网络不进行任何操作
                 this.setData({
                     networkType: false,
-                    searchList:[]
-                })
+                    type:null
+                });
+                wxApi.getShowToast(this.data.netTitle);
+
 
             }else {
                 //有网络
@@ -265,8 +273,9 @@ Page({
         }).catch((err) =>{
             this.setData({
                 networkType: true,
-                isLoad:true
-            })
+                type:null
+            });
+            wxApi.getShowToast(this.data.serverTitle);
         })
 
     },
@@ -284,7 +293,8 @@ Page({
           if (networkType === 'none' || networkType === 'unknown') {
               //无网络不进行任何操作
               this.setData({
-                  networkType: false
+                  networkType: false,
+                  type:'net'
               })
 
           }else {
@@ -295,7 +305,7 @@ Page({
       }).catch((err) =>{
           this.setData({
               networkType: true,
-              isLoad:true
+              type:'server'
           })
       })
 

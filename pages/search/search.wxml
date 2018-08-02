@@ -22,7 +22,7 @@
     </view>
     <!--热门搜索-->
     <view class="pop_view" wx:if="{{allHotTitle.length > 0}}"
-          style="{{searchList.length > 0 ||noSearch === false ||isLoad === true ||networkType === false?'display:none':''}}">
+          style="{{searchList.length > 0 ||noSearch === false?'display:none':''}}">
         <view class="pop_search">
             <view class="search_title">热门搜索</view>
             <view class="{{allHotTitle.length<=12?'refresh_view_hidden':'refresh_view'}}" catchtap="clickChange">
@@ -62,6 +62,8 @@
         </view>
     </block>
     <!--无网络，加载失败loading-->
-    <import src="./template/message.wxml"></import>
-    <template is="message" data="{{networkType,isLoad}}"></template>
+    <import src="/tpls/message.wxml"/>
+    <view wx:if="{{!isLoad}}">
+        <template is="message" wx:if="{{type}}" data="{{ type }}"/>
+    </view>
 </view>
