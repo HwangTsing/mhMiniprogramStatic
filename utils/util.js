@@ -130,7 +130,6 @@ class wxApi {
 
         return systemInfo
     }
-
     getNetworkType(){
         /*
         * ***getNetworkType
@@ -185,6 +184,28 @@ class wxApi {
         });
 
         return promise
+    }
+    getShowToast (title) {
+        const promise = new Promise((resolve,reject) => {
+            var titleType = typeof title;
+            if(titleType!=='string'){
+                reject({message:'title is not a string'});
+                return
+            }
+            wx.showToast({
+                title:title,
+                icon:'none',
+                duration:3000,
+                mask:true,
+                success(res) { //成功
+                    resolve(res)
+                },
+                fail(err) { //失败
+                    reject(err)
+                }
+            })
+        });
+        return promise;
     }
 
     getStorage(key){
