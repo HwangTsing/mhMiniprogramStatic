@@ -25,7 +25,7 @@ Page({
     const { windowWidth, windowHeight } = wxApi.getSystemInfoSync()
 
     this.chapter_id = chapter_id
-    this.chapter_name = chapter_name
+    this.chapter_name = decodeURIComponent(chapter_name)
     this.windowHeight = windowHeight
     this.windowWidth = windowWidth
 
@@ -53,7 +53,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    wxApi.setNavigationBarTitle(this.chapter_name);
+    wxApi.setNavigationBarTitle(this.chapter_name)
   },
 
   /**
@@ -96,7 +96,7 @@ Page({
     this.scrollTimer = setTimeout( ()=> {
       this.setReadingLog({ ...this.readingLog, scrollTop} )
     }, 60 )
-    
+
   },
 
   /**
@@ -178,7 +178,7 @@ Page({
       const _chapter_id = chapter_id
       const PREFIX = 'comic_id_'
       const KEY = PREFIX + comic_id
-      
+
       this.findChapterList(chapter_id, chapter_list)
       this.readingLog = { comic_id, chapter_id, chapter_name, scrollTop: 0, windowWidth: _windowWidth }
 
@@ -188,7 +188,7 @@ Page({
         this.setReadingLog({ ...this.readingLog, scrollTop, windowWidth: _windowWidth})
       }, ()=> {
         this.setReadingLog({ ...this.readingLog})
-      }) 
+      })
 
     });
   },
@@ -212,7 +212,7 @@ Page({
     } else { //漫画章节购买
       if (pay_status == 2) { //收费
         this.can_read_chapters = _.union(try_read_chapters, chapter_id_arr)
-      } 
+      }
     }
     // console.log('this.can_read_chapters', this.can_read_chapters)
     // console.log('can_read_chapters', this.can_read_chapters, chapter_id_arr)
@@ -244,8 +244,8 @@ Page({
 
     const can_read_chapters = this.can_read_chapters
     const { chapter_id, chapter_name } = chapters[index]
-    
-    let is_charge = false 
+
+    let is_charge = false
     let charge_chapters = _.difference(this.chapter_ids, can_read_chapters)
     // console.log('charge_chapters', charge_chapters)
     if( _.indexOf(charge_chapters, chapter_id) != -1 ) {
