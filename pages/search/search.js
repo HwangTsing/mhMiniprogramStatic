@@ -294,7 +294,8 @@ Page({
               //无网络不进行任何操作
               this.setData({
                   networkType: false,
-                  type:'net'
+                  type:'net',
+                  onLoad:true
               })
 
           }else {
@@ -305,7 +306,8 @@ Page({
       }).catch((err) =>{
           this.setData({
               networkType: true,
-              type:'server'
+              type:'server',
+              onLoad:true
           })
       })
 

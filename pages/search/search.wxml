@@ -63,7 +63,7 @@
     </block>
     <!--无网络，加载失败loading-->
     <import src="/tpls/message.wxml"/>
-    <view wx:if="{{!isLoad}}">
+    <view wx:if="{{!isLoad}}" style="{{onLoad === true?'position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;':''}}">
         <template is="message" wx:if="{{type}}" data="{{ type }}"/>
     </view>
 </view>
