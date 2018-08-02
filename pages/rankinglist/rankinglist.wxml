@@ -43,9 +43,6 @@
                     <image class="three_img" wx:if="{{index === 2}}" src="../../images/three.png"></image>
                 </view>
                 <message wx:if="{{readData&&readData.length==0 && hasData === false}}" type="nothing"></message>
-                <!--无网络，加载失败loading-->
-                <import src="./template/message.wxml"></import>
-                <template is="message" data="{{networkType,isLoad}}"></template>
             </scroll-view>
         </swiper-item>
         <swiper-item>
@@ -79,9 +76,6 @@
                     <image class="three_img" wx:if="{{index === 2}}" src="../../images/three.png"></image>
                 </view>
                 <message wx:if="{{newData&&newData.length==0 && hasData === false}}" type="nothing"></message>
-                <!--无网络，加载失败loading-->
-                <import src="./template/message.wxml"></import>
-                <template is="message" data="{{networkType,isLoad}}"></template>
             </scroll-view>
         </swiper-item>
         <swiper-item>
@@ -115,14 +109,11 @@
                     <image class="three_img" wx:if="{{index === 2}}" src="../../images/three.png"></image>
                 </view>
                 <message wx:if="{{rankData&&rankData.length==0 && hasData === false}}" type="nothing"></message>
-                <!--无网络，加载失败loading-->
-                <import src="./template/message.wxml"></import>
-                <template is="message" data="{{networkType,isLoad}}"></template>
             </scroll-view>
         </swiper-item>
     </swiper>
 
-    <!-- 网络慢提示loading -->
+    <!-- 提示信息 -->
     <import src="/tpls/message.wxml"/>
     <view wx:if="{{!isLoad}}"
           style="{{statusList.length>0?'position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;margin-top: 100rpx;':'position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;'}}">

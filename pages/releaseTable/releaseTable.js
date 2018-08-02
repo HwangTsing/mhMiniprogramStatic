@@ -148,9 +148,10 @@ Page({
     }).catch((err) => { //错误的时候
       this.setData({
         networkType: false,
-        type: 'net',
+        type: "net",
         isMessage: false,
       })//错误时候
+      wxApi.getShowToast("主人，您目前的网络好像不太好呢~～")
     })
 
   },
@@ -206,9 +207,10 @@ Page({
         //无网络什么都不做
         this.setData({
           networkType: false,
-          type: 'net',
+          type: null,
           isMessage: false,
         })
+      wxApi.getShowToast("主人，您目前的网络好像不太好呢~～")
       } else {
         this.setData({
           isLoading: true
@@ -234,12 +236,26 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.isLoad({ //调用判断是否存在网络
-      url: this.data.url,
-      pubDay: this.data.pubDay,
-      pageNum: this.data.pageNum,
-      rowsNum: this.data.rowsNum
-    });
+    wxApi.getNetworkType().then((NetworkType) => {
+      let networkType = NetworkType.networkType;
+      if (networkType === 'none' || networkType === 'unknown') {
+        //无网络什么都不做
+        this.setData({
+          networkType: false,
+          type: "net",
+          isMessage: false,
+        })
+      // wxApi.getShowToast("主人，您目前的网络好像不太好呢~～")
+      } else {
+        this.isLoad({ //调用判断是否存在网络
+          url: this.data.url,
+          pubDay: this.data.pubDay,
+          pageNum: this.data.pageNum,
+          rowsNum: this.data.rowsNum
+        });
+      }
+    })
+   
 
   },
 
@@ -352,7 +368,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    console.log('onHide')
+    // console.log('onHide')
   },
 
   /**
