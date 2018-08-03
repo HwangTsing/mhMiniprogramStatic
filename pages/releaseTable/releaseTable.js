@@ -166,10 +166,10 @@ Page({
     }).catch((err) => { //错误的时候
       this.setData({
         networkType: false,
-        type: "net",
+        type: null,
         isMessage: false,
       })//错误时候
-      wxApi.getShowToast("主人，您目前的网络好像不太好呢~～")
+      wxApi.getShowToast("主人，服务器开小差了～")
     })
 
   },
