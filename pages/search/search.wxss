@@ -12,6 +12,18 @@
   background: #ffffff;
   border-bottom: 1rpx solid #E6E6E6;
 }
+.search_input_hidden {
+  width: 100%;
+  height: 88rpx;
+  position: fixed;
+  top: 0;
+  z-index: 99;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border-bottom: 1rpx solid #E6E6E6;
+  visibility: hidden;
+}
 .search_img {
   width: 592rpx;
   height: 56rpx;

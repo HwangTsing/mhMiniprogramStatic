@@ -45,7 +45,10 @@ Page({
 
           },
           fail:function (data) {
-
+              that.setData({
+                  networkType:true,
+                  type:'server'
+              })
           }
       })
     },
@@ -60,7 +63,6 @@ Page({
         }
         if (!!that.data.cate_id){
             cate_id = that.data.cate_id;
-            console.log(cate_id)
         }
         if (!!that.data.end_status){
             end_status = that.data.end_status;
@@ -86,7 +88,6 @@ Page({
                     }
 
                     let page_total = data.data.data.page_total;
-                    console.log(page_total);
                     that.setData({
                         classListData:classListData,
                         total:page_total,
@@ -109,7 +110,7 @@ Page({
                     networkType:true,
                     type:null
                 })
-                wxApi.getShowToast(this.data.serverTitle);
+                wxApi.getShowToast(that.data.serverTitle);
             }
         })
     },
@@ -127,7 +128,7 @@ Page({
                     networkType: false,
                     type: null,
                 })
-                wxApi.getShowToast(this.data.netTitle);
+                wxApi.getShowToast(that.data.netTitle);
 
             }else {
                 //有网络
@@ -146,15 +147,14 @@ Page({
                 networkType: true,
                 type:null
             })
-            wxApi.getShowToast(this.data.serverTitle);
+            wxApi.getShowToast(that.data.serverTitle);
         })
 
     },
     onCate:function (event) {
         var that = this;
         var cate_id = event.currentTarget.dataset.cateid;
-        console.log(cate_id);
-        console.log(that.data.cate_id);
+        //console.log(cate_id);
         if (that.data.cate_id == cate_id) {
             return;
         }else  {
@@ -168,7 +168,7 @@ Page({
                         type: null,
                         cate_id:this.data.cate_id
                     })
-                    wxApi.getShowToast(this.data.netTitle);
+                    wxApi.getShowToast(that.data.netTitle);
 
                 }else {
                     //有网络
@@ -187,7 +187,7 @@ Page({
                     networkType: true,
                     type:null
                 })
-                wxApi.getShowToast(this.data.serverTitle);
+                wxApi.getShowToast(that.data.serverTitle);
             })
         }
     },
@@ -208,7 +208,7 @@ Page({
                         type: null,
                         end_status:this.data.end_status
                     })
-                    wxApi.getShowToast(this.data.netTitle);
+                    wxApi.getShowToast(that.data.netTitle);
 
                 }else {
                     //有网络
@@ -226,7 +226,7 @@ Page({
                     networkType: true,
                     type:null
                 })
-                wxApi.getShowToast(this.data.serverTitle);
+                wxApi.getShowToast(that.data.serverTitle);
             })
         }
     },
