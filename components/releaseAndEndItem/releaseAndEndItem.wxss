@@ -26,7 +26,7 @@
     padding: 0 8rpx;
     max-width: 76rpx;
     line-height: 32rpx;
-    border: solid;
+    /* border: solid; */
     border-radius:32rpx;
     font-size: 20rpx;
     color: #fff;
