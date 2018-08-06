@@ -3,7 +3,7 @@
     <view class="tab_view">
         <ul class="nav_tab">
             <block wx:for="{{statusList}}" wx:for-item="statusList" wx:key="status">
-                <li class="{{status === statusList.status ? 'activeColor' : 'tab_name'}}" data-id="{{statusList.status}}"catchtap="onTabTap">
+                <li class="{{status === statusList.status ? 'activeColor' : 'tab_name'}}" data-id="{{statusList.status}}"catchtap="{{!buttonClicked?'onTabTap':''}}">
                     {{statusList.title}}
                     <view class="{{status === statusList.status ? 'activeBorder':''}}"></view>
                 </li>
@@ -55,13 +55,13 @@
                     </view>
                     <view class="new_word">
                         <block wx:if="{{index === 0 || index === 1 || index === 2}}">
-                            <view class="new_title" style="width:280rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                            <view class="new_title" style="width:270rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
                                 {{item.name}}
                             </view>
-                            <view class="new_avatar" style="width:280rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                            <view class="new_avatar" style="width:270rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
                                 {{item.sina_nickname}}
                             </view>
-                            <view class="new_introduction" style="width:280rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                            <view class="new_introduction" style="width:270rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
                                 {{item.description}}
                             </view>
                         </block>
@@ -88,13 +88,13 @@
                     </view>
                     <view class="rank_word">
                         <block wx:if="{{index === 0 || index === 1 || index === 2}}">
-                            <view class="rank_title" style="width:280rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                            <view class="rank_title" style="width:270rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
                                 {{item.name}}
                             </view>
-                            <view class="rank_avatar" style="width:280rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                            <view class="rank_avatar" style="width:270rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
                                 {{item.sina_nickname}}
                             </view>
-                            <view class="rank_introduction" style="width:280rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                            <view class="rank_introduction" style="width:260rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
                                 {{item.description}}
                             </view>
                         </block>

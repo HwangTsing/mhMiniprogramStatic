@@ -112,42 +112,6 @@ Page({
             }
         })
     },
-    //滚动条滚到底部的时候触发
-    lower: function(e) {
-        var that = this;
-        that.data.scrolType = e.type;
-        //console.log(that.data.scrolType)
-        //判断网络类型
-        wxApi.getNetworkType().then((res) =>{
-            let networkType = res.networkType;
-            if (networkType === 'none' || networkType === 'unknown') {
-                //无网络不进行任何操作
-                this.setData({
-                    networkType: false,
-                    type: null,
-                })
-                wxApi.getShowToast(that.data.netTitle);
-
-            }else {
-                //有网络
-                let total = that.data.total;
-                that.data.page_num++;
-                if (total < that.data.page_num){
-                    return;
-                }else {
-                    that.classList();
-                }
-
-            }
-        }).catch((err) =>{
-            this.setData({
-                networkType: true,
-                type:null
-            })
-            wxApi.getShowToast(that.data.serverTitle);
-        })
-
-    },
     onCate:function (event) {
         var that = this;
         var cate_id = event.currentTarget.dataset.cateid;
@@ -173,8 +137,10 @@ Page({
                         type:'loading',
                         classListData:[],
                         scrolType:'',
-                        cate_id:event.currentTarget.dataset.cateid
+                        cate_id:event.currentTarget.dataset.cateid,
                     })
+                    that.data.scrolType = '';
+                    console.log(that.data.scrolType);
                     that.data.page_num  = 1;
                     this.classList();
 
@@ -214,6 +180,7 @@ Page({
                         scrolType:'',
                         end_status:event.currentTarget.dataset.endid
                     })
+                    that.data.scrolType = '';
                     that.data.page_num  = 1;
                     this.classList();
 
@@ -227,7 +194,43 @@ Page({
             })
         }
     },
+    //滚动条滚到底部的时候触发
+    lower: function(e) {
+        console.log(e);
+        var that = this;
+        //判断网络类型
+        wxApi.getNetworkType().then((res) =>{
+            let networkType = res.networkType;
+            if (networkType === 'none' || networkType === 'unknown') {
+                //无网络不进行任何操作
+                this.setData({
+                    networkType: false,
+                    type: null,
+                })
+                wxApi.getShowToast(that.data.netTitle);
 
+            }else {
+                //有网络
+                that.data.scrolType = e.type;
+                console.log(that.data.scrolType)
+                let total = that.data.total;
+                that.data.page_num++;
+                if (total < that.data.page_num){
+                    return;
+                }else {
+                    that.classList();
+                }
+
+            }
+        }).catch((err) =>{
+            this.setData({
+                networkType: true,
+                type:null
+            })
+            wxApi.getShowToast(that.data.serverTitle);
+        })
+
+    },
 
   /**
    * 生命周期函数--监听页面加载

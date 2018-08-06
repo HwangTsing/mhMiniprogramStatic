@@ -27,6 +27,7 @@ Page({
       netTitle:'主人，您目前的网络好像不太好呢~～',  //无网络提示
       serverTitle:'主人，服务器开小差了～',        //加载失败
       hasData:true,     //是否有内容
+      buttonClicked: false
   },
     /*阅读榜数据*/
     readList:function () {
@@ -169,6 +170,7 @@ Page({
 
                 }else {
                     //有网络
+                    wxApi.buttonClicked(this);
                     if (status === 0) {
                         that.setData({
                             type:'loading',
