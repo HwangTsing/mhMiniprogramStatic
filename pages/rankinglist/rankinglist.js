@@ -34,7 +34,7 @@ Page({
         wxApi.readList({
                 method:'GET',
                 success:function (data) {
-                    console.log(data.data.data.week);
+                    //console.log(data.data.data.week);
                     if (data.data.data.week.length !== 0) {
                         let readData=[];
                         data.data.data.week.forEach((item,index) => {
@@ -62,7 +62,7 @@ Page({
                         networkType: true,
                         type:null
                     })
-                    wxApi.getShowToast(this.data.serverTitle);
+                    wxApi.getShowToast(that.data.serverTitle);
                 }
         })
 
@@ -74,7 +74,7 @@ Page({
       wxApi.newList({
           method:'GET',
           success:function (data) {
-              console.log(data.data.data.week);
+              //console.log(data.data.data.week);
               if (data.data.data.week.length !== 0) {
                   let newData = [];
                   data.data.data.week.forEach((item,index) => {
@@ -102,7 +102,7 @@ Page({
                   networkType: true,
                   type:null
               })
-              wxApi.getShowToast(this.data.serverTitle);
+              wxApi.getShowToast(that.data.serverTitle);
           }
       })
     },
@@ -112,7 +112,7 @@ Page({
         wxApi.rankList({
             method:'GET',
             success:function (data) {
-                console.log(data.data.data.week);
+                //console.log(data.data.data.week);
                 if (data.data.data.week.length !== 0) {
                     let rankData = [];
                     data.data.data.week.forEach((item,index) => {
@@ -140,7 +140,7 @@ Page({
                     networkType: true,
                     type:null
                 })
-                wxApi.getShowToast(this.data.serverTitle);
+                wxApi.getShowToast(that.data.serverTitle);
             }
         })
     },
@@ -165,7 +165,7 @@ Page({
                         networkType: false,
                         type:null
                     });
-                    wxApi.getShowToast(this.data.netTitle);
+                    wxApi.getShowToast(that.data.netTitle);
 
                 }else {
                     //有网络
@@ -197,7 +197,7 @@ Page({
                     networkType: true,
                     type:null
                 })
-                wxApi.getShowToast(this.data.serverTitle);
+                wxApi.getShowToast(that.data.serverTitle);
             })
         }
 
@@ -220,7 +220,7 @@ Page({
                         networkType: false,
                         type:null
                     });
-                    wxApi.getShowToast(this.data.netTitle);
+                    wxApi.getShowToast(that.data.netTitle);
 
                 }else {
                     //有网络
@@ -249,7 +249,7 @@ Page({
                     networkType: true,
                     type:null
                 })
-                wxApi.getShowToast(this.data.serverTitle);
+                wxApi.getShowToast(that.data.serverTitle);
             })
         }
 
@@ -298,7 +298,8 @@ Page({
               //无网络不进行任何操作
               that.setData({
                   networkType: false,
-                  type:'net'
+                  type:'net',
+                  onLoad:true
               })
 
           }else {
@@ -312,7 +313,8 @@ Page({
       }).catch((err) =>{
           that.setData({
               networkType: true,
-              type:'server'
+              type:'server',
+              onLoad:true
           })
       })
   },

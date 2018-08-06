@@ -80,7 +80,6 @@
     flex-wrap: wrap; */
 }
 .comic_catalog_one .comic_catalog_one_item{
-    padding:0 1%;
     box-sizing: border-box;
     margin-bottom: 28rpx;
     margin-right: 2%;
@@ -96,6 +95,7 @@
     overflow: hidden;
     text-overflow:ellipsis;
     white-space: nowrap;
+    padding-right: 6rpx;
 }
 .comic_catalog_one image{
     position: absolute;

@@ -102,7 +102,7 @@ Page({
                     networkType:true,
                     type:null
                 });
-                wxApi.getShowToast(this.data.serverTitle);
+                wxApi.getShowToast(that.data.serverTitle);
             }
 
         });
@@ -123,8 +123,10 @@ Page({
             },
             fail:function (data) {
                 that.setData({
-
-                })
+                    networkType:true,
+                    type:'server',
+                    onLoad:true
+                });
             }
         })
     },
@@ -180,7 +182,7 @@ Page({
                     networkType: false,
                     type:null
                 })
-                wxApi.getShowToast(this.data.netTitle);
+                wxApi.getShowToast(that.data.netTitle);
 
             }else {
                 //有网络
@@ -207,9 +209,9 @@ Page({
         }).catch((err) =>{
             this.setData({
                 networkType: true,
-                type:null
+                type:'server',
+                onLoad:true
             });
-            wxApi.getShowToast(this.data.serverTitle);
         })
 
     },
@@ -255,7 +257,7 @@ Page({
                     networkType: false,
                     type:null
                 });
-                wxApi.getShowToast(this.data.netTitle);
+                wxApi.getShowToast(that.data.netTitle);
 
 
             }else {
@@ -275,7 +277,7 @@ Page({
                 networkType: true,
                 type:null
             });
-            wxApi.getShowToast(this.data.serverTitle);
+            wxApi.getShowToast(that.data.serverTitle);
         })
 
     },
@@ -294,7 +296,8 @@ Page({
               //无网络不进行任何操作
               this.setData({
                   networkType: false,
-                  type:'net'
+                  type:'net',
+                  onLoad:true
               })
 
           }else {
@@ -305,7 +308,8 @@ Page({
       }).catch((err) =>{
           this.setData({
               networkType: true,
-              type:'server'
+              type:'server',
+              onLoad:true
           })
       })
 

@@ -30,12 +30,10 @@ Page({
       wxApi.classLabelList({
           method:'GET',
           success:function (data) {
-            console.log(data.data.data);
+            //console.log(data.data.data);
             if (data.data.code == 1) {
                 that.data.comicCate = data.data.data.cate_list;
-                console.log(that.data.comicCate);
                 that.data.comicEnd = data.data.data.end_status_list;
-                console.log(that.data.comicEnd);
                 that.setData({
                     comicCate:that.data.comicCate,
                     comicEnd:that.data.comicEnd
@@ -45,7 +43,10 @@ Page({
 
           },
           fail:function (data) {
-
+              that.setData({
+                  networkType:true,
+                  type:'server'
+              })
           }
       })
     },
@@ -60,7 +61,6 @@ Page({
         }
         if (!!that.data.cate_id){
             cate_id = that.data.cate_id;
-            console.log(cate_id)
         }
         if (!!that.data.end_status){
             end_status = that.data.end_status;
@@ -68,25 +68,24 @@ Page({
         if (!!that.data.comic_pay_status){
             comic_pay_status = that.data.comic_pay_status;
         }
-        console.log(cate_id);
-        console.log(that.data.cate_id);
+        //console.log(cate_id);
+        //console.log(that.data.cate_id);
 
         wxApi.classList({
             method:'GET',
             data:{page_num,rows_num,cate_id,end_status,comic_pay_status},
             success:function (data) {
-                console.log(data.data.data.data);
+                //console.log(data.data.data.data);
                 if (data.data.data.data.length !== 0){
                     if (that.data.scrolType !== ''){
                         var classListData =that.data.classListData.concat(data.data.data.data);
-                        console.log(classListData);
+                        //console.log(classListData);
                     }else  {
                         that.data.classListData = data.data.data.data;
                         var classListData =that.data.classListData;
                     }
 
                     let page_total = data.data.data.page_total;
-                    console.log(page_total);
                     that.setData({
                         classListData:classListData,
                         total:page_total,
@@ -109,7 +108,7 @@ Page({
                     networkType:true,
                     type:null
                 })
-                wxApi.getShowToast(this.data.serverTitle);
+                wxApi.getShowToast(that.data.serverTitle);
             }
         })
     },
@@ -117,7 +116,7 @@ Page({
     lower: function(e) {
         var that = this;
         that.data.scrolType = e.type;
-        console.log(that.data.scrolType)
+        //console.log(that.data.scrolType)
         //判断网络类型
         wxApi.getNetworkType().then((res) =>{
             let networkType = res.networkType;
@@ -127,12 +126,11 @@ Page({
                     networkType: false,
                     type: null,
                 })
-                wxApi.getShowToast(this.data.netTitle);
+                wxApi.getShowToast(that.data.netTitle);
 
             }else {
                 //有网络
                 let total = that.data.total;
-                console.log(total);
                 that.data.page_num++;
                 if (total < that.data.page_num){
                     return;
@@ -146,20 +144,17 @@ Page({
                 networkType: true,
                 type:null
             })
-            wxApi.getShowToast(this.data.serverTitle);
+            wxApi.getShowToast(that.data.serverTitle);
         })
 
     },
     onCate:function (event) {
         var that = this;
         var cate_id = event.currentTarget.dataset.cateid;
-        console.log(cate_id);
+        //console.log(cate_id);
         if (that.data.cate_id == cate_id) {
             return;
         }else  {
-            that.setData({
-                cate_id:event.currentTarget.dataset.cateid
-            })
             //判断网络类型
             wxApi.getNetworkType().then((res) =>{
                 let networkType = res.networkType;
@@ -168,8 +163,9 @@ Page({
                     this.setData({
                         networkType: false,
                         type: null,
+                        cate_id:this.data.cate_id
                     })
-                    wxApi.getShowToast(this.data.netTitle);
+                    wxApi.getShowToast(that.data.netTitle);
 
                 }else {
                     //有网络
@@ -188,20 +184,17 @@ Page({
                     networkType: true,
                     type:null
                 })
-                wxApi.getShowToast(this.data.serverTitle);
+                wxApi.getShowToast(that.data.serverTitle);
             })
         }
     },
     onEnd:function (event) {
         var that = this;
         var end_status = event.currentTarget.dataset.endid;
-        console.log(end_status);
+        //console.log(end_status);
         if (that.data.end_status == end_status) {
             return;
         }else {
-            that.setData({
-                end_status:event.currentTarget.dataset.endid
-            })
             //判断网络类型
             wxApi.getNetworkType().then((res) =>{
                 let networkType = res.networkType;
@@ -210,14 +203,16 @@ Page({
                     this.setData({
                         networkType: false,
                         type: null,
+                        end_status:this.data.end_status
                     })
-                    wxApi.getShowToast(this.data.netTitle);
+                    wxApi.getShowToast(that.data.netTitle);
 
                 }else {
                     //有网络
                     that.setData({
                         classListData:[],
                         scrolType:'',
+                        end_status:event.currentTarget.dataset.endid
                     })
                     that.data.page_num  = 1;
                     this.classList();
@@ -228,7 +223,7 @@ Page({
                     networkType: true,
                     type:null
                 })
-                wxApi.getShowToast(this.data.serverTitle);
+                wxApi.getShowToast(that.data.serverTitle);
             })
         }
     },
@@ -242,12 +237,10 @@ Page({
       var that = this;
       wx.getSystemInfo({
           success: function (res) {
-              console.info(res.windowHeight);
-              let height = res.windowHeight;
-              console.log(height);
+              //console.info(res.windowHeight);
               wx.createSelectorQuery().selectAll('#top_view').boundingClientRect(function (rects) {
                   rects.forEach(function (rect) {
-                      console.log(rect);
+                      //console.log(rect);
                       that.setData({
                           scrollHeight: res.windowHeight - rect.bottom
                       });

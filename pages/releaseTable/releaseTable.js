@@ -27,22 +27,40 @@ Page({
   /* 接受子组件 点击 头部导航发送的数据 */
   ClickPubDay: function (e) {
     // console.log(e.detail)
-    let pubDay = e.detail.pub_day; //保存子组件发送的点击日期
-    this.setData({
-      pubDay, //存储日期
-      pageNum: 1,
-      rowsNum: 10,
-      type: 'loading',
-      networkType: true,
-      comicList: null,//数据列表
-    });
-    this.isLoad({ //开始调用 获取数据
-      url: this.data.url,
-      pubDay: this.data.pubDay,
-      pageNum: this.data.pageNum,
-      rowsNum: this.data.rowsNum,
-      goTop: false
+    wxApi.getNetworkType().then((NetworkType) => {
+      let networkType = NetworkType.networkType;
+      let pubDay = e.detail.pub_day; //保存子组件发送的点击日期      
+      if (networkType === 'none' || networkType === 'unknown') {
+        //无网络什么都不做
+        this.setData({
+          networkType: false,
+          type: null,
+          isMessage: false,
+          pageNum: 1,
+          rowsNum: 10,
+          comicList:this.data.comicList
+        })
+        wxApi.getShowToast("主人，您目前的网络好像不太好呢~～")
+      } else {
+        this.setData({
+          pubDay, //存储日期
+          pageNum: 1,
+          rowsNum: 10,
+          type: 'loading',
+          networkType: true,
+          comicList: null,//数据列表
+        });
+        this.isLoad({ //开始调用 获取数据
+          url: this.data.url,
+          pubDay: this.data.pubDay,
+          pageNum: this.data.pageNum,
+          rowsNum: this.data.rowsNum,
+          goTop: false
+        })
+      }
     })
+
+
   },
 
   //http://api.manhua.weibo.com/wbcomic/comic/daypub_list?_debug_=yes&page_num=1&rows_num=20&pub_day=20180331
@@ -148,10 +166,10 @@ Page({
     }).catch((err) => { //错误的时候
       this.setData({
         networkType: false,
-        type: "net",
+        type: null,
         isMessage: false,
       })//错误时候
-      wxApi.getShowToast("主人，您目前的网络好像不太好呢~～")
+      wxApi.getShowToast("主人，服务器开小差了～")
     })
 
   },
@@ -210,7 +228,7 @@ Page({
           type: null,
           isMessage: false,
         })
-      wxApi.getShowToast("主人，您目前的网络好像不太好呢~～")
+        wxApi.getShowToast("主人，您目前的网络好像不太好呢~～")
       } else {
         this.setData({
           isLoading: true
@@ -245,7 +263,7 @@ Page({
           type: "net",
           isMessage: false,
         })
-      // wxApi.getShowToast("主人，您目前的网络好像不太好呢~～")
+        // wxApi.getShowToast("主人，您目前的网络好像不太好呢~～")
       } else {
         this.isLoad({ //调用判断是否存在网络
           url: this.data.url,
@@ -255,7 +273,7 @@ Page({
         });
       }
     })
-   
+
 
   },
 

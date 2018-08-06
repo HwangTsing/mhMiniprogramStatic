@@ -82,19 +82,29 @@ page {
 }
 .small_label_view .small_title {
     font-size:28rpx;
-    padding:7rpx 14rpx;
+    /*padding:8rpx 14rpx;*/
     color: #999999;
     font-family:PingFangSC-Regular;
     margin-top:8rpx;
+    width:80rpx;
+    height:56rpx;
+    text-align:center;
+    vertical-align:hidden;
+    line-height:56rpx;
 }
 .small_title_active {
     font-size:28rpx;
-    padding:7rpx 14rpx;
+    /*padding:8rpx 14rpx;*/
     color:rgba(255,77,106,1);
     background:rgba(255,77,106,0.1);
     font-family:PingFangSC-Regular;
     border-radius:32rpx;
     margin-top:8rpx;
+    width:80rpx;
+    height:56rpx;
+    text-align:center;
+    vertical-align:hidden;
+    line-height:56rpx;
 }
 .class_content {
     width:100%;
