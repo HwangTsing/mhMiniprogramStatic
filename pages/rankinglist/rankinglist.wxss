@@ -105,33 +105,40 @@
 }
 .read_view .read_word, .new_view .new_word, .rank_view .rank_word{
     margin-left: 290rpx;
-    flex:1;
-    -webkit-box-flex:1;
     -webkit-flex:1;
+    -ms-flex:1;/*IE 10*/
+    flex: 1;/* NEW ,Spec - Opera 12.1,Firefox 20+*/
+    -webkit-box-flex:1;/*OLD -iOS 6-,Safari 3.1-6*/
+    -moz-box-flex:1;/*OLD - Firefox 19-*/
     display: inline-block;
-    margin-bottom:75rpx;
+    padding-bottom:56rpx;
 }
 .read_word .read_title, .new_word .new_title, .rank_word .rank_title{
     font-size:32rpx;
     color:#333333;
+    /*padding-bottom:4rpx;*/
+    line-height:56rpx;
 }
 .read_word .read_avatar, .new_word .new_avatar, .rank_word .rank_avatar{
     font-size:24rpx;
     color:#999999;
     font-family:PingFangSC-Regular;
-    margin-bottom:4rpx;
+    /*padding-bottom:4rpx;*/
+    line-height:26rpx;
 }
 .read_word .read_introduction, .new_word .new_introduction, .rank_word .rank_introduction{
     font-size:24rpx;
     color:#999999;
     font-family:PingFangSC-Regular;
     display: inline-block;
-    margin-bottom:4rpx;
+    /*padding-bottom:4rpx;*/
+    line-height:56rpx;
 }
 .one_img, .two_img, .three_img{
     width:100rpx;
     height:100rpx;
     margin-left:30rpx;
+    padding-top:12rpx;
 }
 .one_img {
 
