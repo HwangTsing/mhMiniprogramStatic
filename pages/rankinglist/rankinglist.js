@@ -34,7 +34,7 @@ Page({
         wxApi.readList({
                 method:'GET',
                 success:function (data) {
-                    console.log(data.data.data.week);
+                    //console.log(data.data.data.week);
                     if (data.data.data.week.length !== 0) {
                         let readData=[];
                         data.data.data.week.forEach((item,index) => {
@@ -74,7 +74,7 @@ Page({
       wxApi.newList({
           method:'GET',
           success:function (data) {
-              console.log(data.data.data.week);
+              //console.log(data.data.data.week);
               if (data.data.data.week.length !== 0) {
                   let newData = [];
                   data.data.data.week.forEach((item,index) => {
@@ -112,7 +112,7 @@ Page({
         wxApi.rankList({
             method:'GET',
             success:function (data) {
-                console.log(data.data.data.week);
+                //console.log(data.data.data.week);
                 if (data.data.data.week.length !== 0) {
                     let rankData = [];
                     data.data.data.week.forEach((item,index) => {
