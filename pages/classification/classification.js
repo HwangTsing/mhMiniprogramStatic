@@ -115,7 +115,7 @@ Page({
                 setTimeout(()=> {
                     console.log('fetchState.')
                     that.fetchState = 0
-                }, 100)
+                }, 10)
             },
             fail:function (data) {
                 that.fetchState = 0
@@ -211,7 +211,6 @@ Page({
     },
     //滚动条滚到底部的时候触发
     lower: function(e) {
-        console.log(e);
         var that = this;
         //判断网络类型
         if(this.fetchState) return
