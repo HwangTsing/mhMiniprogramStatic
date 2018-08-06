@@ -14,12 +14,12 @@ Page({
       isLoad:false,     //是否加载失败
       netTitle:'主人，您目前的网络好像不太好呢~～',  //无网络提示
       serverTitle:'主人，服务器开小差了～',        //加载失败
-      page_num: 1,
+      page_num: 0,
       rows_num: 10,
       cate_id:0,
       comic_pay_status:'',
       end_status:0,
-      total:0,    //总页码
+      total: 1,    //总页码
       scrolType:'',
       message:'',    //提示语
       hasData:true,  //是否有内容
@@ -52,7 +52,17 @@ Page({
     },
     classList:function () {
         var that = this;
+
         var page_num = '',rows_num='',cate_id=0,end_status=0,comic_pay_status='';
+
+        this.fetchState = 1;
+        let total = this.data.total;
+        this.data.page_num++;
+        if (total < this.data.page_num){
+            return
+        }
+
+
         if (!!that.data.page_num) {
             page_num = +that.data.page_num;
         }
@@ -102,8 +112,13 @@ Page({
                         hasData:false
                     })
                 }
+                setTimeout(()=> {
+                    console.log('fetchState.')
+                    that.fetchState = 0
+                }, 100)
             },
             fail:function (data) {
+                that.fetchState = 0
                 that.setData({
                     networkType:true,
                     type:null
@@ -116,6 +131,8 @@ Page({
         var that = this;
         var cate_id = event.currentTarget.dataset.cateid;
         //console.log(cate_id);
+        this.fetchState = 0
+        that.data.page_num  = 0
         if (that.data.cate_id == cate_id) {
             return;
         }else  {
@@ -141,9 +158,7 @@ Page({
                     })
                     that.data.scrolType = '';
                     console.log(that.data.scrolType);
-                    that.data.page_num  = 1;
                     this.classList();
-
                 }
             }).catch((err) =>{
                 this.setData({
@@ -199,6 +214,7 @@ Page({
         console.log(e);
         var that = this;
         //判断网络类型
+        if(this.fetchState) return
         wxApi.getNetworkType().then((res) =>{
             let networkType = res.networkType;
             if (networkType === 'none' || networkType === 'unknown') {
@@ -211,16 +227,9 @@ Page({
 
             }else {
                 //有网络
-                that.data.scrolType = e.type;
-                console.log(that.data.scrolType)
-                let total = that.data.total;
-                that.data.page_num++;
-                if (total < that.data.page_num){
-                    return;
-                }else {
-                    that.classList();
-                }
-
+                this.data.scrolType = e.type;
+                console.log(this.data.scrolType)
+                this.classList();
             }
         }).catch((err) =>{
             this.setData({
@@ -267,7 +276,6 @@ Page({
                   type:'loading',
               })
               this.classList();
-
           }
       }).catch((err) =>{
           this.setData({
@@ -281,7 +289,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    this.fetchState = 0
   },
 
   /**
