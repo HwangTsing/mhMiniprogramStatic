@@ -17,8 +17,8 @@
                  enable-back-to-top="{{true}}" scroll-into-view="into" lower-threshold="20" bindscrolltolower="lower">
         <text id="into" decode="emsp" style="{{classListData&&classListData.length==0 && hasData === false?'display:none':'height: 0;display:block'}}">&emsp;</text>
         <view class="class_list">
-            <navigator class="list_view" url="../details/details?comic_id={{item.comic_id}}"
-                       data-comic="{{item.comic_id}}" wx:if="{{classListData.length > 0}}" wx:for="{{classListData}}" wx:key="index">
+            <navigator class="list_view" url="../details/details?comic_id={{item.comic_id}}&comic_name={{item.comic_name}}"
+                       data-comic="{{item.comic_id}}"  wx:if="{{classListData.length > 0}}" wx:for="{{classListData}}" wx:key="index">
                 <imgholder class="list_img" type="hcover">
                     <image mode="scaleToFill" class="list_img" src="{{item.comic_hcover}}"></image>
                 </imgholder>

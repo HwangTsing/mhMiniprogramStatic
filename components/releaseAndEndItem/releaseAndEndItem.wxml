@@ -2,7 +2,8 @@
 <navigator 
     class="releaseAndEndItem" 
     data-comic_id="{{data.comic_id}}"
-    url="../details/details?comic_id={{data.comic_id}}"
+    data-comic_name="{{comic.name}}"
+    url="../details/details?comic_id={{data.comic_id}}&comic_name={{comic.name}}"
 >
     <!-- base64 背景图 and 卡槽 S -->
     <view class="releaseAndEndItemBg">

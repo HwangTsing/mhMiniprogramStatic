@@ -13,7 +13,7 @@
     <swiper current="{{status}}" class="swiper-box" duration="300" style="height:{{windowHeight}}rpx;" bindchange="bindChange">
         <swiper-item class="read_content">
             <scroll-view scroll-y="true" class="swiper_scroll">
-                <view class="read_view" wx:for="{{readData}}" data-id="{{item.comic_id}}" wx:key="{{index}}" bindtap="readTap">
+                <view class="read_view" wx:for="{{readData}}" data-id="{{item.comic_id}}" wx:key="{{index}}" bindtap="readTap"  data-comic-name="{{item.name}}">
                     <view class="left_view">
                         <imgholder type="hcover">
                             <image class="left_img" src="{{item.hcover}}"></image>
@@ -47,7 +47,7 @@
         </swiper-item>
         <swiper-item>
             <scroll-view scroll-y="true" class="swiper_scroll">
-                <view class="new_view" wx:for="{{newData}}" data-id="{{item.comic_id}}" wx:key="{{index}}" bindtap="newTap">
+                <view class="new_view" wx:for="{{newData}}" data-id="{{item.comic_id}}" wx:key="{{index}}" bindtap="newTap" data-comic-name="{{item.name}}" >
                     <view class="left_view">
                         <imgholder type="hcover">
                             <image class="left_img" src="{{item.hcover}}"></image>
@@ -80,7 +80,7 @@
         </swiper-item>
         <swiper-item>
             <scroll-view scroll-y="true" class="swiper_scroll">
-                <view class="rank_view" wx:for="{{rankData}}" data-id="{{item.comic_id}}" wx:key="{{index}}" bindtap="rankTap">
+                <view class="rank_view" wx:for="{{rankData}}" data-id="{{item.comic_id}}" wx:key="{{index}}" bindtap="rankTap" data-comic-name="{{item.name}}">
                     <view class="left_view">
                         <imgholder type="hcover">
                             <image class="left_img" src="{{item.hcover}}"></image>

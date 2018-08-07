@@ -14,6 +14,7 @@ Page({
     history: null,
     see: '看到：',
     isBtn: false,
+    title:"",
     tabData: [
       {
         status: 0,
@@ -124,15 +125,17 @@ Page({
     * *** wbcomic/comic/comic_show?comic_id=68491 摘要页接口
     * *** wbcomic/comic/comic_comment_list?comic_id=24&page_num=1&rows_num=10&_debug_=yes 评论列表
     * */
+   console.log(options)
     //comic_id
     let comic_id = options.comic_id;
+    let comic_name=options.comic_name
     //comic_id= options.comic_id ? options.comic_id : 68023;//24 68491
     // comic_id = 68491;
     let page_num = 1;//页码
     let rows_num = 10;//每页条数
     let comicShowUrl = 'wbcomic/comic/comic_show';//摘要页接口前缀
     let comicCommentListUrl = 'wbcomic/comic/comic_comment_list';//摘要页评论接口
-
+     
     /*
     * ***comicShowFn  摘要页接口promise对象
     * @ comicShowUrl 必要参数 请求接口前缀
@@ -140,7 +143,9 @@ Page({
     * */
     // comic_id  69273
     let comicShowFn = wxApi.get(`${comicShowUrl}?comic_id=${comic_id}`);
-
+    this.setData({
+      title: comic_name
+    })
 
     /*
     * ***comicCommentListFn  摘要页评论promise对象
@@ -171,9 +176,9 @@ Page({
           if (res.code === 1) {
             if (res.data.comic.comic_id) {
               //修改导航Title 文案
-              wx.setNavigationBarTitle({
-                title: res.data.comic.name ? res.data.comic.name : '微博动漫'
-              })
+              // wx.setNavigationBarTitle({
+              //   title:comic_name ? comic_name : '微博动漫'
+              // })
               //存储 comic信息
               let DATA = res.data;
               let chapterList = null;
@@ -373,7 +378,9 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+      wx.setNavigationBarTitle({
+              title:this.data.title ? this.data.title : '微博动漫'
+      })
   },
 
   /**
