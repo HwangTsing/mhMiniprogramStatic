@@ -212,7 +212,6 @@ Page({
     },
     /*** 滑动切换tab***/
     bindChange: function (e) {
-        //console.log(e)
         let currentId = e.detail.current;
         let source = e.detail.source;
         var that = this;
