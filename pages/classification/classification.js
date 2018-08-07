@@ -80,36 +80,46 @@ Page({
             data:{page_num,rows_num,cate_id,end_status,comic_pay_status},
             success:function (data) {
                 //console.log(data.data.data.data);
-                if (data.data.data.data.length !== 0){
-                    if (that.data.scrolType !== ''){
-                        var classListData =that.data.classListData.concat(data.data.data.data);
-                        //console.log(classListData);
-                    }else  {
-                        that.data.classListData = data.data.data.data;
-                        var classListData =that.data.classListData;
+                let res = data.data.data.data;
+                if (data.data.data.length !== 0) {
+                    if (res.length !== 0){
+                        if (that.data.scrolType !== ''){
+                            var classListData =that.data.classListData.concat(res);
+                            //console.log(classListData);
+                        }else  {
+                            that.data.classListData = res;
+                            var classListData =that.data.classListData;
+                        }
+
+                        let page_total = data.data.data.page_total;
+                        that.setData({
+                            classListData:classListData,
+                            total:page_total,
+                            message: page_total > page_num ? '加载更多...' : '没有更多了',//提示语
+                            type:null,
+                            networkType:true,
+                            hasData:true
+
+                        })
+                    }else if (res.length === 0) {  //分类没有数据
+                        that.setData({
+                            type:null,
+                            classListData:[],
+                            hasData:false
+                        })
                     }
+                    setTimeout(()=> {
+                        console.log('fetchState.')
+                        that.fetchState = 0
+                    }, 10)
 
-                    let page_total = data.data.data.page_total;
-                    that.setData({
-                        classListData:classListData,
-                        total:page_total,
-                        message: page_total > page_num ? '加载更多...' : '没有更多了',//提示语
-                        type:null,
-                        networkType:true,
-                        hasData:true
-
-                    })
-                }else if (data.data.data.data.length === 0) {  //分类没有数据
+                }else if (data.data.data.length === 0) {
                     that.setData({
                         type:null,
                         classListData:[],
                         hasData:false
                     })
                 }
-                setTimeout(()=> {
-                    console.log('fetchState.')
-                    that.fetchState = 0
-                }, 10)
             },
             fail:function (data) {
                 that.fetchState = 0

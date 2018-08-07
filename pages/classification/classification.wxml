@@ -14,7 +14,7 @@
     </view>
     <!--根据分类条件进行渲染内容-->
     <scroll-view class="{{comicCate.length>16 ? 'class_content_style':'class_content'}}" scroll-y="{{true}}" style="height:{{scrollHeight}}px;"
-                 enable-back-to-top="{{true}}" scroll-into-view="into" lower-threshold="20" bindscrolltolower="lower">
+                 enable-back-to-top="{{true}}" scroll-into-view="into" lower-threshold="{{40}}" bindscrolltolower="lower">
         <text id="into" decode="emsp" style="{{classListData&&classListData.length==0 && hasData === false?'display:none':'height: 0;display:block'}}">&emsp;</text>
         <view class="class_list">
             <navigator class="list_view" url="../details/details?comic_id={{item.comic_id}}&comic_name={{item.comic_name}}"
