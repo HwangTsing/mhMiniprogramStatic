@@ -69,7 +69,10 @@
 .swiper_scroll .read_view:nth-child(1), .swiper_scroll .new_view:nth-child(1), .swiper_scroll .rank_view:nth-child(1){
     margin-top:100rpx;
 }
-
+.ranking_content {
+    width:100%;
+    height:100%;
+}
 
 .read_view, .new_view, .rank_view {
     width:100%;

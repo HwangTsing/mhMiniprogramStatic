@@ -216,7 +216,7 @@ class wxApi {
             self.setData({
                 buttonClicked: false
             })
-        }, 500)
+        }, 800)
      }
 
     getStorage(key){

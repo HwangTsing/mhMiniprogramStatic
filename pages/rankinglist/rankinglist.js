@@ -21,13 +21,13 @@ Page({
           }
       ],
       status:0,
-      windowHeight:'',
+      windowHeight:'568',
       networkType:true,  //是否有网络
       isLoad:false,     //是否加载失败
       netTitle:'主人，您目前的网络好像不太好呢~～',  //无网络提示
       serverTitle:'主人，服务器开小差了～',        //加载失败
       hasData:true,     //是否有内容
-      buttonClicked: false
+      buttonClicked: false,
   },
     /*阅读榜数据*/
     readList:function () {
@@ -156,7 +156,7 @@ Page({
             return;
         }else {
             that.setData({
-                status :event.currentTarget.dataset.id
+                status :event.currentTarget.dataset.id,
             });
             wxApi.getNetworkType().then((res) =>{
                 let networkType = res.networkType;
@@ -216,7 +216,7 @@ Page({
         let source = e.detail.source;
         var that = this;
         that.setData({
-            status: currentId
+            status: currentId,
         });
         if (source) {
             wxApi.getNetworkType().then((res) =>{
@@ -234,18 +234,27 @@ Page({
                     if (currentId === 0) {
                         that.setData({
                             readData:[],
+                            newData:[],
+                            rankData:[],
+                            type:'loading',
                         })
                         that.readList();
                     }
                     else if (currentId === 1) {
                         that.setData({
+                            readData:[],
                             newData:[],
+                            rankData:[],
+                            type:'loading',
                         })
                         that.newList();
                     }
                     else if (currentId === 2) {
                         that.setData({
+                            readData:[],
+                            newData:[],
                             rankData:[],
+                            type:'loading',
                         })
                         that.rankList();
                     }
@@ -297,6 +306,7 @@ Page({
                   rpxR=750/clientWidth;
               var  calc=clientHeight*rpxR;
               that.data.windowHeight = calc;
+              console.log(that.data.windowHeight)
               that.setData({
                   windowHeight: that.data.windowHeight
               });

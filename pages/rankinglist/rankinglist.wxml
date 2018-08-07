@@ -10,9 +10,9 @@
             </block>
         </ul>
     </view>
-    <swiper current="{{status}}" class="swiper-box" duration="300" style="height:{{windowHeight}}rpx;" bindchange="bindChange">
-        <swiper-item class="read_content">
-            <scroll-view scroll-y="true" class="swiper_scroll">
+    <swiper current="{{status}}" class="swiper-box" style="height:{{windowHeight}}rpx;" bindchange="bindChange">
+        <swiper-item class="ranking_content">
+            <scroll-view class="swiper_scroll" scroll-y="{{true}}">
                 <view class="read_view" wx:for="{{readData}}" data-id="{{item.comic_id}}" wx:key="{{index}}" bindtap="readTap"  data-comic-name="{{item.name}}">
                     <view class="left_view">
                         <imgholder type="hcover">
@@ -45,8 +45,8 @@
                 <message wx:if="{{readData&&readData.length==0 && hasData === false}}" type="nothing"></message>
             </scroll-view>
         </swiper-item>
-        <swiper-item>
-            <scroll-view scroll-y="true" class="swiper_scroll">
+        <swiper-item class="ranking_content">
+            <scroll-view class="swiper_scroll" scroll-y="{{true}}">
                 <view class="new_view" wx:for="{{newData}}" data-id="{{item.comic_id}}" wx:key="{{index}}" bindtap="newTap" data-comic-name="{{item.name}}" >
                     <view class="left_view">
                         <imgholder type="hcover">
@@ -78,8 +78,8 @@
                 <message wx:if="{{newData&&newData.length==0 && hasData === false}}" type="nothing"></message>
             </scroll-view>
         </swiper-item>
-        <swiper-item>
-            <scroll-view scroll-y="true" class="swiper_scroll">
+        <swiper-item class="ranking_content">
+            <scroll-view class="swiper_scroll" scroll-y="{{true}}">
                 <view class="rank_view" wx:for="{{rankData}}" data-id="{{item.comic_id}}" wx:key="{{index}}" bindtap="rankTap" data-comic-name="{{item.name}}">
                     <view class="left_view">
                         <imgholder type="hcover">
@@ -116,7 +116,7 @@
     <!-- 提示信息 -->
     <import src="/tpls/message.wxml"/>
     <view wx:if="{{!isLoad}}"
-          style="{{onLoad === true?'position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;':'position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;margin-top: 96rpx;'}}">
+          style="{{onLoad === true?'position: fixed;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;':'position: fixed;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;margin-top: 96rpx;overflow:hidden;'}}">
         <template is="message" wx:if="{{type}}" data="{{ type }}"/>
     </view>
 </view>
