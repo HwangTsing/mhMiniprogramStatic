@@ -50,7 +50,7 @@ Component({
   methods: {
       //点击跳转详情页事件
       listTap(event){
-          console.log(event);
+          // console.log(event);
           let comic_id=event.currentTarget.dataset.comic_id;
           let comic_name=event.currentTarget.dataset.comicName;
 
