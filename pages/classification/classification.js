@@ -80,6 +80,11 @@ Page({
             data:{page_num,rows_num,cate_id,end_status,comic_pay_status},
             success:function (data) {
                 //console.log(data.data.data.data);
+                setTimeout(()=> {
+                    console.log('fetchState.')
+                    that.fetchState = 0
+                    console.log(that.fetchState)
+                }, 10)
                 let res = data.data.data.data;
                 if (data.data.data.length !== 0) {
                     if (res.length !== 0){
@@ -108,10 +113,6 @@ Page({
                             hasData:false
                         })
                     }
-                    setTimeout(()=> {
-                        console.log('fetchState.')
-                        that.fetchState = 0
-                    }, 10)
 
                 }else if (data.data.data.length === 0) {
                     that.setData({
