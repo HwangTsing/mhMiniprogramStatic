@@ -257,20 +257,23 @@ Page({
     /*页面跳转*/
     readTap:function (event) {
         var comic_id = event.currentTarget.dataset.id;
+        var comic_name = event.currentTarget.dataset.comicName;
         wx.navigateTo({
-            url: '/pages/details/details?comic_id='+comic_id
+            url: '/pages/details/details?comic_id='+comic_id + '&comic_name='+comic_name
         })
     },
     newTap:function (event) {
         var comic_id = event.currentTarget.dataset.id;
+        var comic_name = event.currentTarget.dataset.comicName;
         wx.navigateTo({
-            url: '/pages/details/details?comic_id='+comic_id
+            url: '/pages/details/details?comic_id='+comic_id + '&comic_name='+comic_name
         })
     },
     rankTap:function (event) {
         var comic_id = event.currentTarget.dataset.id;
+        var comic_name = event.currentTarget.dataset.comicName;
         wx.navigateTo({
-            url: '/pages/details/details?comic_id='+comic_id
+            url: '/pages/details/details?comic_id='+comic_id  + '&comic_name='+comic_name
         })
     },
 

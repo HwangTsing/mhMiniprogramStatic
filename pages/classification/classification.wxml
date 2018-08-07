@@ -16,8 +16,8 @@
     <scroll-view class="{{comicCate.length>16 ? 'class_content_style':'class_content'}}" scroll-y="{{true}}" style="height:{{scrollHeight}}px;" bindscrolltolower="lower"
                  enable-back-to-top="{{true}}" lower-threshold="{{50}}">
         <view class="class_list">
-            <navigator class="list_view" url="../details/details?comic_id={{item.comic_id}}"
-                       data-comic="{{item.comic_id}}" wx:if="{{classListData.length > 0}}" wx:for="{{classListData}}" wx:key="index">
+            <navigator class="list_view" url="../details/details?comic_id={{item.comic_id}}&comic_name={{item.comic_name}}"
+                       data-comic="{{item.comic_id}}"  wx:if="{{classListData.length > 0}}" wx:for="{{classListData}}" wx:key="index">
                 <imgholder class="list_img" type="hcover">
                     <image mode="scaleToFill" class="list_img" src="{{item.comic_hcover}}"></image>
                 </imgholder>
