@@ -150,9 +150,10 @@ Page({
     },
     onHotTap:function (e) {
        let comic_id = e.currentTarget.dataset.hotid;
+       let comic_name = e.currentTarget.dataset.comicName;
         //console.log(comic_id);
         wx.navigateTo({
-            url: '/pages/details/details?comic_id='+comic_id
+            url: '/pages/details/details?comic_id='+comic_id + '&comic_name='+comic_name
         })
     },
     /*input聚焦和失焦,监听*/

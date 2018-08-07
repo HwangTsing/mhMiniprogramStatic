@@ -31,7 +31,7 @@
             </view>
         </view>
         <view class="search_list">
-            <view class="main_title" wx:for="{{searchTitle}}" wx:key="index" data-hotid="{{item.object_id}}" catchtap="onHotTap">{{item.title}}</view>
+            <view class="main_title" wx:for="{{searchTitle}}" wx:key="index" data-hotid="{{item.object_id}}" data-comic-name="{{item.title}}" catchtap="onHotTap">{{item.title}}</view>
         </view>
     </view>
     <!--根据搜索结果渲染数据-->
