@@ -10,7 +10,7 @@
             </block>
         </ul>
     </view>
-    <swiper current="{{status}}" class="swiper-box"  duration="300"  style="height:{{windowHeight}}rpx;" bindchange="bindChange">
+    <swiper current="{{status}}" class="swiper-box" duration="300" style="height:{{windowHeight}}rpx;" bindchange="bindChange">
         <swiper-item class="read_content">
             <scroll-view scroll-y="true" class="swiper_scroll">
                 <view class="read_view" wx:for="{{readData}}" data-id="{{item.comic_id}}" wx:key="{{index}}" bindtap="readTap">
@@ -116,7 +116,7 @@
     <!-- 提示信息 -->
     <import src="/tpls/message.wxml"/>
     <view wx:if="{{!isLoad}}"
-          style="{{onLoad === true?'position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;':'position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;margin-top: 100rpx;'}}">
+          style="{{onLoad === true?'position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;':'position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;margin-top: 96rpx;'}}">
         <template is="message" wx:if="{{type}}" data="{{ type }}"/>
     </view>
 </view>

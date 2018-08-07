@@ -173,22 +173,28 @@ Page({
                     wxApi.buttonClicked(this);
                     if (status === 0) {
                         that.setData({
-                            type:'loading',
                             readData:[],
+                            newData:[],
+                            rankData:[],
+                            type:'loading',
                         })
                         that.readList();
                     }
                     else if (status === 1) {
                         that.setData({
-                            type:'loading',
+                            readData:[],
                             newData:[],
+                            rankData:[],
+                            type:'loading',
                         })
                         that.newList();
                     }
                     else if (status === 2) {
                         that.setData({
-                            type:'loading',
+                            readData:[],
+                            newData:[],
                             rankData:[],
+                            type:'loading',
                         })
                         that.rankList();
                     }

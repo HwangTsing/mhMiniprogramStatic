@@ -14,12 +14,12 @@ Page({
       isLoad:false,     //是否加载失败
       netTitle:'主人，您目前的网络好像不太好呢~～',  //无网络提示
       serverTitle:'主人，服务器开小差了～',        //加载失败
-      page_num: 0,
+      page_num: 1,
       rows_num: 10,
       cate_id:0,
       comic_pay_status:'',
       end_status:0,
-      total: 1,    //总页码
+      total: 0,    //总页码
       scrolType:'',
       message:'',    //提示语
       hasData:true,  //是否有内容
@@ -56,12 +56,6 @@ Page({
         var page_num = '',rows_num='',cate_id=0,end_status=0,comic_pay_status='';
 
         this.fetchState = 1;
-        let total = this.data.total;
-        this.data.page_num++;
-        if (total < this.data.page_num){
-            return
-        }
-
 
         if (!!that.data.page_num) {
             page_num = +that.data.page_num;
@@ -158,6 +152,7 @@ Page({
                     })
                     that.data.scrolType = '';
                     console.log(that.data.scrolType);
+                    that.data.page_num = 1;
                     this.classList();
                 }
             }).catch((err) =>{
@@ -227,8 +222,14 @@ Page({
             }else {
                 //有网络
                 this.data.scrolType = e.type;
-                console.log(this.data.scrolType)
-                this.classList();
+                console.log(this.data.scrolType);
+                let total = this.data.total;
+                this.data.page_num++;
+                if (total < this.data.page_num){
+                    return
+                }else {
+                    this.classList();
+                }
             }
         }).catch((err) =>{
             this.setData({
