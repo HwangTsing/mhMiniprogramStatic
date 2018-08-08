@@ -97,7 +97,7 @@
                         <block wx:for="{{imgUrls}}" wx:key="index">
                             <swiper-item>
                                 <imgholder type="hcover">
-                                    <image src="{{item.image_ext_url}}" data-typeid="{{item.object_id}}"
+                                    <image src="{{item.image_ext_url}}" data-comicname="{{item.title}}" data-typeid="{{item.object_id}}"
                                            catchtap="swipTap"></image>
                                 </imgholder>
                             </swiper-item>
@@ -110,7 +110,7 @@
                         <block wx:for="{{imgUrls}}" wx:key="index">
                             <swiper-item>
                                 <imgholder type="hcover">
-                                    <image src="{{item.image_ext_url}}" data-typeid="{{item.object_id}}"
+                                    <image src="{{item.image_ext_url}}" data-comicname="{{item.title}}" data-typeid="{{item.object_id}}"
                                            catchtap="swipTap"></image>
                                 </imgholder>
                             </swiper-item>

@@ -226,8 +226,9 @@ Page({
     //banner跳转详情
     swipTap:function (e) {
         var comic_id = e.currentTarget.dataset.typeid;
+        var comic_name = e.currentTarget.dataset.comicname;
         wx.navigateTo({
-            url: '/pages/details/details?comic_id='+comic_id
+            url: '/pages/details/details?comic_id='+comic_id + '&comic_name='+comic_name
         })
     },
     /*放送*/

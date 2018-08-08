@@ -34,7 +34,9 @@
             </view>
         </block>
         <!-- 空内容的时候 S -->
-        <message wx:if="{{classListData&&classListData.length==0 && hasData === false}}" type="nothing"></message>
+        <block wx:if="{{classListData&&classListData.length==0 && hasData === false}}">
+            <message type="nothing" catchtouchmove='noScrollMove'></message>
+        </block>
     </scroll-view>
 
     <!-- 提示信息 -->
