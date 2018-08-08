@@ -18,7 +18,7 @@ Page({
       //console.log(options);
       var that = this;
       var location_en = options.location_en;
-      var title = options.title;
+      var title = decodeURIComponent(options.title);
       //判断网络类型
       wxApi.getNetworkType().then((res) =>{
           let networkType = res.networkType;
@@ -126,7 +126,7 @@ Page({
   onReachBottom: function () {
 
   },
-  
+
   onShareAppMessage: function () {
     return {
       title: '各种有爱的动漫分享'
