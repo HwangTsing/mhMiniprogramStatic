@@ -38,7 +38,7 @@
     <!-- 提示信息 -->
     <import src="/tpls/message.wxml"/>
     <view wx:if="{{!isLoad}}"
-          style="{{comicCate.length>0?'position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;margin-top:217rpx':'position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;'}}">
+          style="{{comicCate.length>0?'position: fixed;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;margin-top:217rpx':'position: fixed;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;'}}">
         <template is="message" wx:if="{{type}}" data="{{ type }}"/>
     </view>
 </view>

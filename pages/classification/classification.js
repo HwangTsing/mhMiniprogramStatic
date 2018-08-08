@@ -35,6 +35,8 @@ Page({
                 that.data.comicCate = data.data.data.cate_list;
                 that.data.comicEnd = data.data.data.end_status_list;
                 that.setData({
+                    networkType:true,
+                    type:null,
                     comicCate:that.data.comicCate,
                     comicEnd:that.data.comicEnd
                 })
@@ -243,7 +245,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-      this.classLabelList();
       var that = this;
       wx.getSystemInfo({
           success: function (res) {
@@ -273,6 +274,7 @@ Page({
               this.setData({
                   type:'loading',
               })
+              this.classLabelList();
               this.classList();
           }
       }).catch((err) =>{
@@ -287,7 +289,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+
   },
 
   /**
