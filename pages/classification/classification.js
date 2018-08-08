@@ -1,5 +1,6 @@
 // pages/classification/classification.js
 var wxApi = require("../../utils/util.js");
+var _timer = null
 Page({
 
   /**
@@ -17,14 +18,18 @@ Page({
       page_num: 1,
       rows_num: 10,
       cate_id:0,
+      last_click_id: 1,
+      cur_click_id: 1,
       comic_pay_status:'',
       end_status:0,
       total: 0,    //总页码
       scrolType:'',
       message:'',    //提示语
       hasData:true,  //是否有内容
-  },
-
+    },
+    getNow () {
+        return +new Date()
+    },
     classLabelList:function () {
       var that = this;
       wxApi.classLabelList({
@@ -52,26 +57,27 @@ Page({
           }
       })
     },
-    classList:function () {
+    classList:function (cur_click_id = 0, cateId = this.data.cate_id, endStatus = this.data.end_status, filter) {
         var that = this;
-        var page_num = '',rows_num='',cate_id=0,end_status=0,comic_pay_status='';
+        var page_num = '',rows_num='',cate_id=cateId||0, end_status= endStatus || 0, comic_pay_status='';
         if (!!that.data.page_num) {
             page_num = +that.data.page_num;
         }
         if (!!that.data.rows_num){
             rows_num = that.data.rows_num;
         }
-        if (!!that.data.cate_id){
-            cate_id = that.data.cate_id;
-        }
-        if (!!that.data.end_status){
-            end_status = that.data.end_status;
-        }
+        // if (!!that.data.cate_id){
+        //     cate_id = that.data.cate_id;
+        // }
+        // if (!!that.data.end_status){
+        //     end_status = that.data.end_status;
+        // }
         if (!!that.data.comic_pay_status){
             comic_pay_status = that.data.comic_pay_status;
         }
         //console.log(cate_id);
         //console.log(that.data.cate_id);
+        //this.setData({cate_filer: isFilter})
 
         wxApi.classList({
             method:'GET',
@@ -79,6 +85,11 @@ Page({
             success:function (data) {
                 //console.log(data.data.data.data);
                 let res = data.data.data.data;
+                that.setData({cur_click_id})
+                let { type, last_click_id } = that.data
+
+                type = cur_click_id == last_click_id ? null : type //'loading'
+                if(filter) type = null;
                 if (data.data.data.length !== 0) {
                     if (res.length !== 0){
                         if (that.data.scrolType !== ''){
@@ -94,7 +105,7 @@ Page({
                             classListData:classListData,
                             total:page_total,
                             message: page_total > page_num ? '加载更多...' : '没有更多了',//提示语
-                            type:null,
+                            type,
                             networkType:true,
                             hasData:true
 
@@ -109,7 +120,7 @@ Page({
 
                 }else if (data.data.data.length === 0) {
                     that.setData({
-                        type:null,
+                        type,
                         classListData:[],
                         hasData:false
                     })
@@ -118,92 +129,111 @@ Page({
             fail:function (data) {
                 that.setData({
                     networkType:true,
-                    type:null
+                    type:null,
+                    cate_id
                 })
                 wxApi.getShowToast(that.data.serverTitle);
             }
         })
     },
+    setLastClickId () {
+        const last_click_id = this.getNow()
+        this.setData({ last_click_id })
+        return last_click_id
+    },
     onCate:function (event) {
         var that = this;
         var cate_id = event.currentTarget.dataset.cateid;
-        //console.log(cate_id);
+
+        const last_click_id = this.setLastClickId()
+        if(_timer) clearTimeout(_timer)
+
         if (that.data.cate_id == cate_id) {
             return;
-        }else  {
-            //判断网络类型
-            wxApi.getNetworkType().then((res) =>{
-                let networkType = res.networkType;
-                if (networkType === 'none' || networkType === 'unknown') {
-                    //无网络不进行任何操作
-                    this.setData({
-                        networkType: false,
-                        type: null,
-                        cate_id:this.data.cate_id
-                    })
-                    wxApi.getShowToast(that.data.netTitle);
-
-                }else {
-                    //有网络
-                    that.setData({
-                        type:'loading',
-                        classListData:[],
-                        scrolType:'',
-                        cate_id:event.currentTarget.dataset.cateid,
-                    })
-                    that.data.scrolType = '';
-                    console.log(that.data.scrolType);
-                    that.data.page_num = 1;
-                    this.classList();
-                }
-            }).catch((err) =>{
-                this.setData({
-                    networkType: true,
-                    type:null
-                })
-                wxApi.getShowToast(that.data.serverTitle);
-            })
         }
+
+        //判断网络类型
+        wxApi.getNetworkType().then((res) =>{
+            let networkType = res.networkType;
+            if (networkType === 'none' || networkType === 'unknown') {
+                //无网络不进行任何操作
+                const { cate_id } = this.data
+                this.setData({
+                    networkType: false,
+                    type: null,
+                    cate_id
+                })
+                wxApi.getShowToast(that.data.netTitle);
+
+            }else {
+                //有网络
+                that.setData({
+                    type:'loading',
+                    classListData:[],
+                    scrolType:'',
+                    cate_id,
+                })
+                that.data.scrolType = '';
+                // console.log(that.data.scrolType);
+                that.data.page_num = 1;
+                _timer = setTimeout(() => {
+                    that.classList(last_click_id, cate_id)
+                }, 1200);
+
+            }
+        }).catch((err) =>{
+            this.setData({
+                networkType: true,
+                type:null
+            })
+            wxApi.getShowToast(that.data.serverTitle);
+        })
+
     },
     onEnd:function (event) {
         var that = this;
-        var end_status = event.currentTarget.dataset.endid;
-        //console.log(end_status);
+        let { cateid: cate_id, endid: end_status } = event.currentTarget.dataset;
+
+        const last_click_id = this.setLastClickId()
+
+        if(_timer) clearTimeout(_timer)
         if (that.data.end_status == end_status) {
             return;
-        }else {
-            //判断网络类型
-            wxApi.getNetworkType().then((res) =>{
-                let networkType = res.networkType;
-                if (networkType === 'none' || networkType === 'unknown') {
-                    //无网络不进行任何操作
-                    this.setData({
-                        networkType: false,
-                        type: null,
-                        end_status:this.data.end_status
-                    })
-                    wxApi.getShowToast(that.data.netTitle);
-
-                }else {
-                    //有网络
-                    that.setData({
-                        classListData:[],
-                        scrolType:'',
-                        end_status:event.currentTarget.dataset.endid
-                    })
-                    that.data.scrolType = '';
-                    that.data.page_num  = 1;
-                    this.classList();
-
-                }
-            }).catch((err) =>{
-                this.setData({
-                    networkType: true,
-                    type:null
-                })
-                wxApi.getShowToast(that.data.serverTitle);
-            })
         }
+        //判断网络类型
+        wxApi.getNetworkType().then((res) =>{
+            let networkType = res.networkType;
+            if (networkType === 'none' || networkType === 'unknown') {
+                //无网络不进行任何操作
+                this.setData({
+                    networkType: false,
+                    type: null,
+                    end_status:this.data.end_status
+                })
+                wxApi.getShowToast(that.data.netTitle);
+
+            }else {
+                //有网络
+                that.setData({
+                    classListData:[],
+                    scrolType:'',
+                    type: null,
+                    end_status,
+                })
+                that.data.scrolType = '';
+                that.data.page_num  = 1;
+
+                that.classList(last_click_id, cate_id, end_status, 1);
+
+            }
+        }).catch((err) =>{
+            this.setData({
+                networkType: true,
+                type:null
+            })
+            wxApi.getShowToast(that.data.serverTitle);
+        })
+
     },
     //滚动条滚到底部的时候触发
     lower: function(e) {
@@ -228,7 +258,8 @@ Page({
                 if (total < this.data.page_num){
                     return
                 }else {
-                    this.classList();
+                    const last_click_id = this.setLastClickId()
+                    this.classList(last_click_id);
                 }
             }
         }).catch((err) =>{
@@ -275,7 +306,7 @@ Page({
                   type:'loading',
               })
               this.classLabelList();
-              this.classList();
+              this.classList(1);
           }
       }).catch((err) =>{
           this.setData({
