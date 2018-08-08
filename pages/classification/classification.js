@@ -52,11 +52,7 @@ Page({
     },
     classList:function () {
         var that = this;
-
         var page_num = '',rows_num='',cate_id=0,end_status=0,comic_pay_status='';
-
-        this.fetchState = 1;
-
         if (!!that.data.page_num) {
             page_num = +that.data.page_num;
         }
@@ -80,11 +76,6 @@ Page({
             data:{page_num,rows_num,cate_id,end_status,comic_pay_status},
             success:function (data) {
                 //console.log(data.data.data.data);
-                setTimeout(()=> {
-                    console.log('fetchState.')
-                    that.fetchState = 0
-                    console.log(that.fetchState)
-                }, 10)
                 let res = data.data.data.data;
                 if (data.data.data.length !== 0) {
                     if (res.length !== 0){
@@ -123,7 +114,6 @@ Page({
                 }
             },
             fail:function (data) {
-                that.fetchState = 0
                 that.setData({
                     networkType:true,
                     type:null
@@ -136,8 +126,6 @@ Page({
         var that = this;
         var cate_id = event.currentTarget.dataset.cateid;
         //console.log(cate_id);
-        this.fetchState = 0
-        that.data.page_num  = 0
         if (that.data.cate_id == cate_id) {
             return;
         }else  {
@@ -219,7 +207,6 @@ Page({
     lower: function(e) {
         var that = this;
         //判断网络类型
-        if(this.fetchState) return
         wxApi.getNetworkType().then((res) =>{
             let networkType = res.networkType;
             if (networkType === 'none' || networkType === 'unknown') {
@@ -300,7 +287,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.fetchState = 0
+    
   },
 
   /**
