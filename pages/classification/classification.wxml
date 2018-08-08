@@ -32,7 +32,9 @@
             <view class="comment_message" wx:if="{{classListData.length > 0}}">{{message}}</view>
         </view>
         <!-- 空内容的时候 S -->
-        <message wx:if="{{classListData&&classListData.length==0 && hasData === false}}" type="nothing"></message>
+        <block wx:if="{{classListData&&classListData.length==0 && hasData === false}}">
+            <message type="nothing" catchtouchmove='noScrollMove'></message>
+        </block>
     </scroll-view>
 
     <!-- 提示信息 -->
