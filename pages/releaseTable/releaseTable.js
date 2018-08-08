@@ -35,10 +35,10 @@ Page({
         this.setData({
           networkType: false,
           type: null,
-          isMessage: false,
-          pageNum: 1,
+          pageNum: this.data.pageNum,
           rowsNum: 10,
-          comicList:this.data.comicList
+          comicList: this.data.comicList,
+          isMessage: true
         })
         wxApi.getShowToast("主人，您目前的网络好像不太好呢~～")
       } else {
@@ -59,7 +59,6 @@ Page({
         })
       }
     })
-
 
   },
 
@@ -120,6 +119,7 @@ Page({
     }
 
     wxApi.get(url, { data }).then(({ code, data, message, tab_list: tabList }) => {
+
       if (!pubDay) { //如果 请求的日期存在不存储 日期列表
         this.setData({ //不存在存储日期列表
           tabList,
@@ -127,7 +127,8 @@ Page({
         });
 
         wxApi.getNodeInfo('#topNav').then((res) => { //在这获取导航条的高度
-          //console.log(res)
+          console.log(res.height)
+          console.log(this.data.height)
           if (res && res.height) {
             this.setData({ //不存在存储日期列表
               height: this.data.height - res.height
@@ -149,11 +150,13 @@ Page({
         chapterList,
         cateList
       });
+      console.log(comicAry)
       if (goTop) { //如果是true  执行回到顶部
         wxApi.pageScrollTo({ //滚动条回到顶部
           scrollTop: 0
         })
       }
+
       this.setData({ //存储数据
         comicList: comicAry,
         siteImage: siteImage,
@@ -174,40 +177,61 @@ Page({
 
   },
   //点击今天没有了跳转
-  release_message() {
-    //判断今天没有了的message
-    if (this.data.message === "今天没有了，不如换一天看看～") {
-      var tabList = this.data.tabList; //总体的日期
-      var pubDay = parseInt(this.data.pubDay);  //当前页面的日期
-      var comicList = this.data.comicList;//当前页面的数据
-      if (pubDay === parseInt(tabList[0].pub_day) || comicList.length < 0) {
-        pubDay = parseInt(tabList[6].pub_day)
+  release_message(e) {
+
+    wxApi.getNetworkType().then((NetworkType) => {
+      let networkType = NetworkType.networkType;
+      // let pubDay = e.detail.pub_day; //保存子组件发送的点击日期    
+      if (networkType === 'none' || networkType === 'unknown') {
+        //无网络什么都不做
+        this.setData({
+          networkType: false,
+          type: null,
+          pageNum: this.data.pageNum,
+          rowsNum: 10,
+          comicList: this.data.comicList,
+          isMessage: true,
+        })
+        wxApi.getShowToast("主人，您目前的网络好像不太好呢~～")
       } else {
-        // pubDay = pubDay - 1
-        for (var i = 0; i < tabList.length; i++) {
-          if (pubDay === parseInt(tabList[i].pub_day)) {
-            pubDay = parseInt(tabList[i - 1].pub_day)
+        //判断今天没有了的message
+        if (this.data.message === "今天没有了，不如换一天看看～") {
+          var tabList = this.data.tabList; //总体的日期
+          var pubDay = parseInt(this.data.pubDay);  //当前页面的日期
+          var comicList = this.data.comicList;//当前页面的数据
+          if (pubDay === parseInt(tabList[0].pub_day) || comicList.length < 0) {
+            pubDay = parseInt(tabList[6].pub_day)
+          } else {
+            // pubDay = pubDay - 1
+            for (var i = 0; i < tabList.length; i++) {
+              if (pubDay === parseInt(tabList[i].pub_day)) {
+                pubDay = parseInt(tabList[i - 1].pub_day)
+              }
+
+            }
           }
+          this.setData({
+            pubDay, //存储日期
+            pageNum: 1,
+            rowsNum: 10,
+            type: 'loading',
+            networkType: true,
+            comicList: null,//数据列表
+          });
+          this.isLoad({ //开始调用 获取数据
+            url: this.data.url,
+            pubDay: this.data.pubDay,
+            pageNum: this.data.pageNum,
+            rowsNum: this.data.rowsNum,
+            goTop: false
+          })
 
         }
       }
-      this.setData({
-        pubDay, //存储日期
-        pageNum: 1,
-        rowsNum: 10,
-        type: 'loading',
-        networkType: true,
-        comicList: null,//数据列表
-      });
-      this.isLoad({ //开始调用 获取数据
-        url: this.data.url,
-        pubDay: this.data.pubDay,
-        pageNum: this.data.pageNum,
-        rowsNum: this.data.rowsNum,
-        goTop: false
-      })
+    })
 
-    }
+
+
   },
 
   /**
@@ -226,7 +250,7 @@ Page({
         this.setData({
           networkType: false,
           type: null,
-          isMessage: false,
+          isMessage: true,
         })
         wxApi.getShowToast("主人，您目前的网络好像不太好呢~～")
       } else {
@@ -263,7 +287,6 @@ Page({
           type: "net",
           isMessage: false,
         })
-        // wxApi.getShowToast("主人，您目前的网络好像不太好呢~～")
       } else {
         this.isLoad({ //调用判断是否存在网络
           url: this.data.url,
@@ -295,24 +318,36 @@ Page({
   onScroll() {
     const data = this.data;
     let { pageNum, rowsNum, pageTotal, isLoading } = data;
+    wxApi.getNetworkType().then((res) => {
+      let networkType = res.networkType;
+      if (networkType === 'none' || networkType === 'unknown') {
+        //无网络不进行任何操作
+        this.setData({
+          networkType: false,
+          type: null,
+        })
+        wxApi.getShowToast("主人，您目前的网络好像不太好呢~～")
+      } else {
+        //有网络
+        //topNav
+        if (!isLoading && pageNum < pageTotal) {
+          this.setData({
+            pageNum: pageNum + 1//条件成立后pageNum+1 然后在请求
+          });
+          this.isLoad({ //调用判断是否存在网络
+            url: this.data.url,
+            pubDay: this.data.pubDay,
+            pageNum: this.data.pageNum,
+            rowsNum: this.data.rowsNum
+          });
 
-    //topNav
+        }
+        else {
+          return
+        }
+      }
+    })
 
-    if (!isLoading && pageNum < pageTotal) {
-      this.setData({
-        pageNum: pageNum + 1//条件成立后pageNum+1 然后在请求
-      });
-      this.isLoad({ //调用判断是否存在网络
-        url: this.data.url,
-        pubDay: this.data.pubDay,
-        pageNum: this.data.pageNum,
-        rowsNum: this.data.rowsNum
-      });
-
-    }
-    else {
-      return
-    }
   },
 
   /**
