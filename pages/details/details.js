@@ -128,7 +128,7 @@ Page({
   //  console.log(options)
     //comic_id
     let comic_id = options.comic_id;
-    let comic_name=options.comic_name
+    let comic_name=decodeURIComponent(options.comic_name);
     //comic_id= options.comic_id ? options.comic_id : 68023;//24 68491
     // comic_id = 68491;
     let page_num = 1;//页码
@@ -378,6 +378,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+
       wx.setNavigationBarTitle({
               title:this.data.title ? this.data.title : '微博动漫'
       })
