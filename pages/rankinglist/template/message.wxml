@@ -1,4 +1,0 @@
-<template name="message">
-    <message wx:if="{{networkType === false}}" class="net_view" type="net"></message>
-    <message wx:if="{{isLoad === true}}" class="server_view" type="server"></message>
-</template>
