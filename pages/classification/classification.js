@@ -232,8 +232,8 @@ Page({
 
             }else {
                 //有网络
-                this.data.scrolType = e.type;
-                console.log(this.data.scrolType);
+                that.data.scrolType = e.type;
+                console.log(that.data.scrolType);
                 let total = this.data.total;
                 this.data.page_num++;
                 if (total < this.data.page_num){

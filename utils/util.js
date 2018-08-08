@@ -195,7 +195,7 @@ class wxApi {
             wx.showToast({
                 title:title,
                 icon:'none',
-                duration:2000,
+                duration:1000,
                 mask:true,
                 success(res) { //成功
                     resolve(res)
