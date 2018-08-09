@@ -172,8 +172,7 @@ Page({
                 _timer = setTimeout(() => {
                     const last_click_id = this.setLastClickId()
                     that.classList(last_click_id, cate_id)
-                }, daley);
-
+                }, daley)
             }
         }).catch((err) =>{
             this.setData({
