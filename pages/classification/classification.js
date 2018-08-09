@@ -76,9 +76,6 @@ Page({
         if (!!that.data.comic_pay_status){
             comic_pay_status = that.data.comic_pay_status;
         }
-        //console.log(cate_id);
-        //console.log(that.data.cate_id);
-        //this.setData({cate_filer: isFilter})
 
         wxApi.classList({
             method:'GET',
@@ -171,7 +168,6 @@ Page({
                     cate_id,
                 })
                 that.data.scrolType = '';
-                // console.log(that.data.scrolType);
                 that.data.page_num = 1;
                 _timer = setTimeout(() => {
                     const last_click_id = this.setLastClickId()
@@ -248,7 +244,6 @@ Page({
             }else {
                 //有网络
                 that.data.scrolType = e.type;
-                console.log(that.data.scrolType);
                 let total = this.data.total;
                 this.data.page_num++;
                 if (total < this.data.page_num){
@@ -256,8 +251,6 @@ Page({
                 }else {
                     if(that.lower_timer ) clearTimeout(that.lower_timer)
                     that.lower_timer  = setTimeout(() => {
-                        //const last_click_id = this.setLastClickId()
-                        console.log('lowerState')
                         this.setData({lowerState: 1})
                         this.classList();
                     }, 200);
@@ -283,7 +276,6 @@ Page({
               //console.info(res.windowHeight);
               wx.createSelectorQuery().selectAll('#top_view').boundingClientRect(function (rects) {
                   rects.forEach(function (rect) {
-                      //console.log(rect);
                       that.setData({
                           scrollHeight: res.windowHeight - rect.bottom
                       });
