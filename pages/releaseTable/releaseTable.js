@@ -22,16 +22,18 @@ Page({
     type: 'loading',
     siteImage: '',
     pageTotal: 1,
+    last_click_id: 1,
+    cur_click_id: 1,
     isLoading: false,
   },
- 
+
   /* 接受子组件 点击 头部导航发送的数据 */
   ClickPubDay: function (e) {
-    if (_timer) clearTimeout(_timer)
 
+    this.setData({lowerState: 0})
     wxApi.getNetworkType().then((NetworkType) => {
       let networkType = NetworkType.networkType;
-      let pubDay = e.detail.pub_day; //保存子组件发送的点击日期      
+      let pubDay = e.detail.pub_day; //保存子组件发送的点击日期
       if (networkType === 'none' || networkType === 'unknown') {
         //无网络什么都不做
         this.setData({
@@ -44,15 +46,18 @@ Page({
         })
         wxApi.getShowToast("主人，您目前的网络好像不太好呢~～")
       } else {
-
+        if (_timer) clearTimeout(_timer)
         this.setData({
-          pubDay, //存储日期
-          pageNum: 1,
-          rowsNum: 10,
-          type: 'loading',
-          networkType: true,
-          comicList: null,//数据列表
+            pubDay, //存储日期
+            pageNum: 1,
+            rowsNum: 10,
+            type: 'loading',
+            networkType: true,
+            comicList: null,//数据列表
         });
+        const last_click_id = this.setLastClickId()
+        // console.log('====================================')
+        // console.log(pubDay, 'last_click_id', last_click_id)
         _timer = setTimeout(() => {
           this.isLoad({ //开始调用 获取数据
             url: this.data.url,
@@ -60,9 +65,9 @@ Page({
             pageNum: this.data.pageNum,
             rowsNum: this.data.rowsNum,
             goTop: false,
-
+            cur_click_id: last_click_id
           })
-        }, 1200);
+        }, 800);
 
       }
     })
@@ -118,7 +123,7 @@ Page({
    * @ rowsNum 每次请求多少条数据 默认10
    *  目的存储当前页数据
   */
-  daypubList: function ({ url = '', pubDay = "", pageNum = 1, rowsNum = 10, goTop = false } = {}) {
+  daypubList: function ({ url = '', pubDay = "", pageNum = 1, rowsNum = 10, goTop = false , cur_click_id = 0 } = {}) {
     let data = {
       page_num: pageNum,
       rows_num: rowsNum,
@@ -126,7 +131,7 @@ Page({
     }
 
     wxApi.get(url, { data }).then(({ code, data, message, tab_list: tabList }) => {
-
+      // console.log(pubDay, 'cur_click_id', cur_click_id)
       if (!pubDay) { //如果 请求的日期存在不存储 日期列表
         this.setData({ //不存在存储日期列表
           tabList,
@@ -141,6 +146,7 @@ Page({
           }
         })
       };
+      if(pageNum == 1) this.setData({ comicList: [] })
       let {  //解构 res.data
         data: myData,
         comic_list: comicList,
@@ -169,7 +175,9 @@ Page({
         message: pageTotal > pageNum ? '加载中' : '今天没有了，不如换一天看看～',//存储提示词,
         isMessage: true,
         type: null,
-      });
+        cur_click_id
+      })
+
     }).catch((err) => { //错误的时候
       this.setData({
         networkType: false,
@@ -185,7 +193,7 @@ Page({
 
     wxApi.getNetworkType().then((NetworkType) => {
       let networkType = NetworkType.networkType;
-      // let pubDay = e.detail.pub_day; //保存子组件发送的点击日期    
+      // let pubDay = e.detail.pub_day; //保存子组件发送的点击日期
       if (networkType === 'none' || networkType === 'unknown') {
         //无网络什么都不做
         this.setData({
@@ -245,7 +253,7 @@ Page({
    * @ pageNum 请求的第几页 默认1 用于请求(daypubList)
    * @ rowsNum 每次请求多少条数据 默认10  用于请求 (daypubList)
   */
-  isLoad: function ({ url = '', pubDay = "", pageNum = 1, rowsNum = 10, goTop = false } = {}) {
+  isLoad: function ({ url = '', pubDay = "", pageNum = 1, rowsNum = 10, goTop = false , cur_click_id = 0 } = {}) {
 
     wxApi.getNetworkType().then((NetworkType) => {
       let networkType = NetworkType.networkType;
@@ -266,7 +274,8 @@ Page({
           pubDay,
           pageNum,
           rowsNum,
-          goTop
+          goTop,
+          cur_click_id
         })
       }
     }).catch((err) => {
@@ -277,7 +286,16 @@ Page({
       })
     })
   },
-
+  setLastClickId () {
+    const last_click_id = this.getNow()
+    this.setData({
+        last_click_id
+    })
+    return last_click_id
+  },
+  getNow () {
+      return +new Date()
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -296,7 +314,8 @@ Page({
           url: this.data.url,
           pubDay: this.data.pubDay,
           pageNum: this.data.pageNum,
-          rowsNum: this.data.rowsNum
+          rowsNum: this.data.rowsNum,
+          cur_click_id: 1,
         });
       }
     })
@@ -336,6 +355,7 @@ Page({
         //topNav
         if (!isLoading && pageNum < pageTotal) {
           this.setData({
+            lowerState: 1,
             pageNum: pageNum + 1//条件成立后pageNum+1 然后在请求
           });
           this.isLoad({ //调用判断是否存在网络

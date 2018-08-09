@@ -1,16 +1,16 @@
 <!-- pages/release/release.wxml -->
 <!-- 放送表 S -->
-<view 
-    class="release_table_container" 
+<view
+    class="release_table_container"
     id="release_table_container"
 >
     <!--  头部导航S  -->
-        <!-- 
+        <!--
             bindClickPubDay 接受子组件返送的事件
             tabList 传递给子组件的日期数据(数组)
             pubDay 传递给子组件的当前时间
         -->
-        <topNav 
+        <topNav
             bindClickPubDay="ClickPubDay"
             wx:if="{{ tabList && tabList.length!=0 }}"
             tabList="{{tabList}}"
@@ -30,13 +30,14 @@
         bindscrolltolower="onScroll"
     >
         <!-- 列表 S  -->
-        <!-- 
+        <!--
             data:漫画id {comic_id:1},
             cate:漫画分类(标签) {cate_cn_name:少年,cate_id:7}
             lastChapter: 漫画最新章节{chapter_name:xxx,comic_id:xxx,chapter_id:xxx},
             comic:漫画信息 {comic_id:1,name:xxx,cover:xxx,...}
             siteImage:背景前缀(域名)
         -->
+        <block wx:if="{{!networkType || lowerState || last_click_id == cur_click_id}}">
            <releaseAndEndItem
             wx:if="{{ comicList && comicList.length!=0 }}"
             wx:for="{{comicList}}"
@@ -46,15 +47,16 @@
             lastChapter="{{item.lastChapter}}"
             comic="{{item.comic}}"
             siteImage="{{siteImage}}"
-          ></releaseAndEndItem>        
+          ></releaseAndEndItem>
+        </block>
         <!-- 列表 E  -->
 
 
         <!-- 空内容的时候 S -->
-        <message 
-            wx:if="{{comicList&&comicList.length==0}}" 
+        <message
+            wx:if="{{comicList&&comicList.length==0}}"
             type="nothing"
-        ></message>    
+        ></message>
         <!-- 空内容的时候 E -->
 
 
