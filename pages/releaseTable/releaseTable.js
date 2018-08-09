@@ -1,6 +1,6 @@
 const wxApi = require('../../utils/util.js');
 const app = getApp();
-
+var _timer = null;
 
 
 Page({
@@ -22,11 +22,13 @@ Page({
     type: 'loading',
     siteImage: '',
     pageTotal: 1,
-    isLoading: false
+    isLoading: false,
   },
+ 
   /* 接受子组件 点击 头部导航发送的数据 */
   ClickPubDay: function (e) {
-    // console.log(e.detail)
+    if (_timer) clearTimeout(_timer)
+
     wxApi.getNetworkType().then((NetworkType) => {
       let networkType = NetworkType.networkType;
       let pubDay = e.detail.pub_day; //保存子组件发送的点击日期      
@@ -42,6 +44,7 @@ Page({
         })
         wxApi.getShowToast("主人，您目前的网络好像不太好呢~～")
       } else {
+
         this.setData({
           pubDay, //存储日期
           pageNum: 1,
@@ -50,13 +53,17 @@ Page({
           networkType: true,
           comicList: null,//数据列表
         });
-        this.isLoad({ //开始调用 获取数据
-          url: this.data.url,
-          pubDay: this.data.pubDay,
-          pageNum: this.data.pageNum,
-          rowsNum: this.data.rowsNum,
-          goTop: false
-        })
+        _timer = setTimeout(() => {
+          this.isLoad({ //开始调用 获取数据
+            url: this.data.url,
+            pubDay: this.data.pubDay,
+            pageNum: this.data.pageNum,
+            rowsNum: this.data.rowsNum,
+            goTop: false,
+
+          })
+        }, 1200);
+
       }
     })
 
@@ -127,8 +134,6 @@ Page({
         });
 
         wxApi.getNodeInfo('#topNav').then((res) => { //在这获取导航条的高度
-          console.log(res.height)
-          console.log(this.data.height)
           if (res && res.height) {
             this.setData({ //不存在存储日期列表
               height: this.data.height - res.height
@@ -150,7 +155,6 @@ Page({
         chapterList,
         cateList
       });
-      console.log(comicAry)
       if (goTop) { //如果是true  执行回到顶部
         wxApi.pageScrollTo({ //滚动条回到顶部
           scrollTop: 0

@@ -1,6 +1,6 @@
 // pages/classification/classification.js
-var wxApi = require("../../utils/util.js");
-var _timer = null
+var wxApi = require("../../utils/util.js")
+var _timer = null, daley = 1000
 Page({
 
   /**
@@ -19,6 +19,7 @@ Page({
       rows_num: 10,
       cate_id:0,
       last_click_id: 1,
+      lowerState: 0,
       cur_click_id: 1,
       comic_pay_status:'',
       end_status:0,
@@ -87,7 +88,6 @@ Page({
                 let res = data.data.data.data;
                 that.setData({cur_click_id})
                 let { type, last_click_id } = that.data
-
                 type = cur_click_id == last_click_id ? null : type //'loading'
                 if(filter) type = null;
                 if (data.data.data.length !== 0) {
@@ -138,16 +138,14 @@ Page({
     },
     setLastClickId () {
         const last_click_id = this.getNow()
-        this.setData({ last_click_id })
+        const lowerState = 0
+        this.setData({ last_click_id , lowerState})
         return last_click_id
     },
     onCate:function (event) {
         var that = this;
         var cate_id = event.currentTarget.dataset.cateid;
-
-        const last_click_id = this.setLastClickId()
         if(_timer) clearTimeout(_timer)
-
         if (that.data.cate_id == cate_id) {
             return;
         }
@@ -177,8 +175,9 @@ Page({
                 // console.log(that.data.scrolType);
                 that.data.page_num = 1;
                 _timer = setTimeout(() => {
+                    const last_click_id = this.setLastClickId()
                     that.classList(last_click_id, cate_id)
-                }, 1200);
+                }, daley);
 
             }
         }).catch((err) =>{
@@ -192,14 +191,13 @@ Page({
     },
     onEnd:function (event) {
         var that = this;
-        let { cateid: cate_id, endid: end_status } = event.currentTarget.dataset;
-
-        const last_click_id = this.setLastClickId()
+        let { cateid: cate_id, endid: end_status } = event.currentTarget.dataset
 
         if(_timer) clearTimeout(_timer)
         if (that.data.end_status == end_status) {
             return;
         }
+
         //判断网络类型
         wxApi.getNetworkType().then((res) =>{
             let networkType = res.networkType;
@@ -222,9 +220,10 @@ Page({
                 })
                 that.data.scrolType = '';
                 that.data.page_num  = 1;
-
-                that.classList(last_click_id, cate_id, end_status, 1);
-
+                setTimeout(() => {
+                    const last_click_id = this.setLastClickId()
+                    that.classList(last_click_id, cate_id, end_status, 1);
+                }, daley);
             }
         }).catch((err) =>{
             this.setData({
@@ -238,6 +237,7 @@ Page({
     //滚动条滚到底部的时候触发
     lower: function(e) {
         var that = this;
+        that.lower_timer = null
         //判断网络类型
         wxApi.getNetworkType().then((res) =>{
             let networkType = res.networkType;
@@ -248,7 +248,6 @@ Page({
                     type: null,
                 })
                 wxApi.getShowToast(that.data.netTitle);
-
             }else {
                 //有网络
                 that.data.scrolType = e.type;
@@ -258,9 +257,13 @@ Page({
                 if (total < this.data.page_num){
                     return
                 }else {
-                    const last_click_id = this.setLastClickId()
-                    console.log(last_click_id);
-                    this.classList(last_click_id);
+                    if(that.lower_timer ) clearTimeout(that.lower_timer)
+                    that.lower_timer  = setTimeout(() => {
+                        //const last_click_id = this.setLastClickId()
+                        console.log('lowerState')
+                        this.setData({lowerState: 1})
+                        this.classList();
+                    }, 200);
                 }
             }
         }).catch((err) =>{

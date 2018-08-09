@@ -16,7 +16,7 @@
     <scroll-view class="{{comicCate.length>16 ? 'class_content_style':'class_content'}}" scroll-y="{{true}}" style="height:{{scrollHeight}}px;"
                  enable-back-to-top="{{true}}" scroll-into-view="into" lower-threshold="{{40}}" bindscrolltolower="lower">
         <text id="into" decode="emsp" style="{{classListData&&classListData.length==0 && hasData === false?'display:none':'height: 0;display:block'}}">&emsp;</text>
-        <block wx:if="{{!networkType || cur_click_id == last_click_id }}">
+        <block wx:if="{{!networkType || lowerState || cur_click_id == last_click_id }}">
             <view class="class_list">
                 <navigator class="list_view" url="../details/details?comic_id={{item.comic_id}}&comic_name={{item.comic_name}}"
                         data-comic="{{item.comic_id}}"  wx:if="{{classListData.length > 0}}" wx:for="{{classListData}}" wx:key="index">
