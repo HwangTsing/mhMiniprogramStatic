@@ -259,6 +259,7 @@ Page({
                     return
                 }else {
                     const last_click_id = this.setLastClickId()
+                    console.log(last_click_id);
                     this.classList(last_click_id);
                 }
             }
