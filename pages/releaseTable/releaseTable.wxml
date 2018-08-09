@@ -37,7 +37,7 @@
             comic:漫画信息 {comic_id:1,name:xxx,cover:xxx,...}
             siteImage:背景前缀(域名)
         -->
-        <releaseAndEndItem
+           <releaseAndEndItem
             wx:if="{{ comicList && comicList.length!=0 }}"
             wx:for="{{comicList}}"
             wx:key="{{index}}"
@@ -46,7 +46,7 @@
             lastChapter="{{item.lastChapter}}"
             comic="{{item.comic}}"
             siteImage="{{siteImage}}"
-        ></releaseAndEndItem>
+          ></releaseAndEndItem>        
         <!-- 列表 E  -->
 
 
