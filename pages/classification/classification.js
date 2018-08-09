@@ -149,7 +149,6 @@ Page({
             return;
         }
         if(_timer) clearTimeout(_timer)
-
         //判断网络类型
         wxApi.getNetworkType().then((res) =>{
             let networkType = res.networkType;
@@ -196,7 +195,6 @@ Page({
             return;
         }
         if(_timer) clearTimeout(_timer)
-
         //判断网络类型
         wxApi.getNetworkType().then((res) =>{
             let networkType = res.networkType;

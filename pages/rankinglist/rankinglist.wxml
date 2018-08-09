@@ -3,7 +3,7 @@
     <view class="tab_view">
         <ul class="nav_tab">
             <block wx:for="{{statusList}}" wx:for-item="statusList" wx:key="status">
-                <li class="{{status === statusList.status ? 'activeColor' : 'tab_name'}}" data-id="{{statusList.status}}"catchtap="{{!buttonClicked?'onTabTap':''}}">
+                <li class="{{status === statusList.status ? 'activeColor' : 'tab_name'}}" data-id="{{statusList.status}}" catchtap="{{!buttonClicked?'onTabTap':''}}">
                     {{statusList.title}}
                     <view class="{{status === statusList.status ? 'activeBorder':''}}"></view>
                 </li>
