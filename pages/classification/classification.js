@@ -145,10 +145,10 @@ Page({
     onCate:function (event) {
         var that = this;
         var cate_id = event.currentTarget.dataset.cateid;
-        if(_timer) clearTimeout(_timer)
         if (that.data.cate_id == cate_id) {
             return;
         }
+        if(_timer) clearTimeout(_timer)
 
         //判断网络类型
         wxApi.getNetworkType().then((res) =>{
@@ -192,11 +192,10 @@ Page({
     onEnd:function (event) {
         var that = this;
         let { cateid: cate_id, endid: end_status } = event.currentTarget.dataset
-
-        if(_timer) clearTimeout(_timer)
         if (that.data.end_status == end_status) {
             return;
         }
+        if(_timer) clearTimeout(_timer)
 
         //判断网络类型
         wxApi.getNetworkType().then((res) =>{
@@ -220,7 +219,7 @@ Page({
                 })
                 that.data.scrolType = '';
                 that.data.page_num  = 1;
-                setTimeout(() => {
+                _timer = setTimeout(() => {
                     const last_click_id = this.setLastClickId()
                     that.classList(last_click_id, cate_id, end_status, 1);
                 }, daley);
