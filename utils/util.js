@@ -326,7 +326,8 @@ class wxApi {
     for (let key in params) {
       if (params.hasOwnProperty(key)) {
         let value = params[key]
-        if (!!value) param.push(key + '=' + encodeURIComponent(value))
+        //value.replace()
+        if (!!value) param.push(key + '=' + value)
       }
     }
     return route + (param.length > 0 ? join + param.join('&') : '');

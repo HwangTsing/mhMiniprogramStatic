@@ -17,13 +17,14 @@ Page({
     json_content: {
       page: []
     },
-    chapter_nav: null
+    chapter_nav: null,
+    title: ""
   },
 
   onLoad: function (options) {
     const { chapter_id, chapter_name = '' } = options;
     const { windowWidth, windowHeight } = wxApi.getSystemInfoSync()
-
+    this.setData({ title: options.chapter_name })
     this.chapter_id = chapter_id
     this.chapter_name = decodeURIComponent(chapter_name)
     this.windowHeight = windowHeight
@@ -53,7 +54,9 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    wxApi.setNavigationBarTitle(this.chapter_name)
+    wx.setNavigationBarTitle({
+      title: this.data.title ? this.data.title : '微博动漫'
+    })
   },
 
   /**
@@ -93,9 +96,9 @@ Page({
 
   onPageScroll: function ({ scrollTop }) {
     if (this.scrollTimer) clearTimeout(this.scrollTimer)
-    this.scrollTimer = setTimeout( ()=> {
-      this.setReadingLog({ ...this.readingLog, scrollTop} )
-    }, 60 )
+    this.scrollTimer = setTimeout(() => {
+      this.setReadingLog({ ...this.readingLog, scrollTop })
+    }, 60)
 
   },
 
@@ -131,7 +134,7 @@ Page({
         chapter = {},
         chapter_list = [],
         json_content = {},
-        json_content: { page=[] },
+        json_content: { page = [] },
         is_allow_read,
         site_ver = version,
         comic
@@ -146,20 +149,20 @@ Page({
       })
       this.isAllowRead = is_allow_read;
 
-      if ( page.length > 0) this.setData({ json_content })
+      if (page.length > 0) this.setData({ json_content })
       if (!chapter_list.length) {
         this.setPageMessage('out')
-      } else if (!(page&&page.length)) {
+      } else if (!(page && page.length)) {
         this.setPageMessage('lose')
       }
 
-      return { chapter_list, comic_id, chapter_id, chapter_name}
+      return { chapter_list, comic_id, chapter_id, chapter_name }
     }, () => {
-        this.setPageMessage('server')
+      this.setPageMessage('server')
     })
   },
 
-  tapScrollHandler: function ({ detail: { y }, currentTarget: { offsetTop }, touches: [{ clientY }] }){
+  tapScrollHandler: function ({ detail: { y }, currentTarget: { offsetTop }, touches: [{ clientY }] }) {
     const scrollY = y - clientY
     const _scrollTop = scrollY < offsetTop ? (clientY - offsetTop + scrollY) : clientY
     const scrollTop = _scrollTop < this.windowHeight / 2 ? (scrollY - this.windowHeight < 0 ? 0 : scrollY - this.windowHeight) : scrollY + this.windowHeight
@@ -167,10 +170,10 @@ Page({
     wxApi.pageScrollTo({ scrollTop })
   },
 
-  render: function (chapter_id){
+  render: function (chapter_id) {
     //wxApi.pageScrollTo({scrollTop: 0});
     if (!chapter_id) return this.setPageMessage('noExist')
-    this.fetchComic(chapter_id).then(({ chapter_list, comic_id, chapter_id, chapter_name} = {})=>{
+    this.fetchComic(chapter_id).then(({ chapter_list, comic_id, chapter_id, chapter_name } = {}) => {
       if (!comic_id || !chapter_id) return
       wxApi.setNavigationBarTitle(chapter_name)
 
@@ -182,21 +185,21 @@ Page({
       this.findChapterList(chapter_id, chapter_list)
       this.readingLog = { comic_id, chapter_id, chapter_name, scrollTop: 0, windowWidth: _windowWidth }
 
-      wxApi.getStorage(KEY).then(({ data = {}, data: {chapter_id, scrollTop = 0, windowWidth} })=>{
+      wxApi.getStorage(KEY).then(({ data = {}, data: { chapter_id, scrollTop = 0, windowWidth } }) => {
         scrollTop = scrollTop * (windowWidth > 0 ? _windowWidth / windowWidth : 1)
-        if (_chapter_id == chapter_id) wxApi.pageScrollTo({ scrollTop, duration: 0});
-        this.setReadingLog({ ...this.readingLog, scrollTop, windowWidth: _windowWidth})
-      }, ()=> {
-        this.setReadingLog({ ...this.readingLog})
+        if (_chapter_id == chapter_id) wxApi.pageScrollTo({ scrollTop, duration: 0 });
+        this.setReadingLog({ ...this.readingLog, scrollTop, windowWidth: _windowWidth })
+      }, () => {
+        this.setReadingLog({ ...this.readingLog })
       })
 
     });
   },
 
-  createNavUrlByIndex: function (chapter_id, chapter_list=[]) {
+  createNavUrlByIndex: function (chapter_id, chapter_list = []) {
     let time = +new Date()
-    chapter_id = chapter_id+''
-    const { comic_id} = this.data.comic
+    chapter_id = chapter_id + ''
+    const { comic_id } = this.data.comic
     let prev_nav = {}, next_nav = {}, next = null, prev = null
     const { comic = { try_read_chapters: [] }, comic_order = {}, chapter_order = {}, comic: { comic_buy, try_read_chapters, pay_status }, comic_order: { order_status } } = this.isAllowRead
     const { chapter_id_arr = [] } = chapter_order
@@ -206,7 +209,7 @@ Page({
     //order_status 订单状态  0:默认 1:末付款 2:已付款
     //pay_status   付费状态  0:默认 1:免费 2:收费
     this.chapter_ids = _.pluck(chapter_list, 'chapter_id')
-    if ( (comic_buy == 2 && order_status == 2) || pay_status == 1) { //漫画全本购买并已付款 or 免费章节
+    if ((comic_buy == 2 && order_status == 2) || pay_status == 1) { //漫画全本购买并已付款 or 免费章节
       this.can_read_chapters = this.chapter_ids
       this.allowRead = true
     } else { //漫画章节购买
@@ -222,13 +225,13 @@ Page({
       prev = this.findPrevChapter(index, chapter_list)
     }
     // console.log(+new Date() - time)
-    if (prev) prev_nav = this.getReadurlByParam({ ...prev, comic_id})
-    if (next) next_nav = this.getReadurlByParam({ ...next, comic_id})
+    if (prev) prev_nav = this.getReadurlByParam({ ...prev, comic_id })
+    if (next) next_nav = this.getReadurlByParam({ ...next, comic_id })
 
-    return { prev_nav, next_nav}
+    return { prev_nav, next_nav }
   },
 
-  findNextChapter: function (index, chapters){
+  findNextChapter: function (index, chapters) {
     const _index = index + 1
     return this.findChapter(_index, chapters, 'findNextChapter')
   },
@@ -248,7 +251,7 @@ Page({
     let is_charge = false
     let charge_chapters = _.difference(this.chapter_ids, can_read_chapters)
     // console.log('charge_chapters', charge_chapters)
-    if( _.indexOf(charge_chapters, chapter_id) != -1 ) {
+    if (_.indexOf(charge_chapters, chapter_id) != -1) {
       is_charge = true
     }
     //console.log(action, chapter_id, chapter_name, chapter_pay_price, _.indexOf(can_read_chapters, chapter_id))
@@ -258,19 +261,19 @@ Page({
     return { chapter_id, chapter_name, is_charge }
   },
 
-  getReadurlByParam: function ({chapter_id, chapter_name, is_charge, comic_id}, url = '/pages/read/read') {
+  getReadurlByParam: function ({ chapter_id, chapter_name, is_charge, comic_id }, url = '/pages/read/read') {
     url = wxApi.appendParams(url, { chapter_id, chapter_name, comic_id })
-    return {url, is_charge}
+    return { url, is_charge }
   },
 
-  findChapterList: function (chapter_id, chapter_list=[]){
-    const chapter_nav = { ...this.createNavUrlByIndex(chapter_id, chapter_list)}
+  findChapterList: function (chapter_id, chapter_list = []) {
+    const chapter_nav = { ...this.createNavUrlByIndex(chapter_id, chapter_list) }
     const { json_content: { page } } = this.data
     const comicNavHolder = page.length > 0
     this.setData({ chapter_nav, comicNavHolder })
   },
 
-  chapterNavTap: function (e){
+  chapterNavTap: function (e) {
     const chapter_id = wxApi.getParam(e.detail.url, 'chapter_id');
 
     this.render(chapter_id)
@@ -283,11 +286,11 @@ Page({
     const KEY = PREFIX + comic_id
 
     if (comic_id) {
-      wxApi.setStorage(KEY, {...values})
+      wxApi.setStorage(KEY, { ...values })
     }
   },
 
-  onMyEvent: function(){
+  onMyEvent: function () {
     console.log('onMyEvent');
   }
 
