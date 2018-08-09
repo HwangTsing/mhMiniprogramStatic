@@ -63,7 +63,7 @@ Page({
       var can_read_chapters = this.can_read_chapters;
       if (arr.chapter_list && arr.chapter_list[0]) {
         let index = 0;
-        this.navigateToHistory(arr.chapter_list[index].chapter_id, arr.comic.comic_id,data.chapter_name);
+        this.navigateToHistory(arr.chapter_list[index].chapter_id, arr.comic.comic_id,arr.chapter_list[index].chapter_name);
       }//错误时候
 
 
