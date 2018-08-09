@@ -43,12 +43,12 @@ Page({
           this.popUp()
         }else{
           wx.navigateTo({
-            url: `/pages/read/read?chapter_id=${chapter_id}&comic_id=${comic_id}&chapter_name=${chapter_name}`
+            url: `/pages/read/read?chapter_id=${chapter_id}&comic_id=${comic_id}&chapter_name=${encodeURIComponent(chapter_name)}`
           })
         }
       }
     })
-   
+
   },
   //点击开始阅读|和据需阅读的事件
   onReadClick: function (event) {
@@ -135,7 +135,7 @@ Page({
     let rows_num = 10;//每页条数
     let comicShowUrl = 'wbcomic/comic/comic_show';//摘要页接口前缀
     let comicCommentListUrl = 'wbcomic/comic/comic_comment_list';//摘要页评论接口
-     
+
     /*
     * ***comicShowFn  摘要页接口promise对象
     * @ comicShowUrl 必要参数 请求接口前缀

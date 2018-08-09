@@ -18,13 +18,11 @@ Page({
       page: []
     },
     chapter_nav: null,
-    title: ""
   },
 
   onLoad: function (options) {
     const { chapter_id, chapter_name = '' } = options;
     const { windowWidth, windowHeight } = wxApi.getSystemInfoSync()
-    this.setData({ title: options.chapter_name })
     this.chapter_id = chapter_id
     this.chapter_name = decodeURIComponent(chapter_name)
     this.windowHeight = windowHeight
@@ -54,9 +52,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    wx.setNavigationBarTitle({
-      title: this.data.title ? this.data.title : '微博动漫'
-    })
+    wxApi.setNavigationBarTitle(this.chapter_name)
   },
 
   /**

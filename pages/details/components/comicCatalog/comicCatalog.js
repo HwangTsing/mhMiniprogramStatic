@@ -23,7 +23,7 @@ Component({
         //组件的内部数据，和 properties 一同用于组件的模版渲染
         chapter:{id:null},
         floorstatus:false,//是否显示弹出框
-       
+
     },
 
 
@@ -47,12 +47,13 @@ Component({
             // let chapter_id = event.currentTarget.id;
             let data=event.currentTarget.dataset;//元素对象信息
             let chapter_id = data.chapter_id;
+            let chapter_name = data.chapter_name;
             let comic_id = data.comic_id;
             let item = data.item;
             this.setData({ //存储 点击章节信息,到组件对象中
                 chapter:data
             })
-          
+
             if(item.isLocked){
                 const pop = this.selectComponent('#popup')
                 pop.open()
@@ -62,7 +63,7 @@ Component({
             }
            else if(comic_id && chapter_id){
                 wx.navigateTo({
-                    url: `/pages/read/read?chapter_id=${chapter_id}`//&comic_id=${comic_id}
+                    url: `/pages/read/read?chapter_id=${chapter_id}&chapter_name=${encodeURIComponent(chapter_name)}`//&comic_id=${comic_id}
                 })
             }
         },
