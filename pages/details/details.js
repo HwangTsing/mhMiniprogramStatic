@@ -34,7 +34,7 @@ Page({
     if(pop) pop.open();
   },
   //跳转接口方法
-  navigateToHistory: function (chapter_id, comic_id) {
+  navigateToHistory: function (chapter_id, comic_id, chapter_name) {
     var that=this;
     let arr = this.data.dataAry.chapter_list;
     return arr.filter( (element, index) => {
@@ -43,7 +43,7 @@ Page({
           this.popUp()
         }else{
           wx.navigateTo({
-            url: `/pages/read/read?chapter_id=${chapter_id}&comic_id=${comic_id}`
+            url: `/pages/read/read?chapter_id=${chapter_id}&comic_id=${comic_id}&chapter_name=${chapter_name}`
           })
         }
       }
@@ -56,14 +56,14 @@ Page({
     wxApi.getStorage(key).then((res) => { //获取阅读历史
 
       let data = res.data;
-      this.navigateToHistory(data.chapter_id, data.comic_id)
+      this.navigateToHistory(data.chapter_id, data.comic_id,data.chapter_name)
     }).catch((err) => {
       let isSort = this.data.isSort;
       let arr = this.data.dataAry;
       var can_read_chapters = this.can_read_chapters;
       if (arr.chapter_list && arr.chapter_list[0]) {
         let index = 0;
-        this.navigateToHistory(arr.chapter_list[index].chapter_id, arr.comic.comic_id);
+        this.navigateToHistory(arr.chapter_list[index].chapter_id, arr.comic.comic_id,data.chapter_name);
       }//错误时候
 
 
