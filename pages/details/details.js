@@ -120,9 +120,6 @@ Page({
    */
 
   onLoad: function (options) {
-      console.log(options);
-      let q = decodeURIComponent(options.q);
-      console.log(q);
       let { q = ''} = options, comic_id = 0
       if(q) {
         let __q__ = decodeURIComponent(q)
