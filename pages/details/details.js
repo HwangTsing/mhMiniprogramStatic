@@ -54,9 +54,8 @@ Page({
   onReadClick: function (event) {
     let key = "comic_id_" + this.data.dataAry.comic.comic_id;
     wxApi.getStorage(key).then((res) => { //获取阅读历史
-
-      let data = res.data;
-      this.navigateToHistory(data.chapter_id, data.comic_id,data.chapter_name)
+      let data = res.data
+      this.navigateToHistory(data.chapter_id, data.comic_id, data.chapter_name)
     }).catch((err) => {
       let isSort = this.data.isSort;
       let arr = this.data.dataAry;
