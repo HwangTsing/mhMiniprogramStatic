@@ -54,9 +54,8 @@ Page({
   onReadClick: function (event) {
     let key = "comic_id_" + this.data.dataAry.comic.comic_id;
     wxApi.getStorage(key).then((res) => { //获取阅读历史
-
-      let data = res.data;
-      this.navigateToHistory(data.chapter_id, data.comic_id,data.chapter_name)
+      let data = res.data
+      this.navigateToHistory(data.chapter_id, data.comic_id, data.chapter_name)
     }).catch((err) => {
       let isSort = this.data.isSort;
       let arr = this.data.dataAry;
@@ -124,14 +123,23 @@ Page({
       console.log(options);
       let q = decodeURIComponent(options.q);
       console.log(q);
+      let { q = ''} = options, comic_id = 0
+      if(q) {
+        let __q__ = decodeURIComponent(q)
+        __q__ = __q__.match(/\/c\/(\d+)/i)
+
+        if(__q__.length && __q__[1] ) {
+            comic_id = __q__[1]
+        }
+      }
     /*
     * *** wbcomic/comic/comic_show?comic_id=68491 摘要页接口
     * *** wbcomic/comic/comic_comment_list?comic_id=24&page_num=1&rows_num=10&_debug_=yes 评论列表
     * */
   //  console.log(options)
     //comic_id
-    let comic_id = options.comic_id;
-    let comic_name=decodeURIComponent(options.comic_name);
+    comic_id = comic_id > 0 || options.comic_id;
+    let comic_name=decodeURIComponent(options.comic_name||'');
     //comic_id= options.comic_id ? options.comic_id : 68023;//24 68491
     // comic_id = 68491;
     let page_num = 1;//页码

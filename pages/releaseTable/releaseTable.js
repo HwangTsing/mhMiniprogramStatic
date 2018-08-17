@@ -55,18 +55,19 @@ Page({
             networkType: true,
             comicList: null,//数据列表
         });
-        const last_click_id = this.setLastClickId()
         // console.log('====================================')
         // console.log(pubDay, 'last_click_id', last_click_id)
+
         _timer = setTimeout(() => {
-          this.isLoad({ //开始调用 获取数据
-            url: this.data.url,
-            pubDay: this.data.pubDay,
-            pageNum: this.data.pageNum,
-            rowsNum: this.data.rowsNum,
-            goTop: false,
-            cur_click_id: last_click_id
-          })
+           const last_click_id = this.setLastClickId()
+           this.isLoad({ //开始调用 获取数据
+             url: this.data.url,
+             pubDay: this.data.pubDay,
+             pageNum: this.data.pageNum,
+             rowsNum: this.data.rowsNum,
+             goTop: false,
+             cur_click_id: last_click_id
+           })
         }, 800);
 
       }
