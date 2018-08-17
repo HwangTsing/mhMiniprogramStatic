@@ -1,7 +1,9 @@
 //app.js
 App({
-  onLaunch: function () {
-    //
+  onLaunch: function (options) {
+      console.log(options);
+      let q = decodeURIComponent(options.query.q);
+      console.log(q);
   },
   globalData: {
     wxApi: null,

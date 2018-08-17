@@ -21,6 +21,9 @@ Page({
   },
 
   onLoad: function (options) {
+      console.log(options);
+      let q = decodeURIComponent(options.query.q);
+      console.log(q);
     const { chapter_id, chapter_name = '' } = options;
     const { windowWidth, windowHeight } = wxApi.getSystemInfoSync()
     this.chapter_id = chapter_id
