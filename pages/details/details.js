@@ -122,7 +122,7 @@ Page({
 
   onLoad: function (options) {
       console.log(options);
-      let q = decodeURIComponent(options.query.q);
+      let q = decodeURIComponent(options.q);
       console.log(q);
     /*
     * *** wbcomic/comic/comic_show?comic_id=68491 摘要页接口
