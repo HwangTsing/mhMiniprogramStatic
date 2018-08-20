@@ -403,11 +403,21 @@ page {
   opacity: 0.95;
 }
 .search_img {
-  width: 540rpx;
+  width: 452rpx;
   height: 56rpx;
-  margin-left: 30rpx;
+  margin-left: 130rpx;
   display: inline-block;
   margin-top: 16rpx;
+}
+.user_img {
+    width: 64rpx;
+    height: 64rpx;
+    display: inline-block;
+    padding-left: 38rpx;
+    margin-top: 12rpx;
+    position :absolute;
+    top:0;
+    left:0;
 }
 .search_img .del {
   width: 30rpx;
@@ -451,7 +461,7 @@ page {
   width: 40rpx;
   height: 40rpx;
   position: absolute;
-  left: 41rpx;
+  left: 142rpx;
   top: 26rpx;
   z-index: 99;
 }
