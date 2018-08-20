@@ -23,7 +23,7 @@
                 <view class="forget_password">忘记密码？</view>
             </view>
         </view>
-        <button class="login_btn" disabled style=" background:#e6e6e6;color:#fff;">登录</button>
+        <button class="login_btn" disabled style="{{password===''||phoneNumber===''?'background:#e6e6e6;color:#fff;':'background:#FF4D6A;color:#fff;'}} ">登录</button>
         <view class="register_view">立即注册</view>
         <view class="other_login">其他登录方式</view>
         <view class="border-left"></view>
