@@ -1,6 +1,5 @@
 {
   "pages": [
-      "pages/login/login",
     "pages/index/index",
     "pages/details/details",
     "pages/comment/comment",
@@ -11,7 +10,9 @@
     "pages/classification/classification",
     "pages/releaseTable/releaseTable",
     "pages/comicEnd/comicEnd",
-    "pages/rankinglist/rankinglist"
+    "pages/rankinglist/rankinglist",
+    "pages/login/login",
+    "pages/forgetPassword/forgetPassword"
   ],
   "window": {
     "backgroundTextStyle": "light",

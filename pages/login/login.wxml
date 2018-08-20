@@ -20,7 +20,7 @@
                        value="{{password}}" placeholder="请输入密码" placeholder-class="phcolor" bindinput="passwordInputChange"/>
                 <image class="{{password==''?'del_password_hidden':'del_password'}}"
                        src="../../images/user/del_icon.png" catchtap="delPassword"></image>
-                <view class="forget_password">忘记密码？</view>
+                <view class="forget_password" catchtap="onForgetPw">忘记密码？</view>
             </view>
         </view>
         <button class="login_btn" disabled style="{{password===''||phoneNumber===''?'background:#e6e6e6;color:#fff;':'background:#FF4D6A;color:#fff;'}} ">登录</button>

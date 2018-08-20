@@ -40,6 +40,12 @@ Page({
             password:''
         })
     },
+    //忘记密码
+    onForgetPw:function () {
+        wx.navigateTo({
+            url: '/pages/forgetPassword/forgetPassword'
+        })
+    },
 
   /**
    * 生命周期函数--监听页面加载
