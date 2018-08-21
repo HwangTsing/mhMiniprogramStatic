@@ -12,7 +12,9 @@
     "pages/comicEnd/comicEnd",
     "pages/rankinglist/rankinglist",
     "pages/mymsg/mymsg",
-    "pages/mymsg/components/more/more"
+    "pages/mymsg/components/more/more",
+    "pages/login/login",
+    "pages/forgetPassword/forgetPassword"
   ],
   "window": {
     "backgroundTextStyle": "light",

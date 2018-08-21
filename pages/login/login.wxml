@@ -1,0 +1,35 @@
+<!--pages/login/login.wxml-->
+<view class="container_login">
+    <view class="login_bg">
+        <image class="ye_toast" src="../../images/user/user_toast.png"></image>
+    </view>
+    <view class="login_content">
+        <view class="iphone_view">
+            <image class="iphone_img" src="../../images/user/iphone_icon.png"></image>
+            <view class="{{phoneNumber==''?'iphone_input':'iphone_input_active'}}">
+                <input type="number" class="iphone_input_number" maxlength="11" value="{{phoneNumber}}"
+                       placeholder="请输入手机号" placeholder-class="phcolor" bindinput="phoneInputChange"/>
+                <image class="{{phoneNumber==''?'del_phone_hidden':'del_phoneNumber'}}"
+                       src="../../images/user/del_icon.png" catchtap="delPhone"></image>
+            </view>
+        </view>
+        <view class="password_view">
+            <image class="password_img" src="../../images/user/pass_icon.png"></image>
+            <view class="{{password==''?'password_input':'password_input_active'}}">
+                <input type="idcard" class="password_input_p" password="{{true}}" maxlength="16"
+                       value="{{password}}" placeholder="请输入密码" placeholder-class="phcolor" bindinput="passwordInputChange"/>
+                <image class="{{password==''?'del_password_hidden':'del_password'}}"
+                       src="../../images/user/del_icon.png" catchtap="delPassword"></image>
+                <view class="forget_password" catchtap="onForgetPw">忘记密码？</view>
+            </view>
+        </view>
+        <button class="login_btn" disabled style="{{password===''||phoneNumber===''?'background:#e6e6e6;color:#fff;':'background:#FF4D6A;color:#fff;'}} ">登录</button>
+        <view class="register_view">立即注册</view>
+        <view class="other_login">其他登录方式</view>
+        <view class="border-left"></view>
+        <view class="border_right"></view>
+        <view class="we_chat_view">
+            <image class="we_chat" src="../../images/user/weixin.png"></image>
+        </view>
+    </view>
+</view>

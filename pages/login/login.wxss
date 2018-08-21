@@ -1,0 +1,187 @@
+/* pages/login/login.wxss */
+.container_login {
+    width:100%;
+    height:100%;
+}
+.login_bg {
+    width:100%;
+    height:270rpx;
+    background: #FF4D6A;
+}
+.login_bg .ye_toast {
+    width:368rpx;
+    height:280rpx;
+    position:relative;
+    left:25%;
+    top:0;
+}
+.login_content {
+    width:100%;
+    background:rgba(255,255,255,1);
+    border-top-left-radius:40rpx;
+    -webkit-border-top-left-radius:40rpx;
+    border-top-right-radius:40rpx;
+    -webkit-border-top-right-radius:40rpx;
+    border:1rpx solid #fff;
+    position:relative;
+}
+.iphone_view {
+    width:100%;
+    height:128rpx;
+    background:#fff;
+}
+.iphone_view .iphone_img, .password_view .password_img{
+    width:48rpx;
+    height:48rpx;
+    display:inline-block;
+}
+.iphone_view .iphone_img {
+    position:relative;
+    left:78rpx;
+    top:63rpx;
+}
+.phcolor {
+    font-size:32rpx;
+    color:#ccc;
+}
+.password_view .password_img {
+    position:relative;
+    left:78rpx;
+    top:63rpx;
+}
+.iphone_input{
+    margin-top:52rpx;
+    height:76rpx;
+    border-bottom:1rpx solid #E6E6E6;
+    margin:0 76rpx;
+    padding-left:60rpx;
+}
+.iphone_input_active {
+    margin-top:52rpx;
+    height:76rpx;
+    border-bottom:1rpx solid #FF4C6A;
+    margin:0 76rpx;
+    padding-left:60rpx;
+}
+.iphone_input_number {
+    width:450rpx;
+    height:76rpx;
+}
+.password_view {
+    width:100%;
+    height:141rpx;
+    background:#fff;
+}
+.password_input {
+    height:76rpx;
+    margin-top:65rpx;
+    border-bottom:1rpx solid #E6E6E6;
+    margin:0 76rpx;
+    padding-left:60rpx;
+}
+.forget_password {
+    font-size:32rpx;
+    color:#FF4C6A;
+    position:absolute;
+    top:178rpx;
+    right:53rpx;
+}
+.password_input_active {
+    height:76rpx;
+    margin-top:65rpx;
+    border-bottom:1rpx solid #FF4C6A;
+    margin:0 76rpx;
+    padding-left:60rpx;
+}
+.password_input_p {
+    width:310rpx;
+    height:76rpx;
+}
+.login_btn {
+    width:600rpx;
+    height:100rpx;
+    line-height:100rpx;
+    border-radius:66rpx;
+    margin-top:57rpx;
+    font-size:34rpx;
+    font-family:PingFangSC;
+}
+button::after{
+    border: none;
+}
+.register_view {
+    width:100%;
+    font-size:34rpx;
+    color:#FF4C6A;
+    font-family:PingFangSC;
+    text-align:center;
+    margin-top:88rpx;
+}
+.other_login {
+    width:100%;
+    text-align:center;
+    font-size:24rpx;
+    color:#ccc;
+    font-family:PingFangSC;
+    margin-top:134rpx;
+    display:inline-block;
+}
+.we_chat {
+    width:76rpx;
+    height:76rpx;
+    margin-top:50rpx;
+}
+.we_chat_view {
+    width:100%;
+    text-align:center;
+}
+.border-left{
+    width:140rpx;
+    margin:5rpx auto;
+    border:1rpx solid #e6e6e6;
+    background:rgba(230,230,230,1);
+    overflow:hidden;
+    position:absolute;
+    bottom:136rpx;
+    left:126rpx;
+}
+.border_right{
+    width:140rpx;
+    margin:5rpx auto;
+    border:1rpx solid #e6e6e6;
+    background:rgba(230,230,230,1);
+    overflow:hidden;
+    position:absolute;
+    bottom:136rpx;
+    right:126rpx;
+}
+.del_phoneNumber{
+    width:32rpx;
+    height:32rpx;
+    position:absolute;
+    top:68rpx;
+    right:83rpx;
+}
+.del_phone_hidden {
+    width:32rpx;
+    height:32rpx;
+    position:absolute;
+    top:68rpx;
+    right:83rpx;
+    display: none;
+}
+.del_password {
+    width:32rpx;
+    height:32rpx;
+    position:absolute;
+    top:186rpx;
+    right:248rpx;
+}
+.del_password_hidden {
+    width:32rpx;
+    height:32rpx;
+    position:absolute;
+    top:186rpx;
+    right:248rpx;
+    display: none;
+}

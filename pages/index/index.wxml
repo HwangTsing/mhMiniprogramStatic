@@ -68,6 +68,7 @@
             <!--search搜索-->
             <!--搜索框聚焦时显示-->
             <view class="search_view">
+                <image class="user_img" src="../../images/user/user.png" catchtap="onUser"></image>
                 <view class="search_img">
                     <image class="search_images" src="../../images/search_gray.png"></image>
                     <navigator url="/pages/search/search" class="'search_input" type="text"

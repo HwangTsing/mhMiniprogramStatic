@@ -126,6 +126,12 @@ Page({
     },
 
     /*事件处理函数*/
+    //点击进入登录页面
+    onUser:function () {
+        wx.navigateTo({
+            url: '/pages/login/login'
+        })
+    },
     /*boy and girl*/
     onBoyTap:function (event) {
         var that = this;
