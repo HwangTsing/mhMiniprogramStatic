@@ -33,4 +33,12 @@
             <image class="we_chat" src="../../images/user/weixin.png" catchtap="onWechat"></image>
         </view>
     </view>
+    <!--正在登录toast-->
+    <block wx:if="{{isLogin===true}}">
+        <view class="isLogin_layer" catchtouchmove='noScrollMove'></view>
+        <view class="isLogin">
+            <image class="load_img" src="../../images/user/loading.png"></image>
+            <view class="login_word">正在登录中</view>
+        </view>
+    </block>
 </view>
