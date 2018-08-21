@@ -46,6 +46,14 @@ Page({
             url: '/pages/forgetPassword/forgetPassword'
         })
     },
+    //点击登录
+    onLogin:function () {
+
+    },
+    //微信登录
+    onWechat:function () {
+
+    },
 
   /**
    * 生命周期函数--监听页面加载
