@@ -1,1 +1,185 @@
 /* pages/register/register.wxss */
+.container_register {
+    width:100%;
+    height:100%;
+    background:#fff;
+}
+.register_phone{
+    width:100%;
+    height:158rpx;
+    padding-top:60rpx;
+}
+.elephone_img, .registerPd_image, .registerCode_image {
+    width:48rpx;
+    height:48rpx;
+}
+.elephone_img {
+    position:absolute;
+    top:88rpx;
+    left:74rpx;
+}
+.registerPd_image {
+    position:absolute;
+    top:247rpx;
+    left:74rpx;
+}
+.registerCode_image{
+    position:absolute;
+    top:387rpx;
+    left:74rpx;
+}
+.phcolor, .code_word{
+      font-size:32rpx;
+      color:#ccc;
+  }
+.register_phone_view {
+    margin:0 72rpx;
+    height:100rpx;
+    border-bottom:1rpx solid #D8D8D8;
+}
+.register_phone_view_a{
+    margin:0 72rpx;
+    height:100rpx;
+    border-bottom:1rpx solid #FF4C6A;
+}
+.elephone_input {
+    width:512rpx ;
+    height:100rpx;
+    line-height:100rpx;
+    margin-left:55rpx;
+}
+.register_password, .register_code{
+    width:100%;
+    height:141rpx;
+}
+.register_password_view {
+    margin:0 72rpx;
+    height:100rpx;
+    border-bottom:1rpx solid #D8D8D8;
+}
+.register_password_view_a{
+    margin:0 72rpx;
+    height:100rpx;
+    border-bottom:1rpx solid #FF4C6A;
+}
+.passWord_input {
+    width:520rpx;
+    height:100rpx;
+    margin-left:55rpx;
+}
+.register_code_view {
+    margin:0 72rpx;
+    height:100rpx;
+    border-bottom:1rpx solid #D8D8D8;
+}
+.register_code_view_a {
+    margin:0 72rpx;
+    height:100rpx;
+    border-bottom:1rpx solid #FF4C6A;
+}
+.obtainCode_input {
+    width:300rpx;
+    height:100rpx;
+    margin-left:55rpx;
+}
+.code_word{
+    position:absolute;
+    top:387rpx;
+    right:72rpx;
+}
+.complete_btn {
+    width:600rpx;
+    height:100rpx;
+    line-height:100rpx;
+    border-radius:66rpx;
+    margin-top:57rpx;
+    font-size:34rpx;
+    font-family:PingFangSC;
+}
+button::after{
+    border: none;
+}
+.delRegister_phone {
+    width:32rpx;
+    height:32rpx;
+    position:absolute;
+    top:98rpx;
+    right:72rpx;
+}
+.delRegister_phone_hidden {
+    width:32rpx;
+    height:32rpx;
+    position:absolute;
+    top:98rpx;
+    right:72rpx;
+    display: none;
+}
+.delRegister_password {
+    width:32rpx;
+    height:32rpx;
+    position:absolute;
+    top:252rpx;
+    right:72rpx;
+}
+.delRegister_password_hidden {
+    width:32rpx;
+    height:32rpx;
+    position:absolute;
+    top:252rpx;
+    right:72rpx;
+    display: none;
+}
+.del_registerCode {
+    width:32rpx;
+    height:32rpx;
+    position:absolute;
+    top:392rpx;
+    right:280rpx;
+}
+.del_registerCode_hidden {
+    width:32rpx;
+    height:32rpx;
+    position:absolute;
+    top:392rpx;
+    right:280rpx;
+    display: none;
+}
+.check_view {
+    width:100%;
+    padding:0 108rpx;
+    margin-top:40rpx;
+}
+.checked {
+    width:48rpx;
+    height:48rpx;
+    display: inline-block;
+    vertical-align:top;
+    margin-top:6rpx;
+}
+.checkbox {
+    width:48rpx;
+    height:48rpx;
+    display: inline-block;
+    vertical-align:top;
+    margin-top:6rpx;
+}
+.checkbox_hidden {
+    width:48rpx;
+    height:48rpx;
+    display: inline-block;
+    vertical-align:top;
+    margin-top:6rpx;
+    display: none;
+}    
+.black_word {
+    color:#333333;
+    font-size:28rpx;
+    font-family:PingFangSC;
+    display: inline-block;
+}
+.red_word {
+    color:#FF4C6A;
+    font-size:28rpx;
+    font-family:PingFangSC;
+    display: inline-block;
+}

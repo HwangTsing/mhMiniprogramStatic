@@ -2,27 +2,39 @@
 <view class="container_register">
     <view class="register_phone">
         <image class="elephone_img" src="../../images/user/iphone_icon.png"></image>
-        <view class="register_phone_view">
-            <input type="number" class="elephone_input" value="" placeholder="请输入手机号,暂时只支持中国大陆"
+        <view class="{{registerPhone==''?'register_phone_view':'register_phone_view_a'}}">
+            <input type="number" class="elephone_input" value="{{registerPhone}}" placeholder="请输入手机号,暂时只支持中国大陆"
                    placeholder-class="phcolor" maxlength="11" bindinput="onElephone"/>
-            <image class="delRegister_phone" src="../../images/user/del_icon.png"></image>
+            <image class="{{registerPhone==''?'delRegister_phone_hidden':'delRegister_phone'}}"
+                   src="../../images/user/del_icon.png" catchtap="delRegisterPhone"></image>
         </view>
     </view>
     <view class="register_password">
         <image class="registerPd_image" src="../../images/user/pass_icon.png"></image>
-        <view class="register_password_view">
-            <input type="submit" password="{{true}}" class="passWord_input" value="" placeholder="请输入新密码（8-16位数字或英文）"
+        <view class="{{registerPass==''?'register_password_view':'register_password_view_a'}}">
+            <input type="submit" password="{{true}}" class="passWord_input" value="{{registerPass}}" placeholder="请输入新密码（8-16位数字或英文）"
                    placeholder-class="phcolor" maxlength="16" bindinput="onPassword"/>
-            <image class="delRegister_password" src="../../images/user/del_icon.png"></image>
+            <image class="{{registerPass==''?'delRegister_password_hidden':'delRegister_password'}}"
+                   src="../../images/user/del_icon.png" catchtap="delRegisterPass"></image>
         </view>
     </view>
     <view class="register_code">
         <image class="registerCode_image" src="../../images/user/code_icon.png"></image>
-        <view class="register_code_view">
-            <input type="number" class="obtainCode_input" value="" placeholder="请输入验证码" maxlength="16"
+        <view class="{{codeNum==''?'register_code_view':'register_code_view_a'}}">
+            <input type="number" class="obtainCode_input" value="{{codeNum}}" placeholder="请输入验证码" maxlength="16"
                    placeholder-class="phcolor" bindinput="onCode"/>
-            <image class="del_registerCode"  src="../../images/user/del_icon.png"></image>
-            <view class="code_word" catchtap="registerObtain">获取验证码</view>
+            <image class="{{codeNum==''?'del_registerCode_hidden':'del_registerCode'}}"
+                   src="../../images/user/del_icon.png" catchtap="delCodeNum"></image>
+            <view class="code_word" catchtap="registerObtain" style="{{registerPhone.length === 11?'color:#FF4C6A;':''}}">获取验证码</view>
         </view>
     </view>
+    <button class="complete_btn" disabled style="{{elephone==''||newPass==''||codeNum==''?'background: #E6E6E6;color:#fff;':'background: #FF4D6A;color:#fff;'}}"
+            catchtap="onComplete">完成</button>
+    <view class="check_view">
+        <image class="checked" wx:if="{{isCheck===true}}" src="../../images/user/checked.png" catchtap="onImage"></image>
+        <image class="{{isCheck===true?'checkbox_hidden':'checkbox'}}" src="../../images/user/checkbox.png" catchtap="onImage"></image>
+        <view class="black_word">我已阅读并同意</view>
+        <view class="red_word" catchtap="onAgreement">微博动漫服务使用协议</view>
+    </view>
+
 </view>

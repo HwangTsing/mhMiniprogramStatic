@@ -5,9 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-      elephone:'',
-      newPass:'',
-      codeNum:''
+      elephone:'',//手机号
+      newPass:'', //密码
+      codeNum:''  //验证码
   },
     //填写手机号
     onPhone:function (e) {

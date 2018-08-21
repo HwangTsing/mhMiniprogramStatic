@@ -13,7 +13,8 @@
     "pages/rankinglist/rankinglist",
     "pages/login/login",
     "pages/forgetPassword/forgetPassword",
-    "pages/register/register"
+    "pages/register/register",
+    "pages/agreement/agreement"
   ],
   "window": {
     "backgroundTextStyle": "light",
