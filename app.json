@@ -14,7 +14,8 @@
     "pages/mymsg/mymsg",
     "pages/mymsg/components/more/more",
     "pages/login/login",
-    "pages/forgetPassword/forgetPassword"
+    "pages/forgetPassword/forgetPassword",
+    "pages/register/register"
   ],
   "window": {
     "backgroundTextStyle": "light",

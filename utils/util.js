@@ -120,6 +120,12 @@ class wxApi {
             ...cfg,
         });
     }
+    requestPost(url, cfg = { method: 'POST', header: { 'Content-Type': 'application/x-www-form-urlencoded' }}) {
+        return wx.request({
+            url: this.getPaths(url),
+            ...cfg,
+        });
+    }
 
     getSystemInfoSync() {
         var systemInfo = {};
@@ -269,6 +275,10 @@ class wxApi {
     }
 
     /*以下是调用接口方法*/
+    //登录
+    loginUrl(cfg) {
+        return this.requestPost('wbcomic/account/login_tel?',cfg)
+    }
 
     //推荐页
     recommendList(cfg) {

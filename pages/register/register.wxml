@@ -1,0 +1,28 @@
+<!--pages/register/register.wxml-->
+<view class="container_register">
+    <view class="register_phone">
+        <image class="elephone_img" src="../../images/user/iphone_icon.png"></image>
+        <view class="register_phone_view">
+            <input type="number" class="elephone_input" value="" placeholder="请输入手机号,暂时只支持中国大陆"
+                   placeholder-class="phcolor" maxlength="11" bindinput="onElephone"/>
+            <image class="delRegister_phone" src="../../images/user/del_icon.png"></image>
+        </view>
+    </view>
+    <view class="register_password">
+        <image class="registerPd_image" src="../../images/user/pass_icon.png"></image>
+        <view class="register_password_view">
+            <input type="submit" password="{{true}}" class="passWord_input" value="" placeholder="请输入新密码（8-16位数字或英文）"
+                   placeholder-class="phcolor" maxlength="16" bindinput="onPassword"/>
+            <image class="delRegister_password" src="../../images/user/del_icon.png"></image>
+        </view>
+    </view>
+    <view class="register_code">
+        <image class="registerCode_image" src="../../images/user/code_icon.png"></image>
+        <view class="register_code_view">
+            <input type="number" class="obtainCode_input" value="" placeholder="请输入验证码" maxlength="16"
+                   placeholder-class="phcolor" bindinput="onCode"/>
+            <image class="del_registerCode"  src="../../images/user/del_icon.png"></image>
+            <view class="code_word" catchtap="registerObtain">获取验证码</view>
+        </view>
+    </view>
+</view>
