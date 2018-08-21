@@ -1,4 +1,6 @@
 // pages/login/login.js
+var wxApi = require("../../utils/util.js");
+//var hex_md5 = require("../../utils/md5.js");
 Page({
 
   /**
@@ -7,6 +9,8 @@ Page({
   data: {
       phoneNumber:'',  //电话号码
       password:'',     //密码
+      phoneTitle:'请输入正确的手机号',
+      passwordTitle:'请输入8-16位字母或数字',
   },
 
     //键盘输入时触发
@@ -48,11 +52,59 @@ Page({
     },
     //点击登录
     onLogin:function () {
+        var that = this;
+        var phoneReg = /^(13[0-9]|14[579]|15[0-35-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
+        var phoneValue = that.data.phoneNumber,user_tel = that.data.phoneNumber;
+        var passReg = /[0-9a-z]{8,16}/i;
+        var passwordValue = that.data.password,password = that.data.password;
+        //console.log(hex_md5.hexMD5(password));
+        //判断手机号和密码是否为空
+        if (phoneValue.length === 0 ||passwordValue.length === 0) {
+            return;
+        }
+        //判断手机号格式是否正确
+        if (!phoneReg.test(phoneValue)){
+            wxApi.getShowToast(that.data.phoneTitle);
+            return;
+        }
+        //判断密码格式是否正确
+        if (!passReg.test(passwordValue)){
+            wxApi.getShowToast(that.data.passwordTitle);
+            return;
+        }
+        wxApi.loginUrl({
+            method:'POST',
+            header:{
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data:{user_tel,password},
+            success:function (res) {
+                console.log(res.data.code);
+                if (res.data.code == 1) {
+                    var message = res.data.message;
+                    console.log(message);
+                    wxApi.getShowToast(message);
+                    wx.navigateTo({
+                        url: '/pages/mymsg/mymsg'
+                    })
+                }
+            },
+            fail:function (res) {
+                console.log(res);
+            }
+        })
+
 
     },
     //微信登录
     onWechat:function () {
 
+    },
+    //立即注册
+    onRegister:function () {
+        wx.navigateTo({
+            url: '/pages/register/register'
+        })
     },
 
   /**

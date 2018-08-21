@@ -12,7 +12,8 @@
     "pages/comicEnd/comicEnd",
     "pages/rankinglist/rankinglist",
     "pages/login/login",
-    "pages/forgetPassword/forgetPassword"
+    "pages/forgetPassword/forgetPassword",
+    "pages/register/register"
   ],
   "window": {
     "backgroundTextStyle": "light",
