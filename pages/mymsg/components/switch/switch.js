@@ -6,7 +6,7 @@ Component({
   methods:{
     btnLog () {
       wx.navigateTo({
-        url: '/pages/details/details'
+        url: '/pages/login/login'
        })
      this.setData({"visible": false})
     },

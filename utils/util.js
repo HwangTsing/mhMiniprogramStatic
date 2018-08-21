@@ -310,8 +310,21 @@ class wxApi {
     }
     //我的关注
     myAttention(cfg){
-      return this.request(' wbcomic/comic/fav_list?',cfg);
+      return this.request('wbcomic/comic/fav_list?',cfg);
     }
+    //添加关注收藏
+    postComicAddFav(cfg){
+      return this.request(' wbcomic/comic/fav_add?',cfg);
+    }
+    //删除关注收藏
+    postComicDelFav(cfg){
+      return this.request('wbcomic/comic/fav_del?',cfg);
+    }
+    //获取用户信息
+    user_info(cfg){
+      return this.request('wbcomic/account/user_info?',cfg);
+    }
+    
    
 
 

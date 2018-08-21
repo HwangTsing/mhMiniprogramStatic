@@ -22,7 +22,7 @@ Page({
           if (networkType === 'none' || networkType === 'unknown') {
               //无网络不进行任何操作
               this.setData({
-                  
+                  type:"net"
               })
 
           }else {
@@ -45,7 +45,6 @@ Page({
       method: 'GET',
       data: { mca },
       success: function (res) {
-        console.log(res.data.data)
         that.setData({
           moreData: res.data.data.mini_recommend_male_fine_works,
           type:null

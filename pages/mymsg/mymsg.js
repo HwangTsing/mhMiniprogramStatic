@@ -7,6 +7,7 @@ Page({
    */
   data: {
     myFollow: "",//关注数据
+    userInfo:[] //用户信息
   },
   //弹出切换账号方法
   switch: function () {
@@ -16,23 +17,37 @@ Page({
   //点击切换账户
   switchAccount: function (e) {
     this.switch();
+    
   },
   //查看更多
   bindMoreTap: function (e) {
-    wx.login({
-      success:function(res){
-        console.log(res)
-      }
-    })
-    // wx.navigateTo({
-    //   url: './components/more/more'
+    // wx.login({
+    //   success:function(res){
+    //     console.log(res)
+    //   }
     // })
+    
+    wx.navigateTo({
+      url: './components/more/more'
+    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var mca = "mini_recommend_male"; var that = this;
+   
+    var mca = "mini_recommend_male", that = this;
+    wxApi.user_info({
+        method:"GET",
+        success:function(res){
+          that.setData({
+            userInfo:res.data.data
+           })
+           console.log(res.data.data)
+
+        }
+        
+    })
     wxApi.recommendList({
       method: 'GET',
       data: { mca },
@@ -44,6 +59,13 @@ Page({
 
       }
     })
+    // wxApi.myAttention({
+    //   method: 'GET',
+    //   success:function(res){
+    //     console.log(res)
+    //   }
+    // })
+    
   },
 
   /**

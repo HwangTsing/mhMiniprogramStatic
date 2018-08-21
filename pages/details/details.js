@@ -14,7 +14,14 @@ Page({
     history: null,
     see: '看到：',
     isBtn: false,
-    title:"",
+    title: "",
+    btnSure: true,
+    btnLog: false,
+    follow: false,
+    ok_follow: false,
+    is_fav_comic: "", //是否关注
+    comic_id: "",//本页id
+    isuser:true,//是否登陆
     tabData: [
       {
         status: 0,
@@ -29,19 +36,32 @@ Page({
     networkType: true,//是否有网络
     type: 'loading',
   },
-  popUp: function() {
+  popUp: function () {
     const pop = this.selectComponent('#popup')
-    if(pop) pop.open();
+    let isuser=this.data.isuser;
+    if(isuser){
+       this.setData({
+        btnSure: true,
+        btnLog: false,
+       })
+    }else{
+      this.setData({
+        btnSure: false,
+        btnLog: true,
+       })
+    }
+    if (pop) pop.open();
   },
   //跳转接口方法
   navigateToHistory: function (chapter_id, comic_id, chapter_name) {
-    var that=this;
+    var that = this;
     let arr = this.data.dataAry.chapter_list;
-    return arr.filter( (element, index) => {
+
+    return arr.filter((element, index) => {
       if (chapter_id === element.chapter_id) {
         if (element.isLocked === true) {
           this.popUp()
-        }else{
+        } else {
           wx.navigateTo({
             url: `/pages/read/read?chapter_id=${chapter_id}&comic_id=${comic_id}&chapter_name=${encodeURIComponent(chapter_name)}`
           })
@@ -62,11 +82,8 @@ Page({
       var can_read_chapters = this.can_read_chapters;
       if (arr.chapter_list && arr.chapter_list[0]) {
         let index = 0;
-        this.navigateToHistory(arr.chapter_list[index].chapter_id, arr.comic.comic_id,arr.chapter_list[index].chapter_name);
+        this.navigateToHistory(arr.chapter_list[index].chapter_id, arr.comic.comic_id, arr.chapter_list[index].chapter_name);
       }//错误时候
-
-
-
     });
   },
   onTabTap: function (event) {
@@ -99,6 +116,43 @@ Page({
     }
 
   },
+  //点击关注(已/未)按钮
+  myevent() {
+    let isuser = this.data.isuser;//用户是否已经登录
+    let is_fav_comic = this.data.is_fav_comic;
+    let comic_id = this.data.comic_id;
+    if (isuser) {
+      if (is_fav_comic.is_fav_comic == 'yes') {
+        wxApi.postComicDelFav({
+          method: "GET",
+          data: { comic_id },
+          success: function (response) {
+            if (response.data.code === 1) {
+              is_fav_comic.is_fav_comic="";
+            }
+            wxApi.getShowToast(response.data.message)
+          }
+        })
+      } else {
+        wxApi.postComicAddFav({
+          method: "GET",
+          data: { comic_id },
+          success: function (response) {
+            if (response.data.code === 1) {
+              is_fav_comic.is_fav_comic="yes";
+            }
+            wxApi.getShowToast(response.data.message)
+          }
+        })
+      }
+
+
+    } else {
+      wx.navigateTo({
+        url: '/pages/login/login'
+      })
+    }
+  },
   /*
   * 点击排序按钮 目录进行排序
   * @ isSort 1 正序 2倒叙
@@ -114,29 +168,43 @@ Page({
       })
     }
   },
+  getUserInfo: function () {
+    var that = this
+    _getUserInfo();
+    function _getUserInfo() {
+      wx.getUserInfo({
+        success: function (res) {
+          that.setData({
+            userInfo: res.userInfo
+          })
+          that.update()
+        }
+      })
+    }
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
 
   onLoad: function (options) {
-      let { q = ''} = options, comic_id = 0
-      if(q) {
-        let __q__ = decodeURIComponent(q)
-        __q__ = __q__.match(/\/c\/(\d+)/i)
+    let { q = '' } = options, comic_id = 0
+    if (q) {
+      let __q__ = decodeURIComponent(q)
+      __q__ = __q__.match(/\/c\/(\d+)/i)
 
-        if(__q__.length && __q__[1] ) {
-            comic_id = __q__[1]
-        }
+      if (__q__.length && __q__[1]) {
+        comic_id = __q__[1]
       }
+    }
     /*
     * *** wbcomic/comic/comic_show?comic_id=68491 摘要页接口
     * *** wbcomic/comic/comic_comment_list?comic_id=24&page_num=1&rows_num=10&_debug_=yes 评论列表
     * */
-  //  console.log(options)
+    //  console.log(options)
     //comic_id
     comic_id = comic_id > 0 || options.comic_id;
-    let comic_name=decodeURIComponent(options.comic_name||'');
+    let comic_name = decodeURIComponent(options.comic_name || '');
     //comic_id= options.comic_id ? options.comic_id : 68023;//24 68491
     // comic_id = 68491;
     let page_num = 1;//页码
@@ -152,7 +220,8 @@ Page({
     // comic_id  69273
     let comicShowFn = wxApi.get(`${comicShowUrl}?comic_id=${comic_id}`);
     this.setData({
-      title: comic_name
+      title: comic_name,
+      comic_id: comic_id
     })
 
     /*
@@ -181,6 +250,22 @@ Page({
         *  comic.cover_display： 1表示使用 cover 2表示使用hcover
         **/
         comicShowFn.then((res) => {
+          let user = res.data.user;
+          if (user.is_fav_comic == "no") {
+            this.setData({
+              follow: true,
+              ok_follow: false,
+              is_fav_comic: user
+            })
+          } else {
+            this.setData({
+              follow: false,
+              ok_follow: true,
+              is_fav_comic: user
+            })
+          }
+
+
           if (res.code === 1) {
             if (res.data.comic.comic_id) {
               //修改导航Title 文案
@@ -387,9 +472,9 @@ Page({
    */
   onReady: function () {
 
-      wx.setNavigationBarTitle({
-              title:this.data.title ? this.data.title : '微博动漫'
-      })
+    wx.setNavigationBarTitle({
+      title: this.data.title ? this.data.title : '微博动漫'
+    })
   },
 
   /**

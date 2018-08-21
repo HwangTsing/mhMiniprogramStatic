@@ -6,8 +6,8 @@
 
         <view class="mymsg_top_head">
             <image src="/images/my/myhead.png"  class="myhead" catchtap="switchAccount" />
-            <image src="/images/icon_bg.png"  class="icon_bg" catchtap="switchAccount" />
-            <view class="mymsg_name">新郎动漫</view>
+            <image src="{{userInfo.user_avatar}}"  class="icon_bg" catchtap="switchAccount" />
+            <view class="mymsg_name">{{userInfo ? userInfo.user_nickname : ""}}</view>
         </view>
            
        </view>

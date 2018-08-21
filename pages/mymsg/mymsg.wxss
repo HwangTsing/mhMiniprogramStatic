@@ -17,11 +17,17 @@ page {
    width: 100%;
    height: 702rpx;
 }
-
-.mymsg_top_head .myhead{
+.mymsg_top_head{
+  width: 300rpx;
+  height: 300rpx;
   position: absolute;
   top: 170rpx;
-  left:280rpx;
+  left:230rpx;
+}
+.mymsg_top_head .myhead{
+  position: absolute;
+  top:0rpx;
+  left:50rpx;
   width: 210rpx;
   height: 210rpx;
 }
@@ -34,19 +40,19 @@ page {
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
   position: absolute;
-  top: 185rpx;
-  left:295rpx;
+  top:15rpx;
+  left:70rpx;
 
 }
 .mymsg_name{
   line-height: 60rpx;
   font-size: 37rpx;
-  position: absolute;
-  left:300rpx;
-  top:410rpx;
+  color: #000000;
   font-size:37rpx;
   color:rgba(255,255,255,1);
   line-height:60rpx;
+  text-align: center;
+  margin-top: 240rpx;
 }
 
 
