@@ -32,7 +32,7 @@ Page({
         })
     },
     //填写验证码
-    onObtainCode:function (e) {
+    onObtaincode:function (e) {
         var that = this;
         that.data.codeNum = e.detail.value;
         console.log(that.data.codeNum);

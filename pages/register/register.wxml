@@ -28,7 +28,7 @@
             <view class="code_word" catchtap="registerObtain" style="{{registerPhone.length === 11?'color:#FF4C6A;':''}}">获取验证码</view>
         </view>
     </view>
-    <button class="complete_btn" disabled style="{{elephone==''||newPass==''||codeNum==''?'background: #E6E6E6;color:#fff;':'background: #FF4D6A;color:#fff;'}}"
+    <button class="complete_btn" disabled style="{{registerPhone==''||registerPass==''||codeNum==''?'background: #E6E6E6;color:#fff;':'background: #FF4D6A;color:#fff;'}}"
             catchtap="onComplete">完成</button>
     <view class="check_view">
         <image class="checked" wx:if="{{isCheck===true}}" src="../../images/user/checked.png" catchtap="onImage"></image>
