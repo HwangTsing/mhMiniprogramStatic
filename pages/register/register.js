@@ -79,7 +79,26 @@ Page({
     },
     //完成
     onComplete:function () {
+        var that = this;
+        //判断网络类型
+        wxApi.getNetworkType().then((res) => {
+            let networkType = res.networkType;
+            if (networkType === 'none' || networkType === 'unknown') {
+                //无网络不进行任何操作
+                this.setData({
+                    networkType: false
+                });
+                wxApi.getShowToast(that.data.netTitle);
 
+            }else {
+                //有网络
+
+            }
+        }).catch((err) =>{
+            that.setData({
+                networkType: true
+            })
+        })
     },
   /**
    * 生命周期函数--监听页面加载

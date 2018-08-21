@@ -119,6 +119,10 @@ Page({
                     }
                 })
             }
+        }).catch((err) =>{
+            that.setData({
+                networkType: true
+            })
         })
 
 

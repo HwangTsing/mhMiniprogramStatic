@@ -7,7 +7,10 @@ Page({
   data: {
       elephone:'',//手机号
       newPass:'', //密码
-      codeNum:''  //验证码
+      codeNum:'',  //验证码
+      networkType:true,
+      netTitle:'主人，您目前的网络好像不太好呢~～',  //无网络提示
+      isLogin:false   //是否正在找回密码
   },
     //填写手机号
     onPhone:function (e) {
@@ -64,7 +67,26 @@ Page({
     },
     //完成
     onComplete:function () {
+        var that = this;
+        //判断网络类型
+        wxApi.getNetworkType().then((res) => {
+            let networkType = res.networkType;
+            if (networkType === 'none' || networkType === 'unknown') {
+                //无网络不进行任何操作
+                this.setData({
+                    networkType: false
+                });
+                wxApi.getShowToast(that.data.netTitle);
 
+            }else {
+                //有网络
+
+            }
+        }).catch((err) =>{
+            that.setData({
+                networkType: true
+            })
+        })
     },
 
   /**
