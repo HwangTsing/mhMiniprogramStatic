@@ -308,7 +308,11 @@ class wxApi {
     rankList(cfg) {
         return this.request('wbcomic/home/rank?',cfg);
     }
-
+    //我的关注
+    myAttention(cfg){
+      return this.request(' wbcomic/comic/fav_list?',cfg);
+    }
+   
 
 
   setNavigationBarTitle(title) {

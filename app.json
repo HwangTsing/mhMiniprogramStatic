@@ -10,7 +10,9 @@
     "pages/classification/classification",
     "pages/releaseTable/releaseTable",
     "pages/comicEnd/comicEnd",
-    "pages/rankinglist/rankinglist"
+    "pages/rankinglist/rankinglist",
+    "pages/mymsg/mymsg",
+    "pages/mymsg/components/more/more"
   ],
   "window": {
     "backgroundTextStyle": "light",

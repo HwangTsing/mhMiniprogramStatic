@@ -1,0 +1,171 @@
+/* pages/mymsg/mymsg.wxss */
+page {
+  font-family: Arial, "Microsoft YaHei", sans-serif;
+}
+/* 头部图片*/
+.mymsg {
+  width: 100%;
+  box-sizing: border-box;
+  height: 100%;
+}
+.mymsg_top{
+  position: relative;
+  width: 100%;
+  height:702rpx;
+}
+.mymsg_top_banner .myback{
+   width: 100%;
+   height: 702rpx;
+}
+
+.mymsg_top_head .myhead{
+  position: absolute;
+  top: 170rpx;
+  left:280rpx;
+  width: 210rpx;
+  height: 210rpx;
+}
+.mymsg_top_head .icon_bg{
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  position: absolute;
+  top: 185rpx;
+  left:295rpx;
+
+}
+.mymsg_name{
+  line-height: 60rpx;
+  font-size: 37rpx;
+  position: absolute;
+  left:300rpx;
+  top:410rpx;
+  font-size:37rpx;
+  color:rgba(255,255,255,1);
+  line-height:60rpx;
+}
+
+
+/* 查看更多*/
+.my_works{
+  display: flex;
+   width: 100%;
+   line-height: 100rpx;
+}
+.fine_text{
+  padding-left: 30rpx;
+  font-size:37rpx;
+  color:rgba(51,51,51,1);
+}
+
+.bg_more{
+  font-size:24rpx;
+  color:rgba(153,153,153,1);
+  position: absolute;
+  right: 30rpx;
+}
+
+
+/*图片数据*/
+.scroll_view {
+  width: 100%;
+  height: 388rpx;
+  display: flex;
+  white-space: nowrap;
+}
+.scrollx_img {
+  display: inline-block;
+  width: 488rpx;
+  height: 276rpx;
+}
+.hot_hoder {
+  display: inline-block;
+  width: 372rpx;
+  height: 212rpx;
+}
+.scroll_view .ext_img,
+.hot_img .ext_img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+.scroll_view .img-view {
+  height: 388rpx;
+  width: 320px;
+  display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  flex-direction: row;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  -webkit-flex-direction: row;
+  align-items: flex-start;
+  -webkit-align-items: flex-start;
+  box-align: flex-start;
+  -moz-box-align: flex-start;
+  -webkit-box-align: flex-start;
+  justify-content: flex-start;
+  -webkit-justify-content: flex-start;
+  -moz-box-pack: flex-start;
+  -webkit--moz-box-pack: flex-start;
+  box-pack: flex-start;
+}
+.scroll_view .big_img {
+  width: 488rpx;
+  height: 388rpx;
+  background: #ffffff;
+  margin: 0 2rpx;
+  display: inline-block;
+  position: relative;
+  left: 0;
+  top: 0;
+}
+.scroll_view .big_img image {
+  display: inline-block;
+  width: 488rpx;
+  height: 276rpx;
+}
+.scroll_view .word_info {
+  width: 488rpx;
+  background: #fff;
+  display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+.scroll_view .word_info text {
+  padding: 0 30rpx;
+  margin-bottom: 5rpx;
+}
+.scroll_view .word_info .name_name {
+  display: block;
+  width: 420rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #333;
+  font-size: 32rpx;
+}
+
+.myHint{
+  width:140rpx;
+  height:100rpx;
+  font-size:28rpx;
+  color:rgba(51,51,51,1);
+  line-height:46rpx;
+  display: inline-block;
+  white-space: pre-line;
+  margin-left: 86rpx;
+  margin-right: 86rpx;
+  position: relative;
+  top:-100rpx;
+}
+
+

@@ -1,0 +1,107 @@
+
+.container {
+  display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  margin: 30rpx 30rpx;
+}
+.more_list {
+  width: 100%;
+  height: 212rpx;
+}
+.more_list .ext_img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+.left_img {
+  width: 272rpx;
+  height: 152rpx;
+  margin-top: 30rpx;
+  flex: 1;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  float: left;
+  position: relative;
+  left: 0;
+  top: 0;
+}
+.left_img .left_img_ban,
+.left_img .hcover {
+  width: 268rpx;
+  height: 148rpx;
+  border: 1rpx solid #e6e6e6;
+}
+.left_img  .toUpdate{
+     width:58rpx;
+     height: 34rpx;
+     position: absolute;
+     left: 0;
+     top: 16rpx;
+}
+.brief_introduction {
+  display: inline-block;
+  flex: 1;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  height: 152rpx;
+  margin-top: 48rpx;
+  margin-left: 18rpx;
+}
+.brief_introduction .book_name {
+  color: #333;
+  font-size: 32rpx;
+  margin-bottom: 4rpx;
+  display: block;
+  font-weight: bold;
+  width: 400rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.brief_introduction .author {
+  margin-bottom: 4rpx;
+}
+.brief_introduction .author {
+  color: #999;
+  font-size: 24rpx;
+  display: block;
+  width: 400rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-top: 5rpx;
+}
+.brief_introduction .explain{
+  font-size: 24rpx;
+  color: #999;
+  display: block;
+  width: 400rpx;
+  margin-top: -20rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.net_view,
+.server_view {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  display: -webkit-flex;
+  display: -webkit-box;
+  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  z-index: 99;
+}

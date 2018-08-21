@@ -1,0 +1,6 @@
+<view hidden="{{!visible}}"  catchtouchmove='preventTouchMove ' catchtap="btnswitch">
+  <view class="popup"></view>
+  <view class="Dialog">
+             <button  catchtap="btnLog" class="btnSure">切换账号</button>
+  </view> 
+ </view> 
