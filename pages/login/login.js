@@ -1,6 +1,7 @@
 // pages/login/login.js
 var wxApi = require("../../utils/util.js");
 //var hex_md5 = require("../../utils/md5.js");
+
 Page({
 
   /**
@@ -13,7 +14,8 @@ Page({
       passwordTitle:'请输入8-16位字母或数字',
       networkType:true,
       netTitle:'主人，您目前的网络好像不太好呢~～',  //无网络提示
-      isLogin:false   //是否正在登录
+      isLogin:false,   //是否正在登录
+      canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
 
     //键盘输入时触发
@@ -127,8 +129,58 @@ Page({
 
 
     },
+    //获取用户授权信息
+    getUserInfo:function () {
+        // 查看是否授权
+        wx.getSetting({
+            success: function(res){
+                if (res.authSetting['scope.userInfo']) {
+                    // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+                    wx.getUserInfo({
+                        withCredentials:true,
+                        success: function(res) {
+                            console.log(res)
+                        }
+                    })
+                }
+            }
+        })
+    },
+    //获取 access_token
+    getAccessToken:function () {
+        var url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET';
+        var grant_type = 'client_credential',appid = 'wx67d874436ca14559',secret='5935d5c40e34b474ec602515340fbcf3';
+        wx.request({
+            url:url,
+            method:'GET',
+            header: {
+                'content-type': 'application/json'
+            },
+            data:{grant_type,appid,secret},
+            success:function(res){
+                console.log(res)
+            },
+            fail:function (res) {
+                console.log(res)
+            }
+        })
+    },
     //微信登录
     onWechat:function () {
+      var open_id = "",open_oauth_token = "",open_oauth_expire = "",open_source="wx";
+        wxApi.thirdPartyLogin({
+            method:'POST',
+            header:{
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data:{open_id,open_oauth_token,open_oauth_expire,open_source},
+            success:function (res) {
+
+            },
+            fail:function (res) {
+
+            }
+        })
 
     },
     //立即注册
@@ -142,7 +194,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    //this.getUserInfo();
+  },
+  //点击该按钮时，会返回获取到的用户信息
+  bindGetUserInfo: function(e) {
+        //console.log(e.detail.userInfo);
+        //this.getAccessToken();
   },
 
   /**

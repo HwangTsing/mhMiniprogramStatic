@@ -26,12 +26,14 @@
         <button class="login_btn" style="{{password===''||phoneNumber===''?'background:#e6e6e6;color:#fff;':'background:#FF4D6A;color:#fff;'}} "
                 catchtap="onLogin">登录</button>
         <view class="register_view" catchtap="onRegister">立即注册</view>
-        <view class="other_login">其他登录方式</view>
+        <!--<view class="other_login">其他登录方式</view>
         <view class="border-left"></view>
         <view class="border_right"></view>
         <view class="we_chat_view">
-            <image class="we_chat" src="../../images/user/weixin.png" catchtap="onWechat"></image>
-        </view>
+            <button class="Wechat_btn" wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">
+                <image class="we_chat" src="../../images/user/weixin.png" catchtap="onWechat"></image>
+            </button>
+        </view>-->
     </view>
     <!--正在登录toast-->
     <block wx:if="{{isLogin===true}}">

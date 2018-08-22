@@ -126,6 +126,13 @@ button::after{
     margin-top:134rpx;
     display:inline-block;
 }
+.Wechat_btn {
+    background:none;
+    width:100%;
+    padding-left:0;
+    padding-right:0;
+
+}
 .we_chat {
     width:76rpx;
     height:76rpx;

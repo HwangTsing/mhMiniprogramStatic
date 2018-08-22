@@ -279,7 +279,22 @@ class wxApi {
     loginUrl(cfg) {
         return this.requestPost('wbcomic/account/login_tel?',cfg)
     }
-
+    //发送验证码
+    postCode(cfg) {
+        return this.requestPost('wbcomic/account/send_vcode?',cfg)
+    }
+    //注册
+    postRegister(cfg) {
+        return this.requestPost('wbcomic/account/register_tel?',cfg)
+    }
+    //修改密码
+    modifyPassword(cfg) {
+        return this.requestPost('wbcomic/account/edit_user_password?',cfg)
+    }
+    //第三方登录
+    thirdPartyLogin(cfg) {
+        return this.requestPost('wbcomic/account/register_oauth?',cfg)
+    }
     //推荐页
     recommendList(cfg) {
         return this.request('wbcomic/home/page_recommend_list?', cfg)

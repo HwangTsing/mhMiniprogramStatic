@@ -1,5 +1,6 @@
 // pages/register/register.js
-var wxApi = require("../../utils/util.js");
+var wxApi = require("../../utils/util.js")
+//var hex_md5 = require("../../utils/md5.js");
 var interval = null;  //倒计时
 Page({
 
