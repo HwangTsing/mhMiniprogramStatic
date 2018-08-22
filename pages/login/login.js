@@ -167,20 +167,6 @@ Page({
     },
     //微信登录
     onWechat:function () {
-      var open_id = "",open_oauth_token = "",open_oauth_expire = "",open_source="wx";
-        wxApi.thirdPartyLogin({
-            method:'POST',
-            header:{
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            data:{open_id,open_oauth_token,open_oauth_expire,open_source},
-            success:function (res) {
-
-            },
-            fail:function (res) {
-
-            }
-        })
 
     },
     //立即注册
