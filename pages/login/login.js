@@ -79,7 +79,10 @@ Page({
             },
             data:{user_tel,password},
             success:function (res) {
-                console.log(res.data.code);
+              wx.setStorageSync({
+                key: 'Set-Cookie',
+                data: res.header['Set-Cookie']
+              }) 
                 if (res.data.code == 1) {
                     var message = res.data.message;
                     console.log(message);
@@ -88,6 +91,7 @@ Page({
                         url: '/pages/mymsg/mymsg'
                     })
                 }
+              
             },
             fail:function (res) {
                 console.log(res);

@@ -17,14 +17,14 @@
             <view class="bg_more"  catchtap="bindMoreTap" >查看更多</view>
           </view>
           <view class="my_Hint">
-           <scroll-view class="scroll_view" scroll-x  wx:if="{{myFollow.length > 0}}">
-              <block  wx:for="{{myFollow}}" wx:key="index" >
+           <scroll-view class="scroll_view" scroll-x wx:if="{{ myFollow || myFollow.length > 0 }}">
+              <block  wx:for="{{myFollow}}" wx:key="index"  >
                   <navigator class="big_img" url="../details/details?comic_id={{item.extra.comic_id}}&comic_name={{item.extra.name}}">
                       <imgholder class="scrollx_img" type="hcover">
-                          <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"></image>
+                          <image mode="scaleToFill" lazy-load="true" src="{{item.hover}}"></image>
                       </imgholder>
                       <view class="word_info">
-                          <text class="name_name">{{item.extra.name}}</text>
+                          <text class="name_name">{{item.name}}</text>
                       </view>
                   </navigator>
               </block>
@@ -37,7 +37,7 @@
                     wx:if="{{ !myFollow || myFollow.length === 0 }}"
                     type="follow"
                      modal="{{ false }}"
-                 ></message>
+               ></message>
          
           </view>
         

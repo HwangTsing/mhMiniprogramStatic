@@ -7,8 +7,10 @@ Page({
    */
   data: {
     myFollow: "",//关注数据
-    userInfo:[] //用户信息
+    userInfo: [], //用户信息,
+    Cookie: ""
   },
+  globalData: {},
   //弹出切换账号方法
   switch: function () {
     const pop = this.selectComponent('#switch')
@@ -17,16 +19,16 @@ Page({
   //点击切换账户
   switchAccount: function (e) {
     this.switch();
-    
+
   },
   //查看更多
   bindMoreTap: function (e) {
-    // wx.login({
-    //   success:function(res){
-    //     console.log(res)
-    //   }
-    // })
-    
+    wx.login({
+      success: function (res) {
+        console.log(res)
+      }
+    })
+
     wx.navigateTo({
       url: './components/more/more'
     })
@@ -35,37 +37,62 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   
-    var mca = "mini_recommend_male", that = this;
+    let that = this, header;
+
+    /** 格式化用户需要的 cookie*/
+    let Cookie = wx.getStorageSync("Set-Cookie");
+    console.log(Cookie)
+    let arr = Cookie.split('=').join(',').split(',');
+    let Set_Cookie = 'app_uf=' + arr[1].split(';')[0] + ';' + 'app_us=' + arr[6].split(';')[0] + ';'
+    // let Cookies= JSON.parse(Cookie)
+    // console.log(typeof(Cookies)  )
+    header = {
+      'content-type': 'application/x-www-form-urlencoded',
+      'cookie': Set_Cookie
+    };
+    //我的信息
     wxApi.user_info({
-        method:"GET",
-        success:function(res){
-          that.setData({
-            userInfo:res.data.data
-           })
-           console.log(res.data.data)
-
-        }
-        
-    })
-    wxApi.recommendList({
-      method: 'GET',
-      data: { mca },
+      method: "GET",
+      header: header,
       success: function (res) {
-        console.log(res.data.data)
-        that.setData({
-          myFollow: res.data.data.mini_recommend_male_fine_works
-        })
+        var  data = res.data.data;
+        let site_Image = res.data.site_image ? res.data.site_image : "";
+        if (res.data.code == 1) {
+          if (data && data.user_avatar && !/^http[s]?:\/\//ig.test(data.user_avatar)) {
+            data.user_avatar = site_Image + data.user_avatar;
+          }
+          that.setData({
+            userInfo: data
+          })
+        }
 
+      },
+      fail: function (res) {
+        console.log(res);
+      }
+
+    })
+    // 关注作品
+    wxApi.myAttention({
+      method: 'GET',
+      header: header,
+      success: function (res) {
+        let siteImage = res.data.site_image ? res.data.site_image : "";
+        let comic = res.data.data.comic;
+        if (res.data.code == 1) {
+          if (comic && comic.hcover && !/^http[s]?:\/\//ig.test(comic.hcover)) {
+            comic.hcover = siteImage + comic.hcover;
+          }
+          that.setData({
+            myFollow: comic
+          })
+        }
+      },
+      fail: function (res) {
+        console.log(res);
       }
     })
-    // wxApi.myAttention({
-    //   method: 'GET',
-    //   success:function(res){
-    //     console.log(res)
-    //   }
-    // })
-    
+
   },
 
   /**
