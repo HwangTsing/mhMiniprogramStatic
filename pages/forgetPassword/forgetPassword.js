@@ -101,6 +101,13 @@ Page({
             data:{user_tel,sms_temp},
             success:function (res) {
                 console.log(res,res.data);
+                if (res.data.code == 1) {
+                    var message = res.data.message;
+                    wxApi.getShowToast(message);
+                }else if (res.data.code == 0) {
+                    var message = res.data.message;
+                    wxApi.getShowToast(message);
+                }
 
             },
             fail:function (res) {
