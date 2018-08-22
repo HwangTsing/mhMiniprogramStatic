@@ -22,14 +22,16 @@
         <image class="registerCode_image" src="../../images/user/code_icon.png"></image>
         <view class="{{codeNum==''?'register_code_view':'register_code_view_a'}}">
             <input type="number" class="obtainCode_input" value="{{codeNum}}" placeholder="请输入验证码" maxlength="16"
-                   placeholder-class="phcolor" bindinput="onCode"/>
+                   placeholder-class="phcolor" maxlength="6" bindinput="onCode"/>
             <image class="{{codeNum==''?'del_registerCode_hidden':'del_registerCode'}}"
                    src="../../images/user/del_icon.png" catchtap="delCodeNum"></image>
-            <view class="code_word" catchtap="registerObtain" style="{{registerPhone.length === 11?'color:#FF4C6A;':''}}">获取验证码</view>
+            <button class="code_word" disabled="{{disabled}}" catchtap="registerObtain" style="{{registerPhone.length === 11?'color:#FF4C6A;background:none;':''}}">
+                {{code}}
+            </button>
         </view>
     </view>
-    <button class="complete_btn" disabled style="{{registerPhone==''||registerPass==''||codeNum==''?'background: #E6E6E6;color:#fff;':'background: #FF4D6A;color:#fff;'}}"
-            catchtap="onComplete">完成</button>
+    <button class="complete_btn" style="{{registerPhone==''||registerPass==''||codeNum==''?'background: #E6E6E6;color:#fff;':'background: #FF4D6A;color:#fff;'}}"
+            catchtap="onFinish">完成</button>
     <view class="check_view">
         <image class="checked" wx:if="{{isCheck===true}}" src="../../images/user/checked.png" catchtap="onImage"></image>
         <image class="{{isCheck===true?'checkbox_hidden':'checkbox'}}" src="../../images/user/checkbox.png" catchtap="onImage"></image>
@@ -37,4 +39,12 @@
         <view class="red_word" catchtap="onAgreement">微博动漫服务使用协议</view>
     </view>
 
+    <!--正在注册toast-->
+    <block wx:if="{{isRegister===true}}">
+        <view class="isRegister_layer" catchtouchmove='noScrollMove'></view>
+        <view class="isRegister">
+            <image class="load_img" src="../../images/user/loading.png"></image>
+            <view class="login_word">正在注册中</view>
+        </view>
+    </block>
 </view>

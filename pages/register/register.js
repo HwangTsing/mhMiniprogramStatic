@@ -1,4 +1,6 @@
 // pages/register/register.js
+var wxApi = require("../../utils/util.js");
+var interval = null;  //倒计时
 Page({
 
   /**
@@ -13,7 +15,10 @@ Page({
       passwordTitle:'请输入8-16位字母或数字',
       networkType:true,
       netTitle:'主人，您目前的网络好像不太好呢~～',  //无网络提示
-      isLogin:false   //是否正在注册
+      isRegister:false,   //是否正在注册
+      code:'获取验证码',
+      currentTime:61,
+      disabled:false,
   },
 
     //填写手机号
@@ -61,9 +66,94 @@ Page({
             codeNum:''
         })
     },
-    //获取验证码
+    //获取验证码倒计时
+    getCode:function (options) {
+        var that = this;
+        var currentTime = that.data.currentTime;
+        that.postCode();
+        if (wxApi.getShowToast("该帐号已注册, 请直接登录!")){
+            that.setData({
+                code:'重新获取',
+                disabled:false
+            })
+            clearInterval(interval);
+        }else {
+            interval = setInterval(function () {
+                currentTime--;
+                that.setData({
+                    code:'重新发送'+'('+currentTime+')'
+                })
+                if (currentTime <=0){
+                    clearInterval(interval);
+                    that.setData({
+                        code:'重新获取',
+                        currentTime:61,
+                        disabled:false
+                    })
+                }
+            },1000)
+        }
+    },
+    //验证码接口
+    postCode:function () {
+        var that = this;
+        var user_tel = that.data.registerPhone,sms_temp = 'regist_account';
+        wxApi.postCode({
+            method:'POST',
+            header:{
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data:{user_tel,sms_temp},
+            success:function (res) {
+                console.log(res,res.data);
+                if (res.data.code == 1) {
+                    var message = res.data.message;
+                    wxApi.getShowToast(message);
+                }
+            },
+            fail:function (res) {
+                console.log(res)
+            }
+        })
+    },
+    //获取验证码事件
     registerObtain:function () {
+        var that = this;
+        var phoneReg = /^(13[0-9]|14[579]|15[0-35-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
+        var phoneVal = that.data.registerPhone;
+        if (that.data.registerPhone.length===0){
+            that.setData({
+                disabled:false
+            })
+        }else {
+            //判断网络类型
+            //判断手机号格式是否正确
+            if (!phoneReg.test(phoneVal)){
+                wxApi.getShowToast(that.data.phoneTitle);
+                return;
+            }
+            wxApi.getNetworkType().then((res) => {
+                let networkType = res.networkType;
+                if (networkType === 'none' || networkType === 'unknown') {
+                    //无网络不进行任何操作
+                    this.setData({
+                        networkType: false
+                    });
+                    wxApi.getShowToast(that.data.netTitle);
 
+                }else {
+                    //有网络
+                    that.setData({
+                        disabled:true
+                    })
+                    that.getCode();
+                }
+            }).catch((err) =>{
+                that.setData({
+                    networkType: true
+                })
+            })
+        }
     },
     //点击选中or不选中
     onImage:function () {
@@ -78,7 +168,7 @@ Page({
         })
     },
     //完成
-    onComplete:function () {
+    onFinish:function () {
         var that = this;
         //判断网络类型
         wxApi.getNetworkType().then((res) => {
@@ -92,6 +182,61 @@ Page({
 
             }else {
                 //有网络
+                var phoneReg = /^(13[0-9]|14[579]|15[0-35-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
+                var user_tel = that.data.registerPhone,user_password = that.data.registerPass,tel_vcode = that.data.codeNum;
+                var passReg = /[0-9a-z]{8,16}/i;
+                //判断手机号和密码是否为空
+                if (user_tel.length === 0 ||user_password.length === 0 || tel_vcode.length === 0) {
+                    return;
+                }
+                //判断手机号格式是否正确
+                if (!phoneReg.test(user_tel)){
+                    wxApi.getShowToast(that.data.phoneTitle);
+                    return;
+                }
+                //判断密码格式是否正确
+                if (!passReg.test(user_password)){
+                    wxApi.getShowToast(that.data.passwordTitle);
+                    return;
+                }
+                that.setData({
+                    isRegister:true
+                })
+                wxApi.postRegister({
+                    method:'POST',
+                    header:{
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    data:{user_tel,user_password,tel_vcode},
+                    success:function (res) {
+                        console.log(res,res.data);
+                        if (res.data.code == 1) {
+                            var message= res.data.message;
+                            that.setData({
+                                isRegister:false
+                            })
+                            wxApi.getShowToast(message);
+                            wx.navigateTo({
+                                url: '/pages/mymsg/mymsg'
+                            })
+                        }
+                        else if (res.data.code == 0) {
+                            var message= res.data.message;
+                            that.setData({
+                                isRegister:false
+                            })
+                            wxApi.getShowToast(message);
+                        }
+
+                    },
+                    fail:function (res) {
+                        console.log(res)
+                        that.setData({
+                            networkType:true,
+                            isRegister:false
+                        })
+                    }
+                })
 
             }
         }).catch((err) =>{
