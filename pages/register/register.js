@@ -80,14 +80,23 @@ Page({
             success:function (res) {
                 console.log(res,res.data);
                 if (res.data.code == 1) {
+                    that.getCode();
                     wxApi.getShowToast(res.data.message);
                     return;
                 }
                 if (res.data.code == 0) {
                     wxApi.getShowToast(res.data.message);
+                    that.setData({
+                        code:'重新获取',
+                        disabled:false
+                    })
                     return;
                 }
                 if (res.data.code == 3) {
+                    that.setData({
+                        code:'重新获取',
+                        disabled:false
+                    })
                     wxApi.getShowToast(res.data.message);
                     return;
                 }
@@ -101,31 +110,22 @@ Page({
     getCode:function (options) {
         var that = this;
         var currentTime = that.data.currentTime;
-        console.log(currentTime)
-        that.postCode();
-        if (wxApi.getShowToast("发送成功！") !=="发送成功！"){
+        interval = setInterval(function () {
+            currentTime--;
             that.setData({
-                code:'重新获取',
-                disabled:false
+                code:'重新发送'+'('+currentTime+')'
             })
-        }else {
-            interval = setInterval(function () {
-                currentTime--;
+            if (currentTime <=0){
+                clearInterval(interval);
                 that.setData({
-                    code:'重新发送'+'('+currentTime+')'
+                    code:'重新获取',
+                    currentTime:61,
+                    disabled:false
                 })
-                if (currentTime <=0){
-                    clearInterval(interval);
-                    that.setData({
-                        code:'重新获取',
-                        currentTime:61,
-                        disabled:false
-                    })
-                }
-            },1000)
-        }
-    },
-    //获取验证码事件
+            }
+        },1000)
+},
+//获取验证码事件
     registerObtain:function () {
         var that = this;
         var phoneReg = /^(13[0-9]|14[579]|15[0-35-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
@@ -155,7 +155,7 @@ Page({
                     that.setData({
                         disabled:true
                     })
-                    that.getCode();
+                    that.postCode();
                 }
             }).catch((err) =>{
                 that.setData({
@@ -225,7 +225,7 @@ Page({
                                 isRegister:false
                             })
                             wxApi.getShowToast(message);
-                            wx.navigateTo({
+                            wx.redirectTo({
                                 url: '/pages/mymsg/mymsg'
                             })
                         }

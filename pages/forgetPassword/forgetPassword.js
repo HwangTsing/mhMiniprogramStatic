@@ -82,15 +82,24 @@ Page({
             success:function (res) {
                 console.log(res,res.data);
                 if (res.data.code == 1) {
+                    that.getCode();
                     wxApi.getShowToast(res.data.message);
                     return;
                 }
                 if (res.data.code == 0) {
                     wxApi.getShowToast(res.data.message);
+                    that.setData({
+                        code:'重新获取',
+                        disabled:false
+                    })
                     return;
                 }
                 if (res.data.code == 3) {
                     wxApi.getShowToast(res.data.message);
+                    that.setData({
+                        code:'重新获取',
+                        disabled:false
+                    })
                     return;
                 }
 
@@ -104,7 +113,6 @@ Page({
     getCode:function (options) {
         var that = this;
         var currentTime = that.data.currentTime;
-        that.postCode();
         interval = setInterval(function () {
             currentTime--;
             that.setData({
@@ -150,7 +158,7 @@ Page({
                     that.setData({
                         disabled:true
                     })
-                    that.getCode();
+                    that.postCode();
                 }
             }).catch((err) =>{
                 that.setData({
@@ -209,7 +217,7 @@ Page({
                                 isRetrieve:false
                             })
                             wxApi.getShowToast(message);
-                            wx.navigateTo({
+                            wx.redirectTo({
                                 url: '/pages/mymsg/mymsg'
                             })
                         }

@@ -51,7 +51,7 @@ Page({
     },
     //忘记密码
     onForgetPw:function () {
-        wx.navigateTo({
+        wx.redirectTo({
             url: '/pages/forgetPassword/forgetPassword'
         })
     },
@@ -100,20 +100,27 @@ Page({
                     data:{user_tel,password},
                     success:function (res) {
                         console.log(res.data.code);
-                        wx.setStorage({
-                          key: 'Set-Cookie',
-                          data: res.header['Set-Cookie']
-                        })
                         if (res.data.code == 1) {
+                            wx.setStorage({
+                                key: 'Set-Cookie',
+                                data: res.header['Set-Cookie']
+                            })
                             var message = res.data.message;
                             console.log(message);
                             that.setData({
                                 isLogin:false
                             })
                             wxApi.getShowToast(message);
-                            wx.navigateTo({
+                            wx.redirectTo({
                                 url: '/pages/mymsg/mymsg'
                             })
+                        }else if (res.data.code == 0) {
+                            var message = res.data.message;
+                            console.log(message);
+                            that.setData({
+                                isLogin:false
+                            })
+                            wxApi.getShowToast(message);
                         }
                     },
                     fail:function (res) {
@@ -175,7 +182,7 @@ Page({
     },
     //立即注册
     onRegister:function () {
-        wx.navigateTo({
+        wx.redirectTo({
             url: '/pages/register/register'
         })
     },
