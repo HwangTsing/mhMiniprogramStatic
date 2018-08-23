@@ -19,9 +19,8 @@ Page({
     btnLog: false,
     follow: false,
     ok_follow: false,
-    is_fav_comic: "", //是否关注
     comic_id: "",//本页id
-    isuser:true,//是否登陆
+    is_fav_comic: "",
     tabData: [
       {
         status: 0,
@@ -37,18 +36,18 @@ Page({
     type: 'loading',
   },
   popUp: function () {
-    const pop = this.selectComponent('#popup')
-    let isuser=this.data.isuser;
-    if(isuser){
-       this.setData({
+    let Cookie = wx.getStorageSync("Set-Cookie"), header;
+    const pop = this.selectComponent('#popup');
+    if (Cookie) {
+      this.setData({
         btnSure: true,
         btnLog: false,
-       })
-    }else{
+      })
+    } else {
       this.setData({
         btnSure: false,
         btnLog: true,
-       })
+      })
     }
     if (pop) pop.open();
   },
@@ -118,40 +117,60 @@ Page({
   },
   //点击关注(已/未)按钮
   myevent() {
-    let isuser = this.data.isuser;//用户是否已经登录
+    let Cookie = wx.getStorageSync("Set-Cookie"), header;
+    let comic_id = this.data.comic_id, that = this;
+
     let is_fav_comic = this.data.is_fav_comic;
-    let comic_id = this.data.comic_id;
-    if (isuser) {
-      if (is_fav_comic.is_fav_comic == 'yes') {
+    //判断用户是否登录
+    if (Cookie) {
+      let arr = Cookie.split('=').join(',').split(',');
+      let Set_Cookie = 'app_uf=' + arr[1].split(';')[0] + ';' + 'app_us=' + arr[6].split(';')[0] + ';'
+      header = {
+        'content-type': 'application/x-www-form-urlencoded',
+        'cookie': Set_Cookie
+      };
+      if (is_fav_comic == 'yes') {
         wxApi.postComicDelFav({
-          method: "GET",
+          method: "POST",
+          header: header,
           data: { comic_id },
           success: function (response) {
             if (response.data.code === 1) {
-              is_fav_comic.is_fav_comic="";
+              that.setData({
+                is_fav_comic: "no",
+                follow: true,
+                ok_follow: false,
+              })
             }
+            console.log(response.data.message)
             wxApi.getShowToast(response.data.message)
           }
         })
       } else {
         wxApi.postComicAddFav({
-          method: "GET",
+          method: "POST",
           data: { comic_id },
+          header: header,
           success: function (response) {
             if (response.data.code === 1) {
-              is_fav_comic.is_fav_comic="yes";
+              that.setData({
+                is_fav_comic: "yes",
+                follow: false,
+                ok_follow: true,
+              })
             }
+            console.log(response)
             wxApi.getShowToast(response.data.message)
           }
         })
       }
-
-
     } else {
       wx.navigateTo({
         url: '/pages/login/login'
       })
     }
+
+
   },
   /*
   * 点击排序按钮 目录进行排序
@@ -197,6 +216,21 @@ Page({
         comic_id = __q__[1]
       }
     }
+    /** 格式化用户需要的 cookie*/
+    let Cookie = wx.getStorageSync("Set-Cookie"), header;
+    if (Cookie) {
+      let arr = Cookie.split('=').join(',').split(',');
+      let Set_Cookie = 'app_uf=' + arr[1].split(';')[0] + ';' + 'app_us=' + arr[6].split(';')[0] + ';'
+      header = {
+        'content-type': 'application/x-www-form-urlencoded',
+        'cookie': Set_Cookie
+      };
+    } else {
+      this.setData({
+        follow: false,
+        ok_follow: true,
+      })
+    }
     /*
     * *** wbcomic/comic/comic_show?comic_id=68491 摘要页接口
     * *** wbcomic/comic/comic_comment_list?comic_id=24&page_num=1&rows_num=10&_debug_=yes 评论列表
@@ -217,12 +251,19 @@ Page({
     * @ comicShowUrl 必要参数 请求接口前缀
     * @ comic_id 必要参数 传递的参数
     * */
-    // comic_id  69273
-    let comicShowFn = wxApi.get(`${comicShowUrl}?comic_id=${comic_id}`);
+    // comic_id  69273   69519
+    // let comicShowFn = wxApi.get(`${comicShowUrl}?comic_id=${69517}` );
+    let comicShowFn = wxApi.get(comicShowUrl, {
+      data: {
+        comic_id: comic_id
+      },
+      header: header
+    });
     this.setData({
       title: comic_name,
       comic_id: comic_id
     })
+
 
     /*
     * ***comicCommentListFn  摘要页评论promise对象
@@ -249,9 +290,13 @@ Page({
         *  comic.directory_display：判断是目录展示方式 1表示9宫格，2表示横板
         *  comic.cover_display： 1表示使用 cover 2表示使用hcover
         **/
+
         comicShowFn.then((res) => {
-          let user = res.data.user;
-          if (user.is_fav_comic == "no") {
+          console.log(res)
+          let user = res.data.user.is_fav_comic,
+            read_history = res.data.user.read_history.chapter_id;
+          console.log(read_history)
+          if (user == "no") {
             this.setData({
               follow: true,
               ok_follow: false,
@@ -330,17 +375,34 @@ Page({
                 dataAry: DATA,
                 type: null
               })
-
-              let key = "comic_id_" + res.data.comic.comic_id;
-              wxApi.getStorage(key).then((res) => { //获取阅读历史
-                this.setData({
-                  history: res.data
-                })
-              }).catch((err) => {
-                this.setData({
-                  history: null
-                })//错误时候
-              });
+            
+              //获取作者的历史记录
+             let Cookie = wx.getStorageSync("Set-Cookie");
+                  if(Cookie){
+                    DATA.chapter_list.forEach((item, index) => {
+                      if (item.chapter_id == read_history) {
+                        this.setData({
+                          history: item
+                        })
+                      }
+                      // console.log(item.chapter_name)
+                      // let aa=this.data.history;
+                      // console.log(aa.chapter_name)
+                    })
+                  }else{
+                    let key = "comic_id_" + res.data.comic.comic_id;
+                    wxApi.getStorage(key).then((res) => { //获取阅读历史
+                      this.setData({
+                        history: res.data
+                      })
+                    }).catch((err) => {
+                      this.setData({
+                        history: null
+                      })//错误时候
+                    });
+                  }
+             
+            
             }
             else {
               this.setData({

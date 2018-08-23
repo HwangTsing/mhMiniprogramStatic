@@ -79,7 +79,8 @@ Page({
             },
             data:{user_tel,password},
             success:function (res) {
-              wx.setStorageSync({
+              console.log(res)
+              wx.setStorage({
                 key: 'Set-Cookie',
                 data: res.header['Set-Cookie']
               }) 

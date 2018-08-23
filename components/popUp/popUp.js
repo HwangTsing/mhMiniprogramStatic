@@ -23,7 +23,7 @@ Component({
     },
     btnLog(){
        wx.navigateTo({
-        url: '/pages/details/details'
+        url: '/pages/login/login'
        })
     }
   }

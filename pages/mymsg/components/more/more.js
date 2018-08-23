@@ -22,7 +22,8 @@ Page({
       if (networkType === 'none' || networkType === 'unknown') {
         //无网络不进行任何操作
         this.setData({
-          type: "net"
+          type: "net",
+          moreData:null,
         })
 
       } else {
@@ -34,7 +35,7 @@ Page({
       }
     }).catch((err) => {
       this.setData({
-
+        type: "server"
       })
     })
   },
@@ -56,15 +57,33 @@ Page({
       success: function (res) {
         let siteImage = res.data.site_image ? res.data.site_image : "";
         let comic = res.data.data.comic;
+        let dataList=[];
+        console.log(res)
         if (res.data.code == 1) {
-          if (comic && comic.hcover && !/^http[s]?:\/\//ig.test(comic.hcover)) {
-            comic.hcover = siteImage + comic.hcover;
-          }
-          that.setData({
-            moreData: comic,
-            type: null
-          })
+
+          res.data.data.data.forEach((item, index) => {
+            if (comic[item.comic_id]) {
+              let obj = {
+                comic: comic[item.comic_id],
+                data: item,
+                history_chapter: res.data.data.history_chapter[comic[item.comic_id].history_chapter_id]
+              };
+              if (comic && comic.hcover && !/^http[s]?:\/\//ig.test(comic.hcover)) {
+                comic.hcover = siteImage + comic.hcover;
+              }
+              console.log(obj)
+              dataList.push(obj)
+              that.setData({
+                moreData: dataList,
+                type: null
+              })
+              //格式图片
+              
+            }
+          });
+
         }
+
       },
       fail: function () {
         that.setData({

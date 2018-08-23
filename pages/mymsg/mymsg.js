@@ -37,8 +37,32 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let that = this, header;
+    let that = this;
+    //判断网络类型
+    wxApi.getNetworkType().then((res) => {
+      let networkType = res.networkType;
+      if (networkType === 'none' || networkType === 'unknown') {
+        //无网络不进行任何操作
+        this.setData({
+          type: "net",
+          userInfo: null,
+          myFollow: null
+        })
 
+      } else {
+        //有网络
+        that.userFollow();
+      }
+    }).catch((err) => {
+      this.setData({
+        type: "server"
+      })
+    })
+
+
+  },
+  userFollow: function () {
+    let that = this, header;
     /** 格式化用户需要的 cookie*/
     let Cookie = wx.getStorageSync("Set-Cookie");
     console.log(Cookie)
@@ -55,13 +79,14 @@ Page({
       method: "GET",
       header: header,
       success: function (res) {
-        var  data = res.data.data;
+        var data = res.data.data;
         let site_Image = res.data.site_image ? res.data.site_image : "";
         if (res.data.code == 1) {
           if (data && data.user_avatar && !/^http[s]?:\/\//ig.test(data.user_avatar)) {
             data.user_avatar = site_Image + data.user_avatar;
           }
           that.setData({
+            type: null,
             userInfo: data
           })
         }
@@ -84,6 +109,7 @@ Page({
             comic.hcover = siteImage + comic.hcover;
           }
           that.setData({
+            type: null,
             myFollow: comic
           })
         }
@@ -92,7 +118,6 @@ Page({
         console.log(res);
       }
     })
-
   },
 
   /**

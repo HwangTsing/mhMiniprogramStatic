@@ -35,13 +35,7 @@
   height: 148rpx;
   border: 1rpx solid #e6e6e6;
 }
-.left_img  .toUpdate{
-     width:58rpx;
-     height: 34rpx;
-     position: absolute;
-     left: 0;
-     top: 16rpx;
-}
+
 .brief_introduction {
   display: inline-block;
   flex: 1;

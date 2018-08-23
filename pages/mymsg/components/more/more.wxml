@@ -2,20 +2,19 @@
 <view class="container">
     <!--请求接口遍历数据-->
     <block wx:for="{{moreData}}" wx:key="index"  wx:if="{{moreData&&moreData.length!=0}}">
-        <navigator class="more_list" url="../../../details/details?comic_id={{item.comic_id}}&comic_name={{item.name}}">
+        <navigator class="more_list" url="../../../details/details?comic_id={{item.comic.comic_id}}&comic_name={{item.comic.name}}">
             <view class="left_img">
                 <imgholder type="hcover">
-                    <image mode="aspectFill" lazy-load="true" src="{{item.hover}}" class="left_img_ban"></image>
-                    <image mode="aspectFill" lazy-load="true" src="/images/my/toUpdate.png" class="toUpdate"></image>
+                    <image mode="aspectFill" lazy-load="true" src="{{item.comic.hover}}" class="left_img_ban"></image>
                 </imgholder>
             </view>
              
             <view class="brief_introduction">
-                <p class="book_name">{{item.name}}</p>
-                <text class="author">作者：{{item.sina_nickname}}</text>
+                <p class="book_name">{{item.comic.name}}</p>
+                <text class="author">作者：{{item.comic.sina_nickname}}</text>
                 <text class="explain">
                           {{
-                            item.description?'看到: '+item.description:'暂无阅读'
+                            item.history_chapter?'看到: '+item.history_chapter.chapter_name:'暂无阅读'
                            }}
                 
                 </text>
@@ -24,7 +23,7 @@
     </block>
      <!-- 空内容的时候 S -->
         <message
-            wx:if="{{moreData&&moreData.length==0}}"
+            wx:if="{{!moreData&&moreData.length==0}}"
             type="follow"
         ></message>
    <!-- 空内容的时候 E -->

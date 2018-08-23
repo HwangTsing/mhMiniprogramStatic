@@ -324,7 +324,7 @@ class wxApi {
     }
     //添加关注收藏
     postComicAddFav(cfg){
-      return this.request(' wbcomic/comic/fav_add?',cfg);
+      return this.request('wbcomic/comic/fav_add?',cfg);
     }
     //删除关注收藏
     postComicDelFav(cfg){

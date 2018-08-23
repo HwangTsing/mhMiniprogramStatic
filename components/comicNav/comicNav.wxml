@@ -23,5 +23,5 @@
 </block>
 
 <!-- 弹出付费框 S  -->
-<popUp id="popup"></popUp>
+<popUp id="popup" btnSure="{{btnSure}}" btnLog="{{btnLog}}"></popUp>
 <!-- 弹出付费框 E  -->
