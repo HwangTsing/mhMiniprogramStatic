@@ -2,6 +2,7 @@
 .container_login {
     width:100%;
     height:100%;
+    background:#FF4D6A;
 }
 .login_bg {
     width:100%;
@@ -22,13 +23,11 @@
     -webkit-border-top-left-radius:40rpx;
     border-top-right-radius:40rpx;
     -webkit-border-top-right-radius:40rpx;
-    border:1rpx solid #fff;
     position:relative;
 }
 .iphone_view {
     width:100%;
     height:128rpx;
-    background:#fff;
 }
 .iphone_view .iphone_img, .password_view .password_img{
     width:48rpx;

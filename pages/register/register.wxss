@@ -3,6 +3,7 @@
     width:100%;
     height:100%;
     background:#fff;
+    overflow-x:hidden;
 }
 .register_phone{
     width:100%;
@@ -63,7 +64,6 @@
     border-bottom:1rpx solid #FF4C6A;
 }
 .passWord_input {
-    width:520rpx;
     height:100rpx;
     margin-left:55rpx;
 }

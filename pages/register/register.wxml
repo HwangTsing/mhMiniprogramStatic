@@ -13,7 +13,7 @@
         <image class="registerPd_image" src="../../images/user/pass_icon.png"></image>
         <view class="{{registerPass==''?'register_password_view':'register_password_view_a'}}">
             <input type="submit" password="{{true}}" class="passWord_input" value="{{registerPass}}" placeholder="请输入新密码（8-16位数字或英文）"
-                   placeholder-class="phcolor" maxlength="16" bindinput="onPassword"/>
+                   placeholder-class="phcolor" style="{{registerPass !==''?'width:450rpx;':''}}" maxlength="16" bindinput="onPassword"/>
             <image class="{{registerPass==''?'delRegister_password_hidden':'delRegister_password'}}"
                    src="../../images/user/del_icon.png" catchtap="delRegisterPass"></image>
         </view>
