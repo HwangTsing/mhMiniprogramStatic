@@ -158,6 +158,14 @@
     font-size: 40rpx;
     color: #fff;
 }
+ /* 关注 */
+.follow image{
+    width: 124rpx;
+    height: 52rpx;
+    position: absolute;
+    right: 23rpx;
+    top: 40rpx;
+}
  /* 付费框 */
 .details_comic .comic_top_icon{
     flex: 1;

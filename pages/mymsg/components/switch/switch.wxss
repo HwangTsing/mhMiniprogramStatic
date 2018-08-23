@@ -1,0 +1,28 @@
+.popup{
+    position: fixed; 
+    left: 0; 
+    top: 0; 
+    bottom: 0;
+    right: 0;
+    background:rgba(0,0,0,1);
+    opacity:0.6;
+    z-index: 9999;
+  
+}
+.Dialog{
+    position: fixed;
+    top:484rpx;
+    left: 180rpx;
+    border-radius: 24rpx;
+    z-index: 10000;
+}
+
+.btnSure{
+    background: #FF4C6A;
+    width: 400rpx;
+    height: 88rpx;
+    border-radius: 200rpx;
+    font-size: 34rpx;
+    color: #ffffff;
+    margin-top: 34rpx;
+}
