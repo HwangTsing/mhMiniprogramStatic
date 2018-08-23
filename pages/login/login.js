@@ -99,7 +99,7 @@ Page({
                     },
                     data:{user_tel,password},
                     success:function (res) {
-                        console.log(res.data.code);
+                        console.log(res,res.data);
                         if (res.data.code == 1) {
                             wx.setStorage({
                                 key: 'Set-Cookie',

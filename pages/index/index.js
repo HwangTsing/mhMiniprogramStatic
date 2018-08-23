@@ -128,9 +128,16 @@ Page({
     /*事件处理函数*/
     //点击进入登录页面
     onUser:function () {
-        wx.navigateTo({
-            url: '/pages/login/login'
-        })
+        let Cookie = wx.getStorageSync("Set-Cookie");
+        if (Cookie) {
+            wx.navigateTo({
+                url: '/pages/mymsg/mymsg'
+            })
+        }else {
+            wx.navigateTo({
+                url: '/pages/login/login'
+            })
+        }
     },
     /*boy and girl*/
     onBoyTap:function (event) {
