@@ -1,4 +1,5 @@
-<view class="mymsg">
+<view class="mymsg_box">
+<view class="mymsg" wx:if="{{!type }}">
        <view class="mymsg_top">
         <view class="mymsg_top_banner">
             <image src="/images/my/my.png"  class="myback"/>  
@@ -43,9 +44,18 @@
         
         </view>
        
+   
+</view>
+ <!-- 提示信息 S  -->
+    <import src="/tpls/message.wxml"/>
+
+    <template is="message" wx:if="{{type}}" data="{{ type }}" />
+    <!-- 提示信息 S  -->
+ <!-- 弹出切换框 S  -->
+   <switch id="switch"></switch>
+   <!-- 弹出切换框 E  -->
 
 </view>
 
-    <!-- 弹出切换框 S  -->
-   <switch id="switch"></switch>
-   <!-- 弹出切换框 E  -->
+   
+   

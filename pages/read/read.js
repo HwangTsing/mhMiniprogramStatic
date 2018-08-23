@@ -110,14 +110,24 @@ Page({
   setPageMessage: function (type) {
     wxApi.setMessageType(this, type)
   },
+  aaa:function(){
 
+  },
   fetchComic: function (chapter_id) {
     const create_source = "microprogram";
+    let Cookie = wx.getStorageSync("Set-Cookie"), header;
+    let arr = Cookie.split('=').join(',').split(',');
+    let Set_Cookie = 'app_uf=' + arr[1].split(';')[0] + ';' + 'app_us=' + arr[6].split(';')[0] + ';'
+      header = {
+        'content-type': 'application/x-www-form-urlencoded',
+        'cookie': Set_Cookie
+      };
     return wxApi.get('wbcomic/comic/comic_play', {
       data: {
         chapter_id,
         create_source
-      }
+      },
+      header: header
     }).then(({ code, message, data } = {}) => {
       if (!data || !code) {
         this.setPageMessage('server')

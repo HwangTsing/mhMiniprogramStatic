@@ -69,8 +69,13 @@ Page({
     })
 
   },
+  shishuxin:function(){
+    var a="AAA";
+    return a;
+  },
   //点击开始阅读|和据需阅读的事件
   onReadClick: function (event) {
+    this.shishuxin();
     let key = "comic_id_" + this.data.dataAry.comic.comic_id;
     wxApi.getStorage(key).then((res) => { //获取阅读历史
       let data = res.data
@@ -207,6 +212,7 @@ Page({
    */
 
   onLoad: function (options) {
+   
     let { q = '' } = options, comic_id = 0
     if (q) {
       let __q__ = decodeURIComponent(q)
@@ -251,7 +257,7 @@ Page({
     * @ comicShowUrl 必要参数 请求接口前缀
     * @ comic_id 必要参数 传递的参数
     * */
-    // comic_id  69273   69519
+    // comic_id  69273   68591
     // let comicShowFn = wxApi.get(`${comicShowUrl}?comic_id=${69517}` );
     let comicShowFn = wxApi.get(comicShowUrl, {
       data: {
