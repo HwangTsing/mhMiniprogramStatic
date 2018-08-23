@@ -157,15 +157,13 @@ button::after{
     width:48rpx;
     height:48rpx;
     display: inline-block;
-    vertical-align:top;
-    margin-top:6rpx;
+    vertical-align:middle;
 }
 .checkbox {
     width:48rpx;
     height:48rpx;
     display: inline-block;
-    vertical-align:top;
-    margin-top:6rpx;
+    vertical-align:middle;
 }
 .checkbox_hidden {
     width:48rpx;

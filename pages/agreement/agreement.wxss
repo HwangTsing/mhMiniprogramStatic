@@ -1,1 +1,52 @@
 /* pages/agreement/agreement.wxss */
+.container_agreement {
+    width:100%;
+    height:100%;
+    background:#fff;
+}
+.agreement_view {
+    margin:0 36rpx;
+    font-family:PingFang-SC-Medium;
+    font-size:28rpx;
+    color:#333333;
+}
+.tips_content, .service_content, .change_service_content, .useRules_content, .property_content, .privacy_content, .disclaimer_content,
+.liquidated_content, .protocol_content, .push_content, .law_content, .other_content{
+    word-wrap: break-word;
+    word-break: normal;
+}
+.tips_content_one, .tips_content_two, .tips_content_three, .service_content_one, .service_content_two{
+    margin-top:28rpx;
+}
+.tips_title, .service_title, .change_service_title, .useRules_title, .property_title, .privacy_title, .disclaimer_title,
+.liquidated_title, .protocol_title, .notification_title, .law_title, .other_title{
+    margin-top:28rpx;
+
+}
+.change_service_contentone, .change_service_contenttwo, .change_service_contentthree, .useRules_contentone,.useRules_contenttwo,
+.useRules_contentthree, .useRules_contentfour, .useRules_contentfive, .useRules_contentsix, .useRules_contentseven,
+useRules_contenteight, .useRules_contentnine, .property_content_a, .property_content_b, .property_content_c, .property_content_d,
+.property_content_e,.privacy_aa, .privacy_bb, .disclaimer_contentone, .disclaimer_contenttwo, .disclaimer_contentthree,
+.disclaimer_contentfour, .disclaimer_contentfive, .liquidated_content_a, .liquidated_content_b, .protocol_content_a, .protocol_content_b,
+.push_content_a, .push_content_b, .law_content_a, .law_content_b, .law_content_c, .other_content_a, .other_content_b, .other_content_c{
+    margin-top:28rpx;
+}
+.responsibility_view, .processing_view,.user_responsibility, .content_include, .peanut_service, .require_user, .agree_content,
+.exception_content, .quality_r{
+    word-wrap: break-word;
+    word-break: normal;
+    margin-left:36rpx;
+    margin-top:30rpx;
+}
+.description_one, .description_two, .instructions_one, .instructions_two, .binding_one, .binding_two, .binding_three,
+.include_one, .include_two, .include_three, .include_four, .include_five, .include_six, .peanut_one, .peanut_two,
+peanut_three, .peanut_four, .peanut_five, .peanut_six, .peanut_seven, .peanut_eight, .peanut_nine, .require_a, .require_b,
+agree_a, .agree_b, .agree_c, .agree_d, .exception_contentone, .exception_contenttwo, .exception_contentthree, .exception_contentfour,
+.exception_contentfive, .exception_contentsix, .exception_contentseven, .exception_contenteight, .exception_contentnine,
+.quality_a, .quality_b{
+    margin-top:20rpx;
+}
+.change_service_contentfour, .change_service_contentfive, .useRules_contenteight, .useRules_contentnine, .useRules_contentten,
+.useRules_contenteleven, .useRules_contenttwelve, .privacy_cc, .disclaimer_contentsix{
+    margin-top:20rpx;
+}

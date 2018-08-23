@@ -69,6 +69,37 @@ Page({
             codeNum:''
         })
     },
+    //验证码接口
+    postCode:function () {
+      var that = this;
+      var user_tel = that.data.elephone,sms_temp = 'change_password';
+        wxApi.postCode({
+            method:'POST',
+            header:{
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data:{user_tel,sms_temp},
+            success:function (res) {
+                console.log(res,res.data);
+                if (res.data.code == 1) {
+                    wxApi.getShowToast(res.data.message);
+                    return;
+                }
+                if (res.data.code == 0) {
+                    wxApi.getShowToast(res.data.message);
+                    return;
+                }
+                if (res.data.code == 3) {
+                    wxApi.getShowToast(res.data.message);
+                    return;
+                }
+
+            },
+            fail:function (res) {
+                console.log(res)
+            }
+        })
+    },
     //获取验证码倒计时
     getCode:function (options) {
         var that = this;
@@ -88,32 +119,6 @@ Page({
                 })
             }
         },1000)
-    },
-    //验证码接口
-    postCode:function () {
-      var that = this;
-      var user_tel = that.data.elephone,sms_temp = 'change_password';
-        wxApi.postCode({
-            method:'POST',
-            header:{
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            data:{user_tel,sms_temp},
-            success:function (res) {
-                console.log(res,res.data);
-                if (res.data.code == 1) {
-                    var message = res.data.message;
-                    wxApi.getShowToast(message);
-                }else if (res.data.code == 0) {
-                    var message = res.data.message;
-                    wxApi.getShowToast(message);
-                }
-
-            },
-            fail:function (res) {
-                console.log(res)
-            }
-        })
     },
     //获取验证码事件
     onObtainCode:function (e) {
