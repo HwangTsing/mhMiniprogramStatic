@@ -8,7 +8,8 @@ Page({
   data: {
     myFollow: "",//关注数据
     userInfo: [], //用户信息,
-    Cookie: ""
+    Cookie: "",
+    type:"loading",
   },
   globalData: {},
   //弹出切换账号方法
@@ -23,11 +24,11 @@ Page({
   },
   //查看更多
   bindMoreTap: function (e) {
-    wx.login({
-      success: function (res) {
-        console.log(res)
-      }
-    })
+    // wx.login({
+    //   success: function (res) {
+    //     console.log(res)
+    //   }
+    // })
 
     wx.navigateTo({
       url: './components/more/more'
@@ -45,8 +46,6 @@ Page({
         //无网络不进行任何操作
         this.setData({
           type: "net",
-          userInfo: null,
-          myFollow: null
         })
 
       } else {
@@ -93,7 +92,9 @@ Page({
 
       },
       fail: function (res) {
-        console.log(res);
+        this.setData({
+          type: "server"
+        })
       }
 
     })
@@ -115,7 +116,9 @@ Page({
         }
       },
       fail: function (res) {
-        console.log(res);
+        this.setData({
+          type: "server"
+        })
       }
     })
   },
