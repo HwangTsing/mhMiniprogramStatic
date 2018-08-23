@@ -14,7 +14,13 @@ Page({
     history: null,
     see: '看到：',
     isBtn: false,
-    title:"",
+    title: "",
+    btnSure: true,
+    btnLog: false,
+    follow: false,
+    ok_follow: false,
+    comic_id: "",//本页id
+    is_fav_comic: "",
     tabData: [
       {
         status: 0,
@@ -29,19 +35,32 @@ Page({
     networkType: true,//是否有网络
     type: 'loading',
   },
-  popUp: function() {
-    const pop = this.selectComponent('#popup')
-    if(pop) pop.open();
+  popUp: function () {
+    let Cookie = wx.getStorageSync("Set-Cookie"), header;
+    const pop = this.selectComponent('#popup');
+    if (Cookie) {
+      this.setData({
+        btnSure: true,
+        btnLog: false,
+      })
+    } else {
+      this.setData({
+        btnSure: false,
+        btnLog: true,
+      })
+    }
+    if (pop) pop.open();
   },
   //跳转接口方法
   navigateToHistory: function (chapter_id, comic_id, chapter_name) {
-    var that=this;
+    var that = this;
     let arr = this.data.dataAry.chapter_list;
-    return arr.filter( (element, index) => {
+
+    return arr.filter((element, index) => {
       if (chapter_id === element.chapter_id) {
         if (element.isLocked === true) {
           this.popUp()
-        }else{
+        } else {
           wx.navigateTo({
             url: `/pages/read/read?chapter_id=${chapter_id}&comic_id=${comic_id}&chapter_name=${encodeURIComponent(chapter_name)}`
           })
@@ -62,11 +81,8 @@ Page({
       var can_read_chapters = this.can_read_chapters;
       if (arr.chapter_list && arr.chapter_list[0]) {
         let index = 0;
-        this.navigateToHistory(arr.chapter_list[index].chapter_id, arr.comic.comic_id,arr.chapter_list[index].chapter_name);
+        this.navigateToHistory(arr.chapter_list[index].chapter_id, arr.comic.comic_id, arr.chapter_list[index].chapter_name);
       }//错误时候
-
-
-
     });
   },
   onTabTap: function (event) {
@@ -99,6 +115,63 @@ Page({
     }
 
   },
+  //点击关注(已/未)按钮
+  myevent() {
+    let Cookie = wx.getStorageSync("Set-Cookie"), header;
+    let comic_id = this.data.comic_id, that = this;
+
+    let is_fav_comic = this.data.is_fav_comic;
+    //判断用户是否登录
+    if (Cookie) {
+      let arr = Cookie.split('=').join(',').split(',');
+      let Set_Cookie = 'app_uf=' + arr[1].split(';')[0] + ';' + 'app_us=' + arr[6].split(';')[0] + ';'
+      header = {
+        'content-type': 'application/x-www-form-urlencoded',
+        'cookie': Set_Cookie
+      };
+      if (is_fav_comic == 'yes') {
+        wxApi.postComicDelFav({
+          method: "POST",
+          header: header,
+          data: { comic_id },
+          success: function (response) {
+            if (response.data.code === 1) {
+              that.setData({
+                is_fav_comic: "no",
+                follow: true,
+                ok_follow: false,
+              })
+            }
+            console.log(response.data.message)
+            wxApi.getShowToast(response.data.message)
+          }
+        })
+      } else {
+        wxApi.postComicAddFav({
+          method: "POST",
+          data: { comic_id },
+          header: header,
+          success: function (response) {
+            if (response.data.code === 1) {
+              that.setData({
+                is_fav_comic: "yes",
+                follow: false,
+                ok_follow: true,
+              })
+            }
+            console.log(response)
+            wxApi.getShowToast(response.data.message)
+          }
+        })
+      }
+    } else {
+      wx.navigateTo({
+        url: '/pages/login/login'
+      })
+    }
+
+
+  },
   /*
   * 点击排序按钮 目录进行排序
   * @ isSort 1 正序 2倒叙
@@ -114,29 +187,58 @@ Page({
       })
     }
   },
+  getUserInfo: function () {
+    var that = this
+    _getUserInfo();
+    function _getUserInfo() {
+      wx.getUserInfo({
+        success: function (res) {
+          that.setData({
+            userInfo: res.userInfo
+          })
+          that.update()
+        }
+      })
+    }
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
 
   onLoad: function (options) {
-      let { q = ''} = options, comic_id = 0
-      if(q) {
-        let __q__ = decodeURIComponent(q)
-        __q__ = __q__.match(/\/c\/(\d+)/i)
+    let { q = '' } = options, comic_id = 0
+    if (q) {
+      let __q__ = decodeURIComponent(q)
+      __q__ = __q__.match(/\/c\/(\d+)/i)
 
-        if(__q__.length && __q__[1] ) {
-            comic_id = __q__[1]
-        }
+      if (__q__.length && __q__[1]) {
+        comic_id = __q__[1]
       }
+    }
+    /** 格式化用户需要的 cookie*/
+    let Cookie = wx.getStorageSync("Set-Cookie"), header;
+    if (Cookie) {
+      let arr = Cookie.split('=').join(',').split(',');
+      let Set_Cookie = 'app_uf=' + arr[1].split(';')[0] + ';' + 'app_us=' + arr[6].split(';')[0] + ';'
+      header = {
+        'content-type': 'application/x-www-form-urlencoded',
+        'cookie': Set_Cookie
+      };
+    } else {
+      this.setData({
+        follow: false,
+        ok_follow: true,
+      })
+    }
     /*
     * *** wbcomic/comic/comic_show?comic_id=68491 摘要页接口
     * *** wbcomic/comic/comic_comment_list?comic_id=24&page_num=1&rows_num=10&_debug_=yes 评论列表
     * */
-  //  console.log(options)
+    //  console.log(options)
     //comic_id
     comic_id = comic_id > 0 || options.comic_id;
-    let comic_name=decodeURIComponent(options.comic_name||'');
+    let comic_name = decodeURIComponent(options.comic_name || '');
     //comic_id= options.comic_id ? options.comic_id : 68023;//24 68491
     // comic_id = 68491;
     let page_num = 1;//页码
@@ -149,11 +251,19 @@ Page({
     * @ comicShowUrl 必要参数 请求接口前缀
     * @ comic_id 必要参数 传递的参数
     * */
-    // comic_id  69273
-    let comicShowFn = wxApi.get(`${comicShowUrl}?comic_id=${comic_id}`);
+    // comic_id  69273   69519
+    // let comicShowFn = wxApi.get(`${comicShowUrl}?comic_id=${69517}` );
+    let comicShowFn = wxApi.get(comicShowUrl, {
+      data: {
+        comic_id: comic_id
+      },
+      header: header
+    });
     this.setData({
-      title: comic_name
+      title: comic_name,
+      comic_id: comic_id
     })
+
 
     /*
     * ***comicCommentListFn  摘要页评论promise对象
@@ -180,7 +290,27 @@ Page({
         *  comic.directory_display：判断是目录展示方式 1表示9宫格，2表示横板
         *  comic.cover_display： 1表示使用 cover 2表示使用hcover
         **/
+
         comicShowFn.then((res) => {
+          console.log(res)
+          let user = res.data.user.is_fav_comic,
+            read_history = res.data.user.read_history.chapter_id;
+          console.log(read_history)
+          if (user == "no") {
+            this.setData({
+              follow: true,
+              ok_follow: false,
+              is_fav_comic: user
+            })
+          } else {
+            this.setData({
+              follow: false,
+              ok_follow: true,
+              is_fav_comic: user
+            })
+          }
+
+
           if (res.code === 1) {
             if (res.data.comic.comic_id) {
               //修改导航Title 文案
@@ -245,17 +375,34 @@ Page({
                 dataAry: DATA,
                 type: null
               })
-
-              let key = "comic_id_" + res.data.comic.comic_id;
-              wxApi.getStorage(key).then((res) => { //获取阅读历史
-                this.setData({
-                  history: res.data
-                })
-              }).catch((err) => {
-                this.setData({
-                  history: null
-                })//错误时候
-              });
+            
+              //获取作者的历史记录
+             let Cookie = wx.getStorageSync("Set-Cookie");
+                  if(Cookie){
+                    DATA.chapter_list.forEach((item, index) => {
+                      if (item.chapter_id == read_history) {
+                        this.setData({
+                          history: item
+                        })
+                      }
+                      // console.log(item.chapter_name)
+                      // let aa=this.data.history;
+                      // console.log(aa.chapter_name)
+                    })
+                  }else{
+                    let key = "comic_id_" + res.data.comic.comic_id;
+                    wxApi.getStorage(key).then((res) => { //获取阅读历史
+                      this.setData({
+                        history: res.data
+                      })
+                    }).catch((err) => {
+                      this.setData({
+                        history: null
+                      })//错误时候
+                    });
+                  }
+             
+            
             }
             else {
               this.setData({
@@ -387,9 +534,9 @@ Page({
    */
   onReady: function () {
 
-      wx.setNavigationBarTitle({
-              title:this.data.title ? this.data.title : '微博动漫'
-      })
+    wx.setNavigationBarTitle({
+      title: this.data.title ? this.data.title : '微博动漫'
+    })
   },
 
   /**

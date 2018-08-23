@@ -1,0 +1,51 @@
+<view class="mymsg">
+       <view class="mymsg_top">
+        <view class="mymsg_top_banner">
+            <image src="/images/my/my.png"  class="myback"/>  
+        </view>
+
+        <view class="mymsg_top_head">
+            <image src="/images/my/myhead.png"  class="myhead" catchtap="switchAccount" />
+            <image src="{{userInfo.user_avatar}}"  class="icon_bg" catchtap="switchAccount" />
+            <view class="mymsg_name">{{userInfo ? userInfo.user_nickname : ""}}</view>
+        </view>
+           
+       </view>
+        <view  class="my_follow">
+          <view class="my_works">
+            <view class="fine_text">关注作品</view> 
+            <view class="bg_more"  catchtap="bindMoreTap" >查看更多</view>
+          </view>
+          <view class="my_Hint">
+           <scroll-view class="scroll_view" scroll-x wx:if="{{ myFollow || myFollow.length != 0 }}">
+              <block  wx:for="{{myFollow}}" wx:key="index"  >
+                  <navigator class="big_img" url="../details/details?comic_id={{item.comic_id}}&comic_name={{item.name}}">
+                      <imgholder class="scrollx_img" type="hcover">
+                          <image mode="scaleToFill" lazy-load="true" src="{{item.hover}}"></image>
+                      </imgholder>
+                      <view class="word_info">
+                          <text class="name_name">{{item.name}}</text>
+                      </view>
+                  </navigator>
+              </block>
+               <view class="myHint">
+                     o(╥﹏╥)o 已经没有啦
+               </view>
+                
+          </scroll-view>
+           <message
+                    wx:if="{{ !myFollow || myFollow.length == 0 }}"
+                    type="follow"
+                     modal="{{ false }}"
+               ></message>
+         
+          </view>
+        
+        </view>
+       
+
+</view>
+
+    <!-- 弹出切换框 S  -->
+   <switch id="switch"></switch>
+   <!-- 弹出切换框 E  -->

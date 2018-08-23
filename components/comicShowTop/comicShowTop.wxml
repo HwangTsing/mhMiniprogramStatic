@@ -47,8 +47,15 @@
                         <text>{{item.cate_cn_name}}</text>
                     </view>
                 </view>
-                <!-- 标签 E -->
+                <!-- 标签 E -->   
+
             </view>
+            <!-- 关注按钮 S -->
+                     <view class="follow">
+                         <image src="/images/details/follow.png" catchtap="follow" wx:if="{{follow}}" />
+                         <image src="/images/details/ok_follow.png"  catchtap="follow"   wx:if="{{ok_follow}}"  />
+                     </view>
+                <!-- 关注按钮 E -->
         </view>
     </view>
 
@@ -86,6 +93,12 @@
                 </view>
             </view>
         </view>
+         <!-- 关注按钮 S -->
+                     <view class="follow">
+                         <image src="/images/details/follow.png"  catchtap="follow"  wx:if="{{follow}}" />
+                         <image src="/images/details/ok_follow.png"  catchtap="follow"  wx:if="{{ok_follow}}"/>
+                     </view>
+                <!-- 关注按钮 E -->
     </view>
 </imgholder>
 </view>

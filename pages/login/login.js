@@ -100,6 +100,10 @@ Page({
                     data:{user_tel,password},
                     success:function (res) {
                         console.log(res.data.code);
+                        wx.setStorage({
+                          key: 'Set-Cookie',
+                          data: res.header['Set-Cookie']
+                        })
                         if (res.data.code == 1) {
                             var message = res.data.message;
                             console.log(message);

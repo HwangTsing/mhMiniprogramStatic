@@ -37,7 +37,8 @@ Component({
       noExist: '很遗憾，此内容不存在哦～',
       nothing:'还什么都没有呢QAQ',
       loading: '页面加载中…',
-      lose: '主人，本章节暂时丢失了～直接观看下一章节吧～'
+      lose: '主人，本章节暂时丢失了～直接观看下一章节吧～',
+      follow: '空空如也，还没有关注作品～',
     },
     icon: {
       net: MESSAGE_IMG,
@@ -47,7 +48,8 @@ Component({
       noExist: MESSAGE_NOEXIT_IMG,
       nothing: MESSAGE_NOEXIT_IMG,
       loading: MESSAGE_LOADING_IMG,
-      lose: MESSAGE_NOEXIT_IMG
+      lose: MESSAGE_NOEXIT_IMG,
+      follow:MESSAGE_NOEXIT_IMG
     },
     clazz: {
       net: MESSAGE_IMG_CLASS,
@@ -57,7 +59,8 @@ Component({
       noExist: MESSAGE_IMG_CLASS,
       nothing: MESSAGE_IMG_CLASS,
       loading: MESSAGE_IMG_CLASS,
-      lose: MESSAGE_OUT_IMG_CLASS
+      lose: MESSAGE_OUT_IMG_CLASS,
+      follow:MESSAGE_IMG_CLASS
     }
   },
   attached () {

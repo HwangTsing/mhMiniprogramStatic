@@ -11,6 +11,8 @@
     "pages/releaseTable/releaseTable",
     "pages/comicEnd/comicEnd",
     "pages/rankinglist/rankinglist",
+    "pages/mymsg/mymsg",
+    "pages/mymsg/components/more/more",
     "pages/login/login",
     "pages/forgetPassword/forgetPassword",
     "pages/register/register",
