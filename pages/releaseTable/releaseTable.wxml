@@ -54,7 +54,7 @@
 
         <!-- 空内容的时候 S -->
         <message
-            wx:if="{{comicList&&comicList.length==0}}"
+            wx:if="{{comicList&&comicList.length==0&&lowerState}}"
             type="nothing"
         ></message>
         <!-- 空内容的时候 E -->

@@ -21,12 +21,6 @@
             </view>
         </navigator>
     </block>
-     <!-- 空内容的时候 S -->
-        <message
-            wx:if="{{!moreData&&moreData.length==0}}"
-            type="follow"
-        ></message>
-   <!-- 空内容的时候 E -->
     <!--data返回null时提示信息-->
     <import src="/tpls/message.wxml"/>
     <template is="message" wx:if="{{type}}" data="{{ type }}"/>

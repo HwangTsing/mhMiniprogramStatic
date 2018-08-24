@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    moreData: [],   //数据
+    moreData: null,   //数据
     type: "loading"
   },
 
@@ -29,13 +29,14 @@ Page({
       } else {
         //有网络
         wx.setNavigationBarTitle({//动态设置当前页面的标题
-          title: "关注作品"
+          title: "我的关注"
         });
         that.moreList();
       }
     }).catch((err) => {
       this.setData({
-        type: "server"
+        type: "server",
+        moreData:null,
       })
     })
   },
@@ -60,34 +61,42 @@ Page({
         let dataList=[];
         console.log(res)
         if (res.data.code == 1) {
-
-          res.data.data.data.forEach((item, index) => {
-            if (comic[item.comic_id]) {
-              let obj = {
-                comic: comic[item.comic_id],
-                data: item,
-                history_chapter: res.data.data.history_chapter[comic[item.comic_id].history_chapter_id]
-              };
-              if (comic && comic.hcover && !/^http[s]?:\/\//ig.test(comic.hcover)) {
-                comic.hcover = siteImage + comic.hcover;
+          if(res.data.data.data.length>0){
+            res.data.data.data.forEach((item, index) => {
+              if (comic[item.comic_id]) {
+                let obj = {
+                  comic: comic[item.comic_id],
+                  data: item,
+                  history_chapter: res.data.data.history_chapter[comic[item.comic_id].history_chapter_id]
+                };
+  
+                if (comic && comic.hcover && !/^http[s]?:\/\//ig.test(comic.hcover)) {
+                  comic.hcover = siteImage + comic.hcover;
+                }
+                dataList.push(obj)
+                that.setData({
+                  type: null,
+                  moreData: dataList, 
+                })
+                
+                
               }
-              console.log(obj)
-              dataList.push(obj)
-              that.setData({
-                moreData: dataList,
-                type: null
-              })
-              //格式图片
-              
-            }
-          });
+            });
+          }else{
+                that.setData({
+                  type: "follow",
+                  moreData: dataList, 
+                })
+          }
+          
 
         }
 
       },
       fail: function () {
         that.setData({
-          type: "server"
+          type: "server",
+          moreData:null,
         })
       }
     })
