@@ -17,7 +17,7 @@ Page({
     title: "",
     btnSure: true,
     btnLog: false,
-    follow: 2,
+    follow: false,
     ok_follow: false,
     comic_id: "",//本页id
     is_fav_comic: "",
@@ -143,8 +143,8 @@ Page({
             if (response.data.code === 1) {
               that.setData({
                 is_fav_comic: "no",
-                follow: 1,
-                // ok_follow: false,
+                follow:true,
+                ok_follow: false,
               })
             }
             console.log(response.data.message)
@@ -159,9 +159,9 @@ Page({
           success: function (response) {
             if (response.data.code === 1) {
               that.setData({
-                follow: 2,
+                follow: false,
                 is_fav_comic: "yes",
-                // ok_follow: true,
+                ok_follow: true,
               })
             }
             wxApi.getShowToast(response.data.message)
@@ -173,9 +173,9 @@ Page({
       // let title=this.data.title;
       let { follow, comic_id, title } = this.data;
       this.setData({
-        follow: 2,
+        follow: false,
         is_fav_comic: "yes",
-        // ok_follow: true,
+        ok_follow: true,
       })
       wx.redirectTo({
         url: `/pages/login/login?comic_id=${comic_id}&chapter_name=${title}`
@@ -240,13 +240,15 @@ Page({
         'content-type': 'application/x-www-form-urlencoded',
         'cookie': Set_Cookie
       };
-    } else {
-      this.setData({
-        follow: 2,
-        is_fav_comic: "no",
-        // ok_follow: true,
-      })
-    }
+     
+    } 
+    // else {
+    //   this.setData({
+    //     follow: 2,
+    //     is_fav_comic: "yes",
+    //     // ok_follow: true,
+    //   })
+    // }
     /*
     * *** wbcomic/comic/comic_show?comic_id=68491 摘要页接口
     * *** wbcomic/comic/comic_comment_list?comic_id=24&page_num=1&rows_num=10&_debug_=yes 评论列表
@@ -321,31 +323,28 @@ Page({
               success: function (response) {
                 if (response.data.code === 1) {
                   that.setData({
-                    follow: 2,
+                    follow: false,
                     is_fav_comic: "yes",
-                    // ok_follow: true,
+                    ok_follow: true,
                   })
                 }
                 wxApi.getShowToast(response.data.message)
               }
             })
           } else {
-            if (user == "no") {
+            console.log(user)
+            if (user == "yes") {
               this.setData({
-                follow: 1,
-                // ok_follow: false,
+                follow: false,
+                ok_follow: true,
                 is_fav_comic: user
               })
-
-
             } else {
               this.setData({
-                follow: 2,
-                // ok_follow: true,
+                follow: true,
+                ok_follow: false,
                 is_fav_comic: user
               })
-      
-
             }
           }
 

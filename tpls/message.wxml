@@ -7,4 +7,5 @@
     <message wx:if="{{type=='loading'}}" type="loading"></message>
     <message wx:if="{{type=='lose'}}" type="lose"></message>
     <message wx:if="{{type=='nothing'}}" type="nothing"></message>
+    <message wx:if="{{type=='follow'}}" type="follow"></message>
 </template>

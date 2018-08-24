@@ -95,8 +95,8 @@
         </view>
          <!-- 关注按钮 S -->
                      <view class="follow">
-                         <image src="/images/details/{{follow==1?'follow.png':'ok_follow.png'}}"  catchtap="follow"   />
-                         <!-- <image src="/images/details/ok_follow.png"  catchtap="follow"  wx:if="{{ok_follow}}"/> -->
+                         <image src="/images/details/follow.png"  catchtap="follow"  wx:if="{{follow}}"  />
+                          <image src="/images/details/ok_follow.png"  catchtap="follow"  wx:if="{{ok_follow}}"/>
                      </view>
                 <!-- 关注按钮 E -->
     </view>
