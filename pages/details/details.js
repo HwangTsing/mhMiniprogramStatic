@@ -69,13 +69,10 @@ Page({
     })
 
   },
-  shishuxin: function () {
-    var a = "AAA";
-    return a;
-  },
+
   //点击开始阅读|和据需阅读的事件
   onReadClick: function (event) {
-    this.shishuxin();
+
     let key = "comic_id_" + this.data.dataAry.comic.comic_id;
     wxApi.getStorage(key).then((res) => { //获取阅读历史
       let data = res.data
@@ -321,10 +318,11 @@ Page({
               data: { comic_id },
               header: header,
               success: function (response) {
-                if (response.data.code === 1) {
+                console.log(response)
+                if (response.data.code) {
                   that.setData({
                     follow: false,
-                    is_fav_comic: "yes",
+                    is_fav_comic: user,
                     ok_follow: true,
                   })
                 }

@@ -9,7 +9,7 @@ Page({
     myFollow: "",//关注数据
     userInfo: [], //用户信息,
     Cookie: "",
-    type:"loading",
+    type: "loading",
   },
   globalData: {},
   //弹出切换账号方法
@@ -107,14 +107,14 @@ Page({
       success: function (res) {
         let siteImage = res.data.site_image ? res.data.site_image : "";
         let comic = res.data.data.comic;
-        let dataList=[];
-        if (res.data.code == 1) {          
+        let dataList = [];
+        if (res.data.code == 1) {
           res.data.data.data.forEach((item, index) => {
             if (comic[item.comic_id]) {
               let obj = {
                 comic: comic[item.comic_id],
                 data: item,
-               
+
               };
               if (comic && comic.hcover && !/^http[s]?:\/\//ig.test(comic.hcover)) {
                 comic.hcover = siteImage + comic.hcover;
@@ -126,7 +126,7 @@ Page({
                 type: null
               })
               //格式图片
-              
+
             }
           });
         }
@@ -150,7 +150,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.onLoad()
   },
 
   /**
