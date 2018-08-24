@@ -15,7 +15,9 @@ Page({
       networkType:true,
       netTitle:'主人，您目前的网络好像不太好呢~～',  //无网络提示
       isLogin:false,   //是否正在登录
-      canIUse: wx.canIUse('button.open-type.getUserInfo')
+      canIUse: wx.canIUse('button.open-type.getUserInfo'),
+      comic_id:"",
+      chapter_name:""
   },
 
     //键盘输入时触发
@@ -111,9 +113,18 @@ Page({
                                 isLogin:false
                             })
                             wxApi.getShowToast(message);
+                            let comic_id=that.data.comic_id;
+                            let chapter_name=that.data.chapter_name;
+                           if(comic_id &&  chapter_name){
                             wx.redirectTo({
+                              url: '/pages/details/details?comic_id='+comic_id + '&comic_name='+chapter_name + '&follow=2'
+                             })
+                           }else{
+                              wx.redirectTo({
                                 url: '/pages/mymsg/mymsg'
-                            })
+                              })
+                           }
+                          
                         }else if (res.data.code == 0) {
                             var message = res.data.message;
                             console.log(message);
@@ -192,6 +203,13 @@ Page({
    */
   onLoad: function (options) {
     //this.getUserInfo();
+    console.log(options)
+   let comic_id=options.comic_id;
+   let chapter_name=options.chapter_name;
+   this.setData({
+    comic_id:comic_id,
+    chapter_name:chapter_name,
+   })
   },
   //点击该按钮时，会返回获取到的用户信息
   bindGetUserInfo: function(e) {

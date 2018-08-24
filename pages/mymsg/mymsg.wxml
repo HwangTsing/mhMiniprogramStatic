@@ -20,12 +20,12 @@
           <view class="my_Hint">
            <scroll-view class="scroll_view" scroll-x wx:if="{{ myFollow || myFollow.length != 0 }}">
               <block  wx:for="{{myFollow}}" wx:key="index"  >
-                  <navigator class="big_img" url="../details/details?comic_id={{item.comic_id}}&comic_name={{item.name}}">
+                  <navigator class="big_img" url="../details/details?comic_id={{item.comic.comic_id}}&comic_name={{item.comic.name}}">
                       <imgholder class="scrollx_img" type="hcover">
-                          <image mode="scaleToFill" lazy-load="true" src="{{item.hover}}"></image>
+                          <image mode="scaleToFill" lazy-load="true" src="{{item.comic.hover}}"></image>
                       </imgholder>
                       <view class="word_info">
-                          <text class="name_name">{{item.name}}</text>
+                          <text class="name_name">{{item.comic.name}}</text>
                       </view>
                   </navigator>
               </block>

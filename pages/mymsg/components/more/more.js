@@ -29,13 +29,14 @@ Page({
       } else {
         //有网络
         wx.setNavigationBarTitle({//动态设置当前页面的标题
-          title: "关注作品"
+          title: "我的关注"
         });
         that.moreList();
       }
     }).catch((err) => {
       this.setData({
-        type: "server"
+        type: "server",
+        moreData:null,
       })
     })
   },
@@ -87,7 +88,8 @@ Page({
       },
       fail: function () {
         that.setData({
-          type: "server"
+          type: "server",
+          moreData:null,
         })
       }
     })

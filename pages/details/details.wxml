@@ -9,7 +9,7 @@
         <!--  头部图片区S  -->
         <comicShowTop
             thisData="{{dataAry}}"
-            ok_follow="{{ok_follow}}"
+         
             follow="{{follow}}"
             bindmyevent="myevent" 
         ></comicShowTop>
