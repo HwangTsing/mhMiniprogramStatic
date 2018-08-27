@@ -103,17 +103,24 @@ Page({
       return
     }
     else {
-
-      let key = "comic_id_" + this.data.dataAry.comic.comic_id;
-      wxApi.getStorage(key).then((res) => {
+      let Cookie = wx.getStorageSync("Set-Cookie");
+      if(Cookie){
         this.setData({
-          history: res.data
+          history:this.data.history
         })
-      }).catch((err) => {
-        this.setData({
-          history: null
-        })//错误时候
-      });
+      }else{
+        let key = "comic_id_" + this.data.dataAry.comic.comic_id;
+        wxApi.getStorage(key).then((res) => {
+          this.setData({
+            history: res.data
+          })
+        }).catch((err) => {
+          this.setData({
+            history: null
+          })//错误时候
+        });
+      }
+      
     }
 
   },
@@ -255,6 +262,7 @@ Page({
     comic_id = comic_id > 0 || options.comic_id;
     let comic_name = decodeURIComponent(options.comic_name || '');
     let follows = options.follow;
+    let btnLogs = options.btnLog;
     //comic_id= options.comic_id ? options.comic_id : 68023;//24 68491
     // comic_id = 68491;
     let page_num = 1;//页码
@@ -312,6 +320,10 @@ Page({
           let user = res.data.user.is_fav_comic,
             read_history = res.data.user.read_history.chapter_id,
             that=this;
+            console.log(btnLogs)
+        if(btnLogs){
+             console.log(btnLogs)
+        }
           if (follows) {
             wxApi.postComicAddFav({
               method: "POST",
@@ -330,7 +342,6 @@ Page({
               }
             })
           } else {
-            console.log(user)
             if (user == "yes") {
               this.setData({
                 follow: false,

@@ -18,6 +18,14 @@ Component({
       type: Object, // 类型（必填），目前接受的类型包括：String, Number, Boolean, Object, Array, null（表示任意类型）
       value: null, // 属性初始值（可选），如果未指定则会根据类型选择一个
     },
+    comic_id_page:{
+      type:Number,
+      value:null,
+    },
+    title:{
+      type:String,
+      value:null,
+    }
   },
   data: {
     //组件的内部数据，和 properties 一同用于组件的模版渲染
@@ -52,7 +60,7 @@ Component({
       let comic_id = data.comic_id;
       let item = data.item;
       this.setData({ //存储 点击章节信息,到组件对象中
-        chapter: data
+        chapter: data,
       })
 
       if (item.isLocked) {
@@ -79,10 +87,11 @@ Component({
         })
       }
     },
-    onMyEvent(event) {
-      this.setData({ //存储 点击章节信息,到组件对象中
-        floorstatus: false
-      })
+    btnLog(event) {
+      let { comic_id_page, title } = this.data;
+         wx.redirectTo({
+          url: `/pages/login/login?comic_id=${comic_id_page}&chapter_name=${title}&btnLog=1`
+       })
     }
   }
 })
