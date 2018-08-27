@@ -22,9 +22,11 @@ Component({
       //this.triggerEvent('myevent', { floorstatus:false});    
     },
     btnLog(){
-       wx.navigateTo({
-        url: '/pages/login/login'
-       })
+      this.triggerEvent('btnLog');    
+
+      //  wx.navigateTo({
+      //   url: '/pages/login/login'
+      //  })
     }
   }
   
