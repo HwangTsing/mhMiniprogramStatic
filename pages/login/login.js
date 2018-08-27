@@ -15,6 +15,8 @@ Page({
       networkType:true,
       netTitle:'主人，您目前的网络好像不太好呢~～',  //无网络提示
       isLogin:false,   //是否正在登录
+      isPhone:false,
+      isPass:false,
       canIUse: wx.canIUse('button.open-type.getUserInfo'),
       comic_id:"",
       chapter_name:"",
@@ -28,7 +30,8 @@ Page({
         that.data.phoneNumber = e.detail.value;
         console.log(that.data.phoneNumber);
         that.setData({
-            phoneNumber:that.data.phoneNumber
+            phoneNumber:that.data.phoneNumber,
+            isPhone:true
         })
     },
     passwordInputChange:function (e) {
@@ -36,21 +39,24 @@ Page({
         that.data.password = e.detail.value;
         console.log(that.data.password);
         that.setData({
-            password:that.data.password
+            password:that.data.password,
+            isPass:true
         })
     },
     //删除所填号码
     delPhone:function () {
       var that = this;
       that.setData({
-          phoneNumber:''
+          phoneNumber:'',
+          isPhone:false
       })
     },
     //删除所填密码
     delPassword:function () {
         var that = this;
         that.setData({
-            password:''
+            password:'',
+            isPass:false
         })
     },
     //忘记密码
@@ -115,7 +121,7 @@ Page({
                                 isLogin:false
                             })
                             wxApi.getShowToast(message);
-                      
+
                             let {comic_id,chapter_name,btnLog,chapter_id}=that.data;
                             let Cookie = wx.getStorageSync("Set-Cookie");
                            if(comic_id &&  chapter_name &&　btnLog ){
@@ -244,7 +250,7 @@ Page({
       btnLog:null
      })
    }
-  
+
   },
   //点击该按钮时，会返回获取到的用户信息
   bindGetUserInfo: function(e) {

@@ -212,6 +212,10 @@ Page({
                     success:function (res) {
                         console.log(res,res.data);
                         if (res.data.code == 1) {
+                            wx.setStorage({
+                                key: 'Set-Cookie',
+                                data: res.header['Set-Cookie']
+                            })
                             var message= res.data.message;
                             that.setData({
                                 isRetrieve:false
