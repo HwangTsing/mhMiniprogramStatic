@@ -100,7 +100,7 @@
                         history="{{history}}"
                         pay_status="{{isPay_status}}"
                         comic_id_page="{{comic_id}}"
-                        title="{{title}}"
+                        title="{{comic_name}}"
                     ></comicCatalog>
                     <!-- 章节信息 组件 E -->
 

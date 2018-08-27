@@ -14,7 +14,7 @@ Page({
     history: null,
     see: '看到：',
     isBtn: false,
-    title: "",
+    comic_name: "",
     btnSure: true,
     btnLog: false,
     follow: false,
@@ -104,11 +104,11 @@ Page({
     }
     else {
       let Cookie = wx.getStorageSync("Set-Cookie");
-      if(Cookie){
+      if (Cookie) {
         this.setData({
-          history:this.data.history
+          history: this.data.history
         })
-      }else{
+      } else {
         let key = "comic_id_" + this.data.dataAry.comic.comic_id;
         wxApi.getStorage(key).then((res) => {
           this.setData({
@@ -120,7 +120,7 @@ Page({
           })//错误时候
         });
       }
-      
+
     }
 
   },
@@ -147,7 +147,7 @@ Page({
             if (response.data.code === 1) {
               that.setData({
                 is_fav_comic: "no",
-                follow:true,
+                follow: true,
                 ok_follow: false,
               })
             }
@@ -175,14 +175,14 @@ Page({
     } else {
       // let comic_id=this.data.comic_id;
       // let title=this.data.title;
-      let { follow, comic_id, title } = this.data;
+      let { follow, comic_id, comic_name } = this.data;
       this.setData({
         follow: false,
         is_fav_comic: "yes",
         ok_follow: true,
       })
       wx.redirectTo({
-        url: `/pages/login/login?comic_id=${comic_id}&chapter_name=${title}`
+        url: `/pages/login/login?comic_id=${comic_id}&chapter_name=${comic_name}`
       })
 
 
@@ -244,8 +244,8 @@ Page({
         'content-type': 'application/x-www-form-urlencoded',
         'cookie': Set_Cookie
       };
-     
-    } 
+
+    }
     // else {
     //   this.setData({
     //     follow: 2,
@@ -284,7 +284,7 @@ Page({
       header: header
     });
     this.setData({
-      title: comic_name,
+      comic_name: comic_name,
       comic_id: comic_id
     })
 
@@ -319,12 +319,23 @@ Page({
           console.log(res)
           let user = res.data.user.is_fav_comic,
             read_history = res.data.user.read_history.chapter_id,
-            that=this;
-            console.log(btnLogs)
-        if(btnLogs){
-             console.log(btnLogs)
-        }
-          if (follows) {
+            that = this;
+          if (btnLogs || !btnLogs　) {
+            if (user == "yes") {
+              this.setData({
+                follow: false,
+                ok_follow: true,
+                is_fav_comic: user
+              })
+            } else {
+              this.setData({
+                follow: true,
+                ok_follow: false,
+                is_fav_comic: user
+              })
+            }
+          }
+          else if (follows) {
             wxApi.postComicAddFav({
               method: "POST",
               data: { comic_id },
@@ -341,21 +352,22 @@ Page({
                 wxApi.getShowToast(response.data.message)
               }
             })
-          } else {
-            if (user == "yes") {
-              this.setData({
-                follow: false,
-                ok_follow: true,
-                is_fav_comic: user
-              })
-            } else {
-              this.setData({
-                follow: true,
-                ok_follow: false,
-                is_fav_comic: user
-              })
-            }
           }
+          // else {
+          //   if (user == "yes") {
+          //     this.setData({
+          //       follow: false,
+          //       ok_follow: true,
+          //       is_fav_comic: user
+          //     })
+          //   } else {
+          //     this.setData({
+          //       follow: true,
+          //       ok_follow: false,
+          //       is_fav_comic: user
+          //     })
+          //   }
+          // }
 
 
 
@@ -583,7 +595,7 @@ Page({
   onReady: function () {
 
     wx.setNavigationBarTitle({
-      title: this.data.title ? this.data.title : '微博动漫'
+      title: this.data.comic_name ? this.data.comic_name : '微博动漫'
     })
   },
 
@@ -592,6 +604,15 @@ Page({
    */
   onShow: function () {
     this.ClickCatalog(); //每次显示页面检测 getStorage
+    let {
+       comic_id,
+       comic_name,
+       follow,
+       btnLog
+    }=this.data;
+  let options={comic_id,comic_name,follow,btnLog}
+  // console.log(options)
+    this.onLoad(options);
   },
 
   /**

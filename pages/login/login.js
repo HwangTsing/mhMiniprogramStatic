@@ -18,7 +18,8 @@ Page({
       canIUse: wx.canIUse('button.open-type.getUserInfo'),
       comic_id:"",
       chapter_name:"",
-      btnLog:null
+      btnLog:null,
+      chapter_id:"",
   },
 
     //键盘输入时触发
@@ -114,18 +115,23 @@ Page({
                                 isLogin:false
                             })
                             wxApi.getShowToast(message);
-                            let comic_id=that.data.comic_id;
-                            let chapter_name=that.data.chapter_name;
-                            let btnLog=that.data.btnLog;
-                           if(comic_id &&  chapter_name &&　btnLog){
+                      
+                            let {comic_id,chapter_name,btnLog,chapter_id}=that.data;
+                            let Cookie = wx.getStorageSync("Set-Cookie");
+                           if(comic_id &&  chapter_name &&　btnLog ){
                             wx.redirectTo({
                               url: '/pages/details/details?comic_id='+comic_id + '&comic_name='+chapter_name + '&btnLog=2'
                              })
-                           }else if(comic_id &&  chapter_name){
+                           }else if(comic_id &&  chapter_name && chapter_id ){
+                            wx.redirectTo({
+                              url: `/pages/read/read?comic_id=${comic_id}&chapter_name=${chapter_name}&chapter_id=${chapter_id}`
+                             })
+                           }else if(comic_id &&  chapter_name ){
                             wx.redirectTo({
                               url: '/pages/details/details?comic_id='+comic_id + '&comic_name='+chapter_name + '&follow=2'
                              })
-                           }else{
+                           }
+                           else{
                               wx.redirectTo({
                                 url: '/pages/mymsg/mymsg'
                               })
@@ -209,15 +215,36 @@ Page({
    */
   onLoad: function (options) {
     //this.getUserInfo();
-    console.log(options)
-   let comic_id=options.comic_id;
-   let chapter_name=options.chapter_name;
-   let btnLog=options.btnLog;
-   this.setData({
-    comic_id:comic_id,
-    chapter_name:chapter_name,
-    btnLog:btnLog
-   })
+    let comic_id=options.comic_id;
+    let chapter_name=options.chapter_name;
+    let btnLog=options.btnLog;
+    let chapter_id=options.chapter_id;
+   if(comic_id &&chapter_name &&　!btnLog &&　!chapter_id){
+    this.setData({
+     comic_id:comic_id,
+     chapter_name:chapter_name
+    })
+   }else if(btnLog){
+    this.setData({
+      comic_id:comic_id,
+      chapter_name:chapter_name,
+      btnLog:btnLog
+     })
+   }else if(chapter_id){
+      this.setData({
+      comic_id:comic_id,
+      chapter_name:chapter_name,
+      chapter_id:chapter_id
+     })
+   }
+   else{
+    this.setData({
+      comic_id:null,
+      chapter_name:null,
+      btnLog:null
+     })
+   }
+  
   },
   //点击该按钮时，会返回获取到的用户信息
   bindGetUserInfo: function(e) {

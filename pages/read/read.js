@@ -14,6 +14,9 @@ Page({
     messageType: '',
     chapter: {},
     comic: {},
+    comic_id:null,
+    chapter_name:"",
+    chapter_id:null,
     json_content: {
       page: []
     },
@@ -21,18 +24,20 @@ Page({
   },
 
   onLoad: function (options) {
-    const { chapter_id, chapter_name = '' } = options;
+    console.log(options)
+    const { chapter_id, chapter_name = '',comic_id} = options;
     const { windowWidth, windowHeight } = wxApi.getSystemInfoSync()
     this.chapter_id = chapter_id
     this.chapter_name = decodeURIComponent(chapter_name)
     this.windowHeight = windowHeight
     this.windowWidth = windowWidth
-
+   
     wxApi.getNetworkType().then(({ networkType }) => {
       if (_.indexOf(['none', '2g'], networkType) != -1) {
         this.setPageMessage('net')
       } else {
-        this.setData({ windowWidth })
+        if(comic_id)  this.setData({comic_id:comic_id})
+        this.setData({ windowWidth ,chapter_name:this.chapter_name ,chapter_id:this.chapter_id})
         this.render(chapter_id)
       }
     }, () => {
@@ -53,6 +58,7 @@ Page({
    */
   onReady: function () {
     wxApi.setNavigationBarTitle(this.chapter_name)
+  
   },
 
   /**
