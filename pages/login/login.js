@@ -136,7 +136,7 @@ Page({
                                 url: '/pages/mymsg/mymsg'
                               })
                            }
-                          
+
                         }else if (res.data.code == 0) {
                             var message = res.data.message;
                             console.log(message);
