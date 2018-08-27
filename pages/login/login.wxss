@@ -10,10 +10,10 @@
     background: #FF4D6A;
 }
 .login_bg .ye_toast {
-    width:368rpx;
+    width:268rpx;
     height:280rpx;
     position:relative;
-    left:25%;
+    left:30%;
     top:0;
 }
 .login_content {
