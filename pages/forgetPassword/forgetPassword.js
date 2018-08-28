@@ -176,7 +176,8 @@ Page({
         interval = setInterval(function () {
             currentTime--;
             that.setData({
-                code:'重新发送'+'('+currentTime+')'
+                code:'重新发送'+'('+currentTime+')',
+                colorCode:currentTime
             })
             if (currentTime <=0){
                 clearInterval(interval);
