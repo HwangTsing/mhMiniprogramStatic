@@ -160,19 +160,11 @@ Page({
                             let {comic_id,chapter_name,Setfollow,chapter_id}=that.data;
                             let pages = getCurrentPages();//当前页面
                             let prevPage = pages[pages.length-2];//上一页面
-<<<<<<< HEAD
-
-                           if(comic_id &&  chapter_name &&　btnLog ){
-                                // prevPage.setData({//直接给上移页面赋值
-                                //   SetbtnLog: 2,
-                                // });
-=======
                            
                            if(comic_id && chapter_name && Setfollow ){
                                 prevPage.setData({//直接给上移页面赋值
                                   Setfollow: 2,
                                 });
->>>>>>> feature_six
                                 wx.navigateBack({
                                   delta:1
                                 })
@@ -181,21 +173,10 @@ Page({
                                 wx.navigateBack({
                                   delta:1
                                 })
-<<<<<<< HEAD
-                           }else if(comic_id &&  chapter_name ){
-
-                                prevPage.setData({//直接给上移页面赋值
-                                  Setfollow: 2,
-                                });
-                                wx.navigateBack({
-                                  delta:1
-                                  // url: '/pages/details/details?comic_id='+comic_id + '&comic_name='+chapter_name + '&follow=2'
-=======
                             }
                             else{
                                 wx.redirectTo({
                                   url: '/pages/mymsg/mymsg'
->>>>>>> feature_six
                                 })
                             }
 
