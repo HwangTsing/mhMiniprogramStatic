@@ -4,26 +4,29 @@
         <image class="elephone_img" src="../../images/user/iphone_icon.png"></image>
         <view class="{{registerPhone==''?'register_phone_view':'register_phone_view_a'}}">
             <input type="number" class="elephone_input" value="{{registerPhone}}" placeholder="请输入手机号,暂时只支持中国大陆"
-                   placeholder-class="phcolor" maxlength="11" bindinput="onElephone"/>
-            <image class="{{registerPhone==''?'delRegister_phone_hidden':'delRegister_phone'}}"
+                   placeholder-class="phcolor" maxlength="11" bindinput="onElephone" focus="{{pFocus}}"
+                   bindblur="blurTele" bindfocus="focusTele"/>
+            <image class="{{registerPhone=='' || isPhone===false?'delRegister_phone_hidden':'delRegister_phone'}}"
                    src="../../images/user/del_icon.png" catchtap="delRegisterPhone"></image>
         </view>
     </view>
     <view class="register_password">
         <image class="registerPd_image" src="../../images/user/pass_icon.png"></image>
         <view class="{{registerPass==''?'register_password_view':'register_password_view_a'}}">
-            <input type="submit" password="{{true}}" class="passWord_input" value="{{registerPass}}" placeholder="请输入新密码（8-16位数字或英文）"
-                   placeholder-class="phcolor" style="{{registerPass !==''?'width:450rpx;':''}}" maxlength="16" bindinput="onPassword"/>
-            <image class="{{registerPass==''?'delRegister_password_hidden':'delRegister_password'}}"
+            <input type="submit" password="{{true}}" class="passWord_input" value="{{registerPass}}"
+                   placeholder="请输入新密码（8-16位数字或英文）" placeholder-class="phcolor" style="{{registerPass !==''?'width:450rpx;':''}}"
+                   maxlength="16" bindinput="onPassword" focus="{{mFocus}}" bindblur="blurPw" bindfocus="focusPw"/>
+            <image class="{{registerPass=='' || isPass===false?'delRegister_password_hidden':'delRegister_password'}}"
                    src="../../images/user/del_icon.png" catchtap="delRegisterPass"></image>
         </view>
     </view>
     <view class="register_code">
         <image class="registerCode_image" src="../../images/user/code_icon.png"></image>
         <view class="{{codeNum==''?'register_code_view':'register_code_view_a'}}">
-            <input type="number" class="obtainCode_input" value="{{codeNum}}" placeholder="请输入验证码" maxlength="16"
-                   placeholder-class="phcolor" maxlength="6" bindinput="onCode"/>
-            <image class="{{codeNum==''?'del_registerCode_hidden':'del_registerCode'}}"
+            <input type="number" class="obtainCode_input" value="{{codeNum}}" placeholder="请输入验证码"
+                   maxlength="16" placeholder-class="phcolor" maxlength="6" bindinput="onCode"
+                   focus="{{cFocus}}" bindblur="blurCd" bindfocus="focusCd"/>
+            <image class="{{codeNum=='' || isCode===false?'del_registerCode_hidden':'del_registerCode'}}"
                    src="../../images/user/del_icon.png" catchtap="delCodeNum"></image>
             <button class="code_word" disabled="{{disabled}}" catchtap="registerObtain" style="{{registerPhone.length === 11?'color:#FF4C6A;background:none;':''}}">
                 {{code}}

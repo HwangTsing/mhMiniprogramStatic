@@ -19,7 +19,6 @@ Page({
       code:'获取验证码',
       currentTime:61,
       disabled:false,
-      isLogin:false,   //是否正在登录
       isPhone:false,   //是否显示删除号码按钮
       isPass:false,    //是否显示删除密码按钮
       isCode:false,    //是否显示删除验证码按钮
