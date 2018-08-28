@@ -15,8 +15,10 @@ Page({
       networkType:true,
       netTitle:'主人，您目前的网络好像不太好呢~～',  //无网络提示
       isLogin:false,   //是否正在登录
-      isPhone:false,
-      isPass:false,
+      isPhone:false,   //是否显示删除号码按钮
+      isPass:false,    //是否显示删除密码按钮
+      pFocus:false,    //号码输入框是否自动聚焦
+      mFocus:false,    //密码输入框是否自动聚焦
       canIUse: wx.canIUse('button.open-type.getUserInfo'),
       comic_id:"",
       chapter_name:"",
@@ -43,12 +45,44 @@ Page({
             isPass:true
         })
     },
+    //失焦事件
+    blurPhone:function (e) {
+        var that = this;
+        that.setData({
+            isPhone:false
+        })
+    },
+    blurPass:function (e) {
+        var that = this;
+        that.setData({
+            isPass:false
+        })
+    },
+    focusPhone:function (e) {
+        var that = this;
+        //console.log(e,that.data.phoneNumber);
+        if (e.detail.value.length !==0) {
+            that.setData({
+                isPhone:true
+            })
+        }
+    },
+    focusPass:function (e) {
+        var that =this;
+        //console.log(e,that.data.password);
+        if (e.detail.value.length !==0) {
+            that.setData({
+                isPass:true
+            })
+        }
+    },
+
     //删除所填号码
     delPhone:function () {
       var that = this;
       that.setData({
           phoneNumber:'',
-          isPhone:false
+          pFocus:true
       })
     },
     //删除所填密码
@@ -56,7 +90,7 @@ Page({
         var that = this;
         that.setData({
             password:'',
-            isPass:false
+            mFocus:true
         })
     },
     //忘记密码

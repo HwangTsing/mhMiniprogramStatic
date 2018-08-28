@@ -63,7 +63,7 @@
     padding-left:60rpx;
 }
 .iphone_input_number {
-    width:450rpx;
+    width:400rpx;
     height:76rpx;
 }
 .password_view {
