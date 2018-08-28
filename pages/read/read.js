@@ -116,9 +116,6 @@ Page({
   setPageMessage: function (type) {
     wxApi.setMessageType(this, type)
   },
-  aaa:function(){
-
-  },
   fetchComic: function (chapter_id) {
     const create_source = "microprogram";
     let Cookie = wx.getStorageSync("Set-Cookie"), header;

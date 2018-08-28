@@ -117,19 +117,31 @@ Page({
                             wxApi.getShowToast(message);
                       
                             let {comic_id,chapter_name,btnLog,chapter_id}=that.data;
-                            let Cookie = wx.getStorageSync("Set-Cookie");
+                            let pages = getCurrentPages();//当前页面
+                            let prevPage = pages[pages.length-2];//上一页面
+                            
                            if(comic_id &&  chapter_name &&　btnLog ){
-                            wx.redirectTo({
-                              url: '/pages/details/details?comic_id='+comic_id + '&comic_name='+chapter_name + '&btnLog=2'
-                             })
+                                // prevPage.setData({//直接给上移页面赋值
+                                //   SetbtnLog: 2,
+                                // });
+                                wx.navigateBack({
+                                  // url: '/pages/details/details?comic_id='+comic_id + '&comic_name='+chapter_name + '&btnLog=2'
+                                  delta:1
+                                })
                            }else if(comic_id &&  chapter_name && chapter_id ){
-                            wx.redirectTo({
-                              url: `/pages/read/read?comic_id=${comic_id}&chapter_name=${chapter_name}&chapter_id=${chapter_id}`
-                             })
+                                wx.navigateBack({
+                                  // url: `/pages/read/read?comic_id=${comic_id}&chapter_name=${chapter_name}&chapter_id=${chapter_id}`
+                                  delta:1
+                                })
                            }else if(comic_id &&  chapter_name ){
-                            wx.redirectTo({
-                              url: '/pages/details/details?comic_id='+comic_id + '&comic_name='+chapter_name + '&follow=2'
-                             })
+                               
+                                prevPage.setData({//直接给上移页面赋值
+                                  Setfollow: 2,
+                                });
+                                wx.navigateBack({
+                                  delta:1
+                                  // url: '/pages/details/details?comic_id='+comic_id + '&comic_name='+chapter_name + '&follow=2'
+                                })
                            }
                            else{
                               wx.redirectTo({
