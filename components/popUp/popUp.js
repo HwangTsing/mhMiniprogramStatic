@@ -15,7 +15,12 @@ Component({
   },
   methods:{
     open () {
+      console.log("open")
       this.setData({"visible": true})
+    },
+    close () {
+      // console.log(this.data.visible,1)
+      this.setData({"visible": false})
     },
     btnSure () {
       this.setData({"visible": false})

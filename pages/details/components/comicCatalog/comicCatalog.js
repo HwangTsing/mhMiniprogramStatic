@@ -36,16 +36,6 @@ Component({
   },
 
 
-  attached() {
-    //组件生命周期函数，在组件实例进入页面节点树时执行
-  },
-
-  moved() {
-    //组件生命周期函数，在组件实例被移动到节点树另一个位置时执行
-  },
-  detached() {
-    //组件生命周期函数，在组件实例被从页面节点树移除时执行
-  },
   methods: {
     // 组件的事件
     /*
@@ -89,7 +79,7 @@ Component({
     },
     btnLog(event) {
       let { comic_id_page, title } = this.data;
-         wx.redirectTo({
+         wx.navigateTo({
           url: `/pages/login/login?comic_id=${comic_id_page}&chapter_name=${title}&btnLog=1`
        })
     }

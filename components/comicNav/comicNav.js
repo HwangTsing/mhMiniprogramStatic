@@ -37,7 +37,7 @@ Component({
     btnLog(event) {
       let { comic_id, chapter_name ,chapter_id} = this.data;
       console.log(this.data)
-         wx.redirectTo({
+         wx.navigateTo({
           url: `/pages/login/login?comic_id=${comic_id}&chapter_name=${chapter_name}&chapter_id=${chapter_id}`
        })
     }
