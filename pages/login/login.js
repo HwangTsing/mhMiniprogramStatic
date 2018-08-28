@@ -58,6 +58,7 @@ Page({
             isPass:false
         })
     },
+    //聚焦事件
     focusPhone:function (e) {
         var that = this;
         //console.log(e,that.data.phoneNumber);
@@ -159,7 +160,7 @@ Page({
                             let {comic_id,chapter_name,btnLog,chapter_id}=that.data;
                             let pages = getCurrentPages();//当前页面
                             let prevPage = pages[pages.length-2];//上一页面
-                            
+
                            if(comic_id &&  chapter_name &&　btnLog ){
                                 // prevPage.setData({//直接给上移页面赋值
                                 //   SetbtnLog: 2,
@@ -174,7 +175,7 @@ Page({
                                   delta:1
                                 })
                            }else if(comic_id &&  chapter_name ){
-                               
+
                                 prevPage.setData({//直接给上移页面赋值
                                   Setfollow: 2,
                                 });

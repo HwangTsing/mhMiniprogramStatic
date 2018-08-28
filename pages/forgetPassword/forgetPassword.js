@@ -19,6 +19,13 @@ Page({
       code:'获取验证码',
       currentTime:61,
       disabled:false,
+      isLogin:false,   //是否正在登录
+      isPhone:false,   //是否显示删除号码按钮
+      isPass:false,    //是否显示删除密码按钮
+      isCode:false,    //是否显示删除验证码按钮
+      pFocus:false,    //号码输入框是否自动聚焦
+      mFocus:false,    //密码输入框是否自动聚焦
+      cFocus:false,    //验证码输入框是否自动聚焦
   },
     //填写手机号
     onPhone:function (e) {
@@ -26,7 +33,8 @@ Page({
         that.data.elephone = e.detail.value;
         console.log(that.data.elephone);
         that.setData({
-            elephone:that.data.elephone
+            elephone:that.data.elephone,
+            isPhone:true
         })
 
     },
@@ -36,7 +44,8 @@ Page({
         that.data.newPass = e.detail.value;
         console.log(that.data.newPass);
         that.setData({
-            newPass:that.data.newPass
+            newPass:that.data.newPass,
+            isPass:true
         })
     },
     //填写验证码
@@ -45,28 +54,80 @@ Page({
         that.data.codeNum = e.detail.value;
         console.log(that.data.codeNum);
         that.setData({
-            codeNum:that.data.codeNum
+            codeNum:that.data.codeNum,
+            isCode:true
         })
+    },
+    //失焦事件
+    blurTel:function (e) {
+        var that = this;
+        that.setData({
+            isPhone:false
+        })
+    },
+    blurPwd:function (e) {
+        var that = this;
+        that.setData({
+            isPass:false
+        })
+    },
+    blurCode:function (e) {
+        var that = this;
+        that.setData({
+            isCode:false
+        })
+    },
+    //聚焦事件
+    focusTel:function (e) {
+        var that = this;
+        //console.log(e,that.data.elephone);
+        if (e.detail.value.length !==0) {
+            that.setData({
+                isPhone:true
+            })
+        }
+    },
+    //聚焦事件
+    focusPwd:function (e) {
+        var that =this;
+        //console.log(e,that.data.newPass);
+        if (e.detail.value.length !==0) {
+            that.setData({
+                isPass:true
+            })
+        }
+    },
+    focusCode:function (e) {
+        var that =this;
+        //console.log(e,that.data.codeNum);
+        if (e.detail.value.length !==0) {
+            that.setData({
+                isCode:true
+            })
+        }
     },
     //删除所填号码
     delElephone:function () {
         var that = this;
         that.setData({
-            elephone:''
+            elephone:'',
+            pFocus:true
         })
     },
     //删除所填新密码
     delPass:function () {
         var that = this;
         that.setData({
-            newPass:''
+            newPass:'',
+            mFocus:true
         })
     },
     //删除所填验证码
     delCode:function () {
         var that = this;
         that.setData({
-            codeNum:''
+            codeNum:'',
+            cFocus:true
         })
     },
     //验证码接口
