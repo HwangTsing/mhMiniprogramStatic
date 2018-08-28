@@ -101,6 +101,7 @@
                         pay_status="{{isPay_status}}"
                         comic_id_page="{{comic_id}}"
                         title="{{comic_name}}"
+                        bind:clickJump="popUp"
                     ></comicCatalog>
                     <!-- 章节信息 组件 E -->
 
@@ -136,7 +137,7 @@
 
 
      <!-- 弹出付费框 S  -->
-   <popUp id="popup" btnSure="{{btnSure}}" btnLog="{{btnLog}}"></popUp>
+   <popUp id="popup" btnSure="{{btnSure}}" btnLog="{{btnLog}}"  callback="{{callback}}"></popUp>
    <!-- 弹出付费框 E  -->
 
 
