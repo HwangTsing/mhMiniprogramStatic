@@ -21,6 +21,9 @@ Page({
     ok_follow: false,
     comic_id: "",//本页id
     is_fav_comic: "",
+    close: false,
+    Setfollow: null,
+    // SetbtnLog:null,
     tabData: [
       {
         status: 0,
@@ -181,7 +184,7 @@ Page({
         is_fav_comic: "yes",
         ok_follow: true,
       })
-      wx.redirectTo({
+      wx.navigateTo({
         url: `/pages/login/login?comic_id=${comic_id}&chapter_name=${comic_name}`
       })
 
@@ -245,6 +248,12 @@ Page({
         'cookie': Set_Cookie
       };
 
+      // const pop = this.selectComponent('#popup');
+      // console.log(pop)
+      // if (pop) {
+      //   pop.close();
+      //   console.log(this.data.close)
+      // }
     }
     // else {
     //   this.setData({
@@ -261,8 +270,8 @@ Page({
     //comic_id
     comic_id = comic_id > 0 || options.comic_id;
     let comic_name = decodeURIComponent(options.comic_name || '');
-    let follows = options.follow;
-    let btnLogs = options.btnLog;
+    // let follows = options.follow;
+    // let btnLogs = options.btnLog;
     //comic_id= options.comic_id ? options.comic_id : 68023;//24 68491
     // comic_id = 68491;
     let page_num = 1;//页码
@@ -320,39 +329,39 @@ Page({
           let user = res.data.user.is_fav_comic,
             read_history = res.data.user.read_history.chapter_id,
             that = this;
-          if (btnLogs || !btnLogs　) {
-            if (user == "yes") {
-              this.setData({
-                follow: false,
-                ok_follow: true,
-                is_fav_comic: user
-              })
-            } else {
-              this.setData({
-                follow: true,
-                ok_follow: false,
-                is_fav_comic: user
-              })
-            }
-          }
-          else if (follows) {
-            wxApi.postComicAddFav({
-              method: "POST",
-              data: { comic_id },
-              header: header,
-              success: function (response) {
-                console.log(response)
-                if (response.data.code) {
-                  that.setData({
-                    follow: false,
-                    is_fav_comic: user,
-                    ok_follow: true,
-                  })
-                }
-                wxApi.getShowToast(response.data.message)
-              }
+          // if (btnLogs || !btnLogs　) {
+          if (user == "yes") {
+            this.setData({
+              follow: false,
+              ok_follow: true,
+              is_fav_comic: user
+            })
+          } else {
+            this.setData({
+              follow: true,
+              ok_follow: false,
+              is_fav_comic: user
             })
           }
+          // }
+          // else if (follows) {
+          //   wxApi.postComicAddFav({
+          //     method: "POST",
+          //     data: { comic_id },
+          //     header: header,
+          //     success: function (response) {
+          //       console.log(response)
+          //       if (response.data.code) {
+          //         that.setData({
+          //           follow: false,
+          //           is_fav_comic: user,
+          //           ok_follow: true,
+          //         })
+          //       }
+          //       wxApi.getShowToast(response.data.message)
+          //     }
+          //   })
+          // }
           // else {
           //   if (user == "yes") {
           //     this.setData({
@@ -603,16 +612,49 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    
     this.ClickCatalog(); //每次显示页面检测 getStorage
     let {
-       comic_id,
-       comic_name,
-       follow,
-       btnLog
-    }=this.data;
-  let options={comic_id,comic_name,follow,btnLog}
-  // console.log(options)
+      comic_id,
+      comic_name,
+      follow,
+      btnLog
+    } = this.data;
+    let options = { comic_id, comic_name, follow, btnLog }
+    // console.log(options)
     this.onLoad(options);
+
+    let Cookie = wx.getStorageSync("Set-Cookie"), header, that = this;
+    if (Cookie) {
+      let arr = Cookie.split('=').join(',').split(',');
+      let Set_Cookie = 'app_uf=' + arr[1].split(';')[0] + ';' + 'app_us=' + arr[6].split(';')[0] + ';'
+      header = {
+        'content-type': 'application/x-www-form-urlencoded',
+        'cookie': Set_Cookie
+      };
+
+      const pop = this.selectComponent('#popup');
+      console.log(pop)
+      if (pop)  pop.close();
+    }
+    if (this.data.Setfollow) {
+      wxApi.postComicAddFav({
+        method: "POST",
+        data: { comic_id },
+        header: header,
+        success: function (response) {
+          console.log(response)
+          if (response.data.code) {
+            that.setData({
+              follow: false,
+              is_fav_comic: "yes",
+              ok_follow: true,
+            })
+          }
+          wxApi.getShowToast(response.data.message)
+        }
+      })
+    }
   },
 
   /**
