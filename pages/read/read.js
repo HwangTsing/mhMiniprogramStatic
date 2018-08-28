@@ -21,16 +21,23 @@ Page({
       page: []
     },
     chapter_nav: null,
+    btnSure: true,
+    btnLog: false,
+    callback:null
   },
 
   onLoad: function (options) {
-    console.log(options)
+
     const { chapter_id, chapter_name = '',comic_id} = options;
     const { windowWidth, windowHeight } = wxApi.getSystemInfoSync()
     this.chapter_id = chapter_id
     this.chapter_name = decodeURIComponent(chapter_name)
     this.windowHeight = windowHeight
     this.windowWidth = windowWidth
+
+   this.setData({
+    callback:`comic_id=${comic_id}&chapter_name=${chapter_name}&chapter_id=${chapter_id}`
+   })
    
     wxApi.getNetworkType().then(({ networkType }) => {
       if (_.indexOf(['none', '2g'], networkType) != -1) {
@@ -52,7 +59,6 @@ Page({
     //   //this.setPageMessage('')
     // })
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -65,7 +71,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    let Cookie = wx.getStorageSync("Set-Cookie");
+    if(Cookie){
+     const pop = this.selectComponent('#popup'); 
+     if (pop) pop.close();
+       
+    }
   },
 
   /**
@@ -285,11 +296,32 @@ Page({
   },
 
   chapterNavTap: function (e) {
-    const chapter_id = wxApi.getParam(e.detail.url, 'chapter_id');
-
-    this.render(chapter_id)
-    //this.triggerEvent('navchapter',{}, {})
+   
+    //  if(e.detail){
+      const chapter_id = wxApi.getParam(e.detail.url, 'chapter_id');
+      this.render(chapter_id)
+    //  }
+    
+    // this.triggerEvent('navchapter',{}, {})
   },
+  clickJump:function(){
+    let Cookie = wx.getStorageSync("Set-Cookie");
+    const pop = this.selectComponent('#popup');
+    if (pop) pop.open();
+  
+      if (Cookie) {
+        this.setData({
+          btnSure: true,
+          btnLog: false,
+        })
+      } else {
+        this.setData({
+          btnSure: false,
+          btnLog: true,
+        })
+      }
+  },
+
 
   setReadingLog: function (values, position = 0) {
     const PREFIX = 'comic_id_'

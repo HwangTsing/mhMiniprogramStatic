@@ -20,19 +20,20 @@ Component({
   },
   methods: {
     chargePop () {
-      let Cookie = wx.getStorageSync("Set-Cookie");
-      if (Cookie) {
-        this.setData({
-          btnSure: true,
-          btnLog: false,
-        })
-      } else {
-        this.setData({
-          btnSure: false,
-          btnLog: true,
-        })
-      }
-      this.popup.open()
+      // let Cookie = wx.getStorageSync("Set-Cookie");
+      // if (Cookie) {
+      //   this.setData({
+      //     btnSure: true,
+      //     btnLog: false,
+      //   })
+      // } else {
+      //   this.setData({
+      //     btnSure: false,
+      //     btnLog: true,
+      //   })
+      // }
+      // this.popup.open()
+      this.triggerEvent('clickJump'); 
     },
     btnLog(event) {
       let { comic_id, chapter_name ,chapter_id} = this.data;

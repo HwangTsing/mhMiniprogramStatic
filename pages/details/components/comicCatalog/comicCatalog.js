@@ -54,21 +54,8 @@ Component({
       })
 
       if (item.isLocked) {
-        let Cookie = wx.getStorageSync("Set-Cookie");
-        const pop = this.selectComponent('#popup');
-        if (Cookie) {
-          this.setData({
-            btnSure: true,
-            btnLog: false,
-          })
-        } else {
-          this.setData({
-            btnSure: false,
-            btnLog: true,
-          })
-        }
-        if (pop) pop.open();
-   
+      
+        this.triggerEvent('clickJump');    
 
       }
       else if (comic_id && chapter_id) {
@@ -76,12 +63,6 @@ Component({
           url: `/pages/read/read?chapter_id=${chapter_id}&chapter_name=${encodeURIComponent(chapter_name)}`//&comic_id=${comic_id}
         })
       }
-    },
-    btnLog(event) {
-      let { comic_id_page, title } = this.data;
-         wx.navigateTo({
-          url: `/pages/login/login?comic_id=${comic_id_page}&chapter_name=${title}&btnLog=1`
-       })
     }
   }
 })

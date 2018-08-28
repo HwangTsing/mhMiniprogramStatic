@@ -71,9 +71,3 @@
 
 </view>
 <!-- 目录组件(章节)包含横版|九宫格 E -->
-
-
-   <!-- 弹出付费框 S  -->
-            
-   <popUp id="popup"  btnSure="{{btnSure}}" btnLog="{{btnLog}}" bindbtnLog="btnLog" ></popUp>
-   <!-- 弹出付费框 E  -->

@@ -20,8 +20,8 @@ Page({
       canIUse: wx.canIUse('button.open-type.getUserInfo'),
       comic_id:"",
       chapter_name:"",
-      btnLog:null,
       chapter_id:"",
+      Setfollow:null,
   },
 
     //键盘输入时触发
@@ -122,40 +122,30 @@ Page({
                             })
                             wxApi.getShowToast(message);
 
-                            let {comic_id,chapter_name,btnLog,chapter_id}=that.data;
+                            let {comic_id,chapter_name,Setfollow,chapter_id}=that.data;
                             let pages = getCurrentPages();//当前页面
                             let prevPage = pages[pages.length-2];//上一页面
-                            
-                           if(comic_id &&  chapter_name &&　btnLog ){
-                                // prevPage.setData({//直接给上移页面赋值
-                                //   SetbtnLog: 2,
-                                // });
-                                wx.navigateBack({
-                                  // url: '/pages/details/details?comic_id='+comic_id + '&comic_name='+chapter_name + '&btnLog=2'
-                                  delta:1
-                                })
-                           }else if(comic_id &&  chapter_name && chapter_id ){
-                                wx.navigateBack({
-                                  // url: `/pages/read/read?comic_id=${comic_id}&chapter_name=${chapter_name}&chapter_id=${chapter_id}`
-                                  delta:1
-                                })
-                           }else if(comic_id &&  chapter_name ){
-                               
+                           
+                           if(comic_id && chapter_name && Setfollow ){
                                 prevPage.setData({//直接给上移页面赋值
                                   Setfollow: 2,
                                 });
                                 wx.navigateBack({
                                   delta:1
-                                  // url: '/pages/details/details?comic_id='+comic_id + '&comic_name='+chapter_name + '&follow=2'
                                 })
-                           }
-                           else{
-                              wx.redirectTo({
-                                url: '/pages/mymsg/mymsg'
-                              })
-                           }
+                             }
+                            else if(comic_id ||  chapter_name || chapter_id){
+                                wx.navigateBack({
+                                  delta:1
+                                })
+                            }
+                            else{
+                                wx.redirectTo({
+                                  url: '/pages/mymsg/mymsg'
+                                })
+                            }
 
-                        }else if (res.data.code == 0) {
+                         }else if (res.data.code == 0) {
                             var message = res.data.message;
                             console.log(message);
                             that.setData({
@@ -233,35 +223,38 @@ Page({
    */
   onLoad: function (options) {
     //this.getUserInfo();
+    console.log(options)
     let comic_id=options.comic_id;
     let chapter_name=options.chapter_name;
-    let btnLog=options.btnLog;
     let chapter_id=options.chapter_id;
-   if(comic_id &&chapter_name &&　!btnLog &&　!chapter_id){
-    this.setData({
-     comic_id:comic_id,
-     chapter_name:chapter_name
-    })
-   }else if(btnLog){
-    this.setData({
-      comic_id:comic_id,
-      chapter_name:chapter_name,
-      btnLog:btnLog
-     })
-   }else if(chapter_id){
+    let Setfollow=options.Setfollow;
+  
+
+    if(comic_id &&chapter_name &&　!Setfollow &&　!chapter_id){
       this.setData({
       comic_id:comic_id,
-      chapter_name:chapter_name,
-      chapter_id:chapter_id
-     })
-   }
-   else{
-    this.setData({
-      comic_id:null,
-      chapter_name:null,
-      btnLog:null
-     })
-   }
+      chapter_name:chapter_name
+      })
+    }else if(Setfollow){
+      this.setData({
+        comic_id:comic_id,
+        chapter_name:chapter_name,
+        Setfollow:Setfollow
+      })
+    }else if(chapter_id){
+        this.setData({
+        comic_id:comic_id,
+        chapter_name:chapter_name,
+        chapter_id:chapter_id
+      })
+    }
+    else{
+      this.setData({
+        comic_id:null,
+        chapter_name:null,
+        Setfollow:null
+      })
+    }
 
   },
   //点击该按钮时，会返回获取到的用户信息

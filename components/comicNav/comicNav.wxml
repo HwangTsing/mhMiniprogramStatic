@@ -22,6 +22,4 @@
   </view>
 </block>
 
-<!-- 弹出付费框 S  -->
-<popUp id="popup" btnSure="{{btnSure}}" btnLog="{{btnLog}}" bindbtnLog="btnLog"></popUp>
-<!-- 弹出付费框 E  -->
+

@@ -23,6 +23,7 @@ Page({
     is_fav_comic: "",
     close: false,
     Setfollow: null,
+    callback:null,
     // SetbtnLog:null,
     tabData: [
       {
@@ -72,6 +73,12 @@ Page({
     })
 
   },
+  // btnLog() {
+  //   let { comic_id, title } = this.data;
+  //      wx.navigateTo({
+  //       url: `/pages/login/login?comic_id=${comic_id}&chapter_name=${title}&btnLog=1`
+  //    })
+  // },
 
   //点击开始阅读|和据需阅读的事件
   onReadClick: function (event) {
@@ -185,7 +192,7 @@ Page({
         ok_follow: true,
       })
       wx.navigateTo({
-        url: `/pages/login/login?comic_id=${comic_id}&chapter_name=${comic_name}`
+        url: `/pages/login/login?comic_id=${comic_id}&chapter_name=${comic_name}&Setfollow=1`
       })
 
 
@@ -247,21 +254,8 @@ Page({
         'content-type': 'application/x-www-form-urlencoded',
         'cookie': Set_Cookie
       };
-
-      // const pop = this.selectComponent('#popup');
-      // console.log(pop)
-      // if (pop) {
-      //   pop.close();
-      //   console.log(this.data.close)
-      // }
     }
-    // else {
-    //   this.setData({
-    //     follow: 2,
-    //     is_fav_comic: "yes",
-    //     // ok_follow: true,
-    //   })
-    // }
+
     /*
     * *** wbcomic/comic/comic_show?comic_id=68491 摘要页接口
     * *** wbcomic/comic/comic_comment_list?comic_id=24&page_num=1&rows_num=10&_debug_=yes 评论列表
@@ -294,7 +288,8 @@ Page({
     });
     this.setData({
       comic_name: comic_name,
-      comic_id: comic_id
+      comic_id: comic_id,
+      callback:`comic_id=${comic_id}&chapter_name=${comic_name}`
     })
 
 
@@ -343,40 +338,7 @@ Page({
               is_fav_comic: user
             })
           }
-          // }
-          // else if (follows) {
-          //   wxApi.postComicAddFav({
-          //     method: "POST",
-          //     data: { comic_id },
-          //     header: header,
-          //     success: function (response) {
-          //       console.log(response)
-          //       if (response.data.code) {
-          //         that.setData({
-          //           follow: false,
-          //           is_fav_comic: user,
-          //           ok_follow: true,
-          //         })
-          //       }
-          //       wxApi.getShowToast(response.data.message)
-          //     }
-          //   })
-          // }
-          // else {
-          //   if (user == "yes") {
-          //     this.setData({
-          //       follow: false,
-          //       ok_follow: true,
-          //       is_fav_comic: user
-          //     })
-          //   } else {
-          //     this.setData({
-          //       follow: true,
-          //       ok_follow: false,
-          //       is_fav_comic: user
-          //     })
-          //   }
-          // }
+         
 
 
 
@@ -634,7 +596,6 @@ Page({
       };
 
       const pop = this.selectComponent('#popup');
-      console.log(pop)
       if (pop)  pop.close();
     }
     if (this.data.Setfollow) {
