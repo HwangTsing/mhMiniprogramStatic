@@ -289,9 +289,12 @@ Page({
                                 isRegister:false
                             })
                             wxApi.getShowToast(message);
-                            wx.redirectTo({
+                            wx.navigateTo({
                                 url: '/pages/mymsg/mymsg'
-                            })
+                            });
+                            /*wx.navigateBack({
+                                delta:3
+                            })*/
                         }
                         else if (res.data.code == 0) {
                             var message= res.data.message;

@@ -96,7 +96,7 @@ Page({
     },
     //忘记密码
     onForgetPw:function () {
-        wx.redirectTo({
+        wx.navigateTo({
             url: '/pages/forgetPassword/forgetPassword'
         })
     },
@@ -160,7 +160,7 @@ Page({
                             let {comic_id,chapter_name,Setfollow,chapter_id}=that.data;
                             let pages = getCurrentPages();//当前页面
                             let prevPage = pages[pages.length-2];//上一页面
-                           
+
                            if(comic_id && chapter_name && Setfollow ){
                                 prevPage.setData({//直接给上移页面赋值
                                   Setfollow: 2,
@@ -248,7 +248,7 @@ Page({
     },
     //立即注册
     onRegister:function () {
-        wx.redirectTo({
+        wx.navigateTo({
             url: '/pages/register/register'
         })
     },
@@ -263,7 +263,7 @@ Page({
     let chapter_name=options.chapter_name;
     let chapter_id=options.chapter_id;
     let Setfollow=options.Setfollow;
-  
+
 
     if(comic_id &&chapter_name &&　!Setfollow &&　!chapter_id){
       this.setData({
