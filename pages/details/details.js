@@ -161,7 +161,7 @@ Page({
                 ok_follow: false,
               })
             }
-            console.log(response.data.message)
+            // console.log(response.data.message)
             wxApi.getShowToast(response.data.message)
           }
         })
@@ -235,7 +235,7 @@ Page({
    */
 
   onLoad: function (options) {
-    console.log(options)
+    
     let { q = '' } = options, comic_id = 0
     if (q) {
       let __q__ = decodeURIComponent(q)
@@ -280,18 +280,28 @@ Page({
     * */
     // comic_id  69273   68591
     // let comicShowFn = wxApi.get(`${comicShowUrl}?comic_id=${69517}` );
+    let  pages = getCurrentPages()    //获取加载的页面
+     let  currentPage = pages[pages.length-1] ;
+     let  url = currentPage.route;
     let comicShowFn = wxApi.get(comicShowUrl, {
       data: {
         comic_id: comic_id
       },
       header: header
     });
+    // let callbackUrl={
+    //   url:url,
+    //   comic_id:comic_id,
+    //   chapter_name:comic_name
+    // }
+    // callbackUrl=JSON.stringify(callbackUrl)
     this.setData({
       comic_name: comic_name,
       comic_id: comic_id,
-      callback:`comic_id=${comic_id}&chapter_name=${comic_name}`
+      callback:encodeURIComponent("/"+url+"?"+"comic_id="+comic_id+"&chapter_name="+comic_name)
     })
-
+    console.log(this.data.callback)
+     
 
     /*
     * ***comicCommentListFn  摘要页评论promise对象
@@ -320,7 +330,7 @@ Page({
         **/
 
         comicShowFn.then((res) => {
-          console.log(res)
+          // console.log(res)
           let user = res.data.user.is_fav_comic,
             read_history = res.data.user.read_history.chapter_id,
             that = this;
@@ -585,7 +595,7 @@ Page({
     let options = { comic_id, comic_name, follow, btnLog }
     // console.log(options)
     this.onLoad(options);
-
+    console.log(this.data)
     let Cookie = wx.getStorageSync("Set-Cookie"), header, that = this;
     if (Cookie) {
       let arr = Cookie.split('=').join(',').split(',');
@@ -604,7 +614,7 @@ Page({
         data: { comic_id },
         header: header,
         success: function (response) {
-          console.log(response)
+          // console.log(response)
           if (response.data.code) {
             that.setData({
               follow: false,

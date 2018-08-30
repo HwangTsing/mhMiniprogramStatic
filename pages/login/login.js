@@ -20,10 +20,8 @@ Page({
       pFocus:false,    //号码输入框是否自动聚焦
       mFocus:false,    //密码输入框是否自动聚焦
       canIUse: wx.canIUse('button.open-type.getUserInfo'),
-      comic_id:"",
-      chapter_name:"",
-      chapter_id:"",
       Setfollow:null,
+      callbackUrl:null,
   },
 
     //键盘输入时触发
@@ -156,24 +154,23 @@ Page({
                                 isLogin:false
                             })
                             wxApi.getShowToast(message);
-
-                            let {comic_id,chapter_name,Setfollow,chapter_id}=that.data;
+                            let {Setfollow,callbackUrl}=that.data;
                             let pages = getCurrentPages();//当前页面
                             let prevPage = pages[pages.length-2];//上一页面
-
-                           if(comic_id && chapter_name && Setfollow ){
-                                prevPage.setData({//直接给上移页面赋值
-                                  Setfollow: 2,
-                                });
-                                wx.navigateBack({
-                                  delta:1
-                                })
-                             }
-                            else if(comic_id ||  chapter_name || chapter_id){
-                                wx.navigateBack({
-                                  delta:1
-                                })
+                           if(callbackUrl!="undefined"){
+                            // callbackUrl=JSON.stringify(callbackUrl)
+                              wx.navigateBack({
+                                delta: 1
+                              })
                             }
+                            else if(callbackUrl && Setfollow ){
+                                 prevPage.setData({
+                                      Setfollow: 2,
+                                 });
+                                   wx.navigateBack({
+                                      delta:1
+                                    })
+                             }
                             else{
                                 wx.redirectTo({
                                   url: '/pages/mymsg/mymsg'
@@ -258,38 +255,32 @@ Page({
    */
   onLoad: function (options) {
     //this.getUserInfo();
-    console.log(options)
-    let comic_id=options.comic_id;
-    let chapter_name=options.chapter_name;
-    let chapter_id=options.chapter_id;
+    // options =JSON.parse(options)
+    let callback=decodeURIComponent(options.callback);
     let Setfollow=options.Setfollow;
 
-
-    if(comic_id &&chapter_name &&　!Setfollow &&　!chapter_id){
+    if(callback && Setfollow){
+      // callback=JSON.parse(callback);
+      // let url=callback.url;
+      // let comic_ids=callback.comic_id;
+      // let chapter_names=callback.chapter_name;
+      // let callbackUrl=url+"?"+"comic_id="+comic_ids+"&chapter_name="+chapter_names;
       this.setData({
-      comic_id:comic_id,
-      chapter_name:chapter_name
-      })
-    }else if(Setfollow){
-      this.setData({
-        comic_id:comic_id,
-        chapter_name:chapter_name,
+        callbackUrl:callback,
         Setfollow:Setfollow
       })
-    }else if(chapter_id){
-        this.setData({
-        comic_id:comic_id,
-        chapter_name:chapter_name,
-        chapter_id:chapter_id
+    }else if(callback){
+      this.setData({
+        callbackUrl:callback,
       })
     }
-    else{
+    else {
       this.setData({
-        comic_id:null,
-        chapter_name:null,
+        callbackUrl:null,
         Setfollow:null
       })
     }
+
 
   },
   //点击该按钮时，会返回获取到的用户信息

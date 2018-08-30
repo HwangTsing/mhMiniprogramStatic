@@ -34,10 +34,20 @@ Page({
     this.chapter_name = decodeURIComponent(chapter_name)
     this.windowHeight = windowHeight
     this.windowWidth = windowWidth
-
-   this.setData({
-    callback:`comic_id=${comic_id}&chapter_name=${chapter_name}&chapter_id=${chapter_id}`
-   })
+    let  pages = getCurrentPages()    //获取加载的页面
+     let  currentPage = pages[pages.length-1] ;
+     let  url = currentPage.route;
+    // let callbackUrl={
+    //   url:url,
+    //   comic_id:comic_id,
+    //   chapter_name:chapter_name,
+    //   chapter_id:chapter_id
+    // }
+    // callbackUrl=JSON.stringify(callbackUrl)
+    this.setData({
+      callback:encodeURIComponent("/"+url+"?"+"comic_id="+comic_id+"&chapter_name="+chapter_name+"&chapter_id="+chapter_id)
+    })
+ 
    
     wxApi.getNetworkType().then(({ networkType }) => {
       if (_.indexOf(['none', '2g'], networkType) != -1) {
