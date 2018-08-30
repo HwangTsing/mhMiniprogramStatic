@@ -94,8 +94,10 @@ Page({
     },
     //忘记密码
     onForgetPw:function () {
+       let callbackUrl=encodeURIComponent(this.data.callbackUrl);
+       let Setfollow=this.data.Setfollow;
         wx.navigateTo({
-            url: '/pages/forgetPassword/forgetPassword'
+            url: `/pages/forgetPassword/forgetPassword?callback=${callbackUrl}&Setfollow=${Setfollow}`
         })
     },
     //点击登录
@@ -245,9 +247,11 @@ Page({
     },
     //立即注册
     onRegister:function () {
-        wx.navigateTo({
-            url: '/pages/register/register'
-        })
+      let callbackUrl=encodeURIComponent(this.data.callbackUrl);
+      let Setfollow=this.data.Setfollow;
+       wx.navigateTo({
+           url: `/pages/register/register?callback=${callbackUrl}&Setfollow=${Setfollow}`
+       })
     },
 
   /**
@@ -258,7 +262,7 @@ Page({
     // options =JSON.parse(options)
     let callback=decodeURIComponent(options.callback);
     let Setfollow=options.Setfollow;
-
+  console.log(Setfollow)
     if(callback && Setfollow){
       // callback=JSON.parse(callback);
       // let url=callback.url;

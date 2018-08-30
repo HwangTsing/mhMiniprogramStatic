@@ -26,6 +26,8 @@ Page({
       pFocus:false,    //号码输入框是否自动聚焦
       mFocus:false,    //密码输入框是否自动聚焦
       cFocus:false,    //验证码输入框是否自动聚焦
+      callbackUrl:null,
+      Setfollow:null
   },
 
     //填写手机号
@@ -289,9 +291,28 @@ Page({
                                 isRegister:false
                             })
                             wxApi.getShowToast(message);
-                            wx.navigateTo({
-                                url: '/pages/mymsg/mymsg'
-                            });
+                            let {Setfollow,callbackUrl}=that.data;
+                            let pages = getCurrentPages();//当前页面
+                            let prevPage = pages[pages.length-3];//上一页面
+                           if(callbackUrl!="undefined"){
+                            // callbackUrl=JSON.stringify(callbackUrl)
+                              wx.navigateBack({
+                                delta: 2
+                              })
+                            }
+                            else if(callbackUrl && Setfollow!="null" ){
+                                 prevPage.setData({
+                                      Setfollow: 2,
+                                 });
+                                   wx.navigateBack({
+                                      delta:2
+                                    })
+                             }
+                            else{
+                                wx.redirectTo({
+                                  url: '/pages/mymsg/mymsg'
+                                })
+                            }
                             /*wx.navigateBack({
                                 delta:3
                             })*/
@@ -325,7 +346,25 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let callback=decodeURIComponent(options.callback);
+    let Setfollow=options.Setfollow;
+    console.log(Setfollow)
+    if(callback && Setfollow){
+      this.setData({
+        callbackUrl:callback,
+        Setfollow:Setfollow
+      })
+    }else if(callback){
+      this.setData({
+        callbackUrl:callback,
+      })
+    }
+    else {
+      this.setData({
+        callbackUrl:null,
+        Setfollow:null
+      })
+    }
   },
 
   /**

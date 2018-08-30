@@ -608,6 +608,7 @@ Page({
       const pop = this.selectComponent('#popup');
       if (pop)  pop.close();
     }
+    console.log(this.data.Setfollow)
     if (this.data.Setfollow) {
       wxApi.postComicAddFav({
         method: "POST",
