@@ -30,11 +30,26 @@ Component({
     btnLog(){
      let callback=this.data.callback;
      console.log(callback)
-
-      // this.triggerEvent('btnLog');
+    //  callback=JSON.parse(callback)
+    //  let url=callback.url;
+    //  let comic_id=callback.comic_id;
+    //  let chapter_name=callback.chapter_name;
+    //  let callbackUrl=url+"/"+"comic_id="+comic_id+"&chapter_name="+chapter_name
+    // let obj={
+    //   callback:callback
+    // }
+    // callback=JSON.stringify(callback)
+    // console.log( callbackUrl)
+    // let callbackUrl={
+    //   url:callback.url,
+    //   comic_id:callback.comic_id,
+    //   chapter_name:callback.comic_name
+    // }
+    // callbackUrl=JSON.stringify(callbackUrl)
        wx.navigateTo({
-        url: `/pages/login/login?${callback}`
+        url: `/pages/login/login?callback=${callback}`
        })
+      //  console.log(callbackUrl)
     }
   }
   
