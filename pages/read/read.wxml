@@ -16,7 +16,7 @@
     </view>
     <view hidden="{{!comicNavHolder}}" class="comic-nav-holder"></view>
     <view wx:if="{{!type||type=='lose'}}" class="vcomic-buttons flex align-center" hidden="{{!chapter_nav}}">
-        <comcicNav nav="{{chapter_nav.prev_nav}}" action="prev" bind:myevent="chapterNavTap" class="flex-item" text="上一章"  ></comcicNav>
+        <comcicNav nav="{{chapter_nav.prev_nav}}" action="prev" bind:myevent="chapterNavTap" class="flex-item" text="上一章"  bind:clickJump="clickJump"></comcicNav>
         <comcicNav nav="{{chapter_nav.next_nav}}" action="next" bind:myevent="chapterNavTap" class="flex-item" text="下一章"  bind:clickJump="clickJump" ></comcicNav>
     </view>
 </view>
