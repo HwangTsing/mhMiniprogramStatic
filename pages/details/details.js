@@ -1,6 +1,5 @@
 // pages/details/details.js
 var wxApi = require("../../utils/util.js");//导入wxApi
-let app = getApp();
 const { _ } = require('../../utils/underscore.js');
 Page({
   /**
@@ -257,7 +256,7 @@ Page({
    */
 
   onLoad: function (options) {
-    
+
     let { q = '' } = options, comic_id = 0
     if (q) {
       let __q__ = decodeURIComponent(q)
@@ -323,7 +322,7 @@ Page({
       callback:encodeURIComponent("/"+url+"?"+"comic_id="+comic_id+"&chapter_name="+comic_name)
     })
     console.log(this.data.callback)
-     
+
 
     /*
     * ***comicCommentListFn  摘要页评论promise对象
@@ -370,7 +369,7 @@ Page({
               is_fav_comic: user
             })
           }
-         
+
 
 
 
