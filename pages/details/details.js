@@ -1,5 +1,6 @@
 // pages/details/details.js
 var wxApi = require("../../utils/util.js");//导入wxApi
+let app = getApp();
 const { _ } = require('../../utils/underscore.js');
 Page({
   /**
@@ -25,6 +26,7 @@ Page({
     Setfollow: null,
     callback:null,
     // SetbtnLog:null,
+    statisticsBaseurl:"https://apiv2.manhua.weibo.com/static/tongji/tu?s=", //统计用户行为url
     tabData: [
       {
         status: 0,
@@ -38,8 +40,15 @@ Page({
     status: 0,
     networkType: true,//是否有网络
     type: 'loading',
+    start_time:0
   },
-  popUp: function () {
+  popUp: function (e) {
+    console.log(e)
+    if(e && e.detail.flag){
+      this.addStatistics("{l1_id:'99',l2_id:'012',l3_id:'001'}",{
+        comic_id:this.data.dataAry.comic.comic_id
+      })
+    }
     let Cookie = wx.getStorageSync("Set-Cookie"), header;
     const pop = this.selectComponent('#popup');
     if (Cookie) {
@@ -55,10 +64,19 @@ Page({
     }
     if (pop) pop.open();
   },
+  sendMsg:function(){
+    let event_id = "{l1_id:'99',l2_id:'012',l3_id:'001'}";
+    this.addStatistics(event_id,{comic_id:this.data.dataAry.comic.comic_id})
+  },
+  addStatistics:function(event_id,attach_info = {}){
+      this.selectComponent("#statistics").changePath(event_id,attach_info);
+  },
   //跳转接口方法
   navigateToHistory: function (chapter_id, comic_id, chapter_name) {
     var that = this;
     let arr = this.data.dataAry.chapter_list;
+    let comic_type = this.data.dataAry.comic.comic_type;
+    this.addStatistics("{l1_id:'99',l2_id:'011',l3_id:'001'}",{comic_id:comic_id});
 
     return arr.filter((element, index) => {
       if (chapter_id === element.chapter_id) {
@@ -66,7 +84,7 @@ Page({
           this.popUp()
         } else {
           wx.navigateTo({
-            url: `/pages/read/read?chapter_id=${chapter_id}&comic_id=${comic_id}&chapter_name=${encodeURIComponent(chapter_name)}`
+            url: `/pages/read/read?chapter_id=${chapter_id}&comic_id=${comic_id}&chapter_name=${encodeURIComponent(chapter_name)}&comic_type=${comic_type}`
           })
         }
       }
@@ -82,8 +100,8 @@ Page({
 
   //点击开始阅读|和据需阅读的事件
   onReadClick: function (event) {
-
-    let key = "comic_id_" + this.data.dataAry.comic.comic_id;
+    let comic_id = this.data.dataAry.comic.comic_id;
+    let key = "comic_id_" + comic_id;
     wxApi.getStorage(key).then((res) => { //获取阅读历史
       let data = res.data
       this.navigateToHistory(data.chapter_id, data.comic_id, data.chapter_name)
@@ -140,6 +158,10 @@ Page({
     let comic_id = this.data.comic_id, that = this;
 
     let is_fav_comic = this.data.is_fav_comic;
+    this.addStatistics("{l1_id:'99',l2_id:'015',l3_id:'002'}",{
+      comic_id:this.data.dataAry.comic.comic_id,
+      follow_status:is_fav_comic == 'yes' ? 1:0
+    })
     //判断用户是否登录
     if (Cookie) {
       let arr = Cookie.split('=').join(',').split(',');
@@ -584,7 +606,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    this.setData({
+        start_time : new Date().getTime(),
+    })
     this.ClickCatalog(); //每次显示页面检测 getStorage
     let {
       comic_id,
@@ -633,14 +657,16 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    let start_time = this.data.start_time;
+    this.selectComponent("#statistics").pageStatistics(start_time);
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    let start_time = this.data.start_time;
+    this.selectComponent("#statistics").pageStatistics(start_time);
   },
 
   /**
@@ -661,6 +687,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    this.selectComponent("#statistics").shareStatistics();
     return {
       title: '各种有爱的动漫分享'
     }

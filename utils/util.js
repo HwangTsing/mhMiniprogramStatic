@@ -6,7 +6,13 @@ const {
 
 
 class wxApi {
-
+    creatTmpUuid(){
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            const r = (Math.random() * 16) | 0,
+                v = c === 'x' ? r : (r & 0x3) | 0x8;
+            return v.toString(16);
+        });
+    }
     formatTime(date, obj) {
         /*
         * obj.type:存在返回 年月日不补0  默认不补0
@@ -350,6 +356,9 @@ class wxApi {
       return this.request('wbcomic/account/user_info?',cfg);
     }
     
+    
+
+    
    
 
 
@@ -446,12 +455,13 @@ class wxApi {
 }
 
 const __wxApi = new wxApi()
-const {globalData} = getApp()
+// const {globalData} = getApp()
 
-if (!globalData.wxApi) {
-    globalData.wxApi = __wxApi
-}
+// if (!globalData.wxApi) {
+//     globalData.wxApi = __wxApi
+// }
 
-module.exports = globalData.wxApi
+// module.exports = globalData.wxApi
+module.exports = __wxApi
 
 

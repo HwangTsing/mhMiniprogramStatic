@@ -27,6 +27,8 @@ Page({
       scrolType:'',
       message:'',    //提示语
       hasData:true,  //是否有内容
+      cate_name:"全部",
+      statisticsBaseurl:"https://apiv2.manhua.weibo.com/static/tongji/tu?s=", //统计用户行为url
     },
     getNow () {
         return +new Date()
@@ -141,7 +143,10 @@ Page({
     },
     onCate:function (event) {
         var that = this;
+        //可能有多个cate_id和cate_name
         var cate_id = event.currentTarget.dataset.cateid;
+        var cate_name = event.currentTarget.dataset.catename;
+        let event_id = event.currentTarget.dataset.eventid;
         if (that.data.cate_id == cate_id) {
             return;
         }
@@ -155,10 +160,15 @@ Page({
                 this.setData({
                     networkType: false,
                     type: null,
-                    cate_id
+                    cate_id,
+                    cate_name
                 })
                 wxApi.getShowToast(that.data.netTitle);
-
+                this.addStatistics(event_id,{
+                  cate_name:cate_name,
+                  cate_id:cate_id,
+                  switch_type:"click"
+                })
             }else {
                 //有网络
                 that.setData({
@@ -166,12 +176,18 @@ Page({
                     classListData:[],
                     scrolType:'',
                     cate_id,
+                    cate_name
                 })
                 that.data.scrolType = '';
                 that.data.page_num = 1;
                 _timer = setTimeout(() => {
                     const last_click_id = this.setLastClickId()
                     that.classList(last_click_id, cate_id)
+                    this.addStatistics(event_id,{
+                      cate_name:cate_name,
+                      cate_id:cate_id,
+                      switch_type:"click"
+                    })
                 }, daley)
             }
         }).catch((err) =>{
@@ -264,7 +280,23 @@ Page({
         })
 
     },
-
+    sendStatistics:function(e){
+        let comic_id = e.currentTarget.dataset.comicid;
+        let index = e.currentTarget.dataset.comicindex;
+        let event_id = e.currentTarget.dataset.eventid;
+        let cate_id = this.data.cate_id;
+        let cate_name = this.data.cate_name;
+        let attach_info = {
+            comic_id:comic_id,
+            index:index,
+            cate_id,
+            cate_name,
+        }
+        this.addStatistics(event_id,attach_info);
+    },
+    addStatistics:function(event_id,attach_info = {}){
+        this.selectComponent("#statistics").changePath(event_id,attach_info);
+    },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -319,21 +351,25 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.setData({
+        start_time : new Date().getTime(),
+    })
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    let start_time = this.data.start_time;
+    this.selectComponent("#statistics").pageStatistics(start_time);
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    let start_time = this.data.start_time;
+    this.selectComponent("#statistics").pageStatistics(start_time);
   },
 
   /**

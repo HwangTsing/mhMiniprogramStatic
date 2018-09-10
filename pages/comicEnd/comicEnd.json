@@ -5,6 +5,7 @@
     "navigationBarTextStyle": "white",
     "usingComponents": {
         "releaseAndEndItem":"/components/releaseAndEndItem/releaseAndEndItem",
-        "message": "/components/message/message"
+        "message": "/components/message/message",
+      	"statistics":"/components/statistics/statistics"
     }
 }

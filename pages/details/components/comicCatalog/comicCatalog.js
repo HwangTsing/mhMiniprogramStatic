@@ -14,6 +14,10 @@ Component({
       type: Number, // 类型（必填），目前接受的类型包括：String, Number, Boolean, Object, Array, null（表示任意类型）
       value: null, // 属性初始值（可选），如果未指定则会根据类型选择一个
     },
+    comic_type: {
+      type: Number, // 类型（必填），目前接受的类型包括：String, Number, Boolean, Object, Array, null（表示任意类型）
+      value: null, // 属性初始值（可选），如果未指定则会根据类型选择一个
+    },
     history: {
       type: Object, // 类型（必填），目前接受的类型包括：String, Number, Boolean, Object, Array, null（表示任意类型）
       value: null, // 属性初始值（可选），如果未指定则会根据类型选择一个
@@ -49,18 +53,19 @@ Component({
       let chapter_name = data.chapter_name;
       let comic_id = data.comic_id;
       let item = data.item;
+      let comic_type = this.properties.comic_type;
       this.setData({ //存储 点击章节信息,到组件对象中
         chapter: data,
       })
 
       if (item.isLocked) {
-      
-        this.triggerEvent('clickJump');    
+        this.triggerEvent('clickJump',{flag:true});    
 
       }
       else if (comic_id && chapter_id) {
+        this.triggerEvent('sendMsg');
         wx.navigateTo({
-          url: `/pages/read/read?chapter_id=${chapter_id}&chapter_name=${encodeURIComponent(chapter_name)}`//&comic_id=${comic_id}
+          url: `/pages/read/read?chapter_id=${chapter_id}&chapter_name=${encodeURIComponent(chapter_name)}&comic_type=${comic_type}`//&comic_id=${comic_id}
         })
       }
     }

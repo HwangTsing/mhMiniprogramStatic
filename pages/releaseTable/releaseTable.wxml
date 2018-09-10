@@ -47,6 +47,8 @@
             lastChapter="{{item.lastChapter}}"
             comic="{{item.comic}}"
             siteImage="{{siteImage}}"
+            comicIndex="{{index}}"
+            eventId = "{{ event_id }}"
           ></releaseAndEndItem>
         </block>
         <!-- 列表 E  -->
@@ -82,5 +84,6 @@
 
     <template is="message" wx:if="{{ type }}" data="{{ type }}"/>
     <!-- 提示信息 S  -->
+    <statistics id="statistics" hidden="true" alt="" base-url="{{ statisticsBaseurl }}"></statistics>
 </view>
 <!-- 放送表 E -->

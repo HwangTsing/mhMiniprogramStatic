@@ -50,4 +50,5 @@
             <view class="login_word">正在注册中</view>
         </view>
     </block>
+    <statistics id="statistics" hidden="true" alt="" base-url="{{ statisticsBaseurl }}"></statistics>
 </view>

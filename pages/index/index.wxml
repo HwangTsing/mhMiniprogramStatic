@@ -1,5 +1,4 @@
 <!--index.wxml-->
-
 <view class="container" scroll-y="{{isScroll}}">
     <!--弹层男女选择-->
     <view hidden="{{!isShowGenderView}}" class="{{boyid || girlid? 'fix_view_hidden':'fix_view'}}">
@@ -71,7 +70,7 @@
                 <image class="user_img" src="../../images/user/user.png" catchtap="onUser"></image>
                 <view class="search_img">
                     <image class="search_images" src="../../images/search_gray.png"></image>
-                    <navigator url="/pages/search/search" class="'search_input" type="text"
+                    <navigator catchtap="normalStatistics" data-eventid="{l1_id:'02',l2_id:'001',l3_id:'002'}" url="/pages/search/search" class="'search_input" type="text"
                                placeholder="搜索作品或作者名称"><text style="line-height:60rpx;">搜索作品或作者名称</text></navigator>
                     <block wx:if="{{boyid}}">
                         <image class="{{id !== 0? 'boy_img_hidden':'boy_img'}}" data-index="{{boyid}}"
@@ -98,7 +97,7 @@
                         <block wx:for="{{imgUrls}}" wx:key="index">
                             <swiper-item>
                                 <imgholder type="hcover">
-                                    <image src="{{item.image_ext_url}}" data-comicname="{{item.title}}" data-typeid="{{item.object_id}}"
+                                    <image src="{{item.image_ext_url}}" data-comicname="{{item.title}}" data-typeid="{{item.object_id}}" data-bannerindex = "{{ index }}" data-eventid="{l1_id:'02',l2_id:'001',l3_id:'001'}"
                                            catchtap="swipTap"></image>
                                 </imgholder>
                             </swiper-item>
@@ -111,7 +110,7 @@
                         <block wx:for="{{imgUrls}}" wx:key="index">
                             <swiper-item>
                                 <imgholder type="hcover">
-                                    <image src="{{item.image_ext_url}}" data-comicname="{{item.title}}" data-typeid="{{item.object_id}}"
+                                    <image src="{{item.image_ext_url}}" data-comicname="{{item.title}}" data-typeid="{{item.object_id}}" data-typeid="{{item.object_id}}" data-bannerindex = "{{ index }}" data-eventid="{l1_id:'02',l2_id:'001',l3_id:'001'}"
                                            catchtap="swipTap"></image>
                                 </imgholder>
                             </swiper-item>
@@ -124,35 +123,35 @@
 
         <!--nav-->
         <view class="nav_view">
-            <view class="release_view" bindtap="releaseTap">
+            <view class="release_view" bindtap="releaseTap" data-eventid="{l1_id:'02',l2_id:'001',l3_id:'009'}">
                 <image mode="aspectFit" src="../../images/indexIcon/release.png"></image>
                 <view class="release_title" style="margin-left: 10rpx;">放送表</view>
             </view>
-            <view class="classif_view" bindtap="classTap">
+            <view class="classif_view" bindtap="classTap" data-eventid="{l1_id:'02',l2_id:'001',l3_id:'005'}">
                 <image mode="aspectFit" src="../../images/indexIcon/classif.png"></image>
                 <view class="classif_title">分类</view>
             </view>
-            <view class="list_view" bindtap="listTap">
+            <view class="list_view" bindtap="listTap" data-eventid="{l1_id:'02',l2_id:'001',l3_id:'006'}">
                 <image mode="aspectFit" src="../../images/indexIcon/list.png"></image>
                 <view class="list_title">榜单</view>
             </view>
-            <view class="end_view" bindtap="endTap">
+            <view class="end_view" bindtap="endTap" data-eventid="{l1_id:'02',l2_id:'001',l3_id:'010'}">
                 <image mode="aspectFit" src="../../images/indexIcon/end.png"></image>
                 <view class="end_title">完结</view>
             </view>
         </view>
-        <view class="fine_works" wx:if="{{FineWorks.length > 0}}">
+        <view class="fine_works" wx:if="{{FineWorks.data.length > 0}}">
             <view class="left_fine">
                 <image class="left_xian" src="../../images/left_xian.png"></image>
                 <view class="fine_text">{{title_f}}</view>
             </view>
-            <view class="bg_more" wx:if="{{FineWorks.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex_f}}"
+            <view class="bg_more" wx:if="{{FineWorks.data.length > 0}}" catchtap="bindMoreTap" data-location="{{ FineWorks.location }}" data-eventid="{l1_id:'02',l2_id:'001',l3_id:'008'}" data-index="{{keyIndex_f}}"
                   data-title="{{title_f}}">查看更多</view>
         </view>
         <!--img+content 图片区域内容可滑动-精品佳作-->
-        <scroll-view class="scroll_view" scroll-x="{{true}}" wx:if="{{FineWorks.length > 0}}">
-            <block wx:if="{{FineWorks}}" wx:for="{{FineWorks}}" wx:key="index">
-                <navigator class="big_img" url="../details/details?comic_id={{item.extra.comic_id}}&comic_name={{item.extra.name}}">
+        <scroll-view class="scroll_view" scroll-x="{{true}}" wx:if="{{FineWorks.data.length > 0}}">
+            <block wx:if="{{FineWorks.data}}" wx:for="{{FineWorks.data}}" wx:key="index">
+                <navigator data-location="{{ FineWorks.location }}" catchtap="sendStatistics" data-eventid="{l1_id:'02',l2_id:'001',l3_id:'007'}" data-comicid="{{item.extra.comic_id}}" data-comicindex="{{index}}"  class="big_img" url="../details/details?comic_id={{item.extra.comic_id}}&comic_name={{item.extra.name}}">
                     <imgholder class="scrollx_img" type="hcover">
                         <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"></image>
                     </imgholder>
@@ -164,18 +163,18 @@
             </block>
         </scroll-view>
 
-        <view class="hot_works" wx:if="{{PopularWorks.length >0}}">
+        <view class="hot_works" wx:if="{{PopularWorks.data.length >0}}">
             <view class="left_fine">
                 <image class="left_xian" src="../../images/left_xian.png"></image>
                 <view class="fine_text">{{title_p}}</view>
             </view>
-            <view class="bg_more" wx:if="{{PopularWorks.length >0}}" catchtap="bindMoreTap" data-index="{{keyIndex_p}}"
+            <view class="bg_more" data-location="{{ PopularWorks.location }}" data-eventid="{l1_id:'02',l2_id:'001',l3_id:'008'}" wx:if="{{PopularWorks.data.length >0}}" catchtap="bindMoreTap" data-index="{{keyIndex_p}}"
                   data-title="{{title_p}}">查看更多</view>
         </view>
         <!--img+content 人气作品-->
         <view class="hot_view">
-            <block wx:for="{{PopularWorks}}" wx:key="index">
-                <navigator class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}&comic_name={{item.extra.name}}">
+            <block wx:for="{{PopularWorks.data}}" wx:key="index">
+                <navigator data-location="{{ PopularWorks.location }}" catchtap="sendStatistics" data-eventid="{l1_id:'02',l2_id:'001',l3_id:'007'}" data-comicid="{{item.extra.comic_id}}" data-comicindex="{{index}}" class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}&comic_name={{item.extra.name}}">
                     <imgholder class="hot_hoder" type="hcover">
                         <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"></image>
                     </imgholder>
@@ -187,18 +186,18 @@
             </block>
         </view>
         <!--最新上架-->
-        <view class="new_works" wx:if="{{newArrivalWorks.length > 0}}">
+        <view class="new_works" wx:if="{{newArrivalWorks.data.length > 0}}">
             <view class="left_fine">
                 <image class="left_xian" src="../../images/left_xian.png"></image>
                 <view class="fine_text">{{title_n}}</view>
             </view>
-            <view class="bg_more" wx:if="{{newArrivalWorks.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex_n}}"
+            <view class="bg_more" data-location="{{ newArrivalWorks.location }}" data-eventid="{l1_id:'02',l2_id:'001',l3_id:'008'}" wx:if="{{newArrivalWorks.data.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex_n}}"
                   data-title="{{title_n}}">查看更多</view>
         </view>
         <view class="new_view">
                 <view class="big_new_view">
-                    <block wx:for="{{newArrivalWorks}}" wx:key="index">
-                        <navigator class="new_img" url="../details/details?comic_id={{item.extra.comic_id}}&comic_name={{item.extra.name}}">
+                    <block wx:for="{{newArrivalWorks.data}}" wx:key="index">
+                        <navigator data-location="{{ newArrivalWorks.location }}" catchtap="sendStatistics" data-eventid="{l1_id:'02',l2_id:'001',l3_id:'007'}" data-comicid="{{item.extra.comic_id}}" data-comicindex="{{index}}" class="new_img" url="../details/details?comic_id={{item.extra.comic_id}}&comic_name={{item.extra.name}}">
                             <image mode="aspectFill" src="../../images/hcover.png"
                                    style="position: relative;top: 0;left: 0;">
                                 <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"
@@ -213,18 +212,18 @@
                 </view>
         </view>
         <!--热门连载-->
-        <view class="hot_works" wx:if="{{hotSerialWorks.length > 0}}">
+        <view class="hot_works" wx:if="{{hotSerialWorks.data.length > 0}}">
             <view class="left_fine">
                 <image class="left_xian" src="../../images/left_xian.png"></image>
                 <view class="fine_text">{{title_h}}</view>
             </view>
-            <view class="bg_more" wx:if="{{hotSerialWorks.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex_h}}"
+            <view class="bg_more" data-location="{{ hotSerialWorks.location }}" data-eventid="{l1_id:'02',l2_id:'001',l3_id:'008'}" wx:if="{{hotSerialWorks.data.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex_h}}"
                   data-title="{{title_h}}">查看更多</view>
         </view>
         <!--img+content 图片区域内容-->
         <view class="hot_view">
-            <block wx:for="{{hotSerialWorks}}" wx:key="index">
-                <navigator class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}&comic_name={{item.extra.name}}">
+            <block wx:for="{{hotSerialWorks.data}}" wx:key="index">
+                <navigator data-location="{{ hotSerialWorks.location }}" catchtap="sendStatistics" data-eventid="{l1_id:'02',l2_id:'001',l3_id:'007'}" data-comicid="{{item.extra.comic_id}}" data-comicindex="{{index}}" class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}&comic_name={{item.extra.name}}">
                     <imgholder class="hot_hoder" type="hcover">
                         <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"></image>
                     </imgholder>
@@ -236,18 +235,18 @@
             </block>
         </view>
         <!--小编推荐-->
-        <view class="new_works" wx:if="{{xiaobianRecommend.length > 0}}">
+        <view class="new_works" wx:if="{{xiaobianRecommend.data.length > 0}}">
             <view class="left_fine">
                 <image class="left_xian" src="../../images/left_xian.png"></image>
                 <view class="fine_text">{{title_x}}</view>
             </view>
-            <view class="bg_more" wx:if="{{xiaobianRecommend.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex_x}}"
+            <view class="bg_more" data-location="{{ xiaobianRecommend.location }}" data-eventid="{l1_id:'02',l2_id:'001',l3_id:'008'}" wx:if="{{xiaobianRecommend.data.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex_x}}"
                   data-title="{{title_x}}">查看更多</view>
         </view>
         <view class="new_view">
             <view class="big_new_view">
-                <block wx:for="{{xiaobianRecommend}}" wx:key="index">
-                    <navigator class="new_img" url="../details/details?comic_id={{item.extra.comic_id}}&comic_name={{item.extra.name}}">
+                <block wx:for="{{xiaobianRecommend.data}}" wx:key="index">
+                    <navigator data-location="{{ xiaobianRecommend.location }}" catchtap="sendStatistics" data-eventid="{l1_id:'02',l2_id:'001',l3_id:'007'}" data-comicid="{{item.extra.comic_id}}" data-comicindex="{{index}}" class="new_img" url="../details/details?comic_id={{item.extra.comic_id}}&comic_name={{item.extra.name}}">
                         <image mode="aspectFill" src="../../images/hcover.png"
                                style="position: relative;top: 0;left: 0;">
                             <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"
@@ -262,17 +261,17 @@
             </view>
         </view>
         <!--img+content 本周推荐-->
-        <view class="hot_works" wx:if="{{weekRecommend.length > 0}}">
+        <view class="hot_works" wx:if="{{weekRecommend.data.length > 0}}">
             <view class="left_fine">
                 <image class="left_xian" src="../../images/left_xian.png"></image>
                 <view class="fine_text">{{title_w}}</view>
             </view>
-            <view class="bg_more" wx:if="{{weekRecommend.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex_w}}"
+            <view class="bg_more" data-location="{{ weekRecommend.location }}" data-eventid="{l1_id:'02',l2_id:'001',l3_id:'008'}" wx:if="{{weekRecommend.data.length > 0}}" catchtap="bindMoreTap" data-index="{{keyIndex_w}}"
                   data-title="{{title_w}}">查看更多</view>
         </view>
         <view class="hot_view">
-            <block wx:for="{{weekRecommend}}" wx:key="index">
-                <navigator class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}&comic_name={{item.extra.name}}">
+            <block wx:for="{{weekRecommend.data}}" wx:key="index">
+                <navigator data-location="{{ weekRecommend.location }}" catchtap="sendStatistics" data-eventid="{l1_id:'02',l2_id:'001',l3_id:'007'}" data-comicid="{{item.extra.comic_id}}" data-comicindex="{{index}}" class="hot_img" url="../details/details?comic_id={{item.extra.comic_id}}&comic_name={{item.extra.name}}">
                     <imgholder class="hot_hoder" type="hcover">
                         <image mode="scaleToFill" lazy-load="true" src="{{item.image_ext_url}}"></image>
                     </imgholder>
@@ -298,5 +297,6 @@
     <view wx:if="{{!isLoad}}" style="position: absolute;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;">
         <template is="message" wx:if="{{type}}" data="{{ type }}"/>
     </view>
+    <statistics id="statistics" hidden="true" alt="" base-url="{{ statisticsBaseurl }}"></statistics>
 </view>
 

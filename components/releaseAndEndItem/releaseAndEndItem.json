@@ -1,6 +1,7 @@
 {
   "component": true,
   "usingComponents": {
-    "imgHolder":"/components/imgHolder/imgHolder"
+    "imgHolder":"/components/imgHolder/imgHolder",
+	"statistics":"/components/statistics/statistics"
   }
 }

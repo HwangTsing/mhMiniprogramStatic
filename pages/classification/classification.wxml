@@ -2,7 +2,7 @@
     <view id="top_view">
         <view class="class_label_view">
             <view wx:for="{{comicCate}}" class="{{cate_id ===item.cate_id? 'label_title_active':'label_title'}}" wx:key="index"
-                  data-cateid="{{item.cate_id}}" bindtap="onCate">
+                  data-cateid="{{item.cate_id}}" data-catename="{{ item.cate_cn_name }}" data-eventid="{l1_id:'02',l2_id:'006',l3_id:'002'}" bindtap="onCate">
                 <text>{{item.cate_cn_name}}</text>
                 <view class="{{cate_id == item.cate_id? 'active_border':'checked_border'}}"></view>
             </view>
@@ -19,7 +19,7 @@
         <block wx:if="{{!networkType || lowerState || cur_click_id == last_click_id }}">
             <view class="class_list">
                 <navigator class="list_view" url="../details/details?comic_id={{item.comic_id}}&comic_name={{item.comic_name}}"
-                        data-comic="{{item.comic_id}}"  wx:if="{{classListData.length > 0}}" wx:for="{{classListData}}" wx:key="index">
+                        data-comic="{{item.comic_id}}" data-eventid="{l1_id:'02',l2_id:'006',l3_id:'001'}" data-comicindex = "{{ index }}"  wx:if="{{classListData.length > 0}}" wx:for="{{classListData}}" wx:key="index" catchtap="sendStatistics" >
                     <imgholder class="list_img" type="hcover">
                         <image mode="scaleToFill" class="list_img" src="{{item.comic_hcover}}"></image>
                     </imgholder>
@@ -45,4 +45,5 @@
           style="{{comicCate.length>0?'position: fixed;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;margin-top:217rpx':'position: fixed;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;'}}">
         <template is="message" wx:if="{{type}}" data="{{ type }}"/>
     </view>
+    <statistics id="statistics" hidden="true" alt="" base-url="{{ statisticsBaseurl }}"></statistics>
 </view>

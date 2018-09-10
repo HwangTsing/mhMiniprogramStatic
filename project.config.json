@@ -8,7 +8,7 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.9.93",
+	"libVersion": "2.2.4",
 	"appid": "wx1b92c882952be596",
 	"projectname": "mini",
 	"condition": {
@@ -20,13 +20,60 @@
 			"current": -1,
 			"list": []
 		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
 		"game": {
 			"currentL": -1,
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
-			"list": []
+			"current": 6,
+			"list": [
+				{
+					"id": -1,
+					"name": "分类页面",
+					"pathName": "pages/classification/classification",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "排行榜页面",
+					"pathName": "pages/rankinglist/rankinglist",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "放送列表页",
+					"pathName": "pages/comicEnd/comicEnd",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "放送列表页",
+					"pathName": "pages/releaseTable/releaseTable",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "搜索页",
+					"pathName": "pages/search/search",
+					"query": ""
+				},
+				{
+					"id": 5,
+					"name": "详情页",
+					"pathName": "pages/details/details",
+					"query": "comic_id=68798&comic_name=妖神记"
+				},
+				{
+					"id": 6,
+					"name": "阅读页",
+					"pathName": "pages/read/read",
+					"query": "chapter_id=265309&comic_id=68792&chapter_name=%E4%B8%8E%E5%90%9B%E6%AD%8C%E4%B8%80%E6%9B%B2%2001"
+				}
+			]
 		}
 	}
 }

@@ -24,7 +24,11 @@ Component({
       idx:{
         type:Number,
         value:''
-      }
+      },
+      comicindex:{
+        type:Number,
+        value:''
+      },
   },
 
   /**
@@ -34,13 +38,14 @@ Component({
 
   },
   attached(){
-    const  {src,name,artists,cates,idx} =this.properties;
+    const  {src,name,artists,cates,idx,comicindex} =this.properties;
     this.setData({
         src:src,
         name:name,
         artists:artists,
         cates:cates,
-        idx:idx
+        idx:idx,
+        comicIndex:comicindex
     })
   },
 
@@ -50,10 +55,15 @@ Component({
   methods: {
       //点击跳转详情页事件
       listTap(event){
-          // console.log(event);
           let comic_id=event.currentTarget.dataset.comic_id;
           let comic_name=event.currentTarget.dataset.comicName;
-
+          let idx = this.data.comicIndex;
+          let data = {
+            comic_id,
+            idx
+          };
+          this.triggerEvent('sendMsg', data, { bubbles: true, composed: true }) // 会依次触发 父辈上的事件
+          
           wx.navigateTo({
             url: '/pages/details/details?comic_id='+comic_id + '&comic_name='+comic_name
           })

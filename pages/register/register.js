@@ -27,7 +27,8 @@ Page({
       mFocus:false,    //密码输入框是否自动聚焦
       cFocus:false,    //验证码输入框是否自动聚焦
       callbackUrl:null,
-      Setfollow:null
+      Setfollow:null,
+      statisticsBaseurl:"https://apiv2.manhua.weibo.com/static/tongji/tu?s=", //统计用户行为url
   },
 
     //填写手机号
@@ -128,6 +129,10 @@ Page({
             codeNum:'',
             cFocus:true
         })
+    },
+    // 添加统计
+    addStatistics:function(event_id,attach_info = {}){
+        this.selectComponent("#statistics").changePath(event_id,attach_info);
     },
     //验证码接口
     postCode:function () {
@@ -286,6 +291,10 @@ Page({
                                 key: 'Set-Cookie',
                                 data: res.header['Set-Cookie']
                             })
+                            that.addStatistics("{l1_id:'99',l2_id:'032',l3_id:'001'}",{
+                              login:'phone',
+                              user_id:res.data.data.user_row.user_id
+                            })
                             var message= res.data.message;
                             that.setData({
                                 isRegister:false
@@ -378,21 +387,25 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.setData({
+        start_time : new Date().getTime(),
+    })
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    let start_time = this.data.start_time;
+    this.selectComponent("#statistics").pageStatistics(start_time);
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    let start_time = this.data.start_time;
+    this.selectComponent("#statistics").pageStatistics(start_time);
   },
 
   /**

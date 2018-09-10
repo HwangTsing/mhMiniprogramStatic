@@ -1,5 +1,6 @@
 //index.js
 var wxApi = require("../../utils/util.js");
+var app = getApp();
 
 Page({
       data: {
@@ -25,6 +26,8 @@ Page({
           id:0,
           idg:1,
           isLoad:false,     //是否加载失败
+          scrollTimes:0,    //页面滚动次数
+          statisticsBaseurl:"https://apiv2.manhua.weibo.com/static/tongji/tu?s=", //统计用户行为url
       },
       metaData:{
         mca:''
@@ -35,6 +38,12 @@ Page({
         var mca = '';
         if (!!this.metaData.mca){
             mca = this.metaData.mca;
+        }
+        let findLocation = function(arr,location_en){
+            let res = arr.filter(function(item,index){
+                return item.location_en == location_en
+            })
+            return res[0]
         }
         wxApi.recommendList({
             method:'GET',
@@ -56,7 +65,6 @@ Page({
                             title[key] = item.location_cn || '';
                             keyIndex[key] = key;
                         }
-
                     });
                     //轮播图
                     const imgUrls = recommendList[mca+'_rotation_map'] ? recommendList[mca+'_rotation_map'] : [];
@@ -75,15 +83,33 @@ Page({
                     const keyIndex_x = keyIndex[mca+'_xiaobian_recommend'] ? keyIndex[mca+'_xiaobian_recommend'] : '';
                     const keyIndex_w = keyIndex[mca+'_week_recommend'] ? keyIndex[mca+'_week_recommend'] : '';
                     //精品佳作
-                    const FineWorks = recommendList[mca+'_fine_works'];
+                    const FineWorks = {
+                        data:recommendList[mca+'_fine_works'],
+                        location:findLocation(location_list,mca+'_fine_works')
+                    }
                     //人气作品
-                    const PopularWorks = recommendList[mca + '_popular_works'] ? recommendList[mca+'_popular_works'].slice(0,4) : [];
+                    const PopularWorks ={
+                        data:recommendList[mca + '_popular_works'] ? recommendList[mca+'_popular_works'].slice(0,4) : [],
+                        location:findLocation(location_list,mca+'_popular_works')
+                    } 
                     //最新上架
-                    const newArrivalWorks = recommendList[mca + '_new_arrival'] ? recommendList[mca+'_new_arrival'].slice(0,3) : [];
+                    const newArrivalWorks = {
+                        data:recommendList[mca + '_new_arrival'] ? recommendList[mca+'_new_arrival'].slice(0,3) : [],
+                        location:findLocation(location_list,mca+'_new_arrival')
+                    }
                     //热门连载
-                    const hotSerialWorks = recommendList[mca + '_hot_serial'] ? recommendList[mca+'_hot_serial'].slice(0,4) : [];
-                    const xiaobianRecommend = recommendList[mca + '_xiaobian_recommend'] ? recommendList[mca+'_xiaobian_recommend'].slice(0,3) : [];
-                    const weekRecommend = recommendList[mca + '_week_recommend'] ? recommendList[mca+'_week_recommend'].slice(0,4) : [];
+                    const hotSerialWorks = {
+                        data:recommendList[mca + '_hot_serial'] ? recommendList[mca+'_hot_serial'].slice(0,4) : [],
+                        location:findLocation(location_list,mca+'_hot_serial')
+                    } 
+                    const xiaobianRecommend = {
+                        data:recommendList[mca + '_xiaobian_recommend'] ? recommendList[mca+'_xiaobian_recommend'].slice(0,3) : [],
+                        location:findLocation(location_list,mca+'_xiaobian_recommend')
+                    } 
+                    const weekRecommend = {
+                        data:recommendList[mca + '_week_recommend'] ? recommendList[mca+'_week_recommend'].slice(0,4) : [],
+                        location:findLocation(location_list,mca+'_week_recommend')
+                    }
                     //重置轮播图
                     that.setData({imgUrls:[]})
                     that.setData({
@@ -122,7 +148,7 @@ Page({
                 })
             }
         })
-
+        
     },
 
     /*事件处理函数*/
@@ -240,39 +266,79 @@ Page({
     swipTap:function (e) {
         var comic_id = e.currentTarget.dataset.typeid;
         var comic_name = e.currentTarget.dataset.comicname;
+        let banner_index = e.currentTarget.dataset.bannerindex;
+        let event_id = e.currentTarget.dataset.eventid;
+        let attach_info = {
+            comic_id:comic_id,
+            index:banner_index
+        };
+        this.addStatistics(event_id,attach_info);
         wx.navigateTo({
             url: '/pages/details/details?comic_id='+comic_id + '&comic_name='+comic_name
         })
+            
+    },
+    sendStatistics:function(e){
+        let locationData = e.currentTarget.dataset.location;
+        let comic_id = e.currentTarget.dataset.comicid;
+        let index = e.currentTarget.dataset.comicindex;
+        let event_id = e.currentTarget.dataset.eventid;
+        let attach_info = {
+            location_en:locationData.location_en,
+            location_id:locationData.location_id,
+            location_cn:locationData.location_cn,
+            comic_id:comic_id,
+            index:index
+        }
+        this.addStatistics(event_id,attach_info);
+    },
+    addStatistics:function(event_id,attach_info = {}){
+        this.selectComponent("#statistics").changePath(event_id,attach_info);
+    },
+    normalStatistics:function(e){
+        let eventid = e.currentTarget.dataset.eventid;
+        this.addStatistics(eventid);
     },
     /*放送*/
-    releaseTap:function () {
+    releaseTap:function (e) {
+        this.normalStatistics(e);
         wx.navigateTo({
             url: '/pages/releaseTable/releaseTable'
         })
     },
     /*分类*/
-    classTap:function () {
+    classTap:function (e) {
+        this.normalStatistics(e);
         wx.navigateTo({
             url: '/pages/classification/classification'
         })
     },
     /*榜单*/
-    listTap:function () {
+    listTap:function (e) {
+        this.normalStatistics(e);
         wx.navigateTo({
             url: '/pages/rankinglist/rankinglist'
         })
     },
     /*完结*/
-    endTap:function () {
+    endTap:function (e) {
+        this.normalStatistics(e);
         wx.navigateTo({
             url: '/pages/comicEnd/comicEnd'
         })
     },
-
     /*查看更多*/
     bindMoreTap:function (e) {
         var location_en = e.currentTarget.dataset.index;
         var title = e.currentTarget.dataset.title;
+        let event_id = e.currentTarget.dataset.eventid;
+        let locationData = e.currentTarget.dataset.location;
+        let attach_info = {
+            location_id:locationData.location_id,
+            location_en:locationData.location_en,
+            location_cn:locationData.location_cn
+        }
+        this.addStatistics(event_id,attach_info);
         wx.navigateTo({
             url: '/pages/morelist/morelist?location_en='+location_en+'&title='+title
         })
@@ -282,9 +348,24 @@ Page({
     upper: function(e) {
 
     },
-
+    
+    onHide:function(){
+        // let page_name = wxApi.getCurrentRoute();
+        // let refer_page_name = app.globalData.refer_page_name;
+        // let end_time = new Date().getTime();
+        // let start_time = this.data.start_time;
+        // this.setData({
+        //     statisticsBaseurl:"http://apiv2.manhua.weibo.com/static/tongji/tp?s="
+        // })
+        // this.selectComponent("#statistics").pageStatistics(page_name,refer_page_name,start_time,end_time);
+        // app.globalData.refer_page_name = wxApi.getCurrentPageUrl();
+        let start_time = this.data.start_time;
+        this.selectComponent("#statistics").pageStatistics(start_time);
+    },
     onLoad: function (options) {
+        console.log(wxApi)
         var that = this;
+        console.log(wxApi.getCurrentPageUrl())
         //判断网络类型
         let { windowWidth,windowHeight } = wxApi.getSystemInfoSync();
         if (windowWidth > 0) {
@@ -411,6 +492,9 @@ Page({
         this.searchlist = this.selectComponent("#searchlist");
     },
     onShow: function () {
+        this.setData({
+            start_time : new Date().getTime(),
+        })        
         wx.setNavigationBarTitle({//动态设置当前页面的标题
             title: "微博动漫"
         });
@@ -426,13 +510,26 @@ Page({
     onPageScroll() {
         //if(this.__pageScrollState == 1) return false;
     },
+
+    // touchEnd: function(event) {
+    //     var that = this
+    //     wx.createSelectorQuery().selectViewport().scrollOffset(function(res) {
+    //         that.setData({
+    //             scrollTimes: that.data.scrollTimes+1
+    //         })
+    //     }).exec()
+    // },
     /**
      * 用户点击右上角分享
      */
     onShareAppMessage: function () {
+        this.selectComponent("#statistics").shareStatistics();
         return {
-          title: '各种有爱的动漫分享'
+          title: '各种有爱的动漫分享',
         }
-    }
-
+    },
+    onUnload: function () {
+        let start_time = this.data.start_time;
+        this.selectComponent("#statistics").pageStatistics(start_time);
+    },
 })

@@ -25,15 +25,17 @@ Page({
     last_click_id: 1,
     cur_click_id: 1,
     isLoading: false,
+    event_id:"{l1_id:'02',l2_id:'017',l3_id:'007'}",
+    statisticsBaseurl:"https://apiv2.manhua.weibo.com/static/tongji/tu?s=", //统计用户行为url
   },
 
   /* 接受子组件 点击 头部导航发送的数据 */
   ClickPubDay: function (e) {
-
     this.setData({lowerState: 0})
     wxApi.getNetworkType().then((NetworkType) => {
       let networkType = NetworkType.networkType;
       let pubDay = e.detail.pub_day; //保存子组件发送的点击日期
+      let event_id = e.detail.event_id;
       if (networkType === 'none' || networkType === 'unknown') {
         //无网络什么都不做
         this.setData({
@@ -54,6 +56,7 @@ Page({
             type: 'loading',
             networkType: true,
             comicList: null,//数据列表
+            event_id:event_id
         });
         // console.log('====================================')
         // console.log(pubDay, 'last_click_id', last_click_id)
@@ -437,6 +440,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.setData({
+        start_time : new Date().getTime(),
+    })
     wx.setNavigationBarTitle({//动态设置当前页面的标题
       title: "放送表"
     });
@@ -446,6 +452,8 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
+    let start_time = this.data.start_time;
+    this.selectComponent("#statistics").pageStatistics(start_time);
     // console.log('onHide')
   },
 
@@ -453,7 +461,8 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    let start_time = this.data.start_time;
+    this.selectComponent("#statistics").pageStatistics(start_time);
   },
 
   /**
@@ -474,6 +483,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    this.selectComponent("#statistics").shareStatistics();
+    
+
     return {
       title: '各种有爱的动漫分享'
     }

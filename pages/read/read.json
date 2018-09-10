@@ -8,6 +8,7 @@
     "vcomic": "/components/comicImg/comicImg",
     "comcicNav": "/components/comicNav/comicNav",
     "message": "/components/message/message",
-    "popUp": "/components/popUp/popUp"
+    "popUp": "/components/popUp/popUp",
+    "statistics":"/components/statistics/statistics"
   }
 }

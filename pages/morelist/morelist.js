@@ -9,6 +9,7 @@ Page({
       moreData:[],   //数据
       networkType:true,  //是否有网络
       isLoad:false,     //是否加载失败
+      statisticsBaseurl:"https://apiv2.manhua.weibo.com/static/tongji/tu?s=", //统计用户行为url
   },
 
   /**
@@ -96,21 +97,25 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.setData({
+        start_time : new Date().getTime(),
+    })
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    let start_time = this.data.start_time;
+    this.selectComponent("#statistics").pageStatistics(start_time);
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    let start_time = this.data.start_time;
+    this.selectComponent("#statistics").pageStatistics(start_time);
   },
 
   /**
@@ -128,6 +133,7 @@ Page({
   },
 
   onShareAppMessage: function () {
+    this.selectComponent("#statistics").shareStatistics();
     return {
       title: '各种有爱的动漫分享'
     }

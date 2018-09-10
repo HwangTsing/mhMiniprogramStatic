@@ -24,6 +24,7 @@ Page({
       allHotTitle:[],   //所有热词
       hotTitle:[],      //当前热词数组  12条
       onIndex:0,        //第几次点击热门搜索换一换
+      statisticsBaseurl:"https://apiv2.manhua.weibo.com/static/tongji/tu?s=", //统计用户行为url
   },
   searchData:{
     word:'',
@@ -95,7 +96,7 @@ Page({
                         isScroll:false
                     })
                 }
-
+                that.addStatistics("{l1_id:'99',l2_id:'009',l3_id:'001'}",{word});
             },
             fail:function (data) {
                 that.setData({
@@ -107,6 +108,20 @@ Page({
 
         });
 
+    },
+    //添加统计
+    addStatistics:function(event_id,attach_info = {}){
+        this.selectComponent("#statistics").changePath(event_id,attach_info);
+    },
+    sendMsg:function(e){
+      let _this = this;
+      let comic_id = e.detail.comic_id;
+      let idx = e.detail.idx;
+      this.addStatistics("{l1_id:'99',l2_id:'009',l3_id:'003'}",{
+        comic_id,
+        idx,
+        key_words:_this.data.word
+      });
     },
     //热门搜索数据
     popRecData:function () {
@@ -149,12 +164,19 @@ Page({
         that.hotChange(that.data.onIndex);
     },
     onHotTap:function (e) {
-       let comic_id = e.currentTarget.dataset.hotid;
-       let comic_name = e.currentTarget.dataset.comicName;
-        //console.log(comic_id);
-        wx.navigateTo({
-            url: '/pages/details/details?comic_id='+comic_id + '&comic_name='+comic_name
-        })
+      let _this = this;
+      let comic_id = e.currentTarget.dataset.hotid;
+      let comic_name = e.currentTarget.dataset.comicName;
+      //console.log(comic_id);
+      let idx = e.currentTarget.dataset.comicindex;
+      this.addStatistics("{l1_id:'99',l2_id:'009',l3_id:'002'}",{
+        comic_id,
+        idx,
+        key_words:_this.data.word
+      });
+      wx.navigateTo({
+          url: '/pages/details/details?comic_id='+comic_id + '&comic_name='+comic_name
+      })
     },
     /*input聚焦和失焦,监听*/
     focusInputEvent: function () {
@@ -327,21 +349,25 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.setData({
+        start_time : new Date().getTime(),
+    })
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    let start_time = this.data.start_time;
+    this.selectComponent("#statistics").pageStatistics(start_time);
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    let start_time = this.data.start_time;
+    this.selectComponent("#statistics").pageStatistics(start_time);
   },
 
   /**

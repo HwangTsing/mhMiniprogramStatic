@@ -31,7 +31,7 @@
             </view>
         </view>
         <view class="search_list">
-            <view class="main_title" wx:for="{{searchTitle}}" wx:key="index" data-hotid="{{item.object_id}}" data-comic-name="{{item.title}}" catchtap="onHotTap">{{item.title}}</view>
+            <view class="main_title" wx:for="{{searchTitle}}" wx:key="index" data-hotid="{{item.object_id}}" data-comic-name="{{item.title}}" data-comicindex="{{index}}" catchtap="onHotTap">{{item.title}}</view>
         </view>
     </view>
     <!--根据搜索结果渲染数据-->
@@ -46,6 +46,8 @@
                 name="{{item.name}}"
                 artists="{{item.sina_nickname}}"
                 cates="{{item.cates}}"
+                comicindex="{{index}}"
+                bindsendMsg="sendMsg"
             ></searchlist>
         </block>
         <view class="load_view">
@@ -66,4 +68,6 @@
     <view wx:if="{{!isLoad}}" style="{{onLoad === true?'position: fixed;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;':''}}">
         <template is="message" wx:if="{{type}}" data="{{ type }}"/>
     </view>
+    <!-- 统计图片传src -->
+    <statistics id="statistics" hidden="true" alt="" base-url="{{ statisticsBaseurl }}"></statistics>
 </view>

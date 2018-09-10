@@ -19,6 +19,7 @@ Component({
     loading: false,
     disabled: false,
     showDoanloadImgBtn: true,
+    showFlag:false
   },
   attached() {
     const {width, scale, src, version} = this.properties
@@ -51,6 +52,12 @@ Component({
       if (this.loaderror && !this.loadingState) {
         this.loaderror = false
         this.downloadImg()
+      }
+      if(!!!this.data.showFlag){
+        this.triggerEvent('picLoaded')
+        this.setData({
+          showFlag:true
+        })
       }
     },
     setButtonState(hidden = true) {

@@ -58,3 +58,4 @@
 
 </view>
 <!-- 全部评论S -->
+<statistics id="statistics" hidden="true" alt="" base-url="{{ statisticsBaseurl }}"></statistics>

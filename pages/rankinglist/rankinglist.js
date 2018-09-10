@@ -28,6 +28,8 @@ Page({
       serverTitle:'主人，服务器开小差了～',        //加载失败
       hasData:true,     //是否有内容
       buttonClicked: false,
+      event_id:"{l1_id:'02',l2_id:'007',l3_id:'001'}",
+      statisticsBaseurl:"https://apiv2.manhua.weibo.com/static/tongji/tu?s=", //统计用户行为url
   },
     /*阅读榜数据*/
     readList:function () {
@@ -177,6 +179,7 @@ Page({
                             newData:[],
                             rankData:[],
                             type:'loading',
+                            event_id:"{l1_id:'02',l2_id:'007',l3_id:'001'}",
                         })
                         that.readList();
                     }
@@ -186,6 +189,7 @@ Page({
                             newData:[],
                             rankData:[],
                             type:'loading',
+                            event_id:"{l1_id:'02',l2_id:'007',l3_id:'002'}",
                         })
                         that.newList();
                     }
@@ -195,6 +199,7 @@ Page({
                             newData:[],
                             rankData:[],
                             type:'loading',
+                            event_id:"{l1_id:'02',l2_id:'007',l3_id:'003'}",
                         })
                         that.rankList();
                     }
@@ -237,6 +242,7 @@ Page({
                             newData:[],
                             rankData:[],
                             type:'loading',
+                            event_id:"{l1_id:'02',l2_id:'007',l3_id:'001'}",
                         })
                         that.readList();
                     }
@@ -246,6 +252,7 @@ Page({
                             newData:[],
                             rankData:[],
                             type:'loading',
+                            event_id:"{l1_id:'02',l2_id:'007',l3_id:'002'}",
                         })
                         that.newList();
                     }
@@ -255,6 +262,7 @@ Page({
                             newData:[],
                             rankData:[],
                             type:'loading',
+                            event_id:"{l1_id:'02',l2_id:'007',l3_id:'003'}",
                         })
                         that.rankList();
                     }
@@ -270,10 +278,21 @@ Page({
         }
 
     },
+    addStatistics:function(e){
+      var comic_id = e.currentTarget.dataset.id;
+      let comic_index = e.currentTarget.dataset.comicindex;
+      let event_id = this.data.event_id;
+      let attach_info = {
+        comic_id,
+        comic_index
+      };
+      this.selectComponent("#statistics").changePath(event_id,attach_info);
+    },
     /*页面跳转*/
     readTap:function (event) {
         var comic_id = event.currentTarget.dataset.id;
         var comic_name = event.currentTarget.dataset.comicName;
+        this.addStatistics(event);
         wx.navigateTo({
             url: '/pages/details/details?comic_id='+comic_id + '&comic_name='+comic_name
         })
@@ -281,6 +300,7 @@ Page({
     newTap:function (event) {
         var comic_id = event.currentTarget.dataset.id;
         var comic_name = event.currentTarget.dataset.comicName;
+        this.addStatistics(event);
         wx.navigateTo({
             url: '/pages/details/details?comic_id='+comic_id + '&comic_name='+comic_name
         })
@@ -288,7 +308,8 @@ Page({
     rankTap:function (event) {
         var comic_id = event.currentTarget.dataset.id;
         var comic_name = event.currentTarget.dataset.comicName;
-        wx.navigateTo({
+        this.addStatistics(event);
+         wx.navigateTo({
             url: '/pages/details/details?comic_id='+comic_id  + '&comic_name='+comic_name
         })
     },
@@ -350,21 +371,25 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.setData({
+        start_time : new Date().getTime(),
+    })
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    let start_time = this.data.start_time;
+    this.selectComponent("#statistics").pageStatistics(start_time);
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    let start_time = this.data.start_time;
+    this.selectComponent("#statistics").pageStatistics(start_time);
   },
 
   /**
@@ -385,6 +410,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+      this.selectComponent("#statistics").shareStatistics();
       return {
           title: '各种有爱的动漫分享'
       }

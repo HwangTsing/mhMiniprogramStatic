@@ -17,18 +17,21 @@ Page({
     comic_id:null,
     chapter_name:"",
     chapter_id:null,
+    comic_type:null,
     json_content: {
       page: []
     },
     chapter_nav: null,
     btnSure: true,
     btnLog: false,
-    callback:null
+    callback:null,
+    loadPic:0,
+    statisticsBaseurl:"https://apiv2.manhua.weibo.com/static/tongji/tu?s=", //统计用户行为url
   },
 
   onLoad: function (options) {
 
-    const { chapter_id, chapter_name = '',comic_id} = options;
+    const { chapter_id, chapter_name = '',comic_id,comic_type} = options;
     const { windowWidth, windowHeight } = wxApi.getSystemInfoSync()
     this.chapter_id = chapter_id
     this.chapter_name = decodeURIComponent(chapter_name)
@@ -45,7 +48,8 @@ Page({
     // }
     // callbackUrl=JSON.stringify(callbackUrl)
     this.setData({
-      callback:encodeURIComponent("/"+url+"?"+"comic_id="+comic_id+"&chapter_name="+chapter_name+"&chapter_id="+chapter_id)
+      callback:encodeURIComponent("/"+url+"?"+"comic_id="+comic_id+"&chapter_name="+chapter_name+"&chapter_id="+chapter_id),
+      comic_type
     })
  
    
@@ -82,6 +86,9 @@ Page({
    */
   onShow: function () {
     let Cookie = wx.getStorageSync("Set-Cookie");
+    this.setData({
+        start_time : new Date().getTime(),
+    })
     if(Cookie){
      const pop = this.selectComponent('#popup'); 
      if (pop) pop.close();
@@ -93,14 +100,21 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    let start_time = this.data.start_time;
+    this.selectComponent("#statistics").pageStatistics(start_time);
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    this.addStatistics("{l1_id:'99',l2_id:'042',l3_id:'001'}",{
+      picture_count:this.data.loadPic,
+      chapter_id:this.data.chapter_id,
+      comic_type:this.data.comic_type
+    })
+    let start_time = this.data.start_time;
+    this.selectComponent("#statistics").pageStatistics(start_time);
   },
 
   /**
@@ -129,6 +143,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    this.selectComponent("#statistics").shareStatistics();
     return {
       title: '各种有爱的动漫分享'
     }
@@ -136,6 +151,10 @@ Page({
 
   setPageMessage: function (type) {
     wxApi.setMessageType(this, type)
+  },
+  addStatistics:function(event_id,attach_info = {}){
+      this.selectComponent("#statistics").changePath(event_id,attach_info);
+      console.log(1)
   },
   fetchComic: function (chapter_id) {
     const create_source = "microprogram";
@@ -294,7 +313,8 @@ Page({
   },
 
   getReadurlByParam: function ({ chapter_id, chapter_name, is_charge, comic_id }, url = '/pages/read/read') {
-    url = wxApi.appendParams(url, { chapter_id, chapter_name, comic_id })
+    let comic_type = this.data.comic_type
+    url = wxApi.appendParams(url, { chapter_id, chapter_name, comic_id, comic_type })
     return { url, is_charge }
   },
 
@@ -313,6 +333,11 @@ Page({
     //  }
     
     // this.triggerEvent('navchapter',{}, {})
+  },
+  pickLoaded:function(){
+    this.setData({
+      loadPic:this.data.loadPic+1
+    })
   },
   clickJump:function(){
     let Cookie = wx.getStorageSync("Set-Cookie");

@@ -7,6 +7,7 @@
   "usingComponents":{
     "switch":"./components/switch/switch",
     "message": "/components/message/message",
-    "imgholder":"/components/imgHolder/imgHolder"
+    "imgholder":"/components/imgHolder/imgHolder",
+    "statistics":"/components/statistics/statistics"
   }
 }

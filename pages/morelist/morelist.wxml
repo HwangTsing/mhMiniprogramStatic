@@ -20,5 +20,6 @@
     <!--data返回null时提示信息-->
     <import src="/tpls/message.wxml"/>
     <template is="message" wx:if="{{type}}" data="{{ type }}"/>
+    <statistics id="statistics" hidden="true" alt="" base-url="{{ statisticsBaseurl }}"></statistics>
 </view>
 

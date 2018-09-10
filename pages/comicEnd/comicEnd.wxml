@@ -18,12 +18,14 @@
         lastChapter="{{item.lastChapter}}"
         comic="{{item.comic}}"
         siteImage="{{siteImage}}"
+        comicIndex="{{index}}"
+        eventId = "{l1_id:'02',l2_id:'018',l3_id:'001'}"
     ></releaseAndEndItem>
     <!-- 提示信息 S  -->
     <import src="/tpls/message.wxml"/>
 
     <template is="message" wx:if="{{ type }}" data="{{ type }}"/>
     <!-- 提示信息 E  -->
-
+    <statistics id="statistics" hidden="true" alt="" base-url="{{ statisticsBaseurl }}"></statistics>
 </view>
 <!-- 完结 E -->

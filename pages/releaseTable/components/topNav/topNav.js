@@ -37,6 +37,8 @@ Component({
             //console.log(event);
             // let chapter_id = event.currentTarget.id;
             let data=event.currentTarget.dataset;//元素对象信息
+            let index = data.item+1;
+            data.event_id=`\{l1_id:'02',l2_id:'017',l3_id:'00${index}\}`
             //console.log(data,this.properties.pubDay)
             let propsPubDay=this.properties.pubDay; //存储父级传递的 当前日期
             if(propsPubDay==data.pub_day){ //如果点击的日期和当前日期相等什么都不做

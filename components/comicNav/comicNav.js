@@ -6,7 +6,8 @@ Component({
     action: String,
     comic_id:Number,
     chapter_name:String,
-    chapter_id:Number
+    chapter_id:Number,
+    comic_type:Number
   },
   data: {
     navClass: '',

@@ -91,4 +91,6 @@
     <!-- 提示信息 S  -->
 </view>
 <!-- 组件外层盒子E -->
+<statistics id="statistics" hidden="true" alt="" base-url="{{ statisticsBaseurl }}"></statistics>
+
 

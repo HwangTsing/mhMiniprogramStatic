@@ -1,6 +1,6 @@
 <!--components/searchList/searchList.wxml-->
 
-<view class="list_data" catchtap="listTap" data-comic_id="{{idx}}" data-comic-name="{{name}}">
+<view class="list_data" bindtap="listTap" data-comic_id="{{idx}}" data-comic-name="{{name}}">
     <view class="img_view">
         <imgholder type="vcover">
             <image class="ext_img" mode="aspectFill" lazy-load="true" src="{{src}}"></image>

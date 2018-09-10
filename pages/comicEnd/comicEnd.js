@@ -11,7 +11,8 @@ Page({
         networkType: true,//是否有网络
         url:'wbcomic/home/recommend_list?location_en=ending_works_list',
         type:'loading',
-        siteImage:''
+        siteImage:'',
+        statisticsBaseurl:"https://apiv2.manhua.weibo.com/static/tongji/tu?s=", //统计用户行为url
     },
 
     /**
@@ -112,23 +113,28 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-      wx.setNavigationBarTitle({//动态设置当前页面的标题
-        title: "完结"
-      });
+        this.setData({
+            start_time : new Date().getTime(),
+        })
+        wx.setNavigationBarTitle({//动态设置当前页面的标题
+            title: "完结"
+        });
     }, 
 
     /**
      * 生命周期函数--监听页面隐藏
      */
     onHide: function () {
-
+        let start_time = this.data.start_time;
+        this.selectComponent("#statistics").pageStatistics(start_time);
     },
 
     /**
      * 生命周期函数--监听页面卸载
      */
     onUnload: function () {
-
+        let start_time = this.data.start_time;
+        this.selectComponent("#statistics").pageStatistics(start_time);
     },
 
     /**
@@ -149,6 +155,7 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function () {
+        this.selectComponent("#statistics").shareStatistics();
         return {
           title: '各种有爱的动漫分享'
         }

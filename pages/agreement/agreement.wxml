@@ -339,3 +339,4 @@
         </view>
     </view>
 </view>
+<statistics id="statistics" hidden="true" alt="" base-url="{{ statisticsBaseurl }}"></statistics>

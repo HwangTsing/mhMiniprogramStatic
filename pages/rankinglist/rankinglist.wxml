@@ -13,7 +13,7 @@
     <swiper current="{{status}}" class="swiper-box" style="height:{{windowHeight}}rpx;" bindchange="bindChange">
         <swiper-item class="ranking_content">
             <scroll-view class="swiper_scroll" scroll-y="{{true}}">
-                <view class="read_view" wx:for="{{readData}}" data-id="{{item.comic_id}}" wx:key="{{index}}" bindtap="readTap"  data-comic-name="{{item.name}}">
+                <view class="read_view" wx:for="{{readData}}" data-id="{{item.comic_id}}" data-comicindex = "{{ index }}" wx:key="{{index}}" bindtap="readTap"  data-comic-name="{{item.name}}">
                     <view class="left_view">
                         <imgholder type="hcover">
                             <image class="left_img" src="{{item.hcover}}"></image>
@@ -47,7 +47,7 @@
         </swiper-item>
         <swiper-item class="ranking_content">
             <scroll-view class="swiper_scroll" scroll-y="{{true}}">
-                <view class="new_view" wx:for="{{newData}}" data-id="{{item.comic_id}}" wx:key="{{index}}" bindtap="newTap" data-comic-name="{{item.name}}" >
+                <view class="new_view" wx:for="{{newData}}" data-id="{{item.comic_id}}" data-comicindex = "{{ index }}" wx:key="{{index}}" bindtap="newTap" data-comic-name="{{item.name}}" >
                     <view class="left_view">
                         <imgholder type="hcover">
                             <image class="left_img" src="{{item.hcover}}"></image>
@@ -80,7 +80,7 @@
         </swiper-item>
         <swiper-item class="ranking_content">
             <scroll-view class="swiper_scroll" scroll-y="{{true}}">
-                <view class="rank_view" wx:for="{{rankData}}" data-id="{{item.comic_id}}" wx:key="{{index}}" bindtap="rankTap" data-comic-name="{{item.name}}">
+                <view class="rank_view" wx:for="{{rankData}}" data-id="{{item.comic_id}}" data-comicindex = "{{ index }}" wx:key="{{index}}" bindtap="rankTap" data-comic-name="{{item.name}}">
                     <view class="left_view">
                         <imgholder type="hcover">
                             <image class="left_img" src="{{item.hcover}}"></image>
@@ -119,4 +119,5 @@
           style="{{onLoad === true?'position: fixed;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;':'position: fixed;top: 0;left: 0;width:100%;background-color:#fff;color:#999;z-index:99;margin-top: 96rpx;overflow:hidden;'}}">
         <template is="message" wx:if="{{type}}" data="{{ type }}"/>
     </view>
+    <statistics id="statistics" hidden="true" alt="" base-url="{{ statisticsBaseurl }}"></statistics>
 </view>

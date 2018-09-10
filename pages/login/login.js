@@ -22,6 +22,7 @@ Page({
       canIUse: wx.canIUse('button.open-type.getUserInfo'),
       Setfollow:null,
       callbackUrl:null,
+      statisticsBaseurl:"https://apiv2.manhua.weibo.com/static/tongji/tu?s=", //统计用户行为url
   },
 
     //键盘输入时触发
@@ -100,9 +101,14 @@ Page({
             url: `/pages/forgetPassword/forgetPassword?callback=${callbackUrl}&Setfollow=${Setfollow}`
         })
     },
+    // 统计事件
+    addStatistics:function(event_id,attach_info = {}){
+        this.selectComponent("#statistics").changePath(event_id,attach_info);
+    },
     //点击登录
     onLogin:function () {
         var that = this;
+        // console.log(this.selectComponent('#statistics'))
         //判断网络类型
         wxApi.getNetworkType().then((res) => {
             let networkType = res.networkType;
@@ -151,6 +157,10 @@ Page({
                                 data: res.header['Set-Cookie']
                             })
                             var message = res.data.message;
+                            that.addStatistics("{l1_id:'99',l2_id:'031',l3_id:'001'}",{
+                              phone:user_tel,
+                              user_id:res.data.data.user_row.user_id
+                            })
                             console.log(message);
                             that.setData({
                                 isLogin:false
@@ -174,11 +184,11 @@ Page({
                                     })
                              }
                             else{
+                                console.log(new Date().getTime()/1000)
                                 wx.redirectTo({
                                   url: '/pages/mymsg/mymsg'
                                 })
                             }
-
                          }else if (res.data.code == 0) {
                             var message = res.data.message;
                             console.log(message);
@@ -187,6 +197,7 @@ Page({
                             })
                             wxApi.getShowToast(message);
                         }
+                        
                     },
                     fail:function (res) {
                         console.log(res);
@@ -304,14 +315,17 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.setData({
+        start_time : new Date().getTime(),
+    })
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    let start_time = this.data.start_time;
+    this.selectComponent("#statistics").pageStatistics(start_time);
   },
 
   /**

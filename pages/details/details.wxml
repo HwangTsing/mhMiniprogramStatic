@@ -97,11 +97,13 @@
                         directoryDisplay="{{dataAry.comic.directory_display}}"
                         chapterList="{{dataAry.chapterList}}"
                         comic_id="{{dataAry.comic.comic_id}}"
+                        comic_type="{{dataAry.comic.comic_type}}"
                         history="{{history}}"
                         pay_status="{{isPay_status}}"
                         comic_id_page="{{comic_id}}"
                         title="{{comic_name}}"
                         bind:clickJump="popUp"
+                        bind:sendMsg="sendMsg"
                     ></comicCatalog>
                     <!-- 章节信息 组件 E -->
 
@@ -139,7 +141,7 @@
      <!-- 弹出付费框 S  -->
    <popUp id="popup" btnSure="{{btnSure}}" btnLog="{{btnLog}}"  callback="{{callback}}"></popUp>
    <!-- 弹出付费框 E  -->
-
-
+   <!-- 统计 -->
+    <statistics id="statistics" hidden="true" alt="" base-url="{{ statisticsBaseurl }}"></statistics>
 </view>
 

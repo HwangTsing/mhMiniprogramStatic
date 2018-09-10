@@ -26,11 +26,20 @@ Component({
         siteImage:{
             type: String, // 类型String, Number, Boolean, Object, Array, null
             value: '', // 属性初始值（可选），如果未指定则会根据类型选择一个
+        },
+        comicIndex:{
+            type: Number, // 类型String, Number, Boolean, Object, Array, null
+            value: '', // 属性初始值（可选），如果未指定则会根据类型选择一个
+        },
+        eventId:{
+            type: String, // 类型String, Number, Boolean, Object, Array, null
+            value: '', // 属性初始值（可选），如果未指定则会根据类型选择一个
         }
     },
     data: {
         myCate:null,//存储格式化后的标签信息
         //组件的内部数据，和 properties 一同用于组件的模版渲染
+        statisticsBaseurl:"https://apiv2.manhua.weibo.com/static/tongji/tu?s=", //统计用户行为url
     },
     attached() {
         //组件生命周期函数，在组件实例进入页面节点树时执行
@@ -100,6 +109,16 @@ Component({
                     url: `/pages/details/details?comic_id=${comic_id}`
                 })
             }
+        },
+        addStatistics(e){
+            let comic_id=e.currentTarget.dataset.comic_id;
+            let index = this.properties.comicIndex;
+            let event_id = this.properties.eventId;
+            let attach_info = {
+                comic_id:comic_id,
+                index:index
+            }
+            this.selectComponent("#statistics").changePath(event_id,attach_info);
         }
     }
 })

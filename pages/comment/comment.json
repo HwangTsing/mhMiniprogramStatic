@@ -5,6 +5,7 @@
     "navigationBarTextStyle": "white",
     "usingComponents": {
         "commentList": "/components/commentList/commentList",
-        "message": "/components/message/message"
+        "message": "/components/message/message",
+      	"statistics":"/components/statistics/statistics"
     }
 }
