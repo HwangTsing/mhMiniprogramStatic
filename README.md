@@ -1,4 +1,3 @@
 # mhMiniprogramStatic
-*.js linguist-language=javascript
-*.css linguist-language=javascript
-*.xhtml linguist-language=javascript
+微信小程序（动漫）
+javascript
