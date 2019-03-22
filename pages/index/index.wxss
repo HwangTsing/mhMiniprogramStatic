@@ -2,7 +2,7 @@
 page {
   position: relative;
   font-family: Arial, "Microsoft YaHei", sans-serif;
-  background-color: #f5f5f5;
+  background-color: #ff4c6a;
 }
 .container {
   height: 100vh;
@@ -35,7 +35,7 @@ page {
   -ms-flex-direction: column;
   box-sizing: border-box;
   z-index: 100;
-  position: fixed;
+  position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
